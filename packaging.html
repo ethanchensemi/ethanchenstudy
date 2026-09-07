@@ -103,8 +103,8 @@ table.fin{border-collapse:collapse;width:100%;font-size:12.8px}
 .fin tr:last-child td{border-bottom:none}
 .fin td.rowlabel{font-weight:600;color:var(--ink);white-space:normal;min-width:140px}
 .fin .grouprow td{background:#F1F5F6;padding-top:11px;padding-bottom:9px;padding-left:12px;border-bottom:1px solid var(--rule);white-space:normal}
-.fin .lead-v{font-weight:600;color:var(--t-tier2)}
 .fin .na{color:var(--ink-3);font-style:italic}
+#fin-live-time{font-family:ui-monospace,"SF Mono",Menlo,monospace}
 .scroller{overflow-x:auto}
 .notebox{font-size:12.5px;color:#7A5100;background:#FDF6E6;border:1px dashed #C99A1E;padding:14px 16px;margin:16px 0 0;line-height:1.6}
 .notebox b{color:#8A5A00}
@@ -205,8 +205,9 @@ table.cmp{width:100%;border-collapse:collapse;font-size:12.5px;margin:14px 0 0;b
 </section>
 
 <div class="sect" id="s11">
+  <div class="num">00</div>
   <h2>代工廠財務比較表</h2>
-  <p class="key">依製程等級排序：領先製程三家在前，其後為成熟與特殊製程代工廠。市場數據截至 2026 年 8 月底。</p>
+  <p class="key">依製程等級排序：領先製程三家在前，其後為成熟與特殊製程代工廠。股價與市值採 2026 年 6 月 30 日收盤價，為固定快照、不會即時更新；如需最新報價請自行查詢。</p>
   <div class="scroller">
   <table class="fin">
     <tr>
@@ -215,7 +216,7 @@ table.cmp{width:100%;border-collapse:collapse;font-size:12.5px;margin:14px 0 0;b
     <tr class="grouprow"><td colspan="9">基本資料</td></tr>
     <tr>
       <td class="rowlabel">層級</td>
-      <td class="lead-v">領先製程</td><td class="lead-v">領先製程</td><td class="lead-v">領先製程</td>
+      <td>領先製程</td><td>領先製程</td><td>領先製程</td>
       <td>成熟／特殊製程</td><td>成熟／特殊製程</td><td>成熟／特殊製程</td><td>成熟／特殊製程</td><td>成熟／特殊製程</td>
     </tr>
     <tr>
@@ -249,11 +250,11 @@ table.cmp{width:100%;border-collapse:collapse;font-size:12.5px;margin:14px 0 0;b
     <tr class="grouprow"><td colspan="9">市場與客戶</td></tr>
     <tr>
       <td class="rowlabel">代工市占 2026Q2</td>
-      <td class="lead-v">73%</td><td>7%</td><td class="na">NA</td><td>5%</td><td>4%</td><td>3%</td><td>~2.5%</td><td>0.80%</td>
+      <td>73%</td><td>7%</td><td class="na">NA</td><td>5%</td><td>4%</td><td>3%</td><td>~2.5%</td><td>0.80%</td>
     </tr>
     <tr>
       <td class="rowlabel">2025 營收</td>
-      <td class="lead-v">US$89.5bn</td><td>US$18bn（代工）</td><td>US$17.8bn（代工）</td>
+      <td>US$89.5bn</td><td>US$18bn（代工）</td><td>US$17.8bn（代工）</td>
       <td>US$9.33bn</td><td>US$7.63bn</td><td>US$6.79bn</td><td>US$2.42bn</td><td>US$1.57bn</td>
     </tr>
     <tr>
@@ -270,12 +271,12 @@ table.cmp{width:100%;border-collapse:collapse;font-size:12.5px;margin:14px 0 0;b
     <tr class="grouprow"><td colspan="9">股價與估值</td></tr>
     <tr>
       <td class="rowlabel">股價</td>
-      <td>US$415.32</td><td>KRW 250,500</td><td>US$87.63</td><td>HK$70.75</td>
-      <td>US$19.88–20.84</td><td>US$44.76</td><td>CNY 245</td><td>US$205</td>
+      <td>US$477.57</td><td>KRW 250,500</td><td>US$87.63</td><td>HK$70.75</td>
+      <td>US$19.88</td><td>US$44.76</td><td>CNY 245</td><td>US$205</td>
     </tr>
     <tr>
       <td class="rowlabel">市值</td>
-      <td class="lead-v">US$2,154bn</td><td>US$1.20tn</td><td>US$467.5bn</td><td>US$78bn</td>
+      <td>US$2,477bn</td><td>US$1.20tn</td><td>US$467.5bn</td><td>US$78bn</td>
       <td>US$51.3bn</td><td>US$24.6bn</td><td>US$25bn</td><td>US$23.2bn</td>
     </tr>
     <tr>
@@ -285,13 +286,14 @@ table.cmp{width:100%;border-collapse:collapse;font-size:12.5px;margin:14px 0 0;b
     </tr>
     <tr>
       <td class="rowlabel">本益比（近四季）</td>
-      <td>30.9x</td><td>11.1x</td><td class="na">淨損</td><td>69.4x</td>
+      <td>35.5x</td><td>11.1x</td><td class="na">淨損</td><td>69.4x</td>
       <td>17.9x</td><td>35.0x</td><td>300.0x</td><td>80.7x</td>
     </tr>
   </table>
   </div>
 
-  <p class="fn">Samsung 與 Intel 的股價、市值、EPS 與本益比為母公司數字（代工業務未獨立上市）；Hua Hong 數據各來源落差較大。</p>
+  <p class="fn">Samsung 與 Intel 的市值、EPS 與本益比為母公司數字（代工業務未獨立上市）；Hua Hong 數據各來源落差較大。</p>
+</div>
 
 <div class="divider"></div>
 
@@ -1125,5 +1127,6 @@ table.cmp{width:100%;border-collapse:collapse;font-size:12.5px;margin:14px 0 0;b
 </div>
 
 </div>
+
 </body>
 </html>

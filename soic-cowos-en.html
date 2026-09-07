@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SoIC · CoWoS · CPO Full Process Map — Wafer to System Shipment</title>
+<style>
+:root{
+  --b:#4A3B7A;
+ --paper:#F6F8F9; --card:#FFFFFF;
+ --ink:#14181C; --ink-2:#4A555E; --ink-3:#7C8891;
+ --rule:#CBD3D9; --rule-soft:#E2E8EC;
+ --stage:#1F3A4D; --soic:#2E6B4F; --cowos:#4A3B7A;
+ --cowos-tint:#F0EEF7; --shared:#215C68;
+ --t-fab:#5B4B9E; --t-fab-bg:#EEEBF8;
+ --t-insp:#0E7C86; --t-insp-bg:#E4F2F3;
+ --t-pkg:#B85C10; --t-pkg-bg:#FAEEE1;
+ --t-sup:#5F6C75; --t-sup-bg:#ECEFF1;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+ font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Hiragino Sans",-apple-system,"Segoe UI",sans-serif;
+ font-size:15px;line-height:1.65}
+.wrap{max-width:1240px;margin:0 auto;padding:48px 28px 80px}
+
+.masthead{border-bottom:2px solid var(--stage);padding-bottom:22px;margin-bottom:34px}
+.masthead h1{font-size:31px;line-height:1.25;font-weight:700;margin:0 0 6px;letter-spacing:-.01em}
+.masthead .en{font-size:16px;color:var(--ink-2);font-weight:400;margin:0 0 18px}
+.masthead .meta{display:flex;flex-wrap:wrap;gap:8px 26px;font-size:13px;color:var(--ink-3)}
+.masthead .meta b{color:var(--ink-2);font-weight:500}
+
+.legend{background:var(--card);border:1px solid var(--rule);padding:20px 24px;margin-bottom:38px}
+.legend h2{font-size:15px;margin:0 0 14px;font-weight:600}
+.legend h2.two{margin-top:22px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chipwrap{display:flex;align-items:baseline;gap:9px;border:1px solid var(--rule-soft);padding:9px 13px;flex:1 1 200px}
+.chipwrap small{font-size:12px;color:var(--ink-3);line-height:1.4}
+.chipwrap b{font-size:12.5px;font-weight:600;color:var(--t-insp);white-space:nowrap}
+.chip{display:inline-block;font-size:11px;font-weight:600;padding:2px 7px;white-space:nowrap;border-radius:2px}
+.c-fab{background:var(--t-fab-bg);color:var(--t-fab)}
+.c-insp{background:var(--t-insp-bg);color:var(--t-insp)}
+.c-pkg{background:var(--t-pkg-bg);color:var(--t-pkg)}
+.c-sup{background:var(--t-sup-bg);color:var(--t-sup)}
+
+.stage{display:grid;grid-template-columns:212px 1fr}
+.rail{padding:22px 20px 26px 0;border-right:2px solid var(--rule);position:relative}
+.rail .num{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;color:var(--ink-3);letter-spacing:.06em;margin-bottom:8px}
+.rail h2{font-size:19px;margin:0 0 3px;font-weight:600;line-height:1.35}
+.rail .en2{font-size:13px;color:var(--ink-2);margin:0 0 12px;line-height:1.45}
+.rail .clarify{font-size:12.5px;color:var(--ink-3);line-height:1.55;padding-top:11px;border-top:1px dashed var(--rule)}
+.rail .stripe{position:absolute;right:-2px;top:22px;bottom:26px;width:2px;background:var(--stage)}
+.rail.shared .stripe{background:var(--shared)}
+.body{padding:22px 0 26px 26px}
+
+.row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:12px}
+.row:last-child{margin-bottom:0}
+.step{background:var(--card);border:1px solid var(--rule);padding:12px 14px;flex:1 1 200px;min-width:190px}
+.step .idx{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:10.5px;color:var(--ink-3)}
+.step h4{font-size:14px;margin:2px 0 1px;font-weight:600;line-height:1.4}
+.step .en3{font-size:12px;color:var(--ink-2);margin:0 0 9px;line-height:1.4}
+.step .vend{font-size:11.5px;color:var(--ink-2);margin:6px 0 0;line-height:1.5}
+.step .why{font-size:11.5px;color:var(--ink-3);margin:8px 0 0;line-height:1.5;padding-top:8px;border-top:1px dotted var(--rule-soft)}
+.step .qc{font-size:11.5px;margin:8px 0 0;line-height:1.5;padding:7px 9px;background:var(--t-insp-bg);color:#0B5C64}
+.step .qc b{font-weight:600;color:var(--t-insp)}
+.step.fab{border-left:3px solid var(--t-fab)}
+.step.insp{border-left:3px solid var(--t-insp)}
+.step.pkg{border-left:3px solid var(--t-pkg)}
+.step.sup{border-left:3px solid var(--t-sup)}
+.step.pair{background:#FCFDFD}
+
+.sub{font-size:13px;font-weight:600;margin:20px 0 10px;padding:6px 12px;color:#fff}
+.sub:first-child{margin-top:0}
+.sub .lite{font-weight:400;opacity:.82;font-size:12px}
+.sub.g{background:var(--soic)}
+.sub.p{background:var(--cowos)}
+.sub.b{background:var(--stage)}
+.sub.opt{background:#8A5A00}
+.step.opt{border-left:3px solid #8A5A00;border-style:solid dashed dashed dashed;border-color:var(--rule);border-left-color:#8A5A00;background:#FFFDF7}
+.optnote{font-size:12px;color:#7A5100;background:#FDF6E6;border:1px dashed #C99A1E;padding:10px 12px;margin:0 0 10px;line-height:1.55}
+.optbox{border:1px dashed #C99A1E;background:#FDF6E6;margin:0 0 12px}
+.optsplit{display:grid;grid-template-columns:1fr 1fr}
+.optcell{padding:13px 15px}
+.optcell + .optcell{border-left:1px dashed #E0C486}
+.optcell h5{font-size:12px;margin:0 0 5px;font-weight:600;color:#8A5A00}
+.optcell p{font-size:12px;margin:0;color:#7A5100;line-height:1.55}
+.optstack{padding:13px 15px;border-top:1px dashed #E0C486}
+.optstack h5{font-size:12px;margin:0 0 9px;font-weight:600;color:#8A5A00}
+.optstack table{width:100%;border-collapse:collapse;font-size:12px}
+.optstack td{padding:4px 0;border:none;color:#7A5100;vertical-align:top;line-height:1.5}
+.optstack td.tier{width:22px;font-family:ui-monospace,Menlo,monospace;color:#B08A2E}
+.optstack td.tech{width:74px;font-weight:600;color:#8A5A00}
+.optstack .ts{font-size:11.5px;color:#9A7530;margin:9px 0 0;padding-top:8px;border-top:1px dashed #E0C486}
+
+.forkbar{display:grid;grid-template-columns:212px 1fr}
+.forkbar .lead{padding:26px 20px 0 0;border-right:2px solid var(--rule)}
+.forkbar .msg{padding:26px 0 4px 26px;font-size:13px;color:var(--ink-3);max-width:74ch;line-height:1.6}
+.forkbar .msg b{color:var(--ink-2);font-weight:500}
+.routes{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+@media (max-width:900px){.routes{grid-template-columns:1fr}}
+.route{border-top:3px solid var(--soic)}
+.route.pk{border-top-color:var(--cowos)}
+.routehead{padding:16px 0 14px}
+.routehead h2{font-size:20px;margin:0 0 2px;font-weight:600}
+.routehead .en2{font-size:13px;color:var(--ink-2);margin:0 0 10px}
+.routehead .clarify{font-size:12.5px;color:var(--ink-3);line-height:1.55;padding-top:11px;border-top:1px dashed var(--rule);max-width:60ch}
+.route .row{flex-direction:column}
+.route .step{flex:1 1 auto}
+.link{grid-column:1/-1;margin:26px 0 0;border:1px dashed var(--cowos);background:var(--cowos-tint);
+ padding:14px 18px;font-size:13px;color:var(--ink-2);line-height:1.6}
+.link b{color:var(--cowos);font-weight:600}
+.divider{height:1px;background:var(--rule-soft)}
+
+.sect{margin-top:48px;border:1px solid var(--rule);background:var(--card);padding:24px 26px}
+.sect h2{font-size:19px;margin:0 0 6px;font-weight:600}
+.sect .key{font-size:12.5px;color:var(--ink-3);margin:0 0 20px}
+.sect .key .tw{font-weight:600}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px solid var(--rule-soft);vertical-align:top}
+th{font-weight:600;color:var(--ink-2);font-size:12.5px;border-bottom:1px solid var(--rule)}
+td.n{font-family:ui-monospace,"SF Mono",Menlo,monospace;color:var(--ink-2);white-space:nowrap}
+tr:last-child td{border-bottom:none}
+.grouprow td{background:#F1F5F6;padding-top:11px;padding-bottom:9px;padding-left:12px;border-bottom:1px solid var(--rule)}
+.lead-v{font-weight:600}
+.tw{color:var(--t-insp)}
+
+@media (max-width:760px){
+ .wrap{padding:30px 16px 60px}
+ .stage,.forkbar{grid-template-columns:1fr}
+ .rail{border-right:none;border-bottom:2px solid var(--rule);padding:20px 0 18px}
+ .rail .stripe{right:auto;left:0;top:auto;bottom:-2px;width:60px;height:2px}
+ .body{padding:20px 0 26px}
+ .forkbar .lead{display:none}
+ .forkbar .msg{padding-left:0}
+ .scroller{overflow-x:auto}
+ table{min-width:560px}
+}
+@media print{.backbar,.toc{display:none}body{background:#fff}.wrap{max-width:none;padding:0}.step,.legend,.sect{break-inside:avoid}}
+.backbar{margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.backbar a{display:inline-block;font-size:13px;color:var(--ink-2);text-decoration:none;border:1px solid var(--rule);background:var(--card);padding:6px 13px}
+.backbar a:hover{color:var(--b);border-color:var(--b)}
+.backbar .lang{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;letter-spacing:.04em}
+.toc{background:var(--card);border:1px solid var(--rule);padding:16px 22px;margin-bottom:34px;font-size:13px}
+.toc a{color:var(--stage);text-decoration:none;font-weight:500;margin-right:18px;white-space:nowrap}
+.toc a:hover{text-decoration:underline}
+.tocrow{display:flex;flex-wrap:wrap;gap:6px 4px;row-gap:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="backbar"><a href="index-en.html">← Back to index</a><a class="lang" href="soic-cowos.html" onclick="this.href=this.href.split('#')[0]+location.hash">中文</a></div>
+
+
+
+<header class="masthead">
+ <h1>SoIC · CoWoS · CPO Full Process Map</h1>
+ <p class="en">Wafer fabrication to system shipment, with the equipment and suppliers behind every step<br>從晶圓製造到系統出貨的完整流程，逐步列出設備與供應商</p>
+ <div class="meta"><span><b>Steps</b> 65, plus the optional CPO branch C1 to C5</span><span><b>Stages</b> 4: wafer fab · die preparation · package integration · board assembly</span><span><b>Note</b> Taiwanese suppliers in green</span></div>
+</header>
+
+<nav class="toc">
+  <div class="tocrow">
+    <a href="#legend">Equipment Legend</a><a href="#s1">1 Wafer Fab</a><a href="#s2">2 Die Preparation</a>
+    <a href="#s3a">3A SoIC</a><a href="#s3b">3B CoWoS</a>
+    <a href="#s4">4 Board Assembly</a><a href="#vendors">Supplier Matrix</a>
+  </div>
+</nav>
+
+
+<section class="legend" id="legend">
+ <h2>Equipment Categories</h2>
+ <div class="chips">
+  <div class="chipwrap"><span class="chip c-fab">Front-end</span><small>Lithography, etch, deposition, CMP, clean, anneal</small></div>
+  <div class="chipwrap"><span class="chip c-insp">Inspection</span><small>AOI, SEM, metrology, electrical test, burn-in</small></div>
+  <div class="chipwrap"><span class="chip c-pkg">Packaging</span><small>Grinding, dicing, die attach, bonding, molding, ball attach</small></div>
+  <div class="chipwrap"><span class="chip c-sup">Support</span><small>Vacuum, gases, thermal, cure, material handling</small></div>
+ </div>
+
+ <h2 class="two">How to Read the Inspection Field</h2>
+ <div class="chips">
+  <div class="chipwrap"><b>Next inspection</b><small>The step is a <b>process step</b>, and the field lists what is verified immediately after it. Most packaging steps cannot be reworked once passed, which is why almost every one carries a check</small></div>
+  <div class="chipwrap"><b>Inspection: this step is the check</b><small>The step <b>is itself a test station</b>, so there is nothing following to name. 20 steps in this document are of this kind</small></div>
+ </div>
+ <h2 class="two">Inspection Methods</h2>
+ <div class="chips">
+  <div class="chipwrap"><b>AOI</b><small>Optical inspection for surface defects: scratches, particles, missing parts. Fast, non-destructive, 100%</small></div>
+  <div class="chipwrap"><b>Metrology</b><small>Dimensional measurement: thickness, overlay, coplanarity, warpage. Fast and non-destructive</small></div>
+  <div class="chipwrap"><b>X-ray</b><small>Penetrating inspection for voids, offset and cracks. Sees what AOI cannot</small></div>
+  <div class="chipwrap"><b>SAM</b><small>Scanning acoustic microscopy. Detects delamination and unbonded areas</small></div>
+  <div class="chipwrap"><b>SEM</b><small>Electron microscopy for nanometre detail and cross-sections. Very slow, usually destructive, sampled only</small></div>
+ </div>
+</section>
+
+<!-- STAGE 1 -->
+<div class="stage" id="s1">
+ <div class="rail"><div class="stripe"></div>
+  <div class="num">STAGE 1</div>
+  <h2>Wafer Fabrication</h2>
+  <p class="en2">晶圓製造與晶圓級測試</p>
+  <div class="clarify">"Front-end" here means <b>position in the sequence</b>, not a class of equipment. The purpose is to establish which die are good, because a bad die entering a stack destroys the whole package.</div>
+ </div>
+ <div class="body">
+  <div class="row">
+   <div class="step fab"><div class="idx">01</div><h4>Wafer Fabrication (FEOL)</h4><p class="en3">晶圓製造（FEOL）</p>
+    <span class="chip c-fab">Front-end</span>
+    <p class="vend">ASML · AMAT · Lam · TEL</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI · metrology · SEM (sampled)</p>
+    <p class="why">Transistors and metal layers are built, which sets the performance of the chip itself.</p></div>
+   <div class="step insp"><div class="idx">02</div><h4>Wafer Test (KGD)</h4><p class="en3">晶圓針測（KGD）</p>
+    <span class="chip c-insp">Inspection</span>
+    <p class="vend">Advantest · Teradyne · <span class="tw">MPI</span> · <span class="tw">CHPT</span></p>
+    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: electrical test</p>
+    <p class="why">Identifies known good die. The yield gate before stacking, and the cheapest point at which to discard a part.</p></div>
+   <div class="step insp"><div class="idx">03</div><h4>Wafer Sort / Measurement</h4><p class="en3">Wafer Sort / 量測</p>
+    <span class="chip c-insp">Inspection</span>
+    <p class="vend">KLA · Onto · Nova</p>
+    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: AOI · metrology</p>
+    <p class="why">Binning and data capture, which decides which die is paired with which.</p></div>
+  </div>
+ </div>
+</div>
+<div class="divider"></div>
+
+<!-- STAGE 2 -->
+<div class="stage" id="s2">
+ <div class="rail shared"><div class="stripe"></div>
+  <div class="num">STAGE 2</div>
+  <h2>Top-Die Preparation</h2>
+  <p class="en2">上層晶片前處理，SoIC 與 CoWoS 共用</p>
+  <div class="clarify">The trunk <b>shared</b> by both routes. A wafer starts around 775µm thick and must be thinned until the TSVs are exposed before a die can conduct vertically. Front-end tools already dominate this stage.</div>
+ </div>
+ <div class="body">
+  <div class="row">
+   <div class="step pkg"><div class="idx">04</div><h4>Temporary Bonding</h4><p class="en3">暫時貼合</p>
+    <span class="chip c-pkg">Packaging</span>
+    <p class="vend">EVG · SUSS MicroTec · TOK (Materials)</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (adhesive thickness, alignment)</p>
+    <p class="why">Mounted on a carrier. A thinned wafer is brittle enough to shatter without one.</p></div>
+   <div class="step sup"><div class="idx">05</div><h4>Post-Bond Cure</h4><p class="en3">貼合後固化</p>
+    <span class="chip c-sup">Support</span>
+    <p class="vend"><span class="tw">C SUN</span> · Koyo Thermo</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (warpage)</p>
+    <p class="why">Cures the adhesive so the wafer does not shift during grinding.</p></div>
+   <div class="step pkg pair"><div class="idx">06a</div><h4>Coarse &amp; Fine Grinding</h4><p class="en3">粗磨／細磨</p>
+    <span class="chip c-pkg">Packaging</span>
+    <p class="vend"><b>DISCO</b> · Tokyo Seimitsu · Okamoto</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (thickness, total thickness variation)</p>
+    <p class="why">Mechanical grinding removes roughly 700µm. Fast, but it leaves sub-surface micro-cracks.</p></div>
+   <div class="step fab pair"><div class="idx">06b</div><h4>CMP Polishing</h4><p class="en3">CMP 拋光</p>
+    <span class="chip c-fab">Front-end</span>
+    <p class="vend"><b>AMAT</b> · Ebara · ACM Research · <span class="tw">Kinik</span> (Consumables)</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (scratches, slurry residue) · metrology · SEM (on excursion)</p>
+    <p class="why">Chemical plus mechanical action removes only 1 to 5µm but eliminates grinding damage. Two different tools run back to back.</p></div>
+  </div>
+  <div class="row">
+   <div class="step sup"><div class="idx">07</div><h4>Wafer Vacuum Lamination</h4><p class="en3">晶圓真空壓膜</p>
+    <span class="chip c-sup">Support</span>
+    <p class="vend">Takatori · Nitto Denko (Materials)</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (bubbles, wrinkles)</p>
+    <p class="why">Lamination under vacuum, so no trapped bubbles turn into downstream defects.</p></div>
+   <div class="step fab"><div class="idx">08</div><h4>TSV Reveal / RDL Patterning</h4><p class="en3">TSV 背鑽／RDL 圖形化</p>
+    <span class="chip c-fab">Front-end</span>
+    <p class="vend">AMAT · Lam · TEL · Veeco</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (line defects) · metrology (linewidth, overlay) · X-ray (TSV fill) · SEM</p>
+    <p class="why">Lithography, etch and deposition. <b>Front-end fab tools, running inside a packaging flow.</b></p></div>
+   <div class="step pkg"><div class="idx">09</div><h4>Debonding</h4><p class="en3">解鍵合</p>
+    <span class="chip c-pkg">Packaging</span>
+    <p class="vend">EVG · SUSS MicroTec</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (breakage, adhesive residue)</p>
+    <p class="why">Removes the temporary carrier by laser or mechanical release. A common source of breakage loss.</p></div>
+   <div class="step pkg"><div class="idx">10</div><h4>Dicing / Die Picking</h4><p class="en3">切割／揀晶</p>
+    <span class="chip c-pkg">Packaging</span>
+    <p class="vend">DISCO · Tokyo Seimitsu · ASMPT</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (edge chipping, cracks)</p>
+    <p class="why">Singulated into individual die and sorted on the test result. The two routes diverge after this point.</p></div>
+  </div>
+ </div>
+</div>
+
+<!-- FORK -->
+<div class="forkbar">
+ <div class="lead"></div>
+ <div class="msg"><b>The routes split here.</b> The only difference is orientation: SoIC stacks die <b>vertically</b>, CoWoS lays them <b>side by side on an interposer</b>. They do not compete, and in practice they are frequently combined.</div>
+</div>
+<div style="height:20px"></div>
+
+<div class="routes">
+ <!-- SoIC -->
+ <div class="route" id="s3a">
+  <div class="routehead">
+   <h2>3A SoIC</h2>
+   <p class="en2">System on Integrated Chips — vertical stacking</p>
+   <div class="clarify">Direct copper-to-copper bonding, with <b>no bumps and no solder</b>. Surfaces must be flat to the nanometre and free of oxide, which is why half the tool set is front-end equipment.</div>
+  </div>
+
+  <div class="sub g">3A-1 Surface Preparation <span class="lite">表面前處理</span></div>
+  <div class="row">
+   <div class="step fab"><div class="idx">11</div><h4>Surface Planarization / CMP</h4><p class="en3">表面平坦化／CMP</p>
+    <span class="chip c-fab">Front-end</span>
+    <p class="vend"><b>AMAT</b> · Ebara · ACM Research</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (particle count is the critical parameter) · metrology (copper pad dishing) · SEM</p>
+    <p class="why">Copper pads must be dished by a precise few nanometres so they expand into contact during anneal.</p></div>
+   <div class="step fab"><div class="idx">12</div><h4>Surface Activation &amp; Cleaning</h4><p class="en3">表面活化與清洗</p>
+    <span class="chip c-fab">Front-end</span>
+    <p class="vend">SCREEN · TEL · Lam · <span class="tw">GPTC</span> · <span class="tw">Scientech</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (residue, particles)</p>
+    <p class="why">Removes oxide and particles. A single particle is enough to fail the entire bond.</p></div>
+  </div>
+
+  <div class="sub g">3A-2 Bonding <span class="lite">鍵合</span></div>
+  <div class="row">
+   <div class="step pkg"><div class="idx">13</div><h4>High-Precision Alignment / Bonding</h4><p class="en3">高精度對位／貼晶</p>
+    <span class="chip c-pkg">Packaging</span>
+    <p class="vend"><b>Besi</b> · <b>ASMPT</b> · EVG · SUSS · Hanmi</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (overlay accuracy) · X-ray</p>
+    <p class="why">Sub-micron placement accuracy. The equipment bottleneck of the whole flow.</p></div>
+   <div class="step pkg"><div class="idx">14</div><h4>Pre-Bond / Hybrid Bonding</h4><p class="en3">預鍵結／混合鍵結</p>
+    <span class="chip c-pkg">Packaging</span>
+    <p class="vend"><b>Besi</b> · <b>ASMPT</b> · EVG</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;X-ray · SAM · SEM (destructive, sampled). <b>AOI does not work here: the bond interface is buried between silicon layers and light cannot reach it.</b></p>
+    <p class="why">The dielectric bonds first; the copper pads inter-diffuse later during anneal. Usually the same tool as step 13.</p></div>
+  </div>
+
+  <div class="sub g">3A-3 Thermal <span class="lite">熱處理</span></div>
+  <div class="row">
+   <div class="step fab"><div class="idx">15</div><h4>Post-Bond Anneal</h4><p class="en3">鍵結後退火</p>
+    <span class="chip c-fab">Front-end</span>
+    <p class="vend">AMAT · Kokusai · TEL</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (warpage) · X-ray (void growth) · SEM</p>
+    <p class="why">Heat drives copper grains to grow across the bond interface. There is no electrical connection before this step.</p></div>
+  </div>
+
+  <div class="sub g">3A-4 Inspection &amp; Test <span class="lite">檢測與測試</span></div>
+  <div class="row">
+   <div class="step insp"><div class="idx">16</div><h4>Post-Bond Inspection / Electrical Test</h4><p class="en3">鍵結後檢查／電測</p>
+    <span class="chip c-insp">Inspection</span>
+    <p class="vend">KLA · Camtek · Hitachi High-Tech · Nordson (SAM)· <span class="tw">MA-tek</span> (Analysis)</p>
+    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: X-ray · SAM · electrical test · SEM (destructive)</p>
+    <p class="why">The bond interface is invisible, so verification relies on X-ray, ultrasound and electrical test. The industry still has no method that is fast, non-destructive and 100% for hybrid bonds.</p></div>
+  </div>
+ </div>
+
+ <!-- CoWoS -->
+ <div class="route pk" id="s3b">
+  <div class="routehead">
+   <h2>3B CoWoS</h2>
+   <p class="en2">Chip on Wafer on Substrate — lateral integration</p>
+   <div class="clarify">Die sit side by side on an interposer, connected by <b>micro-bumps and underfill</b>. The problem being solved is the reticle limit: fitting more silicon into one package than a single exposure field allows.</div>
+  </div>
+
+  <div class="sub p">3B-1 Chip-on-Wafer (CoW) <span class="lite">組裝至中介層</span></div>
+  <div class="row">
+   <div class="step pkg"><div class="idx">17</div><h4>Die Attach to Interposer</h4><p class="en3">晶片貼裝至中介層</p>
+    <span class="chip c-pkg">Packaging</span>
+    <p class="vend">ASMPT · K&amp;S · Shinkawa</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (placement) · metrology (tilt)</p>
+    <p class="why">Logic die and HBM are placed onto the silicon interposer in sequence.</p></div>
+   <div class="step pkg"><div class="idx">18</div><h4>Micro-bump Bonding / TCB</h4><p class="en3">微凸塊接合／TCB</p>
+    <span class="chip c-pkg">Packaging</span>
+    <p class="vend"><b>ASMPT</b> · K&amp;S · Shinkawa · Hanmi</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI · X-ray (bridging, cold joints) · metrology (bond line height)</p>
+    <p class="why">Thermal compression bonding. Units per hour here set the ceiling on CoWoS capacity.</p></div>
+   <div class="step pkg"><div class="idx">19</div><h4>Underfill Fill</h4><p class="en3">Underfill 填膠</p>
+    <span class="chip c-pkg">Packaging</span>
+    <p class="vend">Nordson · <span class="tw">All Ring</span> · Namics (Materials)</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;X-ray (voids) · SAM. <b>The fillet sits under the die, so only penetrating methods can see it.</b></p>
+    <p class="why">Fills the gaps between bumps and spreads thermal expansion stress.</p></div>
+   <div class="step sup"><div class="idx">20</div><h4>Vacuum De-bubble / De-foam</h4><p class="en3">真空脫泡／去氣泡</p>
+    <span class="chip c-sup">Support</span>
+    <p class="vend">Nordson · <span class="tw">C SUN</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;X-ray (residual bubbles)</p>
+    <p class="why">A trapped bubble is a future field failure. A yield gate.</p></div>
+  </div>
+
+  <div class="sub p">3B-2 Molding &amp; Interposer Processing <span class="lite">塑封與中介層加工</span></div>
+  <div class="row">
+   <div class="step pkg"><div class="idx">21</div><h4>Molding / Post-Mold Cure</h4><p class="en3">塑封／塑封後固化</p>
+    <span class="chip c-pkg">Packaging</span>
+    <p class="vend"><b>TOWA</b> · ASMPT · Besi</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (mould flash, incomplete fill) · metrology (warpage)</p>
+    <p class="why">Encapsulation protects the die and provides structural strength.</p></div>
+   <div class="step pkg pair"><div class="idx">22a</div><h4>Interposer Grinding</h4><p class="en3">中介層研磨</p>
+    <span class="chip c-pkg">Packaging</span>
+    <p class="vend"><b>DISCO</b> · Tokyo Seimitsu</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (thickness, TTV, warpage)</p>
+    <p class="why">Large-area mechanical thinning. A moulded reconstituted wafer warps far more readily than a plain one.</p></div>
+   <div class="step fab pair"><div class="idx">22b</div><h4>Interposer CMP</h4><p class="en3">中介層 CMP 拋光</p>
+    <span class="chip c-fab">Front-end</span>
+    <p class="vend">AMAT · Ebara</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI · metrology (backside pad reveal)</p>
+    <p class="why">Finish polish that exposes the backside pads. Like step 06, a grind-then-CMP pair of tools.</p></div>
+   <div class="step pkg"><div class="idx">23</div><h4>Dicing / Test Fixture Prep.</h4><p class="en3">切割／測試治具化</p>
+    <span class="chip c-pkg">Packaging</span>
+    <p class="vend">DISCO · Tokyo Seimitsu</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (cut edges)</p>
+    <p class="why">Singulated into individual modules and prepared for the test interface.</p></div>
+  </div>
+
+  <div class="sub p">3B-3 Attach to Package Substrate (oS) <span class="lite">接合至封裝基板</span></div>
+  <div class="row">
+   <div class="step pkg"><div class="idx">24</div><h4>Attach to Package Substrate</h4><p class="en3">接合至封裝基板</p>
+    <span class="chip c-pkg">Packaging</span>
+    <p class="vend">ASMPT · Shinkawa ｜ Substrates: Ibiden · Shinko · <span class="tw">Unimicron</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI · X-ray (alignment)</p>
+    <p class="why">The assembled module is placed on the ABF substrate. Substrate supply is a bottleneck in its own right.</p></div>
+   <div class="step pkg"><div class="idx">25</div><h4>C4 / Micro-bump Reflow</h4><p class="en3">C4／微凸塊迴焊</p>
+    <span class="chip c-pkg">Packaging</span>
+    <p class="vend">Rehm · BTU · Heller</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;X-ray (joint voids, bridging)</p>
+    <p class="why">Heat melts the solder to form the connection on the substrate side.</p></div>
+   <div class="step sup"><div class="idx">26</div><h4>Substrate-side Underfill Cure</h4><p class="en3">基板側 Underfill 固化</p>
+    <span class="chip c-sup">Support</span>
+    <p class="vend">Nordson · <span class="tw">C SUN</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;X-ray · SAM (delamination)</p>
+    <p class="why">A second underfill and cure that contains the expansion mismatch between substrate and silicon.</p></div>
+  </div>
+
+  <div class="sub opt">3B-C Co-Packaged Optics <span class="lite">Optional branch — not on the mandatory path</span></div>
+  <div class="optbox">
+   <div class="optsplit">
+    <div class="optcell">
+     <h5>Who takes this branch</h5>
+     <p>Switch silicon: Broadcom Tomahawk, NVIDIA Quantum-X and Spectrum-X, Marvell. Their job is moving data out of the package.</p>
+    </div>
+    <div class="optcell">
+     <h5>Who does not</h5>
+     <p>GPUs. Their bandwidth bottleneck is the HBM inside the package rather than external I/O, so there is no reason to take on the cost and risk of optics.</p>
+    </div>
+   </div>
+   <div class="optstack">
+    <h5>TSMC COUPE stacks all three technologies at once</h5>
+    <table>
+     <tr><td class="tier">1</td><td class="tech">SoIC</td><td>Hybrid-bonds the 65nm electronic IC to the photonic IC to form the optical engine</td></tr>
+     <tr><td class="tier">2</td><td class="tech">CoWoS</td><td>Places the optical engine and the customer ASIC on one interposer</td></tr>
+     <tr><td class="tier">3</td><td class="tech">CPO</td><td>The result: optics move inside the package, replacing the pluggable module outside it</td></tr>
+    </table>
+    <p class="ts">The only product using all three at once. COUPE on Substrate entered production in the second half of 2026, with the CoWoS-integrated version to follow. The SoIC here sits inside the optical engine and is not used to stack compute die.</p>
+   </div>
+  </div>
+  <div class="row">
+   <div class="step opt"><div class="idx">C1</div><h4>Optical Engine (PIC+EIC) Attach</h4><p class="en3">光引擎貼裝</p>
+    <span class="chip c-pkg">Packaging</span>
+    <p class="vend">TSMC COUPE ｜ PIC foundry: TSMC · GlobalFoundries · Tower</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI · metrology (placement, tilt) · X-ray</p>
+    <p class="why">The optical engine is already an SoIC package in its own right, and it enters the main package as a chiplet. A package inside a package.</p></div>
+   <div class="step opt"><div class="idx">C2</div><h4>Laser / External Light Source</h4><p class="en3">雷射光源整合</p>
+    <span class="chip c-pkg">Packaging</span>
+    <p class="vend">Coherent · Lumentum · Broadcom ｜ <span class="tw">LandMark</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Optical power · wavelength</p>
+    <p class="why">Laser diode attach, or an external light source instead. The laser is acutely temperature-sensitive and sits beside an ASIC dissipating hundreds of watts.</p></div>
+  </div>
+  <div class="row">
+   <div class="step opt"><div class="idx">C3</div><h4>Optical Alignment</h4><p class="en3">光學對位</p>
+    <span class="chip c-pkg">Packaging</span>
+    <p class="vend"><b>ficonTEC</b> · ASMPT · K&amp;S · Shinkawa</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Active alignment metrology (coupling efficiency measured live)</p>
+    <p class="why">Aligns the fiber to the waveguide entrance at sub-micron precision. One micron off and insertion loss rises sharply.</p></div>
+   <div class="step opt"><div class="idx">C4</div><h4>Fiber Attach</h4><p class="en3">光纖接合</p>
+    <span class="chip c-pkg">Packaging</span>
+    <p class="vend">ficonTEC · Nordson (Dispensing) ｜ <span class="tw">FOCI</span> · <span class="tw">Browave</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (adhesive line) · pull test (sampled)</p>
+    <p class="why">Bonded in place. <b>Effectively no rework: a bad attach scraps the entire high-value package.</b></p></div>
+   <div class="step opt"><div class="idx">C5</div><h4>Optical Test</h4><p class="en3">光學測試</p>
+    <span class="chip c-insp">Inspection</span>
+    <p class="vend">Keysight · EXFO · <span class="tw">Chroma</span></p>
+    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: insertion loss, coupling efficiency, bit error rate</p>
+    <p class="why">The electrical yield is hard enough on its own; optical yield now multiplies on top of it. This is the core reason CPO yield is difficult.</p></div>
+  </div>
+
+  <div class="sub p">3B-4 Final Package Integration <span class="lite">後段封裝整合</span></div>
+  <div class="row">
+   <div class="step pkg"><div class="idx">27</div><h4>TIM / Lid Attach</h4><p class="en3">TIM／散熱蓋貼合</p>
+    <span class="chip c-pkg">Packaging</span>
+    <p class="vend">Nordson ｜ TIM Materials: Henkel · Indium Corp</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;X-ray (voids in the TIM) · metrology (lid height, parallelism)</p>
+    <p class="why">Thermal interface plus metal lid. Power is high enough that cooling limits performance, and a CPO build needs a fiber exit designed into the lid.</p></div>
+   <div class="step pkg"><div class="idx">28</div><h4>Ball Attach (BGA)</h4><p class="en3">植球（BGA）</p>
+    <span class="chip c-pkg">Packaging</span>
+    <p class="vend">ASMPT · Shibaura · <span class="tw">Jun Hwa 均華</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (missing and misplaced balls) · metrology (coplanarity)</p>
+    <p class="why">Attaches the ball array that connects to the motherboard.</p></div>
+   <div class="step pkg"><div class="idx">29</div><h4>BGA Reflow</h4><p class="en3">BGA 迴焊</p>
+    <span class="chip c-pkg">Packaging</span>
+    <p class="vend">Rehm · BTU · Heller</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI · X-ray (voids inside balls) · metrology (warpage)</p>
+    <p class="why">Reflow fixes the balls in place while warpage and coplanarity are controlled.</p></div>
+   <div class="step pkg"><div class="idx">30</div><h4>Laser Marking</h4><p class="en3">雷射標記</p>
+    <span class="chip c-pkg">Packaging</span>
+    <p class="vend">Coherent · Han's Laser</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (OCR character verification)</p>
+    <p class="why">Marks part number and traceability code.</p></div>
+  </div>
+
+  <div class="sub p">3B-5 Final Test <span class="lite">最終測試</span></div>
+  <div class="row">
+   <div class="step insp"><div class="idx">31</div><h4>Final Electrical Test</h4><p class="en3">最終電性測試</p>
+    <span class="chip c-insp">Inspection</span>
+    <p class="vend"><b>Advantest</b> · Teradyne · <span class="tw">KYEC</span> (Contract mfg)· <span class="tw">WinWay</span> (Test sockets)</p>
+    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: electrical test</p>
+    <p class="why">By this point the package is worth so much that a failure scraps the HBM and the substrate along with it.</p></div>
+   <div class="step insp"><div class="idx">32</div><h4>Burn-in / Reliability Test</h4><p class="en3">測試燒機／可靠度</p>
+    <span class="chip c-insp">Inspection</span>
+    <p class="vend">Advantest · Chroma · Aehr</p>
+    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: burn-in</p>
+    <p class="why">Elevated temperature and voltage accelerate ageing to screen infant mortality. Test time is cost.</p></div>
+   <div class="step insp"><div class="idx">33</div><h4>Final Inspection / Outgoing</h4><p class="en3">最終檢查／出貨</p>
+    <span class="chip c-insp">Inspection</span>
+    <p class="vend">KLA · Camtek · YXLON (X-ray)</p>
+    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: AOI · metrology · X-ray</p>
+    <p class="why">Visual and dimensional check, then ship.</p></div>
+  </div>
+ </div>
+
+ <div class="link"><b>In practice the two are combined.</b> The diagram shows SoIC and CoWoS as parallel routes, but a real product usually runs SoIC first to bond logic die vertically, then feeds that stacked module into CoWoS at 3B-1 to sit on the interposer alongside the HBM. TSMC markets the combination as 3DFabric. Read the map as which technology applies to which layer, not as a choice between two options.</div>
+</div>
+
+<div style="height:34px"></div>
+<div class="divider"></div>
+
+<!-- STAGE 4 -->
+<div class="stage" id="s4">
+ <div class="rail"><div class="stripe"></div>
+  <div class="num">STAGE 4</div>
+  <h2>Board-Level Assembly &amp; System Integration</h2>
+  <p class="en2">板級組裝與系統整合</p>
+  <div class="clarify">Both routes converge here. This is <b>board-level</b> work, and the equipment is one to two orders of magnitude cheaper than anything above. Since AI servers moved to liquid cooling, however, cold plate assembly and leak testing in group G have become a genuine production bottleneck, and the main source of Taiwanese value in this stage.</div>
+ </div>
+ <div class="body">
+  <div class="sub b">A Incoming Material &amp; Preparation <span class="lite">來料與前處理</span></div>
+  <div class="row">
+   <div class="step insp"><div class="idx">34</div><h4>Incoming Quality Control</h4><p class="en3">來料檢驗（IQC）</p>
+    <span class="chip c-insp">Inspection</span>
+    <p class="vend">Keyence · Omron · <span class="tw">Chroma</span> · <span class="tw">TRI</span></p>
+    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: dimensional metrology · visual AOI · moisture sensitivity level</p>
+    <p class="why">Boards, passives, connectors and packaged parts are inspected before stocking. Packaged parts are extremely expensive, so lot codes and moisture levels are locked down here.</p></div>
+   <div class="step sup"><div class="idx">35</div><h4>PCB Baking</h4><p class="en3">PCB 除濕烘烤</p>
+    <span class="chip c-sup">Support</span>
+    <p class="vend"><span class="tw">C SUN</span> · Koyo Thermo · Heller</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Humidity indicator card · open-bag time control</p>
+    <p class="why">A high-layer-count board that has absorbed moisture will delaminate at reflow temperature, so it must be dried before placement.</p></div>
+  </div>
+  <div class="sub b">B Surface Mount, First Side <span class="lite">表面貼裝 SMT（正面）</span></div>
+  <div class="row">
+   <div class="step pkg"><div class="idx">36</div><h4>Solder Paste Printing</h4><p class="en3">錫膏印刷</p>
+    <span class="chip c-pkg">Packaging</span>
+    <p class="vend">ASMPT (DEK)· Panasonic · Yamaha · Ekra ｜ Stencils: Photo Stencil · Koh Young</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;SPI 3D solder paste metrology</p>
+    <p class="why">A stencil prints solder paste onto the pads. More than half of all board-level solder defects originate here, so this step governs everything downstream.</p></div>
+   <div class="step insp"><div class="idx">37</div><h4>Solder Paste Inspection</h4><p class="en3">SPI 錫膏檢測</p>
+    <span class="chip c-insp">Inspection</span>
+    <p class="vend">Koh Young · CyberOptics · Parmi · <span class="tw">TRI</span></p>
+    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: 3D paste metrology, 100%</p>
+    <p class="why">Measures paste volume, area and offset on every pad. A bad board is wiped and reprinted before placement, at almost no cost.</p></div>
+   <div class="step pkg"><div class="idx">38</div><h4>SMT Placement</h4><p class="en3">SMT 貼片</p>
+    <span class="chip c-pkg">Packaging</span>
+    <p class="vend">ASMPT · Fuji · Panasonic · Yamaha ｜ Contract mfg: <span class="tw">Foxconn</span> · <span class="tw">Quanta</span> · <span class="tw">Wistron</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Post-reflow AOI · X-ray (BGA joints)</p>
+    <p class="why">Packages and passives are placed on the board. OAM and SXM accelerator cards take shape here.</p></div>
+   <div class="step pkg"><div class="idx">39</div><h4>Reflow Soldering</h4><p class="en3">迴流焊</p>
+    <span class="chip c-pkg">Packaging</span>
+    <p class="vend">Rehm · BTU · Heller · Kurtz Ersa</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (step 40) · X-ray (step 41) ｜ Process monitor: reflow profiling</p>
+    <p class="why">A multi-zone nitrogen oven melts the paste into joints. The thermal profile has to be retuned for board thickness and mass, and large boards are hard to keep even.</p></div>
+   <div class="step insp"><div class="idx">40</div><h4>Post-Reflow AOI</h4><p class="en3">迴流後 AOI</p>
+    <span class="chip c-insp">Inspection</span>
+    <p class="vend">Koh Young · Omron · Saki · <span class="tw">TRI</span></p>
+    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: 100% optical inspection</p>
+    <p class="why">Checks open joints, offset, tombstoning and bridging. AOI handles the joints it can see; the next step handles the ones it cannot.</p></div>
+   <div class="step insp"><div class="idx">41</div><h4>Automated X-ray Inspection</h4><p class="en3">X-ray 檢測（AXI）</p>
+    <span class="chip c-insp">Inspection</span>
+    <p class="vend">Nordson · YXLON · ViTrox · <span class="tw">TRI</span> · Saki</p>
+    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: penetrating inspection, 100% of BGAs</p>
+    <p class="why">The balls under a BGA or a large package are hidden by the component itself, so only X-ray can find voids, offset and cold joints.</p></div>
+  </div>
+  <div class="sub b">C Second Side &amp; Through-Hole <span class="lite">背面與穿孔製程</span></div>
+  <div class="row">
+   <div class="step pkg"><div class="idx">42</div><h4>Second-Side SMT</h4><p class="en3">背面 SMT（雙面板）</p>
+    <span class="chip c-pkg">Packaging</span>
+    <p class="vend">ASMPT · Fuji · Panasonic</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (second side) · X-ray</p>
+    <p class="why">A double-sided board is flipped and printed, placed and reflowed again. The light side runs first so its parts do not fall off during the second pass.</p></div>
+   <div class="step pkg"><div class="idx">43</div><h4>Selective Soldering</h4><p class="en3">選擇性波焊</p>
+    <span class="chip c-pkg">Packaging</span>
+    <p class="vend">Kurtz Ersa · Pillarhouse · SEHO</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI on through-hole joints · X-ray</p>
+    <p class="why">Large connectors and power terminals are still through-hole. A localised solder jet avoids putting the whole board through another thermal cycle.</p></div>
+   <div class="step pkg"><div class="idx">44</div><h4>Hand Solder / Rework</h4><p class="en3">手工焊接與精修</p>
+    <span class="chip c-pkg">Packaging</span>
+    <p class="vend">Hakko · Weller · Metcal · JBC</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Visual · joint sampling · X-ray where needed</p>
+    <p class="why">Rework and low-volume special parts. AI server boards are expensive enough that repair almost always beats scrapping.</p></div>
+  </div>
+  <div class="sub b">D Cleaning &amp; Protective Coating <span class="lite">清潔與防護塗層</span></div>
+  <div class="row">
+   <div class="step sup"><div class="idx">45</div><h4>Cleaning</h4><p class="en3">清洗</p>
+    <span class="chip c-sup">Support</span>
+    <p class="vend">Zestron · Kyzen · PBT Works · Austin American</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Ionic contamination test (ROSE)</p>
+    <p class="why">Removes flux residue, which causes electrochemical migration under high voltage and humidity. Liquid-cooled builds are especially sensitive.</p></div>
+   <div class="step sup"><div class="idx">46</div><h4>Conformal Coating</h4><p class="en3">三防漆塗覆</p>
+    <span class="chip c-sup">Support</span>
+    <p class="vend">Nordson ASYMTEK · PVA · Dymax ｜ Materials: Henkel · Dow</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Visual under UV · coating thickness</p>
+    <p class="why">An insulating layer against moisture and dust. Liquid-cooled racks and humid halls turn this from optional into standard.</p></div>
+   <div class="step sup"><div class="idx">47</div><h4>Coating Cure</h4><p class="en3">塗層硬化</p>
+    <span class="chip c-sup">Support</span>
+    <p class="vend"><span class="tw">C SUN</span> · Dymax (UV)· Heller</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Cure and adhesion, sampled</p>
+    <p class="why">UV or thermal cure turns the coating into a film. Under-cured coating gets scraped off during later assembly.</p></div>
+  </div>
+  <div class="sub b">E Circuit &amp; Power Test <span class="lite">電路與電源測試</span></div>
+  <div class="row">
+   <div class="step insp"><div class="idx">48</div><h4>In-Circuit Test</h4><p class="en3">ICT 電路測試</p>
+    <span class="chip c-insp">Inspection</span>
+    <p class="vend">Keysight · Teradyne (TestStation)· <span class="tw">Chroma</span> · <span class="tw">TRI</span></p>
+    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: 100% electrical, bed-of-nails or flying probe</p>
+    <p class="why">Measures every node for shorts, opens, wrong parts and reversed polarity. Deliberately placed before power-on, to confirm the circuit itself holds no fatal error.</p></div>
+   <div class="step insp"><div class="idx">49</div><h4>First Power-On / Power Sequencing</h4><p class="en3">首次開機與電源序列測試</p>
+    <span class="chip c-insp">Inspection</span>
+    <p class="vend">Keysight · <span class="tw">Chroma</span> · Ametek</p>
+    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: voltage and timing on every power rail</p>
+    <p class="why">First power-on. Each rail is verified for sequence, voltage and current, the point being not to destroy an entire accelerator card in one go.</p></div>
+  </div>
+  <div class="sub b">F Firmware &amp; Serialisation <span class="lite">韌體與序號</span></div>
+  <div class="row">
+   <div class="step insp"><div class="idx">50</div><h4>Firmware Flashing</h4><p class="en3">韌體燒錄</p>
+    <span class="chip c-insp">Inspection</span>
+    <p class="vend">Data I/O · BPM Microsystems · <span class="tw">Chroma</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Read-back checksum</p>
+    <p class="why">Programs BMC, BIOS, FPGA and power firmware. A wrong version only surfaces at system test, which is an expensive place to find it.</p></div>
+   <div class="step sup"><div class="idx">51</div><h4>Serialisation / Asset Tagging</h4><p class="en3">序號與資產標籤燒錄</p>
+    <span class="chip c-sup">Support</span>
+    <p class="vend">Zebra · SATO · Domino · Videojet</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Barcode readability, ANSI grade</p>
+    <p class="why">Writes the serial number and binds it to the build record. Cloud customers generally require traceability down to the individual board.</p></div>
+  </div>
+  <div class="sub b">G Thermal &amp; Liquid Cooling Assembly <span class="lite">散熱與液冷組裝</span></div>
+  <div class="row">
+   <div class="step pkg"><div class="idx">52</div><h4>Thermal Interface Material</h4><p class="en3">導熱介面材料塗佈（TIM）</p>
+    <span class="chip c-pkg">Packaging</span>
+    <p class="vend">Nordson · <span class="tw">All Ring</span> · Graco ｜ Materials: Honeywell · Shin-Etsu · Dow · Laird</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Dispensed volume and coverage</p>
+    <p class="why">Creates the thermal path between die and heatsink. Too little material, or uneven spread, is the most common thermal failure on high-end modules.</p></div>
+   <div class="step pkg"><div class="idx">53</div><h4>Heatsink Assembly (Air-Cooled)</h4><p class="en3">散熱片組裝（氣冷）</p>
+    <span class="chip c-pkg">Packaging</span>
+    <p class="vend">Automated screwdriving: Weber · Deprag ｜ Modules: <span class="tw">AVC</span> · <span class="tw">Auras</span> · <span class="tw">Jentech</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Torque values logged · flatness</p>
+    <p class="why">The heatsink is driven to a set torque. Uneven clamping creates local hot spots, so torque is logged unit by unit.</p></div>
+   <div class="step pkg"><div class="idx">54</div><h4>Cold Plate &amp; Quick Disconnect</h4><p class="en3">冷板組裝與快接頭安裝</p>
+    <span class="chip c-pkg">Packaging</span>
+    <p class="vend">Modules: <span class="tw">AVC</span> · <span class="tw">Auras</span> · <span class="tw">Sunon</span> ｜ Quick disconnects: CPC · Staubli · Parker</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Torque logged · connector mate check · leak test</p>
+    <p class="why">Liquid-cooled builds mount a cold plate and quick disconnects instead. This is a production bottleneck that only appeared with the GB200 generation, and a new source of Taiwanese value.</p></div>
+   <div class="step insp"><div class="idx">55</div><h4>Leak Test</h4><p class="en3">氣密與洩漏測試</p>
+    <span class="chip c-insp">Inspection</span>
+    <p class="vend">ATEQ · INFICON · Cincinnati Test Systems</p>
+    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: pressure decay or helium leak test</p>
+    <p class="why">The cold plate and loop are pressurised and the pressure decay measured. A leak in a liquid-cooled module takes out the whole rack, not just the board.</p></div>
+   <div class="step sup"><div class="idx">56</div><h4>Mechanical Assembly</h4><p class="en3">機構組裝</p>
+    <span class="chip c-sup">Support</span>
+    <p class="vend">Automated screwdriving: Weber · Deprag ｜ Contract mfg: <span class="tw">Foxconn</span> · <span class="tw">Quanta</span> · <span class="tw">Wistron</span> · <span class="tw">Inventec</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Appearance and dimensional sampling</p>
+    <p class="why">Adds stiffener, air shroud, hardware and cabling, turning a board into a module that slots into a chassis.</p></div>
+  </div>
+  <div class="sub b">H Functional &amp; System Test <span class="lite">功能與系統測試</span></div>
+  <div class="row">
+   <div class="step insp"><div class="idx">57</div><h4>Functional Test (FT)</h4><p class="en3">功能測試（FT）</p>
+    <span class="chip c-insp">Inspection</span>
+    <p class="vend"><span class="tw">Chroma</span> · Keysight · Advantest</p>
+    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: board-level functional verification</p>
+    <p class="why">Runs the factory test program across interfaces, memory channels and power delivery.</p></div>
+   <div class="step insp"><div class="idx">58</div><h4>Burn-in Test</h4><p class="en3">老化測試（Burn-in）</p>
+    <span class="chip c-insp">Inspection</span>
+    <p class="vend">Advantest · <span class="tw">Chroma</span> · Aehr · ESPEC</p>
+    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: continuous run monitored inside the chamber</p>
+    <p class="why">Runs hot and fully loaded to screen out infant mortality. Almost mandatory before an accelerator ships, and expensive in cycle time.</p></div>
+   <div class="step insp"><div class="idx">59</div><h4>System Test</h4><p class="en3">系統測試</p>
+    <span class="chip c-insp">Inspection</span>
+    <p class="vend">Advantest · Teradyne · <span class="tw">Chroma</span></p>
+    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: full-system verification</p>
+    <p class="why">Verified in the full system, including cooling, power delivery and interconnect.</p></div>
+   <div class="step insp"><div class="idx">60</div><h4>Performance Benchmark</h4><p class="en3">效能與基準測試</p>
+    <span class="chip c-insp">Inspection</span>
+    <p class="vend">In-house test racks ｜ NVIDIA DCGM · MLPerf · <span class="tw">Chroma</span></p>
+    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: bandwidth, throughput and power against thresholds</p>
+    <p class="why">Runs real workloads to confirm bandwidth, throughput and power sit inside the specification band. Usually a customer-mandated gate for AI cards.</p></div>
+   <div class="step insp"><div class="idx">61</div><h4>Calibration</h4><p class="en3">校準</p>
+    <span class="chip c-insp">Inspection</span>
+    <p class="vend">Keysight · Fluke · <span class="tw">Chroma</span></p>
+    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: calibration values written and read back</p>
+    <p class="why">Writes voltage, clock and sensor offsets so every board behaves identically under the same firmware.</p></div>
+  </div>
+  <div class="sub b">I Final Inspection &amp; Shipping <span class="lite">最終檢驗與出貨</span></div>
+  <div class="row">
+   <div class="step insp"><div class="idx">62</div><h4>Final Visual Inspection</h4><p class="en3">最終目視檢查</p>
+    <span class="chip c-insp">Inspection</span>
+    <p class="vend">Manual visual + Keyence · Omron vision-assisted</p>
+    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: final visual</p>
+    <p class="why">Checks appearance, labels, mechanical completeness and any foreign material left behind.</p></div>
+   <div class="step sup"><div class="idx">63</div><h4>ESD Packaging</h4><p class="en3">防靜電包裝</p>
+    <span class="chip c-sup">Support</span>
+    <p class="vend">3M · Desco · Botron ｜ Materials: ESD bags · desiccant · humidity cards</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Surface resistance, sampled</p>
+    <p class="why">Packed with ESD bags, desiccant and humidity indicator cards. The moisture sensitivity level sets how long the part may stay open after the bag is broken.</p></div>
+   <div class="step sup"><div class="idx">64</div><h4>Labelling</h4><p class="en3">標籤貼附</p>
+    <span class="chip c-sup">Support</span>
+    <p class="vend">Zebra · SATO · Domino</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Barcode scan verification</p>
+    <p class="why">Applies part number, serial and shipping labels, matching the record written at step 51.</p></div>
+   <div class="step sup"><div class="idx">65</div><h4>Packaging / Shipping</h4><p class="en3">包裝與出貨</p>
+    <span class="chip c-sup">Support</span>
+    <p class="vend">—</p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Pre-shipment sampling and document check</p>
+    <p class="why">Boxed and shipped to the customer specification.</p></div>
+  </div>
+ </div>
+</div>
+
+<!-- VENDOR MATRIX -->
+<section class="sect" id="vendors">
+ <h2>Supplier Matrix</h2>
+ <p class="key">Bold denotes the leading supplier · <span class="tw">Taiwanese suppliers in green</span></p>
+ <div class="scroller">
+ <table>
+  <thead><tr><th style="width:190px">Equipment / material</th><th style="width:110px">Steps</th><th>Main suppliers</th></tr></thead>
+  <tbody>
+   <tr class="grouprow"><td colspan="3"><span class="chip c-fab">Front-end equipment</span></td></tr>
+   <tr><td>Lithography</td><td class="n">01, 08</td><td><span class="lead-v">ASML</span> · Nikon · Canon · SMEE · Veeco</td></tr>
+   <tr><td>Etch</td><td class="n">01, 08</td><td><span class="lead-v">Lam</span> · TEL · AMAT · Hitachi High-Tech</td></tr>
+   <tr><td>Deposition</td><td class="n">01, 08</td><td><span class="lead-v">AMAT</span> · Lam · TEL · ASM · Kokusai</td></tr>
+   <tr><td>CMP</td><td class="n">06b, 11, 22b</td><td><span class="lead-v">AMAT</span> · Ebara · ACM Research ｜ Consumables: Entegris · DuPont · <span class="tw">Kinik</span></td></tr>
+   <tr><td>Cleaning / surface activation</td><td class="n">12</td><td><span class="lead-v">SCREEN</span> · TEL · Lam · <span class="tw">GPTC</span> · <span class="tw">Scientech</span></td></tr>
+   <tr><td>Thermal / anneal</td><td class="n">15</td><td><span class="lead-v">AMAT</span> · Kokusai · TEL</td></tr>
+
+   <tr class="grouprow"><td colspan="3"><span class="chip c-pkg">Packaging equipment</span></td></tr>
+   <tr><td>Wafer grinding / thinning</td><td class="n">06a, 22a</td><td><span class="lead-v">DISCO</span> · Tokyo Seimitsu · Okamoto</td></tr>
+   <tr><td>Temporary bonding / debonding</td><td class="n">04, 09</td><td><span class="lead-v">EVG</span> · SUSS MicroTec ｜ Materials: TOK · Brewer Science</td></tr>
+   <tr><td>Dicing</td><td class="n">10, 23</td><td><span class="lead-v">DISCO</span> · Tokyo Seimitsu · ASMPT</td></tr>
+   <tr><td>Hybrid bonding</td><td class="n">13, 14</td><td><span class="lead-v">Besi</span> · <span class="lead-v">ASMPT</span> · EVG · SUSS · Hanmi</td></tr>
+   <tr><td>Thermal compression bonding</td><td class="n">17, 18, 24</td><td><span class="lead-v">ASMPT</span> · K&amp;S · Shinkawa · Hanmi</td></tr>
+   <tr><td>Dispensing / underfill</td><td class="n">19, 26, 27</td><td><span class="lead-v">Nordson</span> · <span class="tw">All Ring</span> ｜ Materials: Namics · Henkel</td></tr>
+   <tr><td>Molding</td><td class="n">21</td><td><span class="lead-v">TOWA</span> · ASMPT · Besi</td></tr>
+   <tr><td>Ball attach / reflow</td><td class="n">25, 28, 29</td><td>ASMPT · Shibaura · <span class="tw">Jun Hwa 均華</span> ｜ Ovens: Rehm · BTU · Heller</td></tr>
+   <tr><td>Laser marking / processing</td><td class="n">30</td><td>Coherent · Han's Laser</td></tr>
+   <tr><td>Package substrate</td><td class="n">24</td><td>Ibiden · Shinko · AT&amp;S · <span class="tw">Unimicron</span> · <span class="tw">Nan Ya PCB</span> · <span class="tw">Kinsus</span></td></tr>
+
+   <tr class="grouprow"><td colspan="3"><span class="chip c-pkg">CPO optical integration</span> optional branch</td></tr>
+   <tr><td>Photonic IC foundry</td><td class="n">C1</td><td><span class="lead-v">TSMC</span> (COUPE)· GlobalFoundries · Tower · Intel</td></tr>
+   <tr><td>Lasers / light source</td><td class="n">C2</td><td><span class="lead-v">Coherent</span> · Lumentum · Broadcom · <span class="tw">LandMark</span></td></tr>
+   <tr><td>Optical alignment tools</td><td class="n">C3, C4</td><td><span class="lead-v">ficonTEC</span> · ASMPT · K&amp;S · Shinkawa</td></tr>
+   <tr><td>Fiber / connectors</td><td class="n">C4</td><td>Senko · US Conec · <span class="tw">FOCI</span> · <span class="tw">Browave</span></td></tr>
+   <tr><td>Optical test</td><td class="n">C5</td><td>Keysight · EXFO · <span class="tw">Chroma</span></td></tr>
+   <tr><td>Fabless customers placing the orders</td><td class="n">C1–C5</td><td>Broadcom · NVIDIA · Marvell · Cisco · Google · Meta</td></tr>
+
+   <tr class="grouprow"><td colspan="3"><span class="chip c-pkg">Board-level equipment</span> STAGE 4</td></tr>
+   <tr><td>Paste printing / stencils</td><td class="n">36</td><td><span class="lead-v">ASMPT (DEK)</span> · Panasonic · Yamaha · Ekra</td></tr>
+   <tr><td>SMT placement</td><td class="n">38, 42</td><td><span class="lead-v">ASMPT</span> · <span class="lead-v">Fuji</span> · Panasonic · Yamaha</td></tr>
+   <tr><td>Reflow ovens</td><td class="n">39</td><td><span class="lead-v">Rehm</span> · BTU · Heller · Kurtz Ersa</td></tr>
+   <tr><td>SPI / board AOI</td><td class="n">37, 40, 42</td><td><span class="lead-v">Koh Young</span> · Omron · Saki · <span class="tw">TRI</span> · CyberOptics</td></tr>
+   <tr><td>Board X-ray (AXI)</td><td class="n">41</td><td><span class="lead-v">Nordson</span> · YXLON · ViTrox · <span class="tw">TRI</span></td></tr>
+   <tr><td>Selective solder / hand solder</td><td class="n">43, 44</td><td>Kurtz Ersa · Pillarhouse · SEHO ｜ Hand solder: Hakko · JBC · Metcal</td></tr>
+   <tr><td>Cleaning / conformal coating</td><td class="n">45–47</td><td>Zestron · Kyzen · <span class="lead-v">Nordson ASYMTEK</span> · PVA ｜ Materials: Henkel · Dow</td></tr>
+   <tr><td>ICT / flying probe</td><td class="n">48, 49</td><td><span class="lead-v">Keysight</span> · Teradyne · <span class="tw">Chroma</span> · <span class="tw">TRI</span></td></tr>
+   <tr><td>Programming / serialisation</td><td class="n">50, 51, 64</td><td>Data I/O · BPM Microsystems ｜ Labelling: Zebra · SATO · Domino</td></tr>
+   <tr><td>TIM dispensing and materials</td><td class="n">52</td><td><span class="lead-v">Nordson</span> · <span class="tw">All Ring</span> ｜ Materials: Honeywell · Shin-Etsu · Dow · Laird</td></tr>
+   <tr><td>Thermal modules / cold plates</td><td class="n">53, 54</td><td><span class="tw">AVC</span> · <span class="tw">Auras</span> · <span class="tw">Jentech</span> · <span class="tw">Sunon</span> ｜ Quick disconnects: CPC · Staubli · Parker</td></tr>
+   <tr><td>Leak test</td><td class="n">55</td><td><span class="lead-v">ATEQ</span> · INFICON · Cincinnati Test Systems</td></tr>
+   <tr><td>System assembly ODMs</td><td class="n">38, 56, 65</td><td><span class="tw">Foxconn</span> · <span class="tw">Quanta</span> · <span class="tw">Wistron</span> · <span class="tw">Inventec</span> · <span class="tw">Wiwynn</span></td></tr>
+
+   <tr class="grouprow"><td colspan="3"><span class="chip c-insp">Inspection and metrology</span></td></tr>
+   <tr><td>Optical inspection (AOI)</td><td class="n">03, 06b, 08, 10, 12, 18, 21, 28, 33</td><td><span class="lead-v">KLA</span> · Camtek · Onto Innovation · Lasertec</td></tr>
+   <tr><td>Metrology</td><td class="n">03, 06a, 13, 22a, 27, 28</td><td><span class="lead-v">KLA</span> · Onto · Nova · Bruker</td></tr>
+   <tr><td>X-ray / CT inspection</td><td class="n">14, 19, 25, 27, 33</td><td><span class="lead-v">YXLON</span> · Nikon · ZEISS · Nordson</td></tr>
+   <tr><td>Scanning acoustic microscopy</td><td class="n">14, 16, 19, 26</td><td>Nordson SONOSCAN · PVA TePla</td></tr>
+   <tr><td>Electron microscopy</td><td class="n">08, 11, 15, 16</td><td>Thermo Fisher · JEOL · TESCAN · Hitachi High-Tech ｜ Services: <span class="tw">MA-tek</span> · <span class="tw">MSSCORPS</span></td></tr>
+   <tr><td>Electrical test (ATE)</td><td class="n">02, 31, 57, 59</td><td><span class="lead-v">Advantest</span> · Teradyne · <span class="tw">Chroma</span></td></tr>
+   <tr><td>Probe cards / test sockets</td><td class="n">02, 31</td><td><span class="tw">CHPT</span> · <span class="tw">MPI</span> · <span class="tw">WinWay</span> · FormFactor ｜ Contract mfg: <span class="tw">KYEC</span></td></tr>
+   <tr><td>Burn-in</td><td class="n">32, 58</td><td>Advantest · <span class="tw">Chroma</span> · Aehr</td></tr>
+
+   <tr class="grouprow"><td colspan="3"><span class="chip c-sup">Support systems</span></td></tr>
+   <tr><td>Vacuum / pumps</td><td class="n">07, 20</td><td><span class="lead-v">Edwards</span> · Ebara · Pfeiffer · INFICON</td></tr>
+   <tr><td>Gas supply / purification</td><td class="n">All steps</td><td>Air Liquide · Linde · <span class="tw">Taiwan Special Chemicals</span> · <span class="tw">Topco</span> (distributor)</td></tr>
+   <tr><td>Cure / bake ovens</td><td class="n">05, 20, 26</td><td><span class="tw">C SUN</span> · Koyo Thermo</td></tr>
+   <tr><td>Facilities / cleanroom</td><td class="n">Infrastructure</td><td><span class="tw">Marketech</span> · <span class="tw">UIS</span> · <span class="tw">Acter</span> · <span class="tw">Sing Hui 聖暉</span></td></tr>
+   <tr><td>Tool contract mfg / parts</td><td class="n">Upstream</td><td><span class="tw">Foxsemicon</span> (AMAT)· <span class="tw">Gudeng</span> (Reticle pods)· <span class="tw">Sindek 迅得</span></td></tr>
+   <tr><td>Automation / smart manufacturing</td><td class="n">All steps</td><td>Daifuku · Murata Machinery · Siemens · FANUC · Omron</td></tr>
+  </tbody>
+ </table>
+ </div>
+</section>
+
+</div>
+</body>
+</html>

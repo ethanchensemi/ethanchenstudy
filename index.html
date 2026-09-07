@@ -31,6 +31,10 @@ body{margin:0;background:var(--paper);color:var(--ink);
 .maprow .name{font-size:14.5px;color:var(--ink-2);font-weight:600}
 .maprow .en3{font-size:12.5px;color:var(--ink-3)}
 .maprow .dot{margin-left:auto;font-size:11.5px;color:var(--ink-3);flex:0 0 auto}
+a.maprow{text-decoration:none;color:inherit}
+a.maprow:hover .name{color:var(--b)}
+a.maprow:hover .dot{color:var(--b)}
+a.maprow:focus-visible{outline:2px solid var(--b);outline-offset:2px}
 
 .sectionlbl{font-size:13px;font-weight:600;color:var(--ink-3);letter-spacing:.03em;margin:0 0 14px;text-transform:uppercase}
 
@@ -57,6 +61,7 @@ body{margin:0;background:var(--paper);color:var(--ink);
 .cell .no{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11px;color:var(--ink-3);display:block;margin-bottom:5px}
 .cell .name{font-size:14px;font-weight:600;color:var(--ink-3);line-height:1.4}
 .cell .en3{font-size:11.5px;color:var(--ink-3);opacity:.75;display:block;margin-top:2px}
+.cell .desc{font-size:11px;color:var(--ink-3);opacity:.85;display:block;margin-top:4px;line-height:1.42}
 
 .foot{margin-top:44px;font-size:12px;color:var(--ink-3);border-top:1px solid var(--rule-soft);padding-top:18px}
 
@@ -79,10 +84,19 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <p class="en">Semiconductor Research Notes</p>
 </header>
 
+<a class="maprow" href="upstream.html">
+  <span class="name">上游</span>
+  <span class="en3">Upstream</span>
+  <span class="dot">原物料到封裝完成的晶片　7 階段</span>
+</a>
 <div class="maprow">
-  <span class="tag">00</span>
-  <span class="name">供應鏈地圖總覽</span>
-  <span class="en3">Supply Chain Map — the whole picture, all 15 categories below in one diagram</span>
+  <span class="name">下游</span>
+  <span class="en3">Downstream</span>
+  <span class="dot">見下方 01</span>
+</div>
+<div class="maprow">
+  <span class="name">終端需求</span>
+  <span class="en3">End Demand</span>
   <span class="dot">待補</span>
 </div>
 
@@ -115,15 +129,36 @@ body{margin:0;background:var(--paper);color:var(--ink);
   </ol>
 </div>
 
+<a class="topic" href="soic-cowos.html">
+  <h2>封裝全製程流程</h2>
+  <p class="en2">SoIC · CoWoS · CPO — 晶圓到系統出貨</p>
+  <p>整條封裝路徑逐步拆解：從晶圓製造、上層晶片前處理，經 SoIC 與 CoWoS 兩條整合路線，到板級組裝與系統出貨。每一步標出所需設備、檢測站與供應商，共 65 步，含 CPO 選配段。</p>
+  <span class="count">65 步　4 階段　含供應商對照表</span>
+</a>
+
+<div class="sub">
+  <h3>封裝全製程　各段直接跳轉</h3>
+  <p class="lead">點擊可直接開到該段。</p>
+  <ol>
+    <li><a href="soic-cowos.html#legend">設備類別標籤與檢測欄位說明</a></li>
+    <li><a href="soic-cowos.html#s1"><span class="n">01</span>晶圓製造階段</a></li>
+    <li><a href="soic-cowos.html#s2"><span class="n">02</span>上層晶片前處理</a></li>
+    <li><a href="soic-cowos.html#s3a"><span class="n">3A</span>SoIC 整合路線</a></li>
+    <li><a href="soic-cowos.html#s3b"><span class="n">3B</span>CoWoS 整合路線</a></li>
+    <li><a href="soic-cowos.html#s4"><span class="n">04</span>板級組裝與系統整合</a></li>
+    <li><a href="soic-cowos.html#vendors">供應商對照表</a></li>
+  </ol>
+</div>
+
 <p class="sectionlbl">02–15　其他分類　尚未建立</p>
 
 <div class="grid">
   <div class="cell"><span class="no">02</span><span class="name">IC 設計與 IP</span><span class="en3">Fabless &amp; IP</span></div>
   <div class="cell"><span class="no">03</span><span class="name">封測代工</span><span class="en3">OSAT</span></div>
-  <div class="cell"><span class="no">04</span><span class="name">記憶體／HBM</span><span class="en3">Memory / HBM</span></div>
+  <div class="cell"><span class="no">04</span><span class="name">記憶體／HBM</span><span class="en3">Memory / HBM</span><span class="desc">DRAM／NAND 製造，以及 HBM 內部 TSV 堆疊（記憶體自身的 3D 封裝）</span></div>
   <div class="cell"><span class="no">05</span><span class="name">載板／PCB／CCL</span><span class="en3">Substrate / PCB / CCL</span></div>
   <div class="cell"><span class="no">06</span><span class="name">光學／光通訊</span><span class="en3">Optical</span></div>
-  <div class="cell"><span class="no">07</span><span class="name">設備</span><span class="en3">Equipment</span></div>
+  <div class="cell"><span class="no">07</span><span class="name">設備</span><span class="en3">Equipment</span><span class="desc">涵蓋全流程：前段晶圓製造（微影、蝕刻、薄膜）到後段封裝與測試設備</span></div>
   <div class="cell"><span class="no">08</span><span class="name">系統組裝代工</span><span class="en3">ODM / EMS</span></div>
   <div class="cell"><span class="no">09</span><span class="name">AI／大型語言模型</span><span class="en3">AI / LLM</span></div>
   <div class="cell"><span class="no">10</span><span class="name">雲端服務商</span><span class="en3">Cloud Operators / CSP</span></div>
@@ -133,8 +168,6 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <div class="cell"><span class="no">14</span><span class="name">散熱</span><span class="en3">Thermal / Cooling</span></div>
   <div class="cell"><span class="no">15</span><span class="name">其他</span><span class="en3">Others</span></div>
 </div>
-
-<p class="foot">依供應鏈分類資料夾編號（00 地圖 → 15 其他）。目前僅「01 晶圓代工」下的先進封裝已建置；其餘分類待補。</p>
 
 </div>
 </body>

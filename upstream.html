@@ -1,0 +1,1938 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>半導體供應鏈 — 上游：原物料到封裝完成的晶片</title>
+<style>
+:root{
+  --b:#4A3B7A;
+  --paper:#F6F8F9; --card:#FFFFFF;
+  --ink:#14181C; --ink-2:#4A555E; --ink-3:#7C8891;
+  --rule:#CBD3D9; --rule-soft:#E2E8EC;
+  --stage:#1F3A4D; --shared:#215C68;
+  --design:#8A5A00; --design-bg:#FDF3E1;
+  --foundry:#B03A2E; --foundry-bg:#FBEAE7;
+  --pkgA:#2E6B4F; --pkgA-bg:#EAF4EE;
+  --pkgB:#4A3B7A; --pkgB-bg:#F0EEF7;
+  --pkgC:#0E7C68; --pkgC-bg:#E3F3EE;
+  --back:#5F6C75; --back-bg:#ECEFF1;
+  --mem:#8E3B6B; --mem-bg:#F8ECF3;
+  --rf:#6B7A1E; --rf-bg:#F2F5E4;
+  --opt:#8A5A00; --opt-bg:#FDF6E6;
+  --sys:#1B5E8C; --sys-bg:#E8F1F8;
+  --t-fab:#5B4B9E; --t-fab-bg:#EEEBF8;
+  --t-insp:#0E7C86; --t-insp-bg:#E4F2F3;
+  --t-pkg:#B85C10; --t-pkg-bg:#FAEEE1;
+  --t-sup:#5F6C75; --t-sup-bg:#ECEFF1;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Inter","Helvetica Neue",Arial,-apple-system,"Segoe UI",sans-serif;
+  font-size:15px;line-height:1.65}
+.wrap{max-width:1320px;margin:0 auto;padding:48px 28px 90px}
+
+.masthead{border-bottom:2px solid var(--stage);padding-bottom:22px;margin-bottom:30px}
+.masthead h1{font-size:30px;line-height:1.25;font-weight:700;margin:0 0 6px;letter-spacing:-.01em}
+.masthead .en{font-size:15px;color:var(--ink-2);font-weight:400;margin:0 0 16px}
+.masthead .meta{display:flex;flex-wrap:wrap;gap:8px 26px;font-size:13px;color:var(--ink-3)}
+.masthead .meta b{color:var(--ink-2);font-weight:500}
+
+.toc{background:var(--card);border:1px solid var(--rule);padding:16px 22px;margin-bottom:34px;font-size:13px}
+.toc a{color:var(--stage);text-decoration:none;font-weight:500;margin-right:18px;white-space:nowrap}
+.toc a:hover{text-decoration:underline}
+.tocrow{display:flex;flex-wrap:wrap;gap:6px 4px;row-gap:8px}
+
+.legend{background:var(--card);border:1px solid var(--rule);padding:18px 22px;margin-bottom:38px}
+.legend h2{font-size:14px;margin:0 0 12px;font-weight:600}
+.fieldkey{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:12.5px;color:var(--ink-3);margin-bottom:6px}
+.fieldkey b{color:var(--ink-2);font-weight:600}
+
+.stage{display:grid;grid-template-columns:216px 1fr;scroll-margin-top:20px}
+.rail{padding:22px 20px 26px 0;border-right:2px solid var(--rule);position:relative}
+.rail .num{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;color:var(--ink-3);letter-spacing:.06em;margin-bottom:8px}
+.rail h2{font-size:19px;margin:0 0 3px;font-weight:600;line-height:1.35}
+.rail .en2{font-size:13px;color:var(--ink-2);margin:0 0 12px;line-height:1.45}
+.rail .clarify{font-size:12.5px;color:var(--ink-3);line-height:1.55;padding-top:11px;border-top:1px dashed var(--rule)}
+.rail .stripe{position:absolute;right:-2px;top:22px;bottom:26px;width:2px;background:var(--stage)}
+.body{padding:22px 0 26px 26px}
+
+.row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:12px}
+.row:last-child{margin-bottom:0}
+.step{background:var(--card);border:1px solid var(--rule);padding:12px 14px;flex:1 1 208px;min-width:196px}
+.step h4{font-size:14px;margin:0 0 1px;font-weight:600;line-height:1.4}
+.step .en3{font-size:11.5px;color:var(--ink-2);margin:0 0 9px;line-height:1.4;font-style:italic}
+.step .field{font-size:11.5px;margin:6px 0 0;line-height:1.5}
+.step .field b{color:var(--ink-2);font-weight:600}
+.step .field.pos{padding-top:7px;border-top:1px dotted var(--rule-soft);margin-top:8px}
+.step.fab{border-left:3px solid var(--t-fab)}
+.step.design{border-left:3px solid var(--design)}
+.step.foundry{border-left:3px solid var(--foundry)}
+.step.back{border-left:3px solid var(--back)}
+.step.mem{border-left:3px solid var(--mem)}
+.step.rf{border-left:3px solid var(--rf)}
+.step.sys{border-left:3px solid var(--sys)}
+.step.pkgA{border-left:3px solid var(--pkgA)}
+.step.pkgB{border-left:3px solid var(--pkgB)}
+.step.pkgC{border-left:3px solid var(--pkgC)}
+
+.sub{font-size:13px;font-weight:600;margin:22px 0 10px;padding:6px 12px;color:#fff}
+.sub:first-child{margin-top:0}
+.sub .lite{font-weight:400;opacity:.85;font-size:12px}
+.sub.a{background:var(--pkgA)}
+.sub.fab{background:var(--t-fab)}
+.sub.b{background:var(--pkgB)}
+.sub.c{background:var(--pkgC)}
+.sub.d{background:var(--design)}
+.sub.f{background:var(--foundry)}
+.sub.k{background:var(--back)}
+.sub.m{background:var(--mem)}
+.sub.r{background:var(--rf)}
+.sub.s{background:var(--sys)}
+.sub.opt{background:var(--opt)}
+
+.stackcard{background:var(--card);border:1px solid var(--rule);padding:16px 18px;margin-bottom:14px}
+.stackcard .sctitle{font-size:15px;font-weight:700;margin:0 0 2px}
+.stackcard .scsub{font-size:12px;color:var(--ink-2);margin:0 0 12px;font-style:italic}
+.stacklayers{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+.slrow{display:flex;gap:4px}
+.slcell{flex:1;padding:6px 8px;font-size:10.5px;text-align:center;border-radius:2px;line-height:1.3}
+.sl-die{background:#E8F4EF;border:1px solid #9FC9B5;color:#1F4D38}
+.sl-mem{background:#FAE8E5;border:1px solid #D9A79E;color:#7A3226}
+.sl-interp{background:var(--pkgB-bg);border:1px solid #A797C9;color:var(--pkgB)}
+.sl-sub{background:#F1F2F3;border:1px solid #CDD2D6;color:#4A555E}
+.sl-pcb{background:#EAEAEA;border:1px solid #C4C4C4;color:#333}
+.sl-bridge{background:#DCEAFB;border:1px solid #90B8E0;color:#1B4E7A}
+.scgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 20px}
+.scfields .field{font-size:12px;margin:5px 0;line-height:1.55}
+.scfields .field b{color:var(--ink-2);font-weight:600}
+.scusers{border-top:1px solid var(--rule-soft);margin-top:10px;padding-top:10px}
+.scusers h5{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-3);margin:0 0 6px;font-weight:600}
+.scusers .u{font-size:12px;margin:3px 0;line-height:1.5}
+.scusers .u b{color:var(--ink);font-weight:600}
+.tworail{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media (max-width:900px){.tworail{grid-template-columns:1fr}}
+.threerail{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+@media (max-width:1100px){.threerail{grid-template-columns:1fr 1fr}}
+@media (max-width:700px){.threerail{grid-template-columns:1fr}}
+
+.forkbar{display:grid;grid-template-columns:216px 1fr;margin:10px 0}
+.forkbar .lead{border-right:2px solid var(--rule)}
+.forkbar .msg{padding:6px 0 4px 26px;font-size:13px;color:var(--ink-3);max-width:80ch;line-height:1.6}
+.forkbar .msg b{color:var(--ink-2);font-weight:500}
+
+.optnote{font-size:12px;color:#7A5100;background:var(--opt-bg);border:1px dashed #C99A1E;padding:10px 12px;margin:0 0 12px;line-height:1.55}
+
+.link{margin:22px 0 0;border:1px dashed var(--pkgB);background:var(--pkgB-bg);
+  padding:14px 18px;font-size:13px;color:var(--ink-2);line-height:1.6}
+.link b{color:var(--pkgB);font-weight:600}
+.divider{height:1px;background:var(--rule-soft);margin:34px 0}
+
+.chip{display:inline-block;font-size:10.5px;font-weight:600;padding:2px 7px;white-space:nowrap;border-radius:2px;margin-bottom:6px}
+.c-fab{background:var(--t-fab-bg);color:var(--t-fab)}
+.c-design{background:var(--design-bg);color:var(--design)}
+.c-foundry{background:var(--foundry-bg);color:var(--foundry)}
+.c-back{background:var(--back-bg);color:var(--back)}
+.c-mem{background:var(--mem-bg);color:var(--mem)}
+.c-rf{background:var(--rf-bg);color:var(--rf)}
+.c-sys{background:var(--sys-bg);color:var(--sys)}
+.c-pkgA{background:var(--pkgA-bg);color:var(--pkgA)}
+.c-pkgB{background:var(--pkgB-bg);color:var(--pkgB)}
+.c-pkgC{background:var(--pkgC-bg);color:var(--pkgC)}
+
+.sect{margin-top:0;border:1px solid var(--rule);background:var(--card);padding:24px 26px}
+.sect h2{font-size:19px;margin:0 0 6px;font-weight:600}
+.sect .key{font-size:12.5px;color:var(--ink-3);margin:0 0 20px}
+
+@media (max-width:760px){
+  .wrap{padding:30px 16px 60px}
+  .stage,.forkbar{grid-template-columns:1fr}
+  .rail{border-right:none;border-bottom:2px solid var(--rule);padding:20px 0 18px}
+  .rail .stripe{right:auto;left:0;top:auto;bottom:-2px;width:60px;height:2px}
+  .body{padding:20px 0 26px}
+  .forkbar .lead{display:none}
+  .forkbar .msg{padding-left:0}
+  .scgrid{grid-template-columns:1fr}
+}
+@media print{.backbar,.toc{display:none}body{background:#fff}.wrap{max-width:none;padding:0}.step,.legend,.sect,.stackcard{break-inside:avoid}}
+.backbar{margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.backbar a{display:inline-block;font-size:13px;color:var(--ink-2);text-decoration:none;border:1px solid var(--rule);background:var(--card);padding:6px 13px}
+.backbar a:hover{color:var(--b);border-color:var(--b)}
+.backbar .lang{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;letter-spacing:.04em}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="backbar"><a href="index.html">← 返回總覽</a><a class="lang" href="upstream-en.html" onclick="this.href=this.href.split('#')[0]+location.hash">EN</a></div>
+
+
+<header class="masthead">
+  <h1>半導體供應鏈 — 上游</h1>
+</header>
+<nav class="toc">
+  <div class="tocrow">
+    <a href="#s0">0 原物料</a><a href="#s1">1 晶片設計</a><a href="#s2">2 晶圓代工</a>
+    <a href="#s3">3 後段</a><a href="#s4">4 記憶體與 HBM</a>
+    <a href="#s5">5 射頻與化合物半導體</a><a href="#s6">6 光通訊與 CPO</a>
+  </div>
+</nav>
+<div class="stage" id="s0">
+  <div class="rail"><div class="stripe"></div>
+    <div class="num">階段 0</div>
+    <h2>原物料</h2>
+    <p class="en2">在電晶體成形之前，進入晶圓廠的東西</p>
+    <div class="clarify">設備（微影、蝕刻、沉積機台廠）另行處理。本階段只涵蓋材料，也就是被消耗、被塗佈或被長成的東西，而不是施加這些材料的機器。</div>
+  </div>
+  <div class="body"><div class="sub fab">原始晶圓</div><div class="row"><div class="step fab">
+  <span class="chip c-fab">原始晶圓，日本</span>
+  <h4>信越化學</h4>
+  
+  <p class="field"><b>產品</b> — 研磨完成的 300mm 矽晶圓</p>
+  <p class="field"><b>終端產品</b> — 每一顆矽晶片</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 約占 300mm 矽晶圓三成</p>
+</div><div class="step fab">
+  <span class="chip c-fab">原始晶圓，日本</span>
+  <h4>SUMCO</h4>
+  
+  <p class="field"><b>產品</b> — 研磨完成的 300mm 矽晶圓</p>
+  <p class="field"><b>終端產品</b> — 每一顆矽晶片</p>
+  <p class="field pos"><b>地位</b> — 第二 — 約占 300mm 矽晶圓四分之一</p>
+</div><div class="step fab">
+  <span class="chip c-fab">原始晶圓，台灣</span>
+  <h4>環球晶</h4>
+  
+  <p class="field"><b>產品</b> — 研磨完成的矽晶圓</p>
+  <p class="field"><b>終端產品</b> — 每一顆矽晶片</p>
+  <p class="field pos"><b>地位</b> — 第三 — 約占 300mm 矽晶圓 15%</p>
+</div><div class="step fab">
+  <span class="chip c-fab">原始晶圓，德國</span>
+  <h4>Siltronic</h4>
+  
+  <p class="field"><b>產品</b> — 研磨完成的矽晶圓</p>
+  <p class="field"><b>終端產品</b> — 每一顆矽晶片</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 約占 300mm 矽晶圓 12%</p>
+</div><div class="step fab">
+  <span class="chip c-fab">原始晶圓，韓國</span>
+  <h4>SK Siltron</h4>
+  
+  <p class="field"><b>產品</b> — 研磨完成的矽晶圓</p>
+  <p class="field"><b>終端產品</b> — 每一顆矽晶片</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 約占 300mm 矽晶圓 11%</p>
+</div></div><div class="sub fab">光阻</div><div class="row"><div class="step fab">
+  <span class="chip c-fab">光阻廠，日本</span>
+  <h4>JSR</h4>
+  
+  <p class="field"><b>產品</b> — 微影用感光塗層</p>
+  <p class="field"><b>終端產品</b> — 每一片經微影定義圖形的晶圓</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 極紫外光光阻</p>
+</div><div class="step fab">
+  <span class="chip c-fab">光阻廠，日本</span>
+  <h4>東京應化（TOK）</h4>
+  
+  <p class="field"><b>產品</b> — 光阻與顯影化學品</p>
+  <p class="field"><b>終端產品</b> — 每一片經微影定義圖形的晶圓</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 光阻</p>
+</div><div class="step fab">
+  <span class="chip c-fab">光阻廠，日本</span>
+  <h4>信越光阻</h4>
+  
+  <p class="field"><b>產品</b> — 光阻化學品</p>
+  <p class="field"><b>終端產品</b> — 每一片經微影定義圖形的晶圓</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 光阻</p>
+</div><div class="step fab">
+  <span class="chip c-fab">光阻廠，美國</span>
+  <h4>DuPont</h4>
+  
+  <p class="field"><b>產品</b> — 光阻與電子材料</p>
+  <p class="field"><b>終端產品</b> — 每一片經微影定義圖形的晶圓</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 光阻</p>
+</div></div><div class="sub fab">光罩與倍縮光罩</div><div class="row"><div class="step fab">
+  <span class="chip c-fab">光罩廠，美國</span>
+  <h4>Photronics</h4>
+  
+  <p class="field"><b>產品</b> — 光罩與倍縮光罩</p>
+  <p class="field"><b>終端產品</b> — 每一件客製晶片設計案</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 獨立光罩廠</p>
+</div><div class="step fab">
+  <span class="chip c-fab">光罩廠，日本</span>
+  <h4>大日本印刷</h4>
+  
+  <p class="field"><b>產品</b> — 光罩與倍縮光罩</p>
+  <p class="field"><b>終端產品</b> — 每一件客製晶片設計案</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 光罩</p>
+</div><div class="step fab">
+  <span class="chip c-fab">光罩廠，日本</span>
+  <h4>凸版印刷</h4>
+  
+  <p class="field"><b>產品</b> — 光罩與倍縮光罩</p>
+  <p class="field"><b>終端產品</b> — 每一件客製晶片設計案</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 光罩</p>
+</div></div><div class="sub fab">化學機械研磨液與研磨墊</div><div class="row"><div class="step fab">
+  <span class="chip c-fab">研磨耗材廠，美國</span>
+  <h4>Entegris（CMC Materials）</h4>
+  
+  <p class="field"><b>產品</b> — 化學機械研磨液與研磨墊</p>
+  <p class="field"><b>終端產品</b> — 每一片研磨完成的晶圓</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 化學機械研磨液</p>
+</div><div class="step fab">
+  <span class="chip c-fab">研磨耗材廠，日本</span>
+  <h4>不二見</h4>
+  
+  <p class="field"><b>產品</b> — 化學機械研磨液</p>
+  <p class="field"><b>終端產品</b> — 每一片研磨完成的晶圓</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 化學機械研磨液</p>
+</div></div><div class="sub fab">製程與特殊氣體</div><div class="row"><div class="step fab">
+  <span class="chip c-fab">工業氣體供應商，德國</span>
+  <h4>Linde</h4>
+  
+  <p class="field"><b>產品</b> — 大宗與特殊製程氣體</p>
+  <p class="field"><b>終端產品</b> — 晶圓廠的每一道製程</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 工業氣體</p>
+</div><div class="step fab">
+  <span class="chip c-fab">工業氣體供應商，法國</span>
+  <h4>Air Liquide</h4>
+  
+  <p class="field"><b>產品</b> — 大宗與特殊製程氣體</p>
+  <p class="field"><b>終端產品</b> — 晶圓廠的每一道製程</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 工業氣體</p>
+</div><div class="step fab">
+  <span class="chip c-fab">工業氣體供應商，美國</span>
+  <h4>Air Products</h4>
+  
+  <p class="field"><b>產品</b> — 大宗與特殊製程氣體</p>
+  <p class="field"><b>終端產品</b> — 晶圓廠的每一道製程</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 工業氣體</p>
+</div></div><div class="sub fab">大宗化學品與金屬靶材</div><div class="row"><div class="step fab">
+  <span class="chip c-fab">大宗化學品廠，日本</span>
+  <h4>住友化學</h4>
+  
+  <p class="field"><b>產品</b> — 超高純度製程化學品</p>
+  <p class="field"><b>終端產品</b> — 每一道濕式清洗與蝕刻製程</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 電子化學品</p>
+</div><div class="step fab">
+  <span class="chip c-fab">大宗化學品廠，日本</span>
+  <h4>三菱化學</h4>
+  
+  <p class="field"><b>產品</b> — 超高純度製程化學品</p>
+  <p class="field"><b>終端產品</b> — 每一道濕式清洗與蝕刻製程</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 電子化學品</p>
+</div><div class="step fab">
+  <span class="chip c-fab">濺鍍靶材廠，美國</span>
+  <h4>Honeywell 靶材</h4>
+  
+  <p class="field"><b>產品</b> — 銅、鎢與鈷靶材</p>
+  <p class="field"><b>終端產品</b> — 每一顆晶片內的內連線金屬</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 濺鍍靶材</p>
+</div><div class="step fab">
+  <span class="chip c-fab">濺鍍靶材廠，日本</span>
+  <h4>JX 金屬</h4>
+  
+  <p class="field"><b>產品</b> — 高純度金屬靶材</p>
+  <p class="field"><b>終端產品</b> — 每一顆晶片內的內連線金屬</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 濺鍍靶材</p>
+</div></div><div class="sub fab">探針卡與測試介面</div><div class="row"><div class="step fab">
+  <span class="chip c-fab">探針卡廠，美國</span>
+  <h4>FormFactor</h4>
+  
+  <p class="field"><b>產品</b> — 晶圓探針卡</p>
+  <p class="field"><b>終端產品</b> — 每一顆經晶圓測試的晶片</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 探針卡</p>
+</div><div class="step fab">
+  <span class="chip c-fab">探針卡廠，台灣</span>
+  <h4>旺矽</h4>
+  
+  <p class="field"><b>產品</b> — 晶圓探針卡</p>
+  <p class="field"><b>終端產品</b> — 每一顆經晶圓測試的晶片</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 探針卡</p>
+</div><div class="step fab">
+  <span class="chip c-fab">探針卡廠，義大利</span>
+  <h4>Technoprobe</h4>
+  
+  <p class="field"><b>產品</b> — 晶圓探針卡</p>
+  <p class="field"><b>終端產品</b> — 每一顆經晶圓測試的晶片</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 探針卡</p>
+</div><div class="step fab">
+  <span class="chip c-fab">測試插座與探針卡廠，台灣</span>
+  <h4>穎崴</h4>
+  
+  <p class="field"><b>產品</b> — 測試插座與探針卡</p>
+  <p class="field"><b>終端產品</b> — 每一顆經插座測試的晶片</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 測試插座</p>
+</div></div></div>
+</div>
+<div class="divider"></div>
+<div class="stage" id="s1">
+  <div class="rail"><div class="stripe"></div>
+    <div class="num">階段 1</div>
+    <h2>晶片設計</h2>
+    <p class="en2">無晶圓廠業者、IDM 與客製化晶片設計者</p>
+    <div class="clarify">這裡的每一家都在決定一顆晶片要做什麼。除了 IDM（Intel、NXP、意法、德儀、英飛凌）自行設計並自行製造之外，其餘都沒有自己的晶圓廠。</div>
+  </div>
+  <div class="body"><div class="sub d">外售 CPU、GPU 與 AI 加速器</div><div class="row"><div class="step design">
+  <span class="chip c-design">IC 設計，美國</span>
+  <h4>Nvidia</h4>
+  <p class="en3">GPU、CPU 與網通晶片</p>
+  <p class="field"><b>產品</b> — Rubin GPU、Vera CPU 與 NVLink 交換器</p>
+  <p class="field"><b>終端產品</b> — AI 訓練與推論伺服器</p>
+  <p class="field pos"><b>地位</b> — 領導者 — AI 加速器</p>
+</div><div class="step design">
+  <span class="chip c-design">IC 設計，美國</span>
+  <h4>AMD</h4>
+  <p class="en3">GPU、CPU 與加速器晶片</p>
+  <p class="field"><b>產品</b> — MI400／MI455X 與 Venice CPU</p>
+  <p class="field"><b>終端產品</b> — AI 伺服器、個人電腦與遊戲主機</p>
+  <p class="field pos"><b>地位</b> — 第二 — AI GPU</p>
+</div><div class="step design">
+  <span class="chip c-design">IDM 晶片設計，美國</span>
+  <h4>Intel</h4>
+  <p class="en3">CPU、GPU 與加速器晶片</p>
+  <p class="field"><b>產品</b> — Core Ultra、Arc 與 Gaudi</p>
+  <p class="field"><b>終端產品</b> — 個人電腦與伺服器</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 個人電腦與伺服器 CPU；挑戰者 — AI</p>
+</div><div class="step design">
+  <span class="chip c-design">IC 設計，美國</span>
+  <h4>Cerebras</h4>
+  <p class="en3">晶圓級 AI 處理器</p>
+  <p class="field"><b>產品</b> — WSE-3 引擎</p>
+  <p class="field"><b>終端產品</b> — AI 訓練叢集</p>
+  <p class="field pos"><b>地位</b> — 利基 — 晶圓級 AI 處理器</p>
+</div><div class="step design">
+  <span class="chip c-design">IC 設計，美國</span>
+  <h4>Groq</h4>
+  <p class="en3">純推論加速器</p>
+  <p class="field"><b>產品</b> — LPU</p>
+  <p class="field"><b>終端產品</b> — AI 推論服務</p>
+  <p class="field pos"><b>地位</b> — 利基 — AI 推論加速器</p>
+</div></div><div class="sub d">雲端業者自研 AI ASIC — 設計夥伴列於地位欄</div><div class="row"><div class="step design">
+  <span class="chip c-design">雲端業者自研晶片，美國</span>
+  <h4>Google TPU 計畫</h4>
+  <p class="en3">AI 訓練與推論加速器</p>
+  <p class="field"><b>產品</b> — TPU 晶片</p>
+  <p class="field"><b>終端產品</b> — Google Cloud 的 AI 基礎設施</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 客製 AI ASIC 專案</p>
+</div><div class="step design">
+  <span class="chip c-design">雲端業者自研晶片，美國</span>
+  <h4>Meta MTIA</h4>
+  <p class="en3">AI 推論加速器</p>
+  <p class="field"><b>產品</b> — MTIA 晶片</p>
+  <p class="field"><b>終端產品</b> — Meta 內部 AI 基礎設施</p>
+  <p class="field pos"><b>地位</b> — 自用 — 僅供內部使用</p>
+</div><div class="step design">
+  <span class="chip c-design">雲端業者自研晶片，美國</span>
+  <h4>Amazon Trainium</h4>
+  <p class="en3">AI 訓練加速器</p>
+  <p class="field"><b>產品</b> — Trainium3 晶片</p>
+  <p class="field"><b>終端產品</b> — AWS 的 AI 基礎設施</p>
+  <p class="field pos"><b>地位</b> — 挑戰者 — 在 AWS AI 產能中的比重提升</p>
+</div><div class="step design">
+  <span class="chip c-design">雲端業者自研晶片，美國</span>
+  <h4>Microsoft Maia</h4>
+  <p class="en3">AI 加速器</p>
+  <p class="field"><b>產品</b> — Maia 晶片</p>
+  <p class="field"><b>終端產品</b> — Azure 的 AI 基礎設施</p>
+  <p class="field pos"><b>地位</b> — 自用 — 內部使用，放量中</p>
+</div><div class="step design">
+  <span class="chip c-design">自用客製晶片，美國</span>
+  <h4>Tesla AI5／AI6</h4>
+  <p class="en3">自駕推論晶片</p>
+  <p class="field"><b>產品</b> — AI5 與 AI6 晶片</p>
+  <p class="field"><b>終端產品</b> — 汽車與 Dojo 訓練系統</p>
+  <p class="field pos"><b>地位</b> — 自用 — 單一客戶</p>
+</div></div><div class="sub d">ASIC 設計服務、EDA 與矽智財</div><div class="row"><div class="step design">
+  <span class="chip c-design">ASIC 設計服務與外售晶片，美國</span>
+  <h4>Broadcom</h4>
+  <p class="en3">客製 AI ASIC 設計與交換器晶片</p>
+  <p class="field"><b>產品</b> — Google TPU 與 Meta MTIA 的後段設計，以及 Tomahawk 交換器</p>
+  <p class="field"><b>終端產品</b> — 雲端業者 AI 基礎設施與網路交換器</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 客製 ASIC 設計</p>
+</div><div class="step design">
+  <span class="chip c-design">ASIC 設計服務與外售晶片，美國</span>
+  <h4>Marvell</h4>
+  <p class="en3">客製晶片、光學 DSP 與 DPU</p>
+  <p class="field"><b>產品</b> — Amazon 與 Microsoft 的客製晶片；PAM4 DSP</p>
+  <p class="field"><b>終端產品</b> — 雲端業者 AI 基礎設施與光模組</p>
+  <p class="field pos"><b>地位</b> — 第二 — 客製 ASIC 設計</p>
+</div><div class="step design">
+  <span class="chip c-design">ASIC 設計服務，台灣</span>
+  <h4>世芯</h4>
+  <p class="en3">AI ASIC 的後段實體設計</p>
+  <p class="field"><b>產品</b> — AWS Trainium 的後段實作</p>
+  <p class="field"><b>終端產品</b> — AWS 的 AI 基礎設施</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 台灣 ASIC 設計服務</p>
+</div><div class="step design">
+  <span class="chip c-design">ASIC 設計服務，台灣</span>
+  <h4>創意</h4>
+  <p class="en3">AI ASIC 的後段實體設計</p>
+  <p class="field"><b>產品</b> — TPU 與 Maia 的後段實作</p>
+  <p class="field"><b>終端產品</b> — Google 與 Microsoft 的 AI 基礎設施</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — ASIC 設計服務，台積電關係企業</p>
+</div><div class="step design">
+  <span class="chip c-design">矽智財授權商，英國</span>
+  <h4>Arm</h4>
+  <p class="en3">處理器指令集與核心設計</p>
+  <p class="field"><b>產品</b> — 授權處理器核心與架構授權</p>
+  <p class="field"><b>終端產品</b> — 幾乎所有行動裝置，以及比重漸增的伺服器 CPU</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 行動處理器矽智財</p>
+</div></div><div class="row"><div class="step design">
+  <span class="chip c-design">EDA 與介面矽智財，美國</span>
+  <h4>Synopsys</h4>
+  <p class="en3">晶片設計軟體與 PCIe／HBM／DDR 實體層矽智財</p>
+  <p class="field"><b>產品</b> — 設計工具與授權介面模組</p>
+  <p class="field"><b>終端產品</b> — 每一件 IC 設計案</p>
+  <p class="field pos"><b>地位</b> — 共同領導者 — EDA 與介面矽智財</p>
+</div><div class="step design">
+  <span class="chip c-design">EDA 與介面矽智財，美國</span>
+  <h4>Cadence</h4>
+  <p class="en3">晶片設計軟體與介面矽智財</p>
+  <p class="field"><b>產品</b> — 設計工具與授權介面模組</p>
+  <p class="field"><b>終端產品</b> — 每一件 IC 設計案</p>
+  <p class="field pos"><b>地位</b> — 共同領導者 — EDA 與介面矽智財</p>
+</div><div class="step design">
+  <span class="chip c-design">ASIC 設計服務，台灣</span>
+  <h4>智原</h4>
+  <p class="en3">設計服務，台灣</p>
+  <p class="field"><b>產品</b> — ASIC 設計服務與委製量產</p>
+  <p class="field"><b>終端產品</b> — 供網通、消費性與工業客戶的客製晶片</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — ASIC 設計服務，與世芯、創意並列</p>
+</div><div class="step design">
+  <span class="chip c-design">ASIC 設計服務，日本</span>
+  <h4>Socionext</h4>
+  <p class="en3">客製 SoC，日本</p>
+  <p class="field"><b>產品</b> — 客製 SoC 設計與供應</p>
+  <p class="field"><b>終端產品</b> — 車用、網通與工業系統</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 客製 SoC 設計服務</p>
+</div><div class="step design">
+  <span class="chip c-design">處理器矽智財，台灣</span>
+  <h4>晶心科</h4>
+  <p class="en3">RISC-V 處理器矽智財，台灣</p>
+  <p class="field"><b>產品</b> — RISC-V 處理器矽智財核心</p>
+  <p class="field"><b>終端產品</b> — 嵌入式控制器、AI 加速器與儲存 SoC</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 商用 RISC-V 處理器矽智財</p>
+</div><div class="step design">
+  <span class="chip c-design">介面矽智財，台灣</span>
+  <h4>M31 Technology</h4>
+  <p class="en3">代工製程矽智財，台灣</p>
+  <p class="field"><b>產品</b> — 針對特定代工製程開發的介面與基礎矽智財</p>
+  <p class="field"><b>終端產品</b> — 在台積電與其他代工製程上下線的 SoC</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 代工介面矽智財，營收跟隨製程放量</p>
+</div><div class="step design">
+  <span class="chip c-design">嵌入式記憶體矽智財，台灣</span>
+  <h4>力旺</h4>
+  <p class="en3">嵌入式非揮發記憶體矽智財，台灣</p>
+  <p class="field"><b>產品</b> — OTP 與 MTP 嵌入式非揮發記憶體矽智財</p>
+  <p class="field"><b>終端產品</b> — 邏輯、驅動 IC 與功率晶片內的嵌入式記憶體</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 嵌入式非揮發記憶體矽智財，授權金加按片權利金</p>
+</div></div><div class="sub d">行動與終端 SoC</div><div class="row"><div class="step design">
+  <span class="chip c-design">IC 設計，美國</span>
+  <h4>Qualcomm</h4>
+  <p class="en3">行動 SoC 與數據機</p>
+  <p class="field"><b>產品</b> — Snapdragon SoC 與 X 系列數據機</p>
+  <p class="field"><b>終端產品</b> — 智慧型手機與個人電腦</p>
+  <p class="field pos"><b>地位</b> — 領導者 — Android SoC</p>
+</div><div class="step design">
+  <span class="chip c-design">自用晶片設計，美國</span>
+  <h4>Apple 自研晶片團隊</h4>
+  <p class="en3">行動與個人電腦 SoC</p>
+  <p class="field"><b>產品</b> — A 系列與 M 系列 SoC</p>
+  <p class="field"><b>終端產品</b> — iPhone、iPad 與 Mac</p>
+  <p class="field pos"><b>地位</b> — 自用 — 僅供內部使用</p>
+</div><div class="step design">
+  <span class="chip c-design">IC 設計，台灣</span>
+  <h4>聯發科</h4>
+  <p class="en3">行動 SoC</p>
+  <p class="field"><b>產品</b> — 天璣 SoC</p>
+  <p class="field"><b>終端產品</b> — Android 智慧型手機</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 中低階行動 SoC</p>
+</div><div class="step design">
+  <span class="chip c-design">自用兼外售晶片設計，韓國</span>
+  <h4>三星 LSI</h4>
+  <p class="en3">行動 SoC</p>
+  <p class="field"><b>產品</b> — Exynos SoC</p>
+  <p class="field"><b>終端產品</b> — 三星智慧型手機</p>
+  <p class="field pos"><b>地位</b> — 挑戰者 — 行動 SoC</p>
+</div><div class="step design">
+  <span class="chip c-design">自用晶片設計，中國</span>
+  <h4>華為海思</h4>
+  <p class="en3">行動 SoC 與 AI 加速器</p>
+  <p class="field"><b>產品</b> — 麒麟 SoC 與昇騰加速器</p>
+  <p class="field"><b>終端產品</b> — 華為終端裝置與中國 AI 伺服器</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 中國內需市場</p>
+</div></div><div class="sub d">網通與互連晶片</div><div class="row"><div class="step design">
+  <span class="chip c-design">IC 設計，美國</span>
+  <h4>Broadcom</h4>
+  <p class="en3">交換器晶片</p>
+  <p class="field"><b>產品</b> — Tomahawk 與 Jericho 交換器 ASIC</p>
+  <p class="field"><b>終端產品</b> — 資料中心交換器</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 外售交換器晶片</p>
+</div><div class="step design">
+  <span class="chip c-design">IC 設計，美國</span>
+  <h4>Marvell</h4>
+  <p class="en3">光學 DSP 與 DPU</p>
+  <p class="field"><b>產品</b> — PAM4 DSP 與 OCTEON DPU</p>
+  <p class="field"><b>終端產品</b> — 光收發模組與網路卡</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 光學 DSP</p>
+</div><div class="step design">
+  <span class="chip c-design">IC 設計，美國</span>
+  <h4>Astera Labs</h4>
+  <p class="en3">連結重計時器</p>
+  <p class="field"><b>產品</b> — PCIe／CXL 重計時器晶片</p>
+  <p class="field"><b>終端產品</b> — AI 伺服器機櫃</p>
+  <p class="field pos"><b>地位</b> — 領導者 — AI 機櫃重計時器</p>
+</div><div class="step design">
+  <span class="chip c-design">IC 設計，美國</span>
+  <h4>Credo</h4>
+  <p class="en3">序列解串器與線纜晶片</p>
+  <p class="field"><b>產品</b> — 主動電子線纜晶片</p>
+  <p class="field"><b>終端產品</b> — AI 伺服器機櫃</p>
+  <p class="field pos"><b>地位</b> — 挑戰者 — AI 機櫃互連</p>
+</div><div class="step design">
+  <span class="chip c-design">介面 IC，台灣</span>
+  <h4>譜瑞-KY</h4>
+  <p class="en3">介面 IC，台灣</p>
+  <p class="field"><b>產品</b> — 顯示介面、時序控制器與 PCIe 重計時器</p>
+  <p class="field"><b>終端產品</b> — 筆記型電腦、顯示器與 AI 伺服器互連</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 重計時器與顯示介面，與 Astera Labs、Credo 並列</p>
+</div></div><div class="sub d">台灣 IC 設計</div><div class="row"><div class="step design">
+  <span class="chip c-design">IC 設計，台灣</span>
+  <h4>瑞昱</h4>
+  <p class="en3">網通與音訊晶片</p>
+  <p class="field"><b>產品</b> — 乙太網路控制器與音訊編解碼晶片</p>
+  <p class="field"><b>終端產品</b> — 個人電腦與網通設備</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 台灣網通晶片</p>
+</div><div class="step design">
+  <span class="chip c-design">IC 設計，台灣</span>
+  <h4>聯詠</h4>
+  <p class="en3">驅動 IC</p>
+  <p class="field"><b>產品</b> — 驅動 IC 與觸控整合驅動 IC</p>
+  <p class="field"><b>終端產品</b> — 手機與電視面板</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 驅動 IC</p>
+</div><div class="step design">
+  <span class="chip c-design">IC 設計，台灣</span>
+  <h4>奇景</h4>
+  <p class="en3">驅動 IC 與光學晶片</p>
+  <p class="field"><b>產品</b> — 驅動 IC 與晶圓級光學</p>
+  <p class="field"><b>終端產品</b> — 手機與 AR／VR 面板</p>
+  <p class="field pos"><b>地位</b> — 利基 — AR／VR 光學</p>
+</div><div class="step design">
+  <span class="chip c-design">IC 設計，台灣</span>
+  <h4>信驊</h4>
+  <p class="en3">伺服器管理晶片</p>
+  <p class="field"><b>產品</b> — 基板管理控制器</p>
+  <p class="field"><b>終端產品</b> — 每一塊伺服器主機板</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 伺服器基板管理控制晶片</p>
+</div><div class="step design">
+  <span class="chip c-design">IC 設計，台灣</span>
+  <h4>群聯</h4>
+  <p class="en3">SSD 控制晶片</p>
+  <p class="field"><b>產品</b> — NAND 控制晶片</p>
+  <p class="field"><b>終端產品</b> — 固態硬碟</p>
+  <p class="field pos"><b>地位</b> — 領導者 — SSD 控制晶片設計</p>
+</div><div class="step design">
+  <span class="chip c-design">介面控制 IC，台灣</span>
+  <h4>祥碩</h4>
+  <p class="en3">介面控制 IC，台灣</p>
+  <p class="field"><b>產品</b> — USB、PCIe 與 SATA 控制晶片及橋接晶片</p>
+  <p class="field"><b>終端產品</b> — 個人電腦平台、晶片組與周邊</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 台灣高速介面控制晶片</p>
+</div></div><div class="sub d">類比、微控制器與功率</div><div class="row"><div class="step design">
+  <span class="chip c-design">IDM 晶片設計，荷蘭</span>
+  <h4>恩智浦</h4>
+  <p class="en3">車用微控制器與雷達晶片</p>
+  <p class="field"><b>產品</b> — 微控制器與雷達 SoC</p>
+  <p class="field"><b>終端產品</b> — 汽車</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 車用半導體</p>
+</div><div class="step design">
+  <span class="chip c-design">IDM 晶片設計，瑞士</span>
+  <h4>意法半導體</h4>
+  <p class="en3">微控制器與碳化矽功率晶片</p>
+  <p class="field"><b>產品</b> — 微控制器與碳化矽元件</p>
+  <p class="field"><b>終端產品</b> — 汽車與工業</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 碳化矽功率</p>
+</div><div class="step design">
+  <span class="chip c-design">IDM 晶片設計，美國</span>
+  <h4>德州儀器</h4>
+  <p class="en3">類比與嵌入式晶片</p>
+  <p class="field"><b>產品</b> — 功率 IC 與微控制器</p>
+  <p class="field"><b>終端產品</b> — 幾乎所有電子裝置</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 類比晶片</p>
+</div><div class="step design">
+  <span class="chip c-design">IDM 晶片設計，德國</span>
+  <h4>英飛凌</h4>
+  <p class="en3">功率半導體</p>
+  <p class="field"><b>產品</b> — 功率級、氮化鎵與碳化矽元件</p>
+  <p class="field"><b>終端產品</b> — 汽車與 AI 伺服器電源</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 功率半導體</p>
+</div><div class="step design">
+  <span class="chip c-design">IC 設計，美國</span>
+  <h4>Monolithic Power Systems</h4>
+  <p class="en3">電源管理 IC</p>
+  <p class="field"><b>產品</b> — GPU 用電壓調節模組晶片</p>
+  <p class="field"><b>終端產品</b> — AI 伺服器供電</p>
+  <p class="field pos"><b>地位</b> — 領導者 — GPU 電壓調節器</p>
+</div><div class="step design">
+  <span class="chip c-design">類比 IDM，美國</span>
+  <h4>亞德諾</h4>
+  <p class="en3">高效能類比，美國</p>
+  <p class="field"><b>產品</b> — 高效能類比、混合訊號與電源管理</p>
+  <p class="field"><b>終端產品</b> — 工業、通訊、車用與醫療</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 高效能類比，與德州儀器並列</p>
+</div><div class="step design">
+  <span class="chip c-design">車用 IDM，日本</span>
+  <h4>瑞薩</h4>
+  <p class="en3">車用微控制器與類比，日本</p>
+  <p class="field"><b>產品</b> — 車用微控制器、類比與功率元件</p>
+  <p class="field"><b>終端產品</b> — 汽車與工業設備</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 車用微控制器</p>
+</div><div class="step design">
+  <span class="chip c-design">功率 IDM，美國</span>
+  <h4>安森美</h4>
+  <p class="en3">功率與感測，美國</p>
+  <p class="field"><b>產品</b> — 矽基與碳化矽功率元件、影像感測器</p>
+  <p class="field"><b>終端產品</b> — 汽車、工業與資料中心電源</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 車用驅動逆變器的外售碳化矽</p>
+</div><div class="step design">
+  <span class="chip c-design">微控制器 IDM，美國</span>
+  <h4>微芯</h4>
+  <p class="en3">微控制器、類比與 FPGA，美國</p>
+  <p class="field"><b>產品</b> — 微控制器、類比與 FPGA</p>
+  <p class="field"><b>終端產品</b> — 工業、車用與消費性</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 微控制器與類比，通路比重高</p>
+</div></div></div>
+</div>
+<div class="divider"></div>
+<div class="stage" id="s2">
+  <div class="rail"><div class="stripe"></div>
+    <div class="num">階段 2</div>
+    <h2>前段晶圓製造</h2>
+    <p class="en2">實際製造晶圓的代工廠</p>
+    <div class="clarify">設計在此階段變成矽。地位以全球晶圓代工營收市占率衡量。</div>
+  </div>
+  <div class="body"><div class="sub f">晶圓代工廠，依先進製程能力排序</div><div class="step foundry" style="flex:1 1 100%">
+  <span class="chip c-foundry">晶圓代工</span>
+  <h4>台積電</h4>
+  <p class="en3">純晶圓代工，台灣</p>
+  <p class="field"><b>產品</b> — 從成熟製程到 N2 的全節點代工晶圓，並自有 CoWoS、SoIC 與 InFO 封裝</p>
+  <p class="field"><b>終端產品</b> — 所有先進製程邏輯晶片：AI GPU、行動 SoC 與客製 ASIC</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 約占晶圓代工營收 73%，先進製程唯一供應者</p>
+  <div class="scusers" style="margin-top:10px"><h5>主要客戶</h5><div class="field" style="margin:3px 0"><b>Nvidia</b> — Rubin 與 Blackwell GPU</div><div class="field" style="margin:3px 0"><b>Apple</b> — A 系列與 M 系列 SoC</div><div class="field" style="margin:3px 0"><b>Broadcom</b> — TPU 與交換器晶片</div><div class="field" style="margin:3px 0"><b>AMD</b> — EPYC 與 MI400</div><div class="field" style="margin:3px 0"><b>Amazon</b> — Trainium</div></div>
+</div><div class="step foundry" style="flex:1 1 100%">
+  <span class="chip c-foundry">晶圓代工</span>
+  <h4>三星晶圓代工</h4>
+  <p class="en3">晶圓代工，韓國（同時為 IDM）</p>
+  <p class="field"><b>產品</b> — 代工晶圓，3 奈米環繞閘極已量產、2 奈米放量中，並有 I-Cube 與 X-Cube 封裝</p>
+  <p class="field"><b>終端產品</b> — 行動 SoC，以及部分 AI 加速器</p>
+  <p class="field pos"><b>地位</b> — 第二 — 約占晶圓代工營收 7%</p>
+  <div class="scusers" style="margin-top:10px"><h5>主要客戶</h5><div class="field" style="margin:3px 0"><b>Tesla</b> — AI6 加速器</div><div class="field" style="margin:3px 0"><b>三星 LSI</b> — Exynos SoC</div><div class="field" style="margin:3px 0"><b>百度</b> — 崑崙加速器</div></div>
+</div><div class="step foundry" style="flex:1 1 100%">
+  <span class="chip c-foundry">晶圓代工</span>
+  <h4>Intel 晶圓代工</h4>
+  <p class="en3">晶圓代工，美國（同時為 IDM）</p>
+  <p class="field"><b>產品</b> — 代工晶圓，18A 已量產，並有 EMIB 與 Foveros 封裝</p>
+  <p class="field"><b>終端產品</b> — Intel 自家 CPU，以及初期的外部代工客戶</p>
+  <p class="field pos"><b>地位</b> — 挑戰者 — 重建外部代工業務，封裝業務較快見效</p>
+  <div class="scusers" style="margin-top:10px"><h5>主要客戶</h5><div class="field" style="margin:3px 0"><b>Intel 產品部門</b> — Core Ultra 與 Xeon</div><div class="field" style="margin:3px 0"><b>Microsoft</b> — 據報為 18A 客戶</div><div class="field" style="margin:3px 0"><b>Amazon</b> — EMIB 封裝客戶</div></div>
+</div><div class="step foundry" style="flex:1 1 100%">
+  <span class="chip c-foundry">晶圓代工</span>
+  <h4>中芯國際</h4>
+  <p class="en3">晶圓代工，中國</p>
+  <p class="field"><b>產品</b> — 以深紫外光多重曝光做到 7 奈米，無法取得極紫外光設備</p>
+  <p class="field"><b>終端產品</b> — 中國內需行動 SoC 與 AI 加速器</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 中國內需晶圓代工，約占代工營收 5%</p>
+  <div class="scusers" style="margin-top:10px"><h5>主要客戶</h5><div class="field" style="margin:3px 0"><b>華為海思</b> — 麒麟與昇騰</div><div class="field" style="margin:3px 0"><b>寒武紀</b> — AI 加速器</div></div>
+</div><div class="step foundry" style="flex:1 1 100%">
+  <span class="chip c-foundry">晶圓代工</span>
+  <h4>聯電</h4>
+  <p class="en3">晶圓代工，台灣</p>
+  <p class="field"><b>產品</b> — 代工晶圓，14 至 40 奈米特殊製程</p>
+  <p class="field"><b>終端產品</b> — 驅動 IC、射頻與網通晶片</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 成熟製程，約占代工營收 4%</p>
+  <div class="scusers" style="margin-top:10px"><h5>主要客戶</h5><div class="field" style="margin:3px 0"><b>聯詠</b> — 驅動 IC</div><div class="field" style="margin:3px 0"><b>瑞昱</b> — 網通晶片</div><div class="field" style="margin:3px 0"><b>Qualcomm</b> — 射頻元件</div></div>
+</div><div class="step foundry" style="flex:1 1 100%">
+  <span class="chip c-foundry">晶圓代工</span>
+  <h4>GlobalFoundries</h4>
+  <p class="en3">晶圓代工，美國</p>
+  <p class="field"><b>產品</b> — 代工晶圓，12 奈米至 22FDX，含射頻絕緣層上矽與矽光子</p>
+  <p class="field"><b>終端產品</b> — 車用、射頻與物聯網晶片</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 約占代工營收 3%</p>
+  <div class="scusers" style="margin-top:10px"><h5>主要客戶</h5><div class="field" style="margin:3px 0"><b>AMD</b> — 成熟製程</div><div class="field" style="margin:3px 0"><b>恩智浦</b> — 車用晶片</div><div class="field" style="margin:3px 0"><b>Qualcomm</b> — 射頻元件</div></div>
+</div><div class="step foundry" style="flex:1 1 100%">
+  <span class="chip c-foundry">晶圓代工</span>
+  <h4>華虹</h4>
+  <p class="en3">晶圓代工，中國</p>
+  <p class="field"><b>產品</b> — 代工晶圓，40／28 奈米功率與類比製程</p>
+  <p class="field"><b>終端產品</b> — 電源管理晶片與分立元件</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 約占代工營收 2.5%</p>
+  <div class="scusers" style="margin-top:10px"><h5>主要客戶</h5><div class="field" style="margin:3px 0"><b>意法半導體</b> — 40 奈米微控制器</div><div class="field" style="margin:3px 0"><b>中國內需</b> — 功率晶片</div></div>
+</div><div class="step foundry">
+  <span class="chip c-foundry">晶圓代工</span>
+  <h4>世界先進</h4>
+  <p class="en3">成熟製程代工，台灣</p>
+  <p class="field"><b>產品</b> — 八吋成熟製程晶圓，並透過與恩智浦在新加坡的 VisionPower 合資廠切入十二吋</p>
+  <p class="field"><b>終端產品</b> — 電源管理 IC、驅動 IC 與混合訊號</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 成熟製程代工，獲利由成熟產能稼動率決定</p>
+</div><div class="step foundry">
+  <span class="chip c-foundry">晶圓代工</span>
+  <h4>力積電</h4>
+  <p class="en3">成熟製程代工，台灣</p>
+  <p class="field"><b>產品</b> — 十二吋邏輯、記憶體與 DRAM 代工晶圓，另有矽基氮化鎵功率晶圓</p>
+  <p class="field"><b>終端產品</b> — 消費性、記憶體、功率與顯示晶片</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 成熟製程代工；氮化鎵代工業務另見階段 5</p>
+</div></div>
+</div>
+<div class="divider"></div>
+<div class="stage" id="s3">
+  <div class="rail"><div class="stripe"></div>
+    <div class="num">階段 3</div>
+    <h2>後段</h2>
+    <p class="en2">封測、載板與印刷電路板</p>
+    <div class="clarify">支撐每一種先進封裝的實體材料與服務層。載板廠與印刷電路板廠幾乎供應本文件所有的終端產品。</div>
+  </div>
+  <div class="body"><div class="sub k">封測 — 封裝與測試</div><div class="row"><div class="step back">
+  <span class="chip c-back">封測，台灣</span>
+  <h4>日月光</h4>
+  
+  <p class="field"><b>產品</b> — 封裝與測試服務</p>
+  <p class="field"><b>終端產品</b> — 為各家客戶封裝測試完成的晶片</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 封測，含矽品與環旭電子</p>
+</div><div class="step back">
+  <span class="chip c-back">封測，美國</span>
+  <h4>Amkor</h4>
+  
+  <p class="field"><b>產品</b> — 封裝與測試服務</p>
+  <p class="field"><b>終端產品</b> — 為各家客戶封裝測試完成的晶片</p>
+  <p class="field pos"><b>地位</b> — 第二 — 封測</p>
+</div><div class="step back">
+  <span class="chip c-back">封測，台灣</span>
+  <h4>力成</h4>
+  
+  <p class="field"><b>產品</b> — 封裝與測試服務</p>
+  <p class="field"><b>終端產品</b> — 記憶體與覆晶封裝</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 記憶體封裝</p>
+</div><div class="step back">
+  <span class="chip c-back">封測，台灣</span>
+  <h4>京元電</h4>
+  
+  <p class="field"><b>產品</b> — 晶圓測試與成品測試服務</p>
+  <p class="field"><b>終端產品</b> — 測試完成的晶片</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 台灣測試服務</p>
+</div><div class="step back">
+  <span class="chip c-back">封測，中國</span>
+  <h4>長電科技</h4>
+  
+  <p class="field"><b>產品</b> — 封裝與測試服務</p>
+  <p class="field"><b>終端產品</b> — 封裝與測試完成的晶片</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 中國封測</p>
+</div></div><div class="row"><div class="step back">
+  <span class="chip c-back">封測，中國</span>
+  <h4>通富微電</h4>
+  
+  <p class="field"><b>產品</b> — 封裝與測試服務</p>
+  <p class="field"><b>終端產品</b> — 封裝與測試完成的晶片</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 封測，AMD 封裝夥伴</p>
+</div></div><div class="sub k">ABF 與 BT 載板</div><div class="row"><div class="step back">
+  <span class="chip c-back">ABF 與 BT 載板廠，台灣</span>
+  <h4>欣興</h4>
+  
+  <p class="field"><b>產品</b> — IC 載板</p>
+  <p class="field"><b>終端產品</b> — 先進封裝與覆晶封裝內的載板層</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 約占高階 ABF 載板四分之一</p>
+</div><div class="step back">
+  <span class="chip c-back">ABF 載板廠，日本</span>
+  <h4>揖斐電</h4>
+  
+  <p class="field"><b>產品</b> — IC 載板</p>
+  <p class="field"><b>終端產品</b> — Nvidia 與 Intel 封裝的載板層</p>
+  <p class="field pos"><b>地位</b> — 第二 — 約占高階 ABF 載板兩成</p>
+</div><div class="step back">
+  <span class="chip c-back">ABF 載板廠，奧地利</span>
+  <h4>AT&amp;S</h4>
+  
+  <p class="field"><b>產品</b> — IC 載板</p>
+  <p class="field"><b>終端產品</b> — AMD 與 Intel 封裝的載板層</p>
+  <p class="field pos"><b>地位</b> — 第三 — 約占高階 ABF 載板 16%</p>
+</div><div class="step back">
+  <span class="chip c-back">ABF 載板廠，台灣</span>
+  <h4>南電</h4>
+  
+  <p class="field"><b>產品</b> — IC 載板</p>
+  <p class="field"><b>終端產品</b> — 封裝內的載板層</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 約占高階 ABF 載板 14%</p>
+</div><div class="step back">
+  <span class="chip c-back">ABF 載板廠，日本</span>
+  <h4>新光電氣</h4>
+  
+  <p class="field"><b>產品</b> — IC 載板</p>
+  <p class="field"><b>終端產品</b> — 封裝內的載板層</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 約占高階 ABF 載板 12%</p>
+</div></div><div class="row"><div class="step back">
+  <span class="chip c-back">ABF 與 BT 載板廠，台灣</span>
+  <h4>臻鼎</h4>
+  
+  <p class="field"><b>產品</b> — IC 載板</p>
+  <p class="field"><b>終端產品</b> — 封裝內的載板層</p>
+  <p class="field pos"><b>地位</b> — 挑戰者 — ABF 載板，轉為獲利</p>
+</div><div class="step back">
+  <span class="chip c-back">ABF 膜材廠，日本</span>
+  <h4>味之素</h4>
+  
+  <p class="field"><b>產品</b> — 味之素增層膜</p>
+  <p class="field"><b>終端產品</b> — ABF 載板內的介電材料</p>
+  <p class="field pos"><b>地位</b> — 獨家供應 — ABF 增層膜</p>
+</div><div class="step back">
+  <span class="chip c-back">BT 樹脂廠，日本</span>
+  <h4>三菱瓦斯化學</h4>
+  
+  <p class="field"><b>產品</b> — BT 樹脂</p>
+  <p class="field"><b>終端產品</b> — BT 載板內的樹脂材料</p>
+  <p class="field pos"><b>地位</b> — 領導者 — BT 樹脂</p>
+</div></div><div class="sub k">印刷電路板與銅箔基板</div><div class="row"><div class="step back">
+  <span class="chip c-back">印刷電路板廠，台灣</span>
+  <h4>臻鼎</h4>
+  
+  <p class="field"><b>產品</b> — 軟板與硬板</p>
+  <p class="field"><b>終端產品</b> — iPhone 軟板、AI 伺服器板與光學印刷電路板</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 約占全球印刷電路板營收 7%</p>
+</div><div class="step back">
+  <span class="chip c-back">印刷電路板廠，台灣</span>
+  <h4>金像電</h4>
+  
+  <p class="field"><b>產品</b> — 高層數伺服器印刷電路板</p>
+  <p class="field"><b>終端產品</b> — AI 伺服器主機板</p>
+  <p class="field pos"><b>地位</b> — 領導者 — AI 伺服器印刷電路板</p>
+</div><div class="step back">
+  <span class="chip c-back">印刷電路板廠，中國</span>
+  <h4>勝宏科技</h4>
+  
+  <p class="field"><b>產品</b> — 高層數伺服器印刷電路板</p>
+  <p class="field"><b>終端產品</b> — AI 伺服器主機板</p>
+  <p class="field pos"><b>地位</b> — 挑戰者 — AI 伺服器印刷電路板</p>
+</div><div class="step back">
+  <span class="chip c-back">銅箔基板廠，台灣</span>
+  <h4>台光電</h4>
+  
+  <p class="field"><b>產品</b> — 銅箔基板</p>
+  <p class="field"><b>終端產品</b> — AI 伺服器印刷電路板內的原材料</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 低損耗銅箔基板</p>
+</div><div class="step back">
+  <span class="chip c-back">銅箔基板廠，台灣</span>
+  <h4>台燿</h4>
+  
+  <p class="field"><b>產品</b> — 銅箔基板</p>
+  <p class="field"><b>終端產品</b> — 高速印刷電路板內的原材料</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 高速銅箔基板</p>
+</div></div></div>
+</div>
+<div class="divider"></div>
+<div class="stage" id="s4">
+  <div class="rail"><div class="stripe"></div>
+    <div class="num">階段 4</div>
+    <h2>記憶體、HBM 與 SSD</h2>
+    <p class="en2">DRAM、NAND 與 HBM 基底晶片</p>
+    <div class="clarify">HBM4 於 2026 年放量，主要供應 Nvidia Rubin，採 12 層與 16 層堆疊，並以混合鍵合取代舊有的微凸塊矽穿孔（TSV）製程。</div>
+  </div>
+  <div class="body"><div class="sub m">DRAM</div><div class="row"><div class="step mem">
+  <span class="chip c-mem">DRAM 與 HBM 廠，韓國</span>
+  <h4>三星</h4>
+  
+  <p class="field"><b>產品</b> — HBM、DDR5 與 LPDDR</p>
+  <p class="field"><b>終端產品</b> — 資料中心、個人電腦與行動記憶體</p>
+  <p class="field pos"><b>地位</b> — 第三 — 約占 HBM 15%</p>
+</div><div class="step mem">
+  <span class="chip c-mem">DRAM 與 HBM 廠，韓國</span>
+  <h4>SK 海力士</h4>
+  
+  <p class="field"><b>產品</b> — HBM 與 DDR5</p>
+  <p class="field"><b>終端產品</b> — 資料中心記憶體</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 約占 HBM 55%</p>
+</div><div class="step mem">
+  <span class="chip c-mem">DRAM 與 HBM 廠，美國</span>
+  <h4>美光</h4>
+  
+  <p class="field"><b>產品</b> — HBM、DDR5 與 LPDDR</p>
+  <p class="field"><b>終端產品</b> — 資料中心與個人電腦記憶體</p>
+  <p class="field pos"><b>地位</b> — 第二 — 約占 HBM 兩成</p>
+</div><div class="step mem">
+  <span class="chip c-mem">DRAM 廠，台灣</span>
+  <h4>南亞科</h4>
+  
+  <p class="field"><b>產品</b> — DDR4 與 DDR5 標準型記憶體</p>
+  <p class="field"><b>終端產品</b> — 消費性與標準型記憶體</p>
+  <p class="field pos"><b>地位</b> — 利基 — 標準型 DRAM</p>
+</div><div class="step mem">
+  <span class="chip c-mem">DRAM 廠，中國</span>
+  <h4>長鑫存儲</h4>
+  
+  <p class="field"><b>產品</b> — DDR5 與 LPDDR5</p>
+  <p class="field"><b>終端產品</b> — 中國內需記憶體</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 中國內需市場</p>
+</div><div class="step mem">
+  <span class="chip c-mem">利基型 DRAM 與 NOR，台灣</span>
+  <h4>華邦電</h4>
+  <p class="en3">利基型記憶體，台灣</p>
+  <p class="field"><b>產品</b> — 利基型 DRAM、NOR 快閃記憶體與程式碼儲存記憶體</p>
+  <p class="field"><b>終端產品</b> — 車用、工業、消費性與網通設備</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 利基型 DRAM 與 NOR，價格走自己的循環</p>
+</div></div><div class="sub m">NAND</div><div class="row"><div class="step mem">
+  <span class="chip c-mem">NAND 快閃記憶體廠，韓國</span>
+  <h4>三星</h4>
+  
+  <p class="field"><b>產品</b> — V-NAND 快閃記憶體</p>
+  <p class="field"><b>終端產品</b> — 固態硬碟</p>
+  <p class="field pos"><b>地位</b> — 領導者 — NAND</p>
+</div><div class="step mem">
+  <span class="chip c-mem">NAND 快閃記憶體廠，韓國／美國</span>
+  <h4>SK 海力士／Solidigm</h4>
+  
+  <p class="field"><b>產品</b> — 企業級 NAND</p>
+  <p class="field"><b>終端產品</b> — 資料中心 SSD</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 企業級 SSD</p>
+</div><div class="step mem">
+  <span class="chip c-mem">NAND 快閃記憶體廠，日本</span>
+  <h4>鎧俠</h4>
+  
+  <p class="field"><b>產品</b> — BiCS NAND，與 SanDisk 合作</p>
+  <p class="field"><b>終端產品</b> — 固態硬碟</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — NAND</p>
+</div><div class="step mem">
+  <span class="chip c-mem">NAND 快閃記憶體廠，美國</span>
+  <h4>美光</h4>
+  
+  <p class="field"><b>產品</b> — 高層數 NAND</p>
+  <p class="field"><b>終端產品</b> — 固態硬碟</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — NAND</p>
+</div><div class="step mem">
+  <span class="chip c-mem">NAND 廠，美國</span>
+  <h4>SanDisk</h4>
+  <p class="en3">NAND 與 SSD，美國</p>
+  <p class="field"><b>產品</b> — BiCS NAND 與消費級 SSD，透過與鎧俠的合資生產</p>
+  <p class="field"><b>終端產品</b> — 消費級 SSD、零售儲存與記憶卡</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — NAND，自威騰電子分割後獨立上市</p>
+</div><div class="step mem">
+  <span class="chip c-mem">NAND 廠，中國</span>
+  <h4>長江存儲</h4>
+  <p class="en3">3D NAND，中國</p>
+  <p class="field"><b>產品</b> — 3D NAND 快閃記憶體與 Xtacking 架構</p>
+  <p class="field"><b>終端產品</b> — 消費級 SSD 與中國內需儲存</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 中國 NAND，NAND 價格最主要的供給端變數</p>
+</div></div><div class="sub m">HBM — 基底晶片與堆疊</div><div class="row"><div class="step mem">
+  <span class="chip c-mem">HBM 基底晶片，韓國</span>
+  <h4>SK 海力士</h4>
+  
+  <p class="field"><b>產品</b> — HBM 堆疊用的基底邏輯晶片</p>
+  <p class="field"><b>終端產品</b> — HBM4E 改由台積電先進製程製造</p>
+  <p class="field pos"><b>地位</b> — 領導者 — HBM，基底晶片轉由台積電代工</p>
+</div><div class="step mem">
+  <span class="chip c-mem">HBM 基底晶片，美國</span>
+  <h4>美光</h4>
+  
+  <p class="field"><b>產品</b> — HBM 堆疊用的基底邏輯晶片</p>
+  <p class="field"><b>終端產品</b> — 目前自製，據報 HBM4E 將轉由台積電代工</p>
+  <p class="field pos"><b>地位</b> — 第二 — HBM</p>
+</div><div class="step mem">
+  <span class="chip c-mem">HBM 基底晶片，韓國</span>
+  <h4>三星</h4>
+  
+  <p class="field"><b>產品</b> — HBM 堆疊用的基底邏輯晶片</p>
+  <p class="field"><b>終端產品</b> — 自有 4 奈米製程</p>
+  <p class="field pos"><b>地位</b> — 第三 — HBM</p>
+</div><div class="step mem">
+  <span class="chip c-mem">HBM 堆疊設備，韓國</span>
+  <h4>韓美半導體</h4>
+  
+  <p class="field"><b>產品</b> — 熱壓鍵合機</p>
+  <p class="field"><b>終端產品</b> — HBM 堆疊組裝</p>
+  <p class="field pos"><b>地位</b> — 領導者 — HBM 熱壓鍵合機</p>
+</div><div class="step mem">
+  <span class="chip c-mem">HBM 堆疊設備，荷蘭</span>
+  <h4>Besi</h4>
+  
+  <p class="field"><b>產品</b> — 混合鍵合設備</p>
+  <p class="field"><b>終端產品</b> — HBM4 堆疊組裝，自微凸塊矽穿孔（TSV）轉換中</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 混合鍵合設備</p>
+</div></div><div class="stackcard">
+  <p class="sctitle">HBM 內部堆疊</p>
+  <p class="scsub">在每一種 CoWoS 系列封裝裡，以單一「HBM」方塊形式進場的模組</p>
+  <div class="stacklayers"><div class="slrow"><div class="slcell sl-mem" style="flex:1">DRAM 晶粒</div></div><div class="slrow"><div class="slcell sl-mem" style="flex:1">DRAM 晶粒</div></div><div class="slrow"><div class="slcell sl-mem" style="flex:1">DRAM 晶粒</div></div><div class="slrow"><div class="slcell sl-mem" style="flex:1">DRAM 晶粒</div></div><div class="slrow"><div class="slcell sl-bridge" style="flex:1">各層晶粒之間以矽穿孔（TSV）或混合鍵合連接</div></div><div class="slrow"><div class="slcell sl-die" style="flex:1">基底邏輯晶片 — 輸出入與控制</div></div></div>
+  
+  <div class="scgrid">
+    <div class="scfields">
+      <p class="field"><b>產品</b> — 預先堆疊完成的記憶體模組，8 至 16 層 DRAM 晶粒</p>
+      <p class="field"><b>終端產品</b> — 本文件所有 CoWoS、I-Cube 與 EMIB 封裝內的 HBM 元件</p>
+      <p class="field pos"><b>地位</b> — 成長中 — HBM4 於 2026 年間由矽穿孔（TSV）轉向混合鍵合</p>
+    </div>
+    <div class="scusers">
+      <h5>採用者</h5><div class="u"><b>Every AI accelerator</b> — Nvidia, AMD, Google TPU, all hyperscaler ASICs</div>
+      <h5 style="margin-top:8px">Done by</h5><div class="u"><b>SK hynix, Micron, Samsung</b> — stack assembly</div><div class="u"><b>TSMC</b> — base die fabrication for HBM4E</div>
+    </div>
+  </div>
+</div><div class="sub m">記憶體控制與介面</div><div class="row"><div class="step mem">
+  <span class="chip c-mem">SSD 控制晶片設計，台灣</span>
+  <h4>慧榮</h4>
+  
+  <p class="field"><b>產品</b> — SSD 控制晶片</p>
+  <p class="field"><b>終端產品</b> — 消費級與企業級 SSD</p>
+  <p class="field pos"><b>地位</b> — 領導者 — SSD 控制晶片設計</p>
+</div><div class="step mem">
+  <span class="chip c-mem">SSD 控制晶片設計，台灣</span>
+  <h4>群聯</h4>
+  
+  <p class="field"><b>產品</b> — SSD 控制晶片</p>
+  <p class="field"><b>終端產品</b> — 消費級與企業級 SSD，含 Pascari 品牌</p>
+  <p class="field pos"><b>地位</b> — 領導者 — SSD 控制晶片設計</p>
+</div><div class="step mem">
+  <span class="chip c-mem">SSD 控制晶片設計，美國</span>
+  <h4>Marvell</h4>
+  
+  <p class="field"><b>產品</b> — 企業級 SSD 控制晶片</p>
+  <p class="field"><b>終端產品</b> — 資料中心 SSD</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 企業級 SSD 控制晶片</p>
+</div><div class="step mem">
+  <span class="chip c-mem">記憶體介面 IC，中國</span>
+  <h4>瀾起科技</h4>
+  <p class="en3">記憶體介面，中國</p>
+  <p class="field"><b>產品</b> — DDR5 暫存時脈驅動器、MRDIMM 緩衝晶片與記憶體介面晶片</p>
+  <p class="field"><b>終端產品</b> — 供雲端與 AI 平台的伺服器記憶體模組</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 伺服器記憶體介面，每一代 DDR 用量遞增</p>
+</div><div class="step mem">
+  <span class="chip c-mem">記憶體介面與矽智財，美國</span>
+  <h4>Rambus</h4>
+  <p class="en3">介面晶片與矽智財，美國</p>
+  <p class="field"><b>產品</b> — 記憶體介面晶片，以及 DDR 與 HBM 相關矽智財授權</p>
+  <p class="field"><b>終端產品</b> — 伺服器記憶體模組與授權的記憶體子系統</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 記憶體介面晶片與權利金型記憶體矽智財</p>
+</div><div class="step mem">
+  <span class="chip c-mem">NOR 與微控制器，中國</span>
+  <h4>兆易創新</h4>
+  <p class="en3">NOR 與微控制器，中國</p>
+  <p class="field"><b>產品</b> — NOR 快閃記憶體、利基型 DRAM 與微控制器</p>
+  <p class="field"><b>終端產品</b> — 消費性、工業與車用電子</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 中國 NOR 快閃記憶體，宜與華邦電並看</p>
+</div></div></div>
+</div>
+<div class="divider"></div>
+<div class="stage" id="s5">
+  <div class="rail"><div class="stripe"></div>
+    <div class="num">階段 5</div>
+    <h2>射頻、功率與化合物半導體</h2>
+    <p class="en2">矽以外的砷化鎵、氮化鎵與磷化銦</p>
+    <div class="clarify">此處的砷化鎵與氮化鎵晶片依材料分群；下方區塊則把同一批晶片依最終用途分群。</div>
+  </div>
+  <div class="body"><div class="stackcard">
+  <p class="sctitle">射頻晶片的製造流程 — 從晶圓到 QFN 封裝</p>
+  <p class="scsub">側視圖。左為晶圓階段，右為 QFN 封裝階段。編號對應下方步驟。</p>
+  <svg viewBox="0 100 1120 245" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:Inter,Helvetica,Arial,sans-serif">
+    <defs>
+      <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6B7A1E"/></marker>
+      <marker id="heat" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#B03A2E"/></marker>
+    </defs>
+
+    <!-- ===== LEFT: WAFER LEVEL ===== -->
+    <text x="40" y="120" font-size="12" font-weight="700" fill="#4A555E" letter-spacing=".06em">WAFER LEVEL</text>
+
+    <!-- substrate -->
+    <rect x="40" y="232" width="420" height="58" fill="#F1F2F3" stroke="#CDD2D6"/>
+    <text x="250" y="266" font-size="13" text-anchor="middle" fill="#4A555E">InP or GaAs substrate</text>
+    <!-- epi -->
+    <rect x="40" y="204" width="420" height="28" fill="#F2F5E4" stroke="#B5BF6E"/>
+    <text x="250" y="223" font-size="12.5" text-anchor="middle" fill="#5A6618">Epi layer (MOCVD)</text>
+    <!-- devices -->
+    <g fill="#E8F4EF" stroke="#9FC9B5">
+      <rect x="66" y="186" width="52" height="18"/><rect x="146" y="186" width="52" height="18"/>
+      <rect x="226" y="186" width="52" height="18"/><rect x="306" y="186" width="52" height="18"/>
+      <rect x="386" y="186" width="52" height="18"/>
+    </g>
+    <text x="150" y="172" font-size="12" fill="#1F4D38">RF transistors patterned into the epi</text>
+    <!-- dice lines -->
+    <g stroke="#B03A2E" stroke-width="1.6" stroke-dasharray="5,4">
+      <line x1="132" y1="150" x2="132" y2="296"/><line x1="372" y1="150" x2="372" y2="296"/>
+    </g>
+    <text x="392" y="146" font-size="12" fill="#B03A2E">dice</text>
+
+    <!-- badges left -->
+    <g font-size="12" font-weight="700" fill="#fff" text-anchor="middle">
+      <circle cx="22" cy="261" r="10" fill="#6B7A1E"/><text x="22" y="265">1</text>
+      <circle cx="22" cy="218" r="10" fill="#6B7A1E"/><text x="22" y="222">2</text>
+      <circle cx="22" cy="195" r="10" fill="#6B7A1E"/><text x="22" y="199">3</text>
+      <circle cx="372" cy="132" r="10" fill="#6B7A1E"/><text x="372" y="136">4</text>
+    </g>
+
+    <!-- ===== ARROW BETWEEN ===== -->
+    <line x1="486" y1="236" x2="576" y2="236" stroke="#6B7A1E" stroke-width="2" marker-end="url(#arw)"/>
+    <text x="531" y="224" font-size="11" text-anchor="middle" fill="#6B7A1E">one die</text>
+
+    <!-- ===== RIGHT: QFN PACKAGE ===== -->
+    <text x="600" y="120" font-size="12" font-weight="700" fill="#4A555E" letter-spacing=".06em">PACKAGE LEVEL — QFN CROSS-SECTION</text>
+
+    <!-- mould compound (drawn first so it sits behind) -->
+    <rect x="612" y="150" width="476" height="105" fill="#F3F4F5" stroke="#D5D9DD"/>
+    <text x="850" y="170" font-size="12.5" text-anchor="middle" fill="#4A555E">Mould compound</text>
+
+    <!-- PCB -->
+    <rect x="600" y="292" width="500" height="40" fill="#EAEAEA" stroke="#C4C4C4"/>
+    <text x="850" y="317" font-size="13" text-anchor="middle" fill="#333">PCB</text>
+    <!-- solder -->
+    <g fill="#C9CED3">
+      <rect x="620" y="285" width="60" height="7"/><rect x="730" y="285" width="240" height="7"/><rect x="1020" y="285" width="60" height="7"/>
+    </g>
+    <!-- leads + pad -->
+    <g fill="#B8BFC6" stroke="#8E979E">
+      <rect x="620" y="257" width="60" height="28"/><rect x="1020" y="257" width="60" height="28"/>
+      <rect x="730" y="257" width="240" height="28"/>
+    </g>
+    <text x="650" y="275" font-size="11.5" text-anchor="middle" fill="#2F363C">Lead</text>
+    <text x="1050" y="275" font-size="11.5" text-anchor="middle" fill="#2F363C">Lead</text>
+    <text x="850" y="275" font-size="11.5" text-anchor="middle" fill="#2F363C">Exposed thermal pad</text>
+    <!-- die -->
+    <rect x="790" y="217" width="120" height="40" fill="#E8F4EF" stroke="#9FC9B5"/>
+    <text x="850" y="241" font-size="12.5" text-anchor="middle" fill="#1F4D38">RF / analog die</text>
+    <!-- wire bonds -->
+    <path d="M 800 217 Q 725 160 650 257" fill="none" stroke="#4A555E" stroke-width="2"/>
+    <path d="M 900 217 Q 975 160 1050 257" fill="none" stroke="#4A555E" stroke-width="2"/>
+    <!-- heat arrow -->
+    <line x1="945" y1="222" x2="945" y2="300" stroke="#B03A2E" stroke-width="1.8" marker-end="url(#heat)"/>
+    <text x="953" y="240" font-size="11" fill="#B03A2E">heat exits</text>
+    <text x="953" y="253" font-size="11" fill="#B03A2E">downward</text>
+
+    <!-- badges right -->
+    <g font-size="12" font-weight="700" fill="#fff" text-anchor="middle">
+      <circle cx="710" cy="190" r="10" fill="#6B7A1E"/><text x="710" y="194">5</text>
+      <circle cx="1072" cy="166" r="10" fill="#6B7A1E"/><text x="1072" y="170">6</text>
+      <circle cx="705" cy="271" r="10" fill="#6B7A1E"/><text x="705" y="275">7</text>
+      <circle cx="1084" cy="312" r="10" fill="#6B7A1E"/><text x="1084" y="316">8</text>
+    </g>
+  </svg>
+
+  <div class="threerail" style="grid-template-columns:1fr 1fr;margin-top:14px">
+    <div>
+      <p class="field"><b>1. 基板</b> — 長成作為基材的磷化銦或砷化鎵晶圓</p>
+      <p class="field"><b>2. 磊晶層</b> — 以有機金屬化學氣相沉積在基板上長成</p>
+      <p class="field"><b>3. 元件</b> — 在磊晶層上定義出射頻電晶體</p>
+      <p class="field"><b>4. 切割</b> — 晶圓切割為單顆射頻晶粒</p>
+    </div>
+    <div>
+      <p class="field"><b>5. 打線</b> — 切割後的晶粒以細金線連接至導線架</p>
+      <p class="field"><b>6. 封膠</b> — 封膠材料覆蓋晶粒與金線</p>
+      <p class="field"><b>7. 接腳與散熱墊</b> — 底部的導線架接腳與外露散熱墊</p>
+      <p class="field"><b>8. 焊接</b> — 接腳與散熱墊平貼焊接於印刷電路板，無錫球、無載板</p>
+    </div>
+  </div>
+</div><div class="sub r">射頻晶片應用 — 終端用途</div><div class="row"><div class="step rf">
+  <span class="chip c-rf">射頻應用，全球</span>
+  <h4>WiFi 與藍牙</h4>
+  
+  <p class="field"><b>產品</b> — 連結類射頻前端晶片</p>
+  <p class="field"><b>終端產品</b> — 手機、筆電、路由器與物聯網裝置</p>
+  <p class="field pos"><b>地位</b> — 最大 — 射頻出貨量</p>
+</div><div class="step rf">
+  <span class="chip c-rf">射頻應用，全球</span>
+  <h4>行動通訊手機</h4>
+  
+  <p class="field"><b>產品</b> — 行動通訊射頻前端晶片</p>
+  <p class="field"><b>終端產品</b> — 智慧型手機</p>
+  <p class="field pos"><b>地位</b> — 第二 — 射頻出貨量</p>
+</div><div class="step rf">
+  <span class="chip c-rf">射頻應用，全球</span>
+  <h4>車用雷達</h4>
+  
+  <p class="field"><b>產品</b> — 氮化鎵與矽鍺雷達晶片</p>
+  <p class="field"><b>終端產品</b> — 先進駕駛輔助系統</p>
+  <p class="field pos"><b>地位</b> — 成長中 — 隨先進駕駛輔助系統普及</p>
+</div><div class="step rf">
+  <span class="chip c-rf">射頻應用，全球</span>
+  <h4>基地台基礎設施</h4>
+  
+  <p class="field"><b>產品</b> — 氮化鎵功率放大器</p>
+  <p class="field"><b>終端產品</b> — 行動基地台與電信基礎設施</p>
+  <p class="field pos"><b>地位</b> — 成熟 — 高價值，由 IDM 主導</p>
+</div><div class="step rf">
+  <span class="chip c-rf">射頻應用，全球</span>
+  <h4>國防與雷達</h4>
+  
+  <p class="field"><b>產品</b> — 氮化鎵與砷化鎵射頻元件</p>
+  <p class="field"><b>終端產品</b> — 軍用雷達與電子戰系統</p>
+  <p class="field pos"><b>地位</b> — 成熟 — 高毛利，由規格驅動</p>
+</div></div><div class="row"><div class="step rf">
+  <span class="chip c-rf">射頻應用，全球</span>
+  <h4>衛星通訊</h4>
+  
+  <p class="field"><b>產品</b> — 砷化鎵與氮化鎵射頻元件</p>
+  <p class="field"><b>終端產品</b> — 衛星地面站與低軌衛星</p>
+  <p class="field pos"><b>地位</b> — 成長中 — 隨低軌衛星星系建置</p>
+</div></div><div class="sub r">射頻前端</div><div class="row"><div class="step rf">
+  <span class="chip c-rf">射頻前端廠，美國</span>
+  <h4>Skyworks</h4>
+  
+  <p class="field"><b>產品</b> — 自製砷化鎵功率放大器與濾波器</p>
+  <p class="field"><b>終端產品</b> — 智慧型手機射頻前端</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 砷化鎵射頻前端</p>
+</div><div class="step rf">
+  <span class="chip c-rf">射頻前端廠，美國</span>
+  <h4>Qorvo</h4>
+  
+  <p class="field"><b>產品</b> — 自製砷化鎵與氮化鎵射頻元件</p>
+  <p class="field"><b>終端產品</b> — 智慧型手機與國防射頻前端</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 砷化鎵與氮化鎵射頻前端</p>
+</div><div class="step rf">
+  <span class="chip c-rf">射頻濾波器廠，美國</span>
+  <h4>Broadcom</h4>
+  
+  <p class="field"><b>產品</b> — 薄膜體聲波濾波器</p>
+  <p class="field"><b>終端產品</b> — 智慧型手機射頻前端</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 薄膜體聲波濾波器</p>
+</div><div class="step rf">
+  <span class="chip c-rf">射頻模組廠，日本</span>
+  <h4>村田製作所</h4>
+  
+  <p class="field"><b>產品</b> — 濾波器與射頻模組</p>
+  <p class="field"><b>終端產品</b> — 智慧型手機射頻前端模組</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 射頻模組</p>
+</div><div class="step rf">
+  <span class="chip c-rf">氮化鎵射頻廠，美國</span>
+  <h4>MACOM</h4>
+  
+  <p class="field"><b>產品</b> — 氮化鎵射頻元件</p>
+  <p class="field"><b>終端產品</b> — 國防與基地台射頻</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 氮化鎵射頻</p>
+</div></div><div class="sub r">氮化鎵功率</div><div class="row"><div class="step rf">
+  <span class="chip c-rf">氮化鎵功率廠，美國</span>
+  <h4>Navitas</h4>
+  
+  <p class="field"><b>產品</b> — 氮化鎵功率元件</p>
+  <p class="field"><b>終端產品</b> — 快充與資料中心電源</p>
+  <p class="field pos"><b>地位</b> — 挑戰者 — 氮化鎵功率，產能轉往力積電</p>
+</div><div class="step rf">
+  <span class="chip c-rf">氮化鎵功率 IDM，中國</span>
+  <h4>英諾賽科</h4>
+  
+  <p class="field"><b>產品</b> — 氮化鎵功率元件</p>
+  <p class="field"><b>終端產品</b> — 消費性與工業電源</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 中國氮化鎵功率</p>
+</div><div class="step rf">
+  <span class="chip c-rf">氮化鎵與碳化矽功率廠，德國</span>
+  <h4>英飛凌</h4>
+  
+  <p class="field"><b>產品</b> — 功率元件</p>
+  <p class="field"><b>終端產品</b> — 汽車、工業與資料中心電源</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 功率半導體</p>
+</div></div><div class="sub r">化合物半導體代工</div><div class="row"><div class="step rf">
+  <span class="chip c-rf">砷化鎵代工，台灣</span>
+  <h4>穩懋</h4>
+  
+  <p class="field"><b>產品</b> — 代工完成的砷化鎵晶圓</p>
+  <p class="field"><b>終端產品</b> — 射頻前端晶片</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 砷化鎵代工</p>
+</div><div class="step rf">
+  <span class="chip c-rf">砷化鎵代工，台灣</span>
+  <h4>宏捷科</h4>
+  
+  <p class="field"><b>產品</b> — 代工完成的砷化鎵晶圓</p>
+  <p class="field"><b>終端產品</b> — 射頻前端晶片</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 砷化鎵代工</p>
+</div><div class="step rf">
+  <span class="chip c-rf">化合物半導體代工，中國</span>
+  <h4>三安集成</h4>
+  
+  <p class="field"><b>產品</b> — 砷化鎵、氮化鎵與碳化矽晶圓</p>
+  <p class="field"><b>終端產品</b> — 射頻與功率晶片</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 中國化合物半導體代工</p>
+</div><div class="step rf">
+  <span class="chip c-rf">矽基氮化鎵代工，台灣</span>
+  <h4>力積電</h4>
+  
+  <p class="field"><b>產品</b> — 氮化鎵功率晶圓</p>
+  <p class="field"><b>終端產品</b> — 功率晶片</p>
+  <p class="field pos"><b>地位</b> — 挑戰者 — 矽基氮化鎵代工</p>
+</div><div class="step rf">
+  <span class="chip c-rf">砷化鎵與磷化銦代工，台灣</span>
+  <h4>環宇-KY</h4>
+  <p class="en3">化合物半導體代工，台灣</p>
+  <p class="field"><b>產品</b> — 代工完成的砷化鎵與磷化銦晶圓</p>
+  <p class="field"><b>終端產品</b> — 射頻前端晶片、雷射與光子元件</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 砷化鎵與磷化銦代工，通往階段 6 的磷化銦路徑</p>
+</div></div><div class="sub r">砷化鎵磊晶與基板 — 供射頻前端</div><div class="row"><div class="step rf">
+  <span class="chip c-rf">砷化鎵磊晶廠，英國</span>
+  <h4>IQE</h4>
+  
+  <p class="field"><b>產品</b> — 砷化鎵磊晶片</p>
+  <p class="field"><b>終端產品</b> — 射頻前端晶片</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 砷化鎵磊晶</p>
+</div><div class="step rf">
+  <span class="chip c-rf">砷化鎵磊晶廠，台灣</span>
+  <h4>全新光電</h4>
+  
+  <p class="field"><b>產品</b> — 砷化鎵磊晶片</p>
+  <p class="field"><b>終端產品</b> — 射頻前端晶片</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 砷化鎵磊晶</p>
+</div><div class="step rf">
+  <span class="chip c-rf">砷化鎵磊晶廠，台灣</span>
+  <h4>英特磊</h4>
+  
+  <p class="field"><b>產品</b> — 砷化鎵磊晶片</p>
+  <p class="field"><b>終端產品</b> — 射頻前端晶片</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 砷化鎵磊晶</p>
+</div><div class="step rf">
+  <span class="chip c-rf">砷化鎵與鍺基板廠，美國</span>
+  <h4>AXT</h4>
+  
+  <p class="field"><b>產品</b> — 砷化鎵與鍺基板</p>
+  <p class="field"><b>終端產品</b> — 射頻晶片與太陽能電池</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 化合物半導體基板</p>
+</div><div class="step rf">
+  <span class="chip c-rf">砷化鎵基板廠，中國</span>
+  <h4>廈門 Powerway</h4>
+  
+  <p class="field"><b>產品</b> — 砷化鎵基板</p>
+  <p class="field"><b>終端產品</b> — 射頻晶片</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 中國內需市場</p>
+</div></div><div class="sub r">磷化銦磊晶與基板 — 供雷射與光通訊，見階段 6</div><div class="row"><div class="step rf">
+  <span class="chip c-rf">磷化銦磊晶廠，英國</span>
+  <h4>IQE</h4>
+  
+  <p class="field"><b>產品</b> — 磷化銦磊晶片</p>
+  <p class="field"><b>終端產品</b> — 光模組用雷射二極體</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 磷化銦磊晶</p>
+</div><div class="step rf">
+  <span class="chip c-rf">磷化銦磊晶與基板廠，日本（住友）</span>
+  <h4>SCIOCS</h4>
+  
+  <p class="field"><b>產品</b> — 磷化銦磊晶片與基板</p>
+  <p class="field"><b>終端產品</b> — 光模組用雷射二極體</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 磷化銦基板</p>
+</div><div class="step rf">
+  <span class="chip c-rf">磷化銦磊晶廠，台灣</span>
+  <h4>英特磊</h4>
+  
+  <p class="field"><b>產品</b> — 磷化銦磊晶片</p>
+  <p class="field"><b>終端產品</b> — 雷射二極體</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 磷化銦磊晶</p>
+</div><div class="step rf">
+  <span class="chip c-rf">雷射磊晶廠，台灣</span>
+  <h4>光聖</h4>
+  
+  <p class="field"><b>產品</b> — 雷射磊晶片</p>
+  <p class="field"><b>終端產品</b> — 光模組用雷射二極體</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 台灣雷射磊晶</p>
+</div><div class="step rf">
+  <span class="chip c-rf">磷化銦基板廠，美國</span>
+  <h4>AXT</h4>
+  
+  <p class="field"><b>產品</b> — 磷化銦基板</p>
+  <p class="field"><b>終端產品</b> — 雷射二極體</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 化合物半導體基板</p>
+</div></div><div class="sub r">承接 QFN 與射頻封裝的封測廠</div><div class="row"><div class="step rf">
+  <span class="chip c-rf">封測，台灣</span>
+  <h4>日月光</h4>
+  
+  <p class="field"><b>產品</b> — QFN 與系統級封裝</p>
+  <p class="field"><b>終端產品</b> — 封裝完成的射頻晶片</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 射頻封裝</p>
+</div><div class="step rf">
+  <span class="chip c-rf">封測，美國</span>
+  <h4>Amkor</h4>
+  
+  <p class="field"><b>產品</b> — QFN 與射頻模組封裝</p>
+  <p class="field"><b>終端產品</b> — 封裝完成的射頻晶片</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 射頻封裝</p>
+</div><div class="step rf">
+  <span class="chip c-rf">封測，中國</span>
+  <h4>長電科技</h4>
+  
+  <p class="field"><b>產品</b> — QFN 封裝</p>
+  <p class="field"><b>終端產品</b> — 封裝完成的射頻晶片</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 中國射頻封裝</p>
+</div></div><div class="sub r">射頻系統級封裝模組廠</div><div class="row"><div class="step rf">
+  <span class="chip c-rf">射頻系統級封裝模組廠，日本</span>
+  <h4>村田製作所</h4>
+  
+  <p class="field"><b>產品</b> — 完整前端模組</p>
+  <p class="field"><b>終端產品</b> — 智慧型手機射頻前端</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 射頻模組</p>
+</div><div class="step rf">
+  <span class="chip c-rf">射頻系統級封裝模組廠，台灣（日月光集團）</span>
+  <h4>環旭電子</h4>
+  
+  <p class="field"><b>產品</b> — 完整系統級封裝模組</p>
+  <p class="field"><b>終端產品</b> — 智慧型手機與穿戴裝置射頻</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 系統級封裝模組</p>
+</div><div class="step rf">
+  <span class="chip c-rf">射頻系統級封裝模組廠，美國</span>
+  <h4>Qorvo</h4>
+  
+  <p class="field"><b>產品</b> — 完整前端模組</p>
+  <p class="field"><b>終端產品</b> — 智慧型手機射頻前端</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 射頻模組，自製</p>
+</div></div></div>
+</div>
+<div class="divider"></div>
+<div class="stage" id="s6">
+  <div class="rail"><div class="stripe"></div>
+    <div class="num">階段 6</div>
+    <h2>光通訊與共同封裝光學</h2>
+    <p class="en2">光的產生、轉換與共同封裝光學</p>
+    <div class="clarify">光子 IC（PIC）與電子 IC（EIC）組成光引擎，在 CPO 封裝內與交換器 ASIC 並排。磷化銦磊晶與基板供應請見階段 5。</div>
+  </div>
+  <div class="body"><div class="stackcard">
+  <p class="sctitle">CPO 交換器的製造流程 — 從磷化銦晶圓到 CPO 封裝</p>
+  <p class="scsub">側視圖。左為雷射晶圓階段，右為 CPO 封裝階段。編號對應下方步驟。</p>
+  <svg viewBox="0 100 1120 245" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:Inter,Helvetica,Arial,sans-serif">
+    <defs>
+      <marker id="arwc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0E7C68"/></marker>
+      <marker id="heatc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#B03A2E"/></marker>
+    </defs>
+
+    <!-- ===== LEFT: WAFER LEVEL (LASER) ===== -->
+    <text x="40" y="120" font-size="12" font-weight="700" fill="#4A555E" letter-spacing=".06em">WAFER LEVEL — LASER</text>
+    <rect x="40" y="232" width="420" height="58" fill="#F1F2F3" stroke="#CDD2D6"/>
+    <text x="250" y="266" font-size="13" text-anchor="middle" fill="#4A555E">InP substrate</text>
+    <rect x="40" y="204" width="420" height="28" fill="#E3F3EE" stroke="#8FC9B8"/>
+    <text x="250" y="223" font-size="12.5" text-anchor="middle" fill="#0E5C4E">Epi layer (MOCVD)</text>
+    <g fill="#FDF3E1" stroke="#D9B26A">
+      <rect x="66" y="186" width="52" height="18"/><rect x="146" y="186" width="52" height="18"/>
+      <rect x="226" y="186" width="52" height="18"/><rect x="306" y="186" width="52" height="18"/>
+      <rect x="386" y="186" width="52" height="18"/>
+    </g>
+    <text x="150" y="172" font-size="12" fill="#7A5100">Laser diode structures patterned into the epi</text>
+    <g stroke="#B03A2E" stroke-width="1.6" stroke-dasharray="5,4">
+      <line x1="132" y1="150" x2="132" y2="296"/><line x1="372" y1="150" x2="372" y2="296"/>
+    </g>
+    <text x="392" y="146" font-size="12" fill="#B03A2E">dice</text>
+    <g font-size="12" font-weight="700" fill="#fff" text-anchor="middle">
+      <circle cx="22" cy="261" r="10" fill="#0E7C68"/><text x="22" y="265">1</text>
+      <circle cx="22" cy="218" r="10" fill="#0E7C68"/><text x="22" y="222">2</text>
+      <circle cx="22" cy="195" r="10" fill="#0E7C68"/><text x="22" y="199">3</text>
+      <circle cx="372" cy="132" r="10" fill="#0E7C68"/><text x="372" y="136">4</text>
+    </g>
+
+    <!-- ===== ARROW ===== -->
+    <line x1="486" y1="236" x2="576" y2="236" stroke="#0E7C68" stroke-width="2" marker-end="url(#arwc)"/>
+    <text x="531" y="224" font-size="11" text-anchor="middle" fill="#0E7C68">laser die</text>
+
+    <!-- ===== RIGHT: CPO PACKAGE ===== -->
+    <text x="600" y="120" font-size="12" font-weight="700" fill="#4A555E" letter-spacing=".06em">PACKAGE LEVEL — CPO CROSS-SECTION</text>
+
+    <!-- external laser source, kept outside the package -->
+    <rect x="600" y="140" width="112" height="26" fill="#FDF3E1" stroke="#D9B26A"/>
+    <text x="656" y="157" font-size="11" text-anchor="middle" fill="#7A5100">External laser (ELS)</text>
+    <path d="M 656 166 Q 656 200 660 222" fill="none" stroke="#D9B26A" stroke-width="1.6" stroke-dasharray="3,3"/>
+    <text x="668" y="196" font-size="10" fill="#7A5100">light in</text>
+
+    <!-- PCB -->
+    <rect x="600" y="292" width="500" height="40" fill="#EAEAEA" stroke="#C4C4C4"/>
+    <text x="850" y="317" font-size="13" text-anchor="middle" fill="#333">Switch board / PCB</text>
+    <!-- BGA balls -->
+    <g fill="#C9CED3">
+      <circle cx="640" cy="289" r="4"/><circle cx="665" cy="289" r="4"/><circle cx="690" cy="289" r="4"/><circle cx="715" cy="289" r="4"/>
+      <circle cx="740" cy="289" r="4"/><circle cx="765" cy="289" r="4"/><circle cx="790" cy="289" r="4"/><circle cx="815" cy="289" r="4"/>
+      <circle cx="840" cy="289" r="4"/><circle cx="865" cy="289" r="4"/><circle cx="890" cy="289" r="4"/><circle cx="915" cy="289" r="4"/>
+      <circle cx="940" cy="289" r="4"/><circle cx="965" cy="289" r="4"/><circle cx="990" cy="289" r="4"/><circle cx="1015" cy="289" r="4"/>
+      <circle cx="1040" cy="289" r="4"/><circle cx="1065" cy="289" r="4"/>
+    </g>
+    <!-- substrate -->
+    <rect x="620" y="257" width="460" height="28" fill="#F0EEF7" stroke="#A797C9"/>
+    <text x="850" y="275" font-size="11.5" text-anchor="middle" fill="#4A3B7A">Package substrate</text>
+    <!-- optical engines: EIC bottom, PIC top -->
+    <g>
+      <rect x="690" y="237" width="80" height="20" fill="#E6F1F6" stroke="#8FB3C9"/><text x="730" y="251" font-size="10.5" text-anchor="middle" fill="#1B4E7A">EIC</text>
+      <rect x="690" y="217" width="80" height="20" fill="#E3F3EE" stroke="#8FC9B8"/><text x="730" y="231" font-size="10.5" text-anchor="middle" fill="#0E5C4E">PIC + laser</text>
+      <rect x="930" y="237" width="80" height="20" fill="#E6F1F6" stroke="#8FB3C9"/><text x="970" y="251" font-size="10.5" text-anchor="middle" fill="#1B4E7A">EIC</text>
+      <rect x="930" y="217" width="80" height="20" fill="#E3F3EE" stroke="#8FC9B8"/><text x="970" y="231" font-size="10.5" text-anchor="middle" fill="#0E5C4E">PIC + laser</text>
+    </g>
+    <text x="730" y="209" font-size="10" text-anchor="middle" fill="#4A555E">optical engine</text>
+    <text x="970" y="209" font-size="10" text-anchor="middle" fill="#4A555E">optical engine</text>
+    <!-- switch ASIC + lid -->
+    <rect x="790" y="217" width="120" height="40" fill="#E8F4EF" stroke="#9FC9B5"/>
+    <text x="850" y="241" font-size="12.5" text-anchor="middle" fill="#1F4D38">Switch ASIC</text>
+    <rect x="780" y="205" width="140" height="12" fill="#B8BFC6" stroke="#8E979E"/>
+    <text x="828" y="200" font-size="10" fill="#4A555E">lid / coldplate</text>
+    <line x1="895" y1="200" x2="895" y2="165" stroke="#B03A2E" stroke-width="1.8" marker-end="url(#heatc)"/>
+    <text x="902" y="176" font-size="11" fill="#B03A2E">heat exits</text>
+    <text x="902" y="189" font-size="11" fill="#B03A2E">upward</text>
+    <!-- FAU + fiber to MPO -->
+    <rect x="644" y="222" width="40" height="30" fill="#FDF6E6" stroke="#C99A1E"/>
+    <text x="664" y="241" font-size="10.5" text-anchor="middle" fill="#7A5100">FAU</text>
+    <rect x="1016" y="222" width="40" height="30" fill="#FDF6E6" stroke="#C99A1E"/>
+    <text x="1036" y="241" font-size="10.5" text-anchor="middle" fill="#7A5100">FAU</text>
+    <line x1="644" y1="237" x2="604" y2="237" stroke="#C99A1E" stroke-width="2"/>
+    <line x1="1056" y1="237" x2="1096" y2="237" stroke="#C99A1E" stroke-width="2"/>
+    <text x="1060" y="228" font-size="10" fill="#7A5100">fiber → MPO</text>
+
+    <!-- badges right -->
+    <g font-size="12" font-weight="700" fill="#fff" text-anchor="middle">
+      <circle cx="770" cy="197" r="10" fill="#0E7C68"/><text x="770" y="201">5</text>
+      <circle cx="802" cy="191" r="10" fill="#0E7C68"/><text x="802" y="195">6</text>
+      <circle cx="1036" cy="205" r="10" fill="#0E7C68"/><text x="1036" y="209">7</text>
+      <circle cx="1084" cy="312" r="10" fill="#0E7C68"/><text x="1084" y="316">8</text>
+    </g>
+  </svg>
+
+  <div class="threerail" style="grid-template-columns:1fr 1fr;margin-top:14px">
+    <div>
+      <p class="field"><b>1. 基板</b> — 長成作為基材的磷化銦晶圓</p>
+      <p class="field"><b>2. 磊晶層</b> — 以有機金屬化學氣相沉積在磷化銦基板上長成</p>
+      <p class="field"><b>3. 雷射元件</b> — 在磊晶層上定義出雷射二極體結構</p>
+      <p class="field"><b>4. 切割</b> — 晶圓切割為單顆雷射晶粒</p>
+    </div>
+    <div>
+      <p class="field"><b>5. 光引擎</b> — 光子 IC（PIC）疊在電子 IC（EIC）之上；雷射與光子 IC 同置，或外置為外部光源</p>
+      <p class="field"><b>6. 置放</b> — 光引擎與交換器 ASIC 並排置於同一載板，ASIC 上方加蓋板與冷板</p>
+      <p class="field"><b>7. 接光纖</b> — 光纖陣列將光纖對準光子 IC，光纖自封裝引出至 MPO 連接器</p>
+      <p class="field"><b>8. 完成</b> — 載板以球柵陣列錫球安裝於交換器主板</p>
+    </div>
+  </div>
+</div><div class="sub c">交換器 ASIC 與 CPO 產品</div><div class="row"><div class="step pkgC">
+  <span class="chip c-pkgC">交換器 ASIC 與 CPO 設計，美國</span>
+  <h4>Broadcom</h4>
+  
+  <p class="field"><b>產品</b> — Tomahawk 6 Davisson 交換器晶片</p>
+  <p class="field"><b>終端產品</b> — 資料中心交換器</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 外售交換器 ASIC</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">交換器 ASIC 與 CPO 設計，美國</span>
+  <h4>Nvidia</h4>
+  
+  <p class="field"><b>產品</b> — Spectrum-X 與 Quantum-X 光通訊</p>
+  <p class="field"><b>終端產品</b> — Nvidia 的 AI 網路</p>
+  <p class="field pos"><b>地位</b> — 挑戰者 — CPO 交換器</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">交換器 ASIC 與光學 DSP 設計，美國</span>
+  <h4>Marvell</h4>
+  
+  <p class="field"><b>產品</b> — Teralynx 交換器晶片與光學 DSP</p>
+  <p class="field"><b>終端產品</b> — 資料中心交換器與光模組</p>
+  <p class="field pos"><b>地位</b> — 第二 — 外售交換器 ASIC</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">交換器 ASIC 與 CPO 設計，美國</span>
+  <h4>Cisco</h4>
+  
+  <p class="field"><b>產品</b> — Silicon One CPO</p>
+  <p class="field"><b>終端產品</b> — Cisco 交換器</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 網通，切入 CPO</p>
+</div></div><div class="sub c">光子 IC — 設計與代工</div><div class="row"><div class="step pkgC">
+  <span class="chip c-pkgC">光子 IC 封裝，台灣</span>
+  <h4>台積電</h4>
+  
+  <p class="field"><b>產品</b> — 以 SoIC 與 CoWoS 完成光子 IC 疊於電子 IC 之上</p>
+  <p class="field"><b>終端產品</b> — CPO 交換器封裝</p>
+  <p class="field pos"><b>地位</b> — 獨家供應 — COUPE 光通訊封裝</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">光子 IC 代工，美國</span>
+  <h4>GlobalFoundries</h4>
+  
+  <p class="field"><b>產品</b> — Fotonix 矽光子製程</p>
+  <p class="field"><b>終端產品</b> — 光子 IC</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 矽光子代工</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">光子 IC 代工，以色列</span>
+  <h4>Tower Semiconductor</h4>
+  
+  <p class="field"><b>產品</b> — 矽光子晶圓</p>
+  <p class="field"><b>終端產品</b> — 光子 IC</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 獨立矽光子代工</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">光學輸出入小晶片廠，美國</span>
+  <h4>Ayar Labs</h4>
+  
+  <p class="field"><b>產品</b> — 光學輸出入小晶片</p>
+  <p class="field"><b>終端產品</b> — AI 加速器光互連</p>
+  <p class="field pos"><b>地位</b> — 利基 — 光學輸出入小晶片</p>
+</div></div><div class="sub c">電子 IC — 驅動器、跨阻放大器與 DSP</div><div class="row"><div class="step pkgC">
+  <span class="chip c-pkgC">電子 IC 廠，美國</span>
+  <h4>Broadcom</h4>
+  
+  <p class="field"><b>產品</b> — 光引擎用驅動器與 DSP</p>
+  <p class="field"><b>終端產品</b> — CPO 光引擎</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 光學電子 IC</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">電子 IC 廠，美國</span>
+  <h4>Marvell</h4>
+  
+  <p class="field"><b>產品</b> — 光引擎用驅動器與 DSP</p>
+  <p class="field"><b>終端產品</b> — CPO 光引擎與可插拔模組</p>
+  <p class="field pos"><b>地位</b> — 第二 — 光學電子 IC</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">跨阻放大器與驅動器廠，美國</span>
+  <h4>MACOM</h4>
+  
+  <p class="field"><b>產品</b> — 跨阻放大器與驅動器</p>
+  <p class="field"><b>終端產品</b> — 光模組與 CPO 引擎</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 跨阻放大器與驅動器</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">跨阻放大器與驅動器廠，美國</span>
+  <h4>Semtech</h4>
+  
+  <p class="field"><b>產品</b> — 跨阻放大器與驅動器</p>
+  <p class="field"><b>終端產品</b> — 光模組</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 跨阻放大器與驅動器</p>
+</div></div><div class="sub c">雷射與外部光源</div><div class="row"><div class="step pkgC">
+  <span class="chip c-pkgC">雷射與外部光源廠，美國</span>
+  <h4>Coherent</h4>
+  
+  <p class="field"><b>產品</b> — 連續波雷射與外部光源</p>
+  <p class="field"><b>終端產品</b> — CPO 與可插拔光模組</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 資料通訊雷射</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">雷射與外部光源廠，美國</span>
+  <h4>Lumentum</h4>
+  
+  <p class="field"><b>產品</b> — 連續波雷射、外部光源與電吸收調變雷射</p>
+  <p class="field"><b>終端產品</b> — CPO 與可插拔光模組</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 資料通訊雷射</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">雷射陣列廠，瑞典／英國</span>
+  <h4>Sivers Photonics</h4>
+  
+  <p class="field"><b>產品</b> — 雷射二極體陣列</p>
+  <p class="field"><b>終端產品</b> — 光模組</p>
+  <p class="field pos"><b>地位</b> — 利基 — 雷射陣列</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">雷射二極體廠，台灣</span>
+  <h4>聯鈞</h4>
+  
+  <p class="field"><b>產品</b> — 雷射二極體</p>
+  <p class="field"><b>終端產品</b> — 光模組</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 台灣雷射二極體</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">雷射與模組廠，美國</span>
+  <h4>Applied Optoelectronics</h4>
+  <p class="en3">垂直整合，美國</p>
+  <p class="field"><b>產品</b> — 自行長晶的雷射，以及完成品光模組</p>
+  <p class="field"><b>終端產品</b> — 資料中心光連結與有線電視網路</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 少數同時自製雷射與模組的西方供應商</p>
+</div></div><div class="sub c">光纖與連接器</div><div class="row"><div class="step pkgC">
+  <span class="chip c-pkgC">光纖與連接器廠，美國</span>
+  <h4>Corning</h4>
+  
+  <p class="field"><b>產品</b> — 光纖</p>
+  <p class="field"><b>終端產品</b> — 資料中心互連</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 光纖</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">連接器廠，日本</span>
+  <h4>Senko</h4>
+  
+  <p class="field"><b>產品</b> — MPO 連接器</p>
+  <p class="field"><b>終端產品</b> — 資料中心互連</p>
+  <p class="field pos"><b>地位</b> — 領導者 — MPO 連接器</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">連接器廠，美國</span>
+  <h4>US Conec</h4>
+  
+  <p class="field"><b>產品</b> — MPO 與 MMC 連接器</p>
+  <p class="field"><b>終端產品</b> — 資料中心互連</p>
+  <p class="field pos"><b>地位</b> — 領導者 — MPO 連接器</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">光纖與連接器廠，日本</span>
+  <h4>藤倉</h4>
+  
+  <p class="field"><b>產品</b> — 光纖與連接器</p>
+  <p class="field"><b>終端產品</b> — 資料中心互連</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 光纖與連接器</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">光纖廠，日本</span>
+  <h4>住友電工</h4>
+  
+  <p class="field"><b>產品</b> — 光纖</p>
+  <p class="field"><b>終端產品</b> — 資料中心互連</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 光纖</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">光被動元件，台灣</span>
+  <h4>波若威</h4>
+  <p class="en3">光被動元件，台灣</p>
+  <p class="field"><b>產品</b> — 分波多工濾波器、耦合器與光被動元件</p>
+  <p class="field"><b>終端產品</b> — 光傳輸設備與光收發模組</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 台灣光被動元件</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">光連接器，台灣</span>
+  <h4>詮欣</h4>
+  <p class="en3">連接器與零組件，台灣</p>
+  <p class="field"><b>產品</b> — 光連接器、光收發模組零組件與線纜組件</p>
+  <p class="field"><b>終端產品</b> — 資料中心與接取網路設備</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 台灣光連接器與組件</p>
+</div></div><div class="sub c">光纖陣列單元 — FAU 廠商</div><div class="row"><div class="step pkgC">
+  <span class="chip c-pkgC">光纖陣列廠，日本</span>
+  <h4>Orbray</h4>
+  
+  <p class="field"><b>產品</b> — 光纖陣列單元</p>
+  <p class="field"><b>終端產品</b> — CPO 交換器封裝</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 光纖陣列單元</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">光纖陣列廠，台灣</span>
+  <h4>ACON Optics</h4>
+  
+  <p class="field"><b>產品</b> — 光纖陣列單元</p>
+  <p class="field"><b>終端產品</b> — CPO 交換器封裝</p>
+  <p class="field pos"><b>地位</b> — 挑戰者 — 光纖陣列單元</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">光纖陣列廠，美國</span>
+  <h4>Corning</h4>
+  
+  <p class="field"><b>產品</b> — 光纖陣列單元</p>
+  <p class="field"><b>終端產品</b> — CPO 交換器封裝</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 光纖陣列單元</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">光纖陣列廠，日本</span>
+  <h4>Senko</h4>
+  
+  <p class="field"><b>產品</b> — 光纖陣列單元</p>
+  <p class="field"><b>終端產品</b> — CPO 交換器封裝</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 光纖陣列單元</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">光纖陣列廠，日本</span>
+  <h4>藤倉</h4>
+  
+  <p class="field"><b>產品</b> — 光纖陣列單元</p>
+  <p class="field"><b>終端產品</b> — CPO 交換器封裝</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 光纖陣列單元</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">光纖陣列廠，台灣</span>
+  <h4>上詮</h4>
+  <p class="en3">光纖陣列與光連接，台灣</p>
+  <p class="field"><b>產品</b> — 光纖陣列單元與封裝端光連接</p>
+  <p class="field"><b>終端產品</b> — CPO 封裝與光引擎的光纖接合</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 台灣光纖陣列供應者，直接受惠 CPO 光纖接合</p>
+</div></div><div class="sub c">載板、封裝與測試</div><div class="row"><div class="step pkgC">
+  <span class="chip c-pkgC">光通訊封裝，台灣</span>
+  <h4>台積電</h4>
+  
+  <p class="field"><b>產品</b> — COUPE 堆疊</p>
+  <p class="field"><b>終端產品</b> — CPO 交換器封裝</p>
+  <p class="field pos"><b>地位</b> — 獨家供應 — COUPE 堆疊</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">光通訊封裝，台灣</span>
+  <h4>日月光</h4>
+  
+  <p class="field"><b>產品</b> — 光引擎組裝</p>
+  <p class="field"><b>終端產品</b> — CPO 交換器封裝</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 封測，切入光通訊</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">光通訊封裝，美國</span>
+  <h4>Amkor</h4>
+  
+  <p class="field"><b>產品</b> — 光通訊封裝</p>
+  <p class="field"><b>終端產品</b> — CPO 交換器封裝</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 封測，切入光通訊</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">載板廠，日本</span>
+  <h4>揖斐電</h4>
+  
+  <p class="field"><b>產品</b> — 光通訊封裝載板</p>
+  <p class="field"><b>終端產品</b> — CPO 交換器封裝</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 封裝載板</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">光學組裝設備廠，德國</span>
+  <h4>ficonTEC</h4>
+  
+  <p class="field"><b>產品</b> — 光學對準與組裝設備</p>
+  <p class="field"><b>終端產品</b> — CPO 與光收發模組組裝線</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 光學組裝設備</p>
+</div></div><div class="row"><div class="step pkgC">
+  <span class="chip c-pkgC">光學測試設備廠，台灣</span>
+  <h4>致茂</h4>
+  
+  <p class="field"><b>產品</b> — 光學測試設備</p>
+  <p class="field"><b>終端產品</b> — CPO 與光收發模組測試</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 光學測試設備</p>
+</div></div><div class="sub c">可插拔光收發模組 — CPO 所要取代的既有路徑</div><div class="row"><div class="step pkgC">
+  <span class="chip c-pkgC">光模組廠，中國</span>
+  <h4>中際旭創</h4>
+  
+  <p class="field"><b>產品</b> — 800G 與 1.6T 可插拔模組</p>
+  <p class="field"><b>終端產品</b> — 資料中心交換器</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 可插拔光模組</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">光模組廠，中國</span>
+  <h4>新易盛</h4>
+  
+  <p class="field"><b>產品</b> — 800G 與 1.6T 可插拔模組</p>
+  <p class="field"><b>終端產品</b> — 資料中心交換器</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 可插拔光模組</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">光模組廠，美國</span>
+  <h4>Coherent</h4>
+  
+  <p class="field"><b>產品</b> — 可插拔模組</p>
+  <p class="field"><b>終端產品</b> — 資料中心交換器</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 可插拔光模組</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">光模組廠，美國</span>
+  <h4>Lumentum</h4>
+  
+  <p class="field"><b>產品</b> — 可插拔模組</p>
+  <p class="field"><b>終端產品</b> — 資料中心交換器</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 可插拔光模組</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">光模組廠，中國</span>
+  <h4>光迅科技</h4>
+  
+  <p class="field"><b>產品</b> — 可插拔模組</p>
+  <p class="field"><b>終端產品</b> — 資料中心交換器</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 中國光模組</p>
+</div></div><div class="row"><div class="step pkgC">
+  <span class="chip c-pkgC">光學 DSP 廠，美國</span>
+  <h4>Marvell</h4>
+  
+  <p class="field"><b>產品</b> — 可插拔模組內的 DSP</p>
+  <p class="field"><b>終端產品</b> — 可插拔光模組</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 光模組 DSP</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">光學印刷電路板廠，台灣</span>
+  <h4>臻鼎</h4>
+  
+  <p class="field"><b>產品</b> — mSAP 光學印刷電路板</p>
+  <p class="field"><b>終端產品</b> — 可插拔光模組</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 光學印刷電路板</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">光收發模組廠，美國</span>
+  <h4>Applied Optoelectronics</h4>
+  <p class="en3">光收發模組，美國</p>
+  <p class="field"><b>產品</b> — 400G 與 800G 可插拔光收發模組</p>
+  <p class="field"><b>終端產品</b> — 雲端業者資料中心連結</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 可插拔光收發模組，自雷射起垂直整合</p>
+</div></div><div class="sub c">交換器系統與 ODM</div><div class="row"><div class="step pkgC">
+  <span class="chip c-pkgC">交換器 ASIC 與系統設計，美國</span>
+  <h4>Nvidia</h4>
+  
+  <p class="field"><b>產品</b> — CPO 交換器 ASIC 與系統設計</p>
+  <p class="field"><b>終端產品</b> — 資料中心網通</p>
+  <p class="field pos"><b>地位</b> — 領導者 — AI 網路交換器設計</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">交換器系統廠，美國</span>
+  <h4>Arista</h4>
+  
+  <p class="field"><b>產品</b> — 資料中心交換器</p>
+  <p class="field"><b>終端產品</b> — 企業與雲端網通</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 企業級交換器</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">交換器系統廠，美國</span>
+  <h4>Cisco</h4>
+  
+  <p class="field"><b>產品</b> — 資料中心交換器</p>
+  <p class="field"><b>終端產品</b> — 企業與雲端網通</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 交換器</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">交換器 ODM，台灣</span>
+  <h4>智邦</h4>
+  
+  <p class="field"><b>產品</b> — 白牌交換器（Edgecore 品牌）</p>
+  <p class="field"><b>終端產品</b> — 雲端業者網通</p>
+  <p class="field pos"><b>地位</b> — 領導者 — 白牌交換器 ODM</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">交換器 ODM，加拿大</span>
+  <h4>Celestica</h4>
+  
+  <p class="field"><b>產品</b> — 交換器 ODM 服務</p>
+  <p class="field"><b>終端產品</b> — 雲端業者網通</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 交換器 ODM</p>
+</div></div><div class="row"><div class="step pkgC">
+  <span class="chip c-pkgC">交換器 ODM，台灣</span>
+  <h4>廣達</h4>
+  
+  <p class="field"><b>產品</b> — 交換器 ODM 服務</p>
+  <p class="field"><b>終端產品</b> — 雲端業者網通</p>
+  <p class="field pos"><b>地位</b> — 主要供應商 — 交換器 ODM</p>
+</div></div></div>
+</div>
+</div>
+</body>
+</html>

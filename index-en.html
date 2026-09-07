@@ -31,6 +31,10 @@ body{margin:0;background:var(--paper);color:var(--ink);
 .maprow .name{font-size:14.5px;color:var(--ink-2);font-weight:600}
 .maprow .en3{font-size:12.5px;color:var(--ink-3)}
 .maprow .dot{margin-left:auto;font-size:11.5px;color:var(--ink-3);flex:0 0 auto}
+a.maprow{text-decoration:none;color:inherit}
+a.maprow:hover .name{color:var(--b)}
+a.maprow:hover .dot{color:var(--b)}
+a.maprow:focus-visible{outline:2px solid var(--b);outline-offset:2px}
 
 .sectionlbl{font-size:13px;font-weight:600;color:var(--ink-3);letter-spacing:.03em;margin:0 0 14px;text-transform:uppercase}
 
@@ -57,6 +61,7 @@ body{margin:0;background:var(--paper);color:var(--ink);
 .cell .no{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11px;color:var(--ink-3);display:block;margin-bottom:5px}
 .cell .name{font-size:14px;font-weight:600;color:var(--ink-3);line-height:1.4}
 .cell .en3{font-size:11.5px;color:var(--ink-3);opacity:.75;display:block;margin-top:2px}
+.cell .desc{font-size:11px;color:var(--ink-3);opacity:.85;display:block;margin-top:4px;line-height:1.42}
 
 .foot{margin-top:44px;font-size:12px;color:var(--ink-3);border-top:1px solid var(--rule-soft);padding-top:18px}
 
@@ -79,10 +84,16 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <p class="en">Packaging, foundry, and the broader supply chain</p>
 </header>
 
+<a class="maprow" href="upstream-en.html">
+  <span class="name">Upstream</span>
+  <span class="dot">Raw materials to packaged die — 7 stages</span>
+</a>
 <div class="maprow">
-  <span class="tag">00</span>
-  <span class="name">Supply Chain Map</span>
-  <span class="en3">The whole picture — all 15 categories below in one diagram</span>
+  <span class="name">Downstream</span>
+  <span class="dot">see 01 below</span>
+</div>
+<div class="maprow">
+  <span class="name">End Demand</span>
   <span class="dot">coming soon</span>
 </div>
 
@@ -115,15 +126,36 @@ body{margin:0;background:var(--paper);color:var(--ink);
   </ol>
 </div>
 
+<a class="topic" href="soic-cowos-en.html">
+  <h2>Full Process Map</h2>
+  <p class="en2">SoIC · CoWoS · CPO — Wafer to System Shipment</p>
+  <p>The whole packaging path broken out step by step: wafer fabrication, die preparation, the SoIC and CoWoS integration routes, then board assembly and system shipment. Each step names the equipment, the inspection station, and the suppliers — 65 steps, plus the optional CPO branch.</p>
+  <span class="count">65 steps, 4 stages, supplier matrix included</span>
+</a>
+
+<div class="sub">
+  <h3>Full Process Map — jump to a stage</h3>
+  <p class="lead">Opens the page at that stage.</p>
+  <ol>
+    <li><a href="soic-cowos-en.html#legend">Equipment Legend and Inspection Notation</a></li>
+    <li><a href="soic-cowos-en.html#s1"><span class="n">01</span>Wafer Fabrication</a></li>
+    <li><a href="soic-cowos-en.html#s2"><span class="n">02</span>Die Preparation</a></li>
+    <li><a href="soic-cowos-en.html#s3a"><span class="n">3A</span>SoIC Integration Route</a></li>
+    <li><a href="soic-cowos-en.html#s3b"><span class="n">3B</span>CoWoS Integration Route</a></li>
+    <li><a href="soic-cowos-en.html#s4"><span class="n">04</span>Board Assembly and System Integration</a></li>
+    <li><a href="soic-cowos-en.html#vendors">Supplier Matrix</a></li>
+  </ol>
+</div>
+
 <p class="sectionlbl">02–15　Not yet built</p>
 
 <div class="grid">
   <div class="cell"><span class="no">02</span><span class="name">Fabless &amp; IP</span></div>
   <div class="cell"><span class="no">03</span><span class="name">OSAT</span></div>
-  <div class="cell"><span class="no">04</span><span class="name">Memory / HBM</span></div>
+  <div class="cell"><span class="no">04</span><span class="name">Memory / HBM</span><span class="desc">DRAM / NAND manufacturing, plus HBM's own internal TSV stack (memory's own 3D packaging)</span></div>
   <div class="cell"><span class="no">05</span><span class="name">Substrate / PCB / CCL</span></div>
   <div class="cell"><span class="no">06</span><span class="name">Optical</span></div>
-  <div class="cell"><span class="no">07</span><span class="name">Equipment</span></div>
+  <div class="cell"><span class="no">07</span><span class="name">Equipment</span><span class="desc">Spans the full flow: front-end wafer fab (litho, etch, deposition) through back-end packaging and test equipment</span></div>
   <div class="cell"><span class="no">08</span><span class="name">ODM / EMS</span></div>
   <div class="cell"><span class="no">09</span><span class="name">AI / LLM</span></div>
   <div class="cell"><span class="no">10</span><span class="name">Cloud Operators / CSP</span></div>
@@ -133,8 +165,6 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <div class="cell"><span class="no">14</span><span class="name">Thermal / Cooling</span></div>
   <div class="cell"><span class="no">15</span><span class="name">Others</span></div>
 </div>
-
-<p class="foot">Numbered to match the supply-chain folder structure (00 Map → 15 Others). Only Advanced Packaging, under 01 Foundry, is built so far; the rest are placeholders.</p>
 
 </div>
 </body>

@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SoIC · CoWoS · CPO 全製程流程圖 — 晶圓到系統出貨</title>
+<style>
+:root{
+  --b:#4A3B7A;
+  --paper:#F6F8F9; --card:#FFFFFF;
+  --ink:#14181C; --ink-2:#4A555E; --ink-3:#7C8891;
+  --rule:#CBD3D9; --rule-soft:#E2E8EC;
+  --stage:#1F3A4D; --soic:#2E6B4F; --cowos:#4A3B7A;
+  --cowos-tint:#F0EEF7; --shared:#215C68;
+  --t-fab:#5B4B9E; --t-fab-bg:#EEEBF8;
+  --t-insp:#0E7C86; --t-insp-bg:#E4F2F3;
+  --t-pkg:#B85C10; --t-pkg-bg:#FAEEE1;
+  --t-sup:#5F6C75; --t-sup-bg:#ECEFF1;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Hiragino Sans",-apple-system,"Segoe UI",sans-serif;
+  font-size:15px;line-height:1.65}
+.wrap{max-width:1240px;margin:0 auto;padding:48px 28px 80px}
+
+.masthead{border-bottom:2px solid var(--stage);padding-bottom:22px;margin-bottom:34px}
+.masthead h1{font-size:31px;line-height:1.25;font-weight:700;margin:0 0 6px;letter-spacing:-.01em}
+.masthead .en{font-size:16px;color:var(--ink-2);font-weight:400;margin:0 0 18px}
+.masthead .meta{display:flex;flex-wrap:wrap;gap:8px 26px;font-size:13px;color:var(--ink-3)}
+.masthead .meta b{color:var(--ink-2);font-weight:500}
+
+.legend{background:var(--card);border:1px solid var(--rule);padding:20px 24px;margin-bottom:38px}
+.legend h2{font-size:15px;margin:0 0 14px;font-weight:600}
+.legend h2.two{margin-top:22px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chipwrap{display:flex;align-items:baseline;gap:9px;border:1px solid var(--rule-soft);padding:9px 13px;flex:1 1 200px}
+.chipwrap small{font-size:12px;color:var(--ink-3);line-height:1.4}
+.chipwrap b{font-size:12.5px;font-weight:600;color:var(--t-insp);white-space:nowrap}
+.chip{display:inline-block;font-size:11px;font-weight:600;padding:2px 7px;white-space:nowrap;border-radius:2px}
+.c-fab{background:var(--t-fab-bg);color:var(--t-fab)}
+.c-insp{background:var(--t-insp-bg);color:var(--t-insp)}
+.c-pkg{background:var(--t-pkg-bg);color:var(--t-pkg)}
+.c-sup{background:var(--t-sup-bg);color:var(--t-sup)}
+
+.stage{display:grid;grid-template-columns:212px 1fr}
+.rail{padding:22px 20px 26px 0;border-right:2px solid var(--rule);position:relative}
+.rail .num{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;color:var(--ink-3);letter-spacing:.06em;margin-bottom:8px}
+.rail h2{font-size:19px;margin:0 0 3px;font-weight:600;line-height:1.35}
+.rail .en2{font-size:13px;color:var(--ink-2);margin:0 0 12px;line-height:1.45}
+.rail .clarify{font-size:12.5px;color:var(--ink-3);line-height:1.55;padding-top:11px;border-top:1px dashed var(--rule)}
+.rail .stripe{position:absolute;right:-2px;top:22px;bottom:26px;width:2px;background:var(--stage)}
+.rail.shared .stripe{background:var(--shared)}
+.body{padding:22px 0 26px 26px}
+
+.row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:12px}
+.row:last-child{margin-bottom:0}
+.step{background:var(--card);border:1px solid var(--rule);padding:12px 14px;flex:1 1 200px;min-width:190px}
+.step .idx{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:10.5px;color:var(--ink-3)}
+.step h4{font-size:14px;margin:2px 0 1px;font-weight:600;line-height:1.4}
+.step .en3{font-size:12px;color:var(--ink-2);margin:0 0 9px;line-height:1.4}
+.step .vend{font-size:11.5px;color:var(--ink-2);margin:6px 0 0;line-height:1.5}
+.step .why{font-size:11.5px;color:var(--ink-3);margin:8px 0 0;line-height:1.5;padding-top:8px;border-top:1px dotted var(--rule-soft)}
+.step .qc{font-size:11.5px;margin:8px 0 0;line-height:1.5;padding:7px 9px;background:var(--t-insp-bg);color:#0B5C64}
+.step .qc b{font-weight:600;color:var(--t-insp)}
+.step.fab{border-left:3px solid var(--t-fab)}
+.step.insp{border-left:3px solid var(--t-insp)}
+.step.pkg{border-left:3px solid var(--t-pkg)}
+.step.sup{border-left:3px solid var(--t-sup)}
+.step.pair{background:#FCFDFD}
+
+.sub{font-size:13px;font-weight:600;margin:20px 0 10px;padding:6px 12px;color:#fff}
+.sub:first-child{margin-top:0}
+.sub .lite{font-weight:400;opacity:.82;font-size:12px}
+.sub.g{background:var(--soic)}
+.sub.p{background:var(--cowos)}
+.sub.b{background:var(--stage)}
+.sub.opt{background:#8A5A00}
+.step.opt{border-left:3px solid #8A5A00;border-style:solid dashed dashed dashed;border-color:var(--rule);border-left-color:#8A5A00;background:#FFFDF7}
+.optnote{font-size:12px;color:#7A5100;background:#FDF6E6;border:1px dashed #C99A1E;padding:10px 12px;margin:0 0 10px;line-height:1.55}
+.optbox{border:1px dashed #C99A1E;background:#FDF6E6;margin:0 0 12px}
+.optsplit{display:grid;grid-template-columns:1fr 1fr}
+.optcell{padding:13px 15px}
+.optcell + .optcell{border-left:1px dashed #E0C486}
+.optcell h5{font-size:12px;margin:0 0 5px;font-weight:600;color:#8A5A00}
+.optcell p{font-size:12px;margin:0;color:#7A5100;line-height:1.55}
+.optstack{padding:13px 15px;border-top:1px dashed #E0C486}
+.optstack h5{font-size:12px;margin:0 0 9px;font-weight:600;color:#8A5A00}
+.optstack table{width:100%;border-collapse:collapse;font-size:12px}
+.optstack td{padding:4px 0;border:none;color:#7A5100;vertical-align:top;line-height:1.5}
+.optstack td.tier{width:22px;font-family:ui-monospace,Menlo,monospace;color:#B08A2E}
+.optstack td.tech{width:74px;font-weight:600;color:#8A5A00}
+.optstack .ts{font-size:11.5px;color:#9A7530;margin:9px 0 0;padding-top:8px;border-top:1px dashed #E0C486}
+
+.forkbar{display:grid;grid-template-columns:212px 1fr}
+.forkbar .lead{padding:26px 20px 0 0;border-right:2px solid var(--rule)}
+.forkbar .msg{padding:26px 0 4px 26px;font-size:13px;color:var(--ink-3);max-width:74ch;line-height:1.6}
+.forkbar .msg b{color:var(--ink-2);font-weight:500}
+.routes{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+@media (max-width:900px){.routes{grid-template-columns:1fr}}
+.route{border-top:3px solid var(--soic)}
+.route.pk{border-top-color:var(--cowos)}
+.routehead{padding:16px 0 14px}
+.routehead h2{font-size:20px;margin:0 0 2px;font-weight:600}
+.routehead .en2{font-size:13px;color:var(--ink-2);margin:0 0 10px}
+.routehead .clarify{font-size:12.5px;color:var(--ink-3);line-height:1.55;padding-top:11px;border-top:1px dashed var(--rule);max-width:60ch}
+.route .row{flex-direction:column}
+.route .step{flex:1 1 auto}
+.link{grid-column:1/-1;margin:26px 0 0;border:1px dashed var(--cowos);background:var(--cowos-tint);
+  padding:14px 18px;font-size:13px;color:var(--ink-2);line-height:1.6}
+.link b{color:var(--cowos);font-weight:600}
+.divider{height:1px;background:var(--rule-soft)}
+
+.sect{margin-top:48px;border:1px solid var(--rule);background:var(--card);padding:24px 26px}
+.sect h2{font-size:19px;margin:0 0 6px;font-weight:600}
+.sect .key{font-size:12.5px;color:var(--ink-3);margin:0 0 20px}
+.sect .key .tw{font-weight:600}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px solid var(--rule-soft);vertical-align:top}
+th{font-weight:600;color:var(--ink-2);font-size:12.5px;border-bottom:1px solid var(--rule)}
+td.n{font-family:ui-monospace,"SF Mono",Menlo,monospace;color:var(--ink-2);white-space:nowrap}
+tr:last-child td{border-bottom:none}
+.grouprow td{background:#F1F5F6;padding-top:11px;padding-bottom:9px;padding-left:12px;border-bottom:1px solid var(--rule)}
+.lead-v{font-weight:600}
+.tw{color:var(--t-insp)}
+
+@media (max-width:760px){
+  .wrap{padding:30px 16px 60px}
+  .stage,.forkbar{grid-template-columns:1fr}
+  .rail{border-right:none;border-bottom:2px solid var(--rule);padding:20px 0 18px}
+  .rail .stripe{right:auto;left:0;top:auto;bottom:-2px;width:60px;height:2px}
+  .body{padding:20px 0 26px}
+  .forkbar .lead{display:none}
+  .forkbar .msg{padding-left:0}
+  .scroller{overflow-x:auto}
+  table{min-width:560px}
+}
+@media print{.backbar,.toc{display:none}body{background:#fff}.wrap{max-width:none;padding:0}.step,.legend,.sect{break-inside:avoid}}
+.backbar{margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.backbar a{display:inline-block;font-size:13px;color:var(--ink-2);text-decoration:none;border:1px solid var(--rule);background:var(--card);padding:6px 13px}
+.backbar a:hover{color:var(--b);border-color:var(--b)}
+.backbar .lang{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;letter-spacing:.04em}
+.toc{background:var(--card);border:1px solid var(--rule);padding:16px 22px;margin-bottom:34px;font-size:13px}
+.toc a{color:var(--stage);text-decoration:none;font-weight:500;margin-right:18px;white-space:nowrap}
+.toc a:hover{text-decoration:underline}
+.tocrow{display:flex;flex-wrap:wrap;gap:6px 4px;row-gap:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="backbar"><a href="index.html">← 返回總覽</a><a class="lang" href="soic-cowos-en.html" onclick="this.href=this.href.split('#')[0]+location.hash">EN</a></div>
+
+
+
+<header class="masthead">
+  <h1>SoIC · CoWoS · CPO 全製程流程圖</h1>
+  <p class="en">從晶圓製造到系統出貨的完整流程，逐步列出設備與供應商<br>Wafer fabrication to system shipment — every step with its equipment and suppliers</p>
+  <div class="meta"><span><b>步驟</b> 65 步，含 CPO 選配段 C1–C5</span><span><b>階段</b> 4 段：晶圓製造 · 上層晶片前處理 · 封裝整合 · 板級組裝</span><span><b>標示</b> 綠色為台灣廠商</span></div>
+</header>
+
+<nav class="toc">
+  <div class="tocrow">
+    <a href="#legend">設備類別標籤</a><a href="#s1">1 晶圓製造</a><a href="#s2">2 上層晶片前處理</a>
+    <a href="#s3a">3A SoIC</a><a href="#s3b">3B CoWoS</a>
+    <a href="#s4">4 板級組裝與系統整合</a><a href="#vendors">供應商對照表</a>
+  </div>
+</nav>
+
+
+<section class="legend" id="legend">
+  <h2>設備類別標籤</h2>
+  <div class="chips">
+    <div class="chipwrap"><span class="chip c-fab">前段製程</span><small>微影、蝕刻、沉積、CMP、清洗、退火</small></div>
+    <div class="chipwrap"><span class="chip c-insp">檢測量測</span><small>AOI、SEM、量測、電性測試、燒機</small></div>
+    <div class="chipwrap"><span class="chip c-pkg">後段封裝</span><small>研磨、切割、黏晶、鍵合、塑封、植球</small></div>
+    <div class="chipwrap"><span class="chip c-sup">支援系統</span><small>真空、氣體、溫控、固化、搬運</small></div>
+  </div>
+
+  <h2 class="two">檢測欄位的兩種寫法</h2>
+  <div class="chips">
+    <div class="chipwrap"><b>後續檢測</b><small>該步為<b>製程步驟</b>，欄位列的是做完之後緊接著要驗的項目。封裝段多數步驟一旦過站就無法重工，因此幾乎每一步都掛著檢測</small></div>
+    <div class="chipwrap"><b>檢測　本步即…</b><small>該步<b>本身就是測試站</b>，沒有後續可列。全文共 20 站屬於此類</small></div>
+  </div>
+  <h2 class="two">檢測欄位說明</h2>
+  <div class="chips">
+    <div class="chipwrap"><b>AOI</b><small>光學檢測。看表面缺陷：刮痕、微粒、缺件。快速、非破壞、全檢</small></div>
+    <div class="chipwrap"><b>量測</b><small>尺寸量測：厚度、疊對、共面度、翹曲。快速、非破壞</small></div>
+    <div class="chipwrap"><b>X-ray</b><small>穿透檢查內部：空洞、偏移、裂縫。看得到 AOI 看不到的地方</small></div>
+    <div class="chipwrap"><b>SAM</b><small>超音波掃描。偵測分層與未接合區域</small></div>
+    <div class="chipwrap"><b>SEM</b><small>電子顯微鏡。奈米級細節與剖面分析。極慢、多為破壞性、僅抽驗</small></div>
+  </div>
+</section>
+
+<!-- STAGE 1 -->
+<div class="stage" id="s1">
+  <div class="rail"><div class="stripe"></div>
+    <div class="num">STAGE 1</div>
+    <h2>晶圓製造階段</h2>
+    <p class="en2">Wafer fabrication &amp; wafer-level test</p>
+    <div class="clarify">此處的「前段」指<b>時序位置</b>，不是設備分類。目的：確認哪些晶粒是好的，因為壞晶粒進入堆疊會毀掉整個封裝。</div>
+  </div>
+  <div class="body">
+    <div class="row">
+      <div class="step fab"><div class="idx">01</div><h4>晶圓製造（FEOL）</h4><p class="en3">Wafer Fabrication (FEOL)</p>
+        <span class="chip c-fab">前段製程</span>
+        <p class="vend">ASML · AMAT · Lam · TEL</p>
+        <p class="qc"><b>後續檢測</b>　AOI · 量測 · SEM（抽驗）</p>
+        <p class="why">電晶體與金屬層製作，決定晶片本身效能。</p></div>
+      <div class="step insp"><div class="idx">02</div><h4>晶圓針測（KGD）</h4><p class="en3">Wafer Test (KGD)</p>
+        <span class="chip c-insp">檢測量測</span>
+        <p class="vend">Advantest · Teradyne · <span class="tw">旺矽</span> · <span class="tw">精測</span></p>
+        <p class="qc"><b>檢測</b>　本步即電性測試</p>
+        <p class="why">挑出 Known Good Die。堆疊前的良率關卡，成本最低的淘汰點。</p></div>
+      <div class="step insp"><div class="idx">03</div><h4>Wafer Sort / 量測</h4><p class="en3">Wafer Sort / Measurement</p>
+        <span class="chip c-insp">檢測量測</span>
+        <p class="vend">KLA · Onto · Nova</p>
+        <p class="qc"><b>檢測</b>　本步即 AOI · 量測</p>
+        <p class="why">分級與資料建檔，決定哪顆晶粒配對哪顆。</p></div>
+    </div>
+  </div>
+</div>
+<div class="divider"></div>
+
+<!-- STAGE 2 -->
+<div class="stage" id="s2">
+  <div class="rail shared"><div class="stripe"></div>
+    <div class="num">STAGE 2</div>
+    <h2>上層晶片前處理</h2>
+    <p class="en2">Die preparation — shared by SoIC and CoWoS</p>
+    <div class="clarify">兩條路線<b>共用</b>的主幹。晶圓原本約 775µm 厚，必須磨薄到露出 TSV，晶粒才能垂直導通。此階段已大量使用前段機台。</div>
+  </div>
+  <div class="body">
+    <div class="row">
+      <div class="step pkg"><div class="idx">04</div><h4>暫時貼合</h4><p class="en3">Temporary Bonding</p>
+        <span class="chip c-pkg">後段封裝</span>
+        <p class="vend">EVG · SUSS MicroTec · TOK（材料）</p>
+        <p class="qc"><b>後續檢測</b>　量測（膠層厚度、對位）</p>
+        <p class="why">貼上載板。磨薄後的晶圓極脆，沒有載板會碎。</p></div>
+      <div class="step sup"><div class="idx">05</div><h4>貼合後固化</h4><p class="en3">Post-Bond Cure</p>
+        <span class="chip c-sup">支援系統</span>
+        <p class="vend"><span class="tw">志聖</span> · Koyo Thermo</p>
+        <p class="qc"><b>後續檢測</b>　量測（翹曲）</p>
+        <p class="why">固化黏著層，確保後續研磨不位移。</p></div>
+      <div class="step pkg pair"><div class="idx">06a</div><h4>粗磨／細磨</h4><p class="en3">Coarse &amp; Fine Grinding</p>
+        <span class="chip c-pkg">後段封裝</span>
+        <p class="vend"><b>DISCO</b> · 東京精密 · Okamoto</p>
+        <p class="qc"><b>後續檢測</b>　量測（厚度、TTV 總厚度變異）</p>
+        <p class="why">機械研磨，移除約 700µm。快，但留下次表面微裂縫。</p></div>
+      <div class="step fab pair"><div class="idx">06b</div><h4>CMP 拋光</h4><p class="en3">CMP Polishing</p>
+        <span class="chip c-fab">前段製程</span>
+        <p class="vend"><b>AMAT</b> · Ebara · ACM Research · <span class="tw">中砂</span>（耗材）</p>
+        <p class="qc"><b>後續檢測</b>　AOI（刮痕、殘留研磨液）· 量測 · SEM（異常時）</p>
+        <p class="why">化學加機械，只移除 1–5µm，但消除研磨損傷。兩台不同機器接續作業。</p></div>
+    </div>
+    <div class="row">
+      <div class="step sup"><div class="idx">07</div><h4>晶圓真空壓膜</h4><p class="en3">Wafer Vacuum Lamination</p>
+        <span class="chip c-sup">支援系統</span>
+        <p class="vend">Takatori · 日東電工（材料）</p>
+        <p class="qc"><b>後續檢測</b>　AOI（氣泡、皺摺）</p>
+        <p class="why">真空環境貼膜，避免夾帶氣泡造成後段缺陷。</p></div>
+      <div class="step fab"><div class="idx">08</div><h4>TSV 背鑽／RDL 圖形化</h4><p class="en3">TSV Reveal / RDL Patterning</p>
+        <span class="chip c-fab">前段製程</span>
+        <p class="vend">AMAT · Lam · TEL · Veeco</p>
+        <p class="qc"><b>後續檢測</b>　AOI（線路缺陷）· 量測（線寬、疊對）· X-ray（TSV 填充）· SEM</p>
+        <p class="why">微影、蝕刻、沉積。<b>完全是晶圓廠機台，卻在封裝流程裡跑。</b></p></div>
+      <div class="step pkg"><div class="idx">09</div><h4>解鍵合</h4><p class="en3">Debonding</p>
+        <span class="chip c-pkg">後段封裝</span>
+        <p class="vend">EVG · SUSS MicroTec</p>
+        <p class="qc"><b>後續檢測</b>　AOI（破片、殘膠）</p>
+        <p class="why">移除暫時載板。雷射或機械剝離，此處易產生破片損失。</p></div>
+      <div class="step pkg"><div class="idx">10</div><h4>切割／揀晶</h4><p class="en3">Dicing / Die Picking</p>
+        <span class="chip c-pkg">後段封裝</span>
+        <p class="vend">DISCO · 東京精密 · ASMPT</p>
+        <p class="qc"><b>後續檢測</b>　AOI（邊緣崩裂、裂紋）</p>
+        <p class="why">切成單顆晶粒並依測試結果挑選。之後兩條路線分流。</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- FORK -->
+<div class="forkbar">
+  <div class="lead"></div>
+  <div class="msg"><b>路線分流。</b>差別只有一個：SoIC 把晶粒<b>垂直疊起來</b>，CoWoS 把晶粒<b>平放在中介層上</b>。兩者不是競爭關係，實務上常疊在一起使用。</div>
+</div>
+<div style="height:20px"></div>
+
+<div class="routes">
+  <!-- SoIC -->
+  <div class="route" id="s3a">
+    <div class="routehead">
+      <h2>3A　SoIC</h2>
+      <p class="en2">System on Integrated Chips — vertical stacking</p>
+      <div class="clarify">銅對銅直接接合，<b>沒有凸塊、沒有錫</b>。表面必須奈米級平整且無氧化物——這就是前段機台佔一半的原因。</div>
+    </div>
+
+    <div class="sub g">3A-1　表面前處理 <span class="lite">Surface preparation</span></div>
+    <div class="row">
+      <div class="step fab"><div class="idx">11</div><h4>表面平坦化／CMP</h4><p class="en3">Surface Planarization / CMP</p>
+        <span class="chip c-fab">前段製程</span>
+        <p class="vend"><b>AMAT</b> · Ebara · ACM Research</p>
+        <p class="qc"><b>後續檢測</b>　AOI（微粒數為最關鍵參數）· 量測（銅墊凹陷量）· SEM</p>
+        <p class="why">銅墊需精準凹陷數奈米，退火時才會膨脹密合。</p></div>
+      <div class="step fab"><div class="idx">12</div><h4>表面活化與清洗</h4><p class="en3">Surface Activation &amp; Cleaning</p>
+        <span class="chip c-fab">前段製程</span>
+        <p class="vend">SCREEN · TEL · Lam · <span class="tw">弘塑</span> · <span class="tw">辛耘</span></p>
+        <p class="qc"><b>後續檢測</b>　AOI（殘留物、微粒）</p>
+        <p class="why">去除氧化層與微粒。一顆微粒就足以讓整個接合失效。</p></div>
+    </div>
+
+    <div class="sub g">3A-2　鍵合 <span class="lite">Bonding</span></div>
+    <div class="row">
+      <div class="step pkg"><div class="idx">13</div><h4>高精度對位／貼晶</h4><p class="en3">High-Precision Alignment / Bonding</p>
+        <span class="chip c-pkg">後段封裝</span>
+        <p class="vend"><b>Besi</b> · <b>ASMPT</b> · EVG · SUSS · Hanmi</p>
+        <p class="qc"><b>後續檢測</b>　量測（疊對精度）· X-ray</p>
+        <p class="why">次微米對位精度。整條流程的設備瓶頸點。</p></div>
+      <div class="step pkg"><div class="idx">14</div><h4>預鍵結／混合鍵結</h4><p class="en3">Pre-Bond / Hybrid Bonding</p>
+        <span class="chip c-pkg">後段封裝</span>
+        <p class="vend"><b>Besi</b> · <b>ASMPT</b> · EVG</p>
+        <p class="qc"><b>後續檢測</b>　X-ray · SAM · SEM（破壞性抽驗）。<b>AOI 無效——接合面已埋在矽層之間，光線進不去。</b></p>
+        <p class="why">介電層先貼合，銅墊隨後於退火時擴散接合。與 13 常為同一台機器。</p></div>
+    </div>
+
+    <div class="sub g">3A-3　熱處理 <span class="lite">Thermal</span></div>
+    <div class="row">
+      <div class="step fab"><div class="idx">15</div><h4>鍵結後退火</h4><p class="en3">Post-Bond Anneal</p>
+        <span class="chip c-fab">前段製程</span>
+        <p class="vend">AMAT · Kokusai · TEL</p>
+        <p class="qc"><b>後續檢測</b>　量測（翹曲）· X-ray（空洞成長）· SEM</p>
+        <p class="why">加熱讓銅晶粒跨越接合面生長。此步之前尚未形成電性連接。</p></div>
+    </div>
+
+    <div class="sub g">3A-4　檢測與測試 <span class="lite">Inspection &amp; test</span></div>
+    <div class="row">
+      <div class="step insp"><div class="idx">16</div><h4>鍵結後檢查／電測</h4><p class="en3">Post-Bond Inspection / Electrical Test</p>
+        <span class="chip c-insp">檢測量測</span>
+        <p class="vend">KLA · Camtek · Hitachi High-Tech · Nordson（SAM）· <span class="tw">閎康</span>（分析服務）</p>
+        <p class="qc"><b>檢測</b>　本步即 X-ray · SAM · 電性測試 · SEM（破壞性）</p>
+        <p class="why">接合面看不見，需靠 X-ray、超音波與電性驗證。全業界至今沒有快速、非破壞、全檢的混合鍵結驗證方法。</p></div>
+    </div>
+  </div>
+
+  <!-- CoWoS -->
+  <div class="route pk" id="s3b">
+    <div class="routehead">
+      <h2>3B　CoWoS</h2>
+      <p class="en2">Chip on Wafer on Substrate — lateral integration</p>
+      <div class="clarify">晶粒平放在中介層上，用<b>微凸塊加底部填膠</b>連接。解決的是光罩尺寸限制——把超過單一光罩面積的矽放進同一個封裝。</div>
+    </div>
+
+    <div class="sub p">3B-1　組裝至中介層 <span class="lite">Chip-on-Wafer (CoW)</span></div>
+    <div class="row">
+      <div class="step pkg"><div class="idx">17</div><h4>晶片貼裝至中介層</h4><p class="en3">Die Attach to Interposer</p>
+        <span class="chip c-pkg">後段封裝</span>
+        <p class="vend">ASMPT · K&amp;S · Shinkawa</p>
+        <p class="qc"><b>後續檢測</b>　AOI（貼裝位置）· 量測（傾斜度）</p>
+        <p class="why">邏輯晶粒與 HBM 依序放上矽中介層。</p></div>
+      <div class="step pkg"><div class="idx">18</div><h4>微凸塊接合／TCB</h4><p class="en3">Micro-bump Bonding / TCB</p>
+        <span class="chip c-pkg">後段封裝</span>
+        <p class="vend"><b>ASMPT</b> · K&amp;S · Shinkawa · Hanmi</p>
+        <p class="qc"><b>後續檢測</b>　AOI · X-ray（橋接、冷焊）· 量測（接合高度）</p>
+        <p class="why">熱壓接合。每小時產出決定 CoWoS 產能上限。</p></div>
+      <div class="step pkg"><div class="idx">19</div><h4>Underfill 填膠</h4><p class="en3">Underfill Fill</p>
+        <span class="chip c-pkg">後段封裝</span>
+        <p class="vend">Nordson · <span class="tw">萬潤</span> · Namics（材料）</p>
+        <p class="qc"><b>後續檢測</b>　X-ray（空洞）· SAM。<b>膠層在晶粒底下，只有穿透式方法看得到。</b></p>
+        <p class="why">填滿凸塊間隙，分散熱膨脹應力。</p></div>
+      <div class="step sup"><div class="idx">20</div><h4>真空脫泡／去氣泡</h4><p class="en3">Vacuum De-bubble / De-foam</p>
+        <span class="chip c-sup">支援系統</span>
+        <p class="vend">Nordson · <span class="tw">志聖</span></p>
+        <p class="qc"><b>後續檢測</b>　X-ray（殘留氣泡）</p>
+        <p class="why">殘留氣泡等於未來的場失效。良率關卡。</p></div>
+    </div>
+
+    <div class="sub p">3B-2　塑封與中介層加工 <span class="lite">Molding &amp; interposer processing</span></div>
+    <div class="row">
+      <div class="step pkg"><div class="idx">21</div><h4>塑封／塑封後固化</h4><p class="en3">Molding / Post-Mold Cure</p>
+        <span class="chip c-pkg">後段封裝</span>
+        <p class="vend"><b>TOWA</b> · ASMPT · Besi</p>
+        <p class="qc"><b>後續檢測</b>　AOI（溢膠、填充不全）· 量測（翹曲）</p>
+        <p class="why">封膠保護晶粒並提供結構強度。</p></div>
+      <div class="step pkg pair"><div class="idx">22a</div><h4>中介層研磨</h4><p class="en3">Interposer Grinding</p>
+        <span class="chip c-pkg">後段封裝</span>
+        <p class="vend"><b>DISCO</b> · 東京精密</p>
+        <p class="qc"><b>後續檢測</b>　量測（厚度、TTV、翹曲）</p>
+        <p class="why">大面積機械減薄。已封膠的模組翹曲風險高，難度高於一般晶圓。</p></div>
+      <div class="step fab pair"><div class="idx">22b</div><h4>中介層 CMP 拋光</h4><p class="en3">Interposer CMP</p>
+        <span class="chip c-fab">前段製程</span>
+        <p class="vend">AMAT · Ebara</p>
+        <p class="qc"><b>後續檢測</b>　AOI · 量測（背面接點露出量）</p>
+        <p class="why">收尾拋光並露出背面接點。與第 06 步同樣是研磨接 CMP 的兩機組合。</p></div>
+      <div class="step pkg"><div class="idx">23</div><h4>切割／測試治具化</h4><p class="en3">Dicing / Test Fixture Prep.</p>
+        <span class="chip c-pkg">後段封裝</span>
+        <p class="vend">DISCO · 東京精密</p>
+        <p class="qc"><b>後續檢測</b>　AOI（切割邊緣）</p>
+        <p class="why">切成單一模組並準備測試介面。</p></div>
+    </div>
+
+    <div class="sub p">3B-3　接合至封裝基板 <span class="lite">Attach to package substrate (oS)</span></div>
+    <div class="row">
+      <div class="step pkg"><div class="idx">24</div><h4>接合至封裝基板</h4><p class="en3">Attach to Package Substrate</p>
+        <span class="chip c-pkg">後段封裝</span>
+        <p class="vend">ASMPT · Shinkawa｜基板：Ibiden · Shinko · <span class="tw">欣興</span></p>
+        <p class="qc"><b>後續檢測</b>　AOI · X-ray（對位）</p>
+        <p class="why">整組模組放上 ABF 基板。基板供給是另一個瓶頸。</p></div>
+      <div class="step pkg"><div class="idx">25</div><h4>C4／微凸塊迴焊</h4><p class="en3">C4 / Micro-bump Reflow</p>
+        <span class="chip c-pkg">後段封裝</span>
+        <p class="vend">Rehm · BTU · Heller</p>
+        <p class="qc"><b>後續檢測</b>　X-ray（焊點空洞、橋接）</p>
+        <p class="why">加熱熔錫形成基板端連接。</p></div>
+      <div class="step sup"><div class="idx">26</div><h4>基板側 Underfill 固化</h4><p class="en3">Substrate-side Underfill Cure</p>
+        <span class="chip c-sup">支援系統</span>
+        <p class="vend">Nordson · <span class="tw">志聖</span></p>
+        <p class="qc"><b>後續檢測</b>　X-ray · SAM（分層）</p>
+        <p class="why">第二次填膠固化，抑制基板與矽的膨脹差。</p></div>
+    </div>
+
+    <div class="sub opt">3B-C　CPO 光學整合 <span class="lite">Co-packaged optics — 選配，非必經</span></div>
+    <div class="optbox">
+      <div class="optsplit">
+        <div class="optcell">
+          <h5>誰會走這一段</h5>
+          <p>交換器晶片。Broadcom Tomahawk、NVIDIA Quantum-X／Spectrum-X、Marvell。工作內容就是把資料送出封裝。</p>
+        </div>
+        <div class="optcell">
+          <h5>誰不走</h5>
+          <p>GPU。頻寬瓶頸在封裝內部的 HBM，不在對外 I/O，沒有理由承擔光學的成本與風險。</p>
+        </div>
+      </div>
+      <div class="optstack">
+        <h5>台積電 COUPE ＝ 三種技術同時疊用</h5>
+        <table>
+          <tr><td class="tier">1</td><td class="tech">SoIC</td><td>把 65nm 電子晶片（EIC）與光子晶片（PIC）混合鍵結，做成光引擎</td></tr>
+          <tr><td class="tier">2</td><td class="tech">CoWoS</td><td>光引擎與客戶的 ASIC 放上同一個中介層</td></tr>
+          <tr><td class="tier">3</td><td class="tech">CPO</td><td>結果：光學進入封裝內部，取代封裝外的可插拔光模組</td></tr>
+        </table>
+        <p class="ts">目前唯一三者同時用上的產品。COUPE on Substrate 已於 2026 下半年量產，CoWoS 整合版為下一代。SoIC 用在光引擎內部，不是用來疊運算晶片。</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="step opt"><div class="idx">C1</div><h4>光引擎貼裝</h4><p class="en3">Optical Engine (PIC+EIC) Attach</p>
+        <span class="chip c-pkg">後段封裝</span>
+        <p class="vend">台積電 COUPE｜光子晶片代工：台積電 · GlobalFoundries · Tower</p>
+        <p class="qc"><b>後續檢測</b>　AOI · 量測（貼裝位置、傾斜）· X-ray</p>
+        <p class="why">光引擎本身已是一個用 SoIC 做成的封裝，此處當成一顆 chiplet 放進主封裝——封裝裡面還有封裝。</p></div>
+      <div class="step opt"><div class="idx">C2</div><h4>雷射光源整合</h4><p class="en3">Laser / External Light Source</p>
+        <span class="chip c-pkg">後段封裝</span>
+        <p class="vend">Coherent · Lumentum · Broadcom｜<span class="tw">聯亞</span></p>
+        <p class="qc"><b>後續檢測</b>　光功率量測 · 波長量測</p>
+        <p class="why">雷射二極體貼裝，或走外接光源（ELS）。雷射對溫度極敏感，但旁邊坐著一顆數百瓦的 ASIC。</p></div>
+    </div>
+    <div class="row">
+      <div class="step opt"><div class="idx">C3</div><h4>光學對位</h4><p class="en3">Optical Alignment</p>
+        <span class="chip c-pkg">後段封裝</span>
+        <p class="vend"><b>ficonTEC</b> · ASMPT · K&amp;S · Shinkawa</p>
+        <p class="qc"><b>後續檢測</b>　主動對位量測（即時量光耦合效率）</p>
+        <p class="why">把光纖對準波導入口，精度次微米。偏 1µm，插入損耗就明顯上升。</p></div>
+      <div class="step opt"><div class="idx">C4</div><h4>光纖接合</h4><p class="en3">Fiber Attach</p>
+        <span class="chip c-pkg">後段封裝</span>
+        <p class="vend">ficonTEC · Nordson（點膠）｜<span class="tw">上詮</span> · <span class="tw">波若威</span></p>
+        <p class="qc"><b>後續檢測</b>　AOI（膠層）· 拉力測試（抽驗）</p>
+        <p class="why">膠合固定。<b>此步幾乎無法返工，做壞等於整個高價封裝報廢。</b></p></div>
+      <div class="step opt"><div class="idx">C5</div><h4>光學測試</h4><p class="en3">Optical Test</p>
+        <span class="chip c-insp">檢測量測</span>
+        <p class="vend">Keysight · EXFO · <span class="tw">致茂</span></p>
+        <p class="qc"><b>檢測</b>　本步即光學測試：插入損耗、耦合效率、誤碼率</p>
+        <p class="why">電的部分已經很難，再串一層光的良率。這是 CPO 良率難拉的主因。</p></div>
+    </div>
+
+    <div class="sub p">3B-4　後段封裝整合 <span class="lite">Final package integration</span></div>
+    <div class="row">
+      <div class="step pkg"><div class="idx">27</div><h4>TIM／散熱蓋貼合</h4><p class="en3">TIM / Lid Attach</p>
+        <span class="chip c-pkg">後段封裝</span>
+        <p class="vend">Nordson｜TIM 材料：Henkel · Indium Corp</p>
+        <p class="qc"><b>後續檢測</b>　X-ray（TIM 空洞）· 量測（蓋高、平行度）</p>
+        <p class="why">導熱介面與金屬蓋。AI 晶片功耗高，散熱是效能限制。若走 CPO，散熱蓋設計需預留光纖出口。</p></div>
+      <div class="step pkg"><div class="idx">28</div><h4>植球（BGA）</h4><p class="en3">Ball Attach (BGA)</p>
+        <span class="chip c-pkg">後段封裝</span>
+        <p class="vend">ASMPT · Shibaura · <span class="tw">均華</span></p>
+        <p class="qc"><b>後續檢測</b>　AOI（缺球、偏位）· 量測（共面度）</p>
+        <p class="why">植上與主機板連接的錫球陣列。</p></div>
+      <div class="step pkg"><div class="idx">29</div><h4>BGA 迴焊</h4><p class="en3">BGA Reflow</p>
+        <span class="chip c-pkg">後段封裝</span>
+        <p class="vend">Rehm · BTU · Heller</p>
+        <p class="qc"><b>後續檢測</b>　AOI · X-ray（球內空洞）· 量測（翹曲）</p>
+        <p class="why">迴焊固定錫球，控制翹曲與共面度。</p></div>
+      <div class="step pkg"><div class="idx">30</div><h4>雷射標記</h4><p class="en3">Laser Marking</p>
+        <span class="chip c-pkg">後段封裝</span>
+        <p class="vend">Coherent · Han's Laser</p>
+        <p class="qc"><b>後續檢測</b>　AOI（字元辨識 OCR）</p>
+        <p class="why">打上料號與追溯碼。</p></div>
+    </div>
+
+    <div class="sub p">3B-5　最終測試 <span class="lite">Final test</span></div>
+    <div class="row">
+      <div class="step insp"><div class="idx">31</div><h4>最終電性測試</h4><p class="en3">Final Electrical Test</p>
+        <span class="chip c-insp">檢測量測</span>
+        <p class="vend"><b>Advantest</b> · Teradyne · <span class="tw">京元電</span>（代工）· <span class="tw">穎崴</span>（測試座）</p>
+        <p class="qc"><b>檢測</b>　本步即電性測試</p>
+        <p class="why">此時封裝價值極高，失效等於連 HBM 與基板一起報廢。</p></div>
+      <div class="step insp"><div class="idx">32</div><h4>測試燒機／可靠度</h4><p class="en3">Burn-in / Reliability Test</p>
+        <span class="chip c-insp">檢測量測</span>
+        <p class="vend">Advantest · Chroma · Aehr</p>
+        <p class="qc"><b>檢測</b>　本步即燒機測試</p>
+        <p class="why">高溫高壓加速老化，篩出早夭品。測試時間即成本。</p></div>
+      <div class="step insp"><div class="idx">33</div><h4>最終檢查／出貨</h4><p class="en3">Final Inspection / Outgoing</p>
+        <span class="chip c-insp">檢測量測</span>
+        <p class="vend">KLA · Camtek · YXLON（X-ray）</p>
+        <p class="qc"><b>檢測</b>　本步即 AOI · 量測 · X-ray</p>
+        <p class="why">外觀與尺寸檢查後出貨。</p></div>
+    </div>
+  </div>
+
+  <div class="link"><b>實務上兩者會疊加使用。</b>圖上將 SoIC 與 CoWoS 並列為兩條路線，但真實產品裡通常是：先做 SoIC 把邏輯晶粒垂直接合，再把這個已堆疊的模組送進 CoWoS 的 3B-1，與 HBM 一起放上中介層。台積電把這套組合稱為 3DFabric。讀圖時應理解為「哪一層用哪一種技術」，而不是「二選一」。</div>
+</div>
+
+<div style="height:34px"></div>
+<div class="divider"></div>
+
+<!-- STAGE 4 -->
+<div class="stage" id="s4">
+  <div class="rail"><div class="stripe"></div>
+    <div class="num">STAGE 4</div>
+    <h2>板級組裝與系統整合</h2>
+    <p class="en2">Board-level assembly &amp; system integration</p>
+    <div class="clarify">兩條路線在此匯流。這一段是<b>板級</b>作業，設備等級與前面完全不同，單機價格低了一到兩個數量級。但自 AI 伺服器導入液冷之後，G 段的冷板組裝與洩漏測試已成為新的量產瓶頸，也是台廠在這一段的主要價值來源。</div>
+  </div>
+  <div class="body">
+    <div class="sub b">A　來料與前處理 Incoming Material &amp; Preparation</div>
+    <div class="row">
+      <div class="step insp"><div class="idx">34</div><h4>來料檢驗（IQC）</h4><p class="en3">Incoming Quality Control</p>
+        <span class="chip c-insp">檢測量測</span>
+        <p class="vend">Keyence · Omron · <span class="tw">致茂</span> · <span class="tw">德律</span></p>
+        <p class="qc"><b>檢測</b>　本步即來料檢驗：尺寸量測 · 外觀 AOI · 濕敏等級確認</p>
+        <p class="why">板材、被動元件、連接器與封裝件入庫前檢驗。封裝件單價極高，批號與濕敏等級在此就要鎖定。</p></div>
+      <div class="step sup"><div class="idx">35</div><h4>PCB 除濕烘烤</h4><p class="en3">PCB Baking</p>
+        <span class="chip c-sup">支援系統</span>
+        <p class="vend"><span class="tw">志聖</span> · Koyo Thermo · Heller</p>
+        <p class="qc"><b>後續檢測</b>　濕度指示卡確認 · 開封時效控管</p>
+        <p class="why">高層數板吸濕後在迴焊高溫下會爆板分層，貼裝前必須先烘乾。</p></div>
+    </div>
+    <div class="sub b">B　表面貼裝 SMT（正面）Surface Mount — First Side</div>
+    <div class="row">
+      <div class="step pkg"><div class="idx">36</div><h4>錫膏印刷</h4><p class="en3">Solder Paste Printing</p>
+        <span class="chip c-pkg">後段封裝</span>
+        <p class="vend">ASMPT（DEK）· Panasonic · Yamaha · Ekra｜鋼板：Photo Stencil · Koh Young</p>
+        <p class="qc"><b>後續檢測</b>　SPI 三維錫膏量測</p>
+        <p class="why">以鋼板把錫膏印到焊墊上。板級焊接不良有超過半數源自印刷品質，這一步決定後面所有事。</p></div>
+      <div class="step insp"><div class="idx">37</div><h4>SPI 錫膏檢測</h4><p class="en3">Solder Paste Inspection</p>
+        <span class="chip c-insp">檢測量測</span>
+        <p class="vend">Koh Young · CyberOptics · Parmi · <span class="tw">德律</span></p>
+        <p class="qc"><b>檢測</b>　本步即三維錫膏量測，全檢</p>
+        <p class="why">量測每個焊墊的錫量、面積與偏移。不良板在貼件前刷洗重印，成本近乎為零。</p></div>
+      <div class="step pkg"><div class="idx">38</div><h4>SMT 貼片</h4><p class="en3">SMT Placement</p>
+        <span class="chip c-pkg">後段封裝</span>
+        <p class="vend">ASMPT · Fuji · Panasonic · Yamaha｜代工：<span class="tw">鴻海</span> · <span class="tw">廣達</span> · <span class="tw">緯創</span></p>
+        <p class="qc"><b>後續檢測</b>　迴焊後 AOI · X-ray（BGA 焊點）</p>
+        <p class="why">把封裝件與被動元件貼到板上。OAM／SXM 加速卡的模組板在此成形。</p></div>
+      <div class="step pkg"><div class="idx">39</div><h4>迴流焊</h4><p class="en3">Reflow Soldering</p>
+        <span class="chip c-pkg">後段封裝</span>
+        <p class="vend">Rehm · BTU · Heller · Kurtz Ersa</p>
+        <p class="qc"><b>後續檢測</b>　AOI（第 40 步）· X-ray（第 41 步）｜製程監控：爐溫曲線 Profiling</p>
+        <p class="why">多溫區氮氣迴焊爐熔化錫膏形成焊點。溫度曲線要依板厚與熱容重新調校，大板尤其難拉平。</p></div>
+      <div class="step insp"><div class="idx">40</div><h4>迴流後 AOI</h4><p class="en3">Post-Reflow AOI</p>
+        <span class="chip c-insp">檢測量測</span>
+        <p class="vend">Koh Young · Omron · Saki · <span class="tw">德律</span></p>
+        <p class="qc"><b>檢測</b>　本步即光學全檢</p>
+        <p class="why">檢查空焊、偏移、立碑與錫橋。看得到的焊點由 AOI 負責，看不到的交給下一步。</p></div>
+      <div class="step insp"><div class="idx">41</div><h4>X-ray 檢測（AXI）</h4><p class="en3">Automated X-ray Inspection</p>
+        <span class="chip c-insp">檢測量測</span>
+        <p class="vend">Nordson · YXLON · ViTrox · <span class="tw">德律</span> · Saki</p>
+        <p class="qc"><b>檢測</b>　本步即穿透檢查，BGA 全檢</p>
+        <p class="why">BGA 與大型封裝件的焊球在元件底下，只有 X-ray 看得到空洞、偏移與冷焊。</p></div>
+    </div>
+    <div class="sub b">C　背面與穿孔製程 Second Side &amp; Through-Hole</div>
+    <div class="row">
+      <div class="step pkg"><div class="idx">42</div><h4>背面 SMT（雙面板）</h4><p class="en3">Second-Side SMT</p>
+        <span class="chip c-pkg">後段封裝</span>
+        <p class="vend">ASMPT · Fuji · Panasonic</p>
+        <p class="qc"><b>後續檢測</b>　AOI（背面）· X-ray</p>
+        <p class="why">雙面板翻面後重複印刷、貼裝與迴焊。順序上先做輕面再做重面，避免第一面元件掉落。</p></div>
+      <div class="step pkg"><div class="idx">43</div><h4>選擇性波焊</h4><p class="en3">Selective Soldering</p>
+        <span class="chip c-pkg">後段封裝</span>
+        <p class="vend">Kurtz Ersa · Pillarhouse · SEHO</p>
+        <p class="qc"><b>後續檢測</b>　穿孔焊點 AOI · X-ray</p>
+        <p class="why">大型連接器與電源端子仍是穿孔件，以局部噴流焊接，避免整板再過一次高溫。</p></div>
+      <div class="step pkg"><div class="idx">44</div><h4>手工焊接與精修</h4><p class="en3">Hand Solder / Rework</p>
+        <span class="chip c-pkg">後段封裝</span>
+        <p class="vend">Hakko · Weller · Metcal · JBC</p>
+        <p class="qc"><b>後續檢測</b>　目視 · 焊點抽驗 · 必要時補 X-ray</p>
+        <p class="why">修補與少量特殊零件。AI 伺服器板單價高，實務上多半是修，很少直接報廢。</p></div>
+    </div>
+    <div class="sub b">D　清潔與防護塗層 Cleaning &amp; Protective Coating</div>
+    <div class="row">
+      <div class="step sup"><div class="idx">45</div><h4>清洗</h4><p class="en3">Cleaning</p>
+        <span class="chip c-sup">支援系統</span>
+        <p class="vend">Zestron · Kyzen · PBT Works · Austin American</p>
+        <p class="qc"><b>後續檢測</b>　離子污染度測試 ROSE</p>
+        <p class="why">洗掉助焊劑殘留。殘留物在高壓與高濕環境會造成電化學遷移，液冷機種特別敏感。</p></div>
+      <div class="step sup"><div class="idx">46</div><h4>三防漆塗覆</h4><p class="en3">Conformal Coating</p>
+        <span class="chip c-sup">支援系統</span>
+        <p class="vend">Nordson ASYMTEK · PVA · Dymax｜材料：Henkel · Dow</p>
+        <p class="qc"><b>後續檢測</b>　UV 燈下目視 · 膜厚量測</p>
+        <p class="why">在板面塗上防潮防塵絕緣層。液冷機櫃與高濕機房環境會把這一步從選配變成標配。</p></div>
+      <div class="step sup"><div class="idx">47</div><h4>塗層硬化</h4><p class="en3">Coating Cure</p>
+        <span class="chip c-sup">支援系統</span>
+        <p class="vend"><span class="tw">志聖</span> · Dymax（UV）· Heller</p>
+        <p class="qc"><b>後續檢測</b>　硬化度與附著力抽驗</p>
+        <p class="why">以紫外光或熱固化讓塗層成膜。硬化不足會在後續組裝時被刮除。</p></div>
+    </div>
+    <div class="sub b">E　電路與電源測試 Circuit &amp; Power Test</div>
+    <div class="row">
+      <div class="step insp"><div class="idx">48</div><h4>ICT 電路測試</h4><p class="en3">In-Circuit Test</p>
+        <span class="chip c-insp">檢測量測</span>
+        <p class="vend">Keysight · Teradyne（TestStation）· <span class="tw">致茂</span> · <span class="tw">德律</span></p>
+        <p class="qc"><b>檢測</b>　本步即電性全檢，針床或飛針</p>
+        <p class="why">逐點量測短路、斷路、錯件與極性。刻意排在通電之前，先確認電路本身沒有致命錯誤。</p></div>
+      <div class="step insp"><div class="idx">49</div><h4>首次開機與電源序列測試</h4><p class="en3">First Power-On / Power Sequencing</p>
+        <span class="chip c-insp">檢測量測</span>
+        <p class="vend">Keysight · <span class="tw">致茂</span> · Ametek</p>
+        <p class="qc"><b>檢測</b>　本步即電源驗證：各電源軌電壓與時序量測</p>
+        <p class="why">第一次上電。逐一驗證各電源軌的時序、電壓與電流，這一步的意義是不要一次燒掉整張加速卡。</p></div>
+    </div>
+    <div class="sub b">F　韌體與序號 Firmware &amp; Serialisation</div>
+    <div class="row">
+      <div class="step insp"><div class="idx">50</div><h4>韌體燒錄</h4><p class="en3">Firmware Flashing</p>
+        <span class="chip c-insp">檢測量測</span>
+        <p class="vend">Data I/O · BPM Microsystems · <span class="tw">致茂</span></p>
+        <p class="qc"><b>後續檢測</b>　回讀校驗 Checksum</p>
+        <p class="why">燒錄 BMC、BIOS、FPGA 與電源韌體。版本錯誤在系統測試才會爆出來，代價很高。</p></div>
+      <div class="step sup"><div class="idx">51</div><h4>序號與資產標籤燒錄</h4><p class="en3">Serialisation / Asset Tagging</p>
+        <span class="chip c-sup">支援系統</span>
+        <p class="vend">Zebra · SATO · Domino · Videojet</p>
+        <p class="qc"><b>後續檢測</b>　條碼可讀性驗證 ANSI 等級</p>
+        <p class="why">寫入序號並綁定製造履歷。雲端客戶普遍要求可追溯到單板，這是出貨文件的基礎。</p></div>
+    </div>
+    <div class="sub b">G　散熱與液冷組裝 Thermal &amp; Liquid Cooling Assembly</div>
+    <div class="row">
+      <div class="step pkg"><div class="idx">52</div><h4>導熱介面材料塗佈（TIM）</h4><p class="en3">Thermal Interface Material</p>
+        <span class="chip c-pkg">後段封裝</span>
+        <p class="vend">Nordson · <span class="tw">萬潤</span> · Graco｜材料：Honeywell · Shin-Etsu · Dow · Laird</p>
+        <p class="qc"><b>後續檢測</b>　塗佈量與覆蓋率量測</p>
+        <p class="why">在晶片與散熱器之間建立導熱路徑。塗佈量不足或分布不均，是高階模組最常見的熱失效原因。</p></div>
+      <div class="step pkg"><div class="idx">53</div><h4>散熱片組裝（氣冷）</h4><p class="en3">Heatsink Assembly (Air-Cooled)</p>
+        <span class="chip c-pkg">後段封裝</span>
+        <p class="vend">自動鎖付：Weber · Deprag｜模組：<span class="tw">奇鋐</span> · <span class="tw">雙鴻</span> · <span class="tw">健策</span></p>
+        <p class="qc"><b>後續檢測</b>　扭力值紀錄 · 平整度量測</p>
+        <p class="why">以定扭力鎖付散熱器。壓力分布不均會造成局部熱點，扭力值需逐台紀錄。</p></div>
+      <div class="step pkg"><div class="idx">54</div><h4>冷板組裝與快接頭安裝</h4><p class="en3">Cold Plate &amp; Quick Disconnect</p>
+        <span class="chip c-pkg">後段封裝</span>
+        <p class="vend">模組：<span class="tw">奇鋐</span> · <span class="tw">雙鴻</span> · <span class="tw">建準</span>｜快接頭：CPC · Staubli · Parker</p>
+        <p class="qc"><b>後續檢測</b>　扭力紀錄 · 接頭插拔確認 · 洩漏測試</p>
+        <p class="why">液冷機種改鎖冷板並接上快接頭。這是 GB200 世代之後新增的量產瓶頸，也是台廠新的價值來源。</p></div>
+      <div class="step insp"><div class="idx">55</div><h4>氣密與洩漏測試</h4><p class="en3">Leak Test</p>
+        <span class="chip c-insp">檢測量測</span>
+        <p class="vend">ATEQ · INFICON · Cincinnati Test Systems</p>
+        <p class="qc"><b>檢測</b>　本步即壓降測試或氦氣檢漏</p>
+        <p class="why">冷板與管路加壓後量測壓降。液冷模組一旦漏液，毀掉的不只是單板而是整個機櫃。</p></div>
+      <div class="step sup"><div class="idx">56</div><h4>機構組裝</h4><p class="en3">Mechanical Assembly</p>
+        <span class="chip c-sup">支援系統</span>
+        <p class="vend">自動鎖付：Weber · Deprag｜代工：<span class="tw">鴻海</span> · <span class="tw">廣達</span> · <span class="tw">緯創</span> · <span class="tw">英業達</span></p>
+        <p class="qc"><b>後續檢測</b>　外觀與尺寸抽驗</p>
+        <p class="why">裝上支撐板、導風罩、機構件與線材，把單板變成可以插進機箱的模組。</p></div>
+    </div>
+    <div class="sub b">H　功能與系統測試 Functional &amp; System Test</div>
+    <div class="row">
+      <div class="step insp"><div class="idx">57</div><h4>功能測試（FT）</h4><p class="en3">Functional Test (FT)</p>
+        <span class="chip c-insp">檢測量測</span>
+        <p class="vend"><span class="tw">致茂</span> · Keysight · Advantest</p>
+        <p class="qc"><b>檢測</b>　本步即板級功能驗證</p>
+        <p class="why">跑廠測程式，確認各介面、記憶體通道與供電正常。</p></div>
+      <div class="step insp"><div class="idx">58</div><h4>老化測試（Burn-in）</h4><p class="en3">Burn-in Test</p>
+        <span class="chip c-insp">檢測量測</span>
+        <p class="vend">Advantest · <span class="tw">致茂</span> · Aehr · ESPEC</p>
+        <p class="qc"><b>檢測</b>　本步即燒機測試：溫箱內連續運轉監控</p>
+        <p class="why">在高溫與滿載下連續運轉，把早夭不良品篩掉。加速卡出貨前幾乎都要做，時間成本很高。</p></div>
+      <div class="step insp"><div class="idx">59</div><h4>系統測試</h4><p class="en3">System Test</p>
+        <span class="chip c-insp">檢測量測</span>
+        <p class="vend">Advantest · Teradyne · <span class="tw">致茂</span></p>
+        <p class="qc"><b>檢測</b>　本步即整機驗證</p>
+        <p class="why">整機環境下驗證，含散熱、供電與互連。</p></div>
+      <div class="step insp"><div class="idx">60</div><h4>效能與基準測試</h4><p class="en3">Performance Benchmark</p>
+        <span class="chip c-insp">檢測量測</span>
+        <p class="vend">自建測試機架｜NVIDIA DCGM · MLPerf · <span class="tw">致茂</span></p>
+        <p class="qc"><b>檢測</b>　本步即效能驗證：頻寬、算力與功耗門檻比對</p>
+        <p class="why">跑實際負載確認頻寬、算力與功耗落在規格帶內。AI 加速卡出貨前多為客戶指定必做。</p></div>
+      <div class="step insp"><div class="idx">61</div><h4>校準</h4><p class="en3">Calibration</p>
+        <span class="chip c-insp">檢測量測</span>
+        <p class="vend">Keysight · Fluke · <span class="tw">致茂</span></p>
+        <p class="qc"><b>檢測</b>　本步即校準：校正值寫入後回讀確認</p>
+        <p class="why">寫入電壓、時脈與感測器的補償參數，讓每一張板在同一組韌體下表現一致。</p></div>
+    </div>
+    <div class="sub b">I　最終檢驗與出貨 Final Inspection &amp; Shipping</div>
+    <div class="row">
+      <div class="step insp"><div class="idx">62</div><h4>最終目視檢查</h4><p class="en3">Final Visual Inspection</p>
+        <span class="chip c-insp">檢測量測</span>
+        <p class="vend">人工目視 ＋ Keyence · Omron 影像輔助</p>
+        <p class="qc"><b>檢測</b>　本步即外觀終檢</p>
+        <p class="why">檢查外觀、標籤、機構完整性與有無遺留物。</p></div>
+      <div class="step sup"><div class="idx">63</div><h4>防靜電包裝</h4><p class="en3">ESD Packaging</p>
+        <span class="chip c-sup">支援系統</span>
+        <p class="vend">3M · Desco · Botron｜材料：防靜電袋 · 乾燥劑 · 濕度指示卡</p>
+        <p class="qc"><b>後續檢測</b>　表面電阻抽驗</p>
+        <p class="why">以防靜電袋、乾燥劑與濕度指示卡包裝，濕敏等級決定開封後的可暴露時間。</p></div>
+      <div class="step sup"><div class="idx">64</div><h4>標籤貼附</h4><p class="en3">Labelling</p>
+        <span class="chip c-sup">支援系統</span>
+        <p class="vend">Zebra · SATO · Domino</p>
+        <p class="qc"><b>後續檢測</b>　條碼掃描驗證</p>
+        <p class="why">貼上料號、序號與出貨標籤，與第 51 步寫入的履歷對應。</p></div>
+      <div class="step sup"><div class="idx">65</div><h4>包裝與出貨</h4><p class="en3">Packaging / Shipping</p>
+        <span class="chip c-sup">支援系統</span>
+        <p class="vend">—</p>
+        <p class="qc"><b>後續檢測</b>　出貨前抽驗與文件核對</p>
+        <p class="why">依客戶規範裝箱出貨。</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- VENDOR MATRIX -->
+<section class="sect" id="vendors">
+  <h2>供應商對照表</h2>
+  <p class="key">粗體為領導廠商　·　<span class="tw">綠色為台灣廠商</span></p>
+  <div class="scroller">
+  <table>
+    <thead><tr><th style="width:190px">細分設備／材料</th><th style="width:110px">對應步驟</th><th>主要供應商</th></tr></thead>
+    <tbody>
+      <tr class="grouprow"><td colspan="3"><span class="chip c-fab">前段製程設備</span></td></tr>
+      <tr><td>微影 Lithography</td><td class="n">01, 08</td><td><span class="lead-v">ASML</span> · Nikon · Canon · SMEE · Veeco</td></tr>
+      <tr><td>蝕刻 Etch</td><td class="n">01, 08</td><td><span class="lead-v">Lam</span> · TEL · AMAT · Hitachi High-Tech</td></tr>
+      <tr><td>沉積 Deposition</td><td class="n">01, 08</td><td><span class="lead-v">AMAT</span> · Lam · TEL · ASM · Kokusai</td></tr>
+      <tr><td>CMP 化學機械研磨</td><td class="n">06b, 11, 22b</td><td><span class="lead-v">AMAT</span> · Ebara · ACM Research｜耗材：Entegris · DuPont · <span class="tw">中砂</span></td></tr>
+      <tr><td>清洗／表面活化</td><td class="n">12</td><td><span class="lead-v">SCREEN</span> · TEL · Lam · <span class="tw">弘塑</span> · <span class="tw">辛耘</span></td></tr>
+      <tr><td>熱處理／退火</td><td class="n">15</td><td><span class="lead-v">AMAT</span> · Kokusai · TEL</td></tr>
+
+      <tr class="grouprow"><td colspan="3"><span class="chip c-pkg">後段封裝設備</span></td></tr>
+      <tr><td>晶圓研磨／薄化</td><td class="n">06a, 22a</td><td><span class="lead-v">DISCO</span> · 東京精密 · Okamoto</td></tr>
+      <tr><td>暫時貼合／解鍵合</td><td class="n">04, 09</td><td><span class="lead-v">EVG</span> · SUSS MicroTec｜材料：TOK · Brewer Science</td></tr>
+      <tr><td>切割 Dicing</td><td class="n">10, 23</td><td><span class="lead-v">DISCO</span> · 東京精密 · ASMPT</td></tr>
+      <tr><td>混合鍵結 Hybrid bonding</td><td class="n">13, 14</td><td><span class="lead-v">Besi</span> · <span class="lead-v">ASMPT</span> · EVG · SUSS · Hanmi</td></tr>
+      <tr><td>熱壓接合 TCB</td><td class="n">17, 18, 24</td><td><span class="lead-v">ASMPT</span> · K&amp;S · Shinkawa · Hanmi</td></tr>
+      <tr><td>點膠／填膠 Dispensing</td><td class="n">19, 26, 27</td><td><span class="lead-v">Nordson</span> · <span class="tw">萬潤</span>｜材料：Namics · Henkel</td></tr>
+      <tr><td>塑封 Molding</td><td class="n">21</td><td><span class="lead-v">TOWA</span> · ASMPT · Besi</td></tr>
+      <tr><td>植球／迴焊</td><td class="n">25, 28, 29</td><td>ASMPT · Shibaura · <span class="tw">均華</span>｜爐：Rehm · BTU · Heller</td></tr>
+      <tr><td>雷射標記／加工</td><td class="n">30</td><td>Coherent · Han's Laser</td></tr>
+      <tr><td>封裝基板 Substrate</td><td class="n">24</td><td>Ibiden · Shinko · AT&amp;S · <span class="tw">欣興</span> · <span class="tw">南電</span> · <span class="tw">景碩</span></td></tr>
+
+      <tr class="grouprow"><td colspan="3"><span class="chip c-pkg">CPO 光學整合</span>　選配段</td></tr>
+      <tr><td>光子晶片代工 PIC</td><td class="n">C1</td><td><span class="lead-v">台積電</span>（COUPE）· GlobalFoundries · Tower · Intel</td></tr>
+      <tr><td>雷射／光源</td><td class="n">C2</td><td><span class="lead-v">Coherent</span> · Lumentum · Broadcom · <span class="tw">聯亞</span></td></tr>
+      <tr><td>光學對位設備</td><td class="n">C3, C4</td><td><span class="lead-v">ficonTEC</span> · ASMPT · K&amp;S · Shinkawa</td></tr>
+      <tr><td>光纖／連接器</td><td class="n">C4</td><td>Senko · US Conec · <span class="tw">上詮</span> · <span class="tw">波若威</span></td></tr>
+      <tr><td>光學測試</td><td class="n">C5</td><td>Keysight · EXFO · <span class="tw">致茂</span></td></tr>
+      <tr><td>下單客戶（fabless）</td><td class="n">C1–C5</td><td>Broadcom · NVIDIA · Marvell · Cisco · Google · Meta</td></tr>
+
+      <tr class="grouprow"><td colspan="3"><span class="chip c-pkg">板級組裝設備</span>　STAGE 4</td></tr>
+      <tr><td>錫膏印刷／鋼板</td><td class="n">36</td><td><span class="lead-v">ASMPT（DEK）</span> · Panasonic · Yamaha · Ekra</td></tr>
+      <tr><td>貼片機 SMT</td><td class="n">38, 42</td><td><span class="lead-v">ASMPT</span> · <span class="lead-v">Fuji</span> · Panasonic · Yamaha</td></tr>
+      <tr><td>迴焊爐 Reflow</td><td class="n">39</td><td><span class="lead-v">Rehm</span> · BTU · Heller · Kurtz Ersa</td></tr>
+      <tr><td>SPI／板級 AOI</td><td class="n">37, 40, 42</td><td><span class="lead-v">Koh Young</span> · Omron · Saki · <span class="tw">德律</span> · CyberOptics</td></tr>
+      <tr><td>板級 X-ray（AXI）</td><td class="n">41</td><td><span class="lead-v">Nordson</span> · YXLON · ViTrox · <span class="tw">德律</span></td></tr>
+      <tr><td>選擇性波焊／手焊</td><td class="n">43, 44</td><td>Kurtz Ersa · Pillarhouse · SEHO｜手焊：Hakko · JBC · Metcal</td></tr>
+      <tr><td>清洗／三防漆</td><td class="n">45–47</td><td>Zestron · Kyzen · <span class="lead-v">Nordson ASYMTEK</span> · PVA｜材料：Henkel · Dow</td></tr>
+      <tr><td>ICT／飛針測試</td><td class="n">48, 49</td><td><span class="lead-v">Keysight</span> · Teradyne · <span class="tw">致茂</span> · <span class="tw">德律</span></td></tr>
+      <tr><td>燒錄／序號標籤</td><td class="n">50, 51, 64</td><td>Data I/O · BPM Microsystems｜標籤：Zebra · SATO · Domino</td></tr>
+      <tr><td>TIM 塗佈與材料</td><td class="n">52</td><td><span class="lead-v">Nordson</span> · <span class="tw">萬潤</span>｜材料：Honeywell · Shin-Etsu · Dow · Laird</td></tr>
+      <tr><td>散熱模組／冷板</td><td class="n">53, 54</td><td><span class="tw">奇鋐</span> · <span class="tw">雙鴻</span> · <span class="tw">健策</span> · <span class="tw">建準</span>｜快接頭：CPC · Staubli · Parker</td></tr>
+      <tr><td>洩漏測試 Leak Test</td><td class="n">55</td><td><span class="lead-v">ATEQ</span> · INFICON · Cincinnati Test Systems</td></tr>
+      <tr><td>系統組裝代工 ODM</td><td class="n">38, 56, 65</td><td><span class="tw">鴻海</span> · <span class="tw">廣達</span> · <span class="tw">緯創</span> · <span class="tw">英業達</span> · <span class="tw">緯穎</span></td></tr>
+
+      <tr class="grouprow"><td colspan="3"><span class="chip c-insp">檢測量測設備</span></td></tr>
+      <tr><td>光學檢測 AOI</td><td class="n">03, 06b, 08, 10, 12, 18, 21, 28, 33</td><td><span class="lead-v">KLA</span> · Camtek · Onto Innovation · Lasertec</td></tr>
+      <tr><td>量測 Metrology</td><td class="n">03, 06a, 13, 22a, 27, 28</td><td><span class="lead-v">KLA</span> · Onto · Nova · Bruker</td></tr>
+      <tr><td>X-ray／CT 檢測</td><td class="n">14, 19, 25, 27, 33</td><td><span class="lead-v">YXLON</span> · Nikon · ZEISS · Nordson</td></tr>
+      <tr><td>超音波掃描 SAM</td><td class="n">14, 16, 19, 26</td><td>Nordson SONOSCAN · PVA TePla</td></tr>
+      <tr><td>電子顯微鏡 SEM</td><td class="n">08, 11, 15, 16</td><td>Thermo Fisher · JEOL · TESCAN · Hitachi High-Tech｜服務：<span class="tw">閎康</span> · <span class="tw">汎銓</span></td></tr>
+      <tr><td>電性測試 ATE</td><td class="n">02, 31, 57, 59</td><td><span class="lead-v">Advantest</span> · Teradyne · <span class="tw">致茂</span></td></tr>
+      <tr><td>探針卡／測試座</td><td class="n">02, 31</td><td><span class="tw">精測</span> · <span class="tw">旺矽</span> · <span class="tw">穎崴</span> · FormFactor｜代工：<span class="tw">京元電</span></td></tr>
+      <tr><td>燒機 Burn-in</td><td class="n">32, 58</td><td>Advantest · <span class="tw">致茂</span> · Aehr</td></tr>
+
+      <tr class="grouprow"><td colspan="3"><span class="chip c-sup">支援系統</span></td></tr>
+      <tr><td>真空／泵浦</td><td class="n">07, 20</td><td><span class="lead-v">Edwards</span> · Ebara · Pfeiffer · INFICON</td></tr>
+      <tr><td>氣體供應／純化</td><td class="n">全程</td><td>Air Liquide · Linde · <span class="tw">台特化</span> · <span class="tw">崇越</span>（代理）</td></tr>
+      <tr><td>固化／烘烤爐</td><td class="n">05, 20, 26</td><td><span class="tw">志聖</span> · Koyo Thermo</td></tr>
+      <tr><td>廠務工程／無塵室</td><td class="n">基礎建設</td><td><span class="tw">帆宣</span> · <span class="tw">漢唐</span> · <span class="tw">亞翔</span> · <span class="tw">聖暉</span></td></tr>
+      <tr><td>設備代工／零組件</td><td class="n">上游</td><td><span class="tw">京鼎</span>（AMAT）· <span class="tw">家登</span>（光罩盒）· <span class="tw">迅得</span></td></tr>
+      <tr><td>自動搬運／智慧製造</td><td class="n">全程</td><td>Daifuku · Murata Machinery · Siemens · FANUC · Omron</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+</div>
+</body>
+</html>
