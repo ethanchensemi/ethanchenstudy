@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>台積電與先進封裝</title>
+<style>
+:root{
+  --paper:#F6F8F9; --card:#FFFFFF;
+  --ink:#14181C; --ink-2:#4A555E; --ink-3:#7C8891;
+  --rule:#CBD3D9; --rule-soft:#E2E8EC;
+  --stage:#1F3A4D; --a:#2E6B4F; --b:#4A3B7A;
+  --b-tint:#F0EEF7; --shared:#215C68;
+  --t-tier1:#5B4B9E; --t-tier1-bg:#EEEBF8;
+  --t-tier2:#0E7C86; --t-tier2-bg:#E4F2F3;
+  --t-tier3:#B85C10; --t-tier3-bg:#FAEEE1;
+  --t-tier4:#8A5A00; --t-tier4-bg:#FDF6E6;
+  --t-fin:#5F6C75; --t-fin-bg:#ECEFF1;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Hiragino Sans",-apple-system,"Segoe UI",sans-serif;
+  font-size:15px;line-height:1.65}
+.wrap{max-width:1240px;margin:0 auto;padding:48px 28px 80px}
+
+.masthead{border-bottom:2px solid var(--stage);padding-bottom:22px;margin-bottom:34px}
+.masthead h1{font-size:31px;line-height:1.25;font-weight:700;margin:0 0 6px;letter-spacing:-.01em}
+.masthead .en{font-size:16px;color:var(--ink-2);font-weight:400;margin:0 0 18px}
+.masthead .meta{display:flex;flex-wrap:wrap;gap:8px 26px;font-size:13px;color:var(--ink-3)}
+.masthead .meta b{color:var(--ink-2);font-weight:500}
+
+.toc{background:var(--card);border:1px solid var(--rule);padding:20px 24px;margin-bottom:38px}
+.toc h2{font-size:15px;margin:0 0 14px;font-weight:600}
+.toc ol{margin:0;padding-left:22px;columns:2;column-gap:36px;font-size:13.5px;color:var(--ink-2)}
+.toc li{margin-bottom:7px;break-inside:avoid}
+.toc a{color:var(--ink-2);text-decoration:none;border-bottom:1px dotted var(--rule)}
+.toc a:hover{color:var(--b);border-color:var(--b)}
+@media (max-width:700px){.toc ol{columns:1}}
+
+.stage{display:grid;grid-template-columns:212px 1fr;scroll-margin-top:20px}
+.rail{padding:22px 20px 26px 0;border-right:2px solid var(--rule);position:relative}
+.rail .num{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;color:var(--ink-3);letter-spacing:.06em;margin-bottom:8px}
+.rail h2{font-size:19px;margin:0 0 3px;font-weight:600;line-height:1.35}
+.rail .en2{font-size:13px;color:var(--ink-2);margin:0 0 12px;line-height:1.45}
+.rail .clarify{font-size:12.5px;color:var(--ink-3);line-height:1.55;padding-top:11px;border-top:1px dashed var(--rule)}
+.rail .stripe{position:absolute;right:-2px;top:22px;bottom:26px;width:2px;background:var(--stage)}
+.rail.shared .stripe{background:var(--shared)}
+.body{padding:22px 0 26px 26px}
+
+.row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:12px}
+.row:last-child{margin-bottom:0}
+.step{background:var(--card);border:1px solid var(--rule);padding:12px 14px;flex:1 1 220px;min-width:210px}
+.step h4{font-size:14px;margin:2px 0 1px;font-weight:600;line-height:1.4}
+.step .en3{font-size:12px;color:var(--ink-2);margin:0 0 9px;line-height:1.4}
+.step .body-txt{font-size:12.5px;color:var(--ink-2);margin:8px 0 0;line-height:1.6}
+.step .why{font-size:11.5px;color:var(--ink-3);margin:8px 0 0;line-height:1.55;padding-top:8px;border-top:1px dotted var(--rule-soft)}
+.step.t1{border-left:3px solid var(--t-tier1)}
+.step.t2{border-left:3px solid var(--t-tier2)}
+.step.t3{border-left:3px solid var(--t-tier3)}
+.step.t4{border-left:3px solid var(--t-tier4)}
+.chip{display:inline-block;font-size:11px;font-weight:600;padding:2px 7px;white-space:nowrap;border-radius:2px;margin-top:4px}
+.c-t1{background:var(--t-tier1-bg);color:var(--t-tier1)}
+.c-t2{background:var(--t-tier2-bg);color:var(--t-tier2)}
+.c-t3{background:var(--t-tier3-bg);color:var(--t-tier3)}
+.c-t4{background:var(--t-tier4-bg);color:var(--t-tier4)}
+.c-fin{background:var(--t-fin-bg);color:var(--t-fin)}
+
+.forkbar{display:grid;grid-template-columns:212px 1fr}
+.forkbar .lead{padding:26px 20px 0 0;border-right:2px solid var(--rule)}
+.forkbar .msg{padding:26px 0 4px 26px;font-size:13px;color:var(--ink-3);max-width:78ch;line-height:1.6}
+.forkbar .msg b{color:var(--ink-2);font-weight:500}
+.routes{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+@media (max-width:900px){.routes{grid-template-columns:1fr}}
+.route{border-top:3px solid var(--a)}
+.route.pk{border-top-color:var(--b)}
+.routehead{padding:16px 0 14px}
+.routehead h2{font-size:20px;margin:0 0 2px;font-weight:600}
+.routehead .en2{font-size:13px;color:var(--ink-2);margin:0 0 10px}
+.routehead .clarify{font-size:12.5px;color:var(--ink-3);line-height:1.55;padding-top:11px;border-top:1px dashed var(--rule);max-width:60ch}
+.route .row{flex-direction:column}
+.route .step{flex:1 1 auto}
+.divider{height:1px;background:var(--rule-soft);margin:34px 0}
+
+.matrix{width:100%;border-collapse:collapse;margin:8px 0 4px;font-size:13px}
+.matrix th,.matrix td{border:1px solid var(--rule);padding:14px 16px;vertical-align:top}
+.matrix th{background:#EEF2F3;font-weight:600;color:var(--ink-2);font-size:12.5px}
+.matrix td.cell{background:var(--card)}
+.matrix td.cell h5{font-size:14px;margin:0 0 3px;font-weight:600;color:var(--ink)}
+.matrix td.cell .en4{font-size:11.5px;color:var(--ink-3);margin:0 0 9px;font-style:italic}
+.matrix td.cell p{font-size:12.5px;color:var(--ink-2);margin:5px 0;line-height:1.55}
+.matrix td.cell .lbl{font-weight:600;color:var(--ink-3);font-size:11.5px}
+.matrix .hi{background:#FBF7EC}
+
+.sect{margin-top:48px;border:1px solid var(--rule);background:var(--card);padding:24px 26px}
+.sect h2{font-size:19px;margin:0 0 6px;font-weight:600}
+.sect .key{font-size:12.5px;color:var(--ink-3);margin:0 0 20px;line-height:1.6}
+.sect .key .tw{font-weight:600}
+table.fin{border-collapse:collapse;width:100%;font-size:12.8px}
+.fin th,.fin td{text-align:left;padding:9px 13px 9px 0;border-bottom:1px solid var(--rule-soft);vertical-align:top;white-space:nowrap}
+.fin th{font-weight:600;color:var(--ink-2);font-size:12px;border-bottom:1px solid var(--rule);position:sticky;left:0}
+.fin td.n{font-family:ui-monospace,"SF Mono",Menlo,monospace;color:var(--ink-2)}
+.fin tr:last-child td{border-bottom:none}
+.fin td.rowlabel{font-weight:600;color:var(--ink);white-space:normal;min-width:140px}
+.fin .grouprow td{background:#F1F5F6;padding-top:11px;padding-bottom:9px;padding-left:12px;border-bottom:1px solid var(--rule);white-space:normal}
+.fin .lead-v{font-weight:600;color:var(--t-tier2)}
+.fin .na{color:var(--ink-3);font-style:italic}
+.scroller{overflow-x:auto}
+.notebox{font-size:12.5px;color:#7A5100;background:#FDF6E6;border:1px dashed #C99A1E;padding:14px 16px;margin:16px 0 0;line-height:1.6}
+.notebox b{color:#8A5A00}
+.notebox ul{margin:8px 0 0;padding-left:20px}
+.notebox li{margin-bottom:4px}
+
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:800px){.vocab-grid{grid-template-columns:1fr}}
+.vcard{background:var(--card);border:1px solid var(--rule);border-left:3px solid var(--t-tier2);padding:14px 16px}
+.vcard h4{font-size:14.5px;margin:0 0 8px;font-weight:600;color:var(--ink)}
+.vcard p{font-size:12.8px;margin:0 0 6px;line-height:1.6;color:var(--ink-2)}
+.vcard p:last-child{margin-bottom:0}
+
+.endmarket{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:14px}
+@media (max-width:1000px){.endmarket{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.endmarket{grid-template-columns:1fr}}
+.emcol{background:var(--card);border:1px solid var(--rule)}
+.emcol h4{font-size:13.5px;margin:0;padding:10px 14px;background:#EEF2F3;color:var(--ink-2);font-weight:600}
+.emcol ul{margin:0;padding:12px 14px 14px 30px;font-size:12.8px;line-height:1.75;color:var(--ink-2)}
+.emcol li b{color:var(--ink)}
+
+.diagram-wrap{background:var(--card);border:1px solid var(--rule);padding:18px 20px 14px;margin:10px 0}
+.diagram-wrap svg{display:block;width:100%;height:auto;max-width:640px;margin:0 auto}
+.diagram-cap{font-size:11.5px;color:var(--ink-3);text-align:center;margin-top:10px;line-height:1.5}
+.diagram-pair{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.diagram-trio{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+@media (max-width:1000px){.diagram-trio{grid-template-columns:1fr 1fr}}
+@media (max-width:700px){.diagram-trio{grid-template-columns:1fr}}
+.diagram-wrap svg.wide{max-width:none}
+@media (max-width:800px){.diagram-pair{grid-template-columns:1fr}}
+svg text{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",-apple-system,sans-serif}
+
+@media (max-width:760px){
+  .wrap{padding:30px 16px 60px}
+  .stage,.forkbar{grid-template-columns:1fr}
+  .rail{border-right:none;border-bottom:2px solid var(--rule);padding:20px 0 18px}
+  .rail .stripe{right:auto;left:0;top:auto;bottom:-2px;width:60px;height:2px}
+  .body{padding:20px 0 26px}
+  .forkbar .lead{display:none}
+  .forkbar .msg{padding-left:0}
+  table.fin{min-width:640px}
+}
+.body a{color:var(--b);text-decoration:none;border-bottom:1px dotted var(--rule)}
+.body a:hover{border-color:var(--b)}
+.grouplbl{font-size:13px;font-weight:600;color:var(--ink-2);margin:26px 0 12px;padding-left:10px;border-left:3px solid var(--stage);line-height:1.4}
+.grouplbl:first-child{margin-top:0}
+.grouplbl span{font-weight:400;color:var(--ink-3);font-size:12px;margin-left:8px}
+.carrier{display:flex;align-items:center;justify-content:center;gap:9px;margin-top:10px;padding-top:9px;border-top:1px dotted var(--rule-soft);font-size:11.5px;color:var(--ink-3);line-height:1.4}
+.carrier svg{width:38px;height:38px;flex:0 0 auto;display:block;margin:0}
+.carrier b{color:var(--ink-2);font-weight:600}
+.xref{font-size:12px;color:var(--ink-3);margin:10px 0 0;line-height:1.55}
+.diagram-wrap img{display:block;width:100%;max-width:900px;height:auto;margin:0 auto}
+table.cmp{width:100%;border-collapse:collapse;font-size:12.5px;margin:14px 0 0;background:var(--card)}
+.cmp th,.cmp td{border:1px solid var(--rule);padding:9px 12px;text-align:left;vertical-align:top;line-height:1.55}
+.cmp th{background:#EEF2F3;font-weight:600;color:var(--ink-2);font-size:12px}
+.cmp td:first-child{font-weight:600;color:var(--ink-2);white-space:nowrap}
+.cmp td{color:var(--ink-2)}
+.sect .fn{font-size:11.5px;color:var(--ink-3);margin:12px 0 0;line-height:1.55}
+.diagram-trio .notebox{margin:0}
+.toc ol{list-style:none;padding-left:0}
+.diagram-wrap{display:flex;flex-direction:column}
+.diagram-wrap .carrier{margin-top:auto;padding-top:10px}
+.diagram-wrap .carrier + .diagram-cap{margin-top:8px}
+
+.backbar{margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.backbar a{display:inline-block;font-size:13px;color:var(--ink-2);text-decoration:none;border:1px solid var(--rule);background:var(--card);padding:6px 13px}
+.backbar a:hover{color:var(--b);border-color:var(--b)}
+.backbar .lang{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;letter-spacing:.04em}
+@media print{.backbar{display:none}body{background:#fff}.wrap{max-width:none;padding:0}.step,.sect{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="backbar"><a href="index.html">← 返回總覽</a><a class="lang" href="packaging-en.html" onclick="this.href=this.href.split('#')[0]+location.hash">EN</a></div>
+
+<header class="masthead">
+  <h1>台積電與先進封裝</h1>
+</header>
+
+<section class="toc">
+  <h2>目錄</h2>
+  <ol>
+    <li><a href="#s11">代工廠財務比較表</a></li>
+    <li><a href="#s3">01　封裝複雜度矩陣</a></li>
+    <li><a href="#sw">02　CPU／GPU／ASIC 晶圓剖面</a></li>
+    <li><a href="#s4">03　SoIC 兩種鍵合方式（WoW／CoW）＋結構圖</a></li>
+    <li><a href="#s7">04　Fan-out：晶圓級對面板級</a></li>
+    <li><a href="#sq">05　QFN 與 RF 晶片　從晶圓到 QFN 封裝</a></li>
+    <li><a href="#s5">06　先進封裝家族　Apple SiP＋InFO-PoP、EMIB／I-Cube、CoWoP／CoPoS</a></li>
+    <li><a href="#sc3">07　CoWoS 三型　S／L／R　側視＋俯視</a></li>
+    <li><a href="#si3">08　Intel 封裝全部變體　EMIB 三型／Foveros 2.5D 三型／3D／3.5D</a></li>
+    <li><a href="#sf3">09　InFO 五型　無載板 PoP／AiP／SoW，有載板 oS／LSI</a></li>
+    <li><a href="#sap">10　Apple SiP 深入　iPhone 主機板對 Apple Watch SiP 模組</a></li>
+    <li><a href="#s8">11　CPO：COUPE 光引擎與封裝建構　從 InP 晶圓到 CPO 封裝</a></li>
+    <li><a href="#s10">12　NVL72 Compute Rack（18 total）</a></li>
+  </ol>
+</section>
+
+<div class="sect" id="s11">
+  <h2>代工廠財務比較表</h2>
+  <p class="key">依製程等級排序：領先製程三家在前，其後為成熟與特殊製程代工廠。市場數據截至 2026 年 8 月底。</p>
+  <div class="scroller">
+  <table class="fin">
+    <tr>
+      <th></th><th>TSMC</th><th>Samsung</th><th>Intel</th><th>SMIC</th><th>UMC</th><th>GlobalFoundries</th><th>Hua Hong</th><th>Tower</th>
+    </tr>
+    <tr class="grouprow"><td colspan="9">基本資料</td></tr>
+    <tr>
+      <td class="rowlabel">層級</td>
+      <td class="lead-v">領先製程</td><td class="lead-v">領先製程</td><td class="lead-v">領先製程</td>
+      <td>成熟／特殊製程</td><td>成熟／特殊製程</td><td>成熟／特殊製程</td><td>成熟／特殊製程</td><td>成熟／特殊製程</td>
+    </tr>
+    <tr>
+      <td class="rowlabel">代號</td>
+      <td class="n">2330.TW / TSM</td><td class="n">005930.KS</td><td class="n">INTC</td><td class="n">0981.HK</td>
+      <td class="n">2303.TW / UMC</td><td class="n">GFS</td><td class="n">1347.HK</td><td class="n">TSEM</td>
+    </tr>
+    <tr>
+      <td class="rowlabel">總部</td>
+      <td>台灣</td><td>南韓</td><td>美國</td><td>中國</td><td>台灣</td><td>美國</td><td>中國</td><td>以色列</td>
+    </tr>
+    <tr>
+      <td class="rowlabel">純代工</td>
+      <td>是</td><td>否</td><td>否</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td>
+    </tr>
+    <tr class="grouprow"><td colspan="9">技術</td></tr>
+    <tr>
+      <td class="rowlabel">最先進製程</td>
+      <td>N2 量產中，下一代 A16</td><td>3nm &amp; 2nm</td><td>18A (1.8nm)</td>
+      <td>7nm</td><td>14nm</td><td>12nm</td><td>40nm &amp; 28nm</td><td>65nm</td>
+    </tr>
+    <tr>
+      <td class="rowlabel">EUV</td>
+      <td>是</td><td>是</td><td>是</td><td>否</td><td>是</td><td>否</td><td>否</td><td>否</td>
+    </tr>
+    <tr>
+      <td class="rowlabel">先進封裝</td>
+      <td>CoWoS, SoIC, InFO, CoPoS</td><td>I-Cube, X-Cube, H-Cube</td><td>EMIB, Foveros</td>
+      <td class="na">NA</td><td class="na">NA</td><td class="na">NA</td><td class="na">NA</td><td class="na">NA</td>
+    </tr>
+    <tr class="grouprow"><td colspan="9">市場與客戶</td></tr>
+    <tr>
+      <td class="rowlabel">代工市占 2026Q2</td>
+      <td class="lead-v">73%</td><td>7%</td><td class="na">NA</td><td>5%</td><td>4%</td><td>3%</td><td>~2.5%</td><td>0.80%</td>
+    </tr>
+    <tr>
+      <td class="rowlabel">2025 營收</td>
+      <td class="lead-v">US$89.5bn</td><td>US$18bn（代工）</td><td>US$17.8bn（代工）</td>
+      <td>US$9.33bn</td><td>US$7.63bn</td><td>US$6.79bn</td><td>US$2.42bn</td><td>US$1.57bn</td>
+    </tr>
+    <tr>
+      <td class="rowlabel">主要客戶</td>
+      <td>NVIDIA, Apple, AMD, Broadcom, Qualcomm, MediaTek</td>
+      <td>Qualcomm、Tesla、自家</td>
+      <td>Amazon、自家</td>
+      <td>HiSilicon、中國本土</td>
+      <td>Novatek、Realtek、MediaTek、類比</td>
+      <td>Qualcomm、NXP、車用與 IoT</td>
+      <td>中國功率、類比</td>
+      <td>類比、RF 與光子</td>
+    </tr>
+    <tr class="grouprow"><td colspan="9">股價與估值</td></tr>
+    <tr>
+      <td class="rowlabel">股價</td>
+      <td>US$415.32</td><td>KRW 250,500</td><td>US$87.63</td><td>HK$70.75</td>
+      <td>US$19.88–20.84</td><td>US$44.76</td><td>CNY 245</td><td>US$205</td>
+    </tr>
+    <tr>
+      <td class="rowlabel">市值</td>
+      <td class="lead-v">US$2,154bn</td><td>US$1.20tn</td><td>US$467.5bn</td><td>US$78bn</td>
+      <td>US$51.3bn</td><td>US$24.6bn</td><td>US$25bn</td><td>US$23.2bn</td>
+    </tr>
+    <tr>
+      <td class="rowlabel">EPS（近四季）</td>
+      <td>US$13.44</td><td>KRW 22,476</td><td class="na">淨損</td><td>HK$1.02</td>
+      <td class="na">—</td><td class="na">—</td><td>US$0.04</td><td>US$2.54</td>
+    </tr>
+    <tr>
+      <td class="rowlabel">本益比（近四季）</td>
+      <td>30.9x</td><td>11.1x</td><td class="na">淨損</td><td>69.4x</td>
+      <td>17.9x</td><td>35.0x</td><td>300.0x</td><td>80.7x</td>
+    </tr>
+  </table>
+  </div>
+
+  <p class="fn">Samsung 與 Intel 的股價、市值、EPS 與本益比為母公司數字（代工業務未獨立上市）；Hua Hong 數據各來源落差較大。</p>
+
+<div class="divider"></div>
+
+<div class="stage" id="s3">
+  <div class="rail"><div class="stripe"></div>
+    <div class="num">01</div>
+    <h2>封裝複雜度矩陣</h2>
+    <div class="clarify">依「有無 2.5D 中介層／橋接」與「有無 3D 垂直堆疊」兩個軸分類。</div>
+  </div>
+  <div class="body">
+    <div class="scroller">
+    <table class="matrix">
+      <tr><th style="width:140px"></th><th>No 2.5D（無中介層／橋接）</th><th>Yes 2.5D（有中介層／橋接）</th></tr>
+      <tr>
+        <th>No 3D（無垂直堆疊）</th>
+        <td class="cell">
+          <h5>純 2D 封裝</h5>
+          <p><span class="lbl">主要技術</span>　FC-BGA、FC-CSP</p>
+          <p><span class="lbl">終端應用</span>　一般消費性電子、標準桌機／筆電、車用 ECU、IoT／智慧家庭、電視機上盒</p>
+          <p><span class="lbl">代表產品</span>　標準 Intel／AMD 桌機 CPU、中階手機 SoC、車用微控制器</p>
+        </td>
+        <td class="cell">
+          <h5>純 2.5D 封裝</h5>
+          <p><span class="lbl">主要技術</span>　TSMC CoWoS-S/R/L、Intel EMIB、Samsung I-Cube</p>
+          <p><span class="lbl">終端應用</span>　資料中心 AI 加速器、LLM 訓練伺服器機櫃、超大規模雲端運算節點、51.2T／102.4T 網路核心交換器</p>
+          <p><span class="lbl">代表產品</span>　Nvidia H100／Blackwell B200、Google TPU v4/v5/v6、AWS Trainium、AMD MI200</p>
+        </td>
+      </tr>
+      <tr>
+        <th>Yes 3D（垂直堆疊）</th>
+        <td class="cell">
+          <h5>純 3D 封裝</h5>
+          <p><span class="lbl">主要技術</span>　TSMC SoIC-X、Intel Foveros Direct、Samsung X-Cube</p>
+          <p><span class="lbl">終端應用</span>　高階遊戲電腦、旗艦手機相機模組、緊湊型邊緣 AI 裝置、高效能工作站 CPU</p>
+          <p><span class="lbl">代表產品</span>　AMD Ryzen 3D V-Cache（7800X3D／9800X3D）、Sony CIS 相機感測器（如 iPhone）、Apple Silicon（Mac）</p>
+        </td>
+        <td class="cell hi">
+          <h5>3.5D 封裝（3D＋2.5D 混用）</h5>
+          <p><span class="lbl">主要技術</span>　TSMC SoIC + CoWoS-L、Intel Foveros + EMIB</p>
+          <p><span class="lbl">終端應用</span>　前沿等級超級電腦、旗艦雲端 AI 訓練節點、大型多模態 AI 叢集</p>
+          <p><span class="lbl">代表產品</span>　AMD Instinct MI300X／MI350X、Intel Data Center GPU Max（Ponte Vecchio）</p>
+        </td>
+      </tr>
+    </table>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="stage" id="sw">
+  <div class="rail"><div class="stripe"></div>
+    <div class="num">02</div>
+    <h2>CPU／GPU／ASIC 晶圓剖面</h2>
+    <div class="clarify">封裝之前先看晶圓：從銲球到塊材矽的完整剖面。三種晶片共用同一個層疊，差別只在電晶體被接成什麼電路。</div>
+  </div>
+  <div class="body"><div class="diagram-wrap"><svg viewBox="0 0 560 320" role="img" aria-label="CPU wafer cross-section with zone brackets on the left and layer labels on the right"><text x="320" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3A4D">CPU 晶圓剖面　GPU／ASIC 共用同一層疊</text><circle cx="240" cy="52" r="9" fill="#C9CED3" stroke="#8E979E" stroke-width="1"/><circle cx="300" cy="52" r="9" fill="#C9CED3" stroke="#8E979E" stroke-width="1"/><circle cx="360" cy="52" r="9" fill="#C9CED3" stroke="#8E979E" stroke-width="1"/><rect x="200" y="61" width="200" height="14" fill="#ECEFF1" stroke="#B7C1C8" stroke-width="1"/><rect x="231" y="61" width="18" height="14" fill="#E9B96A" stroke="#8A5A00" stroke-width=".6"/><rect x="291" y="61" width="18" height="14" fill="#E9B96A" stroke="#8A5A00" stroke-width=".6"/><rect x="351" y="61" width="18" height="14" fill="#E9B96A" stroke="#8A5A00" stroke-width=".6"/><rect x="200" y="75" width="200" height="32" fill="#ECEFF1" stroke="#B7C1C8" stroke-width="1"/><rect x="208" y="81" width="80" height="12" fill="#E9B96A" stroke="#8A5A00" stroke-width=".6"/><rect x="300" y="81" width="88" height="12" fill="#E9B96A" stroke="#8A5A00" stroke-width=".6"/><rect x="226" y="93" width="8" height="14" fill="#E9B96A" stroke="#8A5A00" stroke-width=".6"/><rect x="296" y="93" width="8" height="14" fill="#E9B96A" stroke="#8A5A00" stroke-width=".6"/><rect x="370" y="93" width="8" height="14" fill="#E9B96A" stroke="#8A5A00" stroke-width=".6"/><rect x="200" y="107" width="200" height="30" fill="#ECEFF1" stroke="#B7C1C8" stroke-width="1"/><rect x="204" y="111" width="48" height="8" fill="#E9B96A" stroke="#8A5A00" stroke-width=".6"/><rect x="262" y="111" width="58" height="8" fill="#E9B96A" stroke="#8A5A00" stroke-width=".6"/><rect x="330" y="111" width="64" height="8" fill="#E9B96A" stroke="#8A5A00" stroke-width=".6"/><rect x="226" y="119" width="6" height="6" fill="#E9B96A" stroke="#8A5A00" stroke-width=".6"/><rect x="296" y="119" width="6" height="6" fill="#E9B96A" stroke="#8A5A00" stroke-width=".6"/><rect x="364" y="119" width="6" height="6" fill="#E9B96A" stroke="#8A5A00" stroke-width=".6"/><rect x="206" y="125" width="40" height="8" fill="#E9B96A" stroke="#8A5A00" stroke-width=".6"/><rect x="256" y="125" width="66" height="8" fill="#E9B96A" stroke="#8A5A00" stroke-width=".6"/><rect x="332" y="125" width="60" height="8" fill="#E9B96A" stroke="#8A5A00" stroke-width=".6"/><rect x="200" y="137" width="200" height="44" fill="#ECEFF1" stroke="#B7C1C8" stroke-width="1"/><rect x="204" y="141" width="24" height="4" fill="#E9B96A" stroke="#8A5A00" stroke-width=".5"/><rect x="236" y="141" width="32" height="4" fill="#E9B96A" stroke="#8A5A00" stroke-width=".5"/><rect x="276" y="141" width="28" height="4" fill="#E9B96A" stroke="#8A5A00" stroke-width=".5"/><rect x="312" y="141" width="36" height="4" fill="#E9B96A" stroke="#8A5A00" stroke-width=".5"/><rect x="356" y="141" width="38" height="4" fill="#E9B96A" stroke="#8A5A00" stroke-width=".5"/><rect x="208" y="151" width="30" height="4" fill="#E9B96A" stroke="#8A5A00" stroke-width=".5"/><rect x="246" y="151" width="26" height="4" fill="#E9B96A" stroke="#8A5A00" stroke-width=".5"/><rect x="280" y="151" width="40" height="4" fill="#E9B96A" stroke="#8A5A00" stroke-width=".5"/><rect x="328" y="151" width="28" height="4" fill="#E9B96A" stroke="#8A5A00" stroke-width=".5"/><rect x="364" y="151" width="30" height="4" fill="#E9B96A" stroke="#8A5A00" stroke-width=".5"/><rect x="204" y="161" width="20" height="4" fill="#E9B96A" stroke="#8A5A00" stroke-width=".5"/><rect x="232" y="161" width="36" height="4" fill="#E9B96A" stroke="#8A5A00" stroke-width=".5"/><rect x="276" y="161" width="22" height="4" fill="#E9B96A" stroke="#8A5A00" stroke-width=".5"/><rect x="306" y="161" width="44" height="4" fill="#E9B96A" stroke="#8A5A00" stroke-width=".5"/><rect x="358" y="161" width="36" height="4" fill="#E9B96A" stroke="#8A5A00" stroke-width=".5"/><rect x="210" y="171" width="28" height="4" fill="#E9B96A" stroke="#8A5A00" stroke-width=".5"/><rect x="246" y="171" width="20" height="4" fill="#E9B96A" stroke="#8A5A00" stroke-width=".5"/><rect x="274" y="171" width="44" height="4" fill="#E9B96A" stroke="#8A5A00" stroke-width=".5"/><rect x="326" y="171" width="26" height="4" fill="#E9B96A" stroke="#8A5A00" stroke-width=".5"/><rect x="360" y="171" width="34" height="4" fill="#E9B96A" stroke="#8A5A00" stroke-width=".5"/><rect x="222" y="145" width="4" height="6" fill="#E9B96A"/><rect x="288" y="145" width="4" height="6" fill="#E9B96A"/><rect x="340" y="145" width="4" height="6" fill="#E9B96A"/><rect x="254" y="155" width="4" height="6" fill="#E9B96A"/><rect x="318" y="155" width="4" height="6" fill="#E9B96A"/><rect x="374" y="155" width="4" height="6" fill="#E9B96A"/><rect x="226" y="165" width="4" height="6" fill="#E9B96A"/><rect x="292" y="165" width="4" height="6" fill="#E9B96A"/><rect x="348" y="165" width="4" height="6" fill="#E9B96A"/><rect x="200" y="181" width="200" height="12" fill="#ECEFF1" stroke="#B7C1C8" stroke-width="1"/><rect x="216" y="181" width="4" height="12" fill="#E9B96A"/><rect x="250" y="181" width="4" height="12" fill="#E9B96A"/><rect x="318" y="181" width="4" height="12" fill="#E9B96A"/><rect x="352" y="181" width="4" height="12" fill="#E9B96A"/><rect x="200" y="193" width="200" height="44" fill="#ECEFF1" stroke="#B7C1C8" stroke-width="1"/><rect x="216" y="203" width="6" height="32" fill="#1F7A5C"/><rect x="226" y="203" width="6" height="32" fill="#1F7A5C"/><rect x="236" y="203" width="6" height="32" fill="#1F7A5C"/><rect x="314" y="203" width="6" height="32" fill="#1F7A5C"/><rect x="324" y="203" width="6" height="32" fill="#1F7A5C"/><rect x="334" y="203" width="6" height="32" fill="#1F7A5C"/><rect x="210" y="207" width="38" height="11" fill="#5B4B9E"/><rect x="308" y="207" width="38" height="11" fill="#5B4B9E"/><rect x="200" y="237" width="200" height="64" fill="#ECEFF1" stroke="#B7C1C8" stroke-width="1"/><text x="300" y="273" text-anchor="middle" font-size="11" fill="#4A555E">Bulk silicon 塊材矽</text><path d="M196 42 L188 42 L188 75 L196 75" fill="none" stroke="#7C8891" stroke-width="1"/><path d="M196 77 L184 77 L184 193 L196 193" fill="none" stroke="#7C8891" stroke-width="1"/><path d="M196 195 L184 195 L184 237 L196 237" fill="none" stroke="#7C8891" stroke-width="1"/><path d="M196 239 L184 239 L184 301 L196 301" fill="none" stroke="#7C8891" stroke-width="1"/><text x="180" y="55" text-anchor="end" font-size="11" font-weight="400" fill="#4A555E">銲球 Solder bumps</text><text x="178" y="118" text-anchor="end" font-size="14" font-weight="700" fill="#14181C">銅線層</text><text x="178" y="134" text-anchor="end" font-size="11.5" font-weight="400" fill="#4A555E">Copper wiring</text><text x="178" y="150" text-anchor="end" font-size="11" font-weight="400" fill="#7C8891">BEOL · 10–17 層</text><text x="178" y="212" text-anchor="end" font-size="14" font-weight="700" fill="#14181C">電晶體</text><text x="178" y="228" text-anchor="end" font-size="11" font-weight="400" fill="#4A555E">Transistors · FEOL</text><text x="178" y="266" text-anchor="end" font-size="14" font-weight="700" fill="#14181C">基板</text><text x="178" y="282" text-anchor="end" font-size="11" font-weight="400" fill="#4A555E">Substrate · bulk Si</text><line x1="402" y1="52" x2="414" y2="52" stroke="#7C8891" stroke-width=".8" stroke-dasharray="3,2"/><text x="418" y="56" font-size="11" fill="#4A555E">銲球 solder bumps</text><line x1="402" y1="68" x2="414" y2="68" stroke="#7C8891" stroke-width=".8" stroke-dasharray="3,2"/><text x="418" y="72" font-size="11" fill="#4A555E">銲墊 pads</text><line x1="402" y1="91" x2="414" y2="91" stroke="#7C8891" stroke-width=".8" stroke-dasharray="3,2"/><text x="418" y="95" font-size="11" fill="#4A555E">頂層金屬 top metal</text><line x1="402" y1="122" x2="414" y2="122" stroke="#7C8891" stroke-width=".8" stroke-dasharray="3,2"/><text x="418" y="126" font-size="11" fill="#4A555E">中層金屬 mid metal</text><line x1="402" y1="159" x2="414" y2="159" stroke="#7C8891" stroke-width=".8" stroke-dasharray="3,2"/><text x="418" y="163" font-size="11" fill="#4A555E">細線 M1–M4</text><line x1="402" y1="187" x2="414" y2="187" stroke="#7C8891" stroke-width=".8" stroke-dasharray="3,2"/><text x="418" y="191" font-size="11" fill="#4A555E">接觸窗 contacts</text><line x1="402" y1="215" x2="414" y2="215" stroke="#7C8891" stroke-width=".8" stroke-dasharray="3,2"/><text x="418" y="219" font-size="11" fill="#4A555E">鰭片＋閘極 fins, gates</text><line x1="402" y1="270" x2="414" y2="270" stroke="#7C8891" stroke-width=".8" stroke-dasharray="3,2"/><text x="418" y="274" font-size="11" fill="#4A555E">塊材矽 bulk silicon</text></svg><div class="diagram-cap">左側大標＝四個區域；右側小標＝逐層名稱。由下往上是晶圓廠的製作順序：先做電晶體（FEOL），再往上鋪銅線（BEOL），最後上銲墊與銲球交給封裝。</div></div><div class="diagram-wrap"><svg viewBox="0 0 640 276" role="img" aria-label="CPU, GPU and AI ASIC die floorplans from above"><text x="320" y="22" text-anchor="middle" font-size="11.5" fill="#4A555E">相同的銅線與電晶體材料——差別只在電晶體被接成什麼電路</text><text x="126" y="46" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3A4D">CPU</text><rect x="30" y="54" width="192" height="130" rx="4" fill="#ECEFF1" stroke="#B7C1C8" stroke-width="1"/><rect x="40" y="62" width="82" height="52" rx="3" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.2"/><text x="81" y="92" text-anchor="middle" font-size="10.5" fill="#1F7A5C">核心 core</text><rect x="130" y="62" width="82" height="52" rx="3" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.2"/><text x="171" y="92" text-anchor="middle" font-size="10.5" fill="#1F7A5C">核心 core</text><rect x="40" y="122" width="172" height="54" rx="3" fill="#EEEBF8" stroke="#5B4B9E" stroke-width="1.2"/><text x="126" y="153" text-anchor="middle" font-size="10.5" fill="#5B4B9E">大型 SRAM 快取 large cache</text><text x="126" y="202" text-anchor="middle" font-size="10.5" fill="#4A555E">少量複雜核心</text><text x="126" y="217" text-anchor="middle" font-size="10.5" fill="#4A555E">大型共用快取</text><text x="126" y="232" text-anchor="middle" font-size="10.5" fill="#4A555E">DDR 記憶體在主機板上</text><text x="330" y="46" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3A4D">GPU</text><rect x="234" y="54" width="192" height="130" rx="4" fill="#ECEFF1" stroke="#B7C1C8" stroke-width="1"/><rect x="238" y="58" width="16" height="122" fill="#FBE7E4" stroke="#C0433A" stroke-width="1"/><rect x="406" y="58" width="16" height="122" fill="#FBE7E4" stroke="#C0433A" stroke-width="1"/><rect x="260" y="62" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="280" y="62" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="300" y="62" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="320" y="62" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="340" y="62" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="360" y="62" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="380" y="62" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="260" y="78" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="280" y="78" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="300" y="78" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="320" y="78" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="340" y="78" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="360" y="78" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="380" y="78" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="260" y="94" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="280" y="94" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="300" y="94" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="320" y="94" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="340" y="94" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="360" y="94" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="380" y="94" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="260" y="110" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="280" y="110" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="300" y="110" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="320" y="110" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="340" y="110" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="360" y="110" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="380" y="110" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="260" y="126" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="280" y="126" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="300" y="126" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="320" y="126" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="340" y="126" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="360" y="126" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="380" y="126" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="260" y="142" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="280" y="142" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="300" y="142" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="320" y="142" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="340" y="142" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="360" y="142" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="380" y="142" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="260" y="158" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="280" y="158" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="300" y="158" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="320" y="158" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="340" y="158" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="360" y="158" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><rect x="380" y="158" width="16" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width=".8"/><text x="246" y="120" text-anchor="middle" font-size="7.5" fill="#C0433A" transform="rotate(-90 246 120)">HBM 介面</text><text x="414" y="120" text-anchor="middle" font-size="7.5" fill="#C0433A" transform="rotate(-90 414 120)">HBM 介面</text><text x="330" y="202" text-anchor="middle" font-size="10.5" fill="#4A555E">數千個小核心</text><text x="330" y="217" text-anchor="middle" font-size="10.5" fill="#4A555E">每核心只有微量 SRAM</text><text x="330" y="232" text-anchor="middle" font-size="10.5" fill="#4A555E">HBM 在封裝內</text><text x="534" y="46" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3A4D">AI ASIC</text><rect x="438" y="54" width="192" height="130" rx="4" fill="#ECEFF1" stroke="#B7C1C8" stroke-width="1"/><rect x="448" y="62" width="172" height="50" rx="3" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.2"/><text x="534" y="91" text-anchor="middle" font-size="10.5" fill="#1F7A5C">客製邏輯 custom logic（MAC 陣列）</text><rect x="448" y="118" width="98" height="30" rx="3" fill="#EEEBF8" stroke="#5B4B9E" stroke-width="1.2"/><text x="497" y="137" text-anchor="middle" font-size="10" fill="#5B4B9E">SRAM（暫存）</text><rect x="552" y="118" width="68" height="30" rx="3" fill="#FBE7E4" stroke="#C0433A" stroke-width="1.2"/><text x="586" y="137" text-anchor="middle" font-size="10" fill="#C0433A">HBM I/O</text><rect x="448" y="154" width="172" height="22" rx="3" fill="#E6F1FB" stroke="#2560A6" stroke-width="1.2"/><text x="534" y="169" text-anchor="middle" font-size="10" fill="#2560A6">SerDes／I/O 帶</text><text x="534" y="202" text-anchor="middle" font-size="10.5" fill="#4A555E">專做一種運算，做得快</text><text x="534" y="217" text-anchor="middle" font-size="10.5" fill="#4A555E">客製邏輯方塊</text><text x="534" y="232" text-anchor="middle" font-size="10.5" fill="#4A555E">HBM 在封裝內</text><text x="320" y="262" text-anchor="middle" font-size="10" fill="#7C8891">綠＝運算（核心／客製邏輯）　紫＝晶粒上記憶體（快取／SRAM）　紅＝HBM 介面　藍＝I/O</text></svg><div class="diagram-cap">俯視晶粒平面圖。三者的剖面完全相同——差別在於晶粒面積怎麼分配給運算、晶粒上記憶體與 I/O。AI ASIC 的運算在客製邏輯（MAC 陣列）；SRAM 是餵資料給陣列的暫存，本身不做運算。</div></div><div class="row" style="margin-top:14px"><div class="step t1"><h4>銲球　Solder bumps</h4><p class="body-txt">銲球不屬於晶圓內部結構，是晶圓廠加上的最後一層，也是封裝端接手的第一層；翻轉後貼到載板上。</p></div><div class="step t2"><h4>銅線層　Copper wiring（BEOL）</h4><p class="body-txt">銅線嵌在低介電常數絕緣層中，外圍有鉭阻障層。最細的 M1–M4 連接相鄰電晶體；最厚的頂層金屬負責全晶粒的電源與時脈。最底部的接觸窗（鎢／鈷）向下接到每個電晶體。</p></div><div class="step t3"><h4>電晶體　Transistors（FEOL）</h4><p class="body-txt">矽鰭片直接由晶圓蝕刻而成；閘極介電層為幾個原子厚的氧化鉿；金屬閘極為 TiN／W；源極汲極以磊晶長出 SiGe 或 SiP。製程節點（N3、N2、18A）就是定義在這一層。</p></div><div class="step t4"><h4>基板　Substrate（bulk Si）</h4><p class="body-txt">原始 300mm 晶圓。只有最頂端的薄層會成為電路，其餘是機械承載，封裝前會被磨薄。</p></div></div><div class="row"><div class="step t2"><h4>哪一層不同？</h4><p class="body-txt">把 CPU、GPU、AI ASIC 切開，剖面完全一樣——相同的鰭片、閘極材料、銅線層數。不同的是光罩：哪些電晶體接到哪些。CPU 把幾百個電晶體接成分支預測器；GPU 把同樣的電晶體接成乘加單元，再複製數千次。</p></div><div class="step t1"><h4>CPU</h4><p class="body-txt">少量大型核心，專為單一執行緒的速度設計；大型共用 SRAM 快取用來掩蓋主機板上 DDR 的延遲。封裝：覆晶＋ABF 載板，無中介層、無 HBM。</p></div><div class="step t3"><h4>GPU</h4><p class="body-txt">數千個小型相同運算單元。同時發出的記憶體請求太多，主機板上的 DDR 餵不飽，所以 HBM 移到封裝內——這正是 CoWoS 存在的全部理由。</p></div><div class="step t4"><h4>AI ASIC</h4><p class="body-txt">少數專用邏輯方塊只做一種運算，晶粒內 SRAM 緩衝，周邊大量面積給 SerDes 與 HBM I/O。由 Broadcom、Marvell、Alchip、GUC 為雲端業者設計；與 GPU 共用同樣的晶圓層疊與 CoWoS 封裝。</p></div></div></div>
+</div>
+
+<div class="divider"></div>
+
+
+<div class="forkbar" id="s4">
+  <div class="lead"></div>
+  <div class="msg"><b>SoIC 內部的兩種鍵合方式。</b>差別在於堆疊發生的時機：WoW 先整片晶圓對齊鍵合再切割，CoW 先切割成單顆晶片再逐顆放上目標晶圓。</div>
+</div>
+<div style="height:20px"></div>
+
+<div class="routes">
+  <div class="route">
+    <div class="routehead">
+      <h2>03A　Wafer-on-Wafer（WoW）</h2>
+      <p class="en2">晶圓對晶圓</p>
+      <div class="clarify">兩片完整的晶圓，各自已含有許多晶片電路，先對齊並整片黏合在一起。完成接合後，才將堆疊結果切割成個別晶片。</div>
+    </div>
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 320 210" role="img" aria-label="WoW: two full wafers bonded together, then diced">
+        <text x="160" y="20" text-anchor="middle" font-size="12" font-weight="600" fill="#14181C">整片對齊 → 一次鍵合 → 再切割</text>
+        <circle cx="100" cy="80" r="46" fill="#E4F2F3" stroke="#0E7C86" stroke-width="1.6"/>
+        <text x="100" y="84" text-anchor="middle" font-size="11" fill="#0E7C86">晶圓 A</text>
+        <circle cx="220" cy="80" r="46" fill="#E4F2F3" stroke="#0E7C86" stroke-width="1.6"/>
+        <text x="220" y="84" text-anchor="middle" font-size="11" fill="#0E7C86">晶圓 B</text>
+        <path d="M150 80 L190 80" stroke="#7C8891" stroke-width="1.6" marker-end="url(#arw1)"/>
+        <circle cx="100" cy="160" r="46" fill="#E4F2F3" stroke="#0E7C86" stroke-width="2.4"/>
+        <circle cx="100" cy="160" r="30" fill="#B85C10" fill-opacity=".14" stroke="#B85C10" stroke-width="1.2" stroke-dasharray="3,2"/>
+        <text x="100" y="164" text-anchor="middle" font-size="10.5" fill="#14181C">整片鍵合</text>
+        <path d="M100 130 L100 148" stroke="#7C8891" stroke-width="1.6" marker-end="url(#arw1)"/>
+        <g transform="translate(220,140)">
+          <rect x="-30" y="0" width="24" height="24" fill="#E4F2F3" stroke="#0E7C86" stroke-width="1.2"/>
+          <rect x="6" y="0" width="24" height="24" fill="#E4F2F3" stroke="#0E7C86" stroke-width="1.2"/>
+          <text x="0" y="42" text-anchor="middle" font-size="10" fill="#7C8891">再切割成單顆</text>
+        </g>
+        <path d="M150 160 L188 155" stroke="#7C8891" stroke-width="1.6" marker-end="url(#arw1)"/>
+        <defs><marker id="arw1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="#7C8891" stroke-width="1.6"/></marker></defs>
+      </svg>
+      <div class="diagram-cap">整片晶圓尺寸與佈局須完全一致，因為所有位置一次對齊、一次鍵合。</div>
+    </div>
+    <div class="diagram-wrap"><svg viewBox="0 0 260 236" role="img" aria-label="WoW side view: two whole wafers bonded face to face with Cu-Cu hybrid bonding, then diced into stacks"><text x="130" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E7C86">WoW 側視　晶圓對晶圓</text><rect x="15" y="40" width="230" height="30" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><line x1="61" y1="40" x2="61" y2="70" stroke="#1F7A5C" stroke-width=".8" stroke-dasharray="3 2" opacity=".55"/><line x1="107" y1="40" x2="107" y2="70" stroke="#1F7A5C" stroke-width=".8" stroke-dasharray="3 2" opacity=".55"/><line x1="153" y1="40" x2="153" y2="70" stroke="#1F7A5C" stroke-width=".8" stroke-dasharray="3 2" opacity=".55"/><line x1="199" y1="40" x2="199" y2="70" stroke="#1F7A5C" stroke-width=".8" stroke-dasharray="3 2" opacity=".55"/><text paint-order="stroke" stroke="#E1F5EE" stroke-width="3.5" stroke-linejoin="round" x="130" y="59" text-anchor="middle" font-size="9" fill="#1F7A5C">晶圓 A（頂晶粒面朝下）</text><rect x="15" y="70" width="230" height="5" fill="#DCEAFB" stroke="#2560A6" stroke-width="1"/><rect x="15" y="75" width="230" height="34" fill="#EAF4EE" stroke="#1F7A5C" stroke-width="1.4"/><line x1="61" y1="75" x2="61" y2="109" stroke="#1F7A5C" stroke-width=".8" stroke-dasharray="3 2" opacity=".55"/><line x1="107" y1="75" x2="107" y2="109" stroke="#1F7A5C" stroke-width=".8" stroke-dasharray="3 2" opacity=".55"/><line x1="153" y1="75" x2="153" y2="109" stroke="#1F7A5C" stroke-width=".8" stroke-dasharray="3 2" opacity=".55"/><line x1="199" y1="75" x2="199" y2="109" stroke="#1F7A5C" stroke-width=".8" stroke-dasharray="3 2" opacity=".55"/><text paint-order="stroke" stroke="#EAF4EE" stroke-width="3.5" stroke-linejoin="round" x="130" y="96" text-anchor="middle" font-size="9" fill="#1F7A5C">晶圓 B（基底晶粒，含 TSV）</text><line x1="61" y1="32" x2="61" y2="118" stroke="#B02E6E" stroke-width="1" stroke-dasharray="4 3"/><line x1="107" y1="32" x2="107" y2="118" stroke="#B02E6E" stroke-width="1" stroke-dasharray="4 3"/><line x1="153" y1="32" x2="153" y2="118" stroke="#B02E6E" stroke-width="1" stroke-dasharray="4 3"/><line x1="199" y1="32" x2="199" y2="118" stroke="#B02E6E" stroke-width="1" stroke-dasharray="4 3"/><text x="130" y="130" text-anchor="middle" font-size="9" fill="#B02E6E">✂ 鍵合後才切割</text><text x="130" y="147" text-anchor="middle" font-size="8.5" fill="#7C8891">↓ 切割後：一顆 SoIC 堆疊</text><rect x="100" y="152" width="60" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.2"/><rect x="100" y="164" width="60" height="4" fill="#DCEAFB" stroke="#2560A6" stroke-width=".8"/><rect x="90" y="168" width="80" height="14" fill="#EAF4EE" stroke="#1F7A5C" stroke-width="1.2"/><g fill="#7C8891"><circle cx="100" cy="186" r="1.6"/><circle cx="130" cy="186" r="1.6"/><circle cx="160" cy="186" r="1.6"/></g><rect x="75" y="190" width="110" height="12" fill="#FAEEDA" stroke="#8A5A00" stroke-width="1.2"/><text x="130" y="199" text-anchor="middle" font-size="7.5" fill="#8A5A00">載板 Substrate</text><text x="130" y="216" text-anchor="middle" font-size="9" fill="#B02E6E" font-style="italic">整片對齊、一次鍵合；兩片佈局須相同</text><text x="130" y="230" text-anchor="middle" font-size="9" fill="#7C8891">混合鍵合面 Cu–Cu（藍）；紅色虛線＝切割道</text></svg><div class="diagram-cap">兩片完整晶圓面對面鍵合（Cu–Cu 混合鍵合），之後才沿切割道切成一顆顆堆疊。</div></div>
+    <div class="row">
+      <div class="step t1">
+        <h4>適用情境</h4>
+        <p class="body-txt">這種方式最適合兩片晶圓的晶片尺寸與佈局相同的情況，因為晶圓上所有位置會一次對齊。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="route pk">
+    <div class="routehead">
+      <h2>03B　Chip-on-Wafer（CoW）</h2>
+      <p class="en2">晶片對晶圓</p>
+      <div class="clarify">先將晶片從晶圓上切割下來，再逐顆放置並黏合到目標晶圓上，因此在混用晶片尺寸或篩選良品時更有彈性。</div>
+    </div>
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 320 210" role="img" aria-label="CoW: chips diced first, then bonded one at a time onto a target wafer">
+        <text x="160" y="20" text-anchor="middle" font-size="12" font-weight="600" fill="#14181C">先切割成單顆 → 逐顆挑選良品 → 逐顆鍵合</text>
+        <circle cx="80" cy="70" r="40" fill="#FAEEE1" stroke="#B85C10" stroke-width="1.6"/>
+        <text paint-order="stroke" stroke="#FAEEE1" stroke-width="4" stroke-linejoin="round" x="80" y="60" text-anchor="middle" font-size="10" fill="#B85C10">來源晶圓</text>
+        <g stroke="#B85C10" stroke-width="1" fill="none" stroke-dasharray="2,2">
+          <path d="M55 55 L105 55 M55 70 L105 70 M55 85 L105 85 M65 45 L65 95 M80 45 L80 95 M95 45 L95 95"/>
+        </g>
+        <rect x="63" y="63" width="14" height="14" fill="#1F7A5C" fill-opacity=".25" stroke="#1F7A5C" stroke-width="1"/>
+        <text x="70" y="112" text-anchor="middle" font-size="9" fill="#1F7A5C">良品晶粒</text>
+        <rect x="120" y="80" width="14" height="14" fill="#B02E6E" fill-opacity=".2" stroke="#B02E6E" stroke-width="1" opacity=".6"/>
+        <text x="140" y="112" text-anchor="middle" font-size="9" fill="#B02E6E">不良（跳過）</text>
+        <path d="M70 78 C 70 130, 220 130, 220 150" stroke="#7C8891" stroke-width="1.6" fill="none" marker-end="url(#arw2)"/>
+        <circle cx="230" cy="160" r="46" fill="#FAEEE1" stroke="#B85C10" stroke-width="1.6"/>
+        <text x="230" y="150" text-anchor="middle" font-size="10" fill="#B85C10">目標晶圓</text>
+        <rect x="218" y="158" width="14" height="14" fill="#1F7A5C" fill-opacity=".3" stroke="#1F7A5C" stroke-width="1"/>
+        <rect x="200" y="170" width="14" height="14" fill="#1F7A5C" fill-opacity=".3" stroke="#1F7A5C" stroke-width="1"/>
+        <defs><marker id="arw2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="#7C8891" stroke-width="1.6"/></marker></defs>
+      </svg>
+      <div class="diagram-cap">可混用不同尺寸晶片，也可跳過測試失敗的晶粒，只使用 Known Good Die。</div>
+    </div>
+    <div class="diagram-wrap"><svg viewBox="0 0 260 236" role="img" aria-label="CoW side view: known good dies of mixed sizes placed and bonded one by one onto a target wafer, bad sites skipped, then the target wafer is diced"><text x="130" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E7C86">CoW 側視　晶片對晶圓</text><text x="130" y="36" text-anchor="middle" font-size="9" fill="#1F7A5C">已切割的良品晶粒（KGD）逐顆放上、鍵合</text><rect x="20" y="48" width="36" height="26" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.3"/><rect x="20" y="74" width="36" height="6" fill="#DCEAFB" stroke="#2560A6" stroke-width="1"/><rect x="66" y="44" width="36" height="30" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.3"/><rect x="66" y="74" width="36" height="6" fill="#DCEAFB" stroke="#2560A6" stroke-width="1"/><rect x="158" y="48" width="36" height="26" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.3"/><rect x="158" y="74" width="36" height="6" fill="#DCEAFB" stroke="#2560A6" stroke-width="1"/><rect x="204" y="48" width="36" height="26" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.3"/><rect x="204" y="74" width="36" height="6" fill="#DCEAFB" stroke="#2560A6" stroke-width="1"/><text x="130" y="66" text-anchor="middle" font-size="13" fill="#B02E6E">✕</text><text x="130" y="77" text-anchor="middle" font-size="7.5" fill="#B02E6E">跳過</text><rect x="15" y="80" width="230" height="34" fill="#EAF4EE" stroke="#1F7A5C" stroke-width="1.4"/><line x1="61" y1="80" x2="61" y2="114" stroke="#1F7A5C" stroke-width=".8" stroke-dasharray="3 2" opacity=".55"/><line x1="107" y1="80" x2="107" y2="114" stroke="#1F7A5C" stroke-width=".8" stroke-dasharray="3 2" opacity=".55"/><line x1="153" y1="80" x2="153" y2="114" stroke="#1F7A5C" stroke-width=".8" stroke-dasharray="3 2" opacity=".55"/><line x1="199" y1="80" x2="199" y2="114" stroke="#1F7A5C" stroke-width=".8" stroke-dasharray="3 2" opacity=".55"/><text paint-order="stroke" stroke="#EAF4EE" stroke-width="3.5" stroke-linejoin="round" x="130" y="101" text-anchor="middle" font-size="9" fill="#1F7A5C">目標晶圓（基底晶粒，含 TSV）</text><line x1="61" y1="80" x2="61" y2="120" stroke="#B02E6E" stroke-width="1" stroke-dasharray="4 3"/><line x1="107" y1="80" x2="107" y2="120" stroke="#B02E6E" stroke-width="1" stroke-dasharray="4 3"/><line x1="153" y1="80" x2="153" y2="120" stroke="#B02E6E" stroke-width="1" stroke-dasharray="4 3"/><line x1="199" y1="80" x2="199" y2="120" stroke="#B02E6E" stroke-width="1" stroke-dasharray="4 3"/><text x="130" y="131" text-anchor="middle" font-size="9" fill="#B02E6E">✂ 放完再切割目標晶圓</text><text x="130" y="147" text-anchor="middle" font-size="8.5" fill="#7C8891">↓ 切割後：一顆 SoIC 堆疊</text><rect x="100" y="152" width="60" height="12" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.2"/><rect x="100" y="164" width="60" height="4" fill="#DCEAFB" stroke="#2560A6" stroke-width=".8"/><rect x="90" y="168" width="80" height="14" fill="#EAF4EE" stroke="#1F7A5C" stroke-width="1.2"/><g fill="#7C8891"><circle cx="100" cy="186" r="1.6"/><circle cx="130" cy="186" r="1.6"/><circle cx="160" cy="186" r="1.6"/></g><rect x="75" y="190" width="110" height="12" fill="#FAEEDA" stroke="#8A5A00" stroke-width="1.2"/><text x="130" y="199" text-anchor="middle" font-size="7.5" fill="#8A5A00">載板 Substrate</text><text x="130" y="216" text-anchor="middle" font-size="9" fill="#B02E6E" font-style="italic">逐顆放置：可混用尺寸、跳過不良位置</text><text x="130" y="230" text-anchor="middle" font-size="9" fill="#7C8891">混合鍵合面 Cu–Cu（藍）；KGD＝已測試良品</text></svg><div class="diagram-cap">先把來源晶圓切成晶粒並測試，只把良品（KGD）逐顆放到目標晶圓上鍵合；放完再切割目標晶圓。</div></div>
+    <div class="row">
+      <div class="step t3">
+        <h4>優勢</h4>
+        <p class="body-txt">這種方式更有彈性，因為可以混用不同尺寸的晶片，或跳過測試失敗的晶片，只使用良品晶粒（known good die）。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="height:34px"></div>
+<div class="divider"></div>
+
+<div class="stage" id="s7">
+  <div class="rail"><div class="stripe"></div>
+    <div class="num">04</div>
+    <h2>Fan-out：晶圓級對面板級</h2>
+    <div class="clarify">兩者是同一種扇出型封裝概念，差別只在製作基材是圓形晶圓還是方形面板。</div>
+  </div>
+  <div class="body">
+    <div class="diagram-pair">
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 260 220" role="img" aria-label="FOWLP: square package sites on a round wafer, corner sites fall off the curved edge and are scrapped">
+          <text x="130" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E7C86">FOWLP</text>
+          <circle cx="130" cy="115" r="90" fill="#E4F2F3" stroke="#0E7C86" stroke-width="1.6"/>
+          <g stroke="#0E7C86" stroke-width="0.8" fill="#FFFFFF" fill-opacity=".5">
+            <rect x="65" y="50" width="26" height="26"/><rect x="95" y="50" width="26" height="26"/><rect x="125" y="50" width="26" height="26"/><rect x="155" y="50" width="26" height="26"/><rect x="185" y="50" width="26" height="26"/>
+            <rect x="50" y="80" width="26" height="26"/><rect x="80" y="80" width="26" height="26"/><rect x="110" y="80" width="26" height="26"/><rect x="140" y="80" width="26" height="26"/><rect x="170" y="80" width="26" height="26"/><rect x="200" y="80" width="26" height="26"/>
+            <rect x="50" y="110" width="26" height="26"/><rect x="80" y="110" width="26" height="26"/><rect x="110" y="110" width="26" height="26"/><rect x="140" y="110" width="26" height="26"/><rect x="170" y="110" width="26" height="26"/><rect x="200" y="110" width="26" height="26"/>
+            <rect x="50" y="140" width="26" height="26"/><rect x="80" y="140" width="26" height="26"/><rect x="110" y="140" width="26" height="26"/><rect x="140" y="140" width="26" height="26"/><rect x="170" y="140" width="26" height="26"/><rect x="200" y="140" width="26" height="26"/>
+            <rect x="65" y="170" width="26" height="26"/><rect x="95" y="170" width="26" height="26"/><rect x="125" y="170" width="26" height="26"/><rect x="155" y="170" width="26" height="26"/><rect x="185" y="170" width="26" height="26"/>
+          </g>
+          <rect x="200" y="50" width="26" height="26" fill="#FBE7E4" stroke="#C0433A" stroke-width="1" opacity=".6"/>
+          <rect x="200" y="170" width="26" height="26" fill="#FBE7E4" stroke="#C0433A" stroke-width="1" opacity=".6"/>
+          <text x="130" y="212" text-anchor="middle" font-size="9.5" fill="#C0433A">紅框：邊緣落於弧形之外，報廢</text>
+        </svg>
+        <div class="diagram-cap">在圓形 300mm 晶圓上製作，周邊方形封裝格會部分落在弧形邊緣之外而報廢。<br><span style="font-size:11px">終端應用：智慧型手機 SoC（Apple A-series via InFO）、應用處理器、RF 收發器、電源管理 IC、連接晶片、車用感測器</span></div>
+      </div>
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 260 220" role="img" aria-label="FOPLP: square package sites on a rectangular panel, no wasted corners">
+          <text x="130" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#B85C10">FOPLP</text>
+          <rect x="30" y="35" width="200" height="160" fill="#FAEEE1" stroke="#B85C10" stroke-width="1.6"/>
+          <g stroke="#B85C10" stroke-width="0.8" fill="#FFFFFF" fill-opacity=".5">
+            <rect x="38" y="43" width="26" height="26"/><rect x="68" y="43" width="26" height="26"/><rect x="98" y="43" width="26" height="26"/><rect x="128" y="43" width="26" height="26"/><rect x="158" y="43" width="26" height="26"/><rect x="188" y="43" width="26" height="26"/>
+            <rect x="38" y="73" width="26" height="26"/><rect x="68" y="73" width="26" height="26"/><rect x="98" y="73" width="26" height="26"/><rect x="128" y="73" width="26" height="26"/><rect x="158" y="73" width="26" height="26"/><rect x="188" y="73" width="26" height="26"/>
+            <rect x="38" y="103" width="26" height="26"/><rect x="68" y="103" width="26" height="26"/><rect x="98" y="103" width="26" height="26"/><rect x="128" y="103" width="26" height="26"/><rect x="158" y="103" width="26" height="26"/><rect x="188" y="103" width="26" height="26"/>
+            <rect x="38" y="133" width="26" height="26"/><rect x="68" y="133" width="26" height="26"/><rect x="98" y="133" width="26" height="26"/><rect x="128" y="133" width="26" height="26"/><rect x="158" y="133" width="26" height="26"/><rect x="188" y="133" width="26" height="26"/>
+            <rect x="38" y="163" width="26" height="26"/><rect x="68" y="163" width="26" height="26"/><rect x="98" y="163" width="26" height="26"/><rect x="128" y="163" width="26" height="26"/><rect x="158" y="163" width="26" height="26"/><rect x="188" y="163" width="26" height="26"/>
+          </g>
+          <text x="130" y="212" text-anchor="middle" font-size="9.5" fill="#1F7A5C">無邊角浪費，單片產出量大增</text>
+        </svg>
+        <div class="diagram-cap">同樣的扇出型封裝改在大尺寸方形面板上製作，無弧形邊緣浪費，單次產出遠高於晶圓。<br><span style="font-size:11px">終端應用：電源管理 IC、顯示驅動 IC、RF 與連接晶片、部分車用與工業零件</span></div>
+      </div>
+    </div>
+    <div class="row" style="margin-top:14px">
+      <div class="step t2">
+        <h4>FOWLP</h4>
+        <p class="body-txt">是在圓形 300mm 晶圓上製作的扇出型封裝，周邊的方形封裝格會有一部分落在晶圓弧形邊緣之外而報廢。</p>
+      </div>
+      <div class="step t3">
+        <h4>FOPLP</h4>
+        <p class="body-txt">是同樣的扇出型封裝改在大尺寸方形面板上製作，沒有弧形邊緣的浪費，單次產出的封裝數也大幅增加——前提是大面板的良率與翹曲問題能夠控制。</p>
+      </div>
+    </div>
+  <div class="notebox"><b>InFO-PoP 與 FOWLP／FOPLP：結構與載體是兩個獨立的選擇</b>
+<p style="margin:8px 0 0">InFO-PoP 描述的是封裝<b>內部結構</b>：SoC、貫穿模封的導孔（TIV）、扇出型 RDL、疊在上方的 DRAM。FOWLP 與 FOPLP 描述的是<b>製作載體</b>：圓形晶圓或方形面板。兩者是獨立的選擇，同一個 InFO-PoP 設計原則上可以在任一載體上生產；今天的量產走的是晶圓級。</p>
+<ul><li>結構（是什麼）：InFO-PoP、InFO-oS、InFO-LSI、CoWoS……</li><li>載體格式（在哪上面做）：FOWLP（晶圓）或 FOPLP（面板）</li><li>兩者正交：「在方形面板上做的晶圓級封裝」是矛盾的說法，因為 wafer-level 本身就是載體格式的名字</li></ul></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="stage" id="sq">
+  <div class="rail"><div class="stripe"></div>
+    <div class="num">05</div>
+    <h2>QFN 與 RF 晶片　從晶圓到 QFN 封裝</h2>
+    <div class="clarify">先進封裝之外的另一端：最便宜、最傳統的導線架封裝。RF、類比、電源晶片幾乎都用它。左半晶圓層級，右半封裝層級。</div>
+  </div>
+  <div class="body"><div class="diagram-wrap"><svg class="wide" viewBox="0 100 1120 245" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+    <defs>
+      <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6B7A1E"/></marker>
+      <marker id="heat" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#B03A2E"/></marker>
+    </defs>
+
+    <!-- ===== LEFT: WAFER LEVEL ===== -->
+    <text x="40" y="120" font-size="12" font-weight="700" fill="#4A555E" letter-spacing=".06em">晶圓層級</text>
+
+    <!-- substrate -->
+    <rect x="40" y="232" width="420" height="58" fill="#F1F2F3" stroke="#CDD2D6"/>
+    <text x="250" y="266" font-size="13" text-anchor="middle" fill="#4A555E">InP 或 GaAs 基板</text>
+    <!-- epi -->
+    <rect x="40" y="204" width="420" height="28" fill="#F2F5E4" stroke="#B5BF6E"/>
+    <text x="250" y="223" font-size="12.5" text-anchor="middle" fill="#5A6618">磊晶層（MOCVD）</text>
+    <!-- devices -->
+    <g fill="#E8F4EF" stroke="#9FC9B5">
+      <rect x="66" y="186" width="52" height="18"/><rect x="146" y="186" width="52" height="18"/>
+      <rect x="226" y="186" width="52" height="18"/><rect x="306" y="186" width="52" height="18"/>
+      <rect x="386" y="186" width="52" height="18"/>
+    </g>
+    <text x="150" y="172" font-size="12" fill="#1F4D38">在磊晶層上做出 RF 電晶體</text>
+    <!-- dice lines -->
+    <g stroke="#B03A2E" stroke-width="1.6" stroke-dasharray="5,4">
+      <line x1="132" y1="150" x2="132" y2="296"/><line x1="372" y1="150" x2="372" y2="296"/>
+    </g>
+    <text x="392" y="146" font-size="12" fill="#B03A2E">切割</text>
+
+    <!-- badges left -->
+    <g font-size="12" font-weight="700" fill="#fff" text-anchor="middle">
+      <circle cx="22" cy="261" r="10" fill="#6B7A1E"/><text x="22" y="265">1</text>
+      <circle cx="22" cy="218" r="10" fill="#6B7A1E"/><text x="22" y="222">2</text>
+      <circle cx="22" cy="195" r="10" fill="#6B7A1E"/><text x="22" y="199">3</text>
+      <circle cx="372" cy="132" r="10" fill="#6B7A1E"/><text x="372" y="136">4</text>
+    </g>
+
+    <!-- ===== ARROW BETWEEN ===== -->
+    <line x1="486" y1="236" x2="576" y2="236" stroke="#6B7A1E" stroke-width="2" marker-end="url(#arw)"/>
+    <text x="531" y="224" font-size="11" text-anchor="middle" fill="#6B7A1E">單顆晶粒</text>
+
+    <!-- ===== RIGHT: QFN PACKAGE ===== -->
+    <text x="600" y="120" font-size="12" font-weight="700" fill="#4A555E" letter-spacing=".06em">封裝層級 — QFN 剖面</text>
+
+    <!-- mould compound (drawn first so it sits behind) -->
+    <rect x="612" y="150" width="476" height="105" fill="#F3F4F5" stroke="#D5D9DD"/>
+    <text x="850" y="170" font-size="12.5" text-anchor="middle" fill="#4A555E">模封化合物</text>
+
+    <!-- PCB -->
+    <rect x="600" y="292" width="500" height="40" fill="#EAEAEA" stroke="#C4C4C4"/>
+    <text x="850" y="317" font-size="13" text-anchor="middle" fill="#333">PCB</text>
+    <!-- solder -->
+    <g fill="#C9CED3">
+      <rect x="620" y="285" width="60" height="7"/><rect x="730" y="285" width="240" height="7"/><rect x="1020" y="285" width="60" height="7"/>
+    </g>
+    <!-- leads + pad -->
+    <g fill="#B8BFC6" stroke="#8E979E">
+      <rect x="620" y="257" width="60" height="28"/><rect x="1020" y="257" width="60" height="28"/>
+      <rect x="730" y="257" width="240" height="28"/>
+    </g>
+    <text x="650" y="275" font-size="11.5" text-anchor="middle" fill="#2F363C">引腳</text>
+    <text x="1050" y="275" font-size="11.5" text-anchor="middle" fill="#2F363C">引腳</text>
+    <text x="850" y="275" font-size="11.5" text-anchor="middle" fill="#2F363C">外露散熱墊</text>
+    <!-- die -->
+    <rect x="790" y="217" width="120" height="40" fill="#E8F4EF" stroke="#9FC9B5"/>
+    <text x="850" y="241" font-size="12.5" text-anchor="middle" fill="#1F4D38">RF／類比晶粒</text>
+    <!-- wire bonds -->
+    <path d="M 800 217 Q 725 160 650 257" fill="none" stroke="#4A555E" stroke-width="2"/>
+    <path d="M 900 217 Q 975 160 1050 257" fill="none" stroke="#4A555E" stroke-width="2"/>
+    <!-- heat arrow -->
+    <line x1="945" y1="222" x2="945" y2="300" stroke="#B03A2E" stroke-width="1.8" marker-end="url(#heat)"/>
+    <text x="953" y="240" font-size="11" fill="#B03A2E">熱</text>
+    <text x="953" y="253" font-size="11" fill="#B03A2E">向下排出</text>
+
+    <!-- badges right -->
+    <g font-size="12" font-weight="700" fill="#fff" text-anchor="middle">
+      <circle cx="710" cy="190" r="10" fill="#6B7A1E"/><text x="710" y="194">5</text>
+      <circle cx="1072" cy="166" r="10" fill="#6B7A1E"/><text x="1072" y="170">6</text>
+      <circle cx="705" cy="271" r="10" fill="#6B7A1E"/><text x="705" y="275">7</text>
+      <circle cx="1084" cy="312" r="10" fill="#6B7A1E"/><text x="1084" y="316">8</text>
+    </g>
+  </svg><div class="diagram-cap">左：RF 晶圓層級（InP 或 GaAs 基板→磊晶→電晶體→切割）。右：QFN 封裝剖面（晶粒在導線架散熱墊上、打線到引腳、模封、平貼 PCB）。數字對應下方八個步驟。</div></div><div class="row" style="margin-top:14px"><div class="step t3"><h4>① 基板　Substrate</h4><p class="body-txt">化合物半導體晶圓——GaAs 用於手機與 WiFi（低電壓），GaN-on-Si 用於基地台與雷達（高電壓），InP 用於雷射。供應商：AXT、廈門三安、SCIOCS。</p></div><div class="step t3"><h4>② 磊晶　Epi layer</h4><p class="body-txt">以 MOCVD 在基板上長出。GaN 通常是長在便宜矽基板上的 GaN 磊晶——做電性工作的是 GaN 那一層，矽只是承載。供應商：IQE、VPEC、IntelliEPI。</p></div><div class="step t3"><h4>③ 元件　Devices</h4><p class="body-txt">RF 電晶體圖案化到磊晶層中。代工：穩懋、宏捷科（GaAs）、力積電（GaN-on-Si）、三安；Qorvo、Skyworks、Infineon 等 IDM 自行製造。</p></div><div class="step t3"><h4>④ 切割　Dice</h4><p class="body-txt">晶圓切割成一顆顆 RF 晶粒——一顆晶粒一個封裝，不像 CoWoS 那樣多晶粒。</p></div></div><div class="row"><div class="step t2"><h4>⑤ 打線　Wire bond</h4><p class="body-txt">晶粒黏在導線架中央的散熱墊上，再以細金線或銅線從晶粒頂端拱到引腳。沒有覆晶凸塊，沒有載板。</p></div><div class="step t2"><h4>⑥ 模封　Mould</h4><p class="body-txt">模封化合物澆在晶粒與導線上並固化，形成黑色塑膠本體。設備：TOWA。</p></div><div class="step t2"><h4>⑦ 引腳與散熱墊　Leads and pad</h4><p class="body-txt">導線架引腳與外露散熱墊是底面僅有的金屬——散熱墊就在晶粒正下方。</p></div><div class="step t2"><h4>⑧ 銲接　Solder</h4><p class="body-txt">引腳與散熱墊平貼銲在 PCB 上：無銲球、無載板、無插槽。OSAT：ASE、Amkor、長電。熱經散熱墊向下排入 PCB。</p></div></div><div class="grouplbl" style="margin-top:22px">QFN 對 CoWoS：同一個問題的兩個極端<span>熱往哪走，由「最短、阻力最小的路徑」決定</span></div>
+<table class="cmp" style="margin-top:0">
+  <tr><th style="width:150px"></th><th>QFN</th><th>CoWoS</th></tr>
+  <tr><td>熱的方向</td><td>晶粒發熱少，向下經外露散熱墊進 PCB</td><td>晶粒很熱，向上經蓋板與冷板排出</td></tr>
+  <tr><td>晶粒對外連接</td><td>打線（wire bond）</td><td>微凸塊（micro-bump）</td></tr>
+  <tr><td>對外引腳</td><td>導線架引腳</td><td>TSV＋RDL，再經載板銲球</td></tr>
+  <tr><td>散熱結構</td><td>外露散熱墊</td><td>蓋板＋冷板</td></tr>
+  <tr><td>載板</td><td>無——從頭到尾沒有載板</td><td>矽中介層＋ABF 載板</td></tr>
+  <tr><td>成本</td><td>本頁最便宜的封裝</td><td>本頁最貴的封裝</td></tr>
+  <tr><td>適用晶片</td><td>RF、類比、電源：接腳少、頻寬需求低、發熱小，中介層與載板都是多餘的成本</td><td>GPU、AI ASIC：HBM 要並排、頻寬高、功耗大</td></tr>
+</table></div>
+</div>
+
+<div class="divider"></div>
+
+
+<div class="stage" id="s5">
+  <div class="rail shared"><div class="stripe"></div>
+    <div class="num">06</div>
+    <h2>先進封裝家族　全結構剖面</h2>
+    <div class="clarify">中介層是這一家族的關鍵差異。先看手機端不用中介層的 SiP 與 InFO-PoP；再看 Intel 與三星各自的對應方案 EMIB 與 I-Cube；最後是台積電自己的兩個變體 CoWoP 與 CoPoS。每張剖面圖下方標示製作載體——圓形晶圓、方形面板或載板條帶。</div>
+  </div>
+  <div class="body">
+    <div class="notebox" style="margin:0 0 18px"><b>中介層 Interposer</b>　一層薄薄的層，通常以矽製成，夾在上方的晶片（例如 GPU 或 CPU 與 HBM 記憶體）與下方的層之間。它的作用是在旁邊並排的晶片之間繞出極細密的連接線路，因為這些晶片需要以非常高速且高密度的方式溝通，這是單靠下方那一層無法單獨負責的。</div>
+    <div class="grouplbl">A　手機端　Apple SiP 與 InFO-PoP<span>不用中介層的兩種結構，常一起出現</span></div>
+    <div class="diagram-pair">
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 260 220" role="img" aria-label="Apple SiP: logic, PMIC, and DRAM sit side by side on one shared substrate">
+          <text x="130" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1F7A5C">Apple SiP</text>
+          <rect x="20" y="40" width="60" height="34" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="50" y="61" text-anchor="middle" font-size="9.5" fill="#1F7A5C">Logic</text>
+          <rect x="90" y="40" width="60" height="34" fill="#FBE7E4" stroke="#C0433A" stroke-width="1.4"/><text x="120" y="61" text-anchor="middle" font-size="9.5" fill="#C0433A">PMIC</text>
+          <rect x="160" y="40" width="60" height="34" fill="#EAF3DE" stroke="#5C8A2A" stroke-width="1.4"/><text x="190" y="61" text-anchor="middle" font-size="9.5" fill="#3B6D11">DRAM</text>
+          <g fill="#7C8891"><circle cx="35" cy="80" r="2"/><circle cx="65" cy="80" r="2"/><circle cx="105" cy="80" r="2"/><circle cx="135" cy="80" r="2"/><circle cx="175" cy="80" r="2"/><circle cx="205" cy="80" r="2"/></g>
+          <rect x="10" y="88" width="220" height="34" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1.4"/><text x="120" y="109" text-anchor="middle" font-size="10.5" fill="#5F6C75">共用 PCB 載板</text>
+          <g fill="#7C8891"><circle cx="30" cy="128" r="2"/><circle cx="80" cy="128" r="2"/><circle cx="120" cy="128" r="2"/><circle cx="160" cy="128" r="2"/><circle cx="210" cy="128" r="2"/></g>
+          <rect x="0" y="136" width="240" height="30" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1"/><text x="120" y="155" text-anchor="middle" font-size="10" fill="#5F6C75">PCB</text>
+          <text x="120" y="190" text-anchor="middle" font-size="9.5" fill="#7C8891">並排放置，沒有堆疊，沒有中介層</text>
+        </svg>
+        <div class="carrier"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="3" y="14" width="34" height="12" fill="#FAEEDA" stroke="#8A5A00" stroke-width="1.5"/><path d="M14.3 14V26M25.7 14V26" stroke="#8A5A00" stroke-width=".9" opacity=".6"/></svg><span><b>載板條帶</b>　在有機載板條帶上組裝（載板級，非晶圓級）</span></div>
+        <div class="diagram-cap">邏輯晶粒、PMIC、DRAM 並排裝在同一塊共用載板上，是最簡單的一種結構。</div>
+      </div>
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 260 260" role="img" aria-label="InFO-PoP: DRAM stacked on top through PoP solder balls, SoC in fan-out mold compound, fan-out RDL, no interposer">
+          <text x="130" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#7A3FA0">InFO-PoP　台積電</text>
+          <rect x="80" y="30" width="90" height="30" fill="#FBE7E4" stroke="#C0433A" stroke-width="1.4"/><text x="125" y="49" text-anchor="middle" font-size="10" fill="#C0433A">DRAM</text>
+          <g fill="#7C8891"><circle cx="95" cy="66" r="2"/><circle cx="115" cy="66" r="2"/><circle cx="135" cy="66" r="2"/><circle cx="155" cy="66" r="2"/></g>
+          <rect x="50" y="74" width="150" height="40" fill="#ECEFF1" stroke="#7C8891" stroke-width="1"/>
+          <text x="125" y="86" text-anchor="middle" font-size="8.5" fill="#7C8891">扇出型模封化合物</text>
+          <rect x="65" y="92" width="120" height="18" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.2"/><text x="125" y="102" text-anchor="middle" font-size="9" fill="#1F7A5C">SoC（CPU+GPU+ASIC）</text>
+          <rect x="50" y="120" width="150" height="26" fill="#F1E7F6" stroke="#7A3FA0" stroke-width="1.6"/><text x="125" y="137" text-anchor="middle" font-size="10" fill="#7A3FA0">扇出型 RDL</text>
+          <text x="125" y="160" text-anchor="middle" font-size="9" fill="#B02E6E" font-style="italic">✕ 無中介層、無橋接</text>
+          <g fill="#7C8891"><circle cx="60" cy="172" r="2"/><circle cx="90" cy="172" r="2"/><circle cx="125" cy="172" r="2"/><circle cx="160" cy="172" r="2"/><circle cx="190" cy="172" r="2"/></g>
+          <rect x="40" y="180" width="170" height="26" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1.4"/><text x="125" y="197" text-anchor="middle" font-size="10" fill="#5F6C75">PCB</text>
+          <text x="125" y="228" text-anchor="middle" font-size="9.5" fill="#7C8891">DRAM 疊在上方，非並排</text>
+        </svg>
+        <div class="carrier"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M10 32.5A16 16 0 1 1 30 32.5Z" fill="#E4F2F3" stroke="#0E7C86" stroke-width="1.5" stroke-linejoin="round"/></svg><span><b>圓形晶圓</b>　在 300mm 矽晶圓上製作（晶圓級）</span></div>
+        <div class="diagram-cap">DRAM 透過 PoP 錫球疊在上方，整合 CPU／GPU／ASIC 的 SoC 裝在扇出型模封化合物中，直接連到扇出型 RDL，完全不涉及中介層或矽橋。</div>
+      </div>
+    </div>
+    <div class="grouplbl">B　Intel 與三星　EMIB／I-Cube<span>另外兩家的對應方案：矽橋嵌在載板內，或整片矽中介層</span></div>
+    <div class="diagram-pair">
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 260 250" role="img" aria-label="EMIB: no full interposer, a small silicon bridge is embedded inside the substrate under the die-to-die seam">
+          <text x="130" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#8A5A00">EMIB　Intel（2.5D）</text>
+          <rect x="30" y="30" width="70" height="30" fill="#FBE7E4" stroke="#C0433A" stroke-width="1.4"/><text x="65" y="49" text-anchor="middle" font-size="10" fill="#C0433A">HBM</text>
+          <rect x="110" y="30" width="110" height="30" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="165" y="49" text-anchor="middle" font-size="10" fill="#1F7A5C">GPU／CPU</text>
+          <g fill="#7C8891"><circle cx="45" cy="66" r="2"/><circle cx="80" cy="66" r="2"/><circle cx="125" cy="66" r="2"/><circle cx="165" cy="66" r="2"/><circle cx="205" cy="66" r="2"/></g>
+          <rect x="10" y="74" width="230" height="60" fill="#FAEEDA" stroke="#8A5A00" stroke-width="1.4"/>
+          <text x="125" y="90" text-anchor="middle" font-size="10.5" fill="#8A5A00">載板 Substrate</text>
+          <rect x="90" y="100" width="70" height="24" fill="#F1E7F6" stroke="#7A3FA0" stroke-width="1.4"/>
+          <text x="125" y="116" text-anchor="middle" font-size="9.5" fill="#7A3FA0">嵌入式矽橋</text>
+          <g fill="#7C8891"><circle cx="30" cy="142" r="2"/><circle cx="70" cy="142" r="2"/><circle cx="125" cy="142" r="2"/><circle cx="180" cy="142" r="2"/><circle cx="220" cy="142" r="2"/></g>
+          <rect x="0" y="150" width="250" height="32" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1.4"/><text x="125" y="170" text-anchor="middle" font-size="10.5" fill="#5F6C75">PCB</text>
+          <text x="125" y="210" text-anchor="middle" font-size="10" fill="#7C8891">三層結構，矽橋只嵌在需要高速溝通的接縫下方</text>
+        </svg>
+        <div class="carrier"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="3" y="14" width="34" height="12" fill="#FAEEDA" stroke="#8A5A00" stroke-width="1.5"/><path d="M14.3 14V26M25.7 14V26" stroke="#8A5A00" stroke-width=".9" opacity=".6"/></svg><span><b>載板條帶</b>　在有機載板條帶上組裝（載板級，非晶圓級）</span></div>
+        <div class="diagram-cap">不使用整片中介層，而是在載板內嵌入一小塊矽橋，只放在晶片接縫處下方。</div>
+      </div>
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 260 280" role="img" aria-label="I-Cube: identical structure to CoWoS, Samsung's own version">
+          <text x="130" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#5B4B9E">I-Cube　三星</text>
+          <rect x="30" y="30" width="70" height="30" fill="#FBE7E4" stroke="#C0433A" stroke-width="1.4"/><text x="65" y="49" text-anchor="middle" font-size="10" fill="#C0433A">HBM</text>
+          <rect x="110" y="30" width="110" height="30" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="165" y="49" text-anchor="middle" font-size="10" fill="#1F7A5C">GPU／CPU</text>
+          <g fill="#7C8891"><circle cx="45" cy="66" r="2"/><circle cx="80" cy="66" r="2"/><circle cx="125" cy="66" r="2"/><circle cx="165" cy="66" r="2"/><circle cx="205" cy="66" r="2"/></g>
+          <rect x="20" y="74" width="210" height="32" fill="#E6F1FB" stroke="#2560A6" stroke-width="1.6"/><text x="125" y="94" text-anchor="middle" font-size="10.5" fill="#2560A6">矽中介層 Interposer</text>
+          <g fill="#7C8891"><circle cx="40" cy="114" r="2"/><circle cx="80" cy="114" r="2"/><circle cx="125" cy="114" r="2"/><circle cx="170" cy="114" r="2"/><circle cx="210" cy="114" r="2"/></g>
+          <rect x="10" y="122" width="230" height="32" fill="#FAEEDA" stroke="#8A5A00" stroke-width="1.4"/><text x="125" y="142" text-anchor="middle" font-size="10.5" fill="#8A5A00">載板 Substrate</text>
+          <g fill="#7C8891"><circle cx="30" cy="162" r="2"/><circle cx="70" cy="162" r="2"/><circle cx="125" cy="162" r="2"/><circle cx="180" cy="162" r="2"/><circle cx="220" cy="162" r="2"/></g>
+          <rect x="0" y="170" width="250" height="32" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1.4"/><text x="125" y="190" text-anchor="middle" font-size="10.5" fill="#5F6C75">PCB</text>
+          <text x="125" y="230" text-anchor="middle" font-size="10" fill="#7C8891">四層結構，與 CoWoS 完全相同</text>
+        </svg>
+        <div class="carrier"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M10 32.5A16 16 0 1 1 30 32.5Z" fill="#E4F2F3" stroke="#0E7C86" stroke-width="1.5" stroke-linejoin="round"/></svg><span><b>圓形晶圓</b>　在 300mm 矽晶圓上製作（晶圓級）</span></div>
+        <div class="diagram-cap">結構與 CoWoS 完全相同，是三星自家版本的矽中介層封裝技術。</div>
+      </div>
+    </div>
+    <div class="grouplbl">C　台積電變體　CoWoP／CoPoS<span>與 CoWoS 同一套上下層：一個省掉載板，一個把中介層換成面板</span></div>
+    <div class="diagram-pair">
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 260 230" role="img" aria-label="CoWoP: interposer sits directly on PCB, no substrate">
+          <text x="130" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E7C86">CoWoP　台積電</text>
+          <rect x="30" y="30" width="70" height="30" fill="#FBE7E4" stroke="#C0433A" stroke-width="1.4"/><text x="65" y="49" text-anchor="middle" font-size="10" fill="#C0433A">HBM</text>
+          <rect x="110" y="30" width="110" height="30" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="165" y="49" text-anchor="middle" font-size="10" fill="#1F7A5C">GPU／CPU</text>
+          <g fill="#7C8891"><circle cx="45" cy="66" r="2"/><circle cx="80" cy="66" r="2"/><circle cx="125" cy="66" r="2"/><circle cx="165" cy="66" r="2"/><circle cx="205" cy="66" r="2"/></g>
+          <rect x="20" y="74" width="210" height="32" fill="#E6F1FB" stroke="#2560A6" stroke-width="1.6"/><text x="125" y="94" text-anchor="middle" font-size="10.5" fill="#2560A6">RDL 中介層</text>
+          <g fill="#7C8891"><circle cx="40" cy="114" r="2"/><circle cx="80" cy="114" r="2"/><circle cx="125" cy="114" r="2"/><circle cx="170" cy="114" r="2"/><circle cx="210" cy="114" r="2"/></g>
+          <text x="125" y="132" text-anchor="middle" font-size="9.5" fill="#B02E6E" font-style="italic">✕ 省略 ABF 載板</text>
+          <rect x="0" y="140" width="250" height="32" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1.4"/><text x="125" y="160" text-anchor="middle" font-size="10.5" fill="#5F6C75">PCB（常需 SLP 等級）</text>
+          <text x="125" y="200" text-anchor="middle" font-size="10" fill="#7C8891">三層結構</text>
+        </svg>
+        <div class="carrier"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M10 32.5A16 16 0 1 1 30 32.5Z" fill="#E4F2F3" stroke="#0E7C86" stroke-width="1.5" stroke-linejoin="round"/></svg><span><b>圓形晶圓</b>　在 300mm 矽晶圓上製作（晶圓級）</span></div>
+        <div class="diagram-cap">省略 ABF 載板，中介層直接裝在 PCB 上；PCB 通常需採用 SLP 等級以彌補缺少的載板。</div>
+      </div>
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 260 280" role="img" aria-label="CoPoS: same four layers as CoWoS but interposer replaced with panel-level RDL">
+          <text x="130" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#7A3FA0">CoPoS　台積電</text>
+          <rect x="30" y="30" width="70" height="30" fill="#FBE7E4" stroke="#C0433A" stroke-width="1.4"/><text x="65" y="49" text-anchor="middle" font-size="10" fill="#C0433A">HBM</text>
+          <rect x="110" y="30" width="110" height="30" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="165" y="49" text-anchor="middle" font-size="10" fill="#1F7A5C">GPU／CPU</text>
+          <g fill="#7C8891"><circle cx="45" cy="66" r="2"/><circle cx="80" cy="66" r="2"/><circle cx="125" cy="66" r="2"/><circle cx="165" cy="66" r="2"/><circle cx="205" cy="66" r="2"/></g>
+          <rect x="20" y="74" width="210" height="32" fill="#F1E7F6" stroke="#7A3FA0" stroke-width="1.6"/><text x="125" y="94" text-anchor="middle" font-size="10.5" fill="#7A3FA0">面板級 RDL（玻璃／藍寶石）</text>
+          <g fill="#7C8891"><circle cx="40" cy="114" r="2"/><circle cx="80" cy="114" r="2"/><circle cx="125" cy="114" r="2"/><circle cx="170" cy="114" r="2"/><circle cx="210" cy="114" r="2"/></g>
+          <rect x="10" y="122" width="230" height="32" fill="#FAEEDA" stroke="#8A5A00" stroke-width="1.4"/><text x="125" y="142" text-anchor="middle" font-size="10.5" fill="#8A5A00">ABF 載板（仍保留）</text>
+          <g fill="#7C8891"><circle cx="30" cy="162" r="2"/><circle cx="70" cy="162" r="2"/><circle cx="125" cy="162" r="2"/><circle cx="180" cy="162" r="2"/><circle cx="220" cy="162" r="2"/></g>
+          <rect x="0" y="170" width="250" height="32" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1.4"/><text x="125" y="190" text-anchor="middle" font-size="10.5" fill="#5F6C75">PCB</text>
+          <text x="125" y="230" text-anchor="middle" font-size="10" fill="#7C8891">四層結構，方形面板製作（非圓形晶圓）</text>
+        </svg>
+        <div class="carrier"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="5" y="7" width="30" height="26" fill="#FAEEE1" stroke="#B85C10" stroke-width="1.5"/><path d="M15 7V33M25 7V33M5 15.7H35M5 24.3H35" stroke="#B85C10" stroke-width=".7" opacity=".55"/></svg><span><b>方形面板</b>　在玻璃／藍寶石面板上製作（面板級）</span></div>
+        <div class="diagram-cap">結構與 CoWoS 相同，但用面板級 RDL（玻璃或藍寶石基材）取代矽中介層，仍保留 ABF 載板。</div>
+      </div>
+    </div>
+<div class="notebox">
+      <b>材料釐清 — CoWoS-R 對 CoPoS</b>
+      <p style="margin:8px 0 0">CoWoS-R 的 RDL 是聚合物介電材料與銅線路建構在圓形矽晶圓上，而 CoPoS 的 RDL 則是建構在玻璃或藍寶石面板上，是真正不同的基礎材料，不只是形狀不同。</p>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="stage" id="sc3">
+  <div class="rail shared"><div class="stripe"></div>
+    <div class="num">07</div>
+    <h2>CoWoS 三型　S／L／R　側視＋俯視</h2>
+    <div class="clarify">前一節的 CoWoS 是通用畫法；台積電實際上有三個變體，差別集中在中介層的材料與矽的覆蓋範圍。上排側視、下排俯視。</div>
+  </div>
+  <div class="body"><div class="diagram-trio"><div class="diagram-wrap"><svg viewBox="0 0 260 260" role="img" aria-label="CoWoS-S: full silicon interposer"><text x="130" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E7C86">CoWoS-S　台積電</text><rect x="30" y="30" width="70" height="30" fill="#FBE7E4" stroke="#C0433A" stroke-width="1.4"/><text x="65.0" y="49.0" text-anchor="middle" font-size="10" fill="#C0433A">HBM</text><rect x="110" y="30" width="110" height="30" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="165.0" y="49.0" text-anchor="middle" font-size="10" fill="#1F7A5C">GPU／ASIC</text><g fill="#7C8891"><circle cx="45" cy="66" r="2"/><circle cx="80" cy="66" r="2"/><circle cx="125" cy="66" r="2"/><circle cx="165" cy="66" r="2"/><circle cx="205" cy="66" r="2"/></g><rect x="20" y="74" width="210" height="32" fill="#E6F1FB" stroke="#2560A6" stroke-width="1.4"/><text x="125.0" y="94.0" text-anchor="middle" font-size="10" fill="#2560A6">矽中介層（整片）Si interposer</text><g fill="#7C8891"><circle cx="40" cy="114" r="2"/><circle cx="80" cy="114" r="2"/><circle cx="125" cy="114" r="2"/><circle cx="170" cy="114" r="2"/><circle cx="210" cy="114" r="2"/></g><rect x="10" y="122" width="230" height="30" fill="#FAEEDA" stroke="#8A5A00" stroke-width="1.4"/><text x="125.0" y="141.0" text-anchor="middle" font-size="10" fill="#8A5A00">ABF 載板 Substrate</text><g fill="#7C8891"><circle cx="30" cy="160" r="2"/><circle cx="70" cy="160" r="2"/><circle cx="125" cy="160" r="2"/><circle cx="180" cy="160" r="2"/><circle cx="220" cy="160" r="2"/></g><rect x="0" y="168" width="250" height="30" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1.4"/><text x="125.0" y="187.0" text-anchor="middle" font-size="10" fill="#5F6C75">PCB</text><text x="125" y="224" text-anchor="middle" font-size="9.5" fill="#7C8891">整片矽中介層，受光罩尺寸限制（≤1 reticle）</text><text x="125" y="240" text-anchor="middle" font-size="9.5" fill="#7C8891">用於 H100 世代；量已移向 CoWoS-L</text></svg></div><div class="diagram-wrap"><svg viewBox="0 0 260 260" role="img" aria-label="CoWoS-L: RDL interposer with local silicon bridges"><text x="130" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E7C86">CoWoS-L　台積電</text><rect x="20" y="30" width="60" height="30" fill="#FBE7E4" stroke="#C0433A" stroke-width="1.4"/><text x="50.0" y="49.0" text-anchor="middle" font-size="10" fill="#C0433A">HBM</text><rect x="86" y="30" width="58" height="30" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="115.0" y="49.0" text-anchor="middle" font-size="9.5" fill="#1F7A5C">邏輯晶粒</text><rect x="150" y="30" width="58" height="30" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="179.0" y="49.0" text-anchor="middle" font-size="9.5" fill="#1F7A5C">邏輯晶粒</text><rect x="214" y="30" width="36" height="30" fill="#FBE7E4" stroke="#C0433A" stroke-width="1.4"/><text x="232.0" y="49.0" text-anchor="middle" font-size="9" fill="#C0433A">HBM</text><g fill="#7C8891"><circle cx="35" cy="66" r="2"/><circle cx="65" cy="66" r="2"/><circle cx="100" cy="66" r="2"/><circle cx="135" cy="66" r="2"/><circle cx="170" cy="66" r="2"/><circle cx="200" cy="66" r="2"/><circle cx="232" cy="66" r="2"/></g><rect x="10" y="74" width="230" height="32" fill="#EEF2F8" stroke="#5B4B9E" stroke-width="1.4"/><rect x="66" y="74" width="38" height="32" fill="#DCEAFB" stroke="#2560A6" stroke-width="1.4"/><text x="85.0" y="94.0" text-anchor="middle" font-size="9" fill="#2560A6">矽橋</text><rect x="130" y="74" width="38" height="32" fill="#DCEAFB" stroke="#2560A6" stroke-width="1.4"/><text x="149.0" y="94.0" text-anchor="middle" font-size="9" fill="#2560A6">矽橋</text><rect x="194" y="74" width="38" height="32" fill="#DCEAFB" stroke="#2560A6" stroke-width="1.4"/><text x="213.0" y="94.0" text-anchor="middle" font-size="9" fill="#2560A6">矽橋</text><text x="40" y="94" text-anchor="middle" font-size="9" fill="#5B4B9E">RDL</text><g fill="#7C8891"><circle cx="30" cy="114" r="2"/><circle cx="70" cy="114" r="2"/><circle cx="125" cy="114" r="2"/><circle cx="180" cy="114" r="2"/><circle cx="220" cy="114" r="2"/></g><rect x="10" y="122" width="230" height="30" fill="#FAEEDA" stroke="#8A5A00" stroke-width="1.4"/><text x="125.0" y="141.0" text-anchor="middle" font-size="10" fill="#8A5A00">ABF 載板 Substrate</text><g fill="#7C8891"><circle cx="30" cy="160" r="2"/><circle cx="70" cy="160" r="2"/><circle cx="125" cy="160" r="2"/><circle cx="180" cy="160" r="2"/><circle cx="220" cy="160" r="2"/></g><rect x="0" y="168" width="250" height="30" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1.4"/><text x="125.0" y="187.0" text-anchor="middle" font-size="10" fill="#5F6C75">PCB</text><text x="125" y="224" text-anchor="middle" font-size="9.5" fill="#7C8891">RDL 中介層＋局部矽橋，只在接縫下方</text><text x="125" y="240" text-anchor="middle" font-size="9.5" fill="#7C8891">可超過光罩尺寸；Blackwell、Rubin、MI300 系列</text></svg></div><div class="diagram-wrap"><svg viewBox="0 0 260 260" role="img" aria-label="CoWoS-R: organic RDL interposer"><text x="130" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E7C86">CoWoS-R　台積電</text><rect x="30" y="30" width="70" height="30" fill="#FBE7E4" stroke="#C0433A" stroke-width="1.4"/><text x="65.0" y="49.0" text-anchor="middle" font-size="10" fill="#C0433A">HBM</text><rect x="110" y="30" width="110" height="30" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="165.0" y="49.0" text-anchor="middle" font-size="10" fill="#1F7A5C">GPU／ASIC</text><g fill="#7C8891"><circle cx="45" cy="66" r="2"/><circle cx="80" cy="66" r="2"/><circle cx="125" cy="66" r="2"/><circle cx="165" cy="66" r="2"/><circle cx="205" cy="66" r="2"/></g><rect x="20" y="74" width="210" height="32" fill="#EEF2F8" stroke="#5B4B9E" stroke-width="1.4"/><text x="125.0" y="94.0" text-anchor="middle" font-size="10" fill="#5B4B9E">有機 RDL（無矽）Organic RDL</text><g fill="#7C8891"><circle cx="40" cy="114" r="2"/><circle cx="80" cy="114" r="2"/><circle cx="125" cy="114" r="2"/><circle cx="170" cy="114" r="2"/><circle cx="210" cy="114" r="2"/></g><rect x="10" y="122" width="230" height="30" fill="#FAEEDA" stroke="#8A5A00" stroke-width="1.4"/><text x="125.0" y="141.0" text-anchor="middle" font-size="10" fill="#8A5A00">ABF 載板 Substrate</text><g fill="#7C8891"><circle cx="30" cy="160" r="2"/><circle cx="70" cy="160" r="2"/><circle cx="125" cy="160" r="2"/><circle cx="180" cy="160" r="2"/><circle cx="220" cy="160" r="2"/></g><rect x="0" y="168" width="250" height="30" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1.4"/><text x="125.0" y="187.0" text-anchor="middle" font-size="10" fill="#5F6C75">PCB</text><text x="125" y="224" text-anchor="middle" font-size="9.5" fill="#7C8891">純有機 RDL，最便宜、密度最低</text><text x="125" y="240" text-anchor="middle" font-size="9.5" fill="#7C8891">不受光罩限制；用於較低頻寬的 HBM 連接</text></svg></div></div><div class="diagram-trio" style="margin-top:6px"><div class="diagram-wrap"><svg viewBox="0 0 260 224" role="img" aria-label="CoWoS-S top view: one continuous interposer under all dies"><text x="130" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E7C86">CoWoS-S　俯視</text><rect x="4" y="28" width="252" height="166" fill="#FAEEDA" stroke="#8A5A00" stroke-width="1.4" stroke-dasharray="4,3"/><rect x="20" y="32" width="220" height="150" fill="#E6F1FB" stroke="#2560A6" stroke-width="1.4"/><text x="130" y="176" text-anchor="middle" font-size="9" fill="#2560A6">整片矽中介層（一塊）</text><rect x="34" y="60" width="44" height="90" fill="#FBE7E4" stroke="#C0433A" stroke-width="1.4"/><text x="56.0" y="109.0" text-anchor="middle" font-size="9" fill="#C0433A">HBM</text><rect x="86" y="44" width="88" height="122" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="130.0" y="109.0" text-anchor="middle" font-size="10" fill="#1F7A5C">GPU</text><rect x="182" y="60" width="44" height="90" fill="#FBE7E4" stroke="#C0433A" stroke-width="1.4"/><text x="204.0" y="109.0" text-anchor="middle" font-size="9" fill="#C0433A">HBM</text><text x="130" y="210" text-anchor="middle" font-size="9.5" fill="#7C8891">虛線＝ABF 載板；藍色＝中介層覆蓋整個晶粒區</text></svg></div><div class="diagram-wrap"><svg viewBox="0 0 260 230" role="img" aria-label="CoWoS-L top view: silicon bridges only under die seams"><text x="130" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E7C86">CoWoS-L　俯視</text><rect x="4" y="28" width="252" height="166" fill="#FAEEDA" stroke="#8A5A00" stroke-width="1.4" stroke-dasharray="4,3"/><rect x="20" y="32" width="220" height="150" fill="#EEF2F8" stroke="#5B4B9E" stroke-width="1.4"/><text x="130" y="176" text-anchor="middle" font-size="9" fill="#5B4B9E">RDL 中介層（可超過光罩）</text><rect x="30" y="60" width="40" height="90" fill="#FBE7E4" stroke="#C0433A" stroke-width="1.4"/><text x="50.0" y="109.0" text-anchor="middle" font-size="9" fill="#C0433A">HBM</text><rect x="78" y="44" width="50" height="122" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="103.0" y="109.0" text-anchor="middle" font-size="9" fill="#1F7A5C">晶粒</text><rect x="132" y="44" width="50" height="122" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="157.0" y="109.0" text-anchor="middle" font-size="9" fill="#1F7A5C">晶粒</text><rect x="190" y="60" width="40" height="90" fill="#FBE7E4" stroke="#C0433A" stroke-width="1.4"/><text x="210.0" y="109.0" text-anchor="middle" font-size="9" fill="#C0433A">HBM</text><rect x="66" y="86" width="16" height="40" fill="#DCEAFB" stroke="#2560A6" stroke-width="1.4"/><rect x="124" y="86" width="12" height="40" fill="#DCEAFB" stroke="#2560A6" stroke-width="1.4"/><rect x="178" y="86" width="16" height="40" fill="#DCEAFB" stroke="#2560A6" stroke-width="1.4"/><text x="130" y="206" text-anchor="middle" font-size="9" fill="#2560A6">深藍小塊＝矽橋，只埋在晶粒接縫下</text><text x="130" y="220" text-anchor="middle" font-size="9.5" fill="#7C8891">矽只用在需要高速溝通的接縫，其餘是 RDL</text></svg></div><div class="diagram-wrap"><svg viewBox="0 0 260 224" role="img" aria-label="CoWoS-R top view: organic RDL, no silicon"><text x="130" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E7C86">CoWoS-R　俯視</text><rect x="4" y="28" width="252" height="166" fill="#FAEEDA" stroke="#8A5A00" stroke-width="1.4" stroke-dasharray="4,3"/><rect x="20" y="32" width="220" height="150" fill="#EEF2F8" stroke="#5B4B9E" stroke-width="1.4"/><text x="130" y="176" text-anchor="middle" font-size="9" fill="#5B4B9E">有機 RDL（完全沒有矽）</text><rect x="34" y="60" width="44" height="90" fill="#FBE7E4" stroke="#C0433A" stroke-width="1.4"/><text x="56.0" y="109.0" text-anchor="middle" font-size="9" fill="#C0433A">HBM</text><rect x="86" y="44" width="88" height="122" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="130.0" y="109.0" text-anchor="middle" font-size="10" fill="#1F7A5C">GPU</text><rect x="182" y="60" width="44" height="90" fill="#FBE7E4" stroke="#C0433A" stroke-width="1.4"/><text x="204.0" y="109.0" text-anchor="middle" font-size="9" fill="#C0433A">HBM</text><text x="130" y="210" text-anchor="middle" font-size="9.5" fill="#7C8891">與 S 同樣是整片，但材料換成有機聚合物</text></svg></div></div><div class="row" style="margin-top:14px"><div class="step t2"><h4>CoWoS-S</h4><p class="body-txt">整片矽中介層，內含 TSV，覆蓋所有晶粒。線路密度最高，但中介層不能超過一個光罩尺寸，限制了 HBM 數量。H100／H200、MI250、早期 TPU。</p></div><div class="step t1"><h4>CoWoS-L</h4><p class="body-txt">有機 RDL 中介層，只在晶粒接縫與 HBM 接縫下方嵌入小塊矽橋。矽只用在需要高速線路的地方，因此封裝可以超過光罩尺寸。Blackwell、Rubin、MI300–MI455X、TPU（經 Broadcom）、Trainium3、Maia。</p></div><div class="step t3"><h4>CoWoS-R</h4><p class="body-txt">完全沒有矽——中介層是純有機 RDL。最便宜、不受光罩限制，但線路較粗，適合較低頻寬的 HBM 連接與部分網通晶片，不適合旗艦 GPU。</p></div></div><div class="notebox"><b>三型怎麼分</b>　看中介層的材料：S 是整片矽，L 是 RDL 加局部矽橋，R 是純 RDL 無矽。三者的上層（晶粒＋HBM）與下層（ABF 載板→PCB）完全相同；只有中間那一層不同。俯視圖中，藍色代表矽的覆蓋範圍：S 整片，L 只在接縫，R 沒有。</div></div>
+</div>
+
+<div class="divider"></div>
+
+<div class="stage" id="si3">
+  <div class="rail"><div class="stripe"></div>
+    <div class="num">08</div>
+    <h2>Intel 封裝　全部變體</h2>
+    <div class="clarify">依 Intel Foundry 現行目錄，由最先進排到最基本：EMIB 3.5D（Foveros 堆疊用 EMIB 相連）、3D 的 Foveros Direct 與 Foveros Omni、Foveros 2.5D 三型（差在中介層材料）、EMIB 2.5D 三型（差在矽橋裡加了什麼）。每張圖標註公布或量產年份。</div>
+  </div>
+  <div class="body">
+    <div class="grouplbl">A　3.5D　EMIB 3.5D（2023）<span>Foveros 堆疊並排，再用 EMIB 把基底晶粒連起來——最高整合度</span></div>
+    <div class="diagram-trio"><div class="diagram-wrap"><svg viewBox="0 0 260 236" role="img" aria-label="EMIB 3.5D: two Foveros stacks side by side on the substrate, their base dies joined by an EMIB bridge embedded in the substrate"><text x="130" y="18" text-anchor="middle" font-size="12.5" fill="#B85C10" font-weight="700">EMIB 3.5D　Foveros＋EMIB（2023）</text><rect x="32" y="26" width="62" height="20" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="63" y="40" text-anchor="middle" font-size="8" fill="#1F7A5C">上層晶粒</text><rect x="158" y="26" width="62" height="20" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="189" y="40" text-anchor="middle" font-size="8" fill="#1F7A5C">上層晶粒</text><g fill="#7C8891"><circle cx="42" cy="49" r="1.5"/><circle cx="55" cy="49" r="1.5"/><circle cx="68" cy="49" r="1.5"/><circle cx="81" cy="49" r="1.5"/><circle cx="168" cy="49" r="1.5"/><circle cx="181" cy="49" r="1.5"/><circle cx="194" cy="49" r="1.5"/><circle cx="207" cy="49" r="1.5"/></g><rect x="25" y="52" width="80" height="26" fill="#EAF4EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="65" y="69" text-anchor="middle" font-size="8.5" fill="#1F7A5C">基底晶粒</text><rect x="147" y="52" width="80" height="26" fill="#EAF4EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="187" y="69" text-anchor="middle" font-size="8.5" fill="#1F7A5C">基底晶粒</text><g fill="#7C8891"><circle cx="35" cy="84" r="2"/><circle cx="55" cy="84" r="2"/><circle cx="75" cy="84" r="2"/><circle cx="95" cy="84" r="2"/><circle cx="155" cy="84" r="2"/><circle cx="175" cy="84" r="2"/><circle cx="195" cy="84" r="2"/><circle cx="215" cy="84" r="2"/></g><rect x="10" y="92" width="230" height="40" fill="#FAEEDA" stroke="#8A5A00" stroke-width="1.4"/><text x="125" y="105" text-anchor="middle" font-size="9.5" fill="#8A5A00">載板 Substrate</text><rect x="98" y="110" width="56" height="16" fill="#DCEAFB" stroke="#2560A6" stroke-width="1.3"/><text x="126" y="121.5" text-anchor="middle" font-size="8" fill="#2560A6">矽橋</text><g fill="#7C8891"><circle cx="30" cy="140" r="2"/><circle cx="70" cy="140" r="2"/><circle cx="125" cy="140" r="2"/><circle cx="180" cy="140" r="2"/><circle cx="220" cy="140" r="2"/></g><rect x="0" y="148" width="250" height="30" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1.4"/><text x="125" y="167" text-anchor="middle" font-size="10" fill="#5F6C75">PCB</text><text x="125" y="206" text-anchor="middle" font-size="9.5" fill="#B02E6E" font-style="italic">✕ 兩組 Foveros 堆疊之間以 EMIB 相連</text><text x="125" y="222" text-anchor="middle" font-size="9.5" fill="#7C8891">Ponte Vecchio 即此結構（Co-EMIB）</text></svg></div><div class="notebox" style="grid-column:span 2"><b>與台積電對照</b>　Foveros-S ↔ CoWoS-S（矽中介層）；Foveros-R ↔ CoWoS-R（有機 RDL）；Foveros-B ↔ CoWoS-L（RDL 內嵌矽橋）；EMIB ↔ 沒有直接對應——矽橋埋在載板裡而非中介層裡，最接近的是 CoWoS-L 但低一層；EMIB-M／EMIB-T ↔ 無對應；Foveros Direct ↔ SoIC（混合鍵合）；EMIB 3.5D ↔ 3DFabric（SoIC＋CoWoS）。</div></div>
+    <div class="grouplbl">B　3D　Foveros Direct／Foveros Omni（2021）<span>真正的晶粒疊晶粒：混合鍵合，以及銅柱懸空版</span></div>
+    <div class="diagram-trio"><div class="diagram-wrap"><svg viewBox="0 0 260 236" role="img" aria-label="Foveros Direct: copper-to-copper hybrid bonding, no micro-bumps"><text x="130" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#B85C10">① Foveros Direct　混合鍵合（2021）</text><rect x="60" y="26" width="140" height="26" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="130.0" y="43.0" text-anchor="middle" font-size="9" fill="#1F7A5C">上層晶粒</text><rect x="60" y="52" width="140" height="6" fill="#DCEAFB" stroke="#2560A6" stroke-width="1"/><text x="222" y="58" font-size="8.5" fill="#2560A6">混合鍵合</text><rect x="40" y="58" width="180" height="28" fill="#EAF4EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="130.0" y="76.0" text-anchor="middle" font-size="9" fill="#1F7A5C">基底晶粒 Base die</text><g fill="#7C8891"><circle cx="55" cy="92" r="2"/><circle cx="90" cy="92" r="2"/><circle cx="130" cy="92" r="2"/><circle cx="170" cy="92" r="2"/><circle cx="205" cy="92" r="2"/></g><rect x="10" y="100" width="230" height="30" fill="#FAEEDA" stroke="#8A5A00" stroke-width="1.4"/><text x="125.0" y="119.0" text-anchor="middle" font-size="10" fill="#8A5A00">載板 Substrate</text><g fill="#7C8891"><circle cx="30" cy="138" r="2"/><circle cx="70" cy="138" r="2"/><circle cx="125" cy="138" r="2"/><circle cx="180" cy="138" r="2"/><circle cx="220" cy="138" r="2"/></g><rect x="0" y="146" width="250" height="30" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1.4"/><text x="125.0" y="165.0" text-anchor="middle" font-size="10" fill="#5F6C75">PCB</text><text x="125" y="200" text-anchor="middle" font-size="9.5" fill="#B02E6E" font-style="italic">✕ 無微凸塊：銅對銅混合鍵合，間距 &lt;10µm</text><text x="125" y="216" text-anchor="middle" font-size="9.5" fill="#7C8891">相當於台積電 SoIC；密度最高</text></svg></div><div class="diagram-wrap"><svg viewBox="0 0 260 236" role="img" aria-label="Foveros Omni: top die wider than the base die and overhanging it, micro-bumps between them, copper columns through the mould carry power from the substrate straight to the top die"><text x="130" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#B85C10">② Foveros Omni　銅柱懸空（2021）</text><rect x="30" y="58" width="200" height="30" fill="#F3F4F5" stroke="#8E979E" stroke-width="1"/><rect x="30" y="26" width="200" height="26" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="130" y="43" text-anchor="middle" font-size="9" fill="#1F7A5C">上層晶粒（可大於基底、懸空）</text><g fill="#7C8891"><circle cx="90" cy="55" r="1.8"/><circle cx="110" cy="55" r="1.8"/><circle cx="130" cy="55" r="1.8"/><circle cx="150" cy="55" r="1.8"/><circle cx="170" cy="55" r="1.8"/></g><rect x="80" y="58" width="100" height="28" fill="#EAF4EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="130" y="76" text-anchor="middle" font-size="9" fill="#1F7A5C">基底晶粒 Base die</text><rect x="42" y="52" width="9" height="48" fill="#E9B98A" stroke="#B85C10" stroke-width="1.2"/><rect x="209" y="52" width="9" height="48" fill="#E9B98A" stroke="#B85C10" stroke-width="1.2"/><text x="222" y="70" font-size="8.5" fill="#B85C10">銅柱</text><g fill="#7C8891"><circle cx="95" cy="93" r="2"/><circle cx="130" cy="93" r="2"/><circle cx="165" cy="93" r="2"/></g><rect x="10" y="100" width="230" height="30" fill="#FAEEDA" stroke="#8A5A00" stroke-width="1.4"/><text x="125" y="119" text-anchor="middle" font-size="10" fill="#8A5A00">載板 Substrate</text><g fill="#7C8891"><circle cx="30" cy="138" r="2"/><circle cx="70" cy="138" r="2"/><circle cx="125" cy="138" r="2"/><circle cx="180" cy="138" r="2"/><circle cx="220" cy="138" r="2"/></g><rect x="0" y="146" width="250" height="30" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1.4"/><text x="125" y="165" text-anchor="middle" font-size="10" fill="#5F6C75">PCB</text><text x="125" y="200" text-anchor="middle" font-size="9.5" fill="#B02E6E" font-style="italic">✕ 頂晶粒懸空；銅柱直通載板供電</text><text x="125" y="216" text-anchor="middle" font-size="9.5" fill="#7C8891">可混不同節點；微凸塊間距 25µm</text></svg></div><div class="notebox"><b>命名注意</b>　Intel 現行目錄把原始 Foveros——晶粒疊在含 TSV 的基底晶粒上——歸為 Foveros-S 2.5D，因為頂晶粒是「並排」放在那片矽中介層上；真正掛 3D 名稱的只有混合鍵合的 Foveros Direct。Foveros Omni 是 2021 年公布的名稱，現行目錄未單獨列出。</div></div>
+    <div class="grouplbl">C　Foveros 2.5D 三型　-B／-R／-S<span>晶粒並排在中介層上；由新到舊，差別在中介層材料（對應 CoWoS-L／R／S）</span></div>
+    <div class="diagram-trio"><div class="diagram-wrap"><svg viewBox="0 0 260 236" role="img" aria-label="Foveros-B 2.5D: RDL interposer with a small silicon bridge embedded under the seam between the dies"><text x="130" y="18" text-anchor="middle" font-size="12.5" fill="#B85C10" font-weight="700">① Foveros-B　RDL＋矽橋（2025）</text><rect x="45" y="30" width="75" height="26" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="82" y="47" text-anchor="middle" font-size="9" fill="#1F7A5C">晶粒</text><rect x="130" y="30" width="75" height="26" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="167" y="47" text-anchor="middle" font-size="9" fill="#1F7A5C">晶粒</text><g fill="#7C8891"><circle cx="55" cy="60" r="1.6"/><circle cx="70" cy="60" r="1.6"/><circle cx="85" cy="60" r="1.6"/><circle cx="100" cy="60" r="1.6"/><circle cx="115" cy="60" r="1.6"/><circle cx="140" cy="60" r="1.6"/><circle cx="155" cy="60" r="1.6"/><circle cx="170" cy="60" r="1.6"/><circle cx="185" cy="60" r="1.6"/><circle cx="200" cy="60" r="1.6"/></g><rect x="35" y="64" width="180" height="30" fill="#EEF2F8" stroke="#5B4B9E" stroke-width="1.4"/><text x="70" y="83" text-anchor="middle" font-size="9" fill="#5B4B9E">RDL</text><text x="190" y="83" text-anchor="middle" font-size="9" fill="#5B4B9E">RDL</text><rect x="103" y="66" width="44" height="26" fill="#DCEAFB" stroke="#2560A6" stroke-width="1.3"/><text x="125" y="82" text-anchor="middle" font-size="8.5" fill="#2560A6">矽橋</text><g fill="#7C8891"><circle cx="55" cy="101" r="2"/><circle cx="90" cy="101" r="2"/><circle cx="125" cy="101" r="2"/><circle cx="160" cy="101" r="2"/><circle cx="195" cy="101" r="2"/></g><rect x="10" y="108" width="230" height="30" fill="#FAEEDA" stroke="#8A5A00" stroke-width="1.4"/><text x="125" y="127" text-anchor="middle" font-size="10" fill="#8A5A00">載板 Substrate</text><g fill="#7C8891"><circle cx="30" cy="146" r="2"/><circle cx="70" cy="146" r="2"/><circle cx="125" cy="146" r="2"/><circle cx="180" cy="146" r="2"/><circle cx="220" cy="146" r="2"/></g><rect x="0" y="154" width="250" height="30" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1.4"/><text x="125" y="173" text-anchor="middle" font-size="10" fill="#5F6C75">PCB</text><text x="125" y="206" text-anchor="middle" font-size="9.5" fill="#B02E6E" font-style="italic">✕ RDL 內嵌矽橋，只在接縫下方</text><text x="125" y="222" text-anchor="middle" font-size="9.5" fill="#7C8891">2026 量產就緒；對應 CoWoS-L</text></svg></div><div class="diagram-wrap"><svg viewBox="0 0 260 236" role="img" aria-label="Foveros-R 2.5D: dies side by side on an organic RDL interposer, no silicon, on a substrate"><text x="130" y="18" text-anchor="middle" font-size="12.5" fill="#B85C10" font-weight="700">② Foveros-R　RDL 中介層（2025）</text><rect x="45" y="30" width="75" height="26" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="82" y="47" text-anchor="middle" font-size="9" fill="#1F7A5C">晶粒</text><rect x="130" y="30" width="75" height="26" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="167" y="47" text-anchor="middle" font-size="9" fill="#1F7A5C">晶粒</text><g fill="#7C8891"><circle cx="55" cy="60" r="1.6"/><circle cx="70" cy="60" r="1.6"/><circle cx="85" cy="60" r="1.6"/><circle cx="100" cy="60" r="1.6"/><circle cx="115" cy="60" r="1.6"/><circle cx="140" cy="60" r="1.6"/><circle cx="155" cy="60" r="1.6"/><circle cx="170" cy="60" r="1.6"/><circle cx="185" cy="60" r="1.6"/><circle cx="200" cy="60" r="1.6"/></g><rect x="35" y="64" width="180" height="30" fill="#EEF2F8" stroke="#5B4B9E" stroke-width="1.4"/><text x="125" y="83" text-anchor="middle" font-size="9" fill="#5B4B9E">RDL 中介層（有機，無矽）</text><g fill="#7C8891"><circle cx="55" cy="101" r="2"/><circle cx="90" cy="101" r="2"/><circle cx="125" cy="101" r="2"/><circle cx="160" cy="101" r="2"/><circle cx="195" cy="101" r="2"/></g><rect x="10" y="108" width="230" height="30" fill="#FAEEDA" stroke="#8A5A00" stroke-width="1.4"/><text x="125" y="127" text-anchor="middle" font-size="10" fill="#8A5A00">載板 Substrate</text><g fill="#7C8891"><circle cx="30" cy="146" r="2"/><circle cx="70" cy="146" r="2"/><circle cx="125" cy="146" r="2"/><circle cx="180" cy="146" r="2"/><circle cx="220" cy="146" r="2"/></g><rect x="0" y="154" width="250" height="30" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1.4"/><text x="125" y="173" text-anchor="middle" font-size="10" fill="#5F6C75">PCB</text><text x="125" y="206" text-anchor="middle" font-size="9.5" fill="#B02E6E" font-style="italic">✕ 無矽中介層；成本與密度取向</text><text x="125" y="222" text-anchor="middle" font-size="9.5" fill="#7C8891">2026 量產就緒；對應 CoWoS-R</text></svg></div><div class="diagram-wrap"><svg viewBox="0 0 260 236" role="img" aria-label="Foveros-S 2.5D: chiplets bonded face to face, side by side, onto a silicon base die with TSVs; 36 µm micro-bumps"><text x="130" y="18" text-anchor="middle" font-size="12.5" fill="#B85C10" font-weight="700">③ Foveros-S　矽中介層（2019）</text><rect x="45" y="30" width="75" height="26" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="82" y="47" text-anchor="middle" font-size="9" fill="#1F7A5C">晶粒</text><rect x="130" y="30" width="75" height="26" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="167" y="47" text-anchor="middle" font-size="9" fill="#1F7A5C">晶粒</text><g fill="#7C8891"><circle cx="55" cy="60" r="1.6"/><circle cx="70" cy="60" r="1.6"/><circle cx="85" cy="60" r="1.6"/><circle cx="100" cy="60" r="1.6"/><circle cx="115" cy="60" r="1.6"/><circle cx="140" cy="60" r="1.6"/><circle cx="155" cy="60" r="1.6"/><circle cx="170" cy="60" r="1.6"/><circle cx="185" cy="60" r="1.6"/><circle cx="200" cy="60" r="1.6"/></g><rect x="35" y="64" width="180" height="30" fill="#DCEAFB" stroke="#2560A6" stroke-width="1.4"/><rect x="42" y="66" width="3" height="26" fill="#2560A6" stroke="#2560A6" stroke-width="0" opacity=".55"/><rect x="210" y="66" width="3" height="26" fill="#2560A6" stroke="#2560A6" stroke-width="0" opacity=".55"/><text x="125" y="83" text-anchor="middle" font-size="8.5" fill="#2560A6" paint-order="stroke" stroke="#DCEAFB" stroke-width="3" stroke-linejoin="round">基底晶粒／矽中介層（含 TSV）</text><g fill="#7C8891"><circle cx="55" cy="101" r="2"/><circle cx="90" cy="101" r="2"/><circle cx="125" cy="101" r="2"/><circle cx="160" cy="101" r="2"/><circle cx="195" cy="101" r="2"/></g><rect x="10" y="108" width="230" height="30" fill="#FAEEDA" stroke="#8A5A00" stroke-width="1.4"/><text x="125" y="127" text-anchor="middle" font-size="10" fill="#8A5A00">載板 Substrate</text><g fill="#7C8891"><circle cx="30" cy="146" r="2"/><circle cx="70" cy="146" r="2"/><circle cx="125" cy="146" r="2"/><circle cx="180" cy="146" r="2"/><circle cx="220" cy="146" r="2"/></g><rect x="0" y="154" width="250" height="30" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1.4"/><text x="125" y="173" text-anchor="middle" font-size="10" fill="#5F6C75">PCB</text><text x="125" y="206" text-anchor="middle" font-size="9.5" fill="#B02E6E" font-style="italic">✕ 面對面微凸塊 36µm；基底可為主動晶粒</text><text x="125" y="222" text-anchor="middle" font-size="9.5" fill="#7C8891">Lakefield、Meteor Lake；最大 4× 光罩</text></svg></div></div>
+    <div class="grouplbl">D　EMIB 2.5D 三型　-T／-M／基本型<span>都是矽橋嵌在載板內；由新到舊，差別在矽橋裡加了什麼</span></div>
+    <div class="diagram-trio"><div class="diagram-wrap"><svg viewBox="0 0 260 224" role="img" aria-label="EMIB-T: the embedded silicon bridge now has through-silicon vias so power can pass vertically through it"><text x="130" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#B85C10">① EMIB-T　橋內 TSV（2024）</text><rect x="30" y="30" width="70" height="30" fill="#FBE7E4" stroke="#C0433A" stroke-width="1.4"/><text x="65.0" y="49.0" text-anchor="middle" font-size="10" fill="#C0433A">HBM</text><rect x="110" y="30" width="110" height="30" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="165.0" y="49.0" text-anchor="middle" font-size="10" fill="#1F7A5C">GPU／CPU</text><g fill="#7C8891"><circle cx="45" cy="66" r="2"/><circle cx="80" cy="66" r="2"/><circle cx="125" cy="66" r="2"/><circle cx="165" cy="66" r="2"/><circle cx="205" cy="66" r="2"/></g><rect x="10" y="74" width="230" height="44" fill="#FAEEDA" stroke="#8A5A00" stroke-width="1.4"/><text x="125" y="88" text-anchor="middle" font-size="10" fill="#8A5A00">載板 Substrate</text><rect x="78" y="96" width="64" height="18" fill="#DCEAFB" stroke="#2560A6" stroke-width="1.4"/><rect x="79" y="96" width="3" height="18" fill="#2560A6" opacity=".6"/><rect x="138" y="96" width="3" height="18" fill="#2560A6" opacity=".6"/><text x="110" y="109" text-anchor="middle" font-size="8" fill="#2560A6">矽橋（含 TSV）</text><g fill="#7C8891"><circle cx="30" cy="126" r="2"/><circle cx="70" cy="126" r="2"/><circle cx="125" cy="126" r="2"/><circle cx="180" cy="126" r="2"/><circle cx="220" cy="126" r="2"/></g><rect x="0" y="134" width="250" height="30" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1.4"/><text x="125.0" y="153.0" text-anchor="middle" font-size="10" fill="#5F6C75">PCB</text><text x="125" y="190" text-anchor="middle" font-size="9.5" fill="#B02E6E" font-style="italic">✕ 無中介層；電源可垂直穿過矽橋</text><text x="125" y="206" text-anchor="middle" font-size="9.5" fill="#7C8891">為 HBM4 級頻寬與更多矽橋準備</text></svg></div><div class="diagram-wrap"><svg viewBox="0 0 260 224" role="img" aria-label="EMIB-M: the embedded silicon bridge carries MIM decoupling capacitors to steady power delivery at the die-to-die link"><text x="130" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#B85C10">② EMIB-M　橋內 MIM 電容（2025）</text><rect x="30" y="30" width="70" height="30" fill="#FBE7E4" stroke="#C0433A" stroke-width="1.4"/><text x="65.0" y="49.0" text-anchor="middle" font-size="10" fill="#C0433A">HBM</text><rect x="110" y="30" width="110" height="30" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="165.0" y="49.0" text-anchor="middle" font-size="10" fill="#1F7A5C">GPU／CPU</text><g fill="#7C8891"><circle cx="45" cy="66" r="2"/><circle cx="80" cy="66" r="2"/><circle cx="125" cy="66" r="2"/><circle cx="165" cy="66" r="2"/><circle cx="205" cy="66" r="2"/></g><rect x="10" y="74" width="230" height="44" fill="#FAEEDA" stroke="#8A5A00" stroke-width="1.4"/><text x="125" y="88" text-anchor="middle" font-size="10" fill="#8A5A00">載板 Substrate</text><rect x="66" y="96" width="88" height="18" fill="#DCEAFB" stroke="#2560A6" stroke-width="1.4"/><path d="M70 99.5H80M70 104.5H80M70 109.5H80M140 99.5H150M140 104.5H150M140 109.5H150" stroke="#2560A6" stroke-width="1.2"/><text x="110" y="109" text-anchor="middle" font-size="8" fill="#2560A6">矽橋＋MIM 電容</text><g fill="#7C8891"><circle cx="30" cy="126" r="2"/><circle cx="70" cy="126" r="2"/><circle cx="125" cy="126" r="2"/><circle cx="180" cy="126" r="2"/><circle cx="220" cy="126" r="2"/></g><rect x="0" y="134" width="250" height="30" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1.4"/><text x="125.0" y="153.0" text-anchor="middle" font-size="10" fill="#5F6C75">PCB</text><text x="125" y="190" text-anchor="middle" font-size="9.5" fill="#B02E6E" font-style="italic">✕ 無中介層；橋內 MIM 電容穩定供電</text><text x="125" y="206" text-anchor="middle" font-size="9.5" fill="#7C8891">降低雜訊；現行量產版之一</text></svg></div><div class="diagram-wrap"><svg viewBox="0 0 260 224" role="img" aria-label="EMIB: silicon bridge embedded in the substrate, no interposer"><text x="130" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#B85C10">③ EMIB　基本型（2017）</text><rect x="30" y="30" width="70" height="30" fill="#FBE7E4" stroke="#C0433A" stroke-width="1.4"/><text x="65.0" y="49.0" text-anchor="middle" font-size="10" fill="#C0433A">HBM</text><rect x="110" y="30" width="110" height="30" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="165.0" y="49.0" text-anchor="middle" font-size="10" fill="#1F7A5C">GPU／CPU</text><g fill="#7C8891"><circle cx="45" cy="66" r="2"/><circle cx="80" cy="66" r="2"/><circle cx="125" cy="66" r="2"/><circle cx="165" cy="66" r="2"/><circle cx="205" cy="66" r="2"/></g><rect x="10" y="74" width="230" height="44" fill="#FAEEDA" stroke="#8A5A00" stroke-width="1.4"/><text x="125" y="88" text-anchor="middle" font-size="10" fill="#8A5A00">載板 Substrate</text><rect x="88" y="96" width="44" height="18" fill="#DCEAFB" stroke="#2560A6" stroke-width="1.4"/><text x="110.0" y="109.0" text-anchor="middle" font-size="8" fill="#2560A6">嵌入式矽橋</text><g fill="#7C8891"><circle cx="30" cy="126" r="2"/><circle cx="70" cy="126" r="2"/><circle cx="125" cy="126" r="2"/><circle cx="180" cy="126" r="2"/><circle cx="220" cy="126" r="2"/></g><rect x="0" y="134" width="250" height="30" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1.4"/><text x="125.0" y="153.0" text-anchor="middle" font-size="10" fill="#5F6C75">PCB</text><text x="125" y="190" text-anchor="middle" font-size="9.5" fill="#B02E6E" font-style="italic">✕ 無中介層：矽橋直接嵌在載板內</text><text x="125" y="206" text-anchor="middle" font-size="9.5" fill="#7C8891">三層結構，矽橋只在高速接縫下方</text></svg></div></div>
+    <div class="row" style="margin-top:14px"><div class="step t3"><h4>EMIB 3.5D　Foveros＋EMIB（Co-EMIB 2019 公布，Ponte Vecchio 2023）</h4><p class="body-txt">兩組以上的 Foveros 堆疊（頂晶粒疊在基底晶粒上）並排放在載板上，載板內的 EMIB 矽橋把基底晶粒彼此相連：垂直密度來自 Foveros，橫向延伸來自 EMIB，可超過光罩限制。Ponte Vecchio（Data Center GPU Max）是代表案例；早期名稱 Co-EMIB。對應台積電 3DFabric（SoIC＋CoWoS）。</p></div><div class="step t1"><h4>① Foveros Direct　混合鍵合（2021 公布）</h4><p class="body-txt">與 Foveros 同樣疊法，但拿掉微凸塊：兩片晶粒的銅墊直接鍵合，間距小於 10µm。這才是台積電 SoIC 的真正對應，也與 HBM4 轉向混合鍵合是同一件事。密度最高、公差最嚴。</p></div><div class="step t4"><h4>② Foveros Omni　銅柱懸空（2021）</h4><p class="body-txt">2021 年公布的下一代 Foveros：頂晶粒可以比基底晶粒大、懸空在外，基底旁邊模封進銅柱，把電源從載板直接送到頂晶粒，因此不同節點、不同尺寸的晶粒可以自由混搭；凸塊間距 25µm。Intel Foundry 現行目錄把 Foveros 列為 S／R／B 2.5D 加上 Direct 3D，Omni 這個名稱不再單獨出現，其銅柱供電的做法延續到後續的 Foveros 世代。</p></div></div>
+    <div class="row"><div class="step t1"><h4>① Foveros-B　RDL＋矽橋（2025 公布，2026 量產）</h4><p class="body-txt">RDL 中介層在晶粒接縫下方嵌入小塊矽橋，只在高速連線處提供矽等級的密度。2026 年量產就緒。對應台積電 CoWoS-L——與 EMIB 在結構上不同：EMIB 的矽橋低一層，埋在載板裡。</p></div><div class="step t4"><h4>② Foveros-R　RDL 中介層（2025 公布，2026 量產）</h4><p class="body-txt">同樣並排放置，但中介層改用有機 RDL 而非矽：更便宜、不受光罩限制，線路密度較低。針對客戶端與成本敏感的產品。2026 年量產就緒。對應台積電 CoWoS-R。</p></div><div class="step t2"><h4>③ Foveros-S　矽中介層（2019 量產）</h4><p class="body-txt">晶粒面對面鍵合到一片含 TSV 的矽基底晶粒上。Intel 歸為 2.5D，因為頂晶粒是並排放在這片中介層上。微凸塊間距 36µm；基底晶粒可以是主動晶粒（I/O、快取），不只是被動中介層。2019 年起量產——Lakefield，之後 Meteor Lake、Arrow Lake。中介層最大約 4× 光罩。</p></div></div>
+    <div class="row"><div class="step t2"><h4>① EMIB-T　橋內 TSV（2024 公布，2026 量產）</h4><p class="body-txt">同樣是嵌入式矽橋，但矽橋本身加了 TSV，電源與接地可以垂直穿過矽橋，不必繞路。目標是 HBM4 級頻寬與矽橋數量很多的封裝——在那種情況下，原版 EMIB 的供電路徑會成為瓶頸。</p></div><div class="step t3"><h4>② EMIB-M　橋內 MIM 電容（2025 公布）</h4><p class="body-txt">同樣的嵌入式矽橋，但矽橋內做進了 MIM（金屬—絕緣層—金屬）去耦電容。電容就在晶粒對晶粒的連線正下方，供電雜訊在最需要的地方被濾掉，載板上的供電網路負擔也減輕。與 EMIB-T 並列為現行兩個量產版本。</p></div><div class="step t3"><h4>③ EMIB　基本型（2017 量產）　Embedded Multi-die Interconnect Bridge</h4><p class="body-txt">嵌入式多晶粒互連橋。小塊矽橋直接埋在 ABF 載板內、位於每個接縫下方，因此完全沒有中介層這一層。相當於 Intel 版的 CoWoS-L，只是矽橋低了一層。用於 Intel 資料中心產品；Amazon 為傳聞中的封裝客戶。</p></div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="stage" id="sf3">
+  <div class="rail shared"><div class="stripe"></div>
+    <div class="num">09</div>
+    <h2>InFO 五型　依有無載板分類</h2>
+    <div class="clarify">InFO 家族的共同點：扇出型 RDL、無矽中介層。分類先看「有沒有載板」：無載板的 PoP、AiP、SoW，RDL 直接接 PCB；有載板的 oS、LSI，RDL 再放到 ABF 載板上。這裡列的是常見五型。</div>
+  </div>
+  <div class="body">
+    <div class="grouplbl">A　無載板　RDL 直接接 PCB<span>由新到舊：SoW（2020）、AiP（2018）、PoP（2016）</span></div>
+    <div class="diagram-trio"><div class="diagram-wrap"><svg viewBox="0 0 260 232" role="img" aria-label="InFO-SoW: many dies across one whole reconstituted wafer joined by a wafer-wide fan-out RDL, never diced; the wafer mounts on a system board"><text x="130" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E7C86">InFO-SoW　台積電（2020）</text><rect x="10" y="30" width="240" height="40" fill="#F3F4F5" stroke="#8E979E" stroke-width="1.2"/><g fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"><rect x="18" y="36" width="38" height="28"/><rect x="64" y="36" width="38" height="28"/><rect x="110" y="36" width="38" height="28"/><rect x="156" y="36" width="38" height="28"/><rect x="202" y="36" width="38" height="28"/></g><g fill="#1F7A5C" font-size="8.5" text-anchor="middle"><text x="37" y="53">晶粒</text><text x="83" y="53">晶粒</text><text x="129" y="53">晶粒</text><text x="175" y="53">晶粒</text><text x="221" y="53">晶粒</text></g><rect x="10" y="70" width="240" height="22" fill="#EEF2F8" stroke="#5B4B9E" stroke-width="1.4"/><text x="130" y="85" text-anchor="middle" font-size="9" fill="#5B4B9E">整片晶圓級扇出 RDL（不切割）</text><g fill="#7C8891"><circle cx="30" cy="100" r="2"/><circle cx="80" cy="100" r="2"/><circle cx="130" cy="100" r="2"/><circle cx="180" cy="100" r="2"/><circle cx="230" cy="100" r="2"/></g><rect x="0" y="108" width="250" height="30" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1.4"/><text x="125" y="127" text-anchor="middle" font-size="10" fill="#5F6C75">系統板 System board</text><text x="125" y="196" text-anchor="middle" font-size="9.5" fill="#B02E6E" font-style="italic">✕ 無載板、不切割；整片晶圓就是一個系統</text><text x="125" y="212" text-anchor="middle" font-size="9.5" fill="#7C8891">Tesla Dojo 訓練模組（25 顆 D1 晶粒）</text></svg></div><div class="diagram-wrap"><svg viewBox="0 0 260 232" role="img" aria-label="InFO-AiP: antenna array patterned in RDL on top of the moulded package, RF transceiver die inside, fan-out RDL below, no substrate"><text x="130" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E7C86">InFO-AiP　台積電（2018）</text><rect x="20" y="30" width="220" height="14" fill="#F1E7F6" stroke="#7A3FA0" stroke-width="1.4"/><text x="130" y="40" text-anchor="middle" font-size="8.5" fill="#7A3FA0">天線層（RDL 圖案）</text><rect x="20" y="44" width="220" height="34" fill="#F3F4F5" stroke="#8E979E" stroke-width="1.2"/><rect x="85" y="50" width="90" height="24" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="130" y="66" text-anchor="middle" font-size="9" fill="#1F7A5C">RF 收發器晶粒</text><rect x="20" y="78" width="220" height="22" fill="#EEF2F8" stroke="#5B4B9E" stroke-width="1.4"/><text x="130" y="93" text-anchor="middle" font-size="9" fill="#5B4B9E">扇出型 RDL（無載板）</text><g fill="#7C8891"><circle cx="40" cy="108" r="2"/><circle cx="80" cy="108" r="2"/><circle cx="130" cy="108" r="2"/><circle cx="180" cy="108" r="2"/><circle cx="220" cy="108" r="2"/></g><rect x="0" y="116" width="250" height="30" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1.4"/><text x="125" y="135" text-anchor="middle" font-size="10" fill="#5F6C75">PCB</text><text x="125" y="196" text-anchor="middle" font-size="9.5" fill="#B02E6E" font-style="italic">✕ 無載板；天線與 RF 晶片封在同一顆</text><text x="125" y="212" text-anchor="middle" font-size="9.5" fill="#7C8891">5G 毫米波（mmWave）模組</text></svg></div><div class="diagram-wrap"><svg viewBox="0 0 260 230" role="img" aria-label="InFO-PoP: DRAM package stacked over the SoC through TIVs, fan-out RDL, no substrate"><text x="130" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E7C86">InFO-PoP　台積電（2016）</text><rect x="40" y="26" width="180" height="26" fill="#FBE7E4" stroke="#C0433A" stroke-width="1.4"/><text x="130.0" y="43.0" text-anchor="middle" font-size="9" fill="#C0433A">DRAM 封裝（LPDDR）</text><g fill="#7C8891"><circle cx="60" cy="58" r="2"/><circle cx="95" cy="58" r="2"/><circle cx="130" cy="58" r="2"/><circle cx="165" cy="58" r="2"/><circle cx="200" cy="58" r="2"/></g><rect x="20" y="64" width="220" height="40" fill="#F3F4F5" stroke="#8E979E" stroke-width="1.4"/><rect x="40" y="66" width="14" height="36" fill="#DCEAFB" stroke="#2560A6" stroke-width="1.4"/><rect x="206" y="66" width="14" height="36" fill="#DCEAFB" stroke="#2560A6" stroke-width="1.4"/><text x="47" y="112" text-anchor="middle" font-size="8" fill="#2560A6">TIV</text><text x="213" y="112" text-anchor="middle" font-size="8" fill="#2560A6">TIV</text><rect x="72" y="70" width="116" height="30" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="130.0" y="89.0" text-anchor="middle" font-size="9" fill="#1F7A5C">SoC（A 系列）</text><rect x="20" y="104" width="220" height="22" fill="#EEF2F8" stroke="#5B4B9E" stroke-width="1.4"/><text x="130.0" y="119.0" text-anchor="middle" font-size="9" fill="#5B4B9E">扇出型 RDL（無載板）</text><g fill="#7C8891"><circle cx="40" cy="132" r="2"/><circle cx="80" cy="132" r="2"/><circle cx="130" cy="132" r="2"/><circle cx="180" cy="132" r="2"/><circle cx="220" cy="132" r="2"/></g><rect x="0" y="140" width="250" height="30" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1.4"/><text x="125.0" y="159.0" text-anchor="middle" font-size="10" fill="#5F6C75">PCB</text><text x="125" y="196" text-anchor="middle" font-size="9.5" fill="#B02E6E" font-style="italic">✕ 無載板、無中介層；DRAM 疊在上方</text><text x="125" y="212" text-anchor="middle" font-size="9.5" fill="#7C8891">iPhone A10 起；Apple Watch S 系列（嵌在 SiP 內）</text></svg></div></div>
+    <div class="grouplbl">B　有載板　RDL 再放到 ABF 載板上<span>由新到舊：LSI（2020）、oS（2017）</span></div>
+    <div class="diagram-trio"><div class="diagram-wrap"><svg viewBox="0 0 260 234" role="img" aria-label="InFO-LSI: local silicon bridge inside fan-out RDL, joins two dies as one"><text x="130" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E7C86">InFO-LSI　台積電（2020）</text><rect x="30" y="30" width="90" height="30" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="75.0" y="49.0" text-anchor="middle" font-size="9.5" fill="#1F7A5C">SoC 晶粒</text><rect x="130" y="30" width="90" height="30" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="175.0" y="49.0" text-anchor="middle" font-size="9.5" fill="#1F7A5C">SoC 晶粒</text><rect x="20" y="60" width="220" height="24" fill="#EEF2F8" stroke="#5B4B9E" stroke-width="1.4"/><rect x="100" y="60" width="50" height="24" fill="#DCEAFB" stroke="#2560A6" stroke-width="1.4"/><text x="125.0" y="76.0" text-anchor="middle" font-size="8.5" fill="#2560A6">LSI 矽橋</text><text x="55" y="76" text-anchor="middle" font-size="8.5" fill="#5B4B9E">RDL</text><text x="200" y="76" text-anchor="middle" font-size="8.5" fill="#5B4B9E">RDL</text><g fill="#7C8891"><circle cx="40" cy="92" r="2"/><circle cx="80" cy="92" r="2"/><circle cx="130" cy="92" r="2"/><circle cx="180" cy="92" r="2"/><circle cx="220" cy="92" r="2"/></g><rect x="10" y="100" width="230" height="30" fill="#FAEEDA" stroke="#8A5A00" stroke-width="1.4"/><text x="125.0" y="119.0" text-anchor="middle" font-size="10" fill="#8A5A00">ABF 載板 Substrate</text><g fill="#7C8891"><circle cx="30" cy="138" r="2"/><circle cx="70" cy="138" r="2"/><circle cx="125" cy="138" r="2"/><circle cx="180" cy="138" r="2"/><circle cx="220" cy="138" r="2"/></g><rect x="0" y="146" width="250" height="30" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1.4"/><text x="125.0" y="165.0" text-anchor="middle" font-size="10" fill="#5F6C75">PCB</text><text x="125" y="202" text-anchor="middle" font-size="9.5" fill="#7C8891">LSI = Local Silicon Interconnect：RDL 內嵌矽橋</text><text x="125" y="218" text-anchor="middle" font-size="9.5" fill="#7C8891">Apple M1／M2 Ultra 的 UltraFusion 即此結構</text></svg></div><div class="diagram-wrap"><svg viewBox="0 0 260 232" role="img" aria-label="InFO-oS: fan-out RDL on a substrate, for high-I/O networking chips"><text x="130" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E7C86">InFO-oS　台積電（2017）</text><rect x="40" y="30" width="80" height="30" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="80.0" y="49.0" text-anchor="middle" font-size="9.5" fill="#1F7A5C">晶粒</text><rect x="130" y="30" width="80" height="30" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="170.0" y="49.0" text-anchor="middle" font-size="9.5" fill="#1F7A5C">晶粒</text><rect x="20" y="60" width="220" height="22" fill="#EEF2F8" stroke="#5B4B9E" stroke-width="1.4"/><text x="130.0" y="75.0" text-anchor="middle" font-size="9" fill="#5B4B9E">扇出型 RDL（細線）</text><g fill="#7C8891"><circle cx="40" cy="90" r="2"/><circle cx="80" cy="90" r="2"/><circle cx="130" cy="90" r="2"/><circle cx="180" cy="90" r="2"/><circle cx="220" cy="90" r="2"/></g><rect x="10" y="98" width="230" height="30" fill="#FAEEDA" stroke="#8A5A00" stroke-width="1.4"/><text x="125.0" y="117.0" text-anchor="middle" font-size="10" fill="#8A5A00">ABF 載板 Substrate</text><g fill="#7C8891"><circle cx="30" cy="136" r="2"/><circle cx="70" cy="136" r="2"/><circle cx="125" cy="136" r="2"/><circle cx="180" cy="136" r="2"/><circle cx="220" cy="136" r="2"/></g><rect x="0" y="144" width="250" height="30" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1.4"/><text x="125.0" y="163.0" text-anchor="middle" font-size="10" fill="#5F6C75">PCB</text><text x="125" y="200" text-anchor="middle" font-size="9.5" fill="#7C8891">oS = on Substrate：扇出型 RDL 再放到載板上</text><text x="125" y="216" text-anchor="middle" font-size="9.5" fill="#7C8891">用於網通、高 I/O 晶片（無 HBM）</text></svg></div><div class="notebox"><b>InFO 家族的共同點</b>　五者都用扇出型 RDL、都沒有矽中介層。先看有沒有載板：PoP、AiP、SoW 沒有載板，RDL 直接接 PCB（SoW 接系統板）；oS、LSI 把 RDL 再放到 ABF 載板上。差別再看各自加了什麼：PoP 上面疊記憶體、AiP 上面做天線、SoW 整片不切割、LSI 在 RDL 內加矽橋。InFO 全部由台積電自製，不外包給 OSAT。</div></div>
+    <div class="row" style="margin-top:14px"><div class="step t4"><h4>InFO-SoW（2020 公布）</h4><p class="body-txt">數十顆晶粒鋪滿整片重組晶圓，靠整片扇出型 RDL 互連，不切割成單顆封裝；供電與 I/O 直接接到晶圓，再裝到系統板上。Tesla Dojo 訓練模組（25 顆 D1）即此結構。</p></div><div class="step t4"><h4>InFO-AiP（2018 公布）</h4><p class="body-txt">天線陣列直接做在模封封裝頂部的 RDL 上，RF 收發器晶粒在裡面，下方是扇出型 RDL。天線與射頻晶片成為同一顆零件——毫米波頻段下，天線到晶片的距離必須極短，正是它的用處。無載板。</p></div><div class="step t2"><h4>InFO-PoP（2016 量產）</h4><p class="body-txt">SoC 埋在模封化合物中，邊緣有貫穿模封的導孔（TIV）；下方扇出型 RDL 取代載板；DRAM 封裝經 TIV 疊在上方。DRAM 疊在上面而非旁邊，因為近端記憶體需要寬而短的路徑。iPhone A10 起；Apple Watch S 系列（InFO-PoP 嵌在更大的 SiP 模組內）。</p></div></div><div class="row"><div class="step t1"><h4>InFO-LSI（2020 公布，2021 認證）</h4><p class="body-txt">小塊矽橋（LSI）嵌在扇出型 RDL 內、兩片大晶粒的接縫下方，把兩片接成一顆。結構上是 CoWoS-L 矽橋的扇出型親戚。Apple M1／M2 Ultra 的 UltraFusion 就是它。</p></div><div class="step t3"><h4>InFO-oS（2017 量產）</h4><p class="body-txt">先做扇出型 RDL，再放到 ABF 載板上——oS 即「on Substrate」。比單靠載板細，又不需要矽中介層。用於高 I/O 網通與部分無 HBM 的 HPC 晶片。</p></div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="stage" id="sap">
+  <div class="rail"><div class="stripe"></div>
+    <div class="num">10</div>
+    <h2>Apple SiP 深入　iPhone 主機板對 Apple Watch SiP 模組</h2>
+    <div class="clarify">SiP（System-in-Package）把整個小系統封成一顆模組；InFO-PoP 則是其中主處理器的封裝。iPhone 把 InFO-PoP 直接焊在主機板上，Apple Watch 把它嵌進 S 系列 SiP 模組內——兩種產品用的是同一顆 InFO-PoP，差別在外面有沒有再包一層。</div>
+  </div>
+  <div class="body">
+    <div class="diagram-wrap">
+        <svg class="wide" style="max-width:780px" viewBox="0 0 700 205" role="img" aria-label="iPhone logic board: the InFO-PoP (DRAM stacked over the SoC) is soldered straight onto the PCB next to the PMIC, NAND, modem and RF packages">
+          <text x="350" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E7C86">iPhone　InFO-PoP 直接焊在主機板上</text>
+          <rect x="20" y="152" width="660" height="30" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1.4"/><text x="350" y="171" text-anchor="middle" font-size="10.5" fill="#5F6C75">主機板 PCB（Logic board）</text>
+          <rect x="34" y="110" width="12" height="30" fill="#F3F4F5" stroke="#8E979E" stroke-width="1"/><rect x="52" y="110" width="12" height="30" fill="#F3F4F5" stroke="#8E979E" stroke-width="1"/>
+          <rect x="80" y="96" width="76" height="44" fill="#E6F1FB" stroke="#2560A6" stroke-width="1.4"/><text x="118" y="115" text-anchor="middle" font-size="9.5" fill="#2560A6">PMIC</text><text x="118" y="128" text-anchor="middle" font-size="9" fill="#2560A6">封裝</text>
+          <rect x="176" y="34" width="250" height="106" rx="3" fill="#F4F1FA" stroke="#5B4B9E" stroke-width="1.4"/><text x="184" y="47" font-size="9" fill="#5B4B9E">InFO-PoP</text>
+          <rect x="188" y="52" width="226" height="24" fill="#FBE7E4" stroke="#C0433A" stroke-width="1.4"/><text x="301" y="68" text-anchor="middle" font-size="9.5" fill="#C0433A">DRAM 封裝（LPDDR）</text>
+          <g fill="#7C8891"><circle cx="205" cy="80" r="1.8"/><circle cx="245" cy="80" r="1.8"/><circle cx="301" cy="80" r="1.8"/><circle cx="357" cy="80" r="1.8"/><circle cx="397" cy="80" r="1.8"/></g>
+          <rect x="188" y="84" width="226" height="30" fill="#F3F4F5" stroke="#8E979E" stroke-width="1.2"/><rect x="190" y="86" width="11" height="26" fill="#DCEAFB" stroke="#2560A6" stroke-width="1.2"/><rect x="401" y="86" width="11" height="26" fill="#DCEAFB" stroke="#2560A6" stroke-width="1.2"/>
+          <rect x="218" y="88" width="166" height="22" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="301" y="103" text-anchor="middle" font-size="9.5" fill="#1F7A5C">SoC 晶粒（A 系列）</text>
+          <rect x="188" y="114" width="226" height="18" fill="#EEF2F8" stroke="#5B4B9E" stroke-width="1.4"/><text x="301" y="126.5" text-anchor="middle" font-size="9" fill="#5B4B9E">扇出型 RDL</text>
+          <rect x="446" y="96" width="76" height="44" fill="#FBE7E4" stroke="#C0433A" stroke-width="1.4"/><text x="484" y="115" text-anchor="middle" font-size="9.5" fill="#C0433A">NAND</text><text x="484" y="128" text-anchor="middle" font-size="9" fill="#C0433A">封裝</text>
+          <rect x="540" y="96" width="66" height="44" fill="#E6F1FB" stroke="#2560A6" stroke-width="1.4"/><text x="573" y="115" text-anchor="middle" font-size="9.5" fill="#2560A6">數據機</text><text x="573" y="128" text-anchor="middle" font-size="9" fill="#2560A6">封裝</text>
+          <rect x="614" y="96" width="60" height="44" fill="#F1E7F6" stroke="#7A3FA0" stroke-width="1.4"/><text x="644" y="115" text-anchor="middle" font-size="9.5" fill="#7A3FA0">RF</text><text x="644" y="128" text-anchor="middle" font-size="9" fill="#7A3FA0">模組</text>
+          <g fill="#7C8891"><circle cx="40" cy="146" r="2"/><circle cx="58" cy="146" r="2"/><circle cx="96" cy="146" r="2"/><circle cx="118" cy="146" r="2"/><circle cx="140" cy="146" r="2"/><circle cx="200" cy="146" r="2"/><circle cx="250" cy="146" r="2"/><circle cx="301" cy="146" r="2"/><circle cx="352" cy="146" r="2"/><circle cx="402" cy="146" r="2"/><circle cx="462" cy="146" r="2"/><circle cx="484" cy="146" r="2"/><circle cx="506" cy="146" r="2"/><circle cx="556" cy="146" r="2"/><circle cx="573" cy="146" r="2"/><circle cx="590" cy="146" r="2"/><circle cx="628" cy="146" r="2"/><circle cx="644" cy="146" r="2"/><circle cx="660" cy="146" r="2"/></g>
+          <text x="350" y="198" text-anchor="middle" font-size="9.5" fill="#7C8891">各封裝各自焊在 PCB 上，沒有 SiP 外殼；數據機與 RF 前端可獨立換供應商</text>
+        </svg>
+      <div class="diagram-cap">iPhone：主機板本身就是「系統」。InFO-PoP（A 系列 SoC＋疊在上方的 DRAM）與 PMIC、NAND、數據機、RF 模組各自獨立封裝，並排焊在 PCB 上。</div>
+    </div>
+    <div class="diagram-wrap">
+        <svg class="wide" style="max-width:780px" viewBox="0 0 700 232" role="img" aria-label="Apple Watch: an S-series SiP module holds the InFO-PoP, NAND, wireless, PMIC and passives on a module substrate; the whole module is soldered to the watch board">
+          <text x="350" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#7A3FA0">Apple Watch　InFO-PoP 嵌套在 S 系列 SiP 模組內</text>
+          <rect x="20" y="176" width="660" height="28" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1.4"/><text x="350" y="194" text-anchor="middle" font-size="10.5" fill="#5F6C75">錶板 Watch board</text>
+          <rect x="70" y="30" width="560" height="128" rx="4" fill="#F3F4F5" stroke="#8E979E" stroke-width="1.4"/><text x="80" y="44" font-size="9.5" fill="#5F6C75">S 系列 SiP 模組（整顆模封）</text>
+          <rect x="82" y="130" width="536" height="20" fill="#FAEEDA" stroke="#8A5A00" stroke-width="1.4"/><text x="350" y="143.5" text-anchor="middle" font-size="9.5" fill="#8A5A00">模組載板 Module substrate</text>
+          <rect x="96" y="100" width="11" height="26" fill="#FFFFFF" stroke="#8E979E" stroke-width="1"/><rect x="112" y="100" width="11" height="26" fill="#FFFFFF" stroke="#8E979E" stroke-width="1"/>
+          <rect x="140" y="48" width="230" height="80" rx="3" fill="#F4F1FA" stroke="#5B4B9E" stroke-width="1.4"/><text x="147" y="60" font-size="8.5" fill="#5B4B9E">InFO-PoP</text>
+          <rect x="150" y="63" width="210" height="18" fill="#FBE7E4" stroke="#C0433A" stroke-width="1.3"/><text x="255" y="75.5" text-anchor="middle" font-size="9" fill="#C0433A">DRAM</text>
+          <g fill="#7C8891"><circle cx="165" cy="84.5" r="1.6"/><circle cx="210" cy="84.5" r="1.6"/><circle cx="255" cy="84.5" r="1.6"/><circle cx="300" cy="84.5" r="1.6"/><circle cx="345" cy="84.5" r="1.6"/></g>
+          <rect x="150" y="88" width="210" height="24" fill="#F3F4F5" stroke="#8E979E" stroke-width="1.1"/><rect x="152" y="90" width="10" height="20" fill="#DCEAFB" stroke="#2560A6" stroke-width="1.1"/><rect x="348" y="90" width="10" height="20" fill="#DCEAFB" stroke="#2560A6" stroke-width="1.1"/>
+          <rect x="176" y="92" width="158" height="16" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.3"/><text x="255" y="103.5" text-anchor="middle" font-size="9" fill="#1F7A5C">SoC 晶粒（S 系列）</text>
+          <rect x="150" y="112" width="210" height="14" fill="#EEF2F8" stroke="#5B4B9E" stroke-width="1.3"/><text x="255" y="122.5" text-anchor="middle" font-size="8.5" fill="#5B4B9E">扇出型 RDL</text>
+          <rect x="392" y="90" width="84" height="36" fill="#FBE7E4" stroke="#C0433A" stroke-width="1.3"/><text x="434" y="112" text-anchor="middle" font-size="9.5" fill="#C0433A">NAND</text>
+          <rect x="494" y="90" width="72" height="36" fill="#E6F1FB" stroke="#2560A6" stroke-width="1.3"/><text x="530" y="112" text-anchor="middle" font-size="9.5" fill="#2560A6">Wi-Fi／BT</text>
+          <rect x="582" y="90" width="28" height="36" fill="#E6F1FB" stroke="#2560A6" stroke-width="1.3"/><text x="596" y="112" text-anchor="middle" font-size="8" fill="#2560A6">PMIC</text>
+          <g fill="#7C8891"><circle cx="110" cy="164" r="2"/><circle cx="170" cy="164" r="2"/><circle cx="230" cy="164" r="2"/><circle cx="290" cy="164" r="2"/><circle cx="350" cy="164" r="2"/><circle cx="410" cy="164" r="2"/><circle cx="470" cy="164" r="2"/><circle cx="530" cy="164" r="2"/><circle cx="590" cy="164" r="2"/></g>
+          <text x="350" y="224" text-anchor="middle" font-size="9.5" fill="#7C8891">整個系統封成一顆模組：先在模組載板上組裝所有晶片，再整顆焊到錶板上</text>
+        </svg>
+      <div class="diagram-cap">Apple Watch：整個系統先組裝在一塊模組載板上、整顆模封成 S 系列 SiP，InFO-PoP 只是模組裡的一個零件；模組再焊到錶板上。</div>
+    </div>
+    <div class="row" style="margin-top:14px">
+      <div class="step t2">
+        <h4>SiP 是什麼</h4>
+        <p class="body-txt">SiP 把處理器、記憶體、儲存、無線、電源管理與被動元件並排放在同一塊模組載板上，整顆模封成一個零件。它是系統層級的封裝，由 OSAT 組裝，不是台積電的前段技術；台積電負責的部分到裡面的 InFO-PoP 為止。</p>
+      </div>
+      <div class="step t1">
+        <h4>InFO-PoP 在裡面做什麼</h4>
+        <p class="body-txt">InFO-PoP 是 SoC 加上經 TIV 疊在上方的 DRAM、下方是扇出型 RDL，由台積電在 300mm 重組晶圓上製作。在 iPhone 裡它是主機板上最大的封裝；在 Watch 裡它只是 SiP 內的其中一個零件。</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="step t3">
+        <h4>為什麼 Watch 用 SiP、iPhone 不用</h4>
+        <p class="body-txt">手錶幾乎沒有板面空間，還要防水防震，一顆整體測試過、直接放上板子的模封模組最合理。手機主機板空間足夠，Apple 也希望數據機與 RF 前端維持獨立封裝，方便分開採購與更換供應商。</p>
+      </div>
+      <div class="step t4">
+        <h4>對供應鏈的意義</h4>
+        <p class="body-txt">台積電把 InFO-PoP 留在自家（晶圓級，不外包）。Watch 的 SiP 模組組裝由 OSAT（日月光集團等）承接，用的是有機模組載板。iPhone 沒有 SiP 這一層，各封裝直接進 EMS（鴻海等）的主機板 SMT 產線。</p>
+      </div>
+    </div>
+    <table class="cmp">
+      <tr><th style="width:150px"></th><th>iPhone</th><th>Apple Watch</th></tr>
+      <tr><td>主處理器封裝</td><td>A 系列 InFO-PoP（台積電）</td><td>S 系列 InFO-PoP（台積電）</td></tr>
+      <tr><td>DRAM 位置</td><td>疊在 SoC 上方（PoP）</td><td>疊在 SoC 上方（PoP），整組嵌在 SiP 內</td></tr>
+      <tr><td>NAND／無線／PMIC</td><td>各自獨立封裝，並排焊在主機板上</td><td>一起進 SiP 模組，與 InFO-PoP 並排在模組載板上</td></tr>
+      <tr><td>外層容器</td><td>沒有；主機板本身就是系統</td><td>SiP 模組（整顆模封），一顆即整個系統</td></tr>
+      <tr><td>焊到哪裡</td><td>主機板 PCB</td><td>先焊到模組載板，模組再焊到錶板</td></tr>
+      <tr><td>誰組裝</td><td>台積電做 InFO-PoP；主機板 SMT 由 EMS（鴻海等）</td><td>台積電做 InFO-PoP；SiP 模組由 OSAT（日月光集團等）</td></tr>
+      <tr><td>為什麼這樣選</td><td>板面空間足夠；數據機／RF 可獨立換供應商</td><td>空間極小、需防水防震；一顆模組好測試、好裝配</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="stage" id="s8">
+  <div class="rail"><div class="stripe"></div>
+    <div class="num">11</div>
+    <h2>CPO：COUPE 光引擎與封裝建構</h2>
+    <div class="clarify">上半：SoIC 不只用於堆疊運算晶片，也把 EIC（電子 IC）與 PIC（光子 IC）鍵合成光引擎，再與 ASIC 共用 CoWoS 中介層。下半：完整建構順序，左半是雷射的晶圓層級，右半是封裝層級。</div>
+  </div>
+  <div class="body">
+    <div class="grouplbl">A　COUPE 光引擎<span>三種技術同時疊用</span></div>
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 400 260" role="img" aria-label="COUPE stacks SoIC bonded EIC-PIC optical engine onto a CoWoS interposer alongside the customer ASIC">
+        <text x="200" y="20" text-anchor="middle" font-size="12.5" font-weight="700" fill="#14181C">台積電 COUPE ＝ 三種技術同時疊用</text>
+        <rect x="40" y="40" width="70" height="20" fill="#FAE3EF" stroke="#B02E6E" stroke-width="1.4"/><text x="75" y="53" text-anchor="middle" font-size="9.5" fill="#B02E6E">EIC（65nm）</text>
+        <rect x="40" y="60" width="70" height="24" fill="#F1E7F6" stroke="#7A3FA0" stroke-width="1.4"/><text x="75" y="75" text-anchor="middle" font-size="9.5" fill="#7A3FA0">PIC 光子晶片</text>
+        <text x="75" y="98" text-anchor="middle" font-size="9" fill="#7C8891">① SoIC 混合鍵結 → 光引擎</text>
+        <rect x="150" y="60" width="90" height="24" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.4"/><text x="195" y="75" text-anchor="middle" font-size="9.5" fill="#1F7A5C">客戶 ASIC</text>
+        <g fill="#7C8891"><circle cx="55" cy="94" r="2"/><circle cx="95" cy="94" r="2"/><circle cx="170" cy="94" r="2"/><circle cx="210" cy="94" r="2"/></g>
+        <rect x="30" y="102" width="230" height="30" fill="#E6F1FB" stroke="#2560A6" stroke-width="1.6"/>
+        <text x="145" y="121" text-anchor="middle" font-size="10" fill="#2560A6">CoWoS 中介層（光引擎與 ASIC 共用）</text>
+        <text x="145" y="148" text-anchor="middle" font-size="9" fill="#7C8891">② CoWoS：放上同一中介層</text>
+        <g fill="#7C8891"><circle cx="50" cy="140" r="2"/><circle cx="90" cy="140" r="2"/><circle cx="145" cy="140" r="2"/><circle cx="200" cy="140" r="2"/><circle cx="240" cy="140" r="2"/></g>
+        <rect x="20" y="148" width="250" height="28" fill="#FAEEDA" stroke="#8A5A00" stroke-width="1.4"/><text x="145" y="166" text-anchor="middle" font-size="10" fill="#8A5A00">ABF 載板</text>
+        <g fill="#7C8891"><circle cx="40" cy="184" r="2"/><circle cx="90" cy="184" r="2"/><circle cx="145" cy="184" r="2"/><circle cx="200" cy="184" r="2"/><circle cx="250" cy="184" r="2"/></g>
+        <rect x="10" y="192" width="270" height="28" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1.4"/><text x="145" y="210" text-anchor="middle" font-size="10" fill="#5F6C75">PCB</text>
+        <path d="M280 60 C 320 60, 320 100, 330 100" stroke="#B85C10" stroke-width="1.4" fill="none" marker-end="url(#arw3)"/>
+        <text x="345" y="70" font-size="9" fill="#B85C10">③ CPO 結果：</text>
+        <text x="345" y="82" font-size="9" fill="#B85C10">光學進入封裝</text>
+        <text x="345" y="94" font-size="9" fill="#B85C10">內部，取代面</text>
+        <text x="345" y="106" font-size="9" fill="#B85C10">板上可插拔模組</text>
+        <defs><marker id="arw3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="#B85C10" stroke-width="1.4"/></marker></defs>
+      </svg>
+      <div class="diagram-cap">光引擎（EIC＋PIC）本身已是一個用 SoIC 做成的封裝，被當作一顆 chiplet，與客戶 ASIC 一起放上同一個 CoWoS 中介層。</div>
+    </div>
+    <div class="row">
+      <div class="step t1">
+        <h4>1　SoIC</h4>
+        <p class="body-txt">把 65nm 電子晶片（EIC）與光子晶片（PIC）混合鍵結，做成光引擎。</p>
+      </div>
+      <div class="step t2">
+        <h4>2　CoWoS</h4>
+        <p class="body-txt">光引擎與客戶的 ASIC 放上同一個中介層。</p>
+      </div>
+      <div class="step t3">
+        <h4>3　CPO</h4>
+        <p class="body-txt">結果：光學進入封裝內部，取代封裝外的可插拔光模組。</p>
+      </div>
+    </div>
+    <div class="grouplbl" id="scp" style="margin-top:26px">B　CPO 封裝建構　從 InP 晶圓到 CPO 封裝<span>左半是雷射的晶圓層級，右半是封裝層級</span></div>
+<div class="diagram-wrap"><svg class="wide" viewBox="0 100 1120 245" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+    <defs>
+      <marker id="arwc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0E7C68"/></marker>
+      <marker id="heatc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#B03A2E"/></marker>
+    </defs>
+
+    <!-- ===== LEFT: WAFER LEVEL (LASER) ===== -->
+    <text x="40" y="120" font-size="12" font-weight="700" fill="#4A555E" letter-spacing=".06em">晶圓層級 — 雷射</text>
+    <rect x="40" y="232" width="420" height="58" fill="#F1F2F3" stroke="#CDD2D6"/>
+    <text x="250" y="266" font-size="13" text-anchor="middle" fill="#4A555E">InP 基板</text>
+    <rect x="40" y="204" width="420" height="28" fill="#E3F3EE" stroke="#8FC9B8"/>
+    <text x="250" y="223" font-size="12.5" text-anchor="middle" fill="#0E5C4E">磊晶層（MOCVD）</text>
+    <g fill="#FDF3E1" stroke="#D9B26A">
+      <rect x="66" y="186" width="52" height="18"/><rect x="146" y="186" width="52" height="18"/>
+      <rect x="226" y="186" width="52" height="18"/><rect x="306" y="186" width="52" height="18"/>
+      <rect x="386" y="186" width="52" height="18"/>
+    </g>
+    <text x="150" y="172" font-size="12" fill="#7A5100">在磊晶層上做出雷射二極體結構</text>
+    <g stroke="#B03A2E" stroke-width="1.6" stroke-dasharray="5,4">
+      <line x1="132" y1="150" x2="132" y2="296"/><line x1="372" y1="150" x2="372" y2="296"/>
+    </g>
+    <text x="392" y="146" font-size="12" fill="#B03A2E">切割</text>
+    <g font-size="12" font-weight="700" fill="#fff" text-anchor="middle">
+      <circle cx="22" cy="261" r="10" fill="#0E7C68"/><text x="22" y="265">1</text>
+      <circle cx="22" cy="218" r="10" fill="#0E7C68"/><text x="22" y="222">2</text>
+      <circle cx="22" cy="195" r="10" fill="#0E7C68"/><text x="22" y="199">3</text>
+      <circle cx="372" cy="132" r="10" fill="#0E7C68"/><text x="372" y="136">4</text>
+    </g>
+
+    <!-- ===== ARROW ===== -->
+    <line x1="486" y1="236" x2="576" y2="236" stroke="#0E7C68" stroke-width="2" marker-end="url(#arwc)"/>
+    <text x="531" y="224" font-size="11" text-anchor="middle" fill="#0E7C68">雷射晶粒</text>
+
+    <!-- ===== RIGHT: CPO PACKAGE ===== -->
+    <text x="600" y="120" font-size="12" font-weight="700" fill="#4A555E" letter-spacing=".06em">封裝層級 — CPO 剖面</text>
+
+    <!-- external laser source, kept outside the package -->
+    <rect x="600" y="140" width="112" height="26" fill="#FDF3E1" stroke="#D9B26A"/>
+    <text x="656" y="157" font-size="11" text-anchor="middle" fill="#7A5100">外部光源（ELS）</text>
+    <path d="M 656 166 Q 656 200 660 222" fill="none" stroke="#D9B26A" stroke-width="1.6" stroke-dasharray="3,3"/>
+    <text x="668" y="196" font-size="10" fill="#7A5100">光入</text>
+
+    <!-- PCB -->
+    <rect x="600" y="292" width="500" height="40" fill="#EAEAEA" stroke="#C4C4C4"/>
+    <text x="850" y="317" font-size="13" text-anchor="middle" fill="#333">交換器主板／PCB</text>
+    <!-- BGA balls -->
+    <g fill="#C9CED3">
+      <circle cx="640" cy="289" r="4"/><circle cx="665" cy="289" r="4"/><circle cx="690" cy="289" r="4"/><circle cx="715" cy="289" r="4"/>
+      <circle cx="740" cy="289" r="4"/><circle cx="765" cy="289" r="4"/><circle cx="790" cy="289" r="4"/><circle cx="815" cy="289" r="4"/>
+      <circle cx="840" cy="289" r="4"/><circle cx="865" cy="289" r="4"/><circle cx="890" cy="289" r="4"/><circle cx="915" cy="289" r="4"/>
+      <circle cx="940" cy="289" r="4"/><circle cx="965" cy="289" r="4"/><circle cx="990" cy="289" r="4"/><circle cx="1015" cy="289" r="4"/>
+      <circle cx="1040" cy="289" r="4"/><circle cx="1065" cy="289" r="4"/>
+    </g>
+    <!-- substrate -->
+    <rect x="620" y="257" width="460" height="28" fill="#F0EEF7" stroke="#A797C9"/>
+    <text x="850" y="275" font-size="11.5" text-anchor="middle" fill="#4A3B7A">封裝載板</text>
+    <!-- optical engines: EIC bottom, PIC top -->
+    <g>
+      <rect x="690" y="237" width="80" height="20" fill="#E6F1F6" stroke="#8FB3C9"/><text x="730" y="251" font-size="10.5" text-anchor="middle" fill="#1B4E7A">EIC</text>
+      <rect x="690" y="217" width="80" height="20" fill="#E3F3EE" stroke="#8FC9B8"/><text x="730" y="231" font-size="10.5" text-anchor="middle" fill="#0E5C4E">PIC＋雷射</text>
+      <rect x="930" y="237" width="80" height="20" fill="#E6F1F6" stroke="#8FB3C9"/><text x="970" y="251" font-size="10.5" text-anchor="middle" fill="#1B4E7A">EIC</text>
+      <rect x="930" y="217" width="80" height="20" fill="#E3F3EE" stroke="#8FC9B8"/><text x="970" y="231" font-size="10.5" text-anchor="middle" fill="#0E5C4E">PIC＋雷射</text>
+    </g>
+    <text x="730" y="209" font-size="10" text-anchor="middle" fill="#4A555E">光引擎</text>
+    <text x="970" y="209" font-size="10" text-anchor="middle" fill="#4A555E">光引擎</text>
+    <!-- switch ASIC + lid -->
+    <rect x="790" y="217" width="120" height="40" fill="#E8F4EF" stroke="#9FC9B5"/>
+    <text x="850" y="241" font-size="12.5" text-anchor="middle" fill="#1F4D38">交換器 ASIC</text>
+    <rect x="780" y="205" width="140" height="12" fill="#B8BFC6" stroke="#8E979E"/>
+    <text x="828" y="200" font-size="10" fill="#4A555E">蓋板／冷板</text>
+    <line x1="895" y1="200" x2="895" y2="165" stroke="#B03A2E" stroke-width="1.8" marker-end="url(#heatc)"/>
+    <text x="902" y="176" font-size="11" fill="#B03A2E">熱</text>
+    <text x="902" y="189" font-size="11" fill="#B03A2E">向上排出</text>
+    <!-- FAU + fiber to MPO -->
+    <rect x="644" y="222" width="40" height="30" fill="#FDF6E6" stroke="#C99A1E"/>
+    <text x="664" y="241" font-size="10.5" text-anchor="middle" fill="#7A5100">FAU</text>
+    <rect x="1016" y="222" width="40" height="30" fill="#FDF6E6" stroke="#C99A1E"/>
+    <text x="1036" y="241" font-size="10.5" text-anchor="middle" fill="#7A5100">FAU</text>
+    <line x1="644" y1="237" x2="604" y2="237" stroke="#C99A1E" stroke-width="2"/>
+    <line x1="1056" y1="237" x2="1096" y2="237" stroke="#C99A1E" stroke-width="2"/>
+    <text x="1060" y="228" font-size="10" fill="#7A5100">光纖 → MPO</text>
+
+    <!-- badges right -->
+    <g font-size="12" font-weight="700" fill="#fff" text-anchor="middle">
+      <circle cx="770" cy="197" r="10" fill="#0E7C68"/><text x="770" y="201">5</text>
+      <circle cx="802" cy="191" r="10" fill="#0E7C68"/><text x="802" y="195">6</text>
+      <circle cx="1036" cy="205" r="10" fill="#0E7C68"/><text x="1036" y="209">7</text>
+      <circle cx="1084" cy="312" r="10" fill="#0E7C68"/><text x="1084" y="316">8</text>
+    </g>
+  </svg><div class="diagram-cap">左：雷射晶圓層級（InP 基板→磊晶→雷射結構→切割）。右：CPO 封裝層級（光引擎→放置→光纖對接→上板）。數字對應下方八個步驟。</div></div><div class="row" style="margin-top:14px"><div class="step t3"><h4>① 基板　Substrate</h4><p class="body-txt">磷化銦晶圓作為基材——化合物半導體，不是矽。供應商：SCIOCS（住友）、AXT。</p></div><div class="step t3"><h4>② 磊晶　Epi layer</h4><p class="body-txt">以 MOCVD 在 InP 基板上長出的薄結晶層，發光的就是這一層。供應商：IQE、IntelliEPI、Landmark。</p></div><div class="step t3"><h4>③ 雷射結構　Laser device</h4><p class="body-txt">雷射二極體結構被圖案化到磊晶層中。與 RF 晶片同一套流程——材料不同，步驟形狀相同。</p></div><div class="step t3"><h4>④ 切割　Dice</h4><p class="body-txt">晶圓切割成一顆顆雷射晶粒，準備與光子晶片結合。</p></div></div><div class="row"><div class="step t2"><h4>⑤ 光引擎　Optical engine</h4><p class="body-txt">光子晶片（PIC——波導、調變器；由 Broadcom、Marvell、Nvidia、Ayar Labs 設計，在台積電、GlobalFoundries、Tower 製造）疊在電子晶片（EIC——驅動器、TIA、DSP；Broadcom、Marvell、MACOM、Semtech）上，通常以 SoIC 混合鍵合。雷射要嘛跟 PIC 放一起，要嘛留在封裝外當外部光源（ELS）。</p></div><div class="step t2"><h4>⑥ 放置　Placement</h4><p class="body-txt">光引擎與交換器 ASIC 並排放在同一個封裝載板（或 CoWoS 中介層）上；ASIC 上方加蓋板與冷板。熱向上排出——與 QFN 相反。</p></div><div class="step t2"><h4>⑦ 光纖對接　Fiber attach</h4><p class="body-txt">光纖陣列單元（FAU——Orbray、ACON、Corning、Senko、Fujikura）把光纖對準 PIC；光纖引出封裝接到 MPO（多芯推入式）連接器——技術人員實際操作的部分。</p></div><div class="step t2"><h4>⑧ 上板　Finish</h4><p class="body-txt">載板以 BGA 銲球貼到交換器主板。組裝：台積電（COUPE）、ASE、Amkor；載板：Ibiden；測試：ficonTEC、Chroma。</p></div></div><div class="notebox"><b>為什麼雷射常留在封裝外</b>　雷射對溫度敏感，而交換器 ASIC 很熱。把雷射做成外部光源（ELS）、用光纖把光送進封裝內的 PIC，可以避開 ASIC 的熱。這也是為什麼 CPO 供應鏈同時橫跨 RF 那一側（InP 磊晶、雷射）與 GPU 那一側（載板、CoWoS、蓋板）。</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="stage" id="s10">
+  <div class="rail"><div class="stripe"></div>
+    <div class="num">12</div>
+    <h2>NVL72 Compute Rack（18 total）</h2>
+    <div class="clarify">機櫃共 18 個 compute tray。以下為單一 tray 的結構圖與相關詞彙。</div>
+  </div>
+  <div class="body">
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 640 260" role="img" aria-label="NVL72 compute tray with two GB200 superchips, network chips, DPU, SSD, and BMC">
+        <text x="320" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#14181C">NVL72 Compute Tray（機櫃內 18 個之一）</text>
+        <rect x="140" y="30" width="320" height="28" fill="#F1E7F6" stroke="#7A3FA0" stroke-width="1.4"/><text x="300" y="48" text-anchor="middle" font-size="10.5" fill="#7A3FA0">NVLink connectors to midplane（背面 rear）</text>
+        <path d="M300 58 L300 70" stroke="#7C8891" stroke-width="1.4" marker-end="url(#arw4)"/>
+        <rect x="20" y="70" width="600" height="150" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1.2"/>
+        <text x="320" y="86" font-size="9.5" fill="#5F6C75" text-anchor="middle">Compute Tray</text>
+        <rect x="34" y="94" width="70" height="30" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.2"/><text x="69" y="112" text-anchor="middle" font-size="8.5" fill="#1F7A5C">Network chip</text>
+        <rect x="34" y="130" width="70" height="30" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.2"/><text x="69" y="148" text-anchor="middle" font-size="8.5" fill="#1F7A5C">Network chip</text>
+        <rect x="34" y="166" width="70" height="30" fill="#F1E7F6" stroke="#7A3FA0" stroke-width="1.2"/><text x="69" y="184" text-anchor="middle" font-size="8.5" fill="#7A3FA0">DPU</text>
+        <rect x="120" y="92" width="160" height="130" fill="#FAEEDA" stroke="#8A5A00" stroke-width="1.2"/><text x="200" y="106" text-anchor="middle" font-size="8.5" fill="#8A5A00">Liquid cooled</text>
+        <rect x="132" y="112" width="136" height="24" fill="#FBE7E4" stroke="#C0433A" stroke-width="1"/><text x="200" y="127" text-anchor="middle" font-size="8.5" fill="#C0433A">Grace CPU</text>
+        <rect x="132" y="142" width="136" height="24" fill="#FBE7E4" stroke="#C0433A" stroke-width="1"/><text x="200" y="157" text-anchor="middle" font-size="8.5" fill="#C0433A">B200 GPU</text>
+        <rect x="132" y="172" width="136" height="24" fill="#FBE7E4" stroke="#C0433A" stroke-width="1"/><text x="200" y="187" text-anchor="middle" font-size="8.5" fill="#C0433A">B200 GPU</text>
+        <text x="200" y="214" text-anchor="middle" font-size="8" fill="#7C8891">GB200 Superchip</text>
+        <rect x="290" y="92" width="160" height="130" fill="#FAEEDA" stroke="#8A5A00" stroke-width="1.2"/><text x="370" y="106" text-anchor="middle" font-size="8.5" fill="#8A5A00">Liquid cooled</text>
+        <rect x="302" y="112" width="136" height="24" fill="#FBE7E4" stroke="#C0433A" stroke-width="1"/><text x="370" y="127" text-anchor="middle" font-size="8.5" fill="#C0433A">Grace CPU</text>
+        <rect x="302" y="142" width="136" height="24" fill="#FBE7E4" stroke="#C0433A" stroke-width="1"/><text x="370" y="157" text-anchor="middle" font-size="8.5" fill="#C0433A">B200 GPU</text>
+        <rect x="302" y="172" width="136" height="24" fill="#FBE7E4" stroke="#C0433A" stroke-width="1"/><text x="370" y="187" text-anchor="middle" font-size="8.5" fill="#C0433A">B200 GPU</text>
+        <text x="370" y="214" text-anchor="middle" font-size="8" fill="#7C8891">GB200 Superchip</text>
+        <rect x="516" y="94" width="70" height="30" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.2"/><text x="551" y="112" text-anchor="middle" font-size="8.5" fill="#1F7A5C">Network chip</text>
+        <rect x="516" y="130" width="70" height="30" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.2"/><text x="551" y="148" text-anchor="middle" font-size="8.5" fill="#1F7A5C">Network chip</text>
+        <rect x="516" y="166" width="70" height="30" fill="#F1E7F6" stroke="#7A3FA0" stroke-width="1.2"/><text x="551" y="184" text-anchor="middle" font-size="8.5" fill="#7A3FA0">DPU</text>
+        <rect x="34" y="200" width="60" height="16" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1"/><text x="64" y="211" text-anchor="middle" font-size="7.5" fill="#5F6C75">SSD ×4</text>
+        <rect x="98" y="200" width="60" height="16" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1"/><text x="128" y="211" text-anchor="middle" font-size="7.5" fill="#5F6C75">M.2 NVMe</text>
+        <rect x="516" y="200" width="70" height="16" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1"/><text x="551" y="211" text-anchor="middle" font-size="7.5" fill="#5F6C75">BMC（Aspeed）</text>
+        <path d="M300 220 L300 235" stroke="#7C8891" stroke-width="1.4" marker-end="url(#arw4)"/>
+        <rect x="140" y="235" width="320" height="24" fill="#E1F5EE" stroke="#1F7A5C" stroke-width="1.2"/><text x="300" y="250" text-anchor="middle" font-size="9.5" fill="#1F7A5C">Front network and service ports（前面板 front）</text>
+        <defs><marker id="arw4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="#7C8891" stroke-width="1.4"/></marker></defs>
+      </svg>
+      <div class="diagram-cap">2 Grace CPU、4 B200 GPU、4 Network chip、2 DPU、SSD 與 M.2、1 BMC。圖的上方＝機櫃背面（NVLink midplane），下方＝前面板（網路與服務埠）。</div>
+    </div>
+        <div class="vocab-grid" style="margin-top:16px">
+      <div class="vcard">
+        <h4>Grace CPU</h4>
+        <p>NVIDIA 自家的 Arm 伺服器 CPU（72 顆 Neoverse V2 核心），LPDDR5X 記憶體在模組上。每個 tray 兩顆，各屬一組 GB200 superchip；負責餵資料給 GPU 與執行主機軟體，不做 AI 運算。</p>
+      </div>
+      <div class="vcard">
+        <h4>Blackwell GPU（B200）</h4>
+        <p>AI 加速器：兩顆接近光罩極限的晶粒在 CoWoS-L 中介層上接成一顆，旁邊並排八組 HBM3E。每個 tray 四顆，各自壓一片冷板——整塊板子最耗電、最需要散熱的零件。</p>
+      </div>
+      <div class="vcard">
+        <h4>GB200 Superchip</h4>
+        <p>一顆 Grace CPU 加兩顆 Blackwell GPU 做成一塊板模組，以 NVLink-C2C 相連，CPU 與 GPU 可一致地共享記憶體。一個 tray 放兩組，這就是 2 CPU＋4 GPU 的由來。</p>
+      </div>
+      <div class="vcard">
+        <h4>NVLink connectors／midplane（背面）</h4>
+        <p>背面的盲插接頭，以銅纜把 NVLink 接到機櫃內的 NVLink switch tray。這是 scale-up 網路：讓整櫃 72 顆 GPU 像一個共享記憶體網域。因為距離只在機櫃內，用銅不用光。</p>
+      </div>
+<div class="vcard">
+        <h4>ConnectX network card</h4>
+        <p>負責處理跨機板 GPU 之間高速 AI 流量的網路晶片。</p>
+      </div>
+<div class="vcard">
+        <h4>BlueField DPU</h4>
+        <p>獨立晶片，負責處理與機櫃外部系統之間的儲存與管理流量。</p>
+      </div>
+<div class="vcard">
+        <h4>OSFP transceiver</h4>
+        <p>將網路晶片連接到光纖的實體連接器模組，含 8 個通道，用於 400G 或 800G 的極高速傳輸。</p>
+      </div>
+<div class="vcard">
+        <h4>10GbE LAN port</h4>
+        <p>一種以每秒 10Gb 速度運作的網路連接埠，可能用於管理或儲存流量，與主要 AI 資料路徑分開。</p>
+      </div>
+      <div class="vcard">
+        <h4>Power connector（背面）</h4>
+        <p>背面的盲插電源接頭，推入機櫃時直接從直流匯流排（busbar）取電；交流轉直流已在機櫃的電源架完成。tray 內部沒有獨立電源供應器。</p>
+      </div>
+      <div class="vcard">
+        <h4>Power Distribution Board</h4>
+        <p>接收匯流排的直流電，降壓並分配成 CPU、GPU、網卡與硬碟各自需要的電壓。有了它，tray 才不需要獨立的電源供應器。</p>
+      </div>
+      <div class="vcard">
+        <h4>Cold water inlet／Hot water outlet（背面）</h4>
+        <p>液冷迴路的快速接頭：冷卻液從冷水入口進入，流經 CPU 與 GPU 上的冷板，變熱後由熱水出口回到機櫃分歧管，再送往 CDU。同樣在推入時盲插。</p>
+      </div>
+<div class="vcard">
+        <h4>Manifold　分歧管</h4>
+        <p>機櫃液冷迴路連接到機板的管路接點。</p>
+      </div>
+      <div class="vcard">
+        <h4>Fan modules</h4>
+        <p>即使是液冷 tray，仍需要風扇讓空氣流過沒有冷板的零件——網卡、DPU、SSD、穩壓器。比氣冷伺服器的風扇小得多、也少得多。</p>
+      </div>
+      <div class="vcard">
+        <h4>Battery</h4>
+        <p>鈕扣電池，在 tray 斷電時維持即時時鐘與管理設定。純粹是輔助用途，與系統供電無關。</p>
+      </div>
+      <div class="vcard">
+        <h4>BMC　Baseboard Management Controller（Aspeed）</h4>
+        <p>獨立於主機運作的管理晶片：監控溫度、風扇與電壓，遠端開關機，更新韌體。Aspeed（信驊）的 BMC 晶片是絕大多數伺服器共用的台廠零件。</p>
+      </div>
+      <div class="vcard">
+        <h4>BMC 1GbE port／USB／VGA（前面板）</h4>
+        <p>BMC 專用的頻外管理網路埠，加上讓技術人員現場接鍵盤與螢幕的 USB 與 VGA。與 AI 資料路徑及 10GbE 埠都分開。</p>
+      </div>
+<div class="vcard">
+        <h4>HMC　Host Management Controller</h4>
+        <p>與 BMC 協同運作，為機板提供頻外硬體管理。</p>
+      </div>
+<div class="vcard">
+        <h4>TPM　Trusted Platform Module</h4>
+        <p>一顆專用的安全晶片，儲存加密金鑰，並在開機時驗證系統未遭竄改。</p>
+      </div>
+<div class="vcard">
+        <h4>M.2 NVMe</h4>
+        <p>一顆小型 SSD，作為存放作業系統的開機硬碟。</p>
+      </div>
+      <div class="vcard">
+        <h4>Cache storage（SSD ×4）</h4>
+        <p>前面板的 NVMe SSD，作為資料集與檢查點的本機暫存與快取，與 M.2 開機碟分開。裝在前面板，不用拔出 tray 就能更換。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+</div>
+</body>
+</html>
