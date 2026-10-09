@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ethan Chen · Semiconductor Research Notes</title>
+<meta name="author" content="Ethan Chen">
+<meta name="description" content="Ethan Chen — Semiconductor and traditional industry research. Semiconductor Research Notes: the semiconductor industry and its companies, organised along the supply chain.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://ethanchensemi.github.io/ethanchenstudy/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ethan Chen · Semiconductor Research Notes">
+<meta property="og:description" content="Ethan Chen — Semiconductor and traditional industry research. Semiconductor Research Notes: the semiconductor industry and its companies, organised along the supply chain.">
+<meta property="og:site_name" content="Ethan Chen · Semiconductor Research Notes">
+<style>
+:root{--paper:#F6F8F9;--card:#FFFFFF;--ink:#14181C;--ink-2:#4A555E;--ink-3:#7C8891;--rule:#CBD3D9;--rule-soft:#E2E8EC;--stage:#1F3A4D;--b:#4A3B7A;--shared:#215C68}
+*{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;font-size:15px;line-height:1.65}
+.wrap{max-width:1080px;margin:0 auto;padding:44px 28px 80px}
+.backbar{margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.backbar a{display:inline-block;font-size:13px;color:var(--ink-2);text-decoration:none;border:1px solid var(--rule);background:var(--card);padding:6px 13px}
+.backbar a:hover{color:var(--b);border-color:var(--b)}
+.masthead{border-bottom:2px solid var(--stage);padding-bottom:20px;margin-bottom:18px}
+.masthead h1{font-size:32px;line-height:1.25;font-weight:700;margin:0 0 6px;letter-spacing:-.01em}
+.masthead .en{font-size:15.5px;color:var(--ink-2);font-weight:400;margin:0}
+.lede{font-size:13.5px;color:var(--ink-2);line-height:1.65;margin:0 0 34px;max-width:82ch}
+.sectionlbl{font-size:13px;font-weight:600;color:var(--ink-3);letter-spacing:.03em;margin:0 0 12px;text-transform:uppercase}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,monospace}
+a{color:inherit}
+@media (max-width:760px){.wrap{padding:30px 16px 60px}.masthead h1{font-size:26px}}
+@media print{.backbar{display:none}}
+
+.wrap{max-width:860px;padding:72px 28px 70px}
+.wrap.has-top{padding-top:30px}
+.topbar{display:flex;justify-content:flex-end;margin-bottom:30px}
+.lsw{display:inline-flex;border:1px solid var(--rule);background:var(--card)}
+.lsw a,.lsw span{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;letter-spacing:.04em;line-height:1.4;padding:6px 14px;color:var(--ink-2);text-decoration:none}
+.lsw a:hover{color:var(--b)}
+.lsw .on{background:var(--stage);color:#FFFFFF}
+.hero{display:flex;align-items:center;gap:30px;border-bottom:2px solid var(--stage);padding-bottom:30px;margin-bottom:28px}
+.hero img{width:128px;height:128px;border-radius:50%;object-fit:cover;flex:0 0 auto;border:1px solid var(--rule)}
+.hero h1{font-size:34px;line-height:1.2;font-weight:700;margin:0 0 6px;letter-spacing:-.01em}
+.hero .role{font-size:15px;color:var(--ink-2);margin:0 0 2px}
+.hero .focus{font-size:13.5px;color:var(--ink-3);margin:0 0 12px}
+.hero .contact{display:flex;gap:6px 22px;flex-wrap:wrap;margin:0;font-size:13.5px;color:var(--ink-2)}
+.hero .contact .lbl{color:var(--ink-3)}
+.hero .contact a{color:var(--ink-2);text-decoration:none;border-bottom:1px dotted var(--rule)}
+.hero .contact a:hover{color:var(--b);border-color:var(--b)}
+.intro p{margin:0 0 34px;max-width:74ch;font-size:14.5px;line-height:1.75;color:var(--ink)}
+.doors{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.door{display:block;background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--stage);padding:20px 22px;text-decoration:none;color:inherit;transition:border-color .12s}
+.door:hover{border-left-color:var(--b)}
+.door .k{display:block;font-size:19px;font-weight:600;line-height:1.3;margin-bottom:4px}
+.door .s{display:block;font-size:12.5px;color:var(--ink-3)}
+.resume{display:flex;gap:22px;align-items:center;background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--stage);padding:18px 22px;margin-bottom:40px}
+.resume .thumb{flex:0 0 auto;display:block;line-height:0;border:1px solid var(--rule-soft);box-shadow:0 1px 3px rgba(20,24,28,.10)}
+.resume .thumb img{display:block;width:92px;height:auto}
+.resume .rt{min-width:0}
+.resume .k{display:block;font-size:19px;font-weight:600;line-height:1.3;margin-bottom:4px}
+.resume .s{display:block;font-size:12.5px;color:var(--ink-3);margin-bottom:14px}
+.resume .btns{display:flex;gap:8px;flex-wrap:wrap}
+.resume .btns a{font-size:13px;color:var(--ink-2);text-decoration:none;border:1px solid var(--rule);background:var(--card);padding:6px 16px}
+.resume .btns a:hover{color:var(--b);border-color:var(--b)}
+.resume .btns a.pri{background:var(--stage);border-color:var(--stage);color:#FFFFFF}
+.resume .btns a.pri:hover{background:var(--b);border-color:var(--b);color:#FFFFFF}
+@media (max-width:640px){
+  .wrap{padding:40px 16px 56px}
+  .wrap.has-top{padding-top:20px}
+  .topbar{margin-bottom:22px}
+  .hero{flex-direction:column;align-items:flex-start;gap:18px}
+  .hero img{width:104px;height:104px}
+  .hero h1{font-size:28px}
+  .doors{grid-template-columns:1fr}
+  .resume{gap:16px;padding:16px 16px 16px 18px}
+  .resume .thumb img{width:72px}
+}
+
+/* site chrome (added by build) */
+.backbar{flex-wrap:wrap}
+.backbar .bbr{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.backbar .lang{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;letter-spacing:.04em}
+.backbar .lang-off{display:inline-block;font-size:12px;color:var(--ink-3,#7C8891);border:1px dashed var(--rule,#CBD3D9);padding:6px 13px;font-family:ui-monospace,"SF Mono",Menlo,monospace;letter-spacing:.04em;cursor:default}
+.site-foot{margin-top:56px;border-top:1px solid var(--rule,#CBD3D9);padding-top:22px;display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;font-size:12.5px;color:var(--ink-3,#7C8891);line-height:1.5}
+.site-foot .sf-id{display:flex;align-items:center;gap:12px;min-width:0}
+.site-foot .sf-id img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:0 0 auto}
+.site-foot .sf-name{font-size:14px;font-weight:600;color:var(--ink,#14181C)}
+.site-foot .sf-name a{color:inherit;text-decoration:none}
+.site-foot .sf-name a:hover{color:var(--b,#4A3B7A)}
+.site-foot .sf-sub{font-size:12px;color:var(--ink-3,#7C8891)}
+.site-foot .sf-contact{display:flex;gap:16px;flex-wrap:wrap;margin-left:auto}
+.site-foot .sf-contact a{color:var(--ink-2,#4A555E);text-decoration:none;border-bottom:1px dotted var(--rule,#CBD3D9)}
+.site-foot .sf-contact a:hover{color:var(--b,#4A3B7A);border-color:var(--b,#4A3B7A)}
+.site-foot .sf-note{flex-basis:100%;font-size:11.5px}
+@media (max-width:640px){.site-foot .sf-contact{margin-left:0}}
+@media (max-width:640px){
+  .stickynav{margin-left:-14px;margin-right:-14px;padding-left:14px;padding-right:14px;white-space:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .legend .fams,.legend .fams.six,.famgrid,.idxgrid{grid-template-columns:1fr !important}
+  .routes{grid-template-columns:minmax(0,1fr) !important}
+  .route,.routes > *{min-width:0}
+  .route .row,.route .chips,.route .chiprow,.route .cols{flex-wrap:wrap}
+  .optstack table{min-width:0 !important}
+  .famcol .chip,.legend .chip,.chipwrap b{white-space:normal}
+}
+@media print{.site-foot .sf-id img{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+  <img src="assets/photo.jpg" alt="Ethan Chen" width="128" height="128">
+  <div class="who">
+    <h1>Ethan Chen</h1>
+    <p class="role">Analyst, Quantum International Corp. (QIC)</p>
+    <p class="focus">Semiconductor and traditional industry research</p>
+    <p class="contact"><span><span class="lbl">Email:</span> <a href="mailto:ethanchen@qtumic.com">ethanchen@qtumic.com</a></span><span><span class="lbl">Phone:</span> <a href="tel:+886975218862">+886-975218862</a></span><a href="https://www.linkedin.com/in/hao-chen-194981297" target="_blank" rel="me noopener">LinkedIn</a></p>
+  </div>
+</header>
+<section class="intro"><p>I am an analyst at Quantum International Corp. (QIC), covering semiconductors and traditional industries in Asia-Pacific. I also advise listed companies on their earnings-call presentations and investor communication, and I have passed Level I of the CFA Program. This site is where I map the semiconductor supply chain, from materials and wafer fabrication through advanced packaging to AI systems and end markets.</p></section>
+<section class="doors">
+  <a class="door" href="map-en.html"><span class="k">Industry Map</span><span class="s">Overview maps and industry topics, from materials to end markets</span></a>
+  <a class="door" href="map-en.html#sec-c"><span class="k">Company Studies</span><span class="s">NVIDIA, ASE, Micron, Alphabet, Meta</span></a>
+</section>
+<section class="resume"><a class="thumb" href="assets/ethan-chen-resume.pdf" target="_blank" rel="noopener"><img src="assets/ethan-chen-resume-thumb.png" alt="Resume, page one" width="92" height="130" loading="lazy"></a><div class="rt"><span class="k">Resume</span><span class="s">Education, work experience and certifications on one page (PDF)</span><span class="btns"><a class="pri" href="assets/ethan-chen-resume.pdf" target="_blank" rel="noopener">Open Resume</a><a href="assets/ethan-chen-resume.pdf" download="Ethan-Chen-Resume.pdf">Download PDF</a></span></div></section>
+<footer class="site-foot">
+  <div class="sf-note">Personal research notes, not investment advice. © 2026 Ethan Chen</div>
+</footer>
+</div>
+</body>
+</html>

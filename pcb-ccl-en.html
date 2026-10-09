@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CCL · PCB · IC Substrate — Materials, Products and Suppliers · Ethan Chen</title>
+<!-- site-head -->
+<meta name="author" content="Ethan Chen">
+<meta name="description" content="Materials, products and suppliers: from resin, glass fabric and copper foil to CCL, PCB and ABF substrate.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://ethanchensemi.github.io/ethanchenstudy/pcb-ccl-en.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CCL · PCB · IC Substrate — Materials, Products and Suppliers · Ethan Chen">
+<meta property="og:description" content="Materials, products and suppliers: from resin, glass fabric and copper foil to CCL, PCB and ABF substrate.">
+<meta property="og:site_name" content="Ethan Chen · Semiconductor Research Notes">
+<!-- /site-head -->
+<style>
+:root{--paper:#F6F8F9;--card:#FFFFFF;--ink:#14181C;--ink-2:#4A555E;--ink-3:#7C8891;--rule:#CBD3D9;--rule-soft:#E2E8EC;--stage:#1F3A4D;--b:#4A3B7A;
+--ccl:#2E6B4F;--pcb:#B85C10;--sub:#4A3B7A;--up:#215C68}
+*{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;font-size:15px;line-height:1.6}
+.wrap{max-width:1240px;margin:0 auto;padding:44px 24px 90px}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,monospace}
+.backbar{margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.backbar a{display:inline-block;font-size:13px;color:var(--ink-2);text-decoration:none;border:1px solid var(--rule);background:var(--card);padding:6px 13px}
+.backbar a:hover{color:var(--b);border-color:var(--b)}
+.backbar .lang{font-family:ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.04em;color:var(--ink-3)}
+.masthead{border-bottom:2px solid var(--stage);padding-bottom:18px;margin-bottom:22px}
+.masthead h1{font-size:28px;line-height:1.28;font-weight:700;margin:0 0 12px;letter-spacing:-.01em}
+.masthead .meta{font-size:12.5px;color:var(--ink-3);line-height:1.9}
+.masthead .meta > span{display:block;margin-top:4px}
+.masthead .meta b{color:var(--ink-2);font-weight:500}
+
+.tw{color:#1F7A5C;font-weight:600}
+.cn{color:#B02E6E}
+.jp{color:#2560A6}
+.kr{color:#8A5A00}
+.us{color:#8C3A3A}
+.eu{color:#5B4B9E}
+.toc{background:var(--card);border:1px solid var(--rule);padding:18px 22px;margin:0 0 8px}
+.toc h2{font-size:14px;margin:0 0 12px}
+.tocgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.tocgroup h4{font-size:11.5px;color:var(--ink-3);letter-spacing:.03em;margin:0 0 8px;text-transform:uppercase}
+.tocgroup ul{list-style:none;margin:0;padding:0} .tocgroup li{margin-bottom:5px;font-size:12.5px}
+.tocgroup a{color:var(--ink-2);text-decoration:none;border-bottom:1px dotted var(--rule)}
+.tocgroup a:hover{color:var(--b);border-color:var(--b)}
+.tocgroup .n{font-family:ui-monospace,Menlo,monospace;color:var(--ink-3);font-size:11px;margin-right:6px}
+
+.pstage{margin-top:38px}
+.prail{border-bottom:2px solid var(--stage);padding-bottom:8px;margin-bottom:20px;position:relative;padding-left:14px}
+.pstripe{position:absolute;left:0;top:2px;bottom:10px;width:4px;background:var(--stage)}
+.prail.rccl .pstripe{background:var(--ccl)} .prail.rpcb .pstripe{background:var(--pcb)}
+.prail.rsub .pstripe{background:var(--sub)} .prail.rup .pstripe{background:var(--up)}
+.pnum{font-size:11px;color:var(--ink-3);letter-spacing:.06em;margin-bottom:3px}
+.prail h2{font-size:21px;margin:0;font-weight:700}
+.psec{margin-bottom:26px}
+.psec-head{display:flex;align-items:baseline;margin-bottom:8px}
+.psec-head .pno{margin-right:10px}
+.pno{font-size:12px;color:var(--ink-3)}
+.psec-head h3{font-size:16px;margin:0;font-weight:600}
+.ptag{font-size:11px;padding:2px 9px;border-radius:20px;margin-left:auto}
+
+.subhead{font-size:12.5px;font-weight:600;color:var(--ink-2);margin:22px 0 8px;padding-top:14px;border-top:1px dashed var(--rule)}
+.psec .subhead:first-of-type{margin-top:14px;padding-top:0;border-top:none}
+
+.scroller{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--rule);background:var(--card)}
+table.ptable{border-collapse:collapse;width:100%;font-size:13px;min-width:840px}
+.ptable th,.ptable td{padding:8px 12px;text-align:left;vertical-align:top;line-height:1.5;border-bottom:1px solid var(--rule-soft)}
+.ptable th{background:#EEF2F3;font-weight:600;color:var(--ink-2);font-size:11.5px;border-bottom:1px solid var(--rule)}
+.ptable tr:last-child td{border-bottom:none}
+.ptable td.pname{font-weight:600;color:var(--ink)}
+.ptable td.desc{color:var(--ink-2)}
+.ptable td.n{text-align:right;font-family:ui-monospace,Menlo,monospace;font-size:12.5px;white-space:nowrap}
+.ptable td .note{font-size:11.5px;color:var(--ink-3);margin-top:3px;display:block}
+.note + .note{margin-top:7px}
+.pagefoot{margin:40px 0 24px;padding-top:14px;border-top:1px solid var(--rule);font-size:11.5px;color:var(--ink-3);line-height:1.5}
+.ptable tr.bucket td{background:#F6F8F9;color:var(--ink-3);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px}
+.ptable tbody tr:not(.bucket):hover td{background:#FAFBFC}
+.ptable .c1{width:170px} .ptable .c2{width:120px} .ptable .cs{width:86px} .ptable .cw{width:210px}
+
+.stickynav{position:sticky;top:0;z-index:40;background:#F6F8F9;border-bottom:1px solid var(--rule);
+ padding:8px 24px;margin:0 -24px 22px;font-size:12px;line-height:2.0}
+.stickynav .snbrand{display:inline-block;font-weight:600;color:var(--ink-2);margin-right:16px}
+.stickynav a{display:inline-block;color:var(--ink-3);text-decoration:none;padding:3px 10px;border-radius:14px;margin-right:2px}
+.stickynav a:hover{color:var(--b);background:var(--card)}
+.stickynav .snright{border:1px solid var(--rule);background:var(--card);color:var(--ink-2);margin-left:10px}
+.psec,.pstage{scroll-margin-top:64px}
+.fig{margin:0 0 14px;background:var(--card);border:1px solid var(--rule);padding:18px 20px 14px}
+.fig svg{width:100%;height:auto;display:block}
+.fig figcaption{margin-top:13px;padding-top:11px;border-top:1px solid var(--rule-soft);
+ font-size:11.5px;color:var(--ink-3);line-height:1.6}
+.psec-head{border-bottom:1px solid var(--rule-soft);padding-bottom:7px;margin-bottom:11px}
+.psec-head h3{font-size:16.5px}
+.pstage{margin-top:52px}
+.ptable td{font-size:13.5px;line-height:1.55;padding:9px 13px}
+.ptable th{padding:7px 13px}
+@media print{
+ .stickynav,.backbar{display:none}
+ .toc{page-break-after:always}
+ .wrap{max-width:none;padding:0}
+ body{background:#fff;font-size:10pt}
+ .pstage{page-break-before:always;margin-top:0}
+ #part-a{page-break-before:auto}
+tr{page-break-inside:avoid}
+ .scroller{overflow:visible}
+ table.ptable{min-width:0;font-size:8.4pt}
+ .ptable td{padding:4px 6px;font-size:8.4pt}
+}
+@media (max-width:900px){.tocgrid{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.wrap{padding:28px 14px 60px}.masthead h1{font-size:22px}.tocgrid{grid-template-columns:1fr}}
+@media print{.backbar{display:none}.scroller{overflow:visible}}
+</style>
+<style id="site-chrome">
+/* site chrome (added by build) */
+.backbar{flex-wrap:wrap}
+.backbar .bbr{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.backbar .lang{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;letter-spacing:.04em}
+.backbar .lang-off{display:inline-block;font-size:12px;color:var(--ink-3,#7C8891);border:1px dashed var(--rule,#CBD3D9);padding:6px 13px;font-family:ui-monospace,"SF Mono",Menlo,monospace;letter-spacing:.04em;cursor:default}
+.site-foot{margin-top:56px;border-top:1px solid var(--rule,#CBD3D9);padding-top:22px;display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;font-size:12.5px;color:var(--ink-3,#7C8891);line-height:1.5}
+.site-foot .sf-id{display:flex;align-items:center;gap:12px;min-width:0}
+.site-foot .sf-id img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:0 0 auto}
+.site-foot .sf-name{font-size:14px;font-weight:600;color:var(--ink,#14181C)}
+.site-foot .sf-name a{color:inherit;text-decoration:none}
+.site-foot .sf-name a:hover{color:var(--b,#4A3B7A)}
+.site-foot .sf-sub{font-size:12px;color:var(--ink-3,#7C8891)}
+.site-foot .sf-contact{display:flex;gap:16px;flex-wrap:wrap;margin-left:auto}
+.site-foot .sf-contact a{color:var(--ink-2,#4A555E);text-decoration:none;border-bottom:1px dotted var(--rule,#CBD3D9)}
+.site-foot .sf-contact a:hover{color:var(--b,#4A3B7A);border-color:var(--b,#4A3B7A)}
+.site-foot .sf-note{flex-basis:100%;font-size:11.5px}
+@media (max-width:640px){.site-foot .sf-contact{margin-left:0}}
+@media (max-width:640px){
+  .stickynav{margin-left:-14px;margin-right:-14px;padding-left:14px;padding-right:14px;white-space:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .legend .fams,.legend .fams.six,.famgrid,.idxgrid{grid-template-columns:1fr !important}
+  .routes{grid-template-columns:minmax(0,1fr) !important}
+  .route,.routes > *{min-width:0}
+  .route .row,.route .chips,.route .chiprow,.route .cols{flex-wrap:wrap}
+  .optstack table{min-width:0 !important}
+  .famcol .chip,.legend .chip,.chipwrap b{white-space:normal}
+}
+@media print{.site-foot .sf-id img{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="backbar"><a href="map-en.html">← Industry Map</a><span class="bbr"><a href="#toc">Contents</a></span></div>
+
+<header class="masthead">
+  <h1>CCL · PCB · IC Substrate — Materials, Products and Suppliers</h1>
+  <div class="meta">
+    <span><b>Regions</b> <span class="tw">Taiwan</span> · <span class="cn">China</span> · <span class="jp">Japan</span> · <span class="kr">Korea</span></span>
+    <span><b>As of</b> September 2026</span>
+</div>
+</header>
+
+<nav class="stickynav">
+  <span class="snbrand">CCL · PCB · Substrate</span>
+  <a href="#part-a">A · Orientation</a>
+  <a href="#part-b">B · Upstream</a>
+  <a href="#part-c">C · CCL</a>
+  <a href="#part-d">D · PCB</a>
+  <a href="#part-e">E · Substrate</a>
+  <a href="#part-f">F · Demand</a>
+  <a href="#toc" class="snright">Contents</a>
+</nav>
+
+<nav class="toc" id="toc">
+  <h2>Contents</h2>
+  <div class="tocgrid">
+    <div class="tocgroup">
+      <h4>Orientation</h4>
+      <ul>
+        <li><span class="n">A1</span><a href="#a1">Anatomy of the Stack</a></li>
+</ul>
+      <h4 style="margin-top:14px">Upstream</h4>
+      <ul>
+        <li><span class="n">B1</span><a href="#b1">Glass Cloth Grades</a></li>
+        <li><span class="n">B2</span><a href="#b2">Copper Foil: HVLP Grades</a></li>
+</ul>
+</div>
+    <div class="tocgroup">
+      <h4>CCL</h4>
+      <ul>
+        <li><span class="n">C1</span><a href="#c1">Cost Structure</a></li>
+        <li><span class="n">C2</span><a href="#c2">Product Ladder</a></li>
+        <li><span class="n">C3</span><a href="#c3">Resin Systems by Grade</a></li>
+</ul>
+</div>
+    <div class="tocgroup">
+      <h4>PCB</h4>
+      <ul>
+        <li><span class="n">D1</span><a href="#d1">Reading the Build</a></li>
+        <li><span class="n">D2</span><a href="#d2">PCB Product Types</a></li>
+</ul>
+      <h4 style="margin-top:14px">Substrate</h4>
+      <ul>
+        <li><span class="n">E1</span><a href="#e1">Structure and Types</a></li>
+        <li><span class="n">E2</span><a href="#e2">Spec Ladder</a></li>
+</ul>
+</div>
+    <div class="tocgroup">
+      <h4>Demand</h4>
+      <ul>
+        <li><span class="n">F1</span><a href="#f1">Platform Map</a></li>
+</ul>
+</div>
+</div>
+</nav>
+
+<!-- ===================== PART A ===================== -->
+<div class="pstage" id="part-a">
+<div class="prail"><div class="pstripe"></div><div class="pnum">PART A</div><h2>Orientation</h2></div>
+
+<div class="psec" id="a1">
+  <div class="psec-head"><span class="pno mono">A1</span><h3>Anatomy of the Stack</h3></div>
+  <figure class="fig">
+  <svg viewBox="0 0 1180 485" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,sans-serif">
+    <rect x="280" y="40" width="160" height="34" fill="#DFE4E8" stroke="#4A555E" stroke-width="0.7" rx="3"/>
+    <text x="360" y="62" text-anchor="middle" font-size="12" fill="#14181C">Die</text>
+    <circle cx="300" cy="80" r="4" fill="#F2C98A" stroke="#B07A2A" stroke-width="0.7"/>
+    <circle cx="330" cy="80" r="4" fill="#F2C98A" stroke="#B07A2A" stroke-width="0.7"/>
+    <circle cx="360" cy="80" r="4" fill="#F2C98A" stroke="#B07A2A" stroke-width="0.7"/>
+    <circle cx="390" cy="80" r="4" fill="#F2C98A" stroke="#B07A2A" stroke-width="0.7"/>
+    <circle cx="420" cy="80" r="4" fill="#F2C98A" stroke="#B07A2A" stroke-width="0.7"/>
+    <rect x="220" y="88" width="280" height="14" fill="#E5E1F2" stroke="#7E74A8" stroke-width="0.7"/>
+    <rect x="220" y="102" width="280" height="4" fill="#F2C98A" stroke="#B07A2A" stroke-width="0.7"/>
+    <rect x="220" y="106" width="280" height="14" fill="#E5E1F2" stroke="#7E74A8" stroke-width="0.7"/>
+    <rect x="220" y="120" width="280" height="4" fill="#F2C98A" stroke="#B07A2A" stroke-width="0.7"/>
+    <rect x="220" y="124" width="280" height="14" fill="#E5E1F2" stroke="#7E74A8" stroke-width="0.7"/>
+    <rect x="220" y="138" width="280" height="50" fill="#D3E7DC" stroke="#2E6B4F" stroke-width="0.7"/>
+    <rect x="220" y="188" width="280" height="4" fill="#F2C98A" stroke="#B07A2A" stroke-width="0.7"/>
+    <rect x="220" y="192" width="280" height="14" fill="#E5E1F2" stroke="#7E74A8" stroke-width="0.7"/>
+    <rect x="220" y="206" width="280" height="4" fill="#F2C98A" stroke="#B07A2A" stroke-width="0.7"/>
+    <rect x="220" y="210" width="280" height="14" fill="#E5E1F2" stroke="#7E74A8" stroke-width="0.7"/>
+    <rect x="220" y="224" width="280" height="4" fill="#F2C98A" stroke="#B07A2A" stroke-width="0.7"/>
+    <rect x="220" y="228" width="280" height="14" fill="#E5E1F2" stroke="#7E74A8" stroke-width="0.7"/>
+    <rect x="250" y="138" width="9" height="50" fill="#F2C98A" stroke="#B07A2A" stroke-width="0.7" rx="2"/>
+    <rect x="460" y="138" width="9" height="50" fill="#F2C98A" stroke="#B07A2A" stroke-width="0.7" rx="2"/>
+    <rect x="330" y="88" width="6" height="14" fill="#F2C98A" stroke="#B07A2A" stroke-width="0.7"/>
+    <rect x="370" y="106" width="6" height="14" fill="#F2C98A" stroke="#B07A2A" stroke-width="0.7"/>
+    <rect x="220" y="88" width="280" height="154" fill="none" stroke="#4A555E" stroke-width="0.9"/>
+    <circle cx="250" cy="253" r="11" fill="#F2C98A" stroke="#B07A2A" stroke-width="0.7"/>
+    <circle cx="308" cy="253" r="11" fill="#F2C98A" stroke="#B07A2A" stroke-width="0.7"/>
+    <circle cx="366" cy="253" r="11" fill="#F2C98A" stroke="#B07A2A" stroke-width="0.7"/>
+    <circle cx="424" cy="253" r="11" fill="#F2C98A" stroke="#B07A2A" stroke-width="0.7"/>
+    <circle cx="482" cy="253" r="11" fill="#F2C98A" stroke="#B07A2A" stroke-width="0.7"/>
+    <rect x="80" y="264" width="560" height="8" fill="#F2C98A" stroke="#B07A2A" stroke-width="0.7"/>
+    <rect x="80" y="272" width="560" height="24" fill="#EDF5F0" stroke="#8FB3A1" stroke-width="0.7"/>
+    <rect x="80" y="296" width="560" height="8" fill="#F2C98A" stroke="#B07A2A" stroke-width="0.7"/>
+    <rect x="80" y="304" width="560" height="32" fill="#D3E7DC" stroke="#2E6B4F" stroke-width="0.7"/>
+    <rect x="80" y="336" width="560" height="8" fill="#F2C98A" stroke="#B07A2A" stroke-width="0.7"/>
+    <rect x="80" y="344" width="560" height="24" fill="#EDF5F0" stroke="#8FB3A1" stroke-width="0.7"/>
+    <rect x="80" y="368" width="560" height="8" fill="#F2C98A" stroke="#B07A2A" stroke-width="0.7"/>
+    <rect x="80" y="376" width="560" height="32" fill="#D3E7DC" stroke="#2E6B4F" stroke-width="0.7"/>
+    <rect x="80" y="408" width="560" height="8" fill="#F2C98A" stroke="#B07A2A" stroke-width="0.7"/>
+    <rect x="140" y="264" width="10" height="152" fill="#F2C98A" stroke="#B07A2A" stroke-width="0.7" rx="2"/>
+    <rect x="80" y="264" width="560" height="152" fill="none" stroke="#4A555E" stroke-width="0.9"/>
+    <rect x="60" y="148" width="140" height="24" fill="#F0EEF7" stroke="#4A3B7A" stroke-width="0.7" rx="3"/>
+    <text x="130" y="164" text-anchor="middle" font-size="11" font-weight="600" fill="#4A3B7A">IC Substrate</text>
+    <rect x="60" y="238" width="140" height="24" fill="#FAEEE1" stroke="#B85C10" stroke-width="0.7" rx="3"/>
+    <text x="130" y="254" text-anchor="middle" font-size="11" font-weight="600" fill="#B85C10">PCB</text>
+    <line x1="440" y1="57" x2="694" y2="57" stroke="#A8B2BA" stroke-width="0.8" stroke-dasharray="3 3"/>
+    <text x="700" y="61" font-size="12.5" font-weight="600" fill="#14181C">Die</text>
+    <line x1="500" y1="113" x2="694" y2="101" stroke="#A8B2BA" stroke-width="0.8" stroke-dasharray="3 3"/>
+    <text x="700" y="105" font-size="12.5" font-weight="600" fill="#14181C">ABF Build-up Layers</text>
+    <text x="700" y="122" font-size="11" fill="#4A555E">No Glass Cloth · Resin cured · Copper plated</text>
+    <line x1="500" y1="163" x2="694" y2="159" stroke="#A8B2BA" stroke-width="0.8" stroke-dasharray="3 3"/>
+    <text x="700" y="163" font-size="12.5" font-weight="600" fill="#14181C">T-Glass Core</text>
+    <text x="700" y="180" font-size="11" fill="#4A555E">Glass Cloth · Resin cured · Copper laminated</text>
+    <line x1="493" y1="253" x2="694" y2="236" stroke="#A8B2BA" stroke-width="0.8" stroke-dasharray="3 3"/>
+    <text x="700" y="240" font-size="12.5" font-weight="600" fill="#14181C">BGA</text>
+    <text x="700" y="257" font-size="11" fill="#4A555E">Substrate to board interconnect</text>
+    <line x1="642" y1="268" x2="694" y2="291" stroke="#A8B2BA" stroke-width="0.8" stroke-dasharray="3 3"/>
+    <text x="700" y="295" font-size="12.5" font-weight="600" fill="#14181C">Copper Foil</text>
+    <text x="700" y="312" font-size="11" fill="#4A555E">No Glass Cloth · No resin · Copper laminated</text>
+    <line x1="642" y1="284" x2="694" y2="344" stroke="#A8B2BA" stroke-width="0.8" stroke-dasharray="3 3"/>
+    <text x="700" y="348" font-size="12.5" font-weight="600" fill="#14181C">Prepreg</text>
+    <text x="700" y="365" font-size="11" fill="#4A555E">Glass Cloth · Resin uncured · No copper</text>
+    <line x1="642" y1="320" x2="694" y2="397" stroke="#A8B2BA" stroke-width="0.8" stroke-dasharray="3 3"/>
+    <text x="700" y="401" font-size="12.5" font-weight="600" fill="#14181C">CCL Core</text>
+    <text x="700" y="418" font-size="11" fill="#4A555E">Glass Cloth · Resin cured · Copper laminated</text>
+    <line x1="60" y1="442" x2="1160" y2="442" stroke="#CBD3D9" stroke-width="0.8"/>
+    <rect x="80" y="450" width="14" height="13" fill="#F2C98A" stroke="#B07A2A" stroke-width="0.7" rx="2"/>
+    <text x="100" y="460" font-size="11" fill="#4A555E">Copper</text>
+    <rect x="300" y="450" width="14" height="13" fill="#D3E7DC" stroke="#2E6B4F" stroke-width="0.7" rx="2"/>
+    <text x="320" y="460" font-size="11" fill="#4A555E">Laminate</text>
+    <rect x="520" y="450" width="14" height="13" fill="#EDF5F0" stroke="#8FB3A1" stroke-width="0.7" rx="2"/>
+    <text x="540" y="460" font-size="11" fill="#4A555E">Prepreg</text>
+    <rect x="740" y="450" width="14" height="13" fill="#E5E1F2" stroke="#7E74A8" stroke-width="0.7" rx="2"/>
+    <text x="760" y="460" font-size="11" fill="#4A555E">ABF Film</text>
+    <rect x="960" y="450" width="14" height="13" fill="#DFE4E8" stroke="#4A555E" stroke-width="0.7" rx="2"/>
+    <text x="980" y="460" font-size="11" fill="#4A555E">Die</text>
+</svg>
+</figure>
+  <p class="subhead">The Words the Diagram Assumes</p>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Term</th><th>What It Is</th></tr></thead>
+    <tbody>
+      <tr><td class="pname">Glass Cloth</td><td class="desc">Fabric woven from glass fibre. The skeleton of the board</td></tr>
+      <tr><td class="pname">Resin</td><td class="desc">Liquid plastic that soaks into the cloth and then hardens. The glue and the insulator</td></tr>
+      <tr><td class="pname">Copper laminated</td><td class="desc">A ready-made copper sheet pressed onto the board. Acid removes everything that is not a circuit. The only copper bought by weight</td></tr>
+      <tr><td class="pname">Copper plated, through hole</td><td class="desc">Copper grown onto a drilled hole wall to connect the top face to the bottom. Build-up layers are joined by laser blind vias instead</td></tr>
+      <tr><td class="pname">Copper plated, Semi-Additive</td><td class="desc">Copper grown only where the circuit goes, with no foil at any point. Reaches finer lines than acid etching can</td></tr>
+    </tbody>
+  </table></div>
+  <p class="subhead">Who Supplies Each System</p>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Component</th><th>Suppliers</th><th class="c2">Concentration</th></tr></thead>
+    <tbody>
+      <tr class="bucket"><td colspan="3">Laminate</td></tr>
+      <tr><td class="pname">CCL</td><td class="desc"><span class="tw">EMC</span> &middot; <span class="cn">Shengyi</span> &middot; <span class="cn">Kingboard</span> &middot; <span class="tw">Nan Ya Plastics</span> &middot; <span class="tw">ITEQ</span> &middot; <span class="tw">TUC</span> &middot; <span class="jp">Panasonic</span> &middot; <span class="kr">Doosan</span> &middot; <span class="tw">Thinflex</span></td><td class="c2 desc">EMC 16.2%, Shengyi 13.2%, Kingboard 12.4%</td></tr>
+      <tr class="bucket"><td colspan="3">Glass and Copper</td></tr>
+      <tr><td class="pname">Glass Cloth</td><td class="desc"><span class="jp">Nittobo</span> &middot; <span class="jp">Asahi Kasei</span> &middot; <span class="jp">AGC</span> &middot; <span class="jp">Nippon Electric Glass</span> &middot; <span class="jp">Unitika</span> &middot; <span class="tw">Taiwan Glass</span> &middot; <span class="tw">Fu Chiao</span> &middot; <span class="cn">Grace Fabric</span> &middot; <span class="cn">China Jushi</span> &middot; <span class="cn">Taishan</span></td><td class="c2 desc">Nittobo 90% T-glass. Japanese trio near 70% of high end</td></tr>
+      <tr><td class="pname">Copper Foil, HVLP</td><td class="desc"><span class="jp">Mitsui Kinzoku</span> &middot; <span class="eu">Circuit Foil</span> &middot; <span class="tw">Co-Tech</span></td><td class="c2 desc">Co-Tech 10.3%. Japanese makers over 60%</td></tr>
+      <tr class="bucket"><td colspan="3">Base Resin</td></tr>
+      <tr><td class="pname">Epoxy</td><td class="desc"><span class="us">Olin</span> &middot; <span class="us">Westlake Epoxy</span> &middot; <span class="kr">Kukdo</span> &middot; <span class="tw">Nan Ya Plastics</span> &middot; <span class="tw">Chang Chun</span> &middot; <span class="jp">Mitsubishi Chemical</span> &middot; <span class="jp">DIC</span></td><td class="c2 desc">Commodity, many suppliers</td></tr>
+      <tr><td class="pname">PPE / PPO</td><td class="desc"><span class="us">SABIC</span> &middot; <span class="jp">Asahi Kasei</span> &middot; <span class="jp">Mitsubishi Gas Chemical</span></td><td class="c2 desc">SABIC SA9000 is the leading CCL grade</td></tr>
+      <tr><td class="pname">Hydrocarbon</td><td class="desc"><span class="eu">Cray Valley</span> &middot; <span class="jp">Kuraray</span> &middot; <span class="jp">Nippon Soda</span></td><td class="c2 desc">—</td></tr>
+      <tr><td class="pname">Cyanate Ester</td><td class="desc"><span class="jp">Mitsubishi Gas Chemical</span> &middot; <span class="us">Huntsman</span></td><td class="c2 desc">—</td></tr>
+      <tr><td class="pname">BMI</td><td class="desc"><span class="jp">K&middot;I Chemical</span> &middot; <span class="jp">Daiwa Kasei</span> &middot; <span class="eu">Evonik</span></td><td class="c2 desc">—</td></tr>
+      <tr><td class="pname">PTFE</td><td class="desc"><span class="cn">Shengyi</span> &middot; <span class="us">Rogers</span> &middot; <span class="tw">Taiflex</span></td><td class="c2 desc">3M exited all PFAS manufacturing, PTFE included, in 2025</td></tr>
+      <tr class="bucket"><td colspan="3">Modified Resin</td></tr>
+      <tr><td class="pname">Modified MPPO</td><td class="desc"><span class="tw">Elite Advanced Materials</span> &middot; CCL makers in-house</td><td class="c2 desc">—</td></tr>
+      <tr><td class="pname">Specialty Crosslinker</td><td class="desc"><span class="tw">Elite Advanced Materials</span></td><td class="c2 desc">—</td></tr>
+      <tr class="bucket"><td colspan="3">Additives and Fillers</td></tr>
+      <tr><td class="pname">Active Ester Hardener</td><td class="desc"><span class="jp">DIC</span></td><td class="c2 desc">DIC is close to sole source for low-Df formulations</td></tr>
+      <tr><td class="pname">Flame Retardant</td><td class="desc"><span class="tw">Elite Advanced Materials</span> &middot; <span class="jp">Daihachi</span> &middot; <span class="eu">Clariant</span> &middot; <span class="eu">ICL</span></td><td class="c2 desc">—</td></tr>
+      <tr><td class="pname">Spherical Silica Filler</td><td class="desc"><span class="jp">Admatechs</span> &middot; <span class="jp">Tatsumori</span> &middot; <span class="jp">Denka</span> &middot; <span class="jp">Tokuyama</span> &middot; <span class="eu">Sibelco</span> &middot; <span class="tw">Eternal Materials</span></td><td class="c2 desc">Japanese technology lead, Chinese scale catching up</td></tr>
+      <tr class="bucket"><td colspan="3">Substrate</td></tr>
+      <tr><td class="pname">IC Substrate</td><td class="desc"><span class="tw">Unimicron</span> &middot; <span class="jp">Ibiden</span> &middot; <span class="eu">AT&amp;S</span> &middot; <span class="tw">Nan Ya PCB</span> &middot; <span class="jp">Shinko Electric</span> &middot; <span class="tw">Kinsus</span> &middot; <span class="kr">Samsung Electro-Mechanics</span> &middot; <span class="cn">Fastprint</span> &middot; <span class="cn">Shennan</span></td><td class="c2 desc">Unimicron above 20% of high end. Top five 60&ndash;74%</td></tr>
+      <tr><td class="pname">BT Resin</td><td class="desc"><span class="jp">Mitsubishi Gas Chemical</span></td><td class="c2 desc">MGC holds the share; the original BT patent expired in 1995</td></tr>
+      <tr><td class="pname">T-Glass Core</td><td class="desc"><span class="jp">Mitsubishi Gas Chemical</span> &middot; <span class="jp">Resonac</span> &middot; <span class="jp">Panasonic</span> &middot; <span class="tw">Nan Ya</span></td><td class="c2 desc">—</td></tr>
+      <tr><td class="pname">ABF Film</td><td class="desc"><span class="jp">Ajinomoto</span> &middot; <span class="jp">Sumitomo Bakelite</span> &middot; <span class="jp">Toray</span> &middot; <span class="jp">Sekisui</span> &middot; <span class="jp">Taiyo Ink</span> &middot; <span class="jp">Shin-Etsu</span></td><td class="c2 desc">Ajinomoto 97%. The rest have never displaced it at volume</td></tr>
+</tbody>
+</table></div>
+</div>
+
+</div>
+
+<div class="pstage" id="part-b">
+<div class="prail rup"><div class="pstripe"></div><div class="pnum">PART B</div><h2>Upstream Materials</h2></div>
+
+<div class="psec" id="b1">
+  <div class="psec-head"><span class="pno mono">B1</span><h3>Glass Cloth Grades</h3><span class="ptag" style="background:#E4F2F3;color:#215C68">Upstream</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Grade</th><th class="c2">First Used</th><th class="cs">CCL Grade</th><th>Used In</th></tr></thead>
+    <tbody>
+      <tr><td class="pname">E-glass 7628 thick</td><td class="desc">—</td><td class="n">M4 and below</td><td class="desc">Commodity boards. Also substrate cores, as a T-glass substitute</td></tr>
+      <tr><td class="pname">E-glass 2116 thin</td><td class="desc">—</td><td class="n">M4 and below</td><td class="desc">Thin core layers</td></tr>
+      <tr><td class="pname">E-glass 1080 thin</td><td class="desc">—</td><td class="n">M4 and below</td><td class="desc">Thin core layers</td></tr>
+      <tr><td class="pname">Low-Dk1</td><td class="desc">2020, with 400G</td><td class="n">M7 and M8</td><td class="desc">GB300 and VR200 compute tray</td></tr>
+      <tr><td class="pname">Low-Dk2</td><td class="desc">2023, with 800G</td><td class="n">M8 and M8+</td><td class="desc">GB300 and VR200 switch tray</td></tr>
+      <tr><td class="pname">Q-glass</td><td class="desc">2026, with 1.6T</td><td class="n">M9 and M10</td><td class="desc">VR200 midplane onward</td></tr>
+      <tr><td class="pname">T-glass, low CTE</td><td class="desc">—</td><td class="n">—</td><td class="desc">Substrate cores and advanced packaging</td></tr>
+</tbody>
+</table></div>
+
+</div>
+
+</div>
+
+<div class="psec" id="b2">
+  <div class="psec-head"><span class="pno mono">B2</span><h3>Copper Foil: HVLP Grades</h3><span class="ptag" style="background:#E4F2F3;color:#215C68">Upstream</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Grade</th><th class="c2">First Used</th><th class="cs">CCL Grade</th><th>Used In</th></tr></thead>
+    <tbody>
+      <tr><td class="pname">HVLP2</td><td class="desc">2020, with 400G</td><td class="n">M6 to M8</td><td class="desc">GB300 switch tray, OAM accelerator card</td></tr>
+      <tr><td class="pname">HVLP3</td><td class="desc">2023, with 800G</td><td class="n">M8</td><td class="desc">GB300 compute tray, Meta MTIA UBB</td></tr>
+      <tr><td class="pname">HVLP4</td><td class="desc">2023, with 800G</td><td class="n">M7 to M9</td><td class="desc">VR200 compute tray, switch tray and midplane</td></tr>
+      <tr><td class="pname">HVLP5</td><td class="desc">2025, with 1.6T</td><td class="n">M9 and above</td><td class="desc">Rubin Ultra, 3.2T switches</td></tr>
+</tbody>
+</table></div>
+
+</div>
+
+<div class="pstage" id="part-c">
+<div class="prail rccl"><div class="pstripe"></div><div class="pnum">PART C</div><h2>CCL · Copper Clad Laminate</h2></div>
+
+<div class="psec" id="c1">
+  <div class="psec-head"><span class="pno mono">C1</span><h3>Cost Structure</h3><span class="ptag" style="background:#E1F0E9;color:#2E6B4F">CCL</span></div>
+<p class="lede">Grade migration confers pricing power on Glass Cloth and Copper Foil but not on resin, so resin suppliers grow through design wins and spec migration rather than through price.</p>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Cost Line</th><th class="cs">Actual</th><th>Comment</th></tr></thead>
+    <tbody>
+      <tr><td class="pname">Copper Foil</td><td class="n">40%</td><td class="desc">Normally 35–45%. Processing fees rose 20% across the board in 3Q26, with copper metal also climbing</td></tr>
+      <tr><td class="pname">Glass Cloth</td><td class="n">40%</td><td class="desc">Normally 25%. Rose to 40% during 2026, and is the swing factor behind CCL cost inflation</td></tr>
+      <tr><td class="pname">Resin</td><td class="n">20%</td><td class="desc">Normally 20–30%. Smallest cost line, largest performance lever. Sets Dk, Df, CTE and Tg directly</td></tr>
+</tbody>
+</table></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Parameter</th><th class="c2">Governs</th><th>What It Is</th></tr></thead>
+    <tbody>
+      <tr><td class="pname">Dk</td><td class="desc">Speed</td><td class="desc">Dielectric constant. Lower Dk lets the signal travel faster through the board</td></tr>
+      <tr><td class="pname">Df</td><td class="desc">Loss</td><td class="desc">Dissipation factor. Lower Df wastes less of the signal as heat. This is the number the M-series is ranked on</td></tr>
+      <tr><td class="pname">CTE</td><td class="desc">Reliability</td><td class="desc">Coefficient of thermal expansion. No effect on signal. Decides whether the package warps or delaminates, and dominates as body size grows</td></tr>
+      <tr><td class="pname">Tg</td><td class="desc">Process window</td><td class="desc">Glass transition temperature. The point at which the resin softens, which caps how hot assembly can run</td></tr>
+    </tbody>
+  </table></div>
+</div>
+
+<div class="psec" id="c2">
+  <div class="psec-head"><span class="pno mono">C2</span><h3>Product Ladder</h3><span class="ptag" style="background:#E1F0E9;color:#2E6B4F">CCL</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Grade</th><th class="c2">Price NT$/sheet</th><th>Where It Goes</th></tr></thead>
+    <tbody>
+      <tr class="bucket"><td colspan="3">Low End</td></tr>
+      <tr><td class="pname">M2</td><td class="n">500–700</td><td class="desc">Consumer and commodity boards</td></tr>
+      <tr><td class="pname">M4</td><td class="n">1,000–1,200</td><td class="desc">General server, auto, GB300 compute tray hybrid layers</td></tr>
+      <tr class="bucket"><td colspan="3">Mid</td></tr>
+      <tr><td class="pname">M6</td><td class="n">1,400–1,600</td><td class="desc">VR300 compute tray hybrid layers, mid-range networking</td></tr>
+      <tr class="bucket"><td colspan="3">High End</td></tr>
+      <tr><td class="pname">M7</td><td class="n">2,000–2,500</td><td class="desc">PCIe Gen6, AI servers, OAM boards</td></tr>
+      <tr><td class="pname">M8</td><td class="n">6,000–6,500</td><td class="desc">GB300 and VR200 trays, 800G switches, ASIC UBB</td></tr>
+      <tr><td class="pname">M8+</td><td class="n">7,000–8,500</td><td class="desc">VR200 switch tray, next-generation ASIC UBB</td></tr>
+      <tr><td class="pname">M9 Low-Dk2</td><td class="n">10,000</td><td class="desc">1.6T switches and HGX boards</td></tr>
+      <tr class="bucket"><td colspan="3">Ramping</td></tr>
+      <tr><td class="pname">M9 Q-glass</td><td class="n">11,000–13,000</td><td class="desc">VR200 midplane, VR300 switch and midplane, LPU boards</td></tr>
+</tbody>
+</table></div>
+</div>
+
+<div class="psec" id="c3">
+  <div class="psec-head"><span class="pno mono">C3</span><h3>Resin Systems by Grade</h3><span class="ptag" style="background:#E1F0E9;color:#2E6B4F">CCL</span></div>
+<p class="lede">No maker uses a single resin system. Formulations blend several against target electrical, thermal and processing properties, matched to the specific glass and copper in use. Formulation capability is the core technical asset of a CCL maker.</p>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">System</th><th class="c2">Grade</th><th class="c2">Used In</th><th class="cw">Strength</th><th class="cw">Weakness</th></tr></thead>
+    <tbody>
+      <tr class="bucket"><td colspan="5">Future</td></tr>
+      <tr><td class="pname">PTFE</td><td class="desc">Beyond M9</td><td class="desc">Switch and midplane boards</td><td class="desc">Best electrical performance available</td><td class="desc">Worst mechanical support, drillability and thermal management</td></tr>
+      <tr class="bucket"><td colspan="5">Current</td></tr>
+      <tr><td class="pname">Hydrocarbon</td><td class="desc">M7 and above</td><td class="desc">AI compute and switch boards, share rising</td><td class="desc">No polar groups, so the lowest Df in volume production</td><td class="desc">High reactivity, narrow processing window, interface compatibility problems</td></tr>
+      <tr><td class="pname">MPPO / MPPE</td><td class="desc">M7 and above</td><td class="desc">The high-speed volume workhorse</td><td class="desc">Low Df and Dk, low moisture absorption, stable dimensions</td><td class="desc">Base PPO is too viscous to process without modification or blending</td></tr>
+      <tr><td class="pname">Epoxy</td><td class="desc">M4 and below</td><td class="desc">CCL Core and Prepreg at commodity grades. Also reaches the substrate, in glass-epoxy cores and in Build-up Films, ABF included</td><td class="desc">Wide process window, low cost, mature</td><td class="desc">Cannot meet high-frequency, high-speed requirements</td></tr>
+      <tr><td class="pname">BMI</td><td class="desc">Blend component</td><td class="desc">Blended into high grades, never a base system</td><td class="desc">Thermal stability, radiation and corrosion resistance, lower cost</td><td class="desc">Brittle, poor impact resistance</td></tr>
+</tbody>
+</table></div>
+  </div>
+
+</div>
+
+<div class="pstage" id="part-d">
+<div class="prail rpcb"><div class="pstripe"></div><div class="pnum">PART D</div><h2>PCB · Printed Circuit Board</h2></div>
+
+<div class="psec" id="d1">
+  <div class="psec-head"><span class="pno mono">D1</span><h3>Reading the Build: X+Y+X</h3><span class="ptag" style="background:#FAEEE1;color:#B85C10">PCB</span></div>
+<p class="lede">HLC has no build-up. Every layer is core, pressed once, with mechanical through-holes only. Written as a plain layer count, 44L, or as sub-stacks, 22+22. HDI has one or more build-up layers each side, added serially with laser blind vias. Written X+Y+X, and the tier name counts build-up per side, so 3+N+3 is third-order. mSAP starts from ultra-thin foil and plates the trace up from it. Reaches 18/18μm in production, 10/10μm sampling. Used on high-end HDI and SLP boards. SAP uses no foil at any point: an electroless seed, then plating into a resist mould. Reaches 8/8μm. Used on IC Substrate build-up layers, not on boards.</p>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Element</th><th class="c2">How It Is Made</th><th class="c2">Vias</th><th>Why It Matters</th></tr></thead>
+    <tbody>
+      <tr><td class="pname">First X, build-up</td><td class="desc">Added one layer at a time. Each layer needs its own lamination, drill and plate cycle</td><td class="desc">Laser blind vias, 50μm class</td><td class="desc">The expensive layers. Cost and yield risk rise faster than the layer count suggests</td></tr>
+      <tr><td class="pname">Y, core</td><td class="desc">A conventional multilayer stack pressed in one cycle, built from CCL Cores and Prepreg</td><td class="desc">Mechanically drilled through-holes</td><td class="desc">The cheap layers. This is where most of the layer count sits</td></tr>
+      <tr><td class="pname">Last X, build-up</td><td class="desc">Identical to the first X and always equal to it</td><td class="desc">Laser blind vias, 50μm class</td><td class="desc">Asymmetry warps the board, so the two build-up counts are never different</td></tr>
+</tbody>
+</table></div>
+
+  <p class="subhead">Worked Examples</p>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Notation</th><th class="cs">Total</th><th class="cs">Build-up Each Side</th><th class="cs">Core</th><th>Seen On</th></tr></thead>
+    <tbody>
+      <tr><td class="pname">5+12+5</td><td class="n">22L</td><td class="n">5</td><td class="n">12L</td><td class="desc">NVIDIA GB300 compute tray</td></tr>
+      <tr><td class="pname">6+14+6</td><td class="n">26L</td><td class="n">6</td><td class="n">14L</td><td class="desc">NVIDIA VR200 compute tray</td></tr>
+      <tr><td class="pname">3+16+3</td><td class="n">22L</td><td class="n">3</td><td class="n">16L</td><td class="desc">OAM accelerator card</td></tr>
+      <tr><td class="pname">3+28+3</td><td class="n">34L</td><td class="n">3</td><td class="n">28L</td><td class="desc">AWS T4 UBB</td></tr>
+      <tr><td class="pname">24L</td><td class="n">24L</td><td class="n">none</td><td class="n">24L</td><td class="desc">NVIDIA GB300 switch tray. No plus sign because there is no build-up</td></tr>
+      <tr><td class="pname">22+22</td><td class="n">44L</td><td class="n">none</td><td class="n">two 22L stacks</td><td class="desc">NVIDIA VR200 midplane. Two stacks joined, not build-up</td></tr>
+</tbody>
+</table></div>
+</div>
+
+<div class="psec" id="d2">
+  <div class="psec-head"><span class="pno mono">D2</span><h3>PCB Product Types</h3><span class="ptag" style="background:#FAEEE1;color:#B85C10">PCB</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Type</th><th class="cs">Layers</th><th class="cs">CCL Grade</th><th class="cw">Makers</th><th>Used In</th></tr></thead>
+    <tbody>
+      <tr class="bucket"><td colspan="5">Future</td></tr>
+      <tr><td class="pname">Backplane</td><td class="n">Up to 78L</td><td class="n">M9 and PTFE</td><td class="desc"><span class="tw">Multek</span></td><td class="desc">Rubin Ultra candidate, spec not frozen</td></tr>
+      <tr class="bucket"><td colspan="5">Current</td></tr>
+      <tr><td class="pname">HLC</td><td class="n">18L to 52L</td><td class="n">M7 to M9</td><td class="desc"><span class="cn">Shennan Circuits</span> &middot; <span class="cn">Victory Giant</span> &middot; <span class="cn">WUS</span> &middot; <span class="tw">Gold Circuit</span> &middot; <span class="tw">Tripod</span></td><td class="desc">Switch trays, midplanes, ASIC UBB</td></tr>
+      <tr><td class="pname">HDI</td><td class="n">8L to 34L</td><td class="n">M6 to M8</td><td class="desc"><span class="tw">Unimicron</span> &middot; <span class="tw">Compeq</span> &middot; <span class="tw">Zhen Ding</span> &middot; <span class="cn">DSBJ</span> &middot; <span class="us">TTM Technologies</span></td><td class="desc">Phone mainboards, GB300 and VR200 compute trays</td></tr>
+      <tr><td class="pname">mSAP and SLP</td><td class="n">—</td><td class="n">M7 and above</td><td class="desc"><span class="tw">Zhen Ding</span> &middot; <span class="eu">AT&amp;S</span></td><td class="desc">High-end handsets, RF and precision modules</td></tr>
+      <tr><td class="pname">Conventional Multilayer</td><td class="n">2L to 12L</td><td class="n">M2 to M6</td><td class="desc"><span class="cn">DSBJ</span> &middot; <span class="cn">Kinwong</span></td><td class="desc">Consumer, auto, appliances</td></tr>
+      <tr><td class="pname">Rigid-flex</td><td class="n">4L to 20L</td><td class="n">—</td><td class="desc"><span class="tw">Zhen Ding</span> &middot; <span class="tw">Unimicron</span></td><td class="desc">Handsets, cameras, auto modules</td></tr>
+      <tr><td class="pname">FPC</td><td class="n">1L to 8L</td><td class="n">—</td><td class="desc"><span class="jp">Nippon Mektron</span> &middot; <span class="tw">Zhen Ding</span> &middot; <span class="tw">Unimicron</span></td><td class="desc">Handsets, wearables, auto</td></tr>
+</tbody>
+</table></div>
+</div>
+
+</div>
+
+<div class="pstage" id="part-e">
+<div class="prail rsub"><div class="pstripe"></div><div class="pnum">PART E</div><h2>IC Substrate</h2></div>
+
+<div class="psec" id="e1">
+  <div class="psec-head"><span class="pno mono">E1</span><h3>Structure and Types</h3><span class="ptag" style="background:#EDE9F5;color:#4A3B7A">Substrate</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Layer</th><th class="c2">Material</th><th class="c2">How It Is Formed</th><th>Supplied By</th></tr></thead>
+    <tbody>
+      <tr><td class="pname">Build-up, both faces</td><td class="desc">ABF Film. Unreinforced resin, 20 to 30μm per layer</td><td class="desc">Laminate, laser-drill, plate by Semi-Additive Process. Repeated once per layer</td><td class="desc"><span class="jp">Ajinomoto</span></td></tr>
+      <tr><td class="pname">Core</td><td class="desc">BT resin on T-glass, copper clad both sides</td><td class="desc">Pressed once, mechanically drilled, through-hole plated</td><td class="desc"><span class="jp">Mitsubishi Gas Chemical</span> &middot; <span class="jp">Resonac</span> &middot; <span class="jp">Panasonic</span> &middot; <span class="tw">Nan Ya</span></td></tr>
+</tbody>
+</table></div>
+  <p class="subhead">ABF Versus BT</p>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Dimension</th><th class="cw">ABF Substrate</th><th>BT Substrate</th></tr></thead>
+    <tbody>
+      <tr><td class="pname">Dielectric</td><td class="desc">Ajinomoto Build-up Film</td><td class="desc">Bismaleimide triazine resin</td></tr>
+      <tr><td class="pname">Serves</td><td class="desc">Logic: GPU, ASIC, high-end CPU</td><td class="desc">Memory: DRAM, and related packages</td></tr>
+      <tr><td class="pname">Cycle driver</td><td class="desc">AI compute capex</td><td class="desc">Memory customer pull</td></tr>
+      <tr><td class="pname">Direction of upgrade</td><td class="desc">Larger body, more layers, higher bump density</td><td class="desc">Thinner, finer, higher pin count</td></tr>
+      <tr><td class="pname">Current condition</td><td class="desc">Tightening, quarterly price increases</td><td class="desc">Tight, driven by memory demand rather than AI directly</td></tr>
+      <tr><td class="pname">Build method</td><td class="desc">Build-up: film lamination, cure, laser drill, desmear, plate, repeated per layer</td><td class="desc">Core-based lamination</td></tr>
+</tbody>
+</table></div>
+</div>
+
+<div class="psec" id="e2">
+  <div class="psec-head"><span class="pno mono">E2</span><h3>Spec Ladder</h3><span class="ptag" style="background:#F0EEF7;color:#4A3B7A">Substrate</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Axis</th><th class="c2">Direction</th><th>Consequence</th></tr></thead>
+    <tbody>
+      <tr><td class="pname">Body size</td><td class="desc">31x31mm and 75x60mm toward 150x150mm and beyond</td><td class="desc">Warpage difficulty rises non-linearly with area. This is where yield is lost</td></tr>
+      <tr><td class="pname">Layer count</td><td class="desc">6L and 20L toward 28L and above</td><td class="desc">Each build-up layer repeats lamination, cure, laser drill and plating, so equipment intensity scales with it</td></tr>
+      <tr><td class="pname">Bump density</td><td class="desc">Toward 300,000 to 500,000 per package</td><td class="desc">Registration precision and inspection requirements rise with it</td></tr>
+      <tr><td class="pname">Core material</td><td class="desc">T-glass, with E-glass substituted where T-glass is unavailable</td><td class="desc">Makers moving capacity from E-glass to low-Dk cloth tipped E-glass into shortage. The two chains collide here</td></tr>
+</tbody>
+</table></div>
+</div>
+
+</div>
+
+<div class="pstage" id="part-f">
+<div class="prail"><div class="pstripe"></div><div class="pnum">PART F</div><h2>Demand</h2></div>
+
+<div class="psec" id="f1">
+  <div class="psec-head"><span class="pno mono">F1</span><h3>Platform Map</h3><span class="ptag" style="background:#F2E9DE;color:#7A5C2E">Demand</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Platform</th><th class="c2">Timing</th><th class="c2">Board</th><th class="c2">PCB Spec</th><th class="cs">CCL Grade</th><th class="c2">Glass and Copper</th><th class="cw">CCL Supplier</th><th>Board Makers</th></tr></thead>
+    <tbody>
+      <tr class="bucket"><td colspan="8">NVIDIA</td></tr>
+      <tr><td class="pname">GB200 / GB300</td><td class="desc">2025, volume 2026</td><td class="desc">Compute tray</td><td class="desc">HDI 5+12+5, 22L</td><td class="n">M8 with M4</td><td class="desc">Low-Dk1 &middot; HVLP3</td><td class="desc"><span class="kr">Doosan</span></td><td class="desc"><span class="tw">Gold Circuit</span> &middot; <span class="tw">Tripod</span> &middot; <span class="us">TTM Technologies</span></td></tr>
+      <tr><td class="pname">GB200 / GB300</td><td class="desc">2025, volume 2026</td><td class="desc">Switch tray</td><td class="desc">HLC 24L</td><td class="n">M8 with M2</td><td class="desc">Low-Dk2 &middot; HVLP2</td><td class="desc"><span class="cn">Shengyi</span> 70% &middot; <span class="tw">EMC</span> 30%</td><td class="desc"><span class="cn">Victory Giant</span> &middot; <span class="cn">WUS</span></td></tr>
+      <tr><td class="pname">VR200</td><td class="desc">2H26, volume 2027</td><td class="desc">Compute tray</td><td class="desc">HDI 6+14+6, 26L</td><td class="n">M8 with M4</td><td class="desc">Low-Dk1 &middot; HVLP4</td><td class="desc"><span class="kr">Doosan</span></td><td class="desc"><span class="tw">Zhen Ding</span></td></tr>
+      <tr><td class="pname">VR200</td><td class="desc">2H26, volume 2027</td><td class="desc">Switch tray</td><td class="desc">HLC 16+16, 32L</td><td class="n">M8+</td><td class="desc">Low-Dk2 &middot; HVLP4</td><td class="desc"><span class="tw">EMC</span> &middot; <span class="cn">Shengyi</span></td><td class="desc"><span class="cn">Victory Giant</span> &middot; <span class="cn">WUS</span></td></tr>
+      <tr><td class="pname">VR200</td><td class="desc">2H26, volume 2027</td><td class="desc">Midplane</td><td class="desc">HLC 22+22, 44L</td><td class="n">M9</td><td class="desc">Q-glass &middot; HVLP4</td><td class="desc"><span class="tw">EMC</span> sole</td><td class="desc">—</td></tr>
+      <tr><td class="pname">VR300</td><td class="desc">Roadmap</td><td class="desc">Compute tray</td><td class="desc">—</td><td class="n">M8.5 with M6</td><td class="desc">Low-Dk2 &middot; HVLP4</td><td class="desc">—</td><td class="desc">—</td></tr>
+      <tr><td class="pname">VR300</td><td class="desc">Roadmap</td><td class="desc">Switch and midplane</td><td class="desc">—</td><td class="n">M9</td><td class="desc">Q-glass &middot; HVLP4</td><td class="desc">—</td><td class="desc">—</td></tr>
+      <tr><td class="pname">Rubin Ultra</td><td class="desc">2027, volume 2028</td><td class="desc">Switch tray</td><td class="desc">16+16L discussed</td><td class="n">PTFE with M9 or M10</td><td class="desc">Q-glass &middot; HVLP5</td><td class="desc"><span class="tw">EMC</span></td><td class="desc">—</td></tr>
+      <tr><td class="pname">Rubin Ultra</td><td class="desc">2027, volume 2028</td><td class="desc">Backplane</td><td class="desc">Possibly 78L</td><td class="n">PTFE core, hybrid press</td><td class="desc">Q-glass &middot; HVLP5</td><td class="desc"><span class="tw">EMC</span> plus <span class="tw">Taiflex</span> or <span class="cn">Shengyi</span></td><td class="desc">—</td></tr>
+      <tr class="bucket"><td colspan="8">CSP ASIC</td></tr>
+      <tr><td class="pname">AWS Trainium T2, T2.5</td><td class="desc">Shipping</td><td class="desc">OAM</td><td class="desc">HDI 3+16+3, 22L</td><td class="n">M6 to M7</td><td class="desc">Low-Dk1 &middot; HVLP2</td><td class="desc"><span class="jp">Panasonic</span></td><td class="desc">—</td></tr>
+      <tr><td class="pname">AWS Trainium T2, T2.5</td><td class="desc">Shipping</td><td class="desc">UBB</td><td class="desc">HLC 26L</td><td class="n">M8</td><td class="desc">Low-Dk1 &middot; HVLP2</td><td class="desc"><span class="tw">EMC</span> &middot; <span class="tw">TUC</span></td><td class="desc">—</td></tr>
+      <tr><td class="pname">AWS Trainium T3</td><td class="desc">Shipping</td><td class="desc">OAM</td><td class="desc">HDI 3+18+3, 24L</td><td class="n">M7</td><td class="desc">Low-Dk1 &middot; HVLP4</td><td class="desc"><span class="jp">Panasonic</span></td><td class="desc">—</td></tr>
+      <tr><td class="pname">AWS Trainium T3</td><td class="desc">Shipping</td><td class="desc">UBB</td><td class="desc">HLC 26L</td><td class="n">M8+</td><td class="desc">Low-Dk2 &middot; HVLP4</td><td class="desc"><span class="tw">EMC</span> &middot; <span class="tw">TUC</span></td><td class="desc">—</td></tr>
+      <tr><td class="pname">AWS Trainium T4</td><td class="desc">2027</td><td class="desc">UBB</td><td class="desc">HDI 3+28+3, 34L</td><td class="n">M9</td><td class="desc">Low-Dk2 &middot; HVLP4</td><td class="desc"><span class="tw">EMC</span></td><td class="desc">—</td></tr>
+      <tr><td class="pname">Google TPU V7</td><td class="desc">2025, volume 2026</td><td class="desc">UBB</td><td class="desc">HLC 24L</td><td class="n">M7</td><td class="desc">Low-Dk2 &middot; HVLP2</td><td class="desc"><span class="jp">Panasonic</span> 80% &middot; <span class="tw">EMC</span> 20%</td><td class="desc">—</td></tr>
+      <tr><td class="pname">Google TPU V8t, V8i</td><td class="desc">4Q26 to 1Q27</td><td class="desc">UBB</td><td class="desc">HLC 44L and 36L</td><td class="n">M8+</td><td class="desc">Low-Dk2 &middot; HVLP4</td><td class="desc"><span class="tw">EMC</span> &middot; <span class="kr">Doosan</span> &middot; <span class="jp">Panasonic</span></td><td class="desc">—</td></tr>
+      <tr><td class="pname">Google TPU V9t</td><td class="desc">2027</td><td class="desc">UBB</td><td class="desc">HDI 6+12+6, 24L</td><td class="n">M8+ or M9</td><td class="desc">Low-Dk2 &middot; HVLP4</td><td class="desc"><span class="tw">EMC</span></td><td class="desc">—</td></tr>
+      <tr><td class="pname">Meta MTIA 300 to 500</td><td class="desc">2026 to 2027</td><td class="desc">UBB</td><td class="desc">HLC 30L to 44L</td><td class="n">M8 to M8+</td><td class="desc">Low-Dk1 to Low-Dk2 &middot; HVLP3</td><td class="desc"><span class="tw">EMC</span> &middot; <span class="tw">TUC</span></td><td class="desc">—</td></tr>
+      <tr><td class="pname">Microsoft Maia 300</td><td class="desc">2027</td><td class="desc">UBB</td><td class="desc">HLC 40L and above</td><td class="n">M8+</td><td class="desc">Low-Dk2 &middot; HVLP4</td><td class="desc"><span class="tw">EMC</span> &middot; <span class="kr">Doosan</span></td><td class="desc">—</td></tr>
+      <tr><td class="pname">Groq LPU</td><td class="desc">2H26</td><td class="desc">Mainboard</td><td class="desc">Possibly HLC 50L and above</td><td class="n">M9</td><td class="desc">Q-glass</td><td class="desc">—</td><td class="desc">—</td></tr>
+      <tr class="bucket"><td colspan="8">Ethernet Switch</td></tr>
+      <tr><td class="pname">400G</td><td class="desc">2020, volume 2022</td><td class="desc">Switch</td><td class="desc">HLC 24L to 36L</td><td class="n">M7</td><td class="desc">Low-Dk1 &middot; HVLP2</td><td class="desc">—</td><td class="desc">—</td></tr>
+      <tr><td class="pname">800G</td><td class="desc">2023, volume 2024</td><td class="desc">Switch</td><td class="desc">HLC 38L to 44L</td><td class="n">M8</td><td class="desc">Low-Dk1 or Dk2 &middot; HVLP3 or 4</td><td class="desc">—</td><td class="desc">—</td></tr>
+      <tr><td class="pname">1.6T</td><td class="desc">2025, volume 2026</td><td class="desc">Switch</td><td class="desc">HLC 46L to 52L</td><td class="n">M8+ or M9</td><td class="desc">Low-Dk2 or Q-glass &middot; HVLP4 or 5</td><td class="desc">—</td><td class="desc">—</td></tr>
+      <tr><td class="pname">3.2T</td><td class="desc">2027, volume 2028</td><td class="desc">Switch</td><td class="desc">—</td><td class="n">M9+ or M10</td><td class="desc">Upgraded Q-glass &middot; HVLP5</td><td class="desc">—</td><td class="desc">—</td></tr>
+</tbody>
+</table></div>
+</div>
+
+</div>
+<footer class="pagefoot">Sources: Prismark, TPCA and ITRI for market shares; MasterLink, Capital, Mega and other broker research for platform specifications, material grades, prices and supplier positions; company disclosures. Figures are as reported by those sources and have not been independently verified.</footer>
+
+<footer class="site-foot">
+  <div class="sf-id">
+    <img src="assets/photo-sm.jpg" alt="Ethan Chen" width="44" height="44" loading="lazy">
+    <div><div class="sf-name"><a href="index.html">Ethan Chen</a></div><div class="sf-sub">Semiconductor Research Notes</div></div>
+  </div>
+  <div class="sf-contact">
+    <a href="mailto:ethanchen@qtumic.com">ethanchen@qtumic.com</a>
+    <a href="https://www.linkedin.com/in/hao-chen-194981297" target="_blank" rel="me noopener">LinkedIn</a>
+  </div>
+  <div class="sf-note">Personal research notes, not investment advice. © 2026 Ethan Chen</div>
+</footer>
+</div>
+
+</body>
+</html>

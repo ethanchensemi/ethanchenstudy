@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Semiconductor Research Notes · Ethan Chen</title>
+<meta name="author" content="Ethan Chen">
+<meta name="description" content="Research notes on the semiconductor industry organised along the supply chain: overview, fifteen industry topics and company studies.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://ethanchensemi.github.io/ethanchenstudy/map-en.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Semiconductor Research Notes · Ethan Chen">
+<meta property="og:description" content="Research notes on the semiconductor industry organised along the supply chain: overview, fifteen industry topics and company studies.">
+<meta property="og:site_name" content="Ethan Chen · Semiconductor Research Notes">
+<style>
+:root{--paper:#F6F8F9;--card:#FFFFFF;--ink:#14181C;--ink-2:#4A555E;--ink-3:#7C8891;--rule:#CBD3D9;--rule-soft:#E2E8EC;--stage:#1F3A4D;--b:#4A3B7A;--shared:#215C68}
+*{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;font-size:15px;line-height:1.65}
+.wrap{max-width:1080px;margin:0 auto;padding:44px 28px 80px}
+.backbar{margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.backbar a{display:inline-block;font-size:13px;color:var(--ink-2);text-decoration:none;border:1px solid var(--rule);background:var(--card);padding:6px 13px}
+.backbar a:hover{color:var(--b);border-color:var(--b)}
+.masthead{border-bottom:2px solid var(--stage);padding-bottom:20px;margin-bottom:18px}
+.masthead h1{font-size:32px;line-height:1.25;font-weight:700;margin:0 0 6px;letter-spacing:-.01em}
+.masthead .en{font-size:15.5px;color:var(--ink-2);font-weight:400;margin:0}
+.lede{font-size:13.5px;color:var(--ink-2);line-height:1.65;margin:0 0 34px;max-width:82ch}
+.sectionlbl{font-size:13px;font-weight:600;color:var(--ink-3);letter-spacing:.03em;margin:0 0 12px;text-transform:uppercase}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,monospace}
+a{color:inherit}
+@media (max-width:760px){.wrap{padding:30px 16px 60px}.masthead h1{font-size:26px}}
+@media print{.backbar{display:none}}
+
+.block{background:var(--card);border:1px solid var(--rule);margin-bottom:38px}
+.row{display:grid;grid-template-columns:52px 230px 1fr;gap:0 18px;padding:14px 20px;border-bottom:1px solid var(--rule-soft);align-items:start}
+.row:last-child{border-bottom:none}
+.row .no{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11.5px;color:var(--ink-3);padding-top:3px}
+.row .topic b{display:block;font-size:14.5px;font-weight:600;line-height:1.4}
+.row .topic i{display:block;font-style:normal;font-size:12px;color:var(--ink-3);line-height:1.4}
+.row .pages{display:flex;flex-direction:column;gap:9px;min-width:0}
+.page{display:grid;grid-template-columns:1fr auto;gap:2px 16px;align-items:baseline}
+.page .t{font-size:14.5px;font-weight:600;line-height:1.4;color:var(--ink);text-decoration:none}
+.page .t:hover{color:var(--b)}
+.page .d{grid-column:1;font-size:12.5px;color:var(--ink-2);line-height:1.55;max-width:72ch}
+.langs{grid-column:2;grid-row:1/3;display:flex;gap:6px;align-self:start;padding-top:2px}
+.langs a{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11px;letter-spacing:.04em;color:var(--ink-2);text-decoration:none;border:1px solid var(--rule);background:var(--card);padding:2px 8px;border-radius:20px}
+.langs a:hover{color:var(--b);border-color:var(--b)}
+.langs a.cur{color:var(--card);background:var(--stage);border-color:var(--stage)}
+.langs .chip-off{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11px;letter-spacing:.04em;color:var(--ink-3);border:1px dashed var(--rule);padding:2px 8px;border-radius:20px;white-space:nowrap}
+.status{font-size:12.5px;color:var(--ink-3);padding-top:3px;line-height:1.55}
+.status a{color:var(--ink-2);text-decoration:none;border-bottom:1px dotted var(--rule)}
+.status a:hover{color:var(--b);border-color:var(--b)}
+.row.off .topic b{color:var(--ink-3);font-weight:500}
+.row.off{background:#FAFBFC}
+.cotag{display:inline-block;font-size:11px;color:var(--ink-3);border:1px solid var(--rule-soft);padding:1px 7px;border-radius:3px;margin-top:5px}
+@media (max-width:760px){
+  .row{grid-template-columns:40px 1fr;gap:4px 12px;padding:12px 14px}
+  .row .pages,.row .status{grid-column:2}
+  .page{grid-template-columns:1fr}
+  .langs{grid-column:1;grid-row:auto;padding-top:4px}
+}
+
+/* site chrome (added by build) */
+.backbar{flex-wrap:wrap}
+.backbar .bbr{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.backbar .lang{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;letter-spacing:.04em}
+.backbar .lang-off{display:inline-block;font-size:12px;color:var(--ink-3,#7C8891);border:1px dashed var(--rule,#CBD3D9);padding:6px 13px;font-family:ui-monospace,"SF Mono",Menlo,monospace;letter-spacing:.04em;cursor:default}
+.site-foot{margin-top:56px;border-top:1px solid var(--rule,#CBD3D9);padding-top:22px;display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;font-size:12.5px;color:var(--ink-3,#7C8891);line-height:1.5}
+.site-foot .sf-id{display:flex;align-items:center;gap:12px;min-width:0}
+.site-foot .sf-id img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:0 0 auto}
+.site-foot .sf-name{font-size:14px;font-weight:600;color:var(--ink,#14181C)}
+.site-foot .sf-name a{color:inherit;text-decoration:none}
+.site-foot .sf-name a:hover{color:var(--b,#4A3B7A)}
+.site-foot .sf-sub{font-size:12px;color:var(--ink-3,#7C8891)}
+.site-foot .sf-contact{display:flex;gap:16px;flex-wrap:wrap;margin-left:auto}
+.site-foot .sf-contact a{color:var(--ink-2,#4A555E);text-decoration:none;border-bottom:1px dotted var(--rule,#CBD3D9)}
+.site-foot .sf-contact a:hover{color:var(--b,#4A3B7A);border-color:var(--b,#4A3B7A)}
+.site-foot .sf-note{flex-basis:100%;font-size:11.5px}
+@media (max-width:640px){.site-foot .sf-contact{margin-left:0}}
+@media (max-width:640px){
+  .stickynav{margin-left:-14px;margin-right:-14px;padding-left:14px;padding-right:14px;white-space:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .legend .fams,.legend .fams.six,.famgrid,.idxgrid{grid-template-columns:1fr !important}
+  .routes{grid-template-columns:minmax(0,1fr) !important}
+  .route,.routes > *{min-width:0}
+  .route .row,.route .chips,.route .chiprow,.route .cols{flex-wrap:wrap}
+  .optstack table{min-width:0 !important}
+  .famcol .chip,.legend .chip,.chipwrap b{white-space:normal}
+}
+@media print{.site-foot .sf-id img{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="backbar"><a href="index.html">← Ethan Chen</a></div>
+<header class="masthead"><h1>Semiconductor Research Notes</h1></header>
+<p class="lede">The semiconductor supply chain from upstream to downstream, in three parts: overview maps, industry topics and company studies.</p>
+<p class="sectionlbl" id="sec-a">A · Overview</p>
+<div class="block"><div class="row" style="grid-template-columns:52px 1fr"><span class="no">A1</span><div class="pages"><div class="page"><a class="t" href="upstream-en.html">Semiconductor Supply Chain — Upstream</a><span class="d">Raw material to packaged chip in seven stages, each with products, end uses and supplier positions.</span></div></div></div><div class="row" style="grid-template-columns:52px 1fr"><span class="no">A2</span><div class="pages"><div class="page"><a class="t" href="soic-cowos-en.html">SoIC · CoWoS · CPO Full Process Map</a><span class="d">98 steps from wafer fabrication to system shipment, each with its equipment, materials, consumables and suppliers; the equipment and materials maps hang off this page.</span></div></div></div><div class="row off" style="grid-template-columns:52px 1fr"><span class="no">A3</span><div class="pages"><div class="page"><span class="t" style="color:var(--ink-3)">AI Racks</span><span class="d">Drawings of every AI rack system, with every chip inside and its packaging method.</span><span class="langs"><span class="chip-off">In progress</span></span></div></div></div></div>
+<p class="sectionlbl" id="sec-b">B · Industry Map</p>
+<div class="block"><div class="row" id="t01"><span class="no">01</span><span class="topic"><b>Foundry</b></span><div class="pages"><div class="page"><a class="t" href="packaging-en.html">TSMC &amp; Advanced Packaging</a><span class="d">From wafer cross-section to package: how AI chips split their dies, SoIC, CoWoS, InFO, QFN and CPO, and the Intel and Samsung equivalents.</span></div></div></div><div class="row off" id="t02"><span class="no">02</span><span class="topic"><b>Fabless &amp; IP</b></span><span class="status">Industry study in progress · Company studies: <a href="#c-nvidia-catalogue">NVIDIA</a></span></div><div class="row off" id="t03"><span class="no">03</span><span class="topic"><b>OSAT</b></span><span class="status">Industry study in progress · Company studies: <a href="#c-ase-catalogue">ASE Technology Holding</a></span></div><div class="row" id="t04"><span class="no">04</span><span class="topic"><b>Memory / HBM</b></span><div class="pages"><div class="page"><a class="t" href="micron-process-en.html">HBM · NAND Full Process Map</a><span class="d">Wafer to shipment, step by step, with equipment and suppliers.</span></div></div></div><div class="row" id="t05"><span class="no">05</span><span class="topic"><b>Substrate / PCB / CCL</b></span><div class="pages"><div class="page"><a class="t" href="pcb-ccl-en.html">CCL · PCB · IC Substrate</a><span class="d">Materials, products and suppliers: from resin, glass fabric and copper foil to CCL, PCB and ABF substrate.</span></div></div></div><div class="row" id="t06"><span class="no">06</span><span class="topic"><b>Optical / CPO</b></span><div class="pages"><div class="page"><a class="t" href="cpo-en.html">CPO · Co-Packaged Optics</a><span class="d">Components, packaging and suppliers: how optical engines, silicon photonics, lasers and fibre arrays enter the switch package.</span></div></div></div><div class="row" id="t07"><span class="no">07</span><span class="topic"><b>Equipment</b></span><div class="pages"><div class="page"><a class="t" href="equipment-en.html">Semiconductor Equipment Map</a><span class="d">Fifteen machine families laid out along the process flow; every row is one step of the process map.</span></div></div></div><div class="row" id="t08"><span class="no">08</span><span class="topic"><b>Materials</b></span><div class="pages"><div class="page"><a class="t" href="materials-en.html">Semiconductor Materials Map</a><span class="d">Every material and consumable of the process map, one row each, with the steps that use it and the suppliers behind it.</span></div></div></div><div class="row" id="t09"><span class="no">09</span><span class="topic"><b>AI / LLM</b></span><div class="pages"><div class="page"><a class="t" href="llm-industry-map-en.html">AI Compute: Industry, Technology and Hardware</a><span class="d">How AI spending flows from users to power plants: industry map, foundations, hardware, model types and analyst toolkit.</span></div></div></div><div class="row" id="t10"><span class="no">10</span><span class="topic"><b>Cloud Operators / CSP</b></span><div class="pages"><div class="page"><a class="t" href="csp-en.html">Cloud Service Providers</a><span class="d">Google, Amazon, Microsoft and Meta in six parts each: latest quarter, capex, custom silicon, AI monetisation, Taiwan supply chain and broker views.</span></div></div></div><div class="row" id="t11"><span class="no">11</span><span class="topic"><b>Downstream / End Market</b></span><div class="pages"><div class="page"><a class="t" href="downstream-en.html">Downstream End Markets: Demand, Silicon Content and Supply Chain</a><span class="d">Data centre, smartphone, PC, automotive, industrial and Taiwan: demand, silicon content and supply chain for each end market.</span></div></div></div><div class="row" id="t12"><span class="no">12</span><span class="topic"><b>ODM / EMS</b></span><div class="pages"><div class="page"><a class="t" href="odm-en.html">OEM, ODM and EMS: Business Models, Server Integration and Economics</a><span class="d">Who designs, builds and brands the hardware: assembly levels L1–L12, consignment and turnkey, AI rack builders and their customers, and the financials of Taiwan ODMs, EMS companies and server brands.</span></div></div></div><div class="row off" id="t13"><span class="no">13</span><span class="topic"><b>Power</b></span><span class="status">In progress</span></div><div class="row off" id="t14"><span class="no">14</span><span class="topic"><b>Networking</b></span><span class="status">In progress</span></div><div class="row off" id="t15"><span class="no">15</span><span class="topic"><b>Thermal / Cooling</b></span><span class="status">In progress</span></div></div>
+<p class="sectionlbl" id="sec-c">C · Company Studies</p>
+<div class="block"><div class="row" id="c-nvidia-catalogue"><span class="no">C1</span><span class="topic"><b>NVIDIA</b><i>Fabless &amp; IP</i></span><div class="pages"><div class="page"><a class="t" href="nvidia-catalogue-en.html">Product Catalogue</a><span class="d">Every product by layer, future to current to past, newest first.</span></div></div></div><div class="row" id="c-ase-catalogue"><span class="no">C2</span><span class="topic"><b>ASE Technology Holding</b><i>OSAT</i></span><div class="pages"><div class="page"><a class="t" href="ase-catalogue-en.html">Service Catalogue</a><span class="d">Packaging, test, materials and EMS services by platform.</span></div></div></div><div class="row" id="c-micron-catalogue"><span class="no">C3</span><span class="topic"><b>Micron</b><i>Memory / HBM</i></span><div class="pages"><div class="page"><a class="t" href="micron-catalogue-en.html">Product Catalogue</a><span class="d">HBM, DRAM, NAND and SSD products by generation.</span></div></div></div><div class="row" id="c-google"><span class="no">C4</span><span class="topic"><b>Alphabet and Google</b><i>Cloud Operators / CSP</i></span><div class="pages"><div class="page"><a class="t" href="google-en.html">Company Study</a><span class="d">Alphabet, financials, Google, TPU and supply chain, investment analysis.</span></div></div></div><div class="row" id="c-meta"><span class="no">C5</span><span class="topic"><b>Meta Platforms</b><i>Cloud Operators / CSP</i></span><div class="pages"><div class="page"><a class="t" href="meta-en.html">Company Study</a><span class="d">Meta Platforms, financials, businesses, MTIA and supply chain, investment analysis.</span></div></div></div></div>
+<footer class="site-foot">
+  <div class="sf-id">
+    <img src="assets/photo-sm.jpg" alt="Ethan Chen" width="44" height="44" loading="lazy">
+    <div><div class="sf-name"><a href="index.html">Ethan Chen</a></div><div class="sf-sub">Semiconductor Research Notes</div></div>
+  </div>
+  <div class="sf-contact">
+    <a href="mailto:ethanchen@qtumic.com">ethanchen@qtumic.com</a>
+    <a href="https://www.linkedin.com/in/hao-chen-194981297" target="_blank" rel="me noopener">LinkedIn</a>
+  </div>
+  <div class="sf-note">Personal research notes, not investment advice. © 2026 Ethan Chen</div>
+</footer>
+</div>
+</body>
+</html>

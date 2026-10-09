@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NVIDIA Product Catalogue — Silicon, Systems, Software · Ethan Chen</title>
+<!-- site-head -->
+<meta name="author" content="Ethan Chen">
+<meta name="description" content="Every product by layer, future to current to past, newest first.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://ethanchensemi.github.io/ethanchenstudy/nvidia-catalogue-en.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NVIDIA Product Catalogue — Silicon, Systems, Software · Ethan Chen">
+<meta property="og:description" content="Every product by layer, future to current to past, newest first.">
+<meta property="og:site_name" content="Ethan Chen · Semiconductor Research Notes">
+<!-- /site-head -->
+<style>
+:root{--paper:#F6F8F9;--card:#FFFFFF;--ink:#14181C;--ink-2:#4A555E;--ink-3:#7C8891;--rule:#CBD3D9;--rule-soft:#E2E8EC;--stage:#1F3A4D;--b:#4A3B7A}
+*{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;font-size:15px;line-height:1.6}
+.wrap{max-width:1240px;margin:0 auto;padding:44px 24px 90px}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,monospace}
+.backbar{margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.backbar a{display:inline-block;font-size:13px;color:var(--ink-2);text-decoration:none;border:1px solid var(--rule);background:var(--card);padding:6px 13px}
+.backbar a:hover{color:var(--b);border-color:var(--b)} .backbar .lang{font-family:ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.04em}
+.masthead{border-bottom:2px solid var(--stage);padding-bottom:18px;margin-bottom:22px}
+.masthead h1{font-size:28px;line-height:1.28;font-weight:700;margin:0 0 6px;letter-spacing:-.01em}
+.masthead .en{font-size:14px;color:var(--ink-2);margin:0}
+.timeline{background:var(--card);border:1px solid var(--rule);padding:16px 18px 6px;margin-bottom:22px}
+.timeline h2{font-size:14px;margin:0 0 6px;font-weight:600}
+.timeline p{font-size:12px;color:var(--ink-3);margin:0 0 6px}
+.timeline svg{width:100%;height:auto;display:block}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:11.5px;color:var(--ink-3);margin:6px 0 4px}
+.legend span::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px;border:1.8px solid}
+.lg-old::before{background:#7C8891;border-color:#7C8891} .lg-ship::before{background:#1F7A5C;border-color:#1F7A5C} .lg-ramp::before{background:#B85C10;border-color:#B85C10} .lg-road::before{background:#fff;border-color:#4A3B7A}
+.toc{background:var(--card);border:1px solid var(--rule);padding:18px 22px;margin:0 0 8px}
+.toc h2{font-size:14px;margin:0 0 12px}
+.tocgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.tocgroup h4{font-size:11.5px;color:var(--ink-3);letter-spacing:.03em;margin:0 0 8px;text-transform:uppercase}
+.tocgroup ul{list-style:none;margin:0;padding:0} .tocgroup li{margin-bottom:5px;font-size:12.5px}
+.tocgroup a{color:var(--ink-2);text-decoration:none;border-bottom:1px dotted var(--rule)} .tocgroup a:hover{color:var(--b);border-color:var(--b)}
+.tocgroup .n{font-family:ui-monospace,Menlo,monospace;color:var(--ink-3);font-size:11px;margin-right:6px}
+.divider{height:1px;background:var(--rule-soft);margin:34px 0}
+.prail{border-bottom:2px solid var(--stage);padding-bottom:8px;margin-bottom:20px;position:relative;padding-left:14px}
+.pstripe{position:absolute;left:0;top:2px;bottom:10px;width:4px;background:var(--stage)}
+.pnum{font-size:11px;color:var(--ink-3);letter-spacing:.06em;margin-bottom:3px} .prail h2{font-size:21px;margin:0;font-weight:700}
+.psec{margin-bottom:26px} .psec-head{display:flex;align-items:baseline;gap:10px;margin-bottom:8px}
+.pno{font-size:12px;color:var(--ink-3)} .psec-head h3{font-size:16px;margin:0;font-weight:600}
+.ptag{font-size:11px;padding:2px 9px;border-radius:20px;margin-left:auto}
+.scroller{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--rule);background:var(--card)}
+table.ptable{border-collapse:collapse;width:100%;font-size:13px;min-width:820px}
+.ptable th,.ptable td{padding:8px 12px;text-align:left;vertical-align:top;line-height:1.5;border-bottom:1px solid var(--rule-soft)}
+.ptable th{background:#EEF2F3;font-weight:600;color:var(--ink-2);font-size:11.5px;border-bottom:1px solid var(--rule)}
+.ptable th.c1{width:215px} .ptable th.cwhere{width:260px} .ptable th.c2,.ptable th.c3{width:150px} .ptable th.c5{width:110px}
+.ptable tr:last-child td{border-bottom:none}
+.ptable td.pname{font-weight:600;color:var(--ink)} .ptable td.d{color:var(--ink-3);font-size:12px;white-space:nowrap}
+.ptable td.desc{color:var(--ink-2)} .ptable td .note{font-size:12px;color:var(--ink-3);margin-top:3px}
+.ptable tr.bucket td{background:#F6F8F9;color:var(--ink-3);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-bottom:1px solid var(--rule-soft)}
+.ptable tbody tr:not(.bucket):hover td{background:#FAFBFC}
+.badge{display:inline-block;font-size:11px;padding:1px 8px;border-radius:3px;border:1px solid;white-space:nowrap}
+.b-road{color:#4A3B7A;border-color:#C9C1E3;background:#F4F1FA} .b-ann{color:#2560A6;border-color:#BBD4F0;background:#EAF2FB}
+.b-warn{color:#B02E6E;border-color:#EDBBD1;background:#FBEFF4} .b-ramp{color:#B85C10;border-color:#EBC9A6;background:#FBF1E6}
+.b-ship{color:#1F7A5C;border-color:#B9E0CF;background:#E9F6F0} .b-cur{color:#215C68;border-color:#B7D6DC;background:#E8F3F5}
+.b-old{color:#7C8891;border-color:#D5DBDF;background:#F3F5F6} .b-rem{color:#7C8891;border-color:#D5DBDF;background:#F3F5F6;text-decoration:line-through}
+.notes{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
+.notebox{background:#FFF9EB;border:1px dashed #D8B25C;padding:12px 14px;font-size:12.5px;line-height:1.6;color:#5A4A1E} .notebox b{color:#8A5A00}
+.fn{font-size:11.5px;color:var(--ink-3);margin:28px 0 0;line-height:1.6;border-top:1px solid var(--rule-soft);padding-top:14px}
+@media (max-width:900px){.tocgrid{grid-template-columns:1fr 1fr} .notes{grid-template-columns:1fr}}
+@media (max-width:640px){.wrap{padding:28px 14px 60px} .masthead h1{font-size:22px} .tocgrid{grid-template-columns:1fr}}
+@media print{.backbar{display:none} .scroller{overflow:visible}}
+
+table.dctable{min-width:1180px;font-size:13px}
+.dctable .c1{width:146px} .dctable .cn{width:118px} .dctable .cd{width:186px}
+.dctable .cp{width:176px} .dctable .cm{width:154px} .dctable .c5{width:100px}
+.dctable .cc{width:230px}
+.ptable .d{font-size:13px}
+.ptable td{font-size:13px}
+
+.lede{font-size:13.5px;color:var(--ink-2);line-height:1.65;margin:0 0 6px}
+.lede.zh{color:var(--ink-3);margin-bottom:12px}
+.secgroup{margin:38px 0 4px;padding-bottom:2px;display:flex;align-items:baseline;gap:10px}
+.secgroup h3{font-size:19px;margin:0;font-weight:700}
+.secgroup .pno{font-size:13px}
+.secgroup+.psec{margin-top:16px}
+.subhead{font-size:12.5px;font-weight:600;color:var(--ink-2);letter-spacing:.01em;margin:22px 0 8px;padding-top:14px;border-top:1px dashed var(--rule)}
+.psec .subhead:first-of-type{margin-top:14px;padding-top:0;border-top:none}
+.dctable .ccat{width:168px}
+
+details.fold{margin:0}
+details.fold>summary{cursor:pointer;list-style:none;padding:10px 14px;background:#F1F4F5;
+ border:1px solid var(--rule);border-radius:8px;font-size:13px;font-weight:600;
+ color:var(--ink-2);user-select:none;display:flex;align-items:center;gap:8px}
+details.fold>summary::-webkit-details-marker{display:none}
+details.fold>summary::after{content:"Show";margin-left:auto;font-weight:500;
+ font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+details.fold[open]>summary::after{content:"Hide"}
+details.fold>summary::before{content:"\25B8";color:#1F7A5C;font-size:11px}
+details.fold[open]>summary::before{content:"\25BE"}
+details.fold[open]>summary{margin-bottom:16px}
+.ptable .ccat{width:168px}
+.ptable .cwhere{width:150px}
+.ptable .ctype{width:112px}
+.ptable .cscope{width:150px}
+.ptable .cwithin{width:92px}
+.ptable .ctyp{width:132px}
+.lede.below{margin:12px 0 0}
+
+.lede.zh{font-size:13px}
+</style><style id="site-chrome">
+/* site chrome (added by build) */
+.backbar{flex-wrap:wrap}
+.backbar .bbr{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.backbar .lang{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;letter-spacing:.04em}
+.backbar .lang-off{display:inline-block;font-size:12px;color:var(--ink-3,#7C8891);border:1px dashed var(--rule,#CBD3D9);padding:6px 13px;font-family:ui-monospace,"SF Mono",Menlo,monospace;letter-spacing:.04em;cursor:default}
+.site-foot{margin-top:56px;border-top:1px solid var(--rule,#CBD3D9);padding-top:22px;display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;font-size:12.5px;color:var(--ink-3,#7C8891);line-height:1.5}
+.site-foot .sf-id{display:flex;align-items:center;gap:12px;min-width:0}
+.site-foot .sf-id img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:0 0 auto}
+.site-foot .sf-name{font-size:14px;font-weight:600;color:var(--ink,#14181C)}
+.site-foot .sf-name a{color:inherit;text-decoration:none}
+.site-foot .sf-name a:hover{color:var(--b,#4A3B7A)}
+.site-foot .sf-sub{font-size:12px;color:var(--ink-3,#7C8891)}
+.site-foot .sf-contact{display:flex;gap:16px;flex-wrap:wrap;margin-left:auto}
+.site-foot .sf-contact a{color:var(--ink-2,#4A555E);text-decoration:none;border-bottom:1px dotted var(--rule,#CBD3D9)}
+.site-foot .sf-contact a:hover{color:var(--b,#4A3B7A);border-color:var(--b,#4A3B7A)}
+.site-foot .sf-note{flex-basis:100%;font-size:11.5px}
+@media (max-width:640px){.site-foot .sf-contact{margin-left:0}}
+@media (max-width:640px){
+  .stickynav{margin-left:-14px;margin-right:-14px;padding-left:14px;padding-right:14px;white-space:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .legend .fams,.legend .fams.six,.famgrid,.idxgrid{grid-template-columns:1fr !important}
+  .routes{grid-template-columns:minmax(0,1fr) !important}
+  .route,.routes > *{min-width:0}
+  .route .row,.route .chips,.route .chiprow,.route .cols{flex-wrap:wrap}
+  .optstack table{min-width:0 !important}
+  .famcol .chip,.legend .chip,.chipwrap b{white-space:normal}
+}
+@media print{.site-foot .sf-id img{display:none}}
+</style>
+</head>
+<body><div class="wrap">
+<div class="backbar"><a href="map-en.html">← Industry Map</a> </div>
+<header class="masthead"><h1>NVIDIA Product Catalogue — Silicon, Systems, Software</h1><p class="en">Every product by layer · future → current → past, newest first · status as at FY2Q27</p></header>
+
+<section class="timeline">
+  <h2>Product cadence at a glance, 2020–2028</h2>
+  <p>One architecture per year from Blackwell onward. Each generation raises rack power, memory content and network content.</p>
+  <svg viewBox="0 0 1120 254" role="img" aria-label="NVIDIA product cadence 2020 to 2028 across GPU, CPU, rack and networking lanes"><line x1="135" y1="30" x2="135" y2="232" stroke="#E2E8EC"/><text x="135" y="24" text-anchor="middle" font-size="10.5" fill="#7C8891">2020</text><line x1="242" y1="30" x2="242" y2="232" stroke="#E2E8EC"/><text x="242" y="24" text-anchor="middle" font-size="10.5" fill="#7C8891">2021</text><line x1="348" y1="30" x2="348" y2="232" stroke="#E2E8EC"/><text x="348" y="24" text-anchor="middle" font-size="10.5" fill="#7C8891">2022</text><line x1="455" y1="30" x2="455" y2="232" stroke="#E2E8EC"/><text x="455" y="24" text-anchor="middle" font-size="10.5" fill="#7C8891">2023</text><line x1="562" y1="30" x2="562" y2="232" stroke="#E2E8EC"/><text x="562" y="24" text-anchor="middle" font-size="10.5" fill="#7C8891">2024</text><line x1="668" y1="30" x2="668" y2="232" stroke="#E2E8EC"/><text x="668" y="24" text-anchor="middle" font-size="10.5" fill="#7C8891">2025</text><line x1="775" y1="30" x2="775" y2="232" stroke="#E2E8EC"/><text x="775" y="24" text-anchor="middle" font-size="10.5" fill="#7C8891">2026</text><line x1="882" y1="30" x2="882" y2="232" stroke="#E2E8EC"/><text x="882" y="24" text-anchor="middle" font-size="10.5" fill="#7C8891">2027</text><line x1="988" y1="30" x2="988" y2="232" stroke="#E2E8EC"/><text x="988" y="24" text-anchor="middle" font-size="10.5" fill="#7C8891">2028</text><line x1="850" y1="30" x2="850" y2="232" stroke="#B02E6E" stroke-width="1.2" stroke-dasharray="4 3"/><text x="850" y="246" text-anchor="middle" font-size="10" fill="#B02E6E">Today</text><text x="125" y="58" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">GPU architecture</text><line x1="135" y1="54" x2="1095" y2="54" stroke="#CBD3D9"/><circle cx="178" cy="54" r="5" fill="#7C8891" stroke="#7C8891" stroke-width="1.8"/><text x="178" y="45" text-anchor="middle" font-size="10" fill="#7C8891">A100</text><circle cx="423" cy="54" r="5" fill="#7C8891" stroke="#7C8891" stroke-width="1.8"/><text x="423" y="71" text-anchor="middle" font-size="10" fill="#7C8891">H100</text><circle cx="604" cy="54" r="5" fill="#1F7A5C" stroke="#1F7A5C" stroke-width="1.8"/><text x="604" y="45" text-anchor="middle" font-size="10" fill="#1F7A5C">H200</text><circle cx="658" cy="54" r="5" fill="#1F7A5C" stroke="#1F7A5C" stroke-width="1.8"/><text x="658" y="71" text-anchor="middle" font-size="10" fill="#1F7A5C">B200</text><circle cx="743" cy="54" r="5" fill="#1F7A5C" stroke="#1F7A5C" stroke-width="1.8"/><text x="743" y="45" text-anchor="middle" font-size="10" fill="#1F7A5C">B300</text><circle cx="823" cy="54" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/><text x="823" y="71" text-anchor="middle" font-size="10" fill="#B85C10">Rubin</text><circle cx="946" cy="54" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/><text x="946" y="45" text-anchor="middle" font-size="10" fill="#4A3B7A">Rubin Ultra</text><circle cx="1020" cy="54" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/><text x="1020" y="71" text-anchor="middle" font-size="10" fill="#4A3B7A">Feynman</text><text x="125" y="104" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">CPU</text><line x1="135" y1="100" x2="1095" y2="100" stroke="#CBD3D9"/><circle cx="498" cy="100" r="5" fill="#1F7A5C" stroke="#1F7A5C" stroke-width="1.8"/><text x="498" y="91" text-anchor="middle" font-size="10" fill="#1F7A5C">Grace</text><circle cx="823" cy="100" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/><text x="823" y="117" text-anchor="middle" font-size="10" fill="#B85C10">Vera</text><circle cx="1020" cy="100" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/><text x="1020" y="91" text-anchor="middle" font-size="10" fill="#4A3B7A">Rosa</text><text x="125" y="150" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">Rack system</text><line x1="135" y1="146" x2="1095" y2="146" stroke="#CBD3D9"/><circle cx="658" cy="146" r="5" fill="#1F7A5C" stroke="#1F7A5C" stroke-width="1.8"/><text x="658" y="137" text-anchor="middle" font-size="10" fill="#1F7A5C">GB200 NVL72</text><circle cx="743" cy="146" r="5" fill="#1F7A5C" stroke="#1F7A5C" stroke-width="1.8"/><text x="743" y="163" text-anchor="middle" font-size="10" fill="#1F7A5C">GB300 NVL72</text><circle cx="823" cy="146" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/><text x="823" y="137" text-anchor="middle" font-size="10" fill="#B85C10">VR NVL72</text><circle cx="946" cy="146" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/><text x="946" y="163" text-anchor="middle" font-size="10" fill="#4A3B7A">Kyber NVL144</text><text x="125" y="196" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">Networking</text><line x1="135" y1="192" x2="1095" y2="192" stroke="#CBD3D9"/><circle cx="498" cy="192" r="5" fill="#1F7A5C" stroke="#1F7A5C" stroke-width="1.8"/><text x="498" y="183" text-anchor="middle" font-size="10" fill="#1F7A5C">Spectrum-X</text><circle cx="588" cy="192" r="5" fill="#1F7A5C" stroke="#1F7A5C" stroke-width="1.8"/><text x="588" y="209" text-anchor="middle" font-size="10" fill="#1F7A5C">X800 / CX-8</text><circle cx="796" cy="192" r="5" fill="#1F7A5C" stroke="#1F7A5C" stroke-width="1.8"/><text x="796" y="183" text-anchor="middle" font-size="10" fill="#1F7A5C">CPO switches</text><circle cx="1020" cy="192" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/><text x="1020" y="209" text-anchor="middle" font-size="10" fill="#4A3B7A">BlueField-5</text></svg>
+  <div class="legend"><span class="lg-old">Legacy</span><span class="lg-ship">Shipping</span><span class="lg-ramp">Ramping</span><span class="lg-road">Roadmap / rumoured</span></div>
+</section>
+
+<div class="pstage" id="part-E"><div class="prail"><div class="pstripe"></div><div class="pnum">PART E</div><h2>Product → Supply Chain Map</h2></div>
+<div class="pbody"><div class="psec" id="se-1">
+  <div class="psec-head"><span class="pno mono">E1</span><h3>Silicon</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">Silicon</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Element</th><th>Suppliers</th></tr></thead>
+    <tbody>
+<tr><td class="pname">Rubin GPU Die</td><td class="desc">TSMC</td></tr>
+<tr><td class="pname">Vera CPU Die</td><td class="desc">TSMC, Arm</td></tr>
+<tr><td class="pname">Groq 3 LPU</td><td class="desc">Samsung Foundry</td></tr>
+<tr><td class="pname">BlueField DPU, ConnectX NIC</td><td class="desc">TSMC</td></tr>
+<tr><td class="pname">BMC</td><td class="desc">Aspeed</td></tr>
+<tr><td class="pname">Retimer, PCIe Redriver</td><td class="desc">Astera Labs, Montage, Credo</td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="se-2">
+  <div class="psec-head"><span class="pno mono">E2</span><h3>Advanced Packaging</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">Silicon</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Element</th><th>Suppliers</th></tr></thead>
+    <tbody>
+<tr><td class="pname">Rubin Packaging</td><td class="desc">TSMC, Amkor, ASE, SPIL</td></tr>
+<tr><td class="pname">Silicon Interposer, TSV</td><td class="desc">TSMC</td></tr>
+<tr><td class="pname">Bumping</td><td class="desc">TSMC, ASE</td></tr>
+<tr><td class="pname">Final Test</td><td class="desc">KYEC, ASE, Advantest, Teradyne</td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="se-3">
+  <div class="psec-head"><span class="pno mono">E3</span><h3>Memory</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">Silicon</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Element</th><th class="cwhere">Where It Sits</th><th>Suppliers</th></tr></thead>
+    <tbody>
+<tr><td class="pname">HBM4</td><td class="desc">Beside The GPU Die On The Interposer</td><td class="desc">SK Hynix, Samsung, Micron</td></tr>
+<tr><td class="pname">GDDR7</td><td class="desc">Consumer And Workstation Parts</td><td class="desc">Samsung, SK Hynix, Micron</td></tr>
+<tr><td class="pname">LPDDR5X</td><td class="desc">Soldered Or SOCAMM2 Beside The CPU</td><td class="desc">Samsung, SK Hynix, Micron</td></tr>
+<tr><td class="pname">SSD And Local Storage</td><td class="desc">On The Compute Tray</td><td class="desc">Samsung, SK Hynix, Micron, Kioxia</td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="se-4">
+  <div class="psec-head"><span class="pno mono">E4</span><h3>Substrate &amp; PCB</h3><span class="ptag" style="background:#FBE7E4;color:#C0433A">Hardware</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Element</th><th>Suppliers</th></tr></thead>
+    <tbody>
+<tr><td class="pname">ABF Substrate</td><td class="desc">Ibiden, Shinko, Unimicron, Nan Ya PCB</td></tr>
+<tr><td class="pname">Compute Tray Board</td><td class="desc">Gold Circuit, Tripod, TTM</td></tr>
+<tr><td class="pname">Copper Clad Laminate</td><td class="desc">Elite Material, Panasonic, Doosan</td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="se-5">
+  <div class="psec-head"><span class="pno mono">E5</span><h3>Rack Assembly &amp; Mechanical</h3><span class="ptag" style="background:#FBE7E4;color:#C0433A">Hardware</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Element</th><th>Suppliers</th></tr></thead>
+    <tbody>
+<tr><td class="pname">NVL72 Rack Assembly</td><td class="desc">Foxconn, Quanta, Wistron, Wiwynn, Inventec, Pegatron</td></tr>
+<tr><td class="pname">Chassis And Sheet Metal</td><td class="desc">Foxconn, AVC</td></tr>
+<tr><td class="pname">Connectors And Backplane</td><td class="desc">Amphenol, Luxshare, TE Connectivity</td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="se-6">
+  <div class="psec-head"><span class="pno mono">E6</span><h3>Power</h3><span class="ptag" style="background:#FBE7E4;color:#C0433A">Hardware</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Element</th><th class="cwhere">Where It Sits</th><th>Suppliers</th></tr></thead>
+    <tbody>
+<tr><td class="pname">Rack Power</td><td class="desc">190–230 kW On Rubin · 600 kW And 800 V DC On Rubin Ultra Kyber, 2027</td><td class="desc">Delta Electronics, Lite-On, Flex</td></tr>
+<tr><td class="pname">Power Shelf And Busbar</td><td class="desc">Rear Of The Rack</td><td class="desc">Delta Electronics, Lite-On</td></tr>
+<tr><td class="pname">VRM And Power Stages</td><td class="desc">On The Compute Tray</td><td class="desc">Monolithic Power Systems, Infineon, Renesas</td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="se-7">
+  <div class="psec-head"><span class="pno mono">E7</span><h3>Cooling</h3><span class="ptag" style="background:#FBE7E4;color:#C0433A">Hardware</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Element</th><th class="cwhere">Where It Sits</th><th>Suppliers</th></tr></thead>
+    <tbody>
+<tr><td class="pname">Cold Plate</td><td class="desc">Directly On GPU And CPU</td><td class="desc">AVC, Auras, Cooler Master, Boyd (Eaton)</td></tr>
+<tr><td class="pname">Coolant Distribution Unit</td><td class="desc">Rack Or Row Level</td><td class="desc">Vertiv, Boyd (Eaton), nVent, Delta Electronics</td></tr>
+<tr><td class="pname">Quick Disconnects</td><td class="desc">Tray To Manifold</td><td class="desc">CPC, Stäubli, Parker</td></tr>
+<tr><td class="pname">Thermal Interface Material</td><td class="desc">Between Die And Cold Plate</td><td class="desc">Honeywell, Shin-Etsu, Dow</td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="se-8">
+  <div class="psec-head"><span class="pno mono">E8</span><h3>Networking &amp; Optics</h3><span class="ptag" style="background:#FBE7E4;color:#C0433A">Hardware</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Element</th><th class="cwhere">Where It Sits</th><th>Suppliers</th></tr></thead>
+    <tbody>
+<tr><td class="pname">Co-Packaged Optics</td><td class="desc">Inside Spectrum-X And Quantum-X Photonics Switches</td><td class="desc">TSMC, Fabrinet, Coherent, Lumentum</td></tr>
+<tr><td class="pname">Optical Transceivers</td><td class="desc">Rack To Rack, Rack To Spine</td><td class="desc">Innolight, Eoptolink, Fabrinet, Coherent</td></tr>
+<tr><td class="pname">Copper Cabling</td><td class="desc">Inside The Rack</td><td class="desc">Amphenol, Luxshare, Foxconn</td></tr>
+</tbody></table></div>
+</div>
+</div></div>
+<div class="divider"></div>
+
+<section class="toc"><h2>Contents</h2><div class="tocgrid"><div class="tocgroup"><h4>Layer 1 — Silicon</h4><ul><li><a href="#s1-1"><span class="n">1.1</span>Data Centre GPUs</a></li><li><a href="#s1-2"><span class="n">1.2</span>Data Centre CPUs</a></li><li><a href="#s1-3"><span class="n">1.3</span>Superchips — Silicon-Level Integration</a></li><li><a href="#s1-4"><span class="n">1.4</span>Inference Co-processors</a></li><li><a href="#s1-5"><span class="n">1.5</span>Networking Silicon</a></li><li><a href="#s1-6"><span class="n">1.6</span>Interconnect Technologies</a></li><li><a href="#s1-7"><span class="n">1.7</span>Client &amp; Edge Silicon</a></li></ul></div><div class="tocgroup"><h4>Layer 2 — Systems</h4><ul><li><a href="#s2-1"><span class="n">2.1</span>Boards &amp; Reference Architectures</a></li><li><a href="#s2-2"><span class="n">2.2</span>Rack-Scale Integrated Systems</a></li><li><a href="#s2-3"><span class="n">2.3</span>AI Factory Scale</a></li><li><a href="#s2-4"><span class="n">2.4</span>NVIDIA-Branded Systems</a></li><li><a href="#s2-5"><span class="n">2.5</span>Networking Systems</a></li><li><a href="#s2-6"><span class="n">2.6</span>Cloud &amp; Services</a></li></ul></div><div class="tocgroup"><h4>Layer 3 — Software</h4><ul><li><a href="#s3-1"><span class="n">3.1</span>Core Compute Foundation</a></li><li><a href="#s3-2"><span class="n">3.2</span>AI Development &amp; Deployment</a></li><li><a href="#s3-3"><span class="n">3.3</span>Models</a></li><li><a href="#s3-4"><span class="n">3.4</span>Simulation &amp; Digital Twins</a></li><li><a href="#s3-5"><span class="n">3.5</span>Infrastructure Operations</a></li><li><a href="#s3-6"><span class="n">3.6</span>Domain Platforms</a></li><li><a href="#s3-7"><span class="n">3.7</span>Graphics &amp; Consumer Software</a></li><li><a href="#s3-8"><span class="n">3.8</span>Ecosystem &amp; Distribution</a></li></ul></div><div class="tocgroup"><h4>Part E — Supply Chain</h4><ul><li><a href="#se-1"><span class="n">E1</span>Silicon</a></li><li><a href="#se-2"><span class="n">E2</span>Advanced Packaging</a></li><li><a href="#se-3"><span class="n">E3</span>Memory</a></li><li><a href="#se-4"><span class="n">E4</span>Substrate &amp; PCB</a></li><li><a href="#se-5"><span class="n">E5</span>Rack Assembly &amp; Mechanical</a></li><li><a href="#se-6"><span class="n">E6</span>Power</a></li><li><a href="#se-7"><span class="n">E7</span>Cooling</a></li><li><a href="#se-8"><span class="n">E8</span>Networking &amp; Optics</a></li></ul></div></div></section>
+
+<div class="pstage" id="part-B"><div class="prail"><div class="pstripe"></div><div class="pnum">PART B</div><h2>Layer 1 — Silicon</h2></div><div class="pbody"><div class="psec" id="s1-1">
+  <div class="psec-head"><span class="pno mono">1.1</span><h3>Data Centre GPUs</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">Silicon</span></div>
+  <div class="scroller"><table class="ptable dctable">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th class="cn">Node</th><th class="cd">Compute dies</th><th class="cp">Packaging</th><th class="cm">Memory</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="7">Future</td></tr>
+<tr><td class="pname">Feynman</td><td class="mono d">2028</td><td class="desc">Not disclosed</td><td class="desc">Not disclosed</td><td class="desc">Advanced 3D stacking</td><td class="desc">Custom HBM</td><td><span class="badge b-road">Roadmap</span></td></tr>
+<tr><td class="pname">Rubin Ultra</td><td class="mono d">2027</td><td class="desc">Not disclosed</td><td class="desc">4 &times; Rubin Ultra GPU die</td><td class="desc">CoWoS-L</td><td class="desc">1 TB HBM4E</td><td><span class="badge b-road">Roadmap</span></td></tr>
+<tr class="bucket"><td colspan="7">Current</td></tr>
+<tr><td class="pname">Rubin GPU</td><td class="mono d">2026</td><td class="desc">TSMC N3P, reported</td><td class="desc">2 &times; Rubin GPU die</td><td class="desc">CoWoS-L; SoIC reported</td><td class="desc">288 GB HBM4</td><td><span class="badge b-ramp">Ramping</span></td></tr>
+<tr><td class="pname">B300 / Blackwell Ultra</td><td class="mono d">2025</td><td class="desc">TSMC 4NP</td><td class="desc">2 &times; Blackwell Ultra GPU die</td><td class="desc">CoWoS-L</td><td class="desc">288 GB HBM3E</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">B100 / B200</td><td class="mono d">2024</td><td class="desc">TSMC 4NP</td><td class="desc">2 &times; Blackwell GPU die</td><td class="desc">CoWoS-L</td><td class="desc">192 GB HBM3E</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">H200</td><td class="mono d">2024</td><td class="desc">TSMC 4N</td><td class="desc">1 &times; Hopper GPU die</td><td class="desc">CoWoS-S</td><td class="desc">141 GB HBM3E</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">L4 / L40S</td><td class="mono d">2023</td><td class="desc">TSMC 4N</td><td class="desc">1 &times; Ada GPU die</td><td class="desc">Flip-chip BGA</td><td class="desc">24 / 48 GB GDDR6</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr class="bucket"><td colspan="7">Past</td></tr>
+<tr><td class="pname">Rubin CPX</td><td class="mono d">&mdash;</td><td class="desc">Not disclosed</td><td class="desc">1 &times; CPX GPU die</td><td class="desc">Flip-chip BGA</td><td class="desc">128 GB GDDR7</td><td><span class="badge b-rem">Removed</span></td></tr>
+<tr><td class="pname">B200A</td><td class="mono d">&mdash;</td><td class="desc">TSMC 4NP</td><td class="desc">1 &times; Blackwell GPU die</td><td class="desc">CoWoS-S</td><td class="desc">144 GB HBM3E</td><td><span class="badge b-rem">Removed</span></td></tr>
+<tr><td class="pname">H800 / H20</td><td class="mono d">2023 / 2024</td><td class="desc">TSMC 4N</td><td class="desc">1 &times; Hopper GPU die</td><td class="desc">CoWoS-S</td><td class="desc">80 / 96 GB HBM3</td><td><span class="badge b-old">Superseded</span></td></tr>
+<tr><td class="pname">H100</td><td class="mono d">2022</td><td class="desc">TSMC 4N</td><td class="desc">1 &times; Hopper GPU die</td><td class="desc">CoWoS-S</td><td class="desc">80 GB HBM3</td><td><span class="badge b-old">Legacy</span></td></tr>
+<tr><td class="pname">A100</td><td class="mono d">2020</td><td class="desc">TSMC 7N</td><td class="desc">1 &times; Ampere GPU die</td><td class="desc">CoWoS-S</td><td class="desc">40 GB HBM2 / 80 GB HBM2e</td><td><span class="badge b-old">Legacy</span></td></tr>
+</tbody></table></div>
+  </div>
+<div class="psec" id="s1-2">
+  <div class="psec-head"><span class="pno mono">1.2</span><h3>Data Centre CPUs</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">Silicon</span></div>
+  <div class="scroller"><table class="ptable dctable">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th class="cn">Node</th><th class="cd">Compute dies</th><th class="cp">Packaging</th><th class="cm">Memory</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="7">Future</td></tr>
+<tr><td class="pname">Rosa</td><td class="mono d">2028</td><td class="desc">Not disclosed</td><td class="desc">Not disclosed</td><td class="desc">Not disclosed</td><td class="desc">Not disclosed</td><td><span class="badge b-road">Roadmap</span></td></tr>
+<tr class="bucket"><td colspan="7">Current</td></tr>
+<tr><td class="pname">Vera</td><td class="mono d">2026</td><td class="desc">N3 class</td><td class="desc">1 &times; Vera CPU die, 88 cores</td><td class="desc">Flip-chip BGA</td><td class="desc">1.5 TB LPDDR5X, SOCAMM2</td><td><span class="badge b-ramp">Ramping</span></td></tr>
+<tr><td class="pname">Grace</td><td class="mono d">2023</td><td class="desc">TSMC 4N</td><td class="desc">1 &times; Grace CPU die, 72 cores</td><td class="desc">Flip-chip BGA</td><td class="desc">480 GB LPDDR5X, soldered</td><td><span class="badge b-ship">Shipping</span></td></tr>
+</tbody></table></div></div>
+<div class="psec" id="s1-3">
+  <div class="psec-head"><span class="pno mono">1.3</span><h3>Superchips &mdash; Silicon-Level Integration</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">Silicon</span></div>
+  <div class="scroller"><table class="ptable dctable">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th class="cc">Composition</th><th class="cp">Packaging</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="5">Current</td></tr>
+<tr><td class="pname">Vera Rubin Superchip</td><td class="mono d">2026</td><td class="desc">1 &times; Vera CPU + 2 &times; Rubin GPU</td><td class="desc">CoWoS-L per GPU; SoIC reported</td><td><span class="badge b-ramp">Ramping</span></td></tr>
+<tr><td class="pname">GB300</td><td class="mono d">2025</td><td class="desc">1 &times; Grace CPU + 2 &times; Blackwell Ultra GPU</td><td class="desc">CoWoS-L per GPU</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">GB200</td><td class="mono d">2024</td><td class="desc">1 &times; Grace CPU + 2 &times; Blackwell GPU</td><td class="desc">CoWoS-L per GPU</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">GH200</td><td class="mono d">2023</td><td class="desc">1 &times; Grace CPU + 1 &times; Hopper GPU</td><td class="desc">CoWoS-S per GPU</td><td><span class="badge b-ship">Shipping</span></td></tr>
+</tbody></table></div></div>
+<div class="psec" id="s1-4">
+  <div class="psec-head"><span class="pno mono">1.4</span><h3>Inference Co-processors</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">Silicon</span></div>
+  <p class="lede">A chip that sits alongside the main GPU and takes over one specific job it is inefficient at, which for NVIDIA means the Groq LPU handling decode, the token-by-token generation stage that is limited by memory bandwidth rather than compute.</p>
+  <div class="scroller"><table class="ptable dctable">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th class="cn">Node</th><th class="cd">Compute dies</th><th class="cp">Packaging</th><th class="cm">Memory</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="7">Current</td></tr>
+<tr><td class="pname">LPX</td><td class="mono d">2026</td><td class="desc">Samsung SF4X</td><td class="desc">256 &times; LPU die</td><td class="desc">Flip-chip BGA</td><td class="desc">500 MB SRAM per die</td><td><span class="badge b-ramp">Ramping</span></td></tr>
+<tr><td class="pname">Groq 3 LPU</td><td class="mono d">2026</td><td class="desc">Samsung SF4X</td><td class="desc">1 &times; LPU die</td><td class="desc">Flip-chip BGA</td><td class="desc">500 MB SRAM</td><td><span class="badge b-ship">Shipping</span></td></tr>
+</tbody></table></div></div>
+<div class="psec" id="s1-5">
+  <div class="psec-head"><span class="pno mono">1.5</span><h3>Networking Silicon</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">Silicon</span></div>
+   <p class="lede"><b>Host</b> is the server side of the link: the CPU and its memory on the compute tray. <b>Fabric</b> is the network beyond it: the switches and cabling that carry traffic between trays, racks and sites. Quantum runs InfiniBand, a purpose-built lossless fabric whose switches, adapters and cables NVIDIA supplies end to end, while Spectrum runs Ethernet, the standard data centres already operate, adapted for AI traffic in hardware rather than replaced.</p>
+  <div class="scroller"><table class="ptable dctable">
+    <thead><tr><th class="c1">Product</th><th class="cscope">Scope</th><th class="cwithin">Within</th><th class="ctyp">Type</th><th class="c3">Available</th><th>What it is</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="7">Die-level &mdash; inside a package</td></tr>
+<tr><td class="pname">Co-packaged optics engines</td><td class="desc">Electrical &harr; optical</td><td class="desc">Package</td><td class="desc">Optical Engine</td><td class="mono d">2025 / 26</td><td class="desc">Silicon photonics engine inside CPO switches</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr class="bucket"><td colspan="7">Host &harr; fabric &mdash; endpoint chips / one per compute tray</td></tr>
+<tr><td class="pname">BlueField-5</td><td class="desc">Host &harr; fabric</td><td class="desc">Tray</td><td class="desc">Data Processing Unit</td><td class="mono d">2028</td><td class="desc">Next DPU Generation · Feynman Era</td><td><span class="badge b-road">Roadmap</span></td></tr>
+<tr><td class="pname">BlueField-4</td><td class="desc">Host &harr; fabric</td><td class="desc">Tray</td><td class="desc">Data Processing Unit</td><td class="mono d">2026</td><td class="desc">800 Gb/s · Vera Rubin Era</td><td><span class="badge b-ramp">Ramping</span></td></tr>
+<tr><td class="pname">BlueField-3 DPU</td><td class="desc">Host &harr; fabric</td><td class="desc">Tray</td><td class="desc">Data Processing Unit</td><td class="mono d">2023</td><td class="desc">400 Gb/s · Offloads Storage, Networking And Security From The Host CPU</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">ConnectX-9 SuperNIC</td><td class="desc">Host &harr; fabric</td><td class="desc">Tray</td><td class="desc">Network Interface Card</td><td class="mono d">2026</td><td class="desc">1.6 Tb/s per port</td><td><span class="badge b-ramp">Ramping</span></td></tr> <tr><td class="pname">ConnectX-8 SuperNIC</td><td class="desc">Host &harr; fabric</td><td class="desc">Tray</td><td class="desc">Network Interface Card</td><td class="mono d">2025</td><td class="desc">800 Gb/s per port</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr class="bucket"><td colspan="7">GPU &harr; GPU &mdash; scale-up / inside the rack</td></tr>
+<tr><td class="pname">NVLink 6 Switch</td><td class="desc">GPU &harr; GPU</td><td class="desc">Rack</td><td class="desc">Switch ASIC</td><td class="mono d">2026</td><td class="desc">3 TB/s per GPU across 72 packages</td><td><span class="badge b-ramp">Ramping</span></td></tr> <tr><td class="pname">NVLink Switch (Gen 5)</td><td class="desc">GPU &harr; GPU</td><td class="desc">Rack</td><td class="desc">Switch ASIC</td><td class="mono d">2024</td><td class="desc">1.8 TB/s per GPU across 72 packages</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr class="bucket"><td colspan="7">Rack &harr; rack &mdash; scale-out / between racks</td></tr>
+<tr><td class="pname">Quantum-X800 switch ASIC</td><td class="desc">Rack &harr; rack</td><td class="desc">Row</td><td class="desc">InfiniBand ASIC</td><td class="mono d">2025</td><td class="desc">800 Gb/s Per Port · Quantum-2 At 400 Gb/s Still In Volume</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">Spectrum-6 switch ASIC</td><td class="desc">Rack &harr; rack</td><td class="desc">Row</td><td class="desc">Ethernet ASIC</td><td class="mono d">2026</td><td class="desc">102.4 Tb/s switching capacity</td><td><span class="badge b-ramp">Ramping</span></td></tr> <tr><td class="pname">Spectrum-4 switch ASIC</td><td class="desc">Rack &harr; rack</td><td class="desc">Row</td><td class="desc">Ethernet ASIC</td><td class="mono d">2023</td><td class="desc">51.2 Tb/s switching capacity</td><td><span class="badge b-ship">Shipping</span></td></tr>
+</tbody></table></div></div>
+<div class="psec" id="s1-6">
+  <div class="psec-head"><span class="pno mono">1.6</span><h3>Interconnect Technologies</h3><span class="ptag" style="background:#E6F1FB;color:#2560A6">Protocol</span></div>
+  <p class="lede">An interconnect is an ability built into the silicon, not a box. Every GPU has to carry NVLink on its own die before an NVLink Switch has anything to route: the switch connects GPUs that can already speak it, it does not give them the ability.</p>
+  <div class="scroller"><table class="ptable dctable">
+    <thead><tr><th class="c1">Product</th><th class="cscope">Scope</th><th class="cwithin">Within</th><th class="ctyp">Type</th><th class="c3">Available</th><th>What it is</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="7">Future</td></tr>
+<tr><td class="pname">NVQLink</td><td class="desc">QPU &harr; GPU</td><td class="desc">Facility</td><td class="desc">Quantum Interconnect</td><td class="mono d">&mdash;</td><td class="desc">Couples quantum processors with GPU computing</td><td><span class="badge b-ann">Announced</span></td></tr>
+<tr><td class="pname">NVLink Fusion</td><td class="desc">GPU &harr; GPU</td><td class="desc">Rack</td><td class="desc">Licensing Model</td><td class="mono d">&mdash;</td><td class="desc">A Licensing Model · Opens NVLink To Third-Party Silicon</td><td><span class="badge b-ann">Announced</span></td></tr>
+<tr class="bucket"><td colspan="7">Current</td></tr>
+<tr><td class="pname">NVLink 6</td><td class="desc">GPU &harr; GPU</td><td class="desc">Rack</td><td class="desc">Switched Fabric</td><td class="mono d">2026</td><td class="desc">3 TB/s per GPU</td><td><span class="badge b-ramp">Ramping</span></td></tr>
+<tr><td class="pname">NVLink 5</td><td class="desc">GPU &harr; GPU</td><td class="desc">Rack</td><td class="desc">Switched Fabric</td><td class="mono d">2024</td><td class="desc">1.8 TB/s per GPU</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">NVLink-C2C</td><td class="desc">Die &harr; die</td><td class="desc">Package</td><td class="desc">Point-to-Point Link</td><td class="mono d">2023</td><td class="desc">900 GB/s between CPU and GPU</td><td><span class="badge b-ship">Shipping</span></td></tr>
+</tbody></table></div></div>
+<div class="secgroup" id="s1-7"><span class="pno mono">1.7</span><h3>Client &amp; Edge Silicon</h3></div>
+<div class="psec" id="s1-7a">
+  <div class="psec-head"><span class="pno mono">1.7a</span><h3>Client &amp; Workstation GPUs</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">Silicon</span></div>
+  <div class="scroller"><table class="ptable dctable">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th class="cn">Node</th><th class="cd">Compute dies</th><th class="cp">Packaging</th><th class="cm">Memory</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="7">Future</td></tr>
+<tr><td class="pname">GeForce RTX 60 series</td><td class="mono d">2028</td><td class="desc">Not disclosed</td><td class="desc">1 &times; Rubin GPU die</td><td class="desc">Not disclosed</td><td class="desc">Not disclosed</td><td><span class="badge b-road">Rumoured</span></td></tr>
+<tr><td class="pname">GeForce RTX 50 Super</td><td class="mono d">&mdash;</td><td class="desc">TSMC 4N</td><td class="desc">1 &times; Blackwell GPU die</td><td class="desc">Flip-chip BGA</td><td class="desc">GDDR7</td><td><span class="badge b-warn">Delayed</span></td></tr>
+<tr class="bucket"><td colspan="7">Current</td></tr>
+<tr><td class="pname">RTX PRO Server</td><td class="mono d">2025</td><td class="desc">TSMC 4N</td><td class="desc">1 &times; GB202 Blackwell die</td><td class="desc">Flip-chip BGA</td><td class="desc">96 GB GDDR7</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">RTX PRO 5000 / 4500 / 4000</td><td class="mono d">2025</td><td class="desc">TSMC 4N</td><td class="desc">1 &times; Blackwell GPU die</td><td class="desc">Flip-chip BGA</td><td class="desc">24 / 72 GB GDDR7</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">RTX PRO 6000 Blackwell</td><td class="mono d">2025</td><td class="desc">TSMC 4N</td><td class="desc">1 &times; GB202 Blackwell die</td><td class="desc">Flip-chip BGA</td><td class="desc">96 GB GDDR7</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">GeForce RTX 50 series</td><td class="mono d">2025</td><td class="desc">TSMC 4N</td><td class="desc">1 &times; GB20x Blackwell die</td><td class="desc">Flip-chip BGA</td><td class="desc">8 / 32 GB GDDR7 / GDDR6</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr class="bucket"><td colspan="7">Past</td></tr>
+<tr><td class="pname">GeForce RTX 40 series</td><td class="mono d">2022</td><td class="desc">TSMC 4N</td><td class="desc">1 &times; AD10x Ada die</td><td class="desc">Flip-chip BGA</td><td class="desc">8 / 24 GB GDDR6 / GDDR6X</td><td><span class="badge b-old">Legacy</span></td></tr>
+</tbody></table></div></div>
+<div class="psec" id="s1-7b">
+  <div class="psec-head"><span class="pno mono">1.7b</span><h3>Robotics &amp; Edge AI Silicon</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">Silicon</span></div>
+  <div class="scroller"><table class="ptable dctable">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th class="cn">Node</th><th class="cd">Compute dies</th><th class="cp">Packaging</th><th class="cm">Memory</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="7">Current</td></tr>
+<tr><td class="pname">Jetson T4000</td><td class="mono d">2026</td><td class="desc">Not disclosed</td><td class="desc">1 &times; Blackwell SoC die</td><td class="desc">Flip-chip BGA</td><td class="desc">64 GB LPDDR5X</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">Jetson T3000 / T2000</td><td class="mono d">2027</td><td class="desc">Not disclosed</td><td class="desc">1 &times; Blackwell SoC die</td><td class="desc">Flip-chip BGA</td><td class="desc">16 / 32 GB LPDDR5X</td><td><span class="badge b-ann">Announced</span></td></tr>
+<tr><td class="pname">Jetson AGX Thor T5000</td><td class="mono d">2025</td><td class="desc">Not disclosed</td><td class="desc">1 &times; Thor SoC die</td><td class="desc">Flip-chip BGA</td><td class="desc">128 GB LPDDR5X</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">Jetson Orin</td><td class="mono d">2022</td><td class="desc">Samsung 8N</td><td class="desc">1 &times; Ampere SoC die</td><td class="desc">Flip-chip BGA</td><td class="desc">4 / 64 GB LPDDR5</td><td><span class="badge b-ship">Shipping</span></td></tr>
+</tbody></table></div></div>
+<div class="psec" id="s1-7c">
+  <div class="psec-head"><span class="pno mono">1.7c</span><h3>Automotive Silicon</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">Silicon</span></div>
+  <div class="scroller"><table class="ptable dctable">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th class="cn">Node</th><th class="cd">Compute dies</th><th class="cp">Packaging</th><th class="cm">Memory</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="7">Current</td></tr>
+<tr><td class="pname">DRIVE Thor</td><td class="mono d">2025</td><td class="desc">Not disclosed</td><td class="desc">1 &times; Thor SoC die</td><td class="desc">Flip-chip BGA</td><td class="desc">LPDDR5X</td><td><span class="badge b-ship">Shipping</span></td></tr>
+</tbody></table></div></div>
+<div class="psec" id="s1-7d">
+  <div class="psec-head"><span class="pno mono">1.7d</span><h3>Industrial &amp; Medical Silicon</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">Silicon</span></div>
+  <div class="scroller"><table class="ptable dctable">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th class="cn">Node</th><th class="cd">Compute dies</th><th class="cp">Packaging</th><th class="cm">Memory</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="7">Current</td></tr>
+<tr><td class="pname">IGX Thor</td><td class="mono d">2025</td><td class="desc">Not disclosed</td><td class="desc">1 &times; Thor SoC die</td><td class="desc">Flip-chip BGA</td><td class="desc">128 GB LPDDR5X</td><td><span class="badge b-ship">Shipping</span></td></tr>
+</tbody></table></div></div>
+<div class="psec" id="s1-7e">
+  <div class="psec-head"><span class="pno mono">1.7e</span><h3>Console SoCs</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">Silicon</span></div>
+  <p class="lede">Custom designs for one customer, Nintendo, rather than a merchant product line.</p>
+  <div class="scroller"><table class="ptable dctable">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th class="cn">Node</th><th class="cd">Compute dies</th><th class="cp">Packaging</th><th class="cm">Memory</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="7">Current</td></tr>
+<tr><td class="pname">Console SoC (Switch 2)</td><td class="mono d">2025</td><td class="desc">Samsung 8N, reported</td><td class="desc">1 &times; Ampere SoC die</td><td class="desc">Flip-chip BGA</td><td class="desc">12 GB LPDDR5X</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr class="bucket"><td colspan="7">Past</td></tr>
+<tr><td class="pname">Console SoC (Switch)</td><td class="mono d">2017</td><td class="desc">TSMC 20 nm</td><td class="desc">1 &times; Maxwell SoC die</td><td class="desc">Flip-chip BGA</td><td class="desc">4 GB LPDDR4</td><td><span class="badge b-old">Legacy</span></td></tr>
+</tbody></table></div></div>
+</div></div>
+
+<div class="pstage" id="part-C"><div class="prail"><div class="pstripe"></div><div class="pnum">PART C</div><h2>Layer 2 — Systems</h2></div><div class="pbody"><div class="secgroup" id="s2-1"><span class="pno mono">2.1</span><h3>Boards &amp; Reference Architectures</h3></div>
+<div class="psec" id="s2-1a">
+  <div class="psec-head"><span class="pno mono">2.1a</span><h3>Boards</h3><span class="ptag" style="background:#FBE7E4;color:#C0433A">Hardware</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Product</th><th class="ctype">Type</th><th class="c3">Available</th><th>What it is</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="5">Current</td></tr>
+<tr><td class="pname">Bianca</td><td class="desc">Compute Tray Board</td><td class="mono d">2024</td><td class="desc">1 Grace CPU + 2 Blackwell GPUs · 2 Boards Per Compute Tray In GB200 / GB300 NVL72 · The Standard Tray</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">Ariel</td><td class="desc">Compute Tray Board</td><td class="mono d">2024</td><td class="desc">1 Grace CPU + 1 Blackwell GPU · Higher CPU Ratio · Reportedly Meta's Custom Variant For Recommendation Workloads</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">HGX</td><td class="desc">Baseboard</td><td class="mono d">Ongoing</td><td class="desc">DGX B200 / B300, HGX Rubin NVL8 and OEM 8-GPU servers</td><td><span class="badge b-cur">Current</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s2-1b">
+  <div class="psec-head"><span class="pno mono">2.1b</span><h3>Standards &amp; Programmes</h3><span class="ptag" style="background:#EEEBF8;color:#5B4B9E">Standard</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Product</th><th class="ctype">Type</th><th class="c3">Available</th><th>What it is</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="5">Current</td></tr>
+<tr><td class="pname">MGX</td><td class="desc">Reference Architecture</td><td class="mono d">2023</td><td class="desc">ODMs to build GB300 and Vera Rubin systems</td><td><span class="badge b-cur">Current</span></td></tr>
+<tr><td class="pname">NVIDIA-Certified Systems</td><td class="desc">Validation Programme</td><td class="mono d">2021</td><td class="desc">Partner servers from Dell, HPE, Lenovo, Supermicro</td><td><span class="badge b-cur">Current</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s2-2">
+  <div class="psec-head"><span class="pno mono">2.2</span><h3>Rack-Scale Integrated Systems</h3><span class="ptag" style="background:#FBE7E4;color:#C0433A">Hardware</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th>What it is</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="4">Future</td></tr><tr><td class="pname">Vera Rubin Ultra NVL144 (Kyber)</td><td class="mono d">2027</td><td class="desc">144 Packages · 576 GPU Dies · 600 kW · 800 V DC · Liquid Cooled</td><td><span class="badge b-road">Roadmap</span></td></tr><tr class="bucket"><td colspan="4">Current</td></tr><tr><td class="pname">LPX rack</td><td class="mono d">2026</td><td class="desc">256 LPU Dies · Decode Only · Liquid Cooled</td><td><span class="badge b-ramp">Ramping</span></td></tr><tr><td class="pname">Vera Rubin NVL72</td><td class="mono d">2026</td><td class="desc">72 Packages · 144 GPU Dies · 36 Vera CPUs · 190–230 kW · Liquid Cooled</td><td><span class="badge b-ramp">Ramping</span></td></tr><tr><td class="pname">GB300 NVL72</td><td class="mono d">2025</td><td class="desc">72 Packages · 144 GPU Dies · 36 Grace CPUs · 130–140 kW · Liquid Cooled</td><td><span class="badge b-ship">Shipping</span></td></tr><tr><td class="pname">GB200 NVL72</td><td class="mono d">2024</td><td class="desc">72 Packages · 144 GPU Dies · 36 Grace CPUs · 120 kW · Liquid Cooled</td><td><span class="badge b-ship">Shipping</span></td></tr><tr><td class="pname">GB200 NVL4</td><td class="mono d">2025</td><td class="desc">4 Packages · 8 GPU Dies · 2 Grace CPUs · 5.4 kW · Liquid Cooled</td><td><span class="badge b-ship">Shipping</span></td></tr><tr class="bucket"><td colspan="4">Past</td></tr><tr><td class="pname">Vera Rubin NVL144 CPX</td><td class="mono d">&mdash;</td><td class="desc">144 Rubin GPUs · 144 Rubin CPX · 36 Vera CPUs · Liquid Cooled</td><td><span class="badge b-rem">Removed</span></td></tr></tbody></table></div>
+</div><div class="secgroup" id="s2-3"><span class="pno mono">2.3</span><h3>AI Factory Scale</h3></div>
+<div class="psec" id="s2-3a">
+  <div class="psec-head"><span class="pno mono">2.3a</span><h3>How It Is Planned</h3><span class="ptag" style="background:#EEEBF8;color:#5B4B9E">Standard</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Product</th><th class="ctype">Type</th><th class="c3">Available</th><th>What it is</th><th class="c5">Status</th></tr></thead>
+    <tbody>
+<tr><td class="pname">Vera Rubin DSX reference design</td><td class="desc">Reference Architecture</td><td class="mono d">2026</td><td class="desc">Architecture, simulation, facilities, lifecycle</td><td><span class="badge b-cur">Current</span></td></tr>
+<tr><td class="pname">Omniverse DSX</td><td class="desc">Software</td><td class="mono d">2026</td><td class="desc">Digital twin for AI factory design</td><td><span class="badge b-cur">Current</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s2-3b">
+  <div class="psec-head"><span class="pno mono">2.3b</span><h3>What You Deploy</h3><span class="ptag" style="background:#FBE7E4;color:#C0433A">Hardware</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Product</th><th class="ctype">Type</th><th class="c3">Available</th><th>What it is</th><th class="c5">Status</th></tr></thead>
+    <tbody>
+<tr><td class="pname">Vera Rubin POD</td><td class="desc">System</td><td class="mono d">2026 / 27</td><td class="desc">40 racks of five types (Vera Rubin NVL72, Groq 3 LPX, Vera CPU, BlueField-4 STX, Spectrum-6 SPX) · 1,152 Rubin GPUs as one system</td><td><span class="badge b-ann">Announced</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="secgroup" id="s2-4"><span class="pno mono">2.4</span><h3>NVIDIA-Branded Systems</h3></div>
+<div class="psec" id="s2-4a">
+  <div class="psec-head"><span class="pno mono">2.4a</span><h3>Desk &amp; Workstation</h3><span class="ptag" style="background:#FBE7E4;color:#C0433A">Hardware</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Product</th><th class="ctype">Type</th><th class="c3">Available</th><th>What it is</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="5">Future</td></tr>
+<tr><td class="pname">RTX Spark</td><td class="desc">Personal Desktop</td><td class="mono d">2026</td><td class="desc">Superchip in OEM Windows Laptops And Compact Desktops</td><td><span class="badge b-ann">Announced</span></td></tr>
+<tr class="bucket"><td colspan="5">Current</td></tr>
+<tr><td class="pname">DGX Station (GB300)</td><td class="desc">Workstation</td><td class="mono d">2026</td><td class="desc">Grace Blackwell · Air Cooled</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">DGX Spark</td><td class="desc">Personal Desktop</td><td class="mono d">2025</td><td class="desc">GB10 Grace Blackwell · Air Cooled</td><td><span class="badge b-ship">Shipping</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s2-4b">
+  <div class="psec-head"><span class="pno mono">2.4b</span><h3>Servers</h3><span class="ptag" style="background:#FBE7E4;color:#C0433A">Hardware</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Product</th><th class="ctype">Type</th><th class="c3">Available</th><th>What it is</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="5">Current</td></tr>
+<tr><td class="pname">DGX B300 (Blackwell Ultra)</td><td class="desc">AI Server</td><td class="mono d">2025</td><td class="desc">8 Blackwell Ultra GPUs · Air Cooled</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">DGX B200</td><td class="desc">AI Server</td><td class="mono d">2024</td><td class="desc">8 Blackwell GPUs · Air Cooled</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">IGX</td><td class="desc">Edge Platform</td><td class="mono d">2023</td><td class="desc">Industrial And Medical · Compact</td><td><span class="badge b-cur">Current</span></td></tr>
+<tr><td class="pname">OVX</td><td class="desc">Simulation Server</td><td class="mono d">2022</td><td class="desc">Built For Omniverse Workloads · Rack-Mount</td><td><span class="badge b-cur">Current</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s2-4c">
+  <div class="psec-head"><span class="pno mono">2.4c</span><h3>Rack &amp; Cluster</h3><span class="ptag" style="background:#FBE7E4;color:#C0433A">Hardware</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Product</th><th class="ctype">Type</th><th class="c3">Available</th><th>What it is</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="5">Current</td></tr>
+<tr><td class="pname">DGX GB300</td><td class="desc">Rack System</td><td class="mono d">2025</td><td class="desc">Grace Blackwell Ultra · Liquid Cooled</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">DGX GB200</td><td class="desc">Rack System</td><td class="mono d">2024</td><td class="desc">Grace Blackwell · Liquid Cooled</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">DGX SuperPOD</td><td class="desc">Reference Architecture</td><td class="mono d">Ongoing</td><td class="desc">Multiple DGX racks networked as one cluster</td><td><span class="badge b-cur">Current</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="secgroup" id="s2-5"><span class="pno mono">2.5</span><h3>Networking Systems</h3></div>
+<div class="psec" id="s2-5a">
+  <div class="psec-head"><span class="pno mono">2.5a</span><h3>Switches</h3><span class="ptag" style="background:#FBE7E4;color:#C0433A">Hardware</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Product</th><th class="cscope">Scope</th><th class="cwithin">Within</th><th class="ctyp">Type</th><th class="c3">Available</th><th>What it is</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="7">Current</td></tr>
+<tr><td class="pname">Spectrum-X Ethernet Photonics</td><td class="desc">Rack &harr; rack</td><td class="desc">Row</td><td class="desc">Ethernet Switch</td><td class="mono d">2026</td><td class="desc">First Ethernet CPO switches with 200 Gb/s SerDes</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">Spectrum-X</td><td class="desc">Rack &harr; rack</td><td class="desc">Row</td><td class="desc">Ethernet Switch</td><td class="mono d">2023</td><td class="desc">Per-Packet Adaptive Routing · Removes RoCE Head-Of-Line Blocking</td><td><span class="badge b-cur">Current</span></td></tr>
+<tr><td class="pname">Quantum-X Photonics</td><td class="desc">Rack &harr; rack</td><td class="desc">Row</td><td class="desc">InfiniBand Switch</td><td class="mono d">2026</td><td class="desc">Co-Packaged Optics · No Pluggable Transceivers</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">Quantum-X800 InfiniBand switches</td><td class="desc">Rack &harr; rack</td><td class="desc">Row</td><td class="desc">InfiniBand Switch</td><td class="mono d">2025</td><td class="desc">800 Gb/s Per Port · XDR</td><td><span class="badge b-cur">Current</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s2-5b">
+  <div class="psec-head"><span class="pno mono">2.5b</span><h3>Topology &amp; Cabling</h3><span class="ptag" style="background:#FBE7E4;color:#C0433A">Hardware</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Product</th><th class="cscope">Scope</th><th class="cwithin">Within</th><th class="ctyp">Type</th><th class="c3">Available</th><th>What it is</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="7">Current</td></tr>
+<tr><td class="pname">Spectrum-X Multiplane</td><td class="desc">Rack &harr; rack</td><td class="desc">Row</td><td class="desc">Topology</td><td class="mono d">2026</td><td class="desc">Parallel-switch topology for Vera Rubin NVL72 racks</td><td><span class="badge b-cur">Current</span></td></tr>
+<tr><td class="pname">LinkX</td><td class="desc">Port &harr; port</td><td class="desc">Rack And Row</td><td class="desc">Cabling</td><td class="mono d">Ongoing</td><td class="desc">Copper and optical cables and transceivers for InfiniBand and Ethernet</td><td><span class="badge b-cur">Current</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s2-6">
+  <div class="psec-head"><span class="pno mono">2.6</span><h3>Cloud &amp; Services</h3><span class="ptag" style="background:#FBEFF4;color:#B02E6E">Service</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Product</th><th class="ctype">Type</th><th class="c3">Available</th><th>What it is</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="5">Current</td></tr><tr><td class="pname">DGX Cloud Lepton</td><td class="desc">Compute Marketplace</td><td class="mono d">2025</td><td class="desc">GPU capacity rented across multiple cloud providers</td><td><span class="badge b-cur">Current</span></td></tr><tr><td class="pname">DGX Cloud</td><td class="desc">Rented Compute</td><td class="mono d">2023</td><td class="desc">Sold inside hyperscaler marketplaces</td><td><span class="badge b-cur">Current</span></td></tr><tr><td class="pname">AI Foundry</td><td class="desc">Managed Service</td><td class="mono d">2024</td><td class="desc">Custom model building on NVIDIA infrastructure</td><td><span class="badge b-cur">Current</span></td></tr><tr><td class="pname">NGC catalogue / build.nvidia.com</td><td class="desc">Software Library</td><td class="mono d">Ongoing</td><td class="desc">Containers, models and microservices</td><td><span class="badge b-cur">Current</span></td></tr></tbody></table></div>
+</div></div></div><div class="divider"></div><div class="pstage" id="part-D"><div class="prail"><div class="pstripe"></div><div class="pnum">PART D</div><h2>Layer 3 — Software</h2></div><details class="fold"><summary>Layer 3 — Software · 8 sections</summary><div class="pbody"><div class="psec" id="s3-1">
+  <div class="psec-head"><span class="pno mono">3.1</span><h3>Core Compute Foundation</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">Software</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th>What it is</th><th class="c5">Status</th></tr></thead>
+    <tbody>
+<tr class="bucket"><td colspan="4">Write GPU code</td></tr>
+<tr><td class="pname">CUDA / CUDA Toolkit</td><td class="mono d">Ongoing</td><td class="desc">The language and compiler for writing programs that run on a GPU · 6m developers, 6,000 applications</td><td><span class="badge b-cur">Current</span></td></tr>
+<tr><td class="pname">cuDNN / cuBLAS / NCCL</td><td class="mono d">Ongoing</td><td class="desc">Ready-made maths routines so you don't write them yourself · neural networks, linear algebra, multi-GPU messaging</td><td><span class="badge b-cur">Current</span></td></tr>
+<tr class="bucket"><td colspan="4">Find out why it is slow</td></tr>
+<tr><td class="pname">Nsight</td><td class="mono d">Ongoing</td><td class="desc">Profiling and debugging tools · shows where GPU code wastes time</td><td><span class="badge b-cur">Current</span></td></tr>
+</tbody></table></div>
+</div><div class="secgroup" id="s3-2"><span class="pno mono">3.2</span><h3>AI Development &amp; Deployment</h3></div>
+<div class="psec" id="s3-2a">
+  <div class="psec-head"><span class="pno mono">3.2a</span><h3>Train or Customise a Model</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">Software</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th>What it is</th><th class="c5">Status</th></tr></thead>
+    <tbody>
+<tr><td class="pname">NeMo</td><td class="mono d">Ongoing</td><td class="desc">Framework for training a model from scratch or fine-tuning an existing one · free</td><td><span class="badge b-cur">Current</span></td></tr>
+<tr><td class="pname">NeMo microservices</td><td class="mono d">2025</td><td class="desc">Paid add-ons for NeMo · search, fine-tuning, evaluation, safety filters</td><td><span class="badge b-cur">Current</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s3-2b">
+  <div class="psec-head"><span class="pno mono">3.2b</span><h3>Package and Serve It</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">Software</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th>What it is</th><th class="c5">Status</th></tr></thead>
+    <tbody>
+<tr><td class="pname">NIM microservices</td><td class="mono d">2024</td><td class="desc">A model pre-packaged as a container · deploy an endpoint in one step instead of building one</td><td><span class="badge b-cur">Current</span></td></tr>
+<tr><td class="pname">Triton Inference Server</td><td class="mono d">Ongoing</td><td class="desc">Runs a finished model in production and handles incoming requests</td><td><span class="badge b-cur">Current</span></td></tr>
+<tr><td class="pname">Dynamo</td><td class="mono d">2025</td><td class="desc">Splits inference across machines, sending prefill and decode to different hardware · this is what makes LPX work</td><td><span class="badge b-cur">Current</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s3-2c">
+  <div class="psec-head"><span class="pno mono">3.2c</span><h3>Tools and Licensing</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">Software</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th>What it is</th><th class="c5">Status</th></tr></thead>
+    <tbody>
+<tr><td class="pname">AI Workbench</td><td class="mono d">2024</td><td class="desc">Sets up and manages a developer's working environment</td><td><span class="badge b-cur">Current</span></td></tr>
+<tr><td class="pname">Blueprints</td><td class="mono d">2024</td><td class="desc">Working example applications to copy and adapt</td><td><span class="badge b-cur">Current</span></td></tr>
+<tr><td class="pname">NVIDIA AI Enterprise</td><td class="mono d">Ongoing</td><td class="desc">Per-GPU subscription bundling supported versions of everything above · NVIDIA's main recurring software revenue</td><td><span class="badge b-cur">Current</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="secgroup" id="s3-3"><span class="pno mono">3.3</span><h3>Models</h3></div>
+<div class="psec" id="s3-3a">
+  <div class="psec-head"><span class="pno mono">3.3a</span><h3>Language</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">Software</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th>What it is</th><th class="c5">Status</th></tr></thead>
+    <tbody>
+<tr><td class="pname">Nemotron</td><td class="mono d">2023</td><td class="desc">NVIDIA's own open large language models</td><td><span class="badge b-cur">Current</span></td></tr>
+<tr><td class="pname">NemoClaw</td><td class="mono d">2026</td><td class="desc">Agentic AI stack that runs locally on RTX PCs, workstations and DGX Spark or Station</td><td><span class="badge b-ship">New</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s3-3b">
+  <div class="psec-head"><span class="pno mono">3.3b</span><h3>Robotics</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">Software</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th>What it is</th><th class="c5">Status</th></tr></thead>
+    <tbody>
+<tr><td class="pname">Isaac GR00T N2</td><td class="mono d">2026</td><td class="desc">Next humanoid robot model · previewed for 2026</td><td><span class="badge b-ann">Announced</span></td></tr>
+<tr><td class="pname">Isaac GR00T N1.6 / N1.7</td><td class="mono d">2025 / 2026</td><td class="desc">Foundation models for humanoid robots · N1.7 in early access ahead of commercial release</td><td><span class="badge b-cur">Current</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s3-3c">
+  <div class="psec-head"><span class="pno mono">3.3c</span><h3>World and Driving</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">Software</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th>What it is</th><th class="c5">Status</th></tr></thead>
+    <tbody>
+<tr><td class="pname">Cosmos 3</td><td class="mono d">2026</td><td class="desc">Open version handling any input type · text, image, video</td><td><span class="badge b-cur">Current</span></td></tr>
+<tr><td class="pname">Cosmos</td><td class="mono d">2025</td><td class="desc">Models that predict how the physical world behaves · used to train robots without real-world trials</td><td><span class="badge b-cur">Current</span></td></tr>
+<tr><td class="pname">Alpamayo</td><td class="mono d">2025</td><td class="desc">Open model for self-driving decision-making</td><td><span class="badge b-cur">Current</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="secgroup" id="s3-4"><span class="pno mono">3.4</span><h3>Simulation &amp; Digital Twins</h3></div>
+<div class="psec" id="s3-4a">
+  <div class="psec-head"><span class="pno mono">3.4a</span><h3>Platform and Physics</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">Software</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th>What it is</th><th class="c5">Status</th></tr></thead>
+    <tbody>
+<tr><td class="pname">Omniverse / Omniverse Enterprise</td><td class="mono d">Ongoing</td><td class="desc">Where different 3D and simulation tools work on one shared virtual model · built on OpenUSD</td><td><span class="badge b-cur">Current</span></td></tr>
+<tr><td class="pname">Newton</td><td class="mono d">2025</td><td class="desc">Open physics engine for how objects move and collide · with Google DeepMind and Disney</td><td><span class="badge b-cur">Current</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s3-4b">
+  <div class="psec-head"><span class="pno mono">3.4b</span><h3>Robot Training</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">Software</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th>What it is</th><th class="c5">Status</th></tr></thead>
+    <tbody>
+<tr><td class="pname">Isaac Lab-Arena</td><td class="mono d">2026</td><td class="desc">Open-source framework for scoring how well a robot performs</td><td><span class="badge b-ship">New</span></td></tr>
+<tr><td class="pname">Isaac Lab</td><td class="mono d">2024</td><td class="desc">Teaches robots by trial and error inside the simulation</td><td><span class="badge b-cur">Current</span></td></tr>
+<tr><td class="pname">OSMO</td><td class="mono d">2024</td><td class="desc">Schedules robot training jobs across local machines and the cloud</td><td><span class="badge b-cur">Current</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s3-4c">
+  <div class="psec-head"><span class="pno mono">3.4c</span><h3>Climate</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">Software</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th>What it is</th><th class="c5">Status</th></tr></thead>
+    <tbody>
+<tr><td class="pname">Earth-2</td><td class="mono d">2024</td><td class="desc">Climate and weather simulation</td><td><span class="badge b-cur">Current</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="secgroup" id="s3-5"><span class="pno mono">3.5</span><h3>Infrastructure Operations</h3></div>
+<div class="psec" id="s3-5a">
+  <div class="psec-head"><span class="pno mono">3.5a</span><h3>Run the Cluster</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">Software</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th>What it is</th><th class="c5">Status</th></tr></thead>
+    <tbody>
+<tr><td class="pname">Mission Control</td><td class="mono d">2025</td><td class="desc">Single control panel for an AI factory · cluster health, job quotas, model deployment, cost tracking</td><td><span class="badge b-cur">Current</span></td></tr>
+<tr><td class="pname">Run:ai</td><td class="mono d">2024</td><td class="desc">Decides which job gets which GPU · claims up to 5× better utilisation</td><td><span class="badge b-cur">Current</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s3-5b">
+  <div class="psec-head"><span class="pno mono">3.5b</span><h3>Watch the Hardware</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">Software</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th>What it is</th><th class="c5">Status</th></tr></thead>
+    <tbody>
+<tr><td class="pname">DCGM</td><td class="mono d">Ongoing</td><td class="desc">Reports GPU temperature, power and health</td><td><span class="badge b-cur">Current</span></td></tr>
+<tr><td class="pname">vGPU</td><td class="mono d">Ongoing</td><td class="desc">Splits one physical GPU so several users share it</td><td><span class="badge b-cur">Current</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s3-5c">
+  <div class="psec-head"><span class="pno mono">3.5c</span><h3>Watch the Network</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">Software</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th>What it is</th><th class="c5">Status</th></tr></thead>
+    <tbody>
+<tr><td class="pname">UFM</td><td class="mono d">Ongoing</td><td class="desc">Manages and monitors an InfiniBand network</td><td><span class="badge b-cur">Current</span></td></tr>
+<tr><td class="pname">NetQ</td><td class="mono d">Ongoing</td><td class="desc">Checks an Ethernet network is wired and behaving correctly</td><td><span class="badge b-cur">Current</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="secgroup" id="s3-6"><span class="pno mono">3.6</span><h3>Domain Platforms</h3></div>
+<div class="psec" id="s3-6a">
+  <div class="psec-head"><span class="pno mono">3.6a</span><h3>Healthcare</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">Software</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th>What it is</th><th class="c5">Status</th></tr></thead>
+    <tbody>
+<tr><td class="pname">Clara / Parabricks / BioNeMo</td><td class="mono d">Ongoing</td><td class="desc">Medical imaging, gene sequencing and drug discovery</td><td><span class="badge b-cur">Current</span></td></tr>
+<tr><td class="pname">Isaac for Healthcare</td><td class="mono d">2025</td><td class="desc">Surgical robotics</td><td><span class="badge b-cur">Current</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s3-6b">
+  <div class="psec-head"><span class="pno mono">3.6b</span><h3>Automotive and Telecom</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">Software</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th>What it is</th><th class="c5">Status</th></tr></thead>
+    <tbody>
+<tr><td class="pname">DRIVE OS / DriveWorks</td><td class="mono d">Ongoing</td><td class="desc">The operating system and middleware running inside a car</td><td><span class="badge b-cur">Current</span></td></tr>
+<tr><td class="pname">Aerial / ARC-Pro</td><td class="mono d">Ongoing</td><td class="desc">Runs 5G and 6G mobile network base stations on GPUs instead of custom chips</td><td><span class="badge b-cur">Current</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="secgroup" id="s3-7"><span class="pno mono">3.7</span><h3>Graphics &amp; Consumer Software</h3></div>
+<div class="psec" id="s3-7a">
+  <div class="psec-head"><span class="pno mono">3.7a</span><h3>Rendering</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">Software</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th>What it is</th><th class="c5">Status</th></tr></thead>
+    <tbody>
+<tr><td class="pname">DLSS 5</td><td class="mono d">2026</td><td class="desc">AI upscaling and frame generation · 3D-guided neural rendering on RTX 50</td><td><span class="badge b-ship">New</span></td></tr>
+<tr><td class="pname">RTX Kit</td><td class="mono d">2025</td><td class="desc">Toolkit for developers adding neural rendering to their games</td><td><span class="badge b-cur">Current</span></td></tr>
+<tr><td class="pname">RTX Remix 1.0</td><td class="mono d">2025</td><td class="desc">Rebuilds old games with modern lighting and path tracing</td><td><span class="badge b-cur">Current</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s3-7b">
+  <div class="psec-head"><span class="pno mono">3.7b</span><h3>Display and Client</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">Software</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th>What it is</th><th class="c5">Status</th></tr></thead>
+    <tbody>
+<tr><td class="pname">G-SYNC Pulsar</td><td class="mono d">2026</td><td class="desc">Reduces motion blur and screen tearing · monitors on sale from 2026</td><td><span class="badge b-cur">Current</span></td></tr>
+<tr><td class="pname">NVIDIA App</td><td class="mono d">2024</td><td class="desc">One client for drivers, settings and game optimisation</td><td><span class="badge b-cur">Current</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s3-8">
+  <div class="psec-head"><span class="pno mono">3.8</span><h3>Ecosystem &amp; Distribution</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">Software</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th>What it is</th><th class="c5">Status</th></tr></thead>
+    <tbody>
+<tr class="bucket"><td colspan="4">Buying the ecosystem</td></tr>
+<tr><td class="pname">Hugging Face acquisition</td><td class="mono d">&mdash;</td><td class="desc">Signed 3Q26 for US$12.93bn · the dominant open-source model and dataset platform</td><td><span class="badge b-ann">Announced</span></td></tr>
+<tr class="bucket"><td colspan="4">Plugging into it</td></tr>
+<tr><td class="pname">LeRobot integration</td><td class="mono d">2025</td><td class="desc">Isaac robot models built into Hugging Face's robotics stack</td><td><span class="badge b-ship">New</span></td></tr>
+<tr class="bucket"><td colspan="4">Why it is hard to leave</td></tr>
+<tr><td class="pname">CUDA developer base</td><td class="mono d">Ongoing</td><td class="desc">6m developers and 6,000 CUDA applications · the switching cost that protects the silicon</td><td><span class="badge b-cur">Current</span></td></tr>
+</tbody></table></div>
+</div></div></details></div>
+
+<footer class="site-foot">
+  <div class="sf-id">
+    <img src="assets/photo-sm.jpg" alt="Ethan Chen" width="44" height="44" loading="lazy">
+    <div><div class="sf-name"><a href="index.html">Ethan Chen</a></div><div class="sf-sub">Semiconductor Research Notes</div></div>
+  </div>
+  <div class="sf-contact">
+    <a href="mailto:ethanchen@qtumic.com">ethanchen@qtumic.com</a>
+    <a href="https://www.linkedin.com/in/hao-chen-194981297" target="_blank" rel="me noopener">LinkedIn</a>
+  </div>
+  <div class="sf-note">Personal research notes, not investment advice. © 2026 Ethan Chen</div>
+</footer>
+</div></body></html>

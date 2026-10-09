@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cloud Service Providers — Google, Amazon, Microsoft, Meta · Ethan Chen</title>
+<!-- site-head -->
+<meta name="author" content="Ethan Chen">
+<meta name="description" content="Google, Amazon, Microsoft and Meta in six parts each: latest quarter, capex, custom silicon, AI monetisation, Taiwan supply chain and broker views.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://ethanchensemi.github.io/ethanchenstudy/csp-en.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cloud Service Providers — Google, Amazon, Microsoft, Meta · Ethan Chen">
+<meta property="og:description" content="Google, Amazon, Microsoft and Meta in six parts each: latest quarter, capex, custom silicon, AI monetisation, Taiwan supply chain and broker views.">
+<meta property="og:site_name" content="Ethan Chen · Semiconductor Research Notes">
+<!-- /site-head -->
+<style>
+:root{--paper:#F6F8F9;--card:#FFFFFF;--ink:#14181C;--ink-2:#4A555E;--ink-3:#7C8891;--rule:#CBD3D9;--rule-soft:#E2E8EC;--stage:#1F3A4D;--b:#4A3B7A}
+*{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;font-size:15px;line-height:1.6}
+.wrap{max-width:1240px;margin:0 auto;padding:44px 24px 90px}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,monospace}
+.backbar{margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.backbar a{display:inline-block;font-size:13px;color:var(--ink-2);text-decoration:none;border:1px solid var(--rule);background:var(--card);padding:6px 13px}
+.backbar a:hover{color:var(--b);border-color:var(--b)} .backbar .lang{font-family:ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.04em}
+.masthead{border-bottom:2px solid var(--stage);padding-bottom:18px;margin-bottom:18px}
+.masthead h1{font-size:28px;line-height:1.28;font-weight:700;margin:0;letter-spacing:-.01em}
+.lede{font-size:13.5px;color:var(--ink-2);line-height:1.65;margin:0 0 22px;max-width:82ch}
+.psec .lede{margin:0 0 12px}
+.timeline{background:var(--card);border:1px solid var(--rule);padding:16px 18px 8px;margin-bottom:22px}
+.timeline h2{font-size:14px;margin:0 0 8px;font-weight:600}
+.tlscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.timeline svg{width:100%;min-width:820px;height:auto;display:block}
+.legend{display:flex;gap:16px;flex-wrap:wrap;align-items:center;font-size:11.5px;color:var(--ink-3);margin:8px 0 4px}
+.legend span::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px;border:1.8px solid}
+.lg-est::before{background:#215C68;border-color:#215C68}
+.lg-ramp::before{background:#B85C10;border-color:#B85C10}
+.lg-qual::before{background:#2560A6;border-color:#2560A6}
+.lg-road::before{background:#fff;border-color:#4A3B7A}
+.legend span.lg-now::before{width:14px;height:0;border-radius:0;border:none;border-top:1.4px dashed #B02E6E;vertical-align:3px}
+.legend span.lg-note{margin-left:auto}
+.legend span.lg-note::before{display:none}
+.toc{background:var(--card);border:1px solid var(--rule);padding:18px 22px;margin:0 0 8px}
+.toc h2{font-size:14px;margin:0 0 12px}
+.tocgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px 18px}
+.tocgroup h4{font-size:11px;color:var(--ink-3);letter-spacing:.03em;margin:0 0 8px}
+.tocgroup ul{list-style:none;margin:0;padding:0} .tocgroup li{margin-bottom:5px;font-size:12px}
+.tocgroup a{color:var(--ink-2);text-decoration:none;border-bottom:1px dotted var(--rule)} .tocgroup a:hover{color:var(--b);border-color:var(--b)}
+.tocgroup .n{font-family:ui-monospace,Menlo,monospace;color:var(--ink-3);font-size:10.5px;margin-right:5px}
+.divider{height:1px;background:var(--rule-soft);margin:34px 0}
+.pstage{scroll-margin-top:16px}
+.prail{border-bottom:2px solid var(--stage);padding-bottom:8px;margin-bottom:20px;position:relative;padding-left:14px}
+.pstripe{position:absolute;left:0;top:2px;bottom:10px;width:4px;background:var(--stage)}
+.pnum{font-size:11px;color:var(--ink-3);letter-spacing:.06em;margin-bottom:3px} .prail h2{font-size:21px;margin:0;font-weight:700}
+.psec{margin-bottom:26px;scroll-margin-top:16px} .psec-head{display:flex;align-items:baseline;gap:10px;margin-bottom:8px}
+.pno{font-size:12px;color:var(--ink-3)} .psec-head h3{font-size:16px;margin:0;font-weight:600}
+.ptag{font-size:11px;padding:2px 9px;border-radius:20px;margin-left:auto;background:#EEF2F3;color:var(--ink-2);white-space:nowrap}
+.scroller{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--rule);background:var(--card)}
+table.ptable{border-collapse:collapse;width:100%;font-size:13px;min-width:860px}
+.ptable th,.ptable td{padding:9px 12px;text-align:left;vertical-align:top;line-height:1.5;border-bottom:1px solid var(--rule-soft)}
+.ptable th{background:#EEF2F3;font-weight:600;color:var(--ink-2);font-size:11.5px;border-bottom:1px solid var(--rule)}
+.ptable th.c-item{width:210px} .ptable th.c-fig{width:160px} .ptable th.c-chg{width:130px} .ptable th.c-src{width:122px}
+.ptable th.c1{width:220px} .ptable th.cship{width:92px} .ptable th.c5{width:118px}
+.ptable th.c-met{width:200px} .ptable th.c-co{width:250px} .ptable th.c-share{width:112px}
+.ptable th.c-house{width:124px} .ptable th.c-date{width:96px} .ptable th.c-stock{width:150px} .ptable th.c-rate{width:128px} .ptable th.c-tp{width:112px}
+table.ptable.t-brk{min-width:980px}
+.ptable tr:last-child td{border-bottom:none}
+.ptable td.pname{font-weight:600;color:var(--ink)} .ptable td.d{color:var(--ink-3);font-size:12.5px}
+.ptable td.num{font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+.ptable td.chg{color:var(--ink-2);font-size:12.5px}
+.ptable td.desc{color:var(--ink-2);font-size:12.5px}
+.ptable td.src{color:var(--ink-3);font-size:11.5px;line-height:1.55}
+.ptable tr.bucket td{background:#F1F4F5;color:var(--ink-2);font-size:11.5px;font-weight:600;letter-spacing:.02em;padding:6px 12px;border-bottom:1px solid var(--rule-soft)}
+.ptable tbody tr:not(.bucket):hover td{background:#FAFBFC}
+td.prog b{display:block;color:var(--ink);font-weight:600;font-size:12.5px;margin-top:9px}
+td.prog b:first-child{margin-top:0}
+td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
+.badge{display:inline-block;font-size:11px;padding:1px 8px;border-radius:3px;border:1px solid;white-space:nowrap}
+.b-ramp{color:#B85C10;border-color:#EBC9A6;background:#FBF1E6}
+.b-qual{color:#2560A6;border-color:#BBD4F0;background:#EAF2FB}
+.b-road{color:#4A3B7A;border-color:#C9C1E3;background:#F4F1FA}
+.b-est{color:#215C68;border-color:#B7D6DC;background:#E8F3F5}
+@media (max-width:900px){.tocgrid{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.wrap{padding:28px 14px 60px} .masthead h1{font-size:22px} .tocgrid{grid-template-columns:1fr} .psec-head{flex-wrap:wrap} .ptag{margin-left:0} .legend span.lg-note{margin-left:0}}
+@media print{.backbar{display:none} .scroller,.tlscroll{overflow:visible}}
+.prail .studylink{position:absolute;right:0;bottom:10px;font-size:12px;color:var(--ink-2);text-decoration:none;border:1px solid var(--rule);background:var(--card);padding:4px 10px}.prail .studylink:hover{color:var(--b);border-color:var(--b)}
+</style>
+<style id="site-chrome">
+/* site chrome (added by build) */
+.backbar{flex-wrap:wrap}
+.backbar .bbr{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.backbar .lang{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;letter-spacing:.04em}
+.backbar .lang-off{display:inline-block;font-size:12px;color:var(--ink-3,#7C8891);border:1px dashed var(--rule,#CBD3D9);padding:6px 13px;font-family:ui-monospace,"SF Mono",Menlo,monospace;letter-spacing:.04em;cursor:default}
+.site-foot{margin-top:56px;border-top:1px solid var(--rule,#CBD3D9);padding-top:22px;display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;font-size:12.5px;color:var(--ink-3,#7C8891);line-height:1.5}
+.site-foot .sf-id{display:flex;align-items:center;gap:12px;min-width:0}
+.site-foot .sf-id img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:0 0 auto}
+.site-foot .sf-name{font-size:14px;font-weight:600;color:var(--ink,#14181C)}
+.site-foot .sf-name a{color:inherit;text-decoration:none}
+.site-foot .sf-name a:hover{color:var(--b,#4A3B7A)}
+.site-foot .sf-sub{font-size:12px;color:var(--ink-3,#7C8891)}
+.site-foot .sf-contact{display:flex;gap:16px;flex-wrap:wrap;margin-left:auto}
+.site-foot .sf-contact a{color:var(--ink-2,#4A555E);text-decoration:none;border-bottom:1px dotted var(--rule,#CBD3D9)}
+.site-foot .sf-contact a:hover{color:var(--b,#4A3B7A);border-color:var(--b,#4A3B7A)}
+.site-foot .sf-note{flex-basis:100%;font-size:11.5px}
+@media (max-width:640px){.site-foot .sf-contact{margin-left:0}}
+@media (max-width:640px){
+  .stickynav{margin-left:-14px;margin-right:-14px;padding-left:14px;padding-right:14px;white-space:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .legend .fams,.legend .fams.six,.famgrid,.idxgrid{grid-template-columns:1fr !important}
+  .routes{grid-template-columns:minmax(0,1fr) !important}
+  .route,.routes > *{min-width:0}
+  .route .row,.route .chips,.route .chiprow,.route .cols{flex-wrap:wrap}
+  .optstack table{min-width:0 !important}
+  .famcol .chip,.legend .chip,.chipwrap b{white-space:normal}
+}
+@media print{.site-foot .sf-id img{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="backbar"><a href="map-en.html">← Industry Map</a> </div>
+
+<header class="masthead">
+  <h1>Cloud Service Providers — Google, Amazon, Microsoft, Meta</h1>
+</header>
+
+<p class="lede">Cloud service providers (CSPs) are the largest buyers of AI servers, accelerators, networking and data-centre capacity, so their capital-expenditure plans set demand across most of the supply chain covered on this site. This page takes the four US hyperscalers one at a time, each in six parts: latest quarter, capex and capacity, custom silicon, AI monetisation, Taiwan supply chain and broker views. Figures are drawn from broker reports published between April and September 2026; Microsoft periods follow its June fiscal year.</p>
+
+<section class="timeline">
+  <h2>Custom Accelerator Roadmap By CSP, 2025–2029</h2>
+  <div class="tlscroll">
+  <svg viewBox="0 0 1160 262" role="img" aria-label="Custom accelerator roadmap from 2025 to 2029 across four lanes: Google TPU, AWS Trainium, Microsoft Maia and Meta MTIA, labelled with Morgan Stanley unit estimates">
+
+    <line x1="250" y1="30" x2="250" y2="252" stroke="#E2E8EC"/><text x="250" y="20" text-anchor="middle" font-size="10.5" fill="#7C8891">2025</text>
+    <line x1="460" y1="30" x2="460" y2="252" stroke="#E2E8EC"/><text x="460" y="20" text-anchor="middle" font-size="10.5" fill="#7C8891">2026</text>
+    <line x1="670" y1="30" x2="670" y2="252" stroke="#E2E8EC"/><text x="670" y="20" text-anchor="middle" font-size="10.5" fill="#7C8891">2027</text>
+    <line x1="880" y1="30" x2="880" y2="252" stroke="#E2E8EC"/><text x="880" y="20" text-anchor="middle" font-size="10.5" fill="#7C8891">2028</text>
+    <line x1="1090" y1="30" x2="1090" y2="252" stroke="#E2E8EC"/><text x="1090" y="20" text-anchor="middle" font-size="10.5" fill="#7C8891">2029</text>
+
+    <line x1="617" y1="30" x2="617" y2="252" stroke="#B02E6E" stroke-width="1.2" stroke-dasharray="4 3"/>
+
+    <text x="150" y="62" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">Google TPU</text>
+    <line x1="165" y1="58" x2="1130" y2="58" stroke="#CBD3D9"/>
+    <circle cx="250" cy="58" r="5" fill="#215C68" stroke="#215C68" stroke-width="1.8"/>
+    <text x="250" y="48" text-anchor="middle" font-size="10" fill="#215C68">v6 Trillium · 1.2m</text>
+    <circle cx="460" cy="58" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
+    <text x="460" y="76" text-anchor="middle" font-size="10" fill="#B85C10">v7 Ironwood · 2.3m</text>
+    <circle cx="670" cy="58" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
+    <text x="670" y="48" text-anchor="middle" font-size="10" fill="#4A3B7A">v8t + v8i · 7.0m</text>
+    <circle cx="880" cy="58" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
+    <text x="880" y="76" text-anchor="middle" font-size="10" fill="#4A3B7A">v9 Humufish · 3.0m</text>
+    <circle cx="1090" cy="58" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
+    <text x="1090" y="48" text-anchor="middle" font-size="10" fill="#4A3B7A">v10 Icefish · 1m</text>
+
+    <text x="150" y="120" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">AWS Trainium</text>
+    <line x1="165" y1="116" x2="1130" y2="116" stroke="#CBD3D9"/>
+    <circle cx="250" cy="116" r="5" fill="#215C68" stroke="#215C68" stroke-width="1.8"/>
+    <text x="250" y="106" text-anchor="middle" font-size="10" fill="#215C68">Trainium2 · 1.2m</text>
+    <circle cx="460" cy="116" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
+    <text x="460" y="134" text-anchor="middle" font-size="10" fill="#B85C10">Trainium3 · 1.7m</text>
+    <circle cx="670" cy="116" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
+    <text x="670" y="106" text-anchor="middle" font-size="10" fill="#4A3B7A">Trainium3 · 2.4m</text>
+    <circle cx="880" cy="116" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
+    <text x="880" y="134" text-anchor="middle" font-size="10" fill="#4A3B7A">Trainium4 · 2.5m</text>
+
+    <text x="150" y="178" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">Microsoft Maia</text>
+    <line x1="165" y1="174" x2="1130" y2="174" stroke="#CBD3D9"/>
+    <circle cx="460" cy="174" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
+    <text x="460" y="164" text-anchor="middle" font-size="10" fill="#B85C10">Maia 200 · 116k</text>
+    <circle cx="670" cy="174" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
+    <text x="670" y="192" text-anchor="middle" font-size="10" fill="#4A3B7A">Maia 300 · 550k</text>
+
+    <text x="150" y="236" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">Meta MTIA</text>
+    <line x1="165" y1="232" x2="1130" y2="232" stroke="#CBD3D9"/>
+    <circle cx="460" cy="232" r="5" fill="#2560A6" stroke="#2560A6" stroke-width="1.8"/>
+    <text x="460" y="250" text-anchor="middle" font-size="10" fill="#2560A6">MTIA 400 Iris · 150k</text>
+    <circle cx="670" cy="232" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
+    <text x="670" y="222" text-anchor="middle" font-size="10" fill="#4A3B7A">Iris · 550k</text>
+    <circle cx="880" cy="232" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
+    <text x="880" y="250" text-anchor="middle" font-size="10" fill="#4A3B7A">MTIA 600</text>
+  </svg>
+  </div>
+  <div class="legend"><span class="lg-est">Established</span><span class="lg-ramp">Ramping</span><span class="lg-qual">Qualification</span><span class="lg-road">Roadmap</span><span class="lg-now">Today</span><span class="lg-note">Units per year · Morgan Stanley estimates, 3Q26</span></div>
+</section>
+
+<section class="toc">
+  <h2>Contents</h2>
+  <div class="tocgrid">
+    <div class="tocgroup"><h4>Part 1 · Google</h4><ul>
+      <li><a href="#p1-1"><span class="n">1.1</span>Business And Latest Quarter</a></li>
+      <li><a href="#p1-2"><span class="n">1.2</span>Capex And Capacity</a></li>
+      <li><a href="#p1-3"><span class="n">1.3</span>Custom Silicon</a></li>
+      <li><a href="#p1-4"><span class="n">1.4</span>AI Models And Monetisation</a></li>
+      <li><a href="#p1-5"><span class="n">1.5</span>Taiwan Supply Chain</a></li>
+      <li><a href="#p1-6"><span class="n">1.6</span>Broker Views</a></li>
+    </ul></div>
+    <div class="tocgroup"><h4>Part 2 · Amazon</h4><ul>
+      <li><a href="#p2-1"><span class="n">2.1</span>Business And Latest Quarter</a></li>
+      <li><a href="#p2-2"><span class="n">2.2</span>Capex And Capacity</a></li>
+      <li><a href="#p2-3"><span class="n">2.3</span>Custom Silicon</a></li>
+      <li><a href="#p2-4"><span class="n">2.4</span>AI Models And Monetisation</a></li>
+      <li><a href="#p2-5"><span class="n">2.5</span>Taiwan Supply Chain</a></li>
+      <li><a href="#p2-6"><span class="n">2.6</span>Broker Views</a></li>
+    </ul></div>
+    <div class="tocgroup"><h4>Part 3 · Microsoft</h4><ul>
+      <li><a href="#p3-1"><span class="n">3.1</span>Business And Latest Quarter</a></li>
+      <li><a href="#p3-2"><span class="n">3.2</span>Capex And Capacity</a></li>
+      <li><a href="#p3-3"><span class="n">3.3</span>Custom Silicon</a></li>
+      <li><a href="#p3-4"><span class="n">3.4</span>AI Models And Monetisation</a></li>
+      <li><a href="#p3-5"><span class="n">3.5</span>Taiwan Supply Chain</a></li>
+      <li><a href="#p3-6"><span class="n">3.6</span>Broker Views</a></li>
+    </ul></div>
+    <div class="tocgroup"><h4>Part 4 · Meta</h4><ul>
+      <li><a href="#p4-1"><span class="n">4.1</span>Business And Latest Quarter</a></li>
+      <li><a href="#p4-2"><span class="n">4.2</span>Capex And Capacity</a></li>
+      <li><a href="#p4-3"><span class="n">4.3</span>Silicon, Networking And Memory</a></li>
+      <li><a href="#p4-4"><span class="n">4.4</span>AI Models And Monetisation</a></li>
+      <li><a href="#p4-5"><span class="n">4.5</span>Taiwan Supply Chain</a></li>
+      <li><a href="#p4-6"><span class="n">4.6</span>Broker Views</a></li>
+    </ul></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<div class="pstage" id="part1">
+  <div class="prail"><div class="pstripe"></div><div class="pnum">PART 1</div><h2>Google — Alphabet (GOOGL US)</h2><a class="studylink" href="google-en.html">Company study →</a></div>
+  <div class="pbody">
+
+    <div class="psec" id="p1-1">
+      <div class="psec-head"><span class="pno mono">1.1</span><h3>Business And Latest Quarter</h3><span class="ptag">2Q26</span></div>
+      <p class="lede">Alphabet reports three segments: Google Services (Search, YouTube, Network, subscriptions and devices), Google Cloud and Other Bets. Google Cloud is the CSP business; its share of group revenue rose from 10.8% in 2023 to 14.6% in 2025.</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c-item">Line</th><th class="c-fig">2Q26</th><th class="c-chg">Change</th><th>Detail</th><th class="c-src">Source</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">Alphabet Revenue</td><td class="num">US$119.8bn</td><td class="chg">+24% YoY</td><td class="desc">Twelfth consecutive quarter of double-digit growth; 2.2% above consensus.</td><td class="src">Capital<br>SPDB International</td></tr>
+        <tr><td class="pname">Operating Profit</td><td class="num">US$40.8bn</td><td class="chg">+30% YoY</td><td class="desc">Operating margin 34%, helped by a lower ratio of traffic acquisition costs to ad revenue.</td><td class="src">SPDB International</td></tr>
+        <tr><td class="pname">Google Services</td><td class="num">US$94.5bn</td><td class="chg">+14.5% YoY</td><td class="desc">Search US$63.3bn (+16.8%); YouTube ads US$11.1bn (+12.9%).</td><td class="src">SPDB International</td></tr>
+        <tr><td class="pname">Google Cloud</td><td class="num">US$24.8bn</td><td class="chg">+82% YoY</td><td class="desc">Accelerated from +63% in 1Q26 and 10% above Street, on core GCP, AI solutions and AI infrastructure.</td><td class="src">J.P. Morgan<br>SPDB International</td></tr>
+        <tr><td class="pname">Cloud Operating Margin</td><td class="num">35.6%</td><td class="chg">+14.9pt YoY</td><td class="desc">Up from 20.7% in 2Q25 and 32.9% in 1Q26 as the business scales.</td><td class="src">J.P. Morgan<br>SPDB International</td></tr>
+        <tr><td class="pname">Cloud Backlog</td><td class="num">US$514bn</td><td class="chg">+US$52bn QoQ</td><td class="desc">Half is expected to convert to revenue within two years, implying a quarterly run rate above US$30bn against US$25bn today.</td><td class="src">SPDB International<br>J.P. Morgan</td></tr>
+        <tr><td class="pname">3Q26 Outlook</td><td class="num">Supply-constrained</td><td class="chg">—</td><td class="desc">More third-party capacity will be used as a bridge, putting slight pressure on Cloud margin.</td><td class="src">Capital<br>J.P. Morgan</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p1-2">
+      <div class="psec-head"><span class="pno mono">1.2</span><h3>Capex And Capacity</h3></div>
+      <p class="lede">Google splits capex roughly 60% servers and 40% data-centre build-out and networking. Component cost increases have lifted the server share across the CSPs.</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c-item">Item</th><th class="c-fig">Figure</th><th class="c-chg">Change</th><th>Detail</th><th class="c-src">Source</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">2Q26 Capex</td><td class="num">US$44.9bn</td><td class="chg">+100% YoY</td><td class="desc">+26% QoQ; in line with expectations.</td><td class="src">Morgan Stanley<br>J.P. Morgan</td></tr>
+        <tr><td class="pname">2026 Guidance</td><td class="num">US$195–205bn</td><td class="chg">from US$180–190bn</td><td class="desc">Second raise in a row: about +120% at the midpoint, implying about +50% half-on-half growth in 2H26.</td><td class="src">Morgan Stanley<br>J.P. Morgan</td></tr>
+        <tr><td class="pname">2027 Outlook</td><td class="num">Significant increase</td><td class="chg">—</td><td class="desc">Management expects a significant uptick despite the high 2026 base, because compute remains undersupplied.</td><td class="src">Morgan Stanley<br>J.P. Morgan</td></tr>
+        <tr><td class="pname">Data-Centre Capacity</td><td class="num">11 GW</td><td class="chg">2026F</td><td class="desc">KGI estimate: 4 GW in 2024, 6 GW in 2025, 18 GW in 2027F and 26 GW in 2028F.</td><td class="src">KGI</td></tr>
+        <tr><td class="pname">Cash Flow And Funding</td><td class="num">−US$5.9bn FCF</td><td class="chg">2Q26</td><td class="desc">In 2Q26 Alphabet raised US$49.6bn through common and mandatory convertible preferred stock and US$20.3bn in senior unsecured notes, for AI infrastructure and general purposes.</td><td class="src">Capital</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p1-3">
+      <div class="psec-head"><span class="pno mono">1.3</span><h3>Custom Silicon</h3></div>
+      <p class="lede">Google sets the TPU (Tensor Processing Unit) architecture and relies on partners for physical design, I/O and package integration: Broadcom on v7 and v8t, MediaTek on v8i, v9 and v10. From v10 Google moves towards customer-owned tooling and designs the compute die itself. Unit volumes are Morgan Stanley estimates.</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">Chip</th><th class="cship">Shipments</th><th>Programme</th><th class="c5">Status</th></tr></thead>
+        <tbody>
+        <tr>
+          <td class="pname">TPU v7 Ironwood</td>
+          <td class="mono d">2025–27</td>
+          <td class="prog"><b>Broadcom · 3nm</b><span>Two compute dies with 192GB of HBM3E. 0.3m units in 2025 and 2.3m in 2026, ahead of Trainium3 at 1.7m.</span></td>
+          <td><span class="badge b-ramp">Ramping</span></td>
+        </tr>
+        <tr>
+          <td class="pname">TPU v8t Sunfish</td>
+          <td class="mono d">2026–28</td>
+          <td class="prog"><b>Broadcom · 3nm</b><span>Two compute dies with 216GB of HBM3E. 0.9m units in 2026, 4.0m in 2027 and 2.5m in 2028.</span></td>
+          <td><span class="badge b-ramp">Ramping</span></td>
+        </tr>
+        <tr>
+          <td class="pname">TPU v8i Zebrafish</td>
+          <td class="mono d">2026–28</td>
+          <td class="prog"><b>MediaTek · 3nm</b><span>Two compute dies with 288GB of HBM3E. 0.5m units in 2026 and 3.0m in 2027; MediaTek books US$4.5k per chip.</span></td>
+          <td><span class="badge b-ramp">Ramping</span></td>
+        </tr>
+        <tr>
+          <td class="pname">TPU v9 Humufish</td>
+          <td class="mono d">2027–29</td>
+          <td class="prog"><b>MediaTek · 2nm</b><span>Four compute dies with 576GB of HBM4E. 3.0m units in 2028 and 4m in 2029; MediaTek's TPU revenue is estimated at US$43–45bn in 2028.</span></td>
+          <td><span class="badge b-road">Roadmap</span></td>
+        </tr>
+        <tr>
+          <td class="pname">TPU v10 Icefish</td>
+          <td class="mono d">2029+</td>
+          <td class="prog"><b>MediaTek · 1.4nm · Customer-Owned Tooling</b><span>Google supplies the tested compute die; MediaTek designs the I/O die and integrates the package on Intel EMIB-T; Marvell or others take memory I/O and GUC or others the 3D IC block. 1m units in 2029.</span></td>
+          <td><span class="badge b-road">Roadmap</span></td>
+        </tr>
+        <tr>
+          <td class="pname">Axion CPU</td>
+          <td class="mono d">2026–28</td>
+          <td class="prog"><b>GUC · Turnkey</b><span>Arm server CPU with up to 30% better performance than other Arm cloud instances (company claim). Axion2 at 1.2–1.3m units in 2026 and 3m in 2027; Axion3, with two 3nm compute dies, from 2027.</span></td>
+          <td><span class="badge b-ramp">Ramping</span></td>
+        </tr>
+        <tr>
+          <td class="pname">TPU Systems For External Customers</td>
+          <td class="mono d">2026–27</td>
+          <td class="prog"><b>Direct Sales</b><span>First TPU systems delivered into customer data centres in 2Q26. The 2026 contribution is small; most contracted revenue lands in 2027.</span></td>
+          <td><span class="badge b-ramp">Ramping</span></td>
+        </tr>
+        <tr>
+          <td class="pname">TPU Attach Silicon</td>
+          <td class="mono d">2028+</td>
+          <td class="prog"><b>Marvell</b><span>Inference accelerators, NICs, storage and memory controllers and near-memory compute around the TPU. A 3Q26 agreement is tied to up to US$120bn of custom-chip revenue through Marvell's FY2033, with meaningful revenue expected from FY2029.</span></td>
+          <td><span class="badge b-road">Roadmap</span></td>
+        </tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p1-4">
+      <div class="psec-head"><span class="pno mono">1.4</span><h3>AI Models And Monetisation</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c-item">Product</th><th class="c-met">Latest Metric</th><th>Detail</th><th class="c-src">Source</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">Gemini App</td><td class="num">950m monthly users</td><td class="desc">Daily users tripled year on year.</td><td class="src">Capital<br>J.P. Morgan</td></tr>
+        <tr><td class="pname">Gemini API</td><td class="num">22bn tokens a minute</td><td class="desc">Up from 16bn in 1Q26; token consumption +38% QoQ.</td><td class="src">Capital<br>J.P. Morgan</td></tr>
+        <tr><td class="pname">Model Line-Up</td><td class="num">Gemini 3.6 Flash</td><td class="desc">Launched with Gemini 3.5 Flash-Lite as cost-efficient models; training of the larger Gemini 4 has begun.</td><td class="src">Capital</td></tr>
+        <tr><td class="pname">Enterprise</td><td class="num">90% of Fortune 100</td><td class="desc">Use Gemini Enterprise and Google Cloud security; Vertex AI is pulling enterprise AI workloads onto GCP.</td><td class="src">Capital<br>SPDB International</td></tr>
+        <tr><td class="pname">AI Cloud Revenue</td><td class="num">Outgrowing core GCP</td><td class="desc">Enterprise AI products drove backlog growth, although most of the backlog remains traditional GCP contracts.</td><td class="src">J.P. Morgan</td></tr>
+        <tr><td class="pname">Search</td><td class="num">+16.8% YoY</td><td class="desc">Gemini is integrated into Search through AI Overviews.</td><td class="src">SPDB International<br>Capital</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p1-5">
+      <div class="psec-head"><span class="pno mono">1.5</span><h3>Taiwan Supply Chain</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c-item">Layer</th><th class="c-co">Companies</th><th>Role</th><th class="c-src">Source</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">ASIC Design</td><td class="desc">MediaTek (2454 TT) · GUC (3443 TT)</td><td class="desc">MediaTek integrates TPU v8i, v9 and v10. GUC runs Axion turnkey, estimated at US$950m in 2026 and US$2.8bn in 2027, and may take the 3D IC block on v10.</td><td class="src">Morgan Stanley</td></tr>
+        <tr><td class="pname">Foundry, Packaging And Test</td><td class="desc">TSMC (2330 TT) · ASE (3711 TT) · KYEC (2449 TT)</td><td class="desc">3nm and 2nm wafers, CoWoS, outsourced packaging, wafer and final test.</td><td class="src">Morgan Stanley</td></tr>
+        <tr><td class="pname">Test Interface</td><td class="desc">MPI (6223 TT) · WinWay (6515 TT) · Hon Precision (7769 TT)</td><td class="desc">Probe cards, test sockets and test handlers; named among TPU and Axion beneficiaries.</td><td class="src">Morgan Stanley</td></tr>
+        <tr><td class="pname">Server ODM</td><td class="desc">Wiwynn (6669 TT) · Hon Hai (2317 TT) · Inventec (2356 TT)</td><td class="desc">Server and rack assembly; Wiwynn is the top Taiwan ODM pick on Google's capex raise.</td><td class="src">J.P. Morgan</td></tr>
+        <tr><td class="pname">Server Components</td><td class="desc">Delta (2308 TT) · ASPEED (5274 TT) · EMC (2383 TT) · Unimicron (3037 TT) · Lotes (3533 TT)</td><td class="desc">Power supplies, BMC chips, copper-clad laminate, substrates and connectors.</td><td class="src">J.P. Morgan</td></tr>
+        <tr><td class="pname">Server Brands</td><td class="desc">ASUSTek (2357 TT) · Lenovo (0992 HK)</td><td class="desc">Benefit from neocloud demand and firmer pricing as Google rents third-party capacity.</td><td class="src">J.P. Morgan</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p1-6">
+      <div class="psec-head"><span class="pno mono">1.6</span><h3>Broker Views</h3><span class="ptag">3Q26</span></div>
+      <div class="scroller"><table class="ptable t-brk">
+        <thead><tr><th class="c-house">House</th><th class="c-date">Date</th><th class="c-stock">Stock</th><th class="c-rate">Rating</th><th class="c-tp">Target</th><th>Thesis</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">Capital</td><td class="d">3Q26</td><td class="desc">Alphabet</td><td class="desc">Buy</td><td class="num">US$400</td><td class="desc">The ecosystem plus TPUs gives a cost-effective full-stack AI infrastructure; the technology moat is turning into profit.</td></tr>
+        <tr><td class="pname">J.P. Morgan</td><td class="d">3Q26</td><td class="desc">Alphabet</td><td class="desc">Overweight</td><td class="num">—</td><td class="desc">The capex raise and a faster 2H26 support the Taiwan server chain; TPU-related supplier revenue concentrates in 2027.</td></tr>
+        <tr><td class="pname">Morgan Stanley</td><td class="d">3Q26</td><td class="desc">Greater China Semis</td><td class="desc">Attractive</td><td class="num">—</td><td class="desc">Higher AI capex through 2027 eases fears of a near-term slowdown in infrastructure spending; the TPU and Axion ramp supports the chip supply chain.</td></tr>
+        <tr><td class="pname">SPDB International</td><td class="d">3Q26</td><td class="desc">Technology Sector</td><td class="desc">Strategic Overweight</td><td class="num">—</td><td class="desc">Faster AI monetisation and another capex raise reconfirm AI as the market's main theme, with selectivity favouring cloud and applications.</td></tr>
+        <tr><td class="pname">Morgan Stanley</td><td class="d">3Q26</td><td class="desc">GUC · Alchip</td><td class="desc">Overweight</td><td class="num">NT$6,288<br>NT$5,888</td><td class="desc">Customer-owned tooling on TPU v10 keeps MediaTek (Overweight) as integrator while opening block-level work to GUC, Alchip and Marvell.</td></tr>
+        <tr><td class="pname">Fubon</td><td class="d">3Q26</td><td class="desc">Marvell</td><td class="desc">Buy</td><td class="num">US$315</td><td class="desc">The Google agreement adds revenue only from FY29; near-memory compute for Google remains a long-term positive.</td></tr>
+        </tbody></table></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="pstage" id="part2">
+  <div class="prail"><div class="pstripe"></div><div class="pnum">PART 2</div><h2>Amazon — AWS (AMZN US)</h2></div>
+  <div class="pbody">
+
+    <div class="psec" id="p2-1">
+      <div class="psec-head"><span class="pno mono">2.1</span><h3>Business And Latest Quarter</h3><span class="ptag">2Q26</span></div>
+      <p class="lede">Amazon reports North America retail, International retail and AWS. AWS was 18% of 2025 revenue, against 38% for online stores, 24% for third-party seller services and 10% for advertising.</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c-item">Line</th><th class="c-fig">2Q26</th><th class="c-chg">Change</th><th>Detail</th><th class="c-src">Source</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">Amazon Revenue</td><td class="num">US$200.6bn</td><td class="chg">+20% YoY</td><td class="desc">Above US$197.0bn consensus, with AWS, advertising and North America retail all stronger.</td><td class="src">Mega</td></tr>
+        <tr><td class="pname">Operating Income</td><td class="num">US$27.5bn</td><td class="chg">+43% YoY</td><td class="desc">Margin 13.7% against 12% expected, on AWS, advertising and a richer services mix.</td><td class="src">Mega</td></tr>
+        <tr><td class="pname">AWS Revenue</td><td class="num">US$42.2bn</td><td class="chg">+37% YoY</td><td class="desc">Accelerated from +28% in 1Q26 and rose 12% QoQ; consensus was US$40.6bn.</td><td class="src">Mega<br>First Securities</td></tr>
+        <tr><td class="pname">AWS Operating Margin</td><td class="num">39.4%</td><td class="chg">+1.7pt QoQ</td><td class="desc">Up from 37.7% in 1Q26.</td><td class="src">Mega</td></tr>
+        <tr><td class="pname">AWS Backlog</td><td class="num">US$496bn</td><td class="chg">+154% YoY</td><td class="desc">+36% QoQ. Most capacity for 2027 is already reserved, and part of 2028 is reserved.</td><td class="src">Mega<br>First Securities</td></tr>
+        <tr><td class="pname">Advertising</td><td class="num">+26% YoY</td><td class="chg">from +24%</td><td class="desc">Sponsored ads and Prime Video live sport; ad agents cut advertisers' costs by a high-single-digit percentage.</td><td class="src">First Securities</td></tr>
+        <tr><td class="pname">Retail</td><td class="num">US$158.4bn</td><td class="chg">+16% YoY</td><td class="desc">North America US$116.2bn at a 7.9% margin; International US$42.2bn at 4.1%.</td><td class="src">Mega</td></tr>
+        <tr><td class="pname">GAAP EPS</td><td class="num">US$5.75</td><td class="chg">—</td><td class="desc">Includes US$53.4bn of non-operating income, mostly from the Anthropic stake; adjusted EPS of US$1.88 compares with US$1.84 consensus.</td><td class="src">Mega</td></tr>
+        <tr><td class="pname">3Q26 Guidance</td><td class="num">US$199.5bn</td><td class="chg">midpoint</td><td class="desc">Below US$204.0bn consensus, as Prime Day moved into 2Q26 and FX is an 80bp headwind; operating margin 12.3%.</td><td class="src">Mega</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p2-2">
+      <div class="psec-head"><span class="pno mono">2.2</span><h3>Capex And Capacity</h3></div>
+      <p class="lede">AWS takes about 90% of Amazon's capex, against 60%-plus for retail and logistics before generative AI. With the 2Q26 results management set out its payback framework for the first time.</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c-item">Item</th><th class="c-fig">Figure</th><th class="c-chg">Change</th><th>Detail</th><th class="c-src">Source</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">2Q26 Capex</td><td class="num">US$54.2bn</td><td class="chg">+68% YoY</td><td class="desc">+23% QoQ. First Securities gives US$53.1bn against US$50.0bn expected.</td><td class="src">Mega<br>First Securities</td></tr>
+        <tr><td class="pname">2025 Actual</td><td class="num">US$131.8bn</td><td class="chg">—</td><td class="desc">Rising each quarter, from US$32.2bn in 2Q25 to US$39.5bn in 4Q25.</td><td class="src">KGI</td></tr>
+        <tr><td class="pname">2026 Guidance</td><td class="num">US$220bn</td><td class="chg">from US$200bn</td><td class="desc">Raise attributed mainly to higher memory prices; most of the spending goes to AWS data centres, servers and networking.</td><td class="src">Mega<br>First Securities</td></tr>
+        <tr><td class="pname">2027 Outlook</td><td class="num">Supply stays tight</td><td class="chg">—</td><td class="desc">Management says US$220bn cannot meet all 2026 demand. Before the results KGI estimated US$250–300bn for 2027.</td><td class="src">Mega<br>KGI</td></tr>
+        <tr><td class="pname">Power Capacity</td><td class="num">2× by 2027</td><td class="chg">vs 2025</td><td class="desc">3.9 GW added in 2025. KGI estimates 13 GW in 2025, 18 GW in 2026F, 26 GW in 2027F and 34 GW in 2028F.</td><td class="src">KGI<br>Mega</td></tr>
+        <tr><td class="pname">Payback</td><td class="num">Under 3 years</td><td class="chg">servers</td><td class="desc">Servers and networking are bought months before go-live and last five to six years; shells are built two years ahead and last 30-plus years. Most contracts run five years or more.</td><td class="src">Mega<br>First Securities</td></tr>
+        <tr><td class="pname">Build Cost</td><td class="num">US$20–25bn per GW</td><td class="chg">Trainium</td><td class="desc">Against US$30–50bn per GW for NVIDIA H200 to Vera Rubin builds; AWS averages US$35–40bn.</td><td class="src">KGI</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p2-3">
+      <div class="psec-head"><span class="pno mono">2.3</span><h3>Custom Silicon</h3></div>
+      <p class="lede">Amazon designs Trainium accelerators and Graviton CPUs in-house through Annapurna Labs, with Alchip carrying part of the Trainium turnkey work. Custom-chip revenue reached a US$25bn annualised run rate in 2Q26, up 257% year on year. Unit volumes are Morgan Stanley estimates.</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">Chip</th><th class="cship">Shipments</th><th>Programme</th><th class="c5">Status</th></tr></thead>
+        <tbody>
+        <tr>
+          <td class="pname">Trainium2</td>
+          <td class="mono d">2024–25</td>
+          <td class="prog"><b>Annapurna Labs</b><span>1.2m units in 2025; capacity sold out.</span></td>
+          <td><span class="badge b-est">Established</span></td>
+        </tr>
+        <tr>
+          <td class="pname">Trainium3</td>
+          <td class="mono d">2025–27</td>
+          <td class="prog"><b>Annapurna Labs · Alchip · 3nm</b><span>Two compute dies with 144GB of HBM3E on CoWoS-R. 1.7m units in 2026 and 2.4m in 2027, sold out and fully booked; Alchip carries roughly a quarter to a third of the turnkey volume.</span></td>
+          <td><span class="badge b-ramp">Ramping</span></td>
+        </tr>
+        <tr>
+          <td class="pname">Trainium4</td>
+          <td class="mono d">2027</td>
+          <td class="prog"><b>Alchip Expected</b><span>Large-scale supply from 2027, with most capacity booked in advance. 2.5m units in 2028; Alchip is expected to take 30% at US$10k per chip excluding HBM, worth US$8bn.</span></td>
+          <td><span class="badge b-road">Roadmap</span></td>
+        </tr>
+        <tr>
+          <td class="pname">Graviton5</td>
+          <td class="mono d">2026</td>
+          <td class="prog"><b>In-House Arm CPU</b><span>Adopted twice as fast as Graviton4. Graviton runs at 98% of AWS's top 1,000 EC2 customers, and Meta's deployment starts with tens of millions of Graviton5 cores.</span></td>
+          <td><span class="badge b-ramp">Ramping</span></td>
+        </tr>
+        <tr>
+          <td class="pname">Trainium Rack</td>
+          <td class="mono d">2026</td>
+          <td class="prog"><b>Switched Scale-Up</b><span>A Neuron Switch tray in the middle of the rack links the accelerators, similar to the NVLink switch tray in NVIDIA's NVL72. Accton ships Trainium3 AI cards and the new switch tray.</span></td>
+          <td><span class="badge b-ramp">Ramping</span></td>
+        </tr>
+        <tr>
+          <td class="pname">Chips Sold Outside AWS</td>
+          <td class="mono d">—</td>
+          <td class="prog"><b>Under Discussion</b><span>Amazon is discussing selling Trainium directly to third-party data centres, with no product form or timetable yet. Jassy puts the chips business at US$50bn a year if it sold this year's chips to AWS and third parties as a stand-alone business, against over US$20bn then.</span></td>
+          <td><span class="badge b-road">Roadmap</span></td>
+        </tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p2-4">
+      <div class="psec-head"><span class="pno mono">2.4</span><h3>AI Models And Monetisation</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c-item">Product</th><th class="c-met">Latest Metric</th><th>Detail</th><th class="c-src">Source</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">AWS AI Revenue</td><td class="num">US$25bn annualised</td><td class="desc">Bedrock added more customers in six months than in the previous two years, and 2Q26 Bedrock spending exceeded all prior spending combined.</td><td class="src">First Securities</td></tr>
+        <tr><td class="pname">Anthropic</td><td class="num">5 GW · US$100bn</td><td class="desc">Multi-generation Trainium purchase agreement in the backlog; KGI estimates AWS supplies 60% of Anthropic's compute.</td><td class="src">Mega<br>KGI</td></tr>
+        <tr><td class="pname">OpenAI</td><td class="num">2 GW of Trainium</td><td class="desc">Part of a US$100bn expansion of its AWS contract, on top of the US$38bn deal of 4Q25, ramping in 2027; GPT-5.6 is available on Bedrock.</td><td class="src">KGI<br>Mega</td></tr>
+        <tr><td class="pname">GPU Pricing</td><td class="num">+20% in 3Q26</td><td class="desc">Reserved EC2 prices for B300, B200, H200 and H100 instances; adds 2% to 1Q27 AWS revenue.</td><td class="src">Mega</td></tr>
+        <tr><td class="pname">Agents</td><td class="num">Bedrock AgentCore</td><td class="desc">Enterprise platform for deploying AI agents; a Forward Deployed Engineering team helps customers build and deploy them.</td><td class="src">Fubon<br>First Securities</td></tr>
+        <tr><td class="pname">AWS Growth Outlook</td><td class="num">+38% · +43%</td><td class="desc">First Securities estimates for 2026 and 2027; KGI sees growth near 35% in 2026 and 40% in 2027.</td><td class="src">First Securities<br>KGI</td></tr>
+        <tr><td class="pname">Retail AI</td><td class="num">Rufus: 300m users</td><td class="desc">Generated US$12bn of incremental revenue in 2025; folded into Alexa+ as a shopping agent in 2Q26.</td><td class="src">Fubon</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p2-5">
+      <div class="psec-head"><span class="pno mono">2.5</span><h3>Taiwan Supply Chain</h3></div>
+      <p class="lede">Amazon share is the share of each supplier's revenue from Amazon, as estimated by KGI.</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c-co">Company</th><th class="c-share">Amazon Share</th><th>Role</th><th class="c-src">Source</th></tr></thead>
+        <tbody>
+        <tr class="bucket"><td colspan="4">Silicon</td></tr>
+        <tr><td class="pname">Alchip (3661 TT)</td><td class="num">40–50%</td><td class="desc">Design services: Trainium3 turnkey, with Trainium4 expected.</td><td class="src">KGI<br>Morgan Stanley</td></tr>
+        <tr class="bucket"><td colspan="4">Servers And Racks</td></tr>
+        <tr><td class="pname">Wiwynn (6669 TT)</td><td class="num">45–50%</td><td class="desc">Server ODM.</td><td class="src">KGI</td></tr>
+        <tr><td class="pname">Quanta (2382 TT)</td><td class="num">&lt;10%</td><td class="desc">Server ODM.</td><td class="src">KGI</td></tr>
+        <tr><td class="pname">Inventec (2356 TT)</td><td class="num">&lt;10%</td><td class="desc">Server ODM.</td><td class="src">KGI</td></tr>
+        <tr><td class="pname">MiTAC (3706 TT)</td><td class="num">&lt;10%</td><td class="desc">Server ODM.</td><td class="src">KGI</td></tr>
+        <tr><td class="pname">Chenbro (8210 TT)</td><td class="num">40–50%</td><td class="desc">Server chassis.</td><td class="src">KGI</td></tr>
+        <tr><td class="pname">King Slide (2059 TT)</td><td class="num">&lt;10%</td><td class="desc">Slide rails.</td><td class="src">KGI</td></tr>
+        <tr><td class="pname">Lite-On (2301 TT)</td><td class="num">20–25%</td><td class="desc">Power supplies.</td><td class="src">KGI</td></tr>
+        <tr class="bucket"><td colspan="4">Networking And Materials</td></tr>
+        <tr><td class="pname">Accton (2345 TT)</td><td class="num">—</td><td class="desc">Trainium3 AI cards, switch trays and 800G switches; 2Q26 revenue NT$95.5bn, +58% YoY, with a record expected in 3Q26.</td><td class="src">Fubon</td></tr>
+        <tr><td class="pname">Hon Hai (2317 TT)</td><td class="num">&lt;10%</td><td class="desc">Data-centre switches.</td><td class="src">KGI</td></tr>
+        <tr><td class="pname">Elite Material (2383 TT)</td><td class="num">&lt;10%</td><td class="desc">Copper-clad laminate.</td><td class="src">KGI</td></tr>
+        <tr class="bucket"><td colspan="4">Retail Supplier, Outside AWS</td></tr>
+        <tr><td class="pname">Great Giant Fibre Garment (4441 TT)</td><td class="num">70% (2026F)</td><td class="desc">Makes Amazon Essentials and Amazon influencer apparel lines; revenue is booked on delivery to Amazon warehouses.</td><td class="src">President<br>Yuanta</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p2-6">
+      <div class="psec-head"><span class="pno mono">2.6</span><h3>Broker Views</h3><span class="ptag">2Q26–3Q26</span></div>
+      <div class="scroller"><table class="ptable t-brk">
+        <thead><tr><th class="c-house">House</th><th class="c-date">Date</th><th class="c-stock">Stock</th><th class="c-rate">Rating</th><th class="c-tp">Target</th><th>Thesis</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">KGI</td><td class="d">3Q26</td><td class="desc">Amazon</td><td class="desc">Outperform</td><td class="num">US$325</td><td class="desc">Anthropic and OpenAI demand keeps AWS accelerating through 2026–27; capex is a heavy free-cash-flow burden, especially in 2027.</td></tr>
+        <tr><td class="pname">Fubon</td><td class="d">3Q26</td><td class="desc">Amazon</td><td class="desc">Buy</td><td class="num">US$320</td><td class="desc">Amazon is moving from point products to scalable agent systems and benefits as AI inference scales.</td></tr>
+        <tr><td class="pname">First Securities</td><td class="d">3Q26</td><td class="desc">Amazon</td><td class="desc">Buy</td><td class="num">US$351</td><td class="desc">Bedrock's multi-model approach protects pricing, Graviton and Trainium give a cost edge, and retail cash funds the cloud build.</td></tr>
+        <tr><td class="pname">Mega</td><td class="d">3Q26</td><td class="desc">Amazon</td><td class="desc">Buy, Upgraded</td><td class="num">US$361</td><td class="desc">2Q26 removed concerns over slowing AWS growth and AI diluting margins; the payback framework and contracted backlog support rising returns on capital.</td></tr>
+        <tr><td class="pname">Fubon</td><td class="d">3Q26</td><td class="desc">Accton</td><td class="desc">Buy</td><td class="num">NT$3,500</td><td class="desc">Trainium3 AI cards and a new CSP customer's 800G switches offset share dilution from more rack assemblers.</td></tr>
+        <tr><td class="pname">Fubon · Yuanta · President</td><td class="d">2Q26</td><td class="desc">Great Giant Fibre Garment</td><td class="desc">Buy</td><td class="num">NT$243<br>NT$300<br>NT$295</td><td class="desc">Exclusive supplier of Amazon influencer apparel; the 2Q26 logistics disruption defers rather than removes revenue.</td></tr>
+        </tbody></table></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="pstage" id="part3">
+  <div class="prail"><div class="pstripe"></div><div class="pnum">PART 3</div><h2>Microsoft — Azure (MSFT US)</h2></div>
+  <div class="pbody">
+
+    <div class="psec" id="p3-1">
+      <div class="psec-head"><span class="pno mono">3.1</span><h3>Business And Latest Quarter</h3><span class="ptag">FY4Q26</span></div>
+      <p class="lede">Microsoft reports Productivity and Business Processes (Microsoft 365, LinkedIn, Dynamics), Intelligent Cloud (Azure and server products) and More Personal Computing (Windows, Xbox, Search). Its fiscal year ends in June, so FY4Q26 is April to June 2026.</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c-item">Line</th><th class="c-fig">FY4Q26</th><th class="c-chg">Change</th><th>Detail</th><th class="c-src">Source</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">Revenue</td><td class="num">US$90.0bn</td><td class="chg">+18% YoY</td><td class="desc">A record, above US$87.7bn consensus; new Azure capacity came online early.</td><td class="src">Taishin<br>Mega</td></tr>
+        <tr><td class="pname">Operating Income</td><td class="num">US$40.6bn</td><td class="chg">margin +0.2pt</td><td class="desc">Operating margin 45.1%; gross margin 67% as the mix shifts to Azure and AI infrastructure.</td><td class="src">Taishin<br>Mega</td></tr>
+        <tr><td class="pname">Intelligent Cloud</td><td class="num">US$39.3bn</td><td class="chg">+32% YoY</td><td class="desc">Azure and other cloud services +43%. Azure passed US$100bn of revenue in FY26, its first year above that level.</td><td class="src">Taishin</td></tr>
+        <tr><td class="pname">Productivity And Business Processes</td><td class="num">US$37.8bn</td><td class="chg">+14% YoY</td><td class="desc">Microsoft 365 commercial cloud +16%; Copilot usage and R&amp;D cut the segment margin from 60% to 58%.</td><td class="src">Taishin<br>Mega</td></tr>
+        <tr><td class="pname">More Personal Computing</td><td class="num">US$12.9bn</td><td class="chg">−4% YoY</td><td class="desc">Windows OEM −7% on weak PC demand and a high base; Xbox −10%; Search ex-TAC +10%.</td><td class="src">Taishin<br>Mega</td></tr>
+        <tr><td class="pname">Commercial RPO</td><td class="num">US$678bn</td><td class="chg">+84% YoY</td><td class="desc">Plus US$329bn of signed leases, mainly data centres, not yet commenced, more than US$130bn of it added in FY4Q26.</td><td class="src">Taishin</td></tr>
+        <tr><td class="pname">AI Business Run Rate</td><td class="num">Above US$37bn</td><td class="chg">+123% YoY</td><td class="desc">Reported with FY3Q26 results (1Q26).</td><td class="src">Fubon Securities</td></tr>
+        <tr><td class="pname">FY1Q27 Guidance</td><td class="num">US$89.85–90.95bn</td><td class="chg">—</td><td class="desc">Azure growth of 45% in constant currency; double-digit revenue and operating-income growth reiterated for FY27.</td><td class="src">Taishin<br>Mega</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p3-2">
+      <div class="psec-head"><span class="pno mono">3.2</span><h3>Capex And Capacity</h3></div>
+      <p class="lede">About two-thirds of Microsoft's capex buys short-lived assets, mainly GPUs and CPUs, whose spending tracks revenue closely; the remaining third funds sites that earn revenue over 15 years or more. Reported capex includes finance leases.</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c-item">Item</th><th class="c-fig">Figure</th><th class="c-chg">Change</th><th>Detail</th><th class="c-src">Source</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">FY3Q26 Capex</td><td class="num">US$31.9bn</td><td class="chg">incl. leases</td><td class="desc">Including US$4.7bn of finance leases; lower QoQ on the timing of builds and lease deliveries.</td><td class="src">Fubon Securities<br>Yuanta</td></tr>
+        <tr><td class="pname">FY4Q26 Guidance</td><td class="num">Above US$40bn</td><td class="chg">—</td><td class="desc">US$5bn of the increase reflects higher component prices; lease timing adds further variability.</td><td class="src">Yuanta<br>Fubon Securities</td></tr>
+        <tr><td class="pname">Calendar 2026 Guidance</td><td class="num">US$190bn</td><td class="chg">restated US$175bn</td><td class="desc">Includes US$25bn of component inflation. The 3Q26 restatement follows a lease reclassification after data-centre useful life was extended from 15 to 25 years; the physical build is unchanged.</td><td class="src">Yuanta<br>Taishin<br>Mega</td></tr>
+        <tr><td class="pname">FY1Q27 Guidance</td><td class="num">Above US$50bn</td><td class="chg">—</td><td class="desc">Includes the effect of the lease reclassification.</td><td class="src">Taishin</td></tr>
+        <tr><td class="pname">Capacity</td><td class="num">+1 GW a quarter</td><td class="chg">FY3Q26 · FY4Q26</td><td class="desc">88 new data centres in FY26 and total capacity to double within two years. KGI estimates 8 GW in 2025 rising to 21 GW in 2028F.</td><td class="src">Yuanta<br>Mega<br>KGI</td></tr>
+        <tr><td class="pname">Supply Constraint</td><td class="num">Through 2026</td><td class="chg">—</td><td class="desc">GPU and server constraints last at least to 2026, so near-term Azure growth depends on how fast capacity comes online.</td><td class="src">Taishin<br>Fubon Securities<br>Mega</td></tr>
+        <tr><td class="pname">Margin Effect</td><td class="num">Cloud GM 66% → 60%</td><td class="chg">FY26F → FY28F</td><td class="desc">Consensus depreciation rises from 12% of revenue in FY25 to 16% in FY28F, and capex reaches 60% of revenue in FY27F.</td><td class="src">KGI</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p3-3">
+      <div class="psec-head"><span class="pno mono">3.3</span><h3>Custom Silicon</h3></div>
+      <p class="lede">Microsoft is less vertically integrated in silicon than Google or Amazon: Azure capacity combines NVIDIA and AMD systems with its own Maia accelerators and Cobalt CPUs, and GUC supports Maia 200 and Cobalt 200. Unit volumes are Morgan Stanley estimates.</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">Chip</th><th class="cship">Shipments</th><th>Programme</th><th class="c5">Status</th></tr></thead>
+        <tbody>
+        <tr>
+          <td class="pname">Maia 200</td>
+          <td class="mono d">2026</td>
+          <td class="prog"><b>3nm · GUC Support</b><span>Second-generation inference accelerator with 30% more tokens per dollar than the latest GPUs; live in Iowa and Arizona and serving OpenAI and MAI models. 116k units in 2026.</span></td>
+          <td><span class="badge b-ramp">Ramping</span></td>
+        </tr>
+        <tr>
+          <td class="pname">Maia 300</td>
+          <td class="mono d">2026–27</td>
+          <td class="prog"><b>2nm · Partner Not Named</b><span>288GB of HBM4. 55k units in 2026 rising to 550k in 2027.</span></td>
+          <td><span class="badge b-road">Roadmap</span></td>
+        </tr>
+        <tr>
+          <td class="pname">Cobalt 200</td>
+          <td class="mono d">2026</td>
+          <td class="prog"><b>Arm CPU · GUC Support</b><span>Second-generation CPU, in preview from Build (2Q26); used by OpenAI, Adobe and Arm, and expected in more than 25 data centres by 3Q26.</span></td>
+          <td><span class="badge b-ramp">Ramping</span></td>
+        </tr>
+        <tr>
+          <td class="pname">Azure Boost And Other ASICs</td>
+          <td class="mono d">—</td>
+          <td class="prog"><b>In-House</b><span>Networking, security and virtualisation chips; Yuanta estimates 500k Microsoft ASIC units this year.</span></td>
+          <td><span class="badge b-est">Established</span></td>
+        </tr>
+        <tr>
+          <td class="pname">Merchant Systems</td>
+          <td class="mono d">2026–27</td>
+          <td class="prog"><b>NVIDIA · AMD</b><span>NVIDIA Vera Rubin and AMD Helios racks to be deployed alongside Maia and Cobalt.</span></td>
+          <td><span class="badge b-road">Roadmap</span></td>
+        </tr>
+        <tr>
+          <td class="pname">GUC Revenue From Microsoft</td>
+          <td class="mono d">2026–28</td>
+          <td class="prog"><b>GUC · Turnkey</b><span>US$80m in 2026, US$250m in 2027 and US$400m in 2028; GUC expects demand to more than double in 2027.</span></td>
+          <td><span class="badge b-ramp">Ramping</span></td>
+        </tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p3-4">
+      <div class="psec-head"><span class="pno mono">3.4</span><h3>AI Models And Monetisation</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c-item">Product</th><th class="c-met">Latest Metric</th><th>Detail</th><th class="c-src">Source</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">Microsoft 365 Copilot</td><td class="num">30m+ paid seats</td><td class="desc">Up from 20m in FY3Q26; net new seats more than doubled QoQ, and customers with 50,000-plus seats rose more than sevenfold.</td><td class="src">Taishin<br>Mega</td></tr>
+        <tr><td class="pname">Pricing Model</td><td class="num">Per user plus usage</td><td class="desc">Each seat carries base usage, with extra usage billed; 60% of Dynamics 365 customer-service customers already use credits, and the E7 bundle lifts revenue per user.</td><td class="src">Taishin<br>Fubon Securities</td></tr>
+        <tr><td class="pname">GitHub Copilot</td><td class="num">140,000 organisations</td><td class="desc">Moved to usage pricing on 2Q26; usage revenue beat expectations but pressured Intelligent Cloud gross margin.</td><td class="src">Fubon Securities<br>Mega</td></tr>
+        <tr><td class="pname">Foundry</td><td class="num">10,000+ multi-model users</td><td class="desc">Hosts OpenAI, Anthropic and MAI models; more than 300 customers will each process over 1tn tokens this year.</td><td class="src">Fubon Securities<br>Mega</td></tr>
+        <tr><td class="pname">MAI Models</td><td class="num">Seven at Build</td><td class="desc">In-house image, transcription, reasoning, voice and code models tuned for Maia 200; MAI-Voice-2-Flash cut Dynamics 365 GPU cost by 89%.</td><td class="src">President<br>Mega</td></tr>
+        <tr><td class="pname">OpenAI</td><td class="num">IP rights to 2032</td><td class="desc">A non-exclusive licence to OpenAI's model and product IP until 2032; OpenAI's revenue-share payments to Microsoft continue until 2030, subject to a cap. OpenAI is a large Azure compute customer but no longer exclusive to Azure.</td><td class="src">Yuanta<br>Fubon Securities</td></tr>
+        <tr><td class="pname">Agents On Windows</td><td class="num">Microsoft Scout</td><td class="desc">The first Microsoft product incorporating OpenClaw technology, with the MXC sandbox for running AI agents securely on Windows.</td><td class="src">President</td></tr>
+        <tr><td class="pname">Competition</td><td class="num">ChatGPT Work: 9m users</td><td class="desc">Reached in 3Q26, in direct competition with Microsoft 365 Copilot; ChatGPT has 1bn weekly users.</td><td class="src">KGI</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p3-5">
+      <div class="psec-head"><span class="pno mono">3.5</span><h3>Taiwan Supply Chain</h3></div>
+      <p class="lede">Microsoft share is the share of each supplier's revenue from Microsoft, as estimated by KGI. Yuanta identifies ASIC servers, rising rack complexity and liquid cooling as the drivers.</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c-co">Company</th><th class="c-share">Microsoft Share</th><th>Role</th><th class="c-src">Source</th></tr></thead>
+        <tbody>
+        <tr class="bucket"><td colspan="4">Silicon</td></tr>
+        <tr><td class="pname">GUC (3443 TT)</td><td class="num">5–10%</td><td class="desc">Design services for Maia 200 and Cobalt 200.</td><td class="src">KGI<br>Morgan Stanley</td></tr>
+        <tr><td class="pname">MediaTek (2454 TT)</td><td class="num">1–3%</td><td class="desc">Design services.</td><td class="src">KGI</td></tr>
+        <tr class="bucket"><td colspan="4">Servers And Racks</td></tr>
+        <tr><td class="pname">Wiwynn (6669 TT)</td><td class="num">30–40%</td><td class="desc">Server ODM.</td><td class="src">KGI</td></tr>
+        <tr><td class="pname">Quanta (2382 TT)</td><td class="num">&lt;20%</td><td class="desc">Server ODM.</td><td class="src">KGI<br>Yuanta</td></tr>
+        <tr><td class="pname">Hon Hai (2317 TT)</td><td class="num">10–15%</td><td class="desc">Server ODM.</td><td class="src">KGI<br>Yuanta</td></tr>
+        <tr><td class="pname">Inventec (2356 TT)</td><td class="num">&lt;10%</td><td class="desc">Server ODM.</td><td class="src">KGI</td></tr>
+        <tr><td class="pname">Chenbro (8210 TT)</td><td class="num">—</td><td class="desc">Server chassis.</td><td class="src">Yuanta</td></tr>
+        <tr><td class="pname">King Slide (2059 TT)</td><td class="num">&lt;10%</td><td class="desc">Slide rails.</td><td class="src">KGI</td></tr>
+        <tr><td class="pname">Lite-On (2301 TT)</td><td class="num">10%</td><td class="desc">Server power supplies.</td><td class="src">KGI</td></tr>
+        <tr><td class="pname">Gold Circuit (2368 TT)</td><td class="num">&lt;10%</td><td class="desc">Printed circuit boards.</td><td class="src">KGI</td></tr>
+        <tr class="bucket"><td colspan="4">Thermal</td></tr>
+        <tr><td class="pname">AVC (3017 TT) · Jentech (3653 TT) · Fositek (6805 TT)</td><td class="num">—</td><td class="desc">Thermal and liquid-cooling components for denser AI racks.</td><td class="src">Yuanta</td></tr>
+        <tr class="bucket"><td colspan="4">Devices</td></tr>
+        <tr><td class="pname">Pegatron (4938 TT) · Chicony (2385 TT)</td><td class="num">10–15%</td><td class="desc">Game consoles.</td><td class="src">KGI</td></tr>
+        <tr><td class="pname">ASUSTek (2357 TT) · MSI (2377 TT)</td><td class="num">—</td><td class="desc">Windows PCs built on NVIDIA RTX Spark.</td><td class="src">President</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p3-6">
+      <div class="psec-head"><span class="pno mono">3.6</span><h3>Broker Views</h3><span class="ptag">2Q26–3Q26</span></div>
+      <div class="scroller"><table class="ptable t-brk">
+        <thead><tr><th class="c-house">House</th><th class="c-date">Date</th><th class="c-stock">Stock</th><th class="c-rate">Rating</th><th class="c-tp">Target</th><th>Thesis</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">Yuanta</td><td class="d">2Q26</td><td class="desc">Microsoft</td><td class="desc">Not Rated</td><td class="num">—</td><td class="desc">Cloud and Azure AI demand drove the FY3Q26 beat; US$190bn of 2026 capex feeds Taiwan ASIC-server, thermal and chassis suppliers.</td></tr>
+        <tr><td class="pname">Taishin</td><td class="d">2Q26</td><td class="desc">Microsoft</td><td class="desc">—</td><td class="num">—</td><td class="desc">Record capex with capacity still limited; US$627bn of RPO gives visibility, while internal model training absorbs near-term Azure capacity.</td></tr>
+        <tr><td class="pname">Fubon Securities</td><td class="d">2Q26</td><td class="desc">Microsoft</td><td class="desc">—</td><td class="num">—</td><td class="desc">The AI business is growing exponentially, and the move from seats to seats plus usage opens a new growth curve.</td></tr>
+        <tr><td class="pname">President</td><td class="d">2Q26</td><td class="desc">Microsoft</td><td class="desc">Buy</td><td class="num">US$520</td><td class="desc">Build 2026 was neutral to positive: the NVIDIA and OpenClaw tie-ups keep Windows central to AI, although the MAI models underwhelm.</td></tr>
+        <tr><td class="pname">Mega</td><td class="d">2Q26</td><td class="desc">Microsoft</td><td class="desc">Buy, Initiation</td><td class="num">US$558</td><td class="desc">Build eased fears of dependence on OpenAI as Microsoft moves from compute supplier to enterprise AI platform.</td></tr>
+        <tr><td class="pname">KGI</td><td class="d">3Q26</td><td class="desc">Microsoft</td><td class="desc">Outperform</td><td class="num">US$585</td><td class="desc">Azure may beat depressed expectations near term; re-acceleration in Productivity and Business Processes is the real test of AI monetisation.</td></tr>
+        <tr><td class="pname">Taishin</td><td class="d">3Q26</td><td class="desc">Microsoft</td><td class="desc">—</td><td class="num">—</td><td class="desc">AI spending is turning into revenue, with Azure above US$100bn, Copilot above 30m seats and US$678bn of RPO, while capex stays under control.</td></tr>
+        <tr><td class="pname">Mega</td><td class="d">3Q26</td><td class="desc">Microsoft</td><td class="desc">Buy</td><td class="num">US$607</td><td class="desc">Capacity and monetisation are both accelerating; 19x FY28E P/E against a 26x five-year average is an unjustified discount.</td></tr>
+        </tbody></table></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="pstage" id="part4">
+  <div class="prail"><div class="pstripe"></div><div class="pnum">PART 4</div><h2>Meta — Meta Platforms (META US)</h2><a class="studylink" href="meta-en.html">Company study →</a></div>
+  <div class="pbody">
+
+    <div class="psec" id="p4-1">
+      <div class="psec-head"><span class="pno mono">4.1</span><h3>Business And Latest Quarter</h3><span class="ptag">2Q26</span></div>
+      <p class="lede">Meta does not sell public cloud, but it builds data-centre capacity on the same scale as the other three and is now exploring API and compute sales. Advertising is 98% of revenue, and the capex funds the ranking, recommendation and generative models behind it.</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c-item">Line</th><th class="c-fig">2Q26</th><th class="c-chg">Change</th><th>Detail</th><th class="c-src">Source</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">Revenue</td><td class="num">US$60.8bn</td><td class="chg">+28% YoY</td><td class="desc">Above US$60.2bn consensus.</td><td class="src">E.SUN<br>Taishin</td></tr>
+        <tr><td class="pname">Advertising</td><td class="num">US$59.4bn</td><td class="chg">+27% YoY</td><td class="desc">Ad impressions +14% and average price per ad +12%.</td><td class="src">Taishin<br>First Securities</td></tr>
+        <tr><td class="pname">Other Revenue</td><td class="num">US$1.0bn</td><td class="chg">+73% YoY</td><td class="desc">Above US$1bn for the first time, on WhatsApp paid messaging and subscriptions.</td><td class="src">Taishin<br>First Securities</td></tr>
+        <tr><td class="pname">Reality Labs</td><td class="num">US$0.43bn</td><td class="chg">+16% YoY</td><td class="desc">Operating loss of US$4.6bn; AI glasses offset lower Quest volumes.</td><td class="src">E.SUN<br>First Securities</td></tr>
+        <tr><td class="pname">Operating Income</td><td class="num">US$18.8bn</td><td class="chg">−8% YoY</td><td class="desc">Margin 31%. Excluding a US$2.4bn litigation charge and US$1.2bn of severance, operating income rose 9%.</td><td class="src">Taishin<br>E.SUN</td></tr>
+        <tr><td class="pname">EPS</td><td class="num">US$6.18</td><td class="chg">—</td><td class="desc">Below US$7.15 consensus on the one-off charges; the shares fell 7% after hours.</td><td class="src">E.SUN</td></tr>
+        <tr><td class="pname">Users</td><td class="num">3.6bn daily</td><td class="chg">+3% YoY</td><td class="desc">Average revenue per person US$16.86, +23.5%.</td><td class="src">First Securities<br>E.SUN</td></tr>
+        <tr><td class="pname">3Q26 Guidance</td><td class="num">US$61–64bn</td><td class="chg">+19–25% YoY</td><td class="desc">Top end above US$63.2bn consensus; includes a 1% FX headwind.</td><td class="src">E.SUN</td></tr>
+        <tr><td class="pname">2026 Expenses</td><td class="num">US$165–169bn</td><td class="chg">from US$162–169bn</td><td class="desc">Low end raised after higher 2Q costs and legal charges; payroll growth comes mainly from AI hiring.</td><td class="src">E.SUN<br>Taishin<br>First Securities</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p4-2">
+      <div class="psec-head"><span class="pno mono">4.2</span><h3>Capex And Capacity</h3></div>
+      <p class="lede">Meta builds mainly on NVIDIA platforms. KGI converts gigawatts into capex with a build cost per GW that rises with each NVIDIA generation, from US$30–35bn for H200 to US$45–50bn for Vera Rubin.</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c-item">Item</th><th class="c-fig">Figure</th><th class="c-chg">Change</th><th>Detail</th><th class="c-src">Source</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">2025 Actual</td><td class="num">US$72.2bn</td><td class="chg">—</td><td class="desc">36% of revenue, including finance-lease principal, the basis of the 2026 guidance.</td><td class="src">KGI</td></tr>
+        <tr><td class="pname">2026 Guidance</td><td class="num">US$130–145bn</td><td class="chg">from US$125–145bn</td><td class="desc">Low end raised and range narrowed with the 2Q26 results.</td><td class="src">E.SUN<br>Taishin</td></tr>
+        <tr><td class="pname">2027 Outlook</td><td class="num">US$200bn-plus</td><td class="chg">KGI estimate</td><td class="desc">Management is maximising 2026–27 capacity and keeping flexibility from 2028; consensus stood at US$168bn before the results.</td><td class="src">KGI<br>Taishin</td></tr>
+        <tr><td class="pname">Data-Centre Capacity</td><td class="num">8 GW</td><td class="chg">2026F</td><td class="desc">KGI estimates 2 GW in 2024, 4 GW in 2025, 14 GW in 2027F and 21 GW in 2028F; a reported internal memo cites 3.5 GW added in 2026 and 7 GW in 2027.</td><td class="src">KGI</td></tr>
+        <tr><td class="pname">Prometheus</td><td class="num">600 MW-plus</td><td class="chg">online in 2026</td><td class="desc">Brought online so far this year; Meta also runs a Hopper GPU cluster of 1.3 GW.</td><td class="src">KGI</td></tr>
+        <tr><td class="pname">Cash-Flow Effect</td><td class="num">FCF margin 1%</td><td class="chg">2026F</td><td class="desc">Consensus falls from 22% in 2025 to 1% in 2026F and −1% in 2027F; the net debt ratio moved from −8% (net cash) in 2024 to 11% in 2025.</td><td class="src">KGI</td></tr>
+        <tr><td class="pname">Financing</td><td class="num">BlackRock JV</td><td class="chg">3Q26</td><td class="desc">Moody's views the joint venture with BlackRock as preserving financial flexibility as AI spending surges.</td><td class="src">Moody's</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p4-3">
+      <div class="psec-head"><span class="pno mono">4.3</span><h3>Silicon, Networking And Memory</h3></div>
+      <p class="lede">Meta designs the MTIA accelerator line and the Vistara CXL memory controller, licenses CPU IP from Andes for MTIA, and buys NVIDIA and AMD GPUs for most of its clusters. Unit volumes are Morgan Stanley estimates.</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">Chip Or Link</th><th class="cship">Shipments</th><th>Programme</th><th class="c5">Status</th></tr></thead>
+        <tbody>
+        <tr>
+          <td class="pname">MTIA 400 Iris</td>
+          <td class="mono d">2026–27</td>
+          <td class="prog"><b>3nm · Andes IP</b><span>Fourth-generation MTIA, nearing mass production; two compute dies with 288GB of HBM3E. 150k units in 2026 and 550k in 2027; Morgan Stanley labels it MTIA 3.</span></td>
+          <td><span class="badge b-qual">Qualification</span></td>
+        </tr>
+        <tr>
+          <td class="pname">MTIA 600</td>
+          <td class="mono d">2028</td>
+          <td class="prog"><b>Rivos Team · GUC Candidate</b><span>Tape-out targeted for 2027, with CoWoS output from 2027 or 2028; GUC could win the design service.</span></td>
+          <td><span class="badge b-road">Roadmap</span></td>
+        </tr>
+        <tr>
+          <td class="pname">Andes Licensing</td>
+          <td class="mono d">2026</td>
+          <td class="prog"><b>Andes Technology</b><span>Contracts signed in 2Q26 for three to four Meta products lifted Andes to a record NT$370m of monthly revenue. The relationship runs from the first MTIA generation to the fourth and continues into the fifth and sixth.</span></td>
+          <td><span class="badge b-ramp">Ramping</span></td>
+        </tr>
+        <tr>
+          <td class="pname">Vistara CXL Memory ASIC</td>
+          <td class="mono d">—</td>
+          <td class="prog"><b>In-House · CXL Type 3</b><span>Lets DDR5 servers reuse DDR4 modules from retired servers as a second memory tier: each MemServer pairs 768GB of DDR5 with 256GB of CXL-attached DDR4. Cache throughput rose 25%, and ML parameter serving needed 25% fewer servers.</span></td>
+          <td><span class="badge b-est">Established</span></td>
+        </tr>
+        <tr>
+          <td class="pname">Merchant Accelerators</td>
+          <td class="mono d">2026–27</td>
+          <td class="prog"><b>NVIDIA · AMD</b><span>Most builds run NVIDIA H200, GB200, GB300 and Vera Rubin; AMD MI450 for Meta at 490k units in 2027.</span></td>
+          <td><span class="badge b-ramp">Ramping</span></td>
+        </tr>
+        <tr>
+          <td class="pname">Optical Links</td>
+          <td class="mono d">2026</td>
+          <td class="prog"><b>800G · 1.6T</b><span>Scale-out optics use CW lasers, which remain in short supply; LandMark supplies CW lasers and epitaxial wafers. Meta's short-term compute leasing raised doubts about AI capex in 3Q26.</span></td>
+          <td><span class="badge b-ramp">Ramping</span></td>
+        </tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p4-4">
+      <div class="psec-head"><span class="pno mono">4.4</span><h3>AI Models And Monetisation</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c-item">Product</th><th class="c-met">Latest Metric</th><th>Detail</th><th class="c-src">Source</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">Muse Spark</td><td class="num">Tier 2 frontier model</td><td class="desc">Version 1.1 scores above Gemini 3.5 Flash; served through an API that Meta is opening to more developers.</td><td class="src">KGI<br>First Securities</td></tr>
+        <tr><td class="pname">Ad Ranking</td><td class="num">Ad Clicks +8.3%</td><td class="desc">A Generative Recommender in Facebook ad retrieval also lifted conversion 15.7%; more than 9m small businesses use at least one generative ad-creative tool.</td><td class="src">Taishin<br>E.SUN</td></tr>
+        <tr><td class="pname">API Revenue</td><td class="num">US$50bn-plus per GW</td><td class="desc">KGI 2027 estimate for a 70B model on H100 and H200 at 60% GPU utilisation.</td><td class="src">KGI</td></tr>
+        <tr><td class="pname">Compute Leasing</td><td class="num">US$15bn per GW</td><td class="desc">KGI estimate. Zuckerberg is exploring selling surplus compute to large enterprises at a premium, although leasing margins sit far below advertising.</td><td class="src">KGI<br>Taishin</td></tr>
+        <tr><td class="pname">Subscriptions</td><td class="num">US$9.6bn per 100m subs</td><td class="desc">Meta One and Meta Verified at US$8–50 a month; Meta One launched in 2Q26.</td><td class="src">KGI<br>Taishin</td></tr>
+        <tr><td class="pname">Business Messaging</td><td class="num">1m+ businesses weekly</td><td class="desc">Use Meta Business Agent on WhatsApp and Messenger; AI completes 85% of booking conversations at Brazil's Movida.</td><td class="src">E.SUN<br>Taishin</td></tr>
+        <tr><td class="pname">AI Glasses</td><td class="num">Demand strong</td><td class="desc">Early Ray-Ban Meta sales beat expectations and drove Reality Labs growth.</td><td class="src">E.SUN<br>Taishin</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p4-5">
+      <div class="psec-head"><span class="pno mono">4.5</span><h3>Taiwan Supply Chain</h3></div>
+      <p class="lede">Meta share is the share of each supplier's revenue from Meta, as estimated by KGI.</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c-co">Company</th><th class="c-share">Meta Share</th><th>Role</th><th class="c-src">Source</th></tr></thead>
+        <tbody>
+        <tr class="bucket"><td colspan="4">Servers And Racks</td></tr>
+        <tr><td class="pname">Wiwynn (6669 TT)</td><td class="num">30–40%</td><td class="desc">Server ODM.</td><td class="src">KGI</td></tr>
+        <tr><td class="pname">Quanta (2382 TT)</td><td class="num">20–30%</td><td class="desc">Server ODM.</td><td class="src">KGI</td></tr>
+        <tr><td class="pname">Hon Hai (2317 TT)</td><td class="num">&lt;10%</td><td class="desc">Server ODM.</td><td class="src">KGI</td></tr>
+        <tr><td class="pname">Gold Circuit (2368 TT)</td><td class="num">&lt;10%</td><td class="desc">Printed circuit boards.</td><td class="src">KGI</td></tr>
+        <tr><td class="pname">Auras (3324 TT)</td><td class="num">&lt;10%</td><td class="desc">Liquid-cooling components.</td><td class="src">KGI</td></tr>
+        <tr><td class="pname">King Slide (2059 TT)</td><td class="num">&lt;10%</td><td class="desc">Slide rails.</td><td class="src">KGI</td></tr>
+        <tr class="bucket"><td colspan="4">Networking And Optics</td></tr>
+        <tr><td class="pname">Accton (2345 TT)</td><td class="num">—</td><td class="desc">Data-centre switches.</td><td class="src">KGI</td></tr>
+        <tr><td class="pname">LandMark (3081 TT)</td><td class="num">—</td><td class="desc">CW lasers and epitaxial wafers for silicon-photonics transceivers.</td><td class="src">Capital</td></tr>
+        <tr class="bucket"><td colspan="4">Silicon, Memory And Devices</td></tr>
+        <tr><td class="pname">Andes Technology (6533 TT)</td><td class="num">—</td><td class="desc">CPU IP licensed into MTIA.</td><td class="src">CTBC</td></tr>
+        <tr><td class="pname">Phison (8299 TT)</td><td class="num">—</td><td class="desc">Enterprise SSD controllers; an indirect beneficiary of CXL memory tiering.</td><td class="src">Cathay Futures</td></tr>
+        <tr><td class="pname">Novatek (3034 TT)</td><td class="num">3–7%</td><td class="desc">AR/VR solutions.</td><td class="src">KGI</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p4-6">
+      <div class="psec-head"><span class="pno mono">4.6</span><h3>Broker Views</h3><span class="ptag">3Q26</span></div>
+      <div class="scroller"><table class="ptable t-brk">
+        <thead><tr><th class="c-house">House</th><th class="c-date">Date</th><th class="c-stock">Stock</th><th class="c-rate">Rating</th><th class="c-tp">Target</th><th>Thesis</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">Capital</td><td class="d">3Q26</td><td class="desc">LandMark</td><td class="desc">Trading Buy</td><td class="num">NT$2,000</td><td class="desc">The optics upcycle is intact, but Meta's short-term compute leasing raised doubts about AI capex.</td></tr>
+        <tr><td class="pname">Cathay Futures</td><td class="d">3Q26</td><td class="desc">Phison</td><td class="desc">Buy</td><td class="num">NT$3,000</td><td class="desc">Vistara shows CXL memory tiering in hyperscale production, turning memory into a schedulable capacity resource.</td></tr>
+        <tr><td class="pname">KGI</td><td class="d">3Q26</td><td class="desc">Meta</td><td class="desc">Outperform</td><td class="num">US$845</td><td class="desc">Non-advertising AI monetisation through API, compute leasing and subscriptions is becoming visible, and capex consensus should rise.</td></tr>
+        <tr><td class="pname">E.SUN</td><td class="d">3Q26</td><td class="desc">Meta</td><td class="desc">—</td><td class="num">—</td><td class="desc">Litigation and severance charges caused the profit miss; the low ends of capex and expense guidance were raised.</td></tr>
+        <tr><td class="pname">Taishin</td><td class="d">3Q26</td><td class="desc">Meta</td><td class="desc">—</td><td class="num">—</td><td class="desc">AI lifts advertising, but infrastructure and transformation costs squeeze margins and free cash flow.</td></tr>
+        <tr><td class="pname">First Securities</td><td class="d">3Q26</td><td class="desc">Meta</td><td class="desc">Buy</td><td class="num">US$654</td><td class="desc">Muse Spark is back in the frontier race; the scale of API and compute sales is the swing factor for revenue and valuation.</td></tr>
+        <tr><td class="pname">Moody's</td><td class="d">3Q26</td><td class="desc">Meta</td><td class="desc">—</td><td class="num">—</td><td class="desc">The BlackRock joint venture preserves financial flexibility as AI spending surges.</td></tr>
+        <tr><td class="pname">CTBC</td><td class="d">3Q26</td><td class="desc">Andes Technology</td><td class="desc">Overweight, Upgraded</td><td class="num">NT$287</td><td class="desc">Meta MTIA licensing shows traction in AI servers, and restructuring returns Andes to break-even in 2026.</td></tr>
+        </tbody></table></div>
+    </div>
+
+  </div>
+</div>
+
+<footer class="site-foot">
+  <div class="sf-id">
+    <img src="assets/photo-sm.jpg" alt="Ethan Chen" width="44" height="44" loading="lazy">
+    <div><div class="sf-name"><a href="index.html">Ethan Chen</a></div><div class="sf-sub">Semiconductor Research Notes</div></div>
+  </div>
+  <div class="sf-contact">
+    <a href="mailto:ethanchen@qtumic.com">ethanchen@qtumic.com</a>
+    <a href="https://www.linkedin.com/in/hao-chen-194981297" target="_blank" rel="me noopener">LinkedIn</a>
+  </div>
+  <div class="sf-note">Personal research notes, not investment advice. © 2026 Ethan Chen</div>
+</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ASE Technology Holding: Service Catalogue · Ethan Chen</title>
+<!-- site-head -->
+<meta name="author" content="Ethan Chen">
+<meta name="description" content="Packaging, test, materials and EMS services by platform.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://ethanchensemi.github.io/ethanchenstudy/ase-catalogue-en.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ASE Technology Holding: Service Catalogue · Ethan Chen">
+<meta property="og:description" content="Packaging, test, materials and EMS services by platform.">
+<meta property="og:site_name" content="Ethan Chen · Semiconductor Research Notes">
+<!-- /site-head -->
+<style>
+:root{--paper:#F6F8F9;--card:#FFFFFF;--ink:#14181C;--ink-2:#4A555E;--ink-3:#7C8891;--rule:#CBD3D9;--rule-soft:#E2E8EC;--stage:#1F3A4D;--b:#4A3B7A}
+*{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;font-size:15px;line-height:1.6}
+.wrap{max-width:1240px;margin:0 auto;padding:44px 24px 90px}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,monospace}
+.backbar{margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.backbar a{display:inline-block;font-size:13px;color:var(--ink-2);text-decoration:none;border:1px solid var(--rule);background:var(--card);padding:6px 13px}
+.backbar a:hover{color:var(--b);border-color:var(--b)} .backbar .lang{font-family:ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.04em}
+.masthead{border-bottom:2px solid var(--stage);padding-bottom:18px;margin-bottom:18px}
+.masthead h1{font-size:28px;line-height:1.28;font-weight:700;margin:0;letter-spacing:-.01em}
+.lede{font-size:13.5px;color:var(--ink-2);line-height:1.65;margin:0 0 22px;max-width:82ch}
+.psec .lede{margin:0 0 12px}
+.timeline{background:var(--card);border:1px solid var(--rule);padding:16px 18px 8px;margin-bottom:22px}
+.timeline h2{font-size:14px;margin:0 0 8px;font-weight:600}
+.tlscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.timeline svg{width:100%;min-width:820px;height:auto;display:block}
+.timeline svg text{paint-order:stroke;stroke:#FFFFFF;stroke-width:3px;stroke-linejoin:round}
+.legend{display:flex;gap:16px;flex-wrap:wrap;align-items:center;font-size:11.5px;color:var(--ink-3);margin:8px 0 4px}
+.legend span::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px;border:1.8px solid}
+.legend span.lg-est::before{background:#215C68;border-color:#215C68}
+.legend span.lg-ramp::before{background:#B85C10;border-color:#B85C10}
+.legend span.lg-qual::before{background:#2560A6;border-color:#2560A6}
+.legend span.lg-road::before{background:#FFFFFF;border-color:#4A3B7A;border-style:dashed}
+.legend span.lg-now::before{width:14px;height:0;border-radius:0;border:none;border-top:1.4px dashed #B02E6E;vertical-align:3px}
+.toc{background:var(--card);border:1px solid var(--rule);padding:18px 22px;margin:0 0 22px}
+.toc h2{font-size:14px;margin:0 0 12px;font-weight:600}
+.tocgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px 18px}
+.tocgroup h4{font-size:11px;color:var(--ink-3);letter-spacing:.03em;margin:0 0 8px}
+.tocgroup ul{list-style:none;margin:0;padding:0} .tocgroup li{margin-bottom:5px;font-size:12px}
+.tocgroup a{color:var(--ink-2);text-decoration:none;border-bottom:1px dotted var(--rule)} .tocgroup a:hover{color:var(--b);border-color:var(--b)}
+.tocgroup .n{font-family:ui-monospace,Menlo,monospace;color:var(--ink-3);font-size:10.5px;margin-right:5px}
+.divider{height:1px;background:var(--rule-soft);margin:34px 0}
+.prail{border-bottom:2px solid var(--stage);padding-bottom:8px;margin-bottom:20px;position:relative;padding-left:14px}
+.pstripe{position:absolute;left:0;top:2px;bottom:10px;width:4px;background:var(--stage)}
+.pnum{font-size:11px;color:var(--ink-3);letter-spacing:.06em;margin-bottom:3px} .prail h2{font-size:21px;margin:0;font-weight:700}
+.secgroup{margin:34px 0 14px;padding-bottom:6px;border-bottom:1px solid var(--rule);scroll-margin-top:16px}
+.secgroup h3{font-size:18px;margin:0;font-weight:700}
+.pstage .pbody>.secgroup:first-child{margin-top:0}
+.psec{margin-bottom:26px;scroll-margin-top:16px} .psec-head{display:flex;align-items:baseline;gap:10px;margin-bottom:8px}
+.pno{font-size:12px;color:var(--ink-3)} .psec-head h3{font-size:16px;margin:0;font-weight:600}
+.ptag{font-size:11px;padding:2px 9px;border-radius:20px;margin-left:auto}
+.ptag.own{background:#E1F5EE;color:#1F7A5C} .ptag.sub{background:#E6F1FB;color:#2560A6}
+.scroller{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--rule);background:var(--card)}
+table.ptable{border-collapse:collapse;width:100%;font-size:13px;min-width:700px}
+.ptable th,.ptable td{padding:9px 12px;text-align:left;vertical-align:top;line-height:1.5;border-bottom:1px solid var(--rule-soft)}
+.ptable th{background:#EEF2F3;font-weight:600;color:var(--ink-2);font-size:11.5px;border-bottom:1px solid var(--rule)}
+.ptable th.c1{width:240px} .ptable th.cstart{width:74px} .ptable th.ccust{width:340px} .ptable th.c5{width:120px}
+.ptable tr:last-child td{border-bottom:none}
+.ptable td.pname{font-weight:600;color:var(--ink);word-break:keep-all} .ptable td.d{color:var(--ink-3);font-size:12.5px}
+.ptable td.cust{color:var(--ink-2);font-size:12.5px}
+.ptable tr.bucket td{background:#F1F4F5;color:var(--ink-2);font-size:11.5px;font-weight:600;letter-spacing:.02em;padding:6px 12px;border-bottom:1px solid var(--rule-soft)}
+.ptable tbody tr:not(.bucket):hover td{background:#FAFBFC}
+td.prog b{display:block;color:var(--ink);font-weight:600;font-size:12.5px;margin-top:9px}
+td.prog b:first-child{margin-top:0}
+td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
+.badge{display:inline-block;font-size:11px;padding:1px 8px;border-radius:3px;border:1px solid;white-space:nowrap}
+.b-ramp{color:#B85C10;border-color:#EBC9A6;background:#FBF1E6}
+.b-qual{color:#2560A6;border-color:#BBD4F0;background:#EAF2FB}
+.b-road{color:#4A3B7A;border-color:#C9C1E3;background:#F4F1FA}
+.b-est{color:#215C68;border-color:#B7D6DC;background:#E8F3F5}
+@media (max-width:900px){.tocgrid{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.wrap{padding:28px 14px 60px} .masthead h1{font-size:22px} .tocgrid{grid-template-columns:1fr}}
+@media print{.backbar{display:none} .scroller,.tlscroll{overflow:visible}}
+</style>
+<style id="site-chrome">
+/* site chrome (added by build) */
+.backbar{flex-wrap:wrap}
+.backbar .bbr{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.backbar .lang{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;letter-spacing:.04em}
+.backbar .lang-off{display:inline-block;font-size:12px;color:var(--ink-3,#7C8891);border:1px dashed var(--rule,#CBD3D9);padding:6px 13px;font-family:ui-monospace,"SF Mono",Menlo,monospace;letter-spacing:.04em;cursor:default}
+.site-foot{margin-top:56px;border-top:1px solid var(--rule,#CBD3D9);padding-top:22px;display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;font-size:12.5px;color:var(--ink-3,#7C8891);line-height:1.5}
+.site-foot .sf-id{display:flex;align-items:center;gap:12px;min-width:0}
+.site-foot .sf-id img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:0 0 auto}
+.site-foot .sf-name{font-size:14px;font-weight:600;color:var(--ink,#14181C)}
+.site-foot .sf-name a{color:inherit;text-decoration:none}
+.site-foot .sf-name a:hover{color:var(--b,#4A3B7A)}
+.site-foot .sf-sub{font-size:12px;color:var(--ink-3,#7C8891)}
+.site-foot .sf-contact{display:flex;gap:16px;flex-wrap:wrap;margin-left:auto}
+.site-foot .sf-contact a{color:var(--ink-2,#4A555E);text-decoration:none;border-bottom:1px dotted var(--rule,#CBD3D9)}
+.site-foot .sf-contact a:hover{color:var(--b,#4A3B7A);border-color:var(--b,#4A3B7A)}
+.site-foot .sf-note{flex-basis:100%;font-size:11.5px}
+@media (max-width:640px){.site-foot .sf-contact{margin-left:0}}
+@media (max-width:640px){
+  .stickynav{margin-left:-14px;margin-right:-14px;padding-left:14px;padding-right:14px;white-space:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .legend .fams,.legend .fams.six,.famgrid,.idxgrid{grid-template-columns:1fr !important}
+  .routes{grid-template-columns:minmax(0,1fr) !important}
+  .route,.routes > *{min-width:0}
+  .route .row,.route .chips,.route .chiprow,.route .cols{flex-wrap:wrap}
+  .optstack table{min-width:0 !important}
+  .famcol .chip,.legend .chip,.chipwrap b{white-space:normal}
+}
+@media print{.site-foot .sf-id img{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="backbar"><a href="map-en.html">← Industry Map</a> </div>
+
+<header class="masthead">
+  <h1>ASE Technology Holding: Service Catalogue</h1>
+</header>
+
+<p class="lede">ASE Technology Holding (3711 TT) is the world’s largest outsourced semiconductor assembly and test provider, formed through the ASE–SPIL merger. This catalogue sets out its packaging, test, materials and EMS services by platform.</p>
+
+<section class="timeline">
+  <h2>LEAP Milestones by Business Line, 2023–2028</h2>
+  <div class="tlscroll">
+  <svg viewBox="0 0 1160 300" role="img" aria-label="ASE LEAP roadmap 2023 to 2028 across five lanes: Full Process, FOCoS, leading-edge test, TSMC on-substrate outsourcing and 2.5D capacity">
+
+    <line x1="230" y1="30" x2="230" y2="278" stroke="#E2E8EC"/><text x="230" y="20" text-anchor="middle" font-size="10.5" fill="#7C8891">2023</text>
+    <line x1="400" y1="30" x2="400" y2="278" stroke="#E2E8EC"/><text x="400" y="20" text-anchor="middle" font-size="10.5" fill="#7C8891">2024</text>
+    <line x1="570" y1="30" x2="570" y2="278" stroke="#E2E8EC"/><text x="570" y="20" text-anchor="middle" font-size="10.5" fill="#7C8891">2025</text>
+    <line x1="740" y1="30" x2="740" y2="278" stroke="#E2E8EC"/><text x="740" y="20" text-anchor="middle" font-size="10.5" fill="#7C8891">2026</text>
+    <line x1="910" y1="30" x2="910" y2="278" stroke="#E2E8EC"/><text x="910" y="20" text-anchor="middle" font-size="10.5" fill="#7C8891">2027</text>
+    <line x1="1080" y1="30" x2="1080" y2="278" stroke="#E2E8EC"/><text x="1080" y="20" text-anchor="middle" font-size="10.5" fill="#7C8891">2028</text>
+
+    <line x1="868" y1="30" x2="868" y2="278" stroke="#B02E6E" stroke-width="1.2" stroke-dasharray="4 3"/>
+
+    <text x="150" y="62" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">Full Process</text>
+    <line x1="165" y1="58" x2="1130" y2="58" stroke="#CBD3D9"/>
+    <circle cx="740" cy="58" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
+    <text x="740" y="76" text-anchor="middle" font-size="10" fill="#B85C10">AMD Venice CPU</text>
+    <circle cx="910" cy="58" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
+    <text x="910" y="48" text-anchor="middle" font-size="10" fill="#4A3B7A">NVIDIA Vera CPU</text>
+
+    <text x="150" y="112" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">FOCoS</text>
+    <line x1="165" y1="108" x2="1130" y2="108" stroke="#CBD3D9"/>
+    <circle cx="570" cy="108" r="5" fill="#2560A6" stroke="#2560A6" stroke-width="1.8"/>
+    <text x="570" y="98" text-anchor="middle" font-size="10" fill="#2560A6">Customer Qualification</text>
+    <circle cx="895" cy="108" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
+    <text x="895" y="126" text-anchor="middle" font-size="10" fill="#4A3B7A">Mass Production Target</text>
+    <circle cx="990" cy="108" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
+    <text x="990" y="98" text-anchor="middle" font-size="10" fill="#4A3B7A">AI ASIC Volume</text>
+
+    <text x="150" y="162" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">Leading-Edge Test</text>
+    <line x1="165" y1="158" x2="1130" y2="158" stroke="#CBD3D9"/>
+    <circle cx="400" cy="158" r="5" fill="#215C68" stroke="#215C68" stroke-width="1.8"/>
+    <text x="400" y="148" text-anchor="middle" font-size="10" fill="#215C68">Wafer Sort Ramp</text>
+    <circle cx="570" cy="158" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
+    <text x="570" y="176" text-anchor="middle" font-size="10" fill="#B85C10">AI ASIC Final Test</text>
+    <circle cx="740" cy="158" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
+    <text x="740" y="148" text-anchor="middle" font-size="10" fill="#B85C10">Trainium 3 · MediaTek TPU</text>
+
+    <text x="150" y="212" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">TSMC oS</text>
+    <line x1="165" y1="208" x2="1130" y2="208" stroke="#CBD3D9"/>
+    <circle cx="230" cy="208" r="5" fill="#215C68" stroke="#215C68" stroke-width="1.8"/>
+    <text x="230" y="198" text-anchor="middle" font-size="10" fill="#215C68">oS Outsourcing Begins</text>
+    <circle cx="740" cy="208" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
+    <text x="740" y="226" text-anchor="middle" font-size="10" fill="#B85C10">CoWoS-L Volume</text>
+
+    <text x="150" y="262" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">2.5D Capacity</text>
+    <line x1="165" y1="258" x2="1130" y2="258" stroke="#CBD3D9"/>
+    <circle cx="740" cy="258" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
+    <text x="740" y="248" text-anchor="middle" font-size="10" fill="#B85C10">15 KPM</text>
+    <circle cx="910" cy="258" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
+    <text x="910" y="276" text-anchor="middle" font-size="10" fill="#4A3B7A">45 KPM</text>
+    <circle cx="1080" cy="258" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
+    <text x="1080" y="248" text-anchor="middle" font-size="10" fill="#4A3B7A">55 KPM</text>
+  </svg>
+  </div>
+  <div class="legend"><span class="lg-est">Established</span><span class="lg-ramp">Ramping</span><span class="lg-qual">Qualification</span><span class="lg-road">Roadmap</span><span class="lg-now">Today</span></div>
+</section>
+
+<section class="toc">
+  <h2>Contents</h2>
+  <div class="tocgrid">
+    <div class="tocgroup"><h4>Part 1 · LEAP</h4><ul>
+      <li><a href="#p1-1"><span class="n">1.1</span>Full Process</a></li>
+      <li><a href="#p1-2"><span class="n">1.2</span>FOCoS</a></li>
+      <li><a href="#p1-3"><span class="n">1.3</span>TSMC CoWoS Outsourcing</a></li>
+      <li><a href="#p1-4"><span class="n">1.4</span>Co-Packaged Optics</a></li>
+    </ul></div>
+    <div class="tocgroup"><h4>Part 1 · Wafer-Level and Bumping</h4><ul>
+      <li><a href="#p1-5"><span class="n">1.5</span>Bumping</a></li>
+      <li><a href="#p1-6"><span class="n">1.6</span>Fan-Out Wafer-Level</a></li>
+      <li><a href="#p1-7"><span class="n">1.7</span>Fan-Out Panel-Level</a></li>
+      <li><a href="#p1-8"><span class="n">1.8</span>Wafer-Level CSP</a></li>
+    </ul></div>
+    <div class="tocgroup"><h4>Part 1 · Flip-Chip</h4><ul>
+      <li><a href="#p1-9"><span class="n">1.9</span>Flip-Chip BGA</a></li>
+      <li><a href="#p1-10"><span class="n">1.10</span>Flip-Chip CSP</a></li>
+    </ul></div>
+    <div class="tocgroup"><h4>Part 1 · Leadframe and Wire Bond</h4><ul>
+      <li><a href="#p1-11"><span class="n">1.11</span>QFN and Leadframe</a></li>
+      <li><a href="#p1-12"><span class="n">1.12</span>Wire Bond BGA</a></li>
+      <li><a href="#p1-13"><span class="n">1.13</span>Stacked-Die and Memory</a></li>
+    </ul></div>
+    <div class="tocgroup"><h4>Part 1 · SiP and RF</h4><ul>
+      <li><a href="#p1-14"><span class="n">1.14</span>SiP and RF Modules</a></li>
+    </ul></div>
+    <div class="tocgroup"><h4>Part 2 · Test</h4><ul>
+      <li><a href="#p2-1"><span class="n">2.1</span>Wafer Sort / Chip Probe</a></li>
+      <li><a href="#p2-2"><span class="n">2.2</span>Final Test</a></li>
+      <li><a href="#p2-3"><span class="n">2.3</span>Burn-In</a></li>
+      <li><a href="#p2-4"><span class="n">2.4</span>System-Level Test</a></li>
+    </ul></div>
+    <div class="tocgroup"><h4>Part 3 · Materials and Design</h4><ul>
+      <li><a href="#p3-1"><span class="n">3.1</span>Substrates and Leadframes</a></li>
+      <li><a href="#p3-2"><span class="n">3.2</span>Design and Simulation</a></li>
+    </ul></div>
+    <div class="tocgroup"><h4>Part 4 · EMS</h4><ul>
+      <li><a href="#p4-1"><span class="n">4.1</span>Universal Scientific Industrial</a></li>
+    </ul></div>
+  </div>
+</section>
+
+<div class="pstage" id="part1">
+  <div class="prail"><div class="pstripe"></div><div class="pnum">PART 1</div><h2>Packaging</h2></div>
+  <div class="pbody">
+
+    <div class="secgroup" id="g1-leap"><h3>LEAP: Leading-Edge Advanced Packaging</h3></div>
+
+    <div class="psec" id="p1-1">
+      <div class="psec-head"><span class="pno mono">1.1</span><h3>Full Process</h3><span class="ptag own">In-House</span></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">Platform</th><th class="cstart">Start</th><th>Representative Programs</th><th class="c5">Status</th></tr></thead>
+        <tbody>
+        <tr>
+          <td class="pname">Full Process: In-House 2.5D Flow</td>
+          <td class="mono d">2026</td>
+          <td class="prog">
+            <b>AMD Venice Server CPU</b><span>Next-generation EPYC server processor and the first Full Process programme to reach volume.</span>
+            <b>NVIDIA Vera Server CPU</b><span>Arm-based CPU paired with Rubin GPUs in Vera Rubin racks; expected to become the second high-volume Full Process programme from 2027.</span>
+          </td>
+          <td><span class="badge b-ramp">Ramping</span></td>
+        </tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p1-2">
+      <div class="psec-head"><span class="pno mono">1.2</span><h3>FOCoS</h3><span class="ptag own">In-House</span></div>
+      <p class="lede">ASE’s proprietary CoWoS alternative. Fan-out redistribution layers replace the silicon interposer, lowering cost and giving AI ASIC customers a second source when TSMC CoWoS capacity is tight. Mass production of the bridge variant is targeted for late 2026.</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">Platform</th><th class="cstart">Start</th><th>Representative Programs</th><th class="c5">Status</th></tr></thead>
+        <tbody>
+        <tr>
+          <td class="pname">FOCoS-Bridge: 2.5D with Embedded Silicon Bridge</td>
+          <td class="mono d">2026</td>
+          <td class="prog">
+            <b>AMD Venice and NVIDIA Vera Server CPUs</b><span>Built on the Full Process line in 1.1; Vera from 2027.</span>
+            <b>Broadcom Tomahawk Networking Chip</b><span>Switch ASIC with large die area and high I/O count, well suited to fan-out integration.</span>
+            <b>AWS Trainium AI Accelerator</b><span>Custom AI training silicon, typical of the cost-sensitive ASIC customers the platform targets.</span>
+          </td>
+          <td><span class="badge b-qual">Qualification</span></td>
+        </tr>
+        <tr>
+          <td class="pname">FOCoS-CL / FOCoS-CF: Chip-Last and Chip-First</td>
+          <td class="mono d">2016</td>
+          <td class="prog">
+            <b>Networking and HPC Silicon</b><span>The original FOCoS generations, in production for large single- and multi-die parts that need finer routing than a substrate alone but no silicon interposer.</span>
+          </td>
+          <td><span class="badge b-est">Established</span></td>
+        </tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p1-3">
+      <div class="psec-head"><span class="pno mono">1.3</span><h3>TSMC CoWoS Outsourcing</h3><span class="ptag sub">Subcontract</span></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">Step</th><th class="cstart">Start</th><th>Representative Programs</th><th class="c5">Status</th></tr></thead>
+        <tbody>
+        <tr>
+          <td class="pname">Bumping for Chip-on-Wafer</td>
+          <td class="mono d">2024</td>
+          <td class="prog">
+            <b>NVIDIA GPU Wafer Bumping</b><span>Micro-bump and C4 bumping on the GPU and interposer wafers ahead of chip-on-wafer bonding, most of which TSMC does in-house. Bundled with oS and wafer probe in one subcontract.</span>
+          </td>
+          <td><span class="badge b-ramp">Ramping</span></td>
+        </tr>
+        <tr>
+          <td class="pname">On-Substrate (oS) Assembly</td>
+          <td class="mono d">2023</td>
+          <td class="prog">
+            <b>NVIDIA CoWoS-L GPU Packages</b><span>Mounts the bonded interposer-and-die stack onto the package substrate. The largest single oS workload; ASE is estimated to carry 80–90% of the oS work TSMC outsources.</span>
+            <b>US Capacity Allocation</b><span>oS work for TSMC’s US fabs is expected to go to Amkor, keeping ASE’s oS expansion in Taiwan.</span>
+          </td>
+          <td><span class="badge b-ramp">Ramping</span></td>
+        </tr>
+        <tr>
+          <td class="pname">CoWoS-S / L / R Back-End Steps</td>
+          <td class="mono d">2023</td>
+          <td class="prog">
+            <b>CoWoS-L</b><span>Local silicon interconnect (LSI) bridges plus redistribution layers. The volume variant for current AI accelerators; TSMC does most chip-on-wafer bonding itself and has begun outsourcing part of it to SPIL.</span>
+            <b>CoWoS-R</b><span>Redistribution-layer interposer only; lower cost where full interposer bandwidth is not needed.</span>
+            <b>CoWoS-S</b><span>Full silicon interposer. The original variant, now the smaller share of new AI builds.</span>
+          </td>
+          <td><span class="badge b-est">Established</span></td>
+        </tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p1-4">
+      <div class="psec-head"><span class="pno mono">1.4</span><h3>Co-Packaged Optics (CPO)</h3><span class="ptag own">In-House</span></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">Platform</th><th class="cstart">Start</th><th>Representative Programs</th><th class="c5">Status</th></tr></thead>
+        <tbody>
+        <tr>
+          <td class="pname">Optical Engine Co-Packaging</td>
+          <td class="mono d">2026</td>
+          <td class="prog">
+            <b>Switch ASIC CPO Packages</b><span>Optical engines assembled beside the switch ASIC on one substrate, replacing pluggable transceivers. SPIL packages and tests NVIDIA’s COUPE-based CPO switches; ASE expects initial low-volume output from 4Q26.</span>
+          </td>
+          <td><span class="badge b-qual">Qualification</span></td>
+        </tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="secgroup" id="g1-wlp"><h3>Wafer-Level Packaging and Bumping</h3></div>
+
+    <div class="psec" id="p1-5">
+      <div class="psec-head"><span class="pno mono">1.5</span><h3>Bumping</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">Process</th><th class="ccust">Typical Customers</th><th class="c5">Status</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">Copper Pillar Bumping</td><td class="cust">MediaTek · Qualcomm · AMD · NVIDIA</td><td><span class="badge b-est">Established</span></td></tr>
+        <tr><td class="pname">Solder Bumping</td><td class="cust">Broadcom · Marvell · Realtek</td><td><span class="badge b-est">Established</span></td></tr>
+        <tr><td class="pname">Redistribution Layer Processing</td><td class="cust">Qualcomm · MediaTek · Novatek</td><td><span class="badge b-est">Established</span></td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p1-6">
+      <div class="psec-head"><span class="pno mono">1.6</span><h3>Fan-Out Wafer-Level Packaging</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">Application</th><th class="ccust">Typical Customers</th><th class="c5">Status</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">Power Management ICs</td><td class="cust">Qualcomm · MediaTek · Richtek</td><td><span class="badge b-est">Established</span></td></tr>
+        <tr><td class="pname">RF Transceivers and Connectivity</td><td class="cust">Qualcomm · MediaTek · Infineon</td><td><span class="badge b-est">Established</span></td></tr>
+        <tr><td class="pname">Automotive Radar and Sensors</td><td class="cust">Infineon · NXP</td><td><span class="badge b-est">Established</span></td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p1-7">
+      <div class="psec-head"><span class="pno mono">1.7</span><h3>Fan-Out Panel-Level Packaging</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">Application</th><th class="ccust">Typical Customers</th><th class="c5">Status</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">Display Driver ICs</td><td class="cust">Novatek · Himax</td><td><span class="badge b-est">Established</span></td></tr>
+        <tr><td class="pname">Power Management ICs</td><td class="cust">Richtek · Monolithic Power Systems</td><td><span class="badge b-est">Established</span></td></tr>
+        <tr><td class="pname">Automotive Chips</td><td class="cust">&ndash;</td><td><span class="badge b-est">Established</span></td></tr>
+        <tr><td class="pname">AI and HPC Packages, 310 &times; 310 mm Line</td><td class="cust">&ndash;</td><td><span class="badge b-road">Roadmap</span></td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p1-8">
+      <div class="psec-head"><span class="pno mono">1.8</span><h3>Wafer-Level Chip-Scale Packaging</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">Application</th><th class="ccust">Typical Customers</th><th class="c5">Status</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">Small-Die Consumer Parts</td><td class="cust">Qualcomm · Texas Instruments · Broadcom</td><td><span class="badge b-est">Established</span></td></tr>
+        <tr><td class="pname">Connectivity and Sensor ICs</td><td class="cust">Realtek · Nordic Semiconductor</td><td><span class="badge b-est">Established</span></td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="secgroup" id="g1-fc"><h3>Flip-Chip</h3></div>
+
+    <div class="psec" id="p1-9">
+      <div class="psec-head"><span class="pno mono">1.9</span><h3>Flip-Chip BGA</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">Application</th><th class="ccust">Typical Customers</th><th class="c5">Status</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">Client GPUs and CPUs</td><td class="cust">AMD · NVIDIA · Intel</td><td><span class="badge b-est">Established</span></td></tr>
+        <tr><td class="pname">Networking and Switch Silicon</td><td class="cust">Broadcom · Marvell · Realtek</td><td><span class="badge b-est">Established</span></td></tr>
+        <tr><td class="pname">FPGAs and Programmable Logic</td><td class="cust">AMD Xilinx · Altera · Lattice</td><td><span class="badge b-est">Established</span></td></tr>
+        <tr><td class="pname">Server Management Silicon</td><td class="cust">Aspeed</td><td><span class="badge b-est">Established</span></td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p1-10">
+      <div class="psec-head"><span class="pno mono">1.10</span><h3>Flip-Chip CSP</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">Application</th><th class="ccust">Typical Customers</th><th class="c5">Status</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">Mobile Application Processors</td><td class="cust">MediaTek · Qualcomm · Samsung LSI</td><td><span class="badge b-est">Established</span></td></tr>
+        <tr><td class="pname">Cellular Modems and Basebands</td><td class="cust">MediaTek · Qualcomm</td><td><span class="badge b-est">Established</span></td></tr>
+        <tr><td class="pname">Smart TV and Set-Top SoCs</td><td class="cust">MediaTek · Realtek · Amlogic</td><td><span class="badge b-est">Established</span></td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="secgroup" id="g1-lf"><h3>Leadframe and Wire Bond</h3></div>
+
+    <div class="psec" id="p1-11">
+      <div class="psec-head"><span class="pno mono">1.11</span><h3>QFN and Leadframe</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">Application</th><th class="ccust">Typical Customers</th><th class="c5">Status</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">RF Front-End Parts</td><td class="cust">Qorvo · Skyworks · Murata</td><td><span class="badge b-est">Established</span></td></tr>
+        <tr><td class="pname">Power Discretes and Drivers</td><td class="cust">Infineon · onsemi · Vishay</td><td><span class="badge b-est">Established</span></td></tr>
+        <tr><td class="pname">Automotive MCUs and Interface ICs</td><td class="cust">NXP · Infineon · Renesas · STMicroelectronics · Texas Instruments</td><td><span class="badge b-est">Established</span></td></tr>
+        <tr><td class="pname">Analog and Mixed-Signal</td><td class="cust">Texas Instruments · Analog Devices · Microchip</td><td><span class="badge b-est">Established</span></td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p1-12">
+      <div class="psec-head"><span class="pno mono">1.12</span><h3>Wire Bond BGA</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">Application</th><th class="ccust">Typical Customers</th><th class="c5">Status</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">Mainstream Consumer SoCs</td><td class="cust">MediaTek · Realtek · Novatek</td><td><span class="badge b-est">Established</span></td></tr>
+        <tr><td class="pname">Storage and Interface Controllers</td><td class="cust">Phison · Silicon Motion · ASMedia</td><td><span class="badge b-est">Established</span></td></tr>
+        <tr><td class="pname">AI Peripheral Silicon</td><td class="cust">Monolithic Power Systems · Infineon</td><td><span class="badge b-est">Established</span></td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p1-13">
+      <div class="psec-head"><span class="pno mono">1.13</span><h3>Stacked-Die and Memory</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">Application</th><th class="ccust">Typical Customers</th><th class="c5">Status</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">NAND and NOR Flash</td><td class="cust">Winbond · Macronix</td><td><span class="badge b-est">Established</span></td></tr>
+        <tr><td class="pname">DRAM and Specialty Memory</td><td class="cust">Nanya Technology · Winbond</td><td><span class="badge b-est">Established</span></td></tr>
+        <tr><td class="pname">Multi-Chip Memory Modules</td><td class="cust">Phison · Silicon Motion</td><td><span class="badge b-est">Established</span></td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="secgroup" id="g1-sip"><h3>SiP and RF</h3></div>
+
+    <div class="psec" id="p1-14">
+      <div class="psec-head"><span class="pno mono">1.14</span><h3>SiP and RF Modules</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">Module</th><th class="ccust">Typical Customers</th><th class="c5">Status</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">mmWave AiP</td><td class="cust">Apple · Qualcomm</td><td><span class="badge b-est">Established</span></td></tr>
+        <tr><td class="pname">3D Sensing Modules</td><td class="cust">Apple</td><td><span class="badge b-est">Established</span></td></tr>
+        <tr><td class="pname">Wearable SiP</td><td class="cust">Apple</td><td><span class="badge b-est">Established</span></td></tr>
+        <tr><td class="pname">Camera Modules</td><td class="cust">Apple</td><td><span class="badge b-est">Established</span></td></tr>
+        <tr><td class="pname">Acoustic Modules</td><td class="cust">Apple</td><td><span class="badge b-est">Established</span></td></tr>
+        <tr><td class="pname">Wi-Fi and Bluetooth Modules</td><td class="cust">MediaTek · Realtek · Broadcom</td><td><span class="badge b-est">Established</span></td></tr>
+        </tbody></table></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="pstage" id="part2">
+  <div class="prail"><div class="pstripe"></div><div class="pnum">PART 2</div><h2>Test</h2></div>
+  <div class="pbody">
+
+    <div class="psec" id="p2-1">
+      <div class="psec-head"><span class="pno mono">2.1</span><h3>Wafer Sort / Chip Probe</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">Service</th><th class="cstart">Start</th><th>Coverage</th><th class="c5">Status</th></tr></thead>
+        <tbody>
+        <tr class="bucket"><td colspan="4">Leading-Edge · LEAP</td></tr>
+        <tr>
+          <td class="pname">AI ASIC and GPU Wafer Probe</td>
+          <td class="mono d">2024</td>
+          <td class="prog">
+            <b>NVIDIA GPU Wafer Probe</b><span>Subcontracted with the oS assembly and bumping in 1.3, so the same programs carry all three. ASE is understood to hold most of the leading-edge wafer sort market.</span>
+            <b>AI ASIC Wafer Probe</b><span>The larger and faster-growing share of leading-edge test revenue.</span>
+          </td>
+          <td><span class="badge b-ramp">Ramping</span></td>
+        </tr>
+        <tr class="bucket"><td colspan="4">Mainstream</td></tr>
+        <tr>
+          <td class="pname">Mainstream Wafer Probe</td>
+          <td class="mono d">&mdash;</td>
+          <td class="prog">
+            <b>Bad Die Before Packaging</b><span>Probes every die so known-bad parts are never packaged; the cheapest point in the flow to discard silicon.</span>
+            <b>Binning Data</b><span>Sorts die by speed and power so matched parts are paired, which matters most in multi-die builds.</span>
+          </td>
+          <td><span class="badge b-est">Established</span></td>
+        </tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p2-2">
+      <div class="psec-head"><span class="pno mono">2.2</span><h3>Final Test</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">Service</th><th class="cstart">Start</th><th>Coverage</th><th class="c5">Status</th></tr></thead>
+        <tbody>
+        <tr class="bucket"><td colspan="4">Leading-Edge · LEAP</td></tr>
+        <tr>
+          <td class="pname">AI ASIC and GPU Final Test</td>
+          <td class="mono d">2025</td>
+          <td class="prog">
+            <b>AWS Trainium 3</b><span>Final test on Amazon’s third-generation training accelerator, one of the anchor leading-edge test programs.</span>
+            <b>MediaTek TPU</b><span>Final test on MediaTek’s AI ASIC work, a second named leading-edge test win.</span>
+            <b>NVIDIA Rubin GPU</b><span>Final test is expected to stay largely with KYEC, so ASE’s position centres on ASIC and networking silicon rather than NVIDIA’s top-end GPUs.</span>
+          </td>
+          <td><span class="badge b-ramp">Ramping</span></td>
+        </tr>
+        <tr class="bucket"><td colspan="4">Mainstream</td></tr>
+        <tr>
+          <td class="pname">Mainstream Final Test</td>
+          <td class="mono d">&mdash;</td>
+          <td class="prog">
+            <b>Assembly-Induced Failures</b><span>Full electrical test after packaging, catching damage from bonding, moulding and ball attach.</span>
+            <b>Speed and Specification Grading</b><span>Confirms the finished part meets its datasheet before shipment.</span>
+          </td>
+          <td><span class="badge b-est">Established</span></td>
+        </tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p2-3">
+      <div class="psec-head"><span class="pno mono">2.3</span><h3>Burn-In</h3></div>
+      <p class="lede">A reliability screen rather than a functional test: the packaged part runs at elevated temperature and voltage in a burn-in chamber, accelerating wear mechanisms that would otherwise take months to surface.</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">Service</th><th class="cstart">Start</th><th>Coverage</th><th class="c5">Status</th></tr></thead>
+        <tbody>
+        <tr>
+          <td class="pname">Burn-In</td>
+          <td class="mono d">&mdash;</td>
+          <td class="prog">
+            <b>Early-Life Failures</b><span>Weak devices fail in the factory rather than in the field.</span>
+            <b>Automotive and Data Centre Reliability</b><span>Coverage is highest where a field failure is costly. The step is slow and capacity-intensive, making it a capex-heavy line.</span>
+          </td>
+          <td><span class="badge b-est">Established</span></td>
+        </tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p2-4">
+      <div class="psec-head"><span class="pno mono">2.4</span><h3>System-Level Test</h3></div>
+      <p class="lede">The packaged part is mounted on a board that mimics its end system and runs real software and traffic, rather than the structured patterns used at wafer sort and final test. It is the last test in the flow and the only one that exercises the part as a customer will.</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">Service</th><th class="cstart">Start</th><th>Coverage</th><th class="c5">Status</th></tr></thead>
+        <tbody>
+        <tr>
+          <td class="pname">System-Level Test</td>
+          <td class="mono d">&mdash;</td>
+          <td class="prog">
+            <b>Failures Only a Real Workload Exposes</b><span>Catches interaction faults that structured test patterns do not reach.</span>
+            <b>Complex SoCs and Accelerators</b><span>As die count and package complexity rise, wafer and final test are no longer sufficient, so this tail of the flow keeps growing.</span>
+          </td>
+          <td><span class="badge b-est">Established</span></td>
+        </tr>
+        </tbody></table></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="pstage" id="part3">
+  <div class="prail"><div class="pstripe"></div><div class="pnum">PART 3</div><h2>Materials and Design Services</h2></div>
+  <div class="pbody">
+
+    <div class="psec" id="p3-1">
+      <div class="psec-head"><span class="pno mono">3.1</span><h3>Substrates and Leadframes</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">Material</th><th>Scope</th><th class="c5">Status</th></tr></thead>
+        <tbody>
+        <tr>
+          <td class="pname">Package Substrates</td>
+          <td class="prog">
+            <b>Captive Substrate Supply</b><span>In-house substrates feed ASE’s flip-chip and SiP lines alongside merchant suppliers, and form the materials side of the ATM segment.</span>
+          </td>
+          <td><span class="badge b-est">Established</span></td>
+        </tr>
+        <tr>
+          <td class="pname">Leadframes</td>
+          <td class="prog">
+            <b>Captive Leadframe Supply</b><span>Leadframe manufacturing for the QFN and wire bond lines in 1.11 and 1.12.</span>
+          </td>
+          <td><span class="badge b-est">Established</span></td>
+        </tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p3-2">
+      <div class="psec-head"><span class="pno mono">3.2</span><h3>Design and Simulation</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">Service</th><th>Scope</th><th class="c5">Status</th></tr></thead>
+        <tbody>
+        <tr>
+          <td class="pname">Package Design and Co-Design</td>
+          <td class="prog">
+            <b>Electrical, Thermal and Mechanical Simulation</b><span>Package and substrate design ahead of assembly, including warpage, signal-integrity and thermal modelling for advanced and SiP packages.</span>
+          </td>
+          <td><span class="badge b-est">Established</span></td>
+        </tr>
+        </tbody></table></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="pstage" id="part4">
+  <div class="prail"><div class="pstripe"></div><div class="pnum">PART 4</div><h2>EMS</h2></div>
+  <div class="pbody">
+    <div class="psec" id="p4-1">
+      <div class="psec-head"><span class="pno mono">4.1</span><h3>Electronics Manufacturing Services</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">Business</th><th>Scope</th><th class="c5">Status</th></tr></thead>
+        <tbody>
+        <tr>
+          <td class="pname">USI: Universal Scientific Industrial</td>
+          <td class="prog">
+            <b>Board and Module Assembly</b><span>Builds finished electronic assemblies rather than packaged chips, one step downstream of Parts 1 to 3.</span>
+            <b>SiP Module Manufacturing</b><span>Much of the wearable and RF SiP module volume in 1.14 is built at USI, so part of SiP sits in this segment rather than in ATM.</span>
+          </td>
+          <td><span class="badge b-est">Established</span></td>
+        </tr>
+        </tbody></table></div>
+    </div>
+  </div>
+</div>
+
+<footer class="site-foot">
+  <div class="sf-id">
+    <img src="assets/photo-sm.jpg" alt="Ethan Chen" width="44" height="44" loading="lazy">
+    <div><div class="sf-name"><a href="index.html">Ethan Chen</a></div><div class="sf-sub">Semiconductor Research Notes</div></div>
+  </div>
+  <div class="sf-contact">
+    <a href="mailto:ethanchen@qtumic.com">ethanchen@qtumic.com</a>
+    <a href="https://www.linkedin.com/in/hao-chen-194981297" target="_blank" rel="me noopener">LinkedIn</a>
+  </div>
+  <div class="sf-note">Personal research notes, not investment advice. © 2026 Ethan Chen</div>
+</footer>
+</div>
+</body>
+</html>

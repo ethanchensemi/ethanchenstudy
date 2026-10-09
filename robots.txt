@@ -1,0 +1,17 @@
+# Search engines: allowed.  AI training crawlers: not allowed.
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: anthropic-ai
+User-agent: Google-Extended
+User-agent: CCBot
+User-agent: Bytespider
+User-agent: Applebot-Extended
+User-agent: meta-externalagent
+User-agent: Diffbot
+User-agent: omgili
+Disallow: /
+
+User-agent: *
+Allow: /
+
+Sitemap: https://ethanchensemi.github.io/ethanchenstudy/sitemap.xml

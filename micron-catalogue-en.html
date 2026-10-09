@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Micron Product Catalogue · Ethan Chen</title>
+<!-- site-head -->
+<meta name="author" content="Ethan Chen">
+<meta name="description" content="HBM, DRAM, NAND and SSD products by generation.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://ethanchensemi.github.io/ethanchenstudy/micron-catalogue-en.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Micron Product Catalogue · Ethan Chen">
+<meta property="og:description" content="HBM, DRAM, NAND and SSD products by generation.">
+<meta property="og:site_name" content="Ethan Chen · Semiconductor Research Notes">
+<!-- /site-head -->
+<style>
+:root{--paper:#F6F8F9;--card:#FFFFFF;--ink:#14181C;--ink-2:#4A555E;--ink-3:#7C8891;--rule:#CBD3D9;--rule-soft:#E2E8EC;--stage:#1F3A4D;--b:#4A3B7A}
+*{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;font-size:15px;line-height:1.6}
+.wrap{max-width:1240px;margin:0 auto;padding:44px 24px 90px}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,monospace}
+.backbar{margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.backbar a{display:inline-block;font-size:13px;color:var(--ink-2);text-decoration:none;border:1px solid var(--rule);background:var(--card);padding:6px 13px}
+.backbar a:hover{color:var(--b);border-color:var(--b)} .backbar .lang{font-family:ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.04em}
+.masthead{border-bottom:2px solid var(--stage);padding-bottom:18px;margin-bottom:22px}
+.masthead h1{font-size:28px;line-height:1.28;font-weight:700;margin:0;letter-spacing:-.01em}
+.masthead .en{font-size:14px;color:var(--ink-2);margin:0}
+.timeline{background:var(--card);border:1px solid var(--rule);padding:16px 18px 6px;margin-bottom:22px}
+.timeline h2{font-size:14px;margin:0 0 12px;font-weight:600}
+.timeline p{font-size:12px;color:var(--ink-3);margin:0 0 6px}
+.tlscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.timeline svg{width:100%;min-width:860px;height:auto;display:block}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:11.5px;color:var(--ink-3);margin:6px 0 4px}
+.legend span::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px;border:1.8px solid}
+.lg-old::before{background:#7C8891;border-color:#7C8891} .lg-ship::before{background:#1F7A5C;border-color:#1F7A5C} .lg-ramp::before{background:#B85C10;border-color:#B85C10} .lg-road::before{background:#fff;border-color:#4A3B7A}
+.toc{background:var(--card);border:1px solid var(--rule);padding:18px 22px;margin:0 0 8px}
+.toc h2{font-size:14px;margin:0 0 12px}
+.tocgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.tocgroup h4{font-size:11.5px;color:var(--ink-3);letter-spacing:.03em;margin:0 0 8px;text-transform:uppercase}
+.tocgroup ul{list-style:none;margin:0;padding:0} .tocgroup li{margin-bottom:5px;font-size:12.5px}
+.tocgroup a{color:var(--ink-2);text-decoration:none;border-bottom:1px dotted var(--rule)} .tocgroup a:hover{color:var(--b);border-color:var(--b)}
+.tocgroup .n{font-family:ui-monospace,Menlo,monospace;color:var(--ink-3);font-size:11px;margin-right:6px}
+.divider{height:1px;background:var(--rule-soft);margin:34px 0}
+.prail{border-bottom:2px solid var(--stage);padding-bottom:8px;margin-bottom:20px;position:relative;padding-left:14px}
+.pstripe{position:absolute;left:0;top:2px;bottom:10px;width:4px;background:var(--stage)}
+.pnum{font-size:11px;color:var(--ink-3);letter-spacing:.06em;margin-bottom:3px} .prail h2{font-size:21px;margin:0;font-weight:700}
+.secgroup{margin:34px 0 14px;padding-bottom:6px;border-bottom:1px solid var(--rule);scroll-margin-top:16px}
+.secgroup h3{font-size:18px;margin:0;font-weight:700;display:inline}
+.psec{margin-bottom:26px;scroll-margin-top:16px} .psec-head{display:flex;align-items:baseline;gap:10px;margin-bottom:8px}
+.pno{font-size:12px;color:var(--ink-3)} .psec-head h3{font-size:16px;margin:0;font-weight:600}
+.ptag{font-size:11px;padding:2px 9px;border-radius:20px;margin-left:auto}
+.lede{font-size:13.5px;color:var(--ink-2);line-height:1.65;margin:0 0 10px;max-width:96ch}
+.scroller{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--rule);background:var(--card)}
+table.ptable{border-collapse:collapse;width:100%;font-size:12.5px;min-width:1060px}
+table.ptable.ssd{min-width:1060px}
+table.ptable.ssd th.c1{width:130px} table.ptable.ssd th.cn{width:104px} table.ptable.ssd th.ccap{width:150px} table.ptable.ssd th.cspd{width:180px} table.ptable.ssd th.cwhere{width:190px} table.ptable.ssd th.c5{width:92px}
+table.ptable.node{min-width:900px}
+.ptable th,.ptable td{padding:8px 10px;text-align:left;vertical-align:top;line-height:1.5;border-bottom:1px solid var(--rule-soft)}
+.ptable th{background:#EEF2F3;font-weight:600;color:var(--ink-2);font-size:11.5px;border-bottom:1px solid var(--rule)}
+.ptable th.c1{width:170px} .ptable th.cwhere{width:190px} .ptable th.c2,.ptable th.c3{width:78px} .ptable th.cn{width:110px} .ptable th.c5{width:96px} .ptable th.ccap{width:150px} .ptable th.cspd{width:170px} .ptable th.cff{width:110px} .ptable th.cdi{width:200px}
+.ptable tr:last-child td{border-bottom:none}
+.ptable td.pname{font-weight:600;color:var(--ink)} .ptable td.d{color:var(--ink-3);font-size:12px;white-space:nowrap}
+.ptable td.desc{color:var(--ink-2)} .ptable td .note{font-size:12px;color:var(--ink-3);margin-top:3px}
+.ptable tr.bucket td{background:#F6F8F9;color:var(--ink-3);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-bottom:1px solid var(--rule-soft)}
+.ptable tbody tr:not(.bucket):hover td{background:#FAFBFC}
+.badge{display:inline-block;font-size:11px;padding:1px 8px;border-radius:3px;border:1px solid;white-space:nowrap}
+.b-road{color:#4A3B7A;border-color:#C9C1E3;background:#F4F1FA} .b-ann{color:#2560A6;border-color:#BBD4F0;background:#EAF2FB}
+.b-warn{color:#B02E6E;border-color:#EDBBD1;background:#FBEFF4} .b-ramp{color:#B85C10;border-color:#EBC9A6;background:#FBF1E6}
+.b-ship{color:#1F7A5C;border-color:#B9E0CF;background:#E9F6F0} .b-cur{color:#215C68;border-color:#B7D6DC;background:#E8F3F5}
+.b-old{color:#7C8891;border-color:#D5DBDF;background:#F3F5F6} .b-rem{color:#7C8891;border-color:#D5DBDF;background:#F3F5F6}
+.notes{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
+.notebox{background:#FFF9EB;border:1px dashed #D8B25C;padding:12px 14px;font-size:12.5px;line-height:1.6;color:#5A4A1E} .notebox b{color:#8A5A00}
+.terms{background:var(--card);border:1px solid var(--rule);border-top:none;padding:9px 12px;font-size:12.5px;color:var(--ink-2);line-height:1.75}
+.terms b{color:var(--ink);font-weight:600}
+.terms div{padding:3px 0}
+.terms div+div{margin-top:0;border-top:1px solid var(--rule-soft);padding-top:6px}
+.fn{font-size:11.5px;color:var(--ink-3);margin:28px 0 0;line-height:1.6;border-top:1px solid var(--rule-soft);padding-top:14px}
+.io{font-size:12.5px;color:var(--ink-2);line-height:1.6;margin:0 0 12px;padding:9px 13px;background:#F4F1FA;border-left:3px solid var(--b)}
+.io b{color:var(--b);font-weight:600;margin-right:6px}
+.explain{background:var(--card);border:1px solid var(--rule);padding:20px 24px;margin:0 0 26px;scroll-margin-top:16px}
+.explain .psec-head{margin-bottom:18px}
+.explain .sub2{font-size:13px;color:var(--ink-2);line-height:1.7;margin:0 0 12px;max-width:92ch}
+.explain .sub2:last-child{margin-bottom:0}
+.explain h3{font-size:16px;margin:0;font-weight:600}
+.explain .pathwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.explain svg{width:100%;min-width:640px;height:auto;display:block;margin:0 0 16px}
+.iftable{border-collapse:collapse;width:100%;font-size:12.5px;min-width:600px}
+.iftable th,.iftable td{padding:8px 10px;text-align:left;vertical-align:top;border-bottom:1px solid var(--rule-soft)}
+.iftable th{background:#EEF2F3;font-weight:600;color:var(--ink-2);font-size:11.5px;border-bottom:1px solid var(--rule)}
+.iftable td.k{font-weight:600;color:var(--ink);white-space:nowrap}
+.iftable tr:last-child td{border-bottom:none}
+.explain .rule{font-size:12.5px;color:var(--ink-2);line-height:1.7;margin:16px 0 0;padding-top:14px;border-top:1px solid var(--rule-soft)}
+.explain .rule div+div{margin-top:5px}
+@media (max-width:900px){.tocgrid{grid-template-columns:1fr 1fr} .notes{grid-template-columns:1fr}}
+@media (max-width:640px){.wrap{padding:28px 14px 60px} .masthead h1{font-size:22px} .tocgrid{grid-template-columns:1fr}}
+@media print{.backbar{display:none} .scroller,.tlscroll{overflow:visible}}
+</style>
+<style id="site-chrome">
+/* site chrome (added by build) */
+.backbar{flex-wrap:wrap}
+.backbar .bbr{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.backbar .lang{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;letter-spacing:.04em}
+.backbar .lang-off{display:inline-block;font-size:12px;color:var(--ink-3,#7C8891);border:1px dashed var(--rule,#CBD3D9);padding:6px 13px;font-family:ui-monospace,"SF Mono",Menlo,monospace;letter-spacing:.04em;cursor:default}
+.site-foot{margin-top:56px;border-top:1px solid var(--rule,#CBD3D9);padding-top:22px;display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;font-size:12.5px;color:var(--ink-3,#7C8891);line-height:1.5}
+.site-foot .sf-id{display:flex;align-items:center;gap:12px;min-width:0}
+.site-foot .sf-id img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:0 0 auto}
+.site-foot .sf-name{font-size:14px;font-weight:600;color:var(--ink,#14181C)}
+.site-foot .sf-name a{color:inherit;text-decoration:none}
+.site-foot .sf-name a:hover{color:var(--b,#4A3B7A)}
+.site-foot .sf-sub{font-size:12px;color:var(--ink-3,#7C8891)}
+.site-foot .sf-contact{display:flex;gap:16px;flex-wrap:wrap;margin-left:auto}
+.site-foot .sf-contact a{color:var(--ink-2,#4A555E);text-decoration:none;border-bottom:1px dotted var(--rule,#CBD3D9)}
+.site-foot .sf-contact a:hover{color:var(--b,#4A3B7A);border-color:var(--b,#4A3B7A)}
+.site-foot .sf-note{flex-basis:100%;font-size:11.5px}
+@media (max-width:640px){.site-foot .sf-contact{margin-left:0}}
+@media (max-width:640px){
+  .stickynav{margin-left:-14px;margin-right:-14px;padding-left:14px;padding-right:14px;white-space:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .legend .fams,.legend .fams.six,.famgrid,.idxgrid{grid-template-columns:1fr !important}
+  .routes{grid-template-columns:minmax(0,1fr) !important}
+  .route,.routes > *{min-width:0}
+  .route .row,.route .chips,.route .chiprow,.route .cols{flex-wrap:wrap}
+  .optstack table{min-width:0 !important}
+  .famcol .chip,.legend .chip,.chipwrap b{white-space:normal}
+}
+@media print{.site-foot .sf-id img{display:none}}
+</style>
+</head>
+<body><div class="wrap">
+<div class="backbar"><a href="map-en.html">← Industry Map</a> </div>
+<header class="masthead"><h1>Micron Product Catalogue</h1></header>
+
+<section class="timeline">
+  <h2>Technology cadence, 2020 to 2028</h2>
+  <div class="tlscroll">
+  <svg viewBox="0 0 1120 254" role="img" aria-label="Micron technology cadence 2020 to 2028 across DRAM node, HBM, NAND node and data centre SSD lanes"><line x1="135" y1="30" x2="135" y2="232" stroke="#E2E8EC"/><text x="135" y="24" text-anchor="middle" font-size="10.5" fill="#7C8891">2020</text><line x1="242" y1="30" x2="242" y2="232" stroke="#E2E8EC"/><text x="242" y="24" text-anchor="middle" font-size="10.5" fill="#7C8891">2021</text><line x1="348" y1="30" x2="348" y2="232" stroke="#E2E8EC"/><text x="348" y="24" text-anchor="middle" font-size="10.5" fill="#7C8891">2022</text><line x1="455" y1="30" x2="455" y2="232" stroke="#E2E8EC"/><text x="455" y="24" text-anchor="middle" font-size="10.5" fill="#7C8891">2023</text><line x1="562" y1="30" x2="562" y2="232" stroke="#E2E8EC"/><text x="562" y="24" text-anchor="middle" font-size="10.5" fill="#7C8891">2024</text><line x1="668" y1="30" x2="668" y2="232" stroke="#E2E8EC"/><text x="668" y="24" text-anchor="middle" font-size="10.5" fill="#7C8891">2025</text><line x1="775" y1="30" x2="775" y2="232" stroke="#E2E8EC"/><text x="775" y="24" text-anchor="middle" font-size="10.5" fill="#7C8891">2026</text><line x1="882" y1="30" x2="882" y2="232" stroke="#E2E8EC"/><text x="882" y="24" text-anchor="middle" font-size="10.5" fill="#7C8891">2027</text><line x1="989" y1="30" x2="989" y2="232" stroke="#E2E8EC"/><text x="989" y="24" text-anchor="middle" font-size="10.5" fill="#7C8891">2028</text><line x1="850" y1="30" x2="850" y2="232" stroke="#B02E6E" stroke-width="1.2" stroke-dasharray="4 3"/><text x="850" y="246" text-anchor="middle" font-size="10" fill="#B02E6E">Today</text>
+<text x="125" y="58" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">DRAM node</text><line x1="135" y1="54" x2="1095" y2="54" stroke="#CBD3D9"/><circle cx="242" cy="54" r="5" fill="#7C8891" stroke="#7C8891" stroke-width="1.8"/><text x="242" y="45" text-anchor="middle" font-size="10" fill="#7C8891">1-Alpha</text><circle cx="439" cy="54" r="5" fill="#1F7A5C" stroke="#1F7A5C" stroke-width="1.8"/><text x="439" y="71" text-anchor="middle" font-size="10" fill="#1F7A5C">1-Beta</text><circle cx="685" cy="54" r="5" fill="#1F7A5C" stroke="#1F7A5C" stroke-width="1.8"/><text x="685" y="45" text-anchor="middle" font-size="10" fill="#1F7A5C">1-Gamma, first EUV</text><circle cx="807" cy="54" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/><text x="807" y="71" text-anchor="middle" font-size="10" fill="#B85C10">1-Gamma ramp</text><circle cx="967" cy="54" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/><text x="967" y="45" text-anchor="middle" font-size="10" fill="#4A3B7A">Next node, est.</text>
+<text x="125" y="104" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">HBM</text><line x1="135" y1="100" x2="1095" y2="100" stroke="#CBD3D9"/><circle cx="199" cy="100" r="5" fill="#7C8891" stroke="#7C8891" stroke-width="1.8"/><text x="199" y="91" text-anchor="middle" font-size="10" fill="#7C8891">HBM2E</text><circle cx="578" cy="100" r="5" fill="#1F7A5C" stroke="#1F7A5C" stroke-width="1.8"/><text x="578" y="117" text-anchor="middle" font-size="10" fill="#1F7A5C">HBM3E 8H</text><circle cx="679" cy="100" r="5" fill="#1F7A5C" stroke="#1F7A5C" stroke-width="1.8"/><text x="679" y="91" text-anchor="middle" font-size="10" fill="#1F7A5C">HBM3E 12H</text><circle cx="786" cy="100" r="5" fill="#1F7A5C" stroke="#1F7A5C" stroke-width="1.8"/><text x="786" y="117" text-anchor="middle" font-size="10" fill="#1F7A5C">HBM4 36GB 12H</text><circle cx="802" cy="100" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/><text x="802" y="91" text-anchor="middle" font-size="10" fill="#B85C10">HBM4 16H sample</text><circle cx="925" cy="100" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/><text x="925" y="117" text-anchor="middle" font-size="10" fill="#4A3B7A">HBM4E</text>
+<text x="125" y="150" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">NAND node</text><line x1="135" y1="146" x2="1095" y2="146" stroke="#CBD3D9"/><circle cx="227" cy="146" r="5" fill="#7C8891" stroke="#7C8891" stroke-width="1.8"/><text x="227" y="137" text-anchor="middle" font-size="10" fill="#7C8891">176L</text><circle cx="407" cy="146" r="5" fill="#7C8891" stroke="#7C8891" stroke-width="1.8"/><text x="407" y="163" text-anchor="middle" font-size="10" fill="#7C8891">G8, 232L</text><circle cx="619" cy="146" r="5" fill="#1F7A5C" stroke="#1F7A5C" stroke-width="1.8"/><text x="619" y="137" text-anchor="middle" font-size="10" fill="#1F7A5C">G9, 276L</text><circle cx="781" cy="146" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/><text x="781" y="163" text-anchor="middle" font-size="10" fill="#B85C10">G9 QLC 2Tb die</text><circle cx="935" cy="146" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/><text x="935" y="137" text-anchor="middle" font-size="10" fill="#4A3B7A">G10, est.</text>
+<text x="125" y="196" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">Data centre SSD</text><line x1="135" y1="192" x2="1095" y2="192" stroke="#CBD3D9"/><circle cx="460" cy="192" r="5" fill="#7C8891" stroke="#7C8891" stroke-width="1.8"/><text x="460" y="183" text-anchor="middle" font-size="10" fill="#7C8891">9400 Gen4</text><circle cx="626" cy="192" r="5" fill="#1F7A5C" stroke="#1F7A5C" stroke-width="1.8"/><text x="626" y="209" text-anchor="middle" font-size="10" fill="#1F7A5C">9550 Gen5</text><circle cx="701" cy="192" r="5" fill="#1F7A5C" stroke="#1F7A5C" stroke-width="1.8"/><text x="701" y="183" text-anchor="middle" font-size="10" fill="#1F7A5C">6550 ION 61TB</text><circle cx="786" cy="192" r="5" fill="#1F7A5C" stroke="#1F7A5C" stroke-width="1.8"/><text x="786" y="209" text-anchor="middle" font-size="10" fill="#1F7A5C">9650 Gen6</text><circle cx="813" cy="192" r="5" fill="#1F7A5C" stroke="#1F7A5C" stroke-width="1.8"/><text x="813" y="183" text-anchor="middle" font-size="10" fill="#1F7A5C">6600 ION 245TB</text>
+  </svg>
+  </div>
+  <div class="legend"><span class="lg-old">Legacy</span><span class="lg-ship">Shipping</span><span class="lg-ramp">Ramping or sampling</span><span class="lg-road">Roadmap</span></div>
+</section>
+
+<section class="toc"><h2>Contents</h2><div class="tocgrid">
+<div class="tocgroup"><h4>Part A, Customers</h4><ul>
+<li><a href="#sa-1"><span class="n">A1</span>Who Buys It</a></li>
+</ul></div>
+<div class="tocgroup"><h4>Part B, DRAM</h4><ul>
+<li><a href="#s1-1"><span class="n">1.1</span>High Bandwidth Memory</a></li>
+<li><a href="#s1-2"><span class="n">1.2</span>Server DRAM Modules</a></li>
+<li><a href="#s1-3"><span class="n">1.3</span>Low-Power Server DRAM</a></li>
+<li><a href="#s1-4"><span class="n">1.4</span>Graphics DRAM</a></li>
+<li><a href="#s1-5"><span class="n">1.5</span>Mobile DRAM</a></li>
+<li><a href="#s1-6"><span class="n">1.6</span>Client DRAM</a></li>
+<li><a href="#s1-7"><span class="n">1.7</span>Automotive and Embedded DRAM</a></li>
+</ul></div>
+<div class="tocgroup"><h4>Part C, NAND and Storage</h4><ul>
+<li><a href="#s2-1"><span class="n">2.1</span>NAND Components</a></li>
+<li><a href="#s2-2"><span class="n">2.2</span>Mobile, Automotive and Managed NAND</a></li>
+<li><a href="#s2-3"><span class="n">2.3</span>Data Centre SSD</a></li>
+<li><a href="#s2-4"><span class="n">2.4</span>Client SSD</a></li>
+<li><a href="#interfaces"><span class="n">2.5</span>Interfaces</a></li>
+<li><a href="#formfactors"><span class="n">2.6</span>Form Factors</a></li>
+</ul></div>
+<div class="tocgroup"><h4>Part D, Process Nodes</h4><ul>
+<li><a href="#s3-1"><span class="n">3.1</span>DRAM Process Nodes</a></li>
+<li><a href="#s3-2"><span class="n">3.2</span>NAND Process Nodes</a></li>
+</ul></div>
+</div></section>
+
+<div class="pstage" id="part-A"><div class="prail"><div class="pstripe"></div><div class="pnum">PART A</div><h2>Customers</h2></div><div class="pbody">
+
+<div class="psec" id="sa-1">
+  <div class="psec-head"><span class="pno mono">A1</span><h3>Who Buys It</h3><span class="ptag" style="background:#FBEFF4;color:#B02E6E">Output</span></div>
+  <div class="scroller"><table class="ptable node">
+    <thead><tr><th class="c1">Channel</th><th class="cwhere">Products</th><th>Named counterparties</th></tr></thead>
+    <tbody><tr><td class="pname">AI accelerator vendors</td><td class="desc">HBM4, HBM3E, GDDR7, SOCAMM2</td><td class="desc">NVIDIA, AMD</td></tr>
+<tr><td class="pname">AI ASIC platforms</td><td class="desc">HBM3E, HBM4</td><td class="desc">Google, Amazon, Broadcom, Marvell</td></tr>
+<tr><td class="pname">Hyperscale cloud</td><td class="desc">HBM4, SOCAMM2, RDIMM, 9650, 6550 ION, 6600 ION</td><td class="desc">Microsoft, Amazon, Google, Meta, Oracle</td></tr>
+<tr><td class="pname">Server OEM</td><td class="desc">DDR5 RDIMM, MRDIMM, 9650, 9550, 7600, 6600 ION</td><td class="desc">Dell, HPE, Lenovo, Supermicro, Cisco</td></tr>
+<tr><td class="pname">Server ODM</td><td class="desc">DDR5 RDIMM, 9550, 7600, 7500</td><td class="desc">Foxconn, Quanta, Wistron, Wiwynn, Inventec, Compal</td></tr>
+<tr><td class="pname">Smartphone OEM</td><td class="desc">LPDDR5X, UFS 4.1, uMCP</td><td class="desc">Apple, Samsung, Xiaomi, Honor, Oppo, vivo, Transsion</td></tr>
+<tr><td class="pname">PC OEM</td><td class="desc">DDR5 SODIMM and UDIMM, LPCAMM2, 4600, 3610, 2600</td><td class="desc">Dell, HP, Lenovo, ASUS, Acer</td></tr>
+<tr><td class="pname">Graphics</td><td class="desc">GDDR7</td><td class="desc">NVIDIA</td></tr>
+<tr><td class="pname">Automotive Tier 1</td><td class="desc">Automotive LPDDR5X, long-lifecycle DDR4, e.MMC, UFS</td><td class="desc">Denso, Hyundai Mobis, Visteon, Harman</td></tr>
+<tr><td class="pname">Industrial, medical, aerospace and defence</td><td class="desc">Long-lifecycle DDR4, LPDDR4X, e.MMC</td><td class="desc">Not individually disclosed</td></tr>
+<tr><td class="pname">Module and component resellers</td><td class="desc">DRAM and NAND components</td><td class="desc">Kingston, ADATA, Team Group, SMART Modular</td></tr>
+<tr><td class="pname">Distribution</td><td class="desc">Full catalogue</td><td class="desc">Arrow, Avnet, Macnica, WT Microelectronics, WPG</td></tr>
+</tbody></table></div>
+</div>
+</div></div>
+<div class="divider"></div>
+
+<div class="pstage" id="part-B"><div class="prail"><div class="pstripe"></div><div class="pnum">PART B</div><h2>Layer 1, DRAM</h2></div><div class="pbody">
+
+<div class="psec" id="s1-1">
+  <div class="psec-head"><span class="pno mono">1.1</span><h3>High Bandwidth Memory</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">DRAM</span></div>
+  <p class="io"><b>I/O</b>A 2,048-bit interface on HBM4, double that of HBM3E, connected through several thousand microbumps to the logic base die. Bandwidth is derived from interface width rather than per-pin rate, yielding in excess of 2.8 TB/s per stack.</p>
+  <div class="scroller"><table class="ptable ">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th class="cn">DRAM node</th><th class="ccap">Capacity</th><th class="cspd">Speed</th><th class="cwhere">Application</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="8">Future</td></tr>
+<tr><td class="pname">Custom HBM4E</td><td class="mono d">2027</td><td class="desc">1-gamma, est.</td><td class="desc">48GB to 64GB per stack, est.</td><td class="desc">Not disclosed</td><td class="desc">Custom AI accelerators, customer logic base die built at TSMC</td><td><span class="badge b-road">Roadmap</span></td></tr>
+<tr><td class="pname">HBM4E</td><td class="mono d">2027</td><td class="desc">1-gamma, est.</td><td class="desc">48GB to 64GB per stack, est.</td><td class="desc">Not disclosed</td><td class="desc">Next-generation AI accelerators</td><td><span class="badge b-road">Roadmap</span></td></tr>
+<tr class="bucket"><td colspan="8">Current</td></tr>
+<tr><td class="pname">HBM4 48GB 16-high</td><td class="mono d">2026</td><td class="desc">1-beta</td><td class="desc">48GB per stack</td><td class="desc">Not disclosed</td><td class="desc">AI accelerators. 33% more capacity per placement than the 12-high</td><td><span class="badge b-ann">Sampling</span></td></tr>
+<tr><td class="pname">HBM4 36GB 12-high</td><td class="mono d">2026</td><td class="desc">1-beta</td><td class="desc">36GB per stack</td><td class="desc">Over 11 Gb/s per pin, over 2.8 TB/s per stack</td><td class="desc">NVIDIA Vera Rubin accelerators</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">HBM3E 36GB 12-high</td><td class="mono d">2025</td><td class="desc">1-beta</td><td class="desc">36GB per stack</td><td class="desc">9.2 Gb/s per pin, 1.2 TB/s per stack</td><td class="desc">AMD Instinct MI350 series, NVIDIA GB300</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">HBM3E 24GB 8-high</td><td class="mono d">2024</td><td class="desc">1-beta</td><td class="desc">24GB per stack</td><td class="desc">9.2 Gb/s per pin, 1.2 TB/s per stack</td><td class="desc">NVIDIA H200, B200 and GB200</td><td><span class="badge b-ship">Shipping</span></td></tr>
+</tbody></table></div>
+</div>
+
+<div class="psec" id="s1-2">
+  <div class="psec-head"><span class="pno mono">1.2</span><h3>Server DRAM Modules</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">DRAM</span></div>
+  <p class="io"><b>I/O</b>Two independent 32-bit sub-channels per module. The registered clock driver regenerates command and address to all devices, while the data bus connects directly to the host.</p>
+  <div class="scroller"><table class="ptable ">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th class="cn">DRAM node</th><th class="ccap">Capacity</th><th class="cspd">Speed</th><th class="cwhere">Application</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="8">Future</td></tr>
+<tr><td class="pname">MRDIMM Gen2</td><td class="mono d">2027</td><td class="desc">1-gamma</td><td class="desc">Not disclosed</td><td class="desc">12,800 MT/s class</td><td class="desc">Next-generation x86 servers</td><td><span class="badge b-road">Roadmap</span></td></tr>
+<tr><td class="pname">256GB DDR5 RDIMM</td><td class="mono d">2026</td><td class="desc">1-gamma, 3DS</td><td class="desc">256GB per module</td><td class="desc">Up to 9,200 MT/s</td><td class="desc">AI head nodes and cloud servers. Sampling to platform partners</td><td><span class="badge b-ann">Sampling</span></td></tr> <tr><td class="pname">512GB DDR5 RDIMM</td><td class="mono d">2026</td><td class="desc">Not disclosed</td><td class="desc">512GB per module</td><td class="desc">Up to 9,200 MT/s</td><td class="desc">High-capacity servers. Sampling to customers</td><td><span class="badge b-ann">Sampling</span></td></tr>
+<tr class="bucket"><td colspan="8">Current</td></tr>
+<tr><td class="pname">MRDIMM Gen1</td><td class="mono d">2024</td><td class="desc">1-beta</td><td class="desc">32GB to 256GB per module</td><td class="desc">8,800 MT/s</td><td class="desc">High-core-count x86 servers</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">128GB DDR5 RDIMM</td><td class="mono d">2024</td><td class="desc">1-beta, 32Gb monolithic die</td><td class="desc">128GB per module</td><td class="desc">4,800 to 6,400 MT/s</td><td class="desc">AI head nodes and cloud servers</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">CZ120 CXL module</td><td class="mono d">2023</td><td class="desc">DDR4 based</td><td class="desc">128GB and 256GB per module</td><td class="desc">36 GB/s over PCIe Gen5 x8</td><td class="desc">Memory capacity expansion and in-memory databases</td><td><span class="badge b-cur">OEM channel</span></td></tr>
+<tr><td class="pname">DDR5 RDIMM</td><td class="mono d">2022</td><td class="desc">1-beta, 1-gamma</td><td class="desc">32GB to 96GB per module</td><td class="desc">5,600 to 8,800 MT/s</td><td class="desc">General-purpose servers</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr class="bucket"><td colspan="8">Past</td></tr>
+<tr><td class="pname">DDR4 RDIMM</td><td class="mono d">&mdash;</td><td class="desc">1-alpha</td><td class="desc">16GB to 64GB per module</td><td class="desc">3,200 MT/s</td><td class="desc">Legacy servers</td><td><span class="badge b-rem">Discontinued</span></td></tr>
+</tbody></table></div>
+</div>
+
+<div class="psec" id="s1-3">
+  <div class="psec-head"><span class="pno mono">1.3</span><h3>Low-Power Server DRAM</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">DRAM</span></div>
+  <p class="io"><b>I/O</b>Low-swing LPDDR5X signalling over short compression-attached traces, giving approximately one-third the power of a comparable RDIMM.</p>
+  <div class="scroller"><table class="ptable ">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th class="cn">DRAM node</th><th class="ccap">Capacity</th><th class="cspd">Speed</th><th class="cwhere">Application</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="8">Current</td></tr>
+<tr><td class="pname">SOCAMM2 256GB</td><td class="mono d">2026</td><td class="desc">1-gamma, 32Gb monolithic die</td><td class="desc">256GB per module, up to 2TB per CPU</td><td class="desc">9.6 Gb/s</td><td class="desc">AI and HPC servers. Co-designed with NVIDIA</td><td><span class="badge b-ann">Sampling</span></td></tr>
+<tr><td class="pname">SOCAMM2 192GB</td><td class="mono d">2026</td><td class="desc">1-gamma</td><td class="desc">192GB per module, up to 1.5TB per CPU</td><td class="desc">9.6 Gb/s</td><td class="desc">NVIDIA Vera Rubin NVL72 and Vera CPU platforms</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">LPDDR5X for server</td><td class="mono d">2023</td><td class="desc">1-beta</td><td class="desc">Up to 480GB per CPU</td><td class="desc">Not disclosed</td><td class="desc">NVIDIA Grace and GB200. Soldered, not modular</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr class="bucket"><td colspan="8">Past</td></tr>
+<tr><td class="pname">SOCAMM Gen1 128GB</td><td class="mono d">2025</td><td class="desc">1-beta</td><td class="desc">128GB per module</td><td class="desc">Not disclosed</td><td class="desc">NVIDIA Grace Blackwell platforms</td><td><span class="badge b-old">Legacy</span></td></tr>
+</tbody></table></div>
+</div>
+
+<div class="psec" id="s1-4">
+  <div class="psec-head"><span class="pno mono">1.4</span><h3>Graphics DRAM</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">DRAM</span></div>
+  <p class="io"><b>I/O</b>PAM3 signalling, encoding three voltage levels per symbol, delivering 32 Gb/s per pin without an increase in clock rate.</p>
+  <div class="scroller"><table class="ptable ">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th class="cn">DRAM node</th><th class="ccap">Capacity</th><th class="cspd">Speed</th><th class="cwhere">Application</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="8">Future</td></tr>
+<tr><td class="pname">GDDR7 36 Gb/s</td><td class="mono d">2026 to 2027</td><td class="desc">Not disclosed</td><td class="desc">24Gb per chip and above</td><td class="desc">36 Gb/s per pin</td><td class="desc">Next-generation graphics and inference accelerators</td><td><span class="badge b-road">Roadmap</span></td></tr>
+<tr class="bucket"><td colspan="8">Current</td></tr>
+<tr><td class="pname">GDDR7 24Gb</td><td class="mono d">2026</td><td class="desc">1-beta, est.</td><td class="desc">24Gb (3GB) per chip</td><td class="desc">28 to 32 Gb/s per pin</td><td class="desc">Graphics cards and inference accelerators</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">GDDR7 16Gb</td><td class="mono d">2025</td><td class="desc">1-beta</td><td class="desc">16Gb (2GB) per chip</td><td class="desc">32 Gb/s per pin</td><td class="desc">NVIDIA GeForce RTX 50 Series</td><td><span class="badge b-ship">Shipping</span></td></tr>
+</tbody></table></div>
+</div>
+
+<div class="psec" id="s1-5">
+  <div class="psec-head"><span class="pno mono">1.5</span><h3>Mobile DRAM</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">DRAM</span></div>
+  <p class="io"><b>I/O</b>Narrow 16-bit channels at low voltage swing, mounted adjacent to or stacked with the application processor.</p>
+  <div class="scroller"><table class="ptable ">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th class="cn">DRAM node</th><th class="ccap">Capacity</th><th class="cspd">Speed</th><th class="cwhere">Application</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="8">Future</td></tr>
+<tr><td class="pname">LPDDR6</td><td class="mono d">2026</td><td class="desc">1-gamma</td><td class="desc">Not disclosed</td><td class="desc">Higher than LPDDR5X, JEDEC range 10.7 to 14.4 Gb/s</td><td class="desc">Physical AI</td><td><span class="badge b-ann">Sampling</span></td></tr>
+<tr class="bucket"><td colspan="8">Current</td></tr>
+<tr><td class="pname">LPDDR5X on 1-gamma</td><td class="mono d">2026</td><td class="desc">1-gamma</td><td class="desc">8GB to 32GB per package</td><td class="desc">10.7 Gb/s, 20% lower power than 1-beta</td><td class="desc">2026 flagship smartphones and AI PCs</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">LPDDR5X on 1-beta</td><td class="mono d">2022</td><td class="desc">1-beta</td><td class="desc">12GB and 16GB per package</td><td class="desc">8.5 to 9.6 Gb/s</td><td class="desc">High-end smartphones</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr class="bucket"><td colspan="8">Past</td></tr>
+<tr><td class="pname">LPDDR4X</td><td class="mono d">&mdash;</td><td class="desc">1-alpha</td><td class="desc">Not disclosed</td><td class="desc">4.2 Gb/s</td><td class="desc">Automotive, industrial, defence and networking; mobile supply ended</td><td><span class="badge b-old">Legacy</span></td></tr>
+</tbody></table></div>
+</div>
+
+<div class="psec" id="s1-6">
+  <div class="psec-head"><span class="pno mono">1.6</span><h3>Client DRAM</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">DRAM</span></div>
+  <p class="io"><b>I/O</b>Unbuffered DDR5, with the host driving each device directly. CUDIMM adds an on-module clock driver to support 6,400 MT/s and above.</p>
+  <div class="scroller"><table class="ptable ">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th class="cn">DRAM node</th><th class="ccap">Capacity</th><th class="cspd">Speed</th><th class="cwhere">Application</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="8">Current</td></tr>
+<tr><td class="pname">LPCAMM2</td><td class="mono d">2024</td><td class="desc">1-beta</td><td class="desc">16GB to 64GB per module</td><td class="desc">7.5 to 9.6 Gb/s</td><td class="desc">Premium notebooks</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">DDR5 UDIMM, SODIMM, CUDIMM</td><td class="mono d">2022</td><td class="desc">1-beta, 1-gamma</td><td class="desc">16GB to 64GB per module</td><td class="desc">5,600 to 6,400 MT/s</td><td class="desc">Desktop and notebook PCs</td><td><span class="badge b-ship">Shipping</span></td></tr>
+</tbody></table></div>
+</div>
+
+<div class="psec" id="s1-7">
+  <div class="psec-head"><span class="pno mono">1.7</span><h3>Automotive and Embedded DRAM</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">DRAM</span></div>
+  <p class="io"><b>I/O</b>Electrically identical to the mainstream parts, qualified across an extended temperature range.</p>
+  <div class="scroller"><table class="ptable ">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th class="cn">DRAM node</th><th class="ccap">Capacity</th><th class="cspd">Speed</th><th class="cwhere">Application</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="8">Current</td></tr>
+<tr><td class="pname">Long-lifecycle DDR4</td><td class="mono d">2026</td><td class="desc">1-alpha</td><td class="desc">Not disclosed</td><td class="desc">3,200 MT/s</td><td class="desc">Automotive, industrial, medical, aerospace and defence. Ten-year-plus supply commitment</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">Automotive LPDDR5X</td><td class="mono d">2024</td><td class="desc">1-beta, 1-gamma</td><td class="desc">Not disclosed</td><td class="desc">Up to 9.6 Gb/s</td><td class="desc">ADAS and in-cabin compute</td><td><span class="badge b-ship">Shipping</span></td></tr>
+</tbody></table></div>
+</div>
+
+</div></div>
+<div class="divider"></div>
+
+<div class="pstage" id="part-C"><div class="prail"><div class="pstripe"></div><div class="pnum">PART C</div><h2>Layer 2, NAND and Storage</h2></div><div class="pbody">
+
+<div class="psec" id="s2-1">
+  <div class="psec-head"><span class="pno mono">2.1</span><h3>NAND Components</h3><span class="ptag" style="background:#FBE7E4;color:#C0433A">NAND</span></div>
+  <div class="scroller"><table class="ptable ssd">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th class="cn">NAND node</th><th class="cn">NAND interface</th><th class="ccap">Capacity</th><th class="cspd">Performance</th><th class="cn">Form factor</th><th class="cwhere">Application</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="10">Current</td></tr>
+<tr><td class="pname">G9 TLC component</td><td class="mono d">2024</td><td class="desc">G9 TLC, 276 layers</td><td class="desc">ONFI 5.1</td><td class="desc">1Tb per die</td><td class="desc">3.6 GB/s per die</td><td class="desc">BGA package</td><td class="desc">Third-party drive and module makers</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">G9 QLC component</td><td class="mono d">2025</td><td class="desc">G9 QLC, 276 layers</td><td class="desc">ONFI 5.1</td><td class="desc">2Tb per die</td><td class="desc">3.6 GB/s per die</td><td class="desc">BGA package</td><td class="desc">Third-party capacity drives</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">G8 component</td><td class="mono d">2022</td><td class="desc">G8 TLC and QLC, 232 layers</td><td class="desc">ONFI 5.0</td><td class="desc">1Tb per die, TLC</td><td class="desc">2.4 GB/s per die</td><td class="desc">BGA package</td><td class="desc">Legacy component supply</td><td><span class="badge b-ship">Shipping</span></td></tr>
+</tbody></table></div>
+  <div class="terms"><div><b>G8, G9, G10</b> Micron NAND generations. 232 layers, 276 layers, and a next step Micron has not disclosed.</div></div>
+</div>
+
+<div class="psec" id="s2-2">
+  <div class="psec-head"><span class="pno mono">2.2</span><h3>Mobile, Automotive and Managed NAND</h3><span class="ptag" style="background:#FBE7E4;color:#C0433A">NAND</span></div>
+  <div class="scroller"><table class="ptable ssd">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th class="cn">NAND node</th><th class="cn">Host interface</th><th class="ccap">Capacity</th><th class="cspd">Performance</th><th class="cn">Form factor</th><th class="cwhere">Application</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="10">Current</td></tr>
+<tr><td class="pname">UFS 4.1</td><td class="mono d">2025</td><td class="desc">G9 TLC</td><td class="desc">UFS 4.1</td><td class="desc">256GB to 1TB per package</td><td class="desc">Over 4,100 MB/s read and write</td><td class="desc">9 x 13 x 0.85mm</td><td class="desc">Flagship smartphones</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">Automotive and industrial managed NAND</td><td class="mono d">2023</td><td class="desc">G8, G9</td><td class="desc">e.MMC 5.1, UFS 3.1 and 4.1</td><td class="desc">Not disclosed</td><td class="desc">Not disclosed</td><td class="desc">BGA package</td><td class="desc">Automotive and industrial systems</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">uMCP and eMCP</td><td class="mono d">&mdash;</td><td class="desc">G8, G9 with LPDDR4X or LPDDR5X</td><td class="desc">UFS or e.MMC plus LPDDR</td><td class="desc">Not disclosed</td><td class="desc">Not disclosed</td><td class="desc">Single BGA package</td><td class="desc">Smartphones</td><td><span class="badge b-ship">Shipping</span></td></tr>
+</tbody></table></div>
+</div>
+
+<div class="psec" id="s2-3">
+  <div class="psec-head"><span class="pno mono">2.3</span><h3>Data Centre SSD</h3><span class="ptag" style="background:#FBE7E4;color:#C0433A">NAND</span></div>
+  <div class="scroller"><table class="ptable ssd">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th class="cn">NAND node</th><th class="cn">Host interface</th><th class="ccap">Capacity</th><th class="cspd">Performance</th><th class="cn">Form factor</th><th class="cwhere">Application</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="10">Current</td></tr>
+<tr><td class="pname">9650</td><td class="mono d">2026</td><td class="desc">G9 TLC</td><td class="desc">PCIe Gen6.2 x4</td><td class="desc">PRO 7.68 to 30.72TB, MAX 6.4 to 25.6TB</td><td class="desc">28 GB/s read, 5.5M read IOPS</td><td class="desc">E3.S, E1.S liquid-cooled</td><td class="desc">AI training and inference</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">6600 ION</td><td class="mono d">2026</td><td class="desc">G9 QLC</td><td class="desc">PCIe Gen5 x4</td><td class="desc">30.72 to 245.76TB</td><td class="desc">14 GB/s read, 2M read IOPS</td><td class="desc">E3.S, E3.L, U.2</td><td class="desc">AI data lakes and object storage</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">7600</td><td class="mono d">2025</td><td class="desc">G9 TLC</td><td class="desc">PCIe Gen5 x4</td><td class="desc">1.6 to 15.36TB</td><td class="desc">12 GB/s read, 2.1M read IOPS, 55&micro;s latency</td><td class="desc">U.2, E1.S, E3.S</td><td class="desc">Databases, analytics and mixed enterprise workloads</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">6550 ION</td><td class="mono d">2025</td><td class="desc">G8 TLC</td><td class="desc">PCIe Gen5 x4</td><td class="desc">30.72 and 61.44TB</td><td class="desc">12 GB/s read, 5 GB/s write at 20W</td><td class="desc">E3.S, U.2, E1.L</td><td class="desc">AI data lakes, ingest, checkpointing and HPC</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">9550</td><td class="mono d">2024</td><td class="desc">G8 TLC</td><td class="desc">PCIe Gen5 x4</td><td class="desc">3.2 to 30.72TB</td><td class="desc">14 GB/s read, 3.3M read IOPS</td><td class="desc">U.2, E1.S, E3.S</td><td class="desc">AI training, caching and databases</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr class="bucket"><td colspan="10">Past</td></tr>
+<tr><td class="pname">7500</td><td class="mono d">2023</td><td class="desc">G8 TLC</td><td class="desc">PCIe Gen4 x4</td><td class="desc">800GB to 15.36TB</td><td class="desc">7 GB/s read, 1.1M read IOPS</td><td class="desc">U.3</td><td class="desc">Mainstream servers</td><td><span class="badge b-old">Legacy</span></td></tr>
+<tr><td class="pname">9400</td><td class="mono d">2023</td><td class="desc">176-layer TLC</td><td class="desc">PCIe Gen4 x4</td><td class="desc">6.4 to 30.72TB</td><td class="desc">7 GB/s read, 1.6M read IOPS</td><td class="desc">U.3</td><td class="desc">Installed-base replacement</td><td><span class="badge b-old">Legacy</span></td></tr>
+<tr><td class="pname">7450</td><td class="mono d">2022</td><td class="desc">176-layer TLC</td><td class="desc">PCIe Gen4 x4</td><td class="desc">400GB to 15.36TB</td><td class="desc">6.8 GB/s read, 1M read IOPS</td><td class="desc">U.3, M.2, E1.S</td><td class="desc">Mainstream servers and boot drives</td><td><span class="badge b-old">Legacy</span></td></tr>
+</tbody></table></div>
+  <div class="terms"><div><b>TLC</b> Three bits per cell. Fastest and longest-lived.</div><div><b>QLC</b> Four bits per cell. Cheaper per terabyte, slower to write.</div><div><b>PRO and MAX</b> The same drive tuned for different write loads. PRO is read-intensive at 1 DWPD, MAX is mixed-use at 3 DWPD.</div></div>
+</div>
+
+<div class="psec" id="s2-4">
+  <div class="psec-head"><span class="pno mono">2.4</span><h3>Client SSD</h3><span class="ptag" style="background:#FBE7E4;color:#C0433A">NAND</span></div>
+  <div class="scroller"><table class="ptable ssd">
+    <thead><tr><th class="c1">Product</th><th class="c3">Available</th><th class="cn">NAND node</th><th class="cn">Host interface</th><th class="ccap">Capacity</th><th class="cspd">Performance</th><th class="cn">Form factor</th><th class="cwhere">Application</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="10">Current</td></tr>
+<tr><td class="pname">3610</td><td class="mono d">2026</td><td class="desc">G9 QLC, 2Tb die</td><td class="desc">PCIe Gen5 x4</td><td class="desc">1TB to 4TB</td><td class="desc">11 GB/s read, 1.5M read IOPS</td><td class="desc">M.2 2230, 2242, 2280</td><td class="desc">Mainstream and ultrathin notebooks</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">4600</td><td class="mono d">2025</td><td class="desc">G9 TLC</td><td class="desc">PCIe Gen5 x4</td><td class="desc">512GB to 4TB</td><td class="desc">14.5 GB/s read, 2.1M IOPS</td><td class="desc">M.2 2280</td><td class="desc">Premium notebooks, workstations and gaming PCs</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">2600</td><td class="mono d">2025</td><td class="desc">G9 QLC</td><td class="desc">PCIe Gen4 x4</td><td class="desc">512GB to 2TB</td><td class="desc">7.2 GB/s read, 1.1M IOPS</td><td class="desc">M.2 2230, 2242, 2280</td><td class="desc">Value notebooks and desktops</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr class="bucket"><td colspan="10">Past</td></tr>
+<tr><td class="pname">2500</td><td class="mono d">2024</td><td class="desc">G8 QLC</td><td class="desc">PCIe Gen4 x4</td><td class="desc">512GB to 2TB</td><td class="desc">7.1 GB/s read</td><td class="desc">M.2 2230, 2242, 2280</td><td class="desc">Value client systems</td><td><span class="badge b-old">Legacy</span></td></tr>
+<tr><td class="pname">3500</td><td class="mono d">2023</td><td class="desc">G8 TLC</td><td class="desc">PCIe Gen4 x4</td><td class="desc">512GB to 2TB</td><td class="desc">7 GB/s read</td><td class="desc">M.2 2280</td><td class="desc">PC OEM systems</td><td><span class="badge b-old">Legacy</span></td></tr>
+</tbody></table></div>
+</div>
+
+
+<section class="explain" id="interfaces">
+  <div class="psec-head"><span class="pno mono">2.5</span><h3>Interfaces</h3></div>
+  <div class="pathwrap"><svg viewBox="0 0 900 240" role="img" aria-label="Data path from NAND dies through the controller to the server, and the interface used at each hop">
+<text x="14" y="18" font-size="11" font-weight="600" fill="#7C8891" letter-spacing=".04em">SSD</text>
+<rect x="14" y="34" width="152" height="58" fill="#E8F3F5" stroke="#215C68"/>
+<text x="90" y="58" text-anchor="middle" font-size="12.5" font-weight="600" fill="#215C68">NAND dies</text>
+<text x="90" y="76" text-anchor="middle" font-size="10.5" fill="#4A555E">1Tb or 2Tb each</text>
+<path d="M172,63 H246" stroke="#B85C10" stroke-width="1.4"/><path d="M246,63 l-8,-4 v8 z" fill="#B85C10"/>
+<text x="209" y="52" text-anchor="middle" font-size="11.5" font-weight="600" fill="#B85C10">ONFI</text>
+<text x="209" y="80" text-anchor="middle" font-size="10.5" fill="#B85C10">3.6 GB/s per die</text>
+<rect x="252" y="34" width="152" height="58" fill="#EEEBF8" stroke="#4A3B7A"/>
+<text x="328" y="58" text-anchor="middle" font-size="12.5" font-weight="600" fill="#4A3B7A">Controller</text>
+<text x="328" y="76" text-anchor="middle" font-size="10.5" fill="#4A555E">reads many dies at once</text>
+<path d="M410,63 H484" stroke="#B85C10" stroke-width="1.4"/><path d="M484,63 l-8,-4 v8 z" fill="#B85C10"/>
+<text x="447" y="52" text-anchor="middle" font-size="11.5" font-weight="600" fill="#B85C10">PCIe, NVMe</text>
+<text x="447" y="80" text-anchor="middle" font-size="10.5" fill="#B85C10">28 GB/s, Gen6 x4</text>
+<rect x="490" y="34" width="152" height="58" fill="#F4F5F1" stroke="#7C8891"/>
+<text x="566" y="58" text-anchor="middle" font-size="12.5" font-weight="600" fill="#4A555E">Server</text>
+<text x="566" y="76" text-anchor="middle" font-size="10.5" fill="#4A555E">CPU or DPU</text>
+<path d="M14,100 v6 H404 v-6" fill="none" stroke="#CBD3D9"/>
+<text x="209" y="122" text-anchor="middle" font-size="10.5" fill="#7C8891">inside the drive</text>
+<line x1="14" y1="144" x2="886" y2="144" stroke="#E2E8EC"/>
+<text x="14" y="168" font-size="11" font-weight="600" fill="#7C8891" letter-spacing=".04em">PHONE</text>
+<rect x="14" y="184" width="238" height="46" fill="#E8F3F5" stroke="#215C68"/>
+<text x="133" y="202" text-anchor="middle" font-size="12.5" font-weight="600" fill="#215C68">NAND plus controller</text>
+<text x="133" y="219" text-anchor="middle" font-size="10.5" fill="#4A555E">one package</text>
+<path d="M258,207 H332" stroke="#B85C10" stroke-width="1.4"/><path d="M332,207 l-8,-4 v8 z" fill="#B85C10"/>
+<text x="295" y="196" text-anchor="middle" font-size="11.5" font-weight="600" fill="#B85C10">UFS</text>
+<text x="295" y="224" text-anchor="middle" font-size="10.5" fill="#B85C10">4.1 GB/s</text>
+<rect x="338" y="184" width="152" height="46" fill="#F4F5F1" stroke="#7C8891"/>
+<text x="414" y="202" text-anchor="middle" font-size="12.5" font-weight="600" fill="#4A555E">Phone</text>
+<text x="414" y="219" text-anchor="middle" font-size="10.5" fill="#4A555E">processor</text>
+</svg></div>
+  <div class="scroller"><table class="iftable">
+    <thead><tr><th style="width:140px">Interface</th><th style="width:250px">Connects</th><th style="width:180px">Speed</th><th>In this catalogue</th></tr></thead>
+    <tbody>
+      <tr><td class="k">ONFI</td><td>NAND die to controller</td><td>3.6 GB/s per die, G9</td><td>2.1, NAND interface</td></tr>
+      <tr><td class="k">PCIe, NVMe</td><td>Drive to server or PC</td><td>28 GB/s, Gen6 x4</td><td>2.3 and 2.4, host interface</td></tr>
+      <tr><td class="k">UFS, e.MMC</td><td>Storage package to phone</td><td>Over 4.1 GB/s, UFS 4.1</td><td>2.2, host interface</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="explain" id="formfactors">
+  <div class="psec-head"><span class="pno mono">2.6</span><h3>Form Factors</h3></div>
+  <div class="pathwrap"><svg viewBox="0 0 900 348" role="img" aria-label="Server, client and component form factors drawn to relative scale"><text x="14" y="16" font-size="11" font-weight="600" fill="#7C8891" letter-spacing=".04em">SERVER</text><rect x="48" y="30" width="150" height="105" fill="#E8F3F5" stroke="#215C68"/><text x="123" y="162" text-anchor="middle" font-size="11.5" font-weight="600" fill="#14181C">U.2, U.3</text><text x="123" y="178" text-anchor="middle" font-size="10" fill="#7C8891">100 x 70mm</text><rect x="257.5" y="59.5" width="167" height="47" fill="#E8F3F5" stroke="#215C68"/><text x="341" y="162" text-anchor="middle" font-size="11.5" font-weight="600" fill="#14181C">E1.S</text><text x="341" y="178" text-anchor="middle" font-size="10" fill="#7C8891">111 x 32mm</text><rect x="474" y="26" width="170" height="114" fill="#E8F3F5" stroke="#215C68"/><text x="559" y="162" text-anchor="middle" font-size="11.5" font-weight="600" fill="#14181C">E3.S</text><text x="559" y="178" text-anchor="middle" font-size="10" fill="#7C8891">113 x 76mm</text><rect x="670" y="26" width="213" height="114" fill="#E8F3F5" stroke="#215C68"/><text x="777" y="162" text-anchor="middle" font-size="11.5" font-weight="600" fill="#14181C">E3.L</text><text x="777" y="178" text-anchor="middle" font-size="10" fill="#7C8891">142 x 76mm</text><line x1="14" y1="200" x2="886" y2="200" stroke="#E2E8EC"/><text x="14" y="222" font-size="11" font-weight="600" fill="#7C8891" letter-spacing=".04em">CLIENT AND COMPONENT</text><rect x="54" y="242" width="120" height="33" fill="#EEEBF8" stroke="#4A3B7A"/><text x="114" y="306" text-anchor="middle" font-size="11.5" font-weight="600" fill="#14181C">M.2 2280</text><text x="114" y="322" text-anchor="middle" font-size="10" fill="#7C8891">80 x 22mm</text><rect x="282" y="242" width="63" height="33" fill="#EEEBF8" stroke="#4A3B7A"/><text x="314" y="306" text-anchor="middle" font-size="11.5" font-weight="600" fill="#14181C">M.2 2242</text><text x="314" y="322" text-anchor="middle" font-size="10" fill="#7C8891">42 x 22mm</text><rect x="492" y="242" width="45" height="33" fill="#EEEBF8" stroke="#4A3B7A"/><text x="514" y="306" text-anchor="middle" font-size="11.5" font-weight="600" fill="#14181C">M.2 2230</text><text x="514" y="322" text-anchor="middle" font-size="10" fill="#7C8891">30 x 22mm</text><rect x="704" y="250" width="20" height="17" fill="#FBF1E6" stroke="#B85C10"/><text x="714" y="306" text-anchor="middle" font-size="11.5" font-weight="600" fill="#14181C">BGA package</text><text x="714" y="322" text-anchor="middle" font-size="10" fill="#7C8891">13.5 x 11.5mm</text><text x="14" y="340" font-size="10.5" fill="#7C8891">Drawn to relative scale. Thickness varies by version and is not shown.</text></svg></div>
+  <div class="scroller"><table class="iftable">
+    <thead><tr><th style="width:150px">Form factor</th><th style="width:140px">Family</th><th style="width:250px">Shape</th><th>Used in</th></tr></thead>
+    <tbody>
+      <tr><td class="k">U.2, U.3</td><td>Legacy 2.5-inch</td><td>Rectangle, the old hard drive shape</td><td>Older servers. 7450, 7500, 9400</td></tr>
+      <tr><td class="k">E1.S</td><td>EDSFF</td><td>Narrow vertical ruler. Liquid-cooled version available</td><td>Dense servers. 9650, 9550</td></tr>
+      <tr><td class="k">E3.S</td><td>EDSFF</td><td>Wider and shorter ruler</td><td>Mainstream servers. 9650, 7600, ION series</td></tr>
+      <tr><td class="k">E3.L</td><td>EDSFF</td><td>The long ruler, the largest of the four</td><td>Maximum capacity. 245TB 6600 ION</td></tr>
+      <tr><td class="k">M.2 2280, 2242, 2230</td><td>Client</td><td>Bare stick, 22mm wide. The number is width then length in mm</td><td>Notebooks and PCs. 4600, 3610, 2600</td></tr>
+      <tr><td class="k">BGA package</td><td>Component</td><td>A packaged chip with solder balls underneath</td><td>Loose NAND and managed NAND. 2.1 and 2.2</td></tr>
+    </tbody>
+  </table></div>
+</section>
+</div></div>
+<div class="divider"></div>
+
+<div class="pstage" id="part-D"><div class="prail"><div class="pstripe"></div><div class="pnum">PART D</div><h2>Layer 3, Process Nodes</h2></div><div class="pbody">
+
+<div class="psec" id="s3-1">
+  <div class="psec-head"><span class="pno mono">3.1</span><h3>DRAM Process Nodes</h3><span class="ptag" style="background:#E6F1FB;color:#2560A6">Process</span></div>
+  <div class="scroller"><table class="ptable node">
+    <thead><tr><th class="c1">Node</th><th class="c3">In production</th><th class="cn">Lithography</th><th class="cn">Cell class</th><th>What it does</th><th class="cwhere">Products</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="7">Future</td></tr>
+<tr><td class="pname">3D DRAM</td><td class="mono d">2030 est.</td><td class="desc">Not disclosed</td><td class="desc">Not disclosed</td><td class="desc">Vertical cell stacking, beyond planar capacitor scaling</td><td class="desc">Not disclosed</td><td><span class="badge b-road">Research</span></td></tr>
+<tr><td class="pname">Next DRAM node</td><td class="mono d">2028 est.</td><td class="desc">EUV</td><td class="desc">Sub-10nm class, est.</td><td class="desc">Not disclosed</td><td class="desc">Post-HBM4E generation</td><td><span class="badge b-road">Roadmap</span></td></tr>
+<tr class="bucket"><td colspan="7">Current</td></tr>
+<tr><td class="pname">1-Gamma</td><td class="mono d">2025</td><td class="desc">EUV</td><td class="desc">10nm class, est.</td><td class="desc">First EUV DRAM node. 20% lower power, 15% better performance, 30% higher bit density than 1-beta</td><td class="desc">DDR5, LPDDR5X, SOCAMM2, GDDR7 roadmap, HBM4E</td><td><span class="badge b-ramp">Ramping</span></td></tr>
+<tr><td class="pname">1-Beta</td><td class="mono d">2022</td><td class="desc">Immersion DUV</td><td class="desc">12nm class, est.</td><td class="desc">Highest-volume advanced node, and the base node for HBM3E and HBM4</td><td class="desc">HBM3E, HBM4, DDR5, LPDDR5X, GDDR7</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">1-Alpha</td><td class="mono d">2021</td><td class="desc">Immersion DUV</td><td class="desc">14nm class, est.</td><td class="desc">Long-lifecycle supply only; Manassas production from 4Q26</td><td class="desc">DDR4, LPDDR4X</td><td><span class="badge b-ship">Shipping</span></td></tr>
+</tbody></table></div>
+  <div class="terms"><div><b>DUV</b> 193nm light. Fine features need the same layer exposed several times.</div><div><b>EUV</b> 13.5nm light. One exposure per layer. ASML is the only supplier.</div></div>
+</div>
+
+<div class="psec" id="s3-2">
+  <div class="psec-head"><span class="pno mono">3.2</span><h3>NAND Process Nodes</h3><span class="ptag" style="background:#E6F1FB;color:#2560A6">Process</span></div>
+  <div class="scroller"><table class="ptable node">
+    <thead><tr><th class="c1">Node</th><th class="c3">In production</th><th class="cn">Layers</th><th class="cn">Cell</th><th>What it does</th><th class="cwhere">Products</th><th class="c5">Status</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="8">Future</td></tr>
+<tr><td class="pname">PLC</td><td class="mono d">Not disclosed</td><td class="desc">Not disclosed</td><td class="desc">5 bits per cell</td><td class="desc">Research stage</td><td class="desc">Not disclosed</td><td><span class="badge b-road">Research</span></td></tr>
+<tr><td class="pname">G10</td><td class="mono d">2027 est.</td><td class="desc">Not disclosed</td><td class="desc">TLC and QLC</td><td class="desc">Not disclosed</td><td class="desc">Not disclosed</td><td><span class="badge b-road">Roadmap</span></td></tr>
+<tr class="bucket"><td colspan="8">Current</td></tr>
+<tr><td class="pname">G9</td><td class="mono d">2024</td><td class="desc">276</td><td class="desc">TLC 1Tb, QLC 2Tb</td><td class="desc">Six planes, 3.6 GB/s interface, first 2Tb QLC die</td><td class="desc">9650, 7600, 6600 ION, 4600, 3610, 2600, UFS 4.1</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr><td class="pname">G8</td><td class="mono d">2022</td><td class="desc">232</td><td class="desc">TLC 1Tb, QLC</td><td class="desc">Six planes, 2.4 GB/s interface</td><td class="desc">9550, 6550 ION, 7500, 3500, 2500, managed NAND</td><td><span class="badge b-ship">Shipping</span></td></tr>
+<tr class="bucket"><td colspan="8">Past</td></tr>
+<tr><td class="pname">176-layer</td><td class="mono d">2020</td><td class="desc">176</td><td class="desc">TLC and QLC</td><td class="desc">Two decks stacked, replacement gate</td><td class="desc">9400, 7450, 2400</td><td><span class="badge b-old">Legacy</span></td></tr>
+</tbody></table></div>
+</div>
+
+</div></div>
+
+<footer class="site-foot">
+  <div class="sf-id">
+    <img src="assets/photo-sm.jpg" alt="Ethan Chen" width="44" height="44" loading="lazy">
+    <div><div class="sf-name"><a href="index.html">Ethan Chen</a></div><div class="sf-sub">Semiconductor Research Notes</div></div>
+  </div>
+  <div class="sf-contact">
+    <a href="mailto:ethanchen@qtumic.com">ethanchen@qtumic.com</a>
+    <a href="https://www.linkedin.com/in/hao-chen-194981297" target="_blank" rel="me noopener">LinkedIn</a>
+  </div>
+  <div class="sf-note">Personal research notes, not investment advice. © 2026 Ethan Chen</div>
+</footer>
+</div></body></html>
