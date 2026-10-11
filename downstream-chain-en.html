@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Semiconductor Supply Chain — Downstream: Packaged Chip to End Market · Ethan Chen</title>
+<!-- site-head -->
+<meta name="author" content="Ethan Chen">
+<meta name="description" content="The six stages from packaged chip to end market, with products and suppliers.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://ethanchensemi.github.io/ethanchenstudy/downstream-chain-en.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Semiconductor Supply Chain — Downstream: Packaged Chip to End Market · Ethan Chen">
+<meta property="og:description" content="The six stages from packaged chip to end market, with products and suppliers.">
+<meta property="og:site_name" content="Ethan Chen · Semiconductor Research Notes">
+<!-- /site-head -->
+<style>
+:root{
+  --b:#4A3B7A;
+  --paper:#F6F8F9; --card:#FFFFFF;
+  --ink:#14181C; --ink-2:#4A555E; --ink-3:#7C8891;
+  --rule:#CBD3D9; --rule-soft:#E2E8EC;
+  --stage:#1F3A4D; --shared:#215C68;
+  --design:#8A5A00; --design-bg:#FDF3E1;
+  --foundry:#B03A2E; --foundry-bg:#FBEAE7;
+  --pkgA:#2E6B4F; --pkgA-bg:#EAF4EE;
+  --pkgB:#4A3B7A; --pkgB-bg:#F0EEF7;
+  --pkgC:#0E7C68; --pkgC-bg:#E3F3EE;
+  --back:#5F6C75; --back-bg:#ECEFF1;
+  --mem:#8E3B6B; --mem-bg:#F8ECF3;
+  --rf:#6B7A1E; --rf-bg:#F2F5E4;
+  --opt:#8A5A00; --opt-bg:#FDF6E6;
+  --sys:#1B5E8C; --sys-bg:#E8F1F8;
+  --t-fab:#5B4B9E; --t-fab-bg:#EEEBF8;
+  --t-insp:#0E7C86; --t-insp-bg:#E4F2F3;
+  --t-pkg:#B85C10; --t-pkg-bg:#FAEEE1;
+  --t-sup:#5F6C75; --t-sup-bg:#ECEFF1;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:-apple-system,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  font-size:15px;line-height:1.65}
+.wrap{max-width:1320px;margin:0 auto;padding:48px 28px 90px}
+
+.masthead{border-bottom:2px solid var(--stage);padding-bottom:22px;margin-bottom:30px}
+.masthead h1{font-size:30px;line-height:1.25;font-weight:700;margin:0 0 6px;letter-spacing:-.01em}
+.masthead .en{font-size:15px;color:var(--ink-2);font-weight:400;margin:0 0 16px}
+.masthead .meta{display:flex;flex-wrap:wrap;gap:8px 26px;font-size:13px;color:var(--ink-3)}
+.masthead .meta b{color:var(--ink-2);font-weight:500}
+
+.toc{background:var(--card);border:1px solid var(--rule);padding:16px 22px;margin-bottom:34px;font-size:13px}
+.toc a{color:var(--stage);text-decoration:none;font-weight:500;margin-right:18px;white-space:nowrap}
+.toc a:hover{text-decoration:underline}
+.tocrow{display:flex;flex-wrap:wrap;gap:6px 4px;row-gap:8px}
+
+.legend{background:var(--card);border:1px solid var(--rule);padding:18px 22px;margin-bottom:38px}
+.legend h2{font-size:14px;margin:0 0 12px;font-weight:600}
+.fieldkey{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:12.5px;color:var(--ink-3);margin-bottom:6px}
+.fieldkey b{color:var(--ink-2);font-weight:600}
+
+.stage{display:grid;grid-template-columns:216px 1fr;scroll-margin-top:20px}
+.rail{padding:22px 20px 26px 0;border-right:2px solid var(--rule);position:relative}
+.rail .num{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;color:var(--ink-3);letter-spacing:.06em;margin-bottom:8px}
+.rail h2{font-size:19px;margin:0 0 3px;font-weight:600;line-height:1.35}
+.rail .en2{font-size:13px;color:var(--ink-2);margin:0 0 12px;line-height:1.45}
+.rail .clarify{font-size:12.5px;color:var(--ink-3);line-height:1.55;padding-top:11px;border-top:1px dashed var(--rule)}
+.rail .stripe{position:absolute;right:-2px;top:22px;bottom:26px;width:2px;background:var(--stage)}
+.body{padding:22px 0 26px 26px}
+
+.row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:12px}
+.row:last-child{margin-bottom:0}
+.step{background:var(--card);border:1px solid var(--rule);padding:12px 14px;flex:1 1 208px;min-width:196px}
+.step h4{font-size:14px;margin:0 0 1px;font-weight:600;line-height:1.4}
+.step .en3{font-size:11.5px;color:var(--ink-2);margin:0 0 9px;line-height:1.4;font-style:italic}
+.step .field{font-size:11.5px;margin:6px 0 0;line-height:1.5}
+.step .field b{color:var(--ink-2);font-weight:600}
+.step .field.pos{padding-top:7px;border-top:1px dotted var(--rule-soft);margin-top:8px}
+.step.fab{border-left:3px solid var(--t-fab)}
+.step.design{border-left:3px solid var(--design)}
+.step.foundry{border-left:3px solid var(--foundry)}
+.step.back{border-left:3px solid var(--back)}
+.step.mem{border-left:3px solid var(--mem)}
+.step.rf{border-left:3px solid var(--rf)}
+.step.sys{border-left:3px solid var(--sys)}
+.step.pkgA{border-left:3px solid var(--pkgA)}
+.step.pkgB{border-left:3px solid var(--pkgB)}
+.step.pkgC{border-left:3px solid var(--pkgC)}
+
+.sub{font-size:13px;font-weight:600;margin:22px 0 10px;padding:6px 12px;color:#fff}
+.sub:first-child{margin-top:0}
+.sub .lite{font-weight:400;opacity:.85;font-size:12px}
+.sub.a{background:var(--pkgA)}
+.sub.fab{background:var(--t-fab)}
+.sub.b{background:var(--pkgB)}
+.sub.c{background:var(--pkgC)}
+.sub.d{background:var(--design)}
+.sub.f{background:var(--foundry)}
+.sub.k{background:var(--back)}
+.sub.m{background:var(--mem)}
+.sub.r{background:var(--rf)}
+.sub.s{background:var(--sys)}
+.sub.opt{background:var(--opt)}
+
+.stackcard{background:var(--card);border:1px solid var(--rule);padding:16px 18px;margin-bottom:14px}
+.stackcard .sctitle{font-size:15px;font-weight:700;margin:0 0 2px}
+.stackcard .scsub{font-size:12px;color:var(--ink-2);margin:0 0 12px;font-style:italic}
+.stacklayers{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+.slrow{display:flex;gap:4px}
+.slcell{flex:1;padding:6px 8px;font-size:10.5px;text-align:center;border-radius:2px;line-height:1.3}
+.sl-die{background:#E8F4EF;border:1px solid #9FC9B5;color:#1F4D38}
+.sl-mem{background:#FAE8E5;border:1px solid #D9A79E;color:#7A3226}
+.sl-interp{background:var(--pkgB-bg);border:1px solid #A797C9;color:var(--pkgB)}
+.sl-sub{background:#F1F2F3;border:1px solid #CDD2D6;color:#4A555E}
+.sl-pcb{background:#EAEAEA;border:1px solid #C4C4C4;color:#333}
+.sl-bridge{background:#DCEAFB;border:1px solid #90B8E0;color:#1B4E7A}
+.scgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 20px}
+.scfields .field{font-size:12px;margin:5px 0;line-height:1.55}
+.scfields .field b{color:var(--ink-2);font-weight:600}
+.scusers{border-top:1px solid var(--rule-soft);margin-top:10px;padding-top:10px}
+.scusers h5{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-3);margin:0 0 6px;font-weight:600}
+.scusers .u{font-size:12px;margin:3px 0;line-height:1.5}
+.scusers .u b{color:var(--ink);font-weight:600}
+.tworail{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media (max-width:900px){.tworail{grid-template-columns:1fr}}
+.threerail{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+@media (max-width:1100px){.threerail{grid-template-columns:1fr 1fr}}
+@media (max-width:700px){.threerail{grid-template-columns:1fr}}
+
+.forkbar{display:grid;grid-template-columns:216px 1fr;margin:10px 0}
+.forkbar .lead{border-right:2px solid var(--rule)}
+.forkbar .msg{padding:6px 0 4px 26px;font-size:13px;color:var(--ink-3);max-width:80ch;line-height:1.6}
+.forkbar .msg b{color:var(--ink-2);font-weight:500}
+
+.optnote{font-size:12px;color:#7A5100;background:var(--opt-bg);border:1px dashed #C99A1E;padding:10px 12px;margin:0 0 12px;line-height:1.55}
+
+.link{margin:22px 0 0;border:1px dashed var(--pkgB);background:var(--pkgB-bg);
+  padding:14px 18px;font-size:13px;color:var(--ink-2);line-height:1.6}
+.link b{color:var(--pkgB);font-weight:600}
+.divider{height:1px;background:var(--rule-soft);margin:34px 0}
+
+.chip{display:inline-block;font-size:10.5px;font-weight:600;padding:2px 7px;white-space:nowrap;border-radius:2px;margin-bottom:6px}
+.c-fab{background:var(--t-fab-bg);color:var(--t-fab)}
+.c-design{background:var(--design-bg);color:var(--design)}
+.c-foundry{background:var(--foundry-bg);color:var(--foundry)}
+.c-back{background:var(--back-bg);color:var(--back)}
+.c-mem{background:var(--mem-bg);color:var(--mem)}
+.c-rf{background:var(--rf-bg);color:var(--rf)}
+.c-sys{background:var(--sys-bg);color:var(--sys)}
+.c-pkgA{background:var(--pkgA-bg);color:var(--pkgA)}
+.c-pkgB{background:var(--pkgB-bg);color:var(--pkgB)}
+.c-pkgC{background:var(--pkgC-bg);color:var(--pkgC)}
+
+.sect{margin-top:0;border:1px solid var(--rule);background:var(--card);padding:24px 26px}
+.sect h2{font-size:19px;margin:0 0 6px;font-weight:600}
+.sect .key{font-size:12.5px;color:var(--ink-3);margin:0 0 20px}
+
+@media (max-width:760px){
+  .wrap{padding:30px 16px 60px}
+  .stage,.forkbar{grid-template-columns:1fr}
+  .rail{border-right:none;border-bottom:2px solid var(--rule);padding:20px 0 18px}
+  .rail .stripe{right:auto;left:0;top:auto;bottom:-2px;width:60px;height:2px}
+  .body{padding:20px 0 26px}
+  .forkbar .lead{display:none}
+  .forkbar .msg{padding-left:0}
+  .scgrid{grid-template-columns:1fr}
+}
+@media print{.backbar,.toc{display:none}body{background:#fff}.wrap{max-width:none;padding:0}.step,.legend,.sect,.stackcard{break-inside:avoid}}
+.backbar{margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.backbar a{display:inline-block;font-size:13px;color:var(--ink-2);text-decoration:none;border:1px solid var(--rule);background:var(--card);padding:6px 13px}
+.backbar a:hover{color:var(--b);border-color:var(--b)}
+.backbar .lang{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;letter-spacing:.04em}
+
+.stage .body{min-width:0}
+.stackcard .figscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.stackcard .figscroll svg{min-width:860px}
+</style>
+<style id="site-chrome">
+/* site chrome (added by build) */
+.backbar{flex-wrap:wrap}
+.backbar .bbr{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.backbar .lang{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;letter-spacing:.04em}
+.backbar .lang-off{display:inline-block;font-size:12px;color:var(--ink-3,#7C8891);border:1px dashed var(--rule,#CBD3D9);padding:6px 13px;font-family:ui-monospace,"SF Mono",Menlo,monospace;letter-spacing:.04em;cursor:default}
+.site-foot{margin-top:56px;border-top:1px solid var(--rule,#CBD3D9);padding-top:22px;display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;font-size:12.5px;color:var(--ink-3,#7C8891);line-height:1.5}
+.site-foot .sf-id{display:flex;align-items:center;gap:12px;min-width:0}
+.site-foot .sf-id img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:0 0 auto}
+.site-foot .sf-name{font-size:14px;font-weight:600;color:var(--ink,#14181C)}
+.site-foot .sf-name a{color:inherit;text-decoration:none}
+.site-foot .sf-name a:hover{color:var(--b,#4A3B7A)}
+.site-foot .sf-sub{font-size:12px;color:var(--ink-3,#7C8891)}
+.site-foot .sf-contact{display:flex;gap:16px;flex-wrap:wrap;margin-left:auto}
+.site-foot .sf-contact a{color:var(--ink-2,#4A555E);text-decoration:none;border-bottom:1px dotted var(--rule,#CBD3D9)}
+.site-foot .sf-contact a:hover{color:var(--b,#4A3B7A);border-color:var(--b,#4A3B7A)}
+.site-foot .sf-note{flex-basis:100%;font-size:11.5px}
+@media (max-width:640px){.site-foot .sf-contact{margin-left:0}}
+@media (max-width:640px){
+  .stickynav{margin-left:-14px;margin-right:-14px;padding-left:14px;padding-right:14px;white-space:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .legend .fams,.legend .fams.six,.famgrid,.idxgrid{grid-template-columns:1fr !important}
+  .routes{grid-template-columns:minmax(0,1fr) !important}
+  .route,.routes > *{min-width:0}
+  .route .row,.route .chips,.route .chiprow,.route .cols{flex-wrap:wrap}
+  .optstack table{min-width:0 !important}
+  .famcol .chip,.legend .chip,.chipwrap b{white-space:normal}
+}
+@media print{.site-foot .sf-id img{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="backbar"><a href="map-en.html">← Industry Map</a><span class="bbr"><a href="upstream-en.html">Upstream</a><a href="downstream-en.html">End Markets</a></span></div>
+
+<header class="masthead">
+  <h1>Semiconductor Supply Chain — Downstream</h1>
+</header>
+<nav class="toc">
+  <div class="tocrow">
+    <a href="#s7">7 Distribution</a><a href="#s8">8 Modules &amp; Components</a><a href="#s9">9 System Assembly</a><a href="#s10">10 Brands &amp; OEMs</a><a href="#s11">11 Operators</a><a href="#s12">12 End Markets</a>
+  </div>
+</nav>
+<div class="stage" id="s7">
+  <div class="rail"><div class="stripe"></div>
+    <div class="num">STAGE 7</div>
+    <h2>Distribution</h2>
+    <p class="en2">From the chip maker to the board maker</p>
+    <div class="clarify">The largest chip makers sell direct to big OEMs and cloud providers; distributors carry the long tail of customers and product lines, and book the full value of the chips they resell at gross margins of roughly 3% (the Taiwan groups) to 11% (Arrow, Avnet), so their revenue is largely pass-through rather than value added. Ranks are by 2025 revenue (Avnet: FY26).</div>
+  </div>
+  <div class="body"><div class="stackcard">
+  <p class="sctitle">How a chip reaches the end user — two paths across stages 7 to 12</p>
+  <p class="scsub">A GPU goes from NVIDIA to the rack builder with no distributor and often no brand; a phone chip passes through a distributor, module makers, an assembler, a brand and a carrier.</p>
+<div class="figscroll"><svg viewBox="0 0 1120 256" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two paths from the packaged chip to the end user: a Rubin GPU into an AI data centre, a Snapdragon application processor into a smartphone, across stages 7 to 12" style="width:100%;height:auto;display:block;font-family:Inter,Helvetica,Arial,sans-serif">
+<defs><marker id="dcArr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4A555E"/></marker></defs>
+<text x="92.0" y="18" font-size="11" font-weight="600" fill="#4A555E" text-anchor="middle" letter-spacing=".04em">CHIP</text>
+<text x="248.0" y="18" font-size="11" font-weight="600" fill="#5F6C75" text-anchor="middle" letter-spacing=".04em">7 · DISTRIBUTION</text>
+<text x="404.0" y="18" font-size="11" font-weight="600" fill="#8A5A00" text-anchor="middle" letter-spacing=".04em">8 · MODULES</text>
+<text x="560.0" y="18" font-size="11" font-weight="600" fill="#1B5E8C" text-anchor="middle" letter-spacing=".04em">9 · ASSEMBLY</text>
+<text x="716.0" y="18" font-size="11" font-weight="600" fill="#4A3B7A" text-anchor="middle" letter-spacing=".04em">10 · BRAND</text>
+<text x="872.0" y="18" font-size="11" font-weight="600" fill="#0E7C68" text-anchor="middle" letter-spacing=".04em">11 · OPERATOR</text>
+<text x="1028.0" y="18" font-size="11" font-weight="600" fill="#8E3B6B" text-anchor="middle" letter-spacing=".04em">12 · END MARKET</text>
+<text x="24" y="44" font-size="10.5" font-weight="600" fill="#7C8891">AI server path</text>
+<rect x="24" y="52" width="136" height="72" rx="3" fill="#F1F2F3" stroke="#4A555E" stroke-width="1.2"/>
+<text x="92.0" y="74" font-size="11.5" font-weight="600" fill="#14181C" text-anchor="middle">Packaged GPU</text>
+<text x="92.0" y="93" font-size="10" fill="#4A555E" text-anchor="middle">Rubin on CoWoS</text>
+<text x="92.0" y="109" font-size="10" fill="#4A555E" text-anchor="middle">Stages 1 to 3</text>
+<line x1="162" y1="88" x2="177" y2="88" stroke="#4A555E" stroke-width="1.3" marker-end="url(#dcArr)"/>
+<rect x="180" y="52" width="136" height="72" rx="3" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1.2"/>
+<text x="248.0" y="74" font-size="11.5" font-weight="600" fill="#14181C" text-anchor="middle">Direct sale</text>
+<text x="248.0" y="93" font-size="10" fill="#4A555E" text-anchor="middle">NVIDIA sells to the ODM</text>
+<text x="248.0" y="109" font-size="10" fill="#4A555E" text-anchor="middle">no distributor</text>
+<line x1="318" y1="88" x2="333" y2="88" stroke="#4A555E" stroke-width="1.3" marker-end="url(#dcArr)"/>
+<rect x="336" y="52" width="136" height="72" rx="3" fill="#FDF3E1" stroke="#8A5A00" stroke-width="1.2"/>
+<text x="404.0" y="74" font-size="11.5" font-weight="600" fill="#14181C" text-anchor="middle">Compute tray</text>
+<text x="404.0" y="93" font-size="10" fill="#4A555E" text-anchor="middle">HBM, cold plate, power</text>
+<text x="404.0" y="109" font-size="10" fill="#4A555E" text-anchor="middle">AVC · Lotes · Delta</text>
+<line x1="474" y1="88" x2="489" y2="88" stroke="#4A555E" stroke-width="1.3" marker-end="url(#dcArr)"/>
+<rect x="492" y="52" width="136" height="72" rx="3" fill="#E8F1F8" stroke="#1B5E8C" stroke-width="1.2"/>
+<text x="560.0" y="74" font-size="11.5" font-weight="600" fill="#14181C" text-anchor="middle">Rack build</text>
+<text x="560.0" y="93" font-size="10" fill="#4A555E" text-anchor="middle">GB300 NVL72, L10 to L12</text>
+<text x="560.0" y="109" font-size="10" fill="#4A555E" text-anchor="middle">Hon Hai · Quanta</text>
+<line x1="630" y1="88" x2="645" y2="88" stroke="#4A555E" stroke-width="1.3" marker-end="url(#dcArr)"/>
+<rect x="648" y="52" width="136" height="72" rx="3" fill="#F0EEF7" stroke="#4A3B7A" stroke-width="1.2"/>
+<text x="716.0" y="74" font-size="11.5" font-weight="600" fill="#14181C" text-anchor="middle">Brand or ODM direct</text>
+<text x="716.0" y="93" font-size="10" fill="#4A555E" text-anchor="middle">Dell · Supermicro</text>
+<text x="716.0" y="109" font-size="10" fill="#4A555E" text-anchor="middle">or straight to the cloud</text>
+<line x1="786" y1="88" x2="801" y2="88" stroke="#4A555E" stroke-width="1.3" marker-end="url(#dcArr)"/>
+<rect x="804" y="52" width="136" height="72" rx="3" fill="#E3F3EE" stroke="#0E7C68" stroke-width="1.2"/>
+<text x="872.0" y="74" font-size="11.5" font-weight="600" fill="#14181C" text-anchor="middle">Operator</text>
+<text x="872.0" y="93" font-size="10" fill="#4A555E" text-anchor="middle">Microsoft · CoreWeave</text>
+<text x="872.0" y="109" font-size="10" fill="#4A555E" text-anchor="middle">runs the rack</text>
+<line x1="942" y1="88" x2="957" y2="88" stroke="#4A555E" stroke-width="1.3" marker-end="url(#dcArr)"/>
+<rect x="960" y="52" width="136" height="72" rx="3" fill="#F8ECF3" stroke="#8E3B6B" stroke-width="1.2"/>
+<text x="1028.0" y="74" font-size="11.5" font-weight="600" fill="#14181C" text-anchor="middle">AI data centre</text>
+<text x="1028.0" y="93" font-size="10" fill="#4A555E" text-anchor="middle">computing and AI</text>
+<text x="1028.0" y="109" font-size="10" fill="#4A555E" text-anchor="middle">45.5% of chip demand</text>
+<text x="24" y="160" font-size="10.5" font-weight="600" fill="#7C8891">Smartphone path</text>
+<rect x="24" y="168" width="136" height="72" rx="3" fill="#F1F2F3" stroke="#4A555E" stroke-width="1.2"/>
+<text x="92.0" y="190" font-size="11.5" font-weight="600" fill="#14181C" text-anchor="middle">Packaged AP</text>
+<text x="92.0" y="209" font-size="10" fill="#4A555E" text-anchor="middle">Snapdragon, substrate PoP</text>
+<text x="92.0" y="225" font-size="10" fill="#4A555E" text-anchor="middle">Stages 1 to 3</text>
+<line x1="162" y1="204" x2="177" y2="204" stroke="#4A555E" stroke-width="1.3" marker-end="url(#dcArr)"/>
+<rect x="180" y="168" width="136" height="72" rx="3" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1.2"/>
+<text x="248.0" y="190" font-size="11.5" font-weight="600" fill="#14181C" text-anchor="middle">Distributor</text>
+<text x="248.0" y="209" font-size="10" fill="#4A555E" text-anchor="middle">WPG · WT for Asian brands</text>
+<text x="248.0" y="225" font-size="10" fill="#4A555E" text-anchor="middle">Apple buys direct</text>
+<line x1="318" y1="204" x2="333" y2="204" stroke="#4A555E" stroke-width="1.3" marker-end="url(#dcArr)"/>
+<rect x="336" y="168" width="136" height="72" rx="3" fill="#FDF3E1" stroke="#8A5A00" stroke-width="1.2"/>
+<text x="404.0" y="190" font-size="11.5" font-weight="600" fill="#14181C" text-anchor="middle">Modules</text>
+<text x="404.0" y="209" font-size="10" fill="#4A555E" text-anchor="middle">camera, display, memory</text>
+<text x="404.0" y="225" font-size="10" fill="#4A555E" text-anchor="middle">Sony · Samsung · Murata</text>
+<line x1="474" y1="204" x2="489" y2="204" stroke="#4A555E" stroke-width="1.3" marker-end="url(#dcArr)"/>
+<rect x="492" y="168" width="136" height="72" rx="3" fill="#E8F1F8" stroke="#1B5E8C" stroke-width="1.2"/>
+<text x="560.0" y="190" font-size="11.5" font-weight="600" fill="#14181C" text-anchor="middle">Assembly</text>
+<text x="560.0" y="209" font-size="10" fill="#4A555E" text-anchor="middle">Hon Hai · Luxshare</text>
+<text x="560.0" y="225" font-size="10" fill="#4A555E" text-anchor="middle">Pegatron</text>
+<line x1="630" y1="204" x2="645" y2="204" stroke="#4A555E" stroke-width="1.3" marker-end="url(#dcArr)"/>
+<rect x="648" y="168" width="136" height="72" rx="3" fill="#F0EEF7" stroke="#4A3B7A" stroke-width="1.2"/>
+<text x="716.0" y="190" font-size="11.5" font-weight="600" fill="#14181C" text-anchor="middle">Brand</text>
+<text x="716.0" y="209" font-size="10" fill="#4A555E" text-anchor="middle">Apple · Samsung</text>
+<text x="716.0" y="225" font-size="10" fill="#4A555E" text-anchor="middle">Xiaomi · vivo</text>
+<line x1="786" y1="204" x2="801" y2="204" stroke="#4A555E" stroke-width="1.3" marker-end="url(#dcArr)"/>
+<rect x="804" y="168" width="136" height="72" rx="3" fill="#E3F3EE" stroke="#0E7C68" stroke-width="1.2"/>
+<text x="872.0" y="190" font-size="11.5" font-weight="600" fill="#14181C" text-anchor="middle">Carrier</text>
+<text x="872.0" y="209" font-size="10" fill="#4A555E" text-anchor="middle">China Mobile · Verizon</text>
+<text x="872.0" y="225" font-size="10" fill="#4A555E" text-anchor="middle">sells the phone</text>
+<line x1="942" y1="204" x2="957" y2="204" stroke="#4A555E" stroke-width="1.3" marker-end="url(#dcArr)"/>
+<rect x="960" y="168" width="136" height="72" rx="3" fill="#F8ECF3" stroke="#8E3B6B" stroke-width="1.2"/>
+<text x="1028.0" y="190" font-size="11.5" font-weight="600" fill="#14181C" text-anchor="middle">Smartphone</text>
+<text x="1028.0" y="209" font-size="10" fill="#4A555E" text-anchor="middle">communications</text>
+<text x="1028.0" y="225" font-size="10" fill="#4A555E" text-anchor="middle">28.7% of chip demand</text>
+</svg></div>
+</div><div class="sub k">Global Distributors</div><div class="row"><div class="step back">
+  <span class="chip c-back">Component distributor, US</span>
+  <h4>Arrow Electronics</h4>
+  <p class="field"><b>Makes</b> — Chips, passives and connectors for OEMs and EMS; enterprise IT resale</p>
+  <p class="field"><b>End product</b> — Boards built by OEMs and EMS in the Americas, Europe and Asia</p>
+  <p class="field pos"><b>Position</b> — #3 — US$30.9bn sales, 2025</p>
+</div><div class="step back">
+  <span class="chip c-back">Component distributor, US</span>
+  <h4>Avnet</h4>
+  <p class="field"><b>Makes</b> — Chips, interconnect and passives; the Farnell catalogue</p>
+  <p class="field"><b>End product</b> — Boards built by OEMs and EMS, half of sales in Asia</p>
+  <p class="field pos"><b>Position</b> — #4 — US$27.6bn sales, FY26</p>
+</div><div class="step back">
+  <span class="chip c-back">Component distributor, Japan</span>
+  <h4>Macnica</h4>
+  <p class="field"><b>Makes</b> — Chips from Altera, Analog Devices, Broadcom, Infineon, NVIDIA, Renesas and TI for Japanese OEMs</p>
+  <p class="field"><b>End product</b> — Boards built by Japanese OEMs</p>
+  <p class="field pos"><b>Position</b> — Major — ¥1.2tn sales, FY26, 86% semiconductors</p>
+</div></div><div class="sub k">Asia Distributors</div><div class="row"><div class="step back">
+  <span class="chip c-back">Component distributor, Taiwan</span>
+  <h4>WT Microelectronics</h4>
+  <p class="field"><b>Makes</b> — 220,000+ part types for 25,000+ Asian OEM and EMS customers; Future Electronics in the Americas and Europe</p>
+  <p class="field"><b>End product</b> — Servers (36% of 2024 sales), phones (19%), networking, industrial and automotive boards</p>
+  <p class="field pos"><b>Position</b> — Leader — largest chip distributor by revenue, ~NT$1.18tn, 2025</p>
+</div><div class="step back">
+  <span class="chip c-back">Component distributor, Taiwan</span>
+  <h4>WPG Holdings</h4>
+  <p class="field"><b>Makes</b> — ~250 lines incl. Intel, AMD, MediaTek, Qualcomm, NXP, Infineon, Micron and Samsung, through WPI, SAC, AIT and Yosun</p>
+  <p class="field"><b>End product</b> — Servers, power supplies, networking gear, phones and PCs built in Asia</p>
+  <p class="field pos"><b>Position</b> — #2 — NT$999bn revenue, 2025</p>
+</div><div class="step back">
+  <span class="chip c-back">Memory distributor, Taiwan</span>
+  <h4>Supreme Electronics</h4>
+  <p class="field"><b>Makes</b> — Samsung DRAM and NAND (~70% of sales), application processors and driver ICs</p>
+  <p class="field"><b>End product</b> — AI servers and smartphones, ~70% sold into China and Hong Kong</p>
+  <p class="field pos"><b>Position</b> — Major — Samsung's key Taiwan distributor; NT$227bn revenue, 2025</p>
+</div><div class="step back">
+  <span class="chip c-back">Component distributor, Taiwan</span>
+  <h4>Edom Technology</h4>
+  <p class="field"><b>Makes</b> — 80+ lines incl. NVIDIA, AMD, Marvell, Astera Labs, Skyworks and ST</p>
+  <p class="field"><b>End product</b> — Computing, data centre, mobile and automotive boards built by Asian OEMs</p>
+  <p class="field pos"><b>Position</b> — Major — carries NVIDIA, AMD and Marvell; NT$116bn revenue, 2025</p>
+</div></div><div class="sub k">Catalogue and Online</div><div class="row"><div class="step back">
+  <span class="chip c-back">Catalogue distributor, US</span>
+  <h4>DigiKey</h4>
+  <p class="field"><b>Makes</b> — 17.4m parts from 3,000+ makers, shipped same day in small quantities</p>
+  <p class="field"><b>End product</b> — Prototypes and low-volume boards for 1m+ customers a year</p>
+  <p class="field pos"><b>Position</b> — Leader — broadest catalogue; ~US$3.5bn sales, 2024 (Forbes estimate)</p>
+</div><div class="step back">
+  <span class="chip c-back">Catalogue distributor, US</span>
+  <h4>Mouser Electronics</h4>
+  <p class="field"><b>Makes</b> — 6.8m products from 1,200+ brands, focused on new-product introductions</p>
+  <p class="field"><b>End product</b> — Prototypes and low-volume boards for 650,000+ customers</p>
+  <p class="field pos"><b>Position</b> — Major — sales undisclosed; a TTI and Berkshire Hathaway company</p>
+</div></div></div>
+</div>
+<div class="divider"></div>
+<div class="stage" id="s8">
+  <div class="rail"><div class="stripe"></div>
+    <div class="num">STAGE 8</div>
+    <h2>Modules and Components</h2>
+    <p class="en2">What is added around the chip before the board goes into a system</p>
+    <div class="clarify">PCBs, CCL and substrates are in Stage 3 of the <a href="upstream-en.html#s3">upstream page</a>. This stage covers what is mounted beside the chip: memory modules, power, cooling, connectors, cables, rails and passives. Most shares here are broker or press estimates; the source is named where one is used.</div>
+  </div>
+  <div class="body"><div class="sub d">Memory Modules and SSDs</div><div class="row"><div class="step design">
+  <span class="chip c-design">DRAM module and SSD maker, US</span>
+  <h4>Kingston Technology</h4>
+  <p class="field"><b>Makes</b> — DDR5 DIMMs and SODIMMs, FURY gaming memory, client and data centre SSDs</p>
+  <p class="field"><b>End product</b> — PCs, workstations and servers</p>
+  <p class="field pos"><b>Position</b> — Leader — ~66% of third-party DRAM module revenue, 2024 (TrendForce)</p>
+</div><div class="step design">
+  <span class="chip c-design">DRAM module and SSD maker, Taiwan</span>
+  <h4>ADATA Technology</h4>
+  <p class="field"><b>Makes</b> — DDR5 and DDR4 modules, XPG gaming memory, PCIe SSDs, industrial memory</p>
+  <p class="field"><b>End product</b> — PCs, gaming systems, industrial equipment</p>
+  <p class="field pos"><b>Position</b> — #2 — ~5% of third-party DRAM module revenue, 2024 (TrendForce)</p>
+</div><div class="step design">
+  <span class="chip c-design">DRAM module and SSD maker, Taiwan</span>
+  <h4>Team Group</h4>
+  <p class="field"><b>Makes</b> — T-Force gaming DRAM, DDR5 server modules, SSDs, memory cards</p>
+  <p class="field"><b>End product</b> — Gaming PCs, servers, consumer devices</p>
+  <p class="field pos"><b>Position</b> — #4 — third-party DRAM module maker by revenue, 2024 (TrendForce)</p>
+</div></div><div class="sub d">Power Supplies and Power Shelves</div><div class="row"><div class="step design">
+  <span class="chip c-design">Server power maker, Taiwan</span>
+  <h4>Delta Electronics</h4>
+  <p class="field"><b>Makes</b> — AI server power supplies and power shelves, 800 V HVDC rack power, battery backup units</p>
+  <p class="field"><b>End product</b> — GB200 and GB300 NVL72 racks, data centre servers</p>
+  <p class="field pos"><b>Position</b> — Leader — ~60–65% of AI server power supplies, 2025 (KGI estimate)</p>
+</div><div class="step design">
+  <span class="chip c-design">Server power maker, Taiwan</span>
+  <h4>Lite-On Technology</h4>
+  <p class="field"><b>Makes</b> — AI server power supplies, power shelves and battery backup units, HVDC modules</p>
+  <p class="field"><b>End product</b> — AI and cloud servers for US cloud providers</p>
+  <p class="field pos"><b>Position</b> — Major — second-tier AI server power supplier behind Delta (KGI)</p>
+</div><div class="step design">
+  <span class="chip c-design">Power supply maker, Taiwan</span>
+  <h4>Chicony Power</h4>
+  <p class="field"><b>Makes</b> — Notebook adapters, server and telecom power supplies</p>
+  <p class="field"><b>End product</b> — Notebooks, general-purpose servers, telecom equipment</p>
+  <p class="field pos"><b>Position</b> — Challenger — AI server power supplies in customer testing, volume from 2027; NT$34.5bn revenue, 2025</p>
+</div><div class="step design">
+  <span class="chip c-design">Power supply maker, Taiwan</span>
+  <h4>FSP Group</h4>
+  <p class="field"><b>Makes</b> — PC and industrial power supplies, CRPS server power supplies, UPS</p>
+  <p class="field"><b>End product</b> — Desktop and industrial PCs, general-purpose servers</p>
+  <p class="field pos"><b>Position</b> — Niche — NT$13.1bn revenue, 2025</p>
+</div><div class="step design">
+  <span class="chip c-design">Data centre power maker, US</span>
+  <h4>Advanced Energy</h4>
+  <p class="field"><b>Makes</b> — Hyperscale server power supplies and shelves; power for wafer-fab tools</p>
+  <p class="field"><b>End product</b> — Hyperscale AI and cloud servers, fab equipment</p>
+  <p class="field pos"><b>Position</b> — Major — data centre power a third of sales, 2Q26</p>
+</div><div class="step design">
+  <span class="chip c-design">Power module maker, US</span>
+  <h4>Vicor</h4>
+  <p class="field"><b>Makes</b> — 48 V and 800 V bus converters, vertical power delivery modules</p>
+  <p class="field"><b>End product</b> — AI accelerator boards and racks</p>
+  <p class="field pos"><b>Position</b> — Niche — vertical power delivery patents, licensed to AI OEMs after a 2025 ITC import ban</p>
+</div></div><div class="sub d">Thermal</div><div class="row"><div class="step design">
+  <span class="chip c-design">Thermal module maker, Taiwan</span>
+  <h4>AVC</h4>
+  <p class="field"><b>Makes</b> — Microchannel cold plates, manifolds, vapour chambers, fans, CDUs</p>
+  <p class="field"><b>End product</b> — GB200, GB300 and Vera Rubin NVL72 racks, AI servers</p>
+  <p class="field pos"><b>Position</b> — Leader — ~40–50% of GB200 and GB300 cold plates (press estimate); one of four Vera Rubin cold-plate suppliers named by NVIDIA, 2026</p>
+</div><div class="step design">
+  <span class="chip c-design">Thermal module maker, Taiwan</span>
+  <h4>Auras Technology</h4>
+  <p class="field"><b>Makes</b> — Cold plates, manifolds, vapour chambers, heat exchangers, quick connectors</p>
+  <p class="field"><b>End product</b> — GB300 racks, AI and general-purpose servers</p>
+  <p class="field pos"><b>Position</b> — Major — ~20–25% of GB300 cold plates (Taiwan press estimate)</p>
+</div><div class="step design">
+  <span class="chip c-design">Thermal module maker, Taiwan</span>
+  <h4>Cooler Master</h4>
+  <p class="field"><b>Makes</b> — Cold plates, liquid cooling modules, PC coolers and cases</p>
+  <p class="field"><b>End product</b> — Vera Rubin racks, AI servers, gaming PCs</p>
+  <p class="field pos"><b>Position</b> — Major — one of four Vera Rubin cold-plate suppliers named by NVIDIA, 2026</p>
+</div><div class="step design">
+  <span class="chip c-design">Lid and cold-plate maker, Taiwan</span>
+  <h4>Jentech Precision</h4>
+  <p class="field"><b>Makes</b> — Metal lids for GPUs and ASICs, stiffeners for CPO switch chips, cold plates</p>
+  <p class="field"><b>End product</b> — NVIDIA Rubin and AMD MI450 GPUs, Spectrum-X and Quantum-X switches</p>
+  <p class="field pos"><b>Position</b> — Major — GPU lids for Rubin and MI450; one of four Vera Rubin cold-plate suppliers named by NVIDIA, 2026</p>
+</div><div class="step design">
+  <span class="chip c-design">Liquid cooling maker, Taiwan</span>
+  <h4>Delta Electronics</h4>
+  <p class="field"><b>Makes</b> — Liquid-to-air sidecars, megawatt CDUs, cold plates</p>
+  <p class="field"><b>End product</b> — GB200, GB300 and Vera Rubin racks</p>
+  <p class="field pos"><b>Position</b> — Leader — &gt;50% of liquid-to-air sidecars, 2025 (KGI estimate)</p>
+</div><div class="step design">
+  <span class="chip c-design">Data centre thermal and power maker, US</span>
+  <h4>Vertiv</h4>
+  <p class="field"><b>Makes</b> — CDUs, rear-door heat exchangers, chillers, UPS and power distribution</p>
+  <p class="field"><b>End product</b> — AI and cloud data centres</p>
+  <p class="field pos"><b>Position</b> — Leader — data centre thermal management; US$10.2bn sales, 2025</p>
+</div><div class="step design">
+  <span class="chip c-design">Direct liquid cooling maker, Canada</span>
+  <h4>CoolIT Systems</h4>
+  <p class="field"><b>Makes</b> — Cold plates and loops, rack manifolds, CDUs</p>
+  <p class="field"><b>End product</b> — Liquid-cooled AI and HPC servers</p>
+  <p class="field pos"><b>Position</b> — Major — 5m+ cold plates shipped; bought by Ecolab for US$4.75bn, 2026</p>
+</div><div class="step design">
+  <span class="chip c-design">Thermal and liquid cooling maker, US</span>
+  <h4>Boyd Thermal</h4>
+  <p class="field"><b>Makes</b> — Cold plates, liquid and two-phase cooling systems, heat exchangers</p>
+  <p class="field"><b>End product</b> — Hyperscale AI servers and data centres</p>
+  <p class="field pos"><b>Position</b> — Major — bought by Eaton for US$9.5bn, 2026</p>
+</div></div><div class="sub d">Connectors and Cables</div><div class="row"><div class="step design">
+  <span class="chip c-design">Connector maker, Ireland</span>
+  <h4>TE Connectivity</h4>
+  <p class="field"><b>Makes</b> — Board-to-board, I/O, automotive and industrial connectors, sensors</p>
+  <p class="field"><b>End product</b> — Cars, servers, industrial and telecom equipment</p>
+  <p class="field pos"><b>Position</b> — Leader — ~15% of connector sales, 2024 (Bishop &amp; Associates)</p>
+</div><div class="step design">
+  <span class="chip c-design">Connector maker, US</span>
+  <h4>Amphenol</h4>
+  <p class="field"><b>Makes</b> — High-speed backplane and I/O connectors, RF and fibre connectors, cable assemblies</p>
+  <p class="field"><b>End product</b> — AI servers and switches, mobile networks, aircraft, cars</p>
+  <p class="field pos"><b>Position</b> — #2 — ~13% of connector sales, 2024 (Bishop &amp; Associates); US$23.1bn sales, 2025, +52%</p>
+</div><div class="step design">
+  <span class="chip c-design">Connector maker, US</span>
+  <h4>Molex</h4>
+  <p class="field"><b>Makes</b> — PCB, I/O and high-speed connectors, optical and copper cable assemblies</p>
+  <p class="field"><b>End product</b> — Servers, phones, cars, medical devices</p>
+  <p class="field pos"><b>Position</b> — #3 — ~6% of connector sales, 2024 (Bishop &amp; Associates)</p>
+</div><div class="step design">
+  <span class="chip c-design">Connector and cable maker, China</span>
+  <h4>Luxshare Precision</h4>
+  <p class="field"><b>Makes</b> — I/O and high-speed connectors, cable assemblies, RF connectors</p>
+  <p class="field"><b>End product</b> — Phones, AI servers, cars</p>
+  <p class="field pos"><b>Position</b> — Major — #6 connector maker, ~3% of sales, 2024 (Bishop &amp; Associates)</p>
+</div><div class="step design">
+  <span class="chip c-design">Socket and connector maker, Taiwan</span>
+  <h4>Lotes</h4>
+  <p class="field"><b>Makes</b> — CPU and GPU sockets, DDR5 DIMM sockets, high-speed board connectors</p>
+  <p class="field"><b>End product</b> — Server and PC motherboards, AI accelerator boards</p>
+  <p class="field pos"><b>Position</b> — Leader — IC sockets, 2024 (Bishop &amp; Associates)</p>
+</div><div class="step design">
+  <span class="chip c-design">Cable and connector maker, Taiwan</span>
+  <h4>BizLink</h4>
+  <p class="field"><b>Makes</b> — High-speed copper cable assemblies, AC power whips, fibre patch cords, harnesses</p>
+  <p class="field"><b>End product</b> — AI racks and data centres, fab equipment, cars</p>
+  <p class="field pos"><b>Position</b> — Major — #9 connector maker, US$1.3bn sales, 2024 (Bishop &amp; Associates); HPC &gt;45% of 4Q25 revenue</p>
+</div></div><div class="sub d">Chassis and Rails</div><div class="row"><div class="step design">
+  <span class="chip c-design">Server chassis maker, Taiwan</span>
+  <h4>Chenbro Micom</h4>
+  <p class="field"><b>Makes</b> — Server and storage chassis, rack and cabinet parts</p>
+  <p class="field"><b>End product</b> — ASIC AI servers and general-purpose servers for US cloud providers</p>
+  <p class="field pos"><b>Position</b> — Major — NT$22.0bn revenue, 2025, +52%</p>
+</div><div class="step design">
+  <span class="chip c-design">Server rail maker, Taiwan</span>
+  <h4>King Slide Works</h4>
+  <p class="field"><b>Makes</b> — Slide rails for HGX, GB200, GB300 and Trainium racks; kitchen drawer slides</p>
+  <p class="field"><b>End product</b> — AI and general-purpose server racks</p>
+  <p class="field pos"><b>Position</b> — Leader — ~60% of general-purpose server rails, rising toward ~80% from 2Q26 (Daiwa estimate)</p>
+</div><div class="step design">
+  <span class="chip c-design">Server rail maker, Taiwan</span>
+  <h4>Nan Juen International</h4>
+  <p class="field"><b>Makes</b> — Slide rails for GB200, GB300 and Vera Rubin NVL72 racks</p>
+  <p class="field"><b>End product</b> — AI and general-purpose servers for cloud providers</p>
+  <p class="field pos"><b>Position</b> — #2 — second-source rail supplier behind King Slide; cloud server rails 74% of revenue, 1Q26</p>
+</div><div class="step design">
+  <span class="chip c-design">Server chassis maker, Taiwan</span>
+  <h4>AIC</h4>
+  <p class="field"><b>Makes</b> — Server chassis, storage servers built to L10, racks and compute trays for AMD Helios</p>
+  <p class="field"><b>End product</b> — AI storage servers, Helios racks</p>
+  <p class="field pos"><b>Position</b> — Niche — rack and compute-tray partner for AMD Helios</p>
+</div></div><div class="sub d">Passive Components</div><div class="row"><div class="step design">
+  <span class="chip c-design">MLCC maker, Japan</span>
+  <h4>Murata Manufacturing</h4>
+  <p class="field"><b>Makes</b> — MLCCs, inductors, RF filters and modules</p>
+  <p class="field"><b>End product</b> — Smartphones, AI servers, cars</p>
+  <p class="field pos"><b>Position</b> — Leader — ~41% of MLCCs, 2025 (Morgan Stanley estimate)</p>
+</div><div class="step design">
+  <span class="chip c-design">MLCC maker, Korea</span>
+  <h4>Samsung Electro-Mechanics</h4>
+  <p class="field"><b>Makes</b> — MLCCs, camera modules, FC-BGA substrates</p>
+  <p class="field"><b>End product</b> — Smartphones, AI servers, cars</p>
+  <p class="field pos"><b>Position</b> — #2 — ~23% of MLCCs, 2025 (Morgan Stanley estimate)</p>
+</div><div class="step design">
+  <span class="chip c-design">Passive component maker, Taiwan</span>
+  <h4>Yageo</h4>
+  <p class="field"><b>Makes</b> — Chip resistors, MLCCs, tantalum capacitors (KEMET), inductors</p>
+  <p class="field"><b>End product</b> — Servers, cars, industrial and consumer electronics</p>
+  <p class="field pos"><b>Position</b> — Leader — chip resistors; #3 in MLCCs (company)</p>
+</div><div class="step design">
+  <span class="chip c-design">MLCC maker, Japan</span>
+  <h4>Taiyo Yuden</h4>
+  <p class="field"><b>Makes</b> — Small high-capacitance MLCCs, inductors, SAW filters</p>
+  <p class="field"><b>End product</b> — Smartphones, cars, servers</p>
+  <p class="field pos"><b>Position</b> — Major — MLCC specialist, ~70% of its sales, 2025 (Morgan Stanley estimate)</p>
+</div></div></div>
+</div>
+<div class="divider"></div>
+<div class="stage" id="s9">
+  <div class="rail"><div class="stripe"></div>
+    <div class="num">STAGE 9</div>
+    <h2>System Assembly</h2>
+    <p class="en2">ODMs, EMS and Tier-1s that build the board, the box or the rack</p>
+    <div class="clarify">No researcher publishes a public ODM-level AI server share, so positions use company-reported revenue and mix. Assembly levels L1–L12, consignment and turnkey, and the financials of the ODMs are on the <a href="odm-en.html">ODM page</a>.</div>
+  </div>
+  <div class="body"><div class="sub s">AI Server and Rack ODMs</div><div class="row"><div class="step sys">
+  <span class="chip c-sys">AI rack ODM and EMS, Taiwan</span>
+  <h4>Hon Hai</h4>
+  <p class="field"><b>Makes</b> — GB200, GB300 and Vera Rubin NVL72 racks, ASIC servers (Ingrasys, FII); iPhones</p>
+  <p class="field"><b>End product</b> — AI racks for NVIDIA, Microsoft, AWS, Google and Meta; iPhones</p>
+  <p class="field pos"><b>Position</b> — Leader — &gt;40% of AI servers, 2026 (company estimate); NT$8.1tn revenue, 2025</p>
+</div><div class="step sys">
+  <span class="chip c-sys">AI server ODM, Taiwan</span>
+  <h4>Quanta Computer</h4>
+  <p class="field"><b>Makes</b> — GB300 NVL72 racks, Vera Rubin racks from 3Q26, ASIC and general-purpose servers; notebooks</p>
+  <p class="field"><b>End product</b> — Cloud providers' servers; PC brands' notebooks</p>
+  <p class="field pos"><b>Position</b> — Major — servers 80% of revenue, AI servers 75% of server revenue, 1Q26</p>
+</div><div class="step sys">
+  <span class="chip c-sys">AI server ODM, Taiwan</span>
+  <h4>Wistron</h4>
+  <p class="field"><b>Makes</b> — GB300 compute boards and racks, Vera Rubin systems in Taiwan and Texas, ASIC servers; notebooks</p>
+  <p class="field"><b>End product</b> — NVIDIA rack systems for cloud providers; PC brands' notebooks</p>
+  <p class="field pos"><b>Position</b> — Major — AI servers ~70% of revenue; NT$2.19tn revenue, 2025, roughly doubled</p>
+</div><div class="step sys">
+  <span class="chip c-sys">Hyperscale rack ODM, Taiwan</span>
+  <h4>Wiwynn</h4>
+  <p class="field"><b>Makes</b> — AWS Trainium3 racks, AMD Helios racks (UBS: from end-2026), GPU and general-purpose servers</p>
+  <p class="field"><b>End product</b> — Hyperscalers' AI and cloud racks</p>
+  <p class="field pos"><b>Position</b> — Major — NT$951bn revenue, 2025, +164%; AI products over half</p>
+</div><div class="step sys">
+  <span class="chip c-sys">Server and notebook ODM, Taiwan</span>
+  <h4>Inventec</h4>
+  <p class="field"><b>Makes</b> — B300 GPU servers, ASIC servers incl. Google TPU servers, Vera Rubin from 4Q26; notebooks</p>
+  <p class="field"><b>End product</b> — Cloud providers' servers; PC brands' notebooks</p>
+  <p class="field pos"><b>Position</b> — Major — AI servers &gt;40% of revenue, 2025</p>
+</div><div class="step sys">
+  <span class="chip c-sys">Server ODM, Taiwan</span>
+  <h4>MiTAC Holdings</h4>
+  <p class="field"><b>Makes</b> — AI and cloud servers for hyperscalers (MiTAC Computing), AMD EPYC servers; telematics</p>
+  <p class="field"><b>End product</b> — Cloud providers' servers; car navigation and fleet devices</p>
+  <p class="field pos"><b>Position</b> — Challenger — NT$106bn revenue, 2025, +72%</p>
+</div><div class="step sys">
+  <span class="chip c-sys">Server maker and brand, Taiwan</span>
+  <h4>Gigabyte Technology</h4>
+  <p class="field"><b>Makes</b> — GPU servers and racks (Giga Computing), graphics cards, motherboards</p>
+  <p class="field"><b>End product</b> — AI servers for cloud providers and enterprises; gaming PCs</p>
+  <p class="field pos"><b>Position</b> — Major — servers ~60% of revenue, AI servers &gt;80% of that, 3Q25</p>
+</div></div><div class="sub s">Global EMS</div><div class="row"><div class="step sys">
+  <span class="chip c-sys">EMS, US</span>
+  <h4>Jabil</h4>
+  <p class="field"><b>Makes</b> — Cloud and AI data centre hardware, networking gear, capital equipment, healthcare and automotive electronics</p>
+  <p class="field"><b>End product</b> — Hyperscaler data centres, medical devices, cars</p>
+  <p class="field pos"><b>Position</b> — Major — US$36.0bn revenue, FY26, +21%</p>
+</div><div class="step sys">
+  <span class="chip c-sys">EMS, US</span>
+  <h4>Flex</h4>
+  <p class="field"><b>Makes</b> — Data centre rack integration, power skids and rack cooling (Axiom, to be spun off); automotive, industrial and health electronics</p>
+  <p class="field"><b>End product</b> — AI data centre power, cooling and compute; cars, medical devices</p>
+  <p class="field pos"><b>Position</b> — Major — US$6.6bn cloud and power infrastructure sales, FY26, +38%</p>
+</div><div class="step sys">
+  <span class="chip c-sys">EMS, Canada</span>
+  <h4>Celestica</h4>
+  <p class="field"><b>Makes</b> — 800G and 1.6T data centre switches, AI compute and storage systems</p>
+  <p class="field"><b>End product</b> — Hyperscalers' networks and AI racks</p>
+  <p class="field pos"><b>Position</b> — Major — 2026 revenue outlook US$20.5bn, +65%</p>
+</div><div class="step sys">
+  <span class="chip c-sys">EMS, US</span>
+  <h4>Sanmina</h4>
+  <p class="field"><b>Makes</b> — AI rack and cluster systems (ZT Systems, bought from AMD), communications and cloud hardware, industrial, medical and defence electronics</p>
+  <p class="field"><b>End product</b> — AMD and cloud AI racks; telecom and data centre equipment</p>
+  <p class="field pos"><b>Position</b> — Major — AMD's preferred new-product partner for AI racks; US$3.5bn sales, FY3Q26, +70%</p>
+</div></div><div class="sub s">Notebook and Phone Assembly</div><div class="row"><div class="step sys">
+  <span class="chip c-sys">Notebook ODM, Taiwan</span>
+  <h4>Compal Electronics</h4>
+  <p class="field"><b>Makes</b> — Notebooks for PC brands; general-purpose servers, Vera Rubin AI servers from 2027</p>
+  <p class="field"><b>End product</b> — PC brands' notebooks; cloud and enterprise servers</p>
+  <p class="field pos"><b>Position</b> — Major — NT$243bn revenue, 3Q26, +30%; servers targeted at 30–40% of revenue in 2027</p>
+</div><div class="step sys">
+  <span class="chip c-sys">iPhone and server EMS, Taiwan</span>
+  <h4>Pegatron</h4>
+  <p class="field"><b>Makes</b> — iPhones; GB200 and GB300 AI servers in Taiwan, Mexico and Texas, AMD MI355X servers</p>
+  <p class="field"><b>End product</b> — Apple iPhones; cloud and enterprise AI servers</p>
+  <p class="field pos"><b>Position</b> — Major — NT$1.12tn revenue, 2025; AI servers more than doubled</p>
+</div><div class="step sys">
+  <span class="chip c-sys">Apple assembler and EMS, China</span>
+  <h4>Luxshare Precision</h4>
+  <p class="field"><b>Makes</b> — iPhone, AirPods and Apple Watch assembly; data centre cables; automotive harnesses (Leoni)</p>
+  <p class="field"><b>End product</b> — Apple devices; AI data centre interconnects; car wiring</p>
+  <p class="field pos"><b>Position</b> — Major — RMB174.5bn revenue, 1H26, +40%</p>
+</div><div class="step sys">
+  <span class="chip c-sys">Phone assembler and EMS, China</span>
+  <h4>BYD Electronic</h4>
+  <p class="field"><b>Makes</b> — Smartphone and consumer electronics assembly and parts, NEV electronics</p>
+  <p class="field"><b>End product</b> — Smartphones and tablets for overseas brands; BYD cars' electronics</p>
+  <p class="field pos"><b>Position</b> — Major — RMB179.5bn revenue, 2025; assembly RMB122bn</p>
+</div><div class="step sys">
+  <span class="chip c-sys">Audio and XR device EMS, China</span>
+  <h4>Goertek</h4>
+  <p class="field"><b>Makes</b> — Wireless earphones, MR and AR headsets, AI glasses, game consoles; micro speakers, MEMS microphones</p>
+  <p class="field"><b>End product</b> — Brand-name earbuds, headsets, glasses and consoles</p>
+  <p class="field pos"><b>Position</b> — Major — RMB96.6bn revenue, 2025</p>
+</div></div><div class="sub s">Automotive Tier-1s</div><div class="row"><div class="step sys">
+  <span class="chip c-sys">Automotive Tier-1, Germany</span>
+  <h4>Bosch</h4>
+  <p class="field"><b>Makes</b> — Braking, steering and powertrain systems, inverters and e-axles, radar and camera sensors, vehicle computers</p>
+  <p class="field"><b>End product</b> — Cars and trucks of nearly every carmaker</p>
+  <p class="field pos"><b>Position</b> — Leader — #1 automotive supplier by sales, 2025 (MarkLines); group sales €91.0bn</p>
+</div><div class="step sys">
+  <span class="chip c-sys">Automotive Tier-1, Japan</span>
+  <h4>Denso</h4>
+  <p class="field"><b>Makes</b> — Powertrain and thermal systems, inverters and ECUs, ADAS cameras and radar</p>
+  <p class="field"><b>End product</b> — Toyota and other carmakers' vehicles</p>
+  <p class="field pos"><b>Position</b> — #2 — automotive supplier by sales, 2025 (MarkLines); ¥7.5tn revenue, FY26</p>
+</div><div class="step sys">
+  <span class="chip c-sys">Automotive Tier-1, Germany</span>
+  <h4>ZF Friedrichshafen</h4>
+  <p class="field"><b>Makes</b> — Transmissions and e-drives, chassis and brakes, ADAS sensors, vehicle computers</p>
+  <p class="field"><b>End product</b> — Cars, trucks and buses of most carmakers</p>
+  <p class="field pos"><b>Position</b> — Major — €38.8bn sales, 2025</p>
+</div><div class="step sys">
+  <span class="chip c-sys">Automotive Tier-1, Korea</span>
+  <h4>Hyundai Mobis</h4>
+  <p class="field"><b>Makes</b> — Chassis, cockpit and front-end modules, ADAS and electrification parts, lamps</p>
+  <p class="field"><b>End product</b> — Hyundai and Kia vehicles, plus other carmakers</p>
+  <p class="field pos"><b>Position</b> — #4 — automotive supplier by sales, 2025 (MarkLines)</p>
+</div><div class="step sys">
+  <span class="chip c-sys">Automotive Tier-1, Canada</span>
+  <h4>Magna International</h4>
+  <p class="field"><b>Makes</b> — Body structures, ADAS and electrification parts, seating, complete-vehicle assembly</p>
+  <p class="field"><b>End product</b> — Cars of most carmakers; contract-built vehicles in Graz</p>
+  <p class="field pos"><b>Position</b> — #5 — automotive supplier by sales, 2025 (MarkLines); US$42.0bn sales</p>
+</div><div class="step sys">
+  <span class="chip c-sys">Automotive Tier-1, Switzerland</span>
+  <h4>Aptiv</h4>
+  <p class="field"><b>Makes</b> — Connectors and cable management, ADAS, vehicle computers and software</p>
+  <p class="field"><b>End product</b> — Cars of most carmakers</p>
+  <p class="field pos"><b>Position</b> — Major — US$12.6–12.8bn sales outlook, 2026, after the Versigent wiring spin-off</p>
+</div><div class="step sys">
+  <span class="chip c-sys">Automotive Tier-1, Germany</span>
+  <h4>Aumovio</h4>
+  <p class="field"><b>Makes</b> — Radar and camera sensors, brakes, displays, vehicle electrical architecture</p>
+  <p class="field"><b>End product</b> — Cars of most carmakers; the former Continental Automotive</p>
+  <p class="field pos"><b>Position</b> — Major — €18.5bn sales, 2025; listed 2025</p>
+</div></div></div>
+</div>
+<div class="divider"></div>
+<div class="stage" id="s10">
+  <div class="rail"><div class="stripe"></div>
+    <div class="num">STAGE 10</div>
+    <h2>Brands and OEMs</h2>
+    <p class="en2">The name on the product</p>
+    <div class="clarify">Brands design and sell; most of the building is done in Stage 9. In servers the largest buyers skip the brands: ODM Direct sales to hyperscalers were 54% of server revenue in 2Q26 (IDC), so the five branded vendors together hold under a third.</div>
+  </div>
+  <div class="body"><div class="sub b">Server Brands</div><div class="row"><div class="step pkgB">
+  <span class="chip c-pkgB">Server brand, US</span>
+  <h4>Dell Technologies</h4>
+  <p class="field"><b>Makes</b> — PowerEdge servers and XE-series AI racks (GB200 and GB300 NVL72), PowerStore storage</p>
+  <p class="field"><b>End product</b> — Enterprise and AI data centre servers</p>
+  <p class="field pos"><b>Position</b> — Leader — ~13% of server revenue, 2Q26 (IDC); the largest branded vendor</p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">Server brand, US</span>
+  <h4>Supermicro</h4>
+  <p class="field"><b>Makes</b> — GPU servers and rack systems (HGX, GB200 and GB300 NVL72), direct liquid cooling</p>
+  <p class="field"><b>End product</b> — AI training and inference servers</p>
+  <p class="field pos"><b>Position</b> — #2 — ~6% of server revenue, 2Q26 (IDC)</p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">Server brand, China</span>
+  <h4>Lenovo</h4>
+  <p class="field"><b>Makes</b> — ThinkSystem servers, ThinkAgile systems, Neptune liquid cooling</p>
+  <p class="field"><b>End product</b> — Enterprise and AI servers</p>
+  <p class="field pos"><b>Position</b> — #3 — ~5% of server revenue, 2Q26 (IDC)</p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">Server brand, US</span>
+  <h4>Hewlett Packard Enterprise</h4>
+  <p class="field"><b>Makes</b> — ProLiant and Cray servers, Cray EX supercomputers, Alletra storage</p>
+  <p class="field"><b>End product</b> — Enterprise, HPC and AI servers</p>
+  <p class="field pos"><b>Position</b> — #4 — ~3.5% of server revenue, 2Q26 (IDC)</p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">Server brand, China</span>
+  <h4>Inspur</h4>
+  <p class="field"><b>Makes</b> — Inspur-brand rack servers and AI servers, storage (IEIT Systems)</p>
+  <p class="field"><b>End product</b> — China cloud and AI servers</p>
+  <p class="field pos"><b>Position</b> — #5 — ~2.4% of server revenue, 2Q26 (IDC)</p>
+</div></div><div class="sub b">PC Brands</div><div class="row"><div class="step pkgB">
+  <span class="chip c-pkgB">PC brand, China</span>
+  <h4>Lenovo</h4>
+  <p class="field"><b>Makes</b> — ThinkPad, Yoga, Legion and IdeaPad PCs; Motorola phones</p>
+  <p class="field"><b>End product</b> — Notebooks and desktops</p>
+  <p class="field pos"><b>Position</b> — Leader — ~25% of PCs shipped, 2025 (IDC)</p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">PC brand, US</span>
+  <h4>HP</h4>
+  <p class="field"><b>Makes</b> — EliteBook and OmniBook PCs, ZBook workstations, LaserJet printers</p>
+  <p class="field"><b>End product</b> — Notebooks, desktops and printers</p>
+  <p class="field pos"><b>Position</b> — #2 — ~20% of PCs shipped, 2025 (IDC)</p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">PC brand, US</span>
+  <h4>Dell Technologies</h4>
+  <p class="field"><b>Makes</b> — Dell, Dell Pro and Dell Pro Max PCs, Alienware gaming PCs</p>
+  <p class="field"><b>End product</b> — Commercial notebooks and desktops</p>
+  <p class="field pos"><b>Position</b> — #3 — ~14% of PCs shipped, 2025 (IDC)</p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">PC brand, US</span>
+  <h4>Apple</h4>
+  <p class="field"><b>Makes</b> — MacBook Air and MacBook Pro, iMac, Mac mini and Mac Studio on M-series chips</p>
+  <p class="field"><b>End product</b> — Macs</p>
+  <p class="field pos"><b>Position</b> — #4 — ~9% of PCs shipped, 2025 (IDC)</p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">PC brand, Taiwan</span>
+  <h4>ASUS</h4>
+  <p class="field"><b>Makes</b> — Zenbook, Vivobook and ROG gaming PCs, motherboards, graphics cards</p>
+  <p class="field"><b>End product</b> — Notebooks, gaming PCs and components</p>
+  <p class="field pos"><b>Position</b> — #5 — ~7% of PCs shipped, 2025 (IDC)</p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">PC brand, Taiwan</span>
+  <h4>Acer</h4>
+  <p class="field"><b>Makes</b> — Swift, Aspire and Predator PCs, Chromebooks</p>
+  <p class="field"><b>End product</b> — Notebooks and Chromebooks</p>
+  <p class="field pos"><b>Position</b> — Major — ~6% of PCs shipped, 2025, sixth-largest vendor (Gartner)</p>
+</div></div><div class="sub b">Smartphone Brands</div><div class="row"><div class="step pkgB">
+  <span class="chip c-pkgB">Smartphone brand, US</span>
+  <h4>Apple</h4>
+  <p class="field"><b>Makes</b> — iPhone on A-series chips, with the in-house C1 modem in some models</p>
+  <p class="field"><b>End product</b> — Smartphones</p>
+  <p class="field pos"><b>Position</b> — Leader — ~20% of smartphones shipped, 2025 (IDC)</p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">Smartphone brand, Korea</span>
+  <h4>Samsung</h4>
+  <p class="field"><b>Makes</b> — Galaxy S, Galaxy Z and Galaxy A phones on Exynos and Snapdragon chips</p>
+  <p class="field"><b>End product</b> — Smartphones</p>
+  <p class="field pos"><b>Position</b> — #2 — ~19% of smartphones shipped, 2025 (IDC)</p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">Smartphone brand, China</span>
+  <h4>Xiaomi</h4>
+  <p class="field"><b>Makes</b> — Xiaomi and Redmi phones, with the in-house XRING O1 chip in some models; IoT devices; SU7 and YU7 EVs</p>
+  <p class="field"><b>End product</b> — Smartphones, consumer IoT, EVs</p>
+  <p class="field pos"><b>Position</b> — #3 — ~13% of smartphones shipped, 2025 (IDC)</p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">Smartphone brand, China</span>
+  <h4>vivo</h4>
+  <p class="field"><b>Makes</b> — X and V series phones, iQOO gaming phones</p>
+  <p class="field"><b>End product</b> — Smartphones</p>
+  <p class="field pos"><b>Position</b> — #4 — ~8% of smartphones shipped, 2025 (IDC)</p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">Smartphone brand, China</span>
+  <h4>OPPO</h4>
+  <p class="field"><b>Makes</b> — Find and Reno phones, OnePlus phones</p>
+  <p class="field"><b>End product</b> — Smartphones</p>
+  <p class="field pos"><b>Position</b> — #5 — ~8% of smartphones shipped, 2025 (IDC)</p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">Smartphone brand, China</span>
+  <h4>Transsion</h4>
+  <p class="field"><b>Makes</b> — TECNO, Infinix and itel phones for Africa, South Asia and other emerging markets</p>
+  <p class="field"><b>End product</b> — Smartphones and feature phones</p>
+  <p class="field pos"><b>Position</b> — Major — ~8% of smartphones shipped, 2025 (Omdia); #4 in 3Q25 (IDC)</p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">Smartphone brand, China</span>
+  <h4>Huawei</h4>
+  <p class="field"><b>Makes</b> — Mate and Pura phones on Kirin chips and HarmonyOS, nova, foldables</p>
+  <p class="field"><b>End product</b> — Smartphones</p>
+  <p class="field pos"><b>Position</b> — Leader — China smartphones, ~16% share, 2025 (IDC China); ~4% of world shipments (Omdia)</p>
+</div></div><div class="sub b">Network Equipment Brands</div><div class="row"><div class="step pkgB">
+  <span class="chip c-pkgB">Network equipment brand, US</span>
+  <h4>Cisco</h4>
+  <p class="field"><b>Makes</b> — Nexus data centre switches, Silicon One ASICs, Catalyst campus gear, routers, UCS servers</p>
+  <p class="field"><b>End product</b> — Enterprise and hyperscale networks</p>
+  <p class="field pos"><b>Position</b> — Leader — ~29% of Ethernet switch revenue, 2Q26 (IDC)</p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">Network equipment brand, US</span>
+  <h4>NVIDIA</h4>
+  <p class="field"><b>Makes</b> — Spectrum-X Ethernet switches, Quantum InfiniBand, ConnectX NICs, BlueField DPUs, NVLink switches</p>
+  <p class="field"><b>End product</b> — AI back-end and scale-up networks</p>
+  <p class="field pos"><b>Position</b> — Leader — ~20% of data centre Ethernet switch revenue, 2Q26 (IDC)</p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">Network equipment brand, US</span>
+  <h4>Arista Networks</h4>
+  <p class="field"><b>Makes</b> — 7800R and 7060X data centre switches, Etherlink AI platforms, EOS software</p>
+  <p class="field"><b>End product</b> — Cloud and AI back-end networks</p>
+  <p class="field pos"><b>Position</b> — #2 — ~19% of data centre Ethernet switch revenue, 2Q26 (IDC)</p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">Network equipment brand, China</span>
+  <h4>Huawei</h4>
+  <p class="field"><b>Makes</b> — CloudEngine data centre switches, NetEngine routers, 5G base stations</p>
+  <p class="field"><b>End product</b> — Telecom and enterprise networks</p>
+  <p class="field pos"><b>Position</b> — Major — ~8% of Ethernet switch revenue; #2 in routers, ~30%, 2Q26 (IDC)</p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">Network equipment brand, US</span>
+  <h4>HPE Juniper Networking</h4>
+  <p class="field"><b>Makes</b> — QFX and PTX switches and routers, Mist AI, Aruba campus switches</p>
+  <p class="field"><b>End product</b> — Data centre and campus networks</p>
+  <p class="field pos"><b>Position</b> — Major — ~6% of Ethernet switch revenue, 2Q26 (IDC)</p>
+</div></div><div class="sub b">Carmakers</div><div class="row"><div class="step pkgB">
+  <span class="chip c-pkgB">Carmaker, Japan</span>
+  <h4>Toyota</h4>
+  <p class="field"><b>Makes</b> — Toyota and Lexus vehicles, hybrids incl. Prius and RAV4, Daihatsu, Hino trucks</p>
+  <p class="field"><b>End product</b> — Vehicles</p>
+  <p class="field pos"><b>Position</b> — Leader — 11.3m vehicles sold, 2025, incl. Daihatsu and Hino</p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">Carmaker, Germany</span>
+  <h4>Volkswagen Group</h4>
+  <p class="field"><b>Makes</b> — Volkswagen, Audi, Porsche, Škoda and SEAT/CUPRA cars on MEB and PPE EV platforms, TRATON trucks</p>
+  <p class="field"><b>End product</b> — Vehicles</p>
+  <p class="field pos"><b>Position</b> — #2 — 8.98m vehicles delivered, 2025</p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">Carmaker, Korea</span>
+  <h4>Hyundai Motor Group</h4>
+  <p class="field"><b>Makes</b> — Hyundai, Kia and Genesis vehicles, E-GMP EVs (IONIQ 5, EV6)</p>
+  <p class="field"><b>End product</b> — Vehicles</p>
+  <p class="field pos"><b>Position</b> — #3 — ~7.3m vehicles sold, 2025 (Hyundai 4.14m, Kia 3.14m)</p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">Carmaker, US</span>
+  <h4>General Motors</h4>
+  <p class="field"><b>Makes</b> — Chevrolet, GMC, Cadillac and Buick vehicles and EVs (Equinox EV, Lyriq), Wuling through the SAIC-GM-Wuling venture</p>
+  <p class="field"><b>End product</b> — Vehicles</p>
+  <p class="field pos"><b>Position</b> — #4 — 6.18m vehicles sold incl. China ventures, 2025</p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">Carmaker, Netherlands</span>
+  <h4>Stellantis</h4>
+  <p class="field"><b>Makes</b> — Jeep, Ram, Peugeot, Fiat, Citroën and Opel vehicles on STLA platforms</p>
+  <p class="field"><b>End product</b> — Vehicles</p>
+  <p class="field pos"><b>Position</b> — #5 — 5.48m consolidated shipments, 2025</p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">Carmaker, China</span>
+  <h4>BYD</h4>
+  <p class="field"><b>Makes</b> — BEVs and PHEVs (Dynasty, Ocean, Denza, Yangwang), Blade battery, in-house IGBT and SiC power chips</p>
+  <p class="field"><b>End product</b> — Electric and plug-in hybrid vehicles</p>
+  <p class="field pos"><b>Position</b> — Leader — BEVs: 2.26m sold, 2025; 4.60m NEVs in total</p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">Carmaker, US</span>
+  <h4>Tesla</h4>
+  <p class="field"><b>Makes</b> — Model 3 and Model Y, Cybertruck, in-house FSD computer, Megapack storage</p>
+  <p class="field"><b>End product</b> — Battery-electric vehicles</p>
+  <p class="field pos"><b>Position</b> — #2 — BEVs: 1.64m delivered, 2025</p>
+</div></div></div>
+</div>
+<div class="divider"></div>
+<div class="stage" id="s11">
+  <div class="rail"><div class="stripe"></div>
+    <div class="num">STAGE 11</div>
+    <h2>Operators and Buyers of Compute</h2>
+    <p class="en2">Who runs the hardware</p>
+    <div class="clarify">Cloud shares are Synergy Research's cloud infrastructure services for 2Q26; capex figures are each company's own 2026 guidance. The four largest cloud providers are compared on the <a href="csp-en.html">CSP page</a>.</div>
+  </div>
+  <div class="body"><div class="sub c">Hyperscale Cloud</div><div class="row"><div class="step pkgC">
+  <span class="chip c-pkgC">Hyperscale cloud, US</span>
+  <h4>Amazon (AWS)</h4>
+  <p class="field"><b>Makes</b> — EC2, Bedrock and SageMaker on NVIDIA GPUs and its own Trainium and Graviton chips</p>
+  <p class="field"><b>End product</b> — Cloud and AI services for enterprises and model developers</p>
+  <p class="field pos"><b>Position</b> — Leader — ~28% of cloud infrastructure services, 2Q26; ~US$220bn cash capex planned for 2026</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">Hyperscale cloud, US</span>
+  <h4>Microsoft (Azure)</h4>
+  <p class="field"><b>Makes</b> — Azure cloud and AI infrastructure; hosts OpenAI and Anthropic models</p>
+  <p class="field"><b>End product</b> — Azure AI services, Microsoft 365 Copilot</p>
+  <p class="field pos"><b>Position</b> — #2 — ~20% of cloud infrastructure services, 2Q26; ~US$175bn capex for 2026 after a lease reclassification</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">Hyperscale cloud, US</span>
+  <h4>Alphabet (Google Cloud)</h4>
+  <p class="field"><b>Makes</b> — Google Cloud compute and the Gemini Enterprise Agent Platform on TPUs and NVIDIA GPUs</p>
+  <p class="field"><b>End product</b> — Cloud and AI services; Gemini</p>
+  <p class="field pos"><b>Position</b> — #3 — ~15% of cloud infrastructure services, 2Q26; 2026 capex guided to US$195–205bn</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">Hyperscale cloud, China</span>
+  <h4>Alibaba Cloud</h4>
+  <p class="field"><b>Makes</b> — Elastic compute, storage and AI platform services in China and Asia</p>
+  <p class="field"><b>End product</b> — Cloud services for Chinese internet and enterprise customers</p>
+  <p class="field pos"><b>Position</b> — #4 — cloud infrastructure services worldwide, 2025 (Synergy); ~37% of mainland China, 4Q25 (Omdia)</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">Hyperscale cloud, US</span>
+  <h4>Oracle</h4>
+  <p class="field"><b>Makes</b> — OCI GPU superclusters and Stargate sites built for OpenAI; database cloud</p>
+  <p class="field"><b>End product</b> — AI training capacity and enterprise database services</p>
+  <p class="field pos"><b>Position</b> — Challenger — remaining performance obligations US$664bn, FY1Q27; FY27 capex guided to US$90–95bn</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">Hyperscale operator, US</span>
+  <h4>Meta</h4>
+  <p class="field"><b>Makes</b> — Owns and runs data centres for Facebook, Instagram, WhatsApp and Meta AI; sells no public cloud</p>
+  <p class="field"><b>End product</b> — Ads ranking, recommendations and Llama and Meta AI models</p>
+  <p class="field pos"><b>Position</b> — Major — 2026 capex US$130–145bn incl. finance-lease principal</p>
+</div></div><div class="sub c">AI Clouds</div><div class="row"><div class="step pkgC">
+  <span class="chip c-pkgC">AI cloud, US</span>
+  <h4>CoreWeave</h4>
+  <p class="field"><b>Makes</b> — GPU cloud on GB200, GB300 and Vera Rubin NVL72; 1.5 GW active and 3.7 GW contracted power, 2Q26</p>
+  <p class="field"><b>End product</b> — Training and inference capacity for model developers and enterprises</p>
+  <p class="field pos"><b>Position</b> — Leader — largest neocloud (Synergy); revenue backlog ~US$104bn, 2Q26</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">AI cloud, Netherlands</span>
+  <h4>Nebius</h4>
+  <p class="field"><b>Makes</b> — AI cloud on NVIDIA GPUs; multi-year capacity deals with Microsoft and Meta</p>
+  <p class="field"><b>End product</b> — GPU capacity for Microsoft, Meta and AI labs</p>
+  <p class="field pos"><b>Position</b> — Challenger — US$530m revenue, 2025; &gt;US$40bn committed backlog, 2Q26</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">AI cloud, US</span>
+  <h4>Lambda</h4>
+  <p class="field"><b>Makes</b> — GPU cloud; tens of thousands of NVIDIA GPUs deployed for Microsoft</p>
+  <p class="field"><b>End product</b> — Training and inference capacity for Microsoft and AI developers</p>
+  <p class="field pos"><b>Position</b> — Niche — multi-year, multibillion-dollar GPU agreement with Microsoft, 2025</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">AI cloud, US</span>
+  <h4>Crusoe</h4>
+  <p class="field"><b>Makes</b> — Builds and operates AI data centres (Abilene, Texas; a 1.8 GW Wyoming campus planned) and a GPU cloud</p>
+  <p class="field"><b>End product</b> — Capacity for OpenAI through Oracle's Stargate sites, and cloud customers</p>
+  <p class="field pos"><b>Position</b> — Niche — developer of the 1.2 GW Abilene Stargate campus for Oracle and OpenAI</p>
+</div></div><div class="sub c">Model Developers That Contract Compute</div><div class="row"><div class="step pkgC">
+  <span class="chip c-pkgC">Model developer, US</span>
+  <h4>OpenAI</h4>
+  <p class="field"><b>Makes</b> — GPT models and ChatGPT; contracts compute from Oracle, Microsoft, AWS and CoreWeave and chips from NVIDIA, AMD and Broadcom</p>
+  <p class="field"><b>End product</b> — ChatGPT and the OpenAI API</p>
+  <p class="field pos"><b>Position</b> — Leader — ~30 GW of compute committed for ~US$1.4tn, 2025: NVIDIA at least 10 GW, Broadcom 10 GW, AMD 6 GW, Oracle 4.5 GW, Microsoft US$250bn, AWS US$38bn</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">Model developer, US</span>
+  <h4>Anthropic</h4>
+  <p class="field"><b>Makes</b> — Claude models; trains and serves on more than one million AWS Trainium2 chips plus NVIDIA systems on Azure</p>
+  <p class="field"><b>End product</b> — Claude through its API, Amazon Bedrock, Google Cloud and Microsoft Foundry</p>
+  <p class="field pos"><b>Position</b> — Major — up to 5 GW and &gt;US$100bn over ten years on AWS, 2026; US$30bn of Azure and up to 1 GW of NVIDIA systems, 2025</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">Model developer, US</span>
+  <h4>xAI (SpaceX)</h4>
+  <p class="field"><b>Makes</b> — Grok models; owns and operates the Colossus data centres in Memphis and Southaven</p>
+  <p class="field"><b>End product</b> — Grok on X and through its API; compute leased to Anthropic</p>
+  <p class="field pos"><b>Position</b> — Major — Colossus I and II ~1.0 GW of compute (SpaceX S-1, 2026); 300 MW leased to Anthropic</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">Model developer, France</span>
+  <h4>Mistral AI</h4>
+  <p class="field"><b>Makes</b> — Mistral models and the Mistral Compute cloud; own data centres south of Paris</p>
+  <p class="field"><b>End product</b> — European sovereign AI services</p>
+  <p class="field pos"><b>Position</b> — Niche — 13,800 GB300 GPUs at a 44 MW site near Paris; 200 MW across Europe targeted by 2027</p>
+</div></div><div class="sub c">Colocation</div><div class="row"><div class="step pkgC">
+  <span class="chip c-pkgC">Colocation, US</span>
+  <h4>Equinix</h4>
+  <p class="field"><b>Makes</b> — Retail colocation and interconnection in IBX data centres; 52 expansion projects in 33 markets</p>
+  <p class="field"><b>End product</b> — Enterprise, cloud on-ramp and AI inference capacity</p>
+  <p class="field pos"><b>Position</b> — Leader — largest colocation operator by revenue; 2026 revenue guided to US$10.2–10.3bn</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">Colocation, US</span>
+  <h4>Digital Realty</h4>
+  <p class="field"><b>Makes</b> — Wholesale and retail colocation on PlatformDIGITAL; 300+ facilities in 55+ metros</p>
+  <p class="field"><b>End product</b> — Hyperscale and enterprise data centre capacity</p>
+  <p class="field pos"><b>Position</b> — #2 — colocation operator by revenue; 2026 revenue guided to US$6.9bn</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">Colocation, Japan</span>
+  <h4>NTT Global Data Centers</h4>
+  <p class="field"><b>Makes</b> — Wholesale and retail colocation campuses in Japan, the US, Europe and India</p>
+  <p class="field"><b>End product</b> — Hyperscale and enterprise data centre capacity</p>
+  <p class="field pos"><b>Position</b> — #3 — data centre provider outside China (Bloomberg); 34 projects to double capacity to 4 GW</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">Colocation, China</span>
+  <h4>GDS Holdings</h4>
+  <p class="field"><b>Makes</b> — Hyperscale data centres in Greater China; ~685,000 sqm in service, 2Q26</p>
+  <p class="field"><b>End product</b> — Capacity for Chinese cloud, internet and financial customers</p>
+  <p class="field pos"><b>Position</b> — Major — China's leading carrier-neutral operator (company); US$1.6bn revenue, 2025</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">Colocation, Taiwan</span>
+  <h4>Chief Telecom</h4>
+  <p class="field"><b>Makes</b> — Carrier-neutral data centres in Taipei (LY, HD, LY2) and the TPIX internet exchange</p>
+  <p class="field"><b>End product</b> — Colocation and interconnection for clouds, carriers and content providers in Taiwan</p>
+  <p class="field pos"><b>Position</b> — Leader — Taiwan's largest internet exchange and carrier-neutral IDC operator (company); NT$3.9bn revenue, 2025</p>
+</div></div><div class="sub c">Telecom Operators</div><div class="row"><div class="step pkgC">
+  <span class="chip c-pkgC">Telecom operator, China</span>
+  <h4>China Mobile</h4>
+  <p class="field"><b>Makes</b> — Mobile, broadband and cloud networks across 31 provinces</p>
+  <p class="field"><b>End product</b> — Mobile and home broadband services, Mobile Cloud</p>
+  <p class="field pos"><b>Position</b> — Leader — world's largest mobile operator, 1,005m customers; RMB1.05tn revenue, 2025</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">Telecom operator, US</span>
+  <h4>Verizon</h4>
+  <p class="field"><b>Makes</b> — US wireless and fibre networks; 2026 capex US$16.0–16.5bn</p>
+  <p class="field"><b>End product</b> — Mobile and broadband services</p>
+  <p class="field pos"><b>Position</b> — Leader — largest US carrier by revenue, US$138.2bn, 2025</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">Telecom operator, US</span>
+  <h4>AT&amp;T</h4>
+  <p class="field"><b>Makes</b> — US wireless and fibre networks; capital investment US$23–24bn a year, 2026–28</p>
+  <p class="field"><b>End product</b> — Mobile, fibre and fixed wireless services</p>
+  <p class="field pos"><b>Position</b> — #2 — US carrier by revenue, US$125.6bn, 2025</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">Telecom operator, Germany</span>
+  <h4>Deutsche Telekom</h4>
+  <p class="field"><b>Makes</b> — Mobile and fixed networks in Germany, Europe and the US (T-Mobile US); cash capex €19.3bn, 2025</p>
+  <p class="field"><b>End product</b> — Mobile, broadband and fibre services</p>
+  <p class="field pos"><b>Position</b> — Leader — Europe's largest telecoms group, €119.1bn revenue, 2025</p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">Telecom operator, Taiwan</span>
+  <h4>Chunghwa Telecom</h4>
+  <p class="field"><b>Makes</b> — Taiwan mobile, fixed-line and broadband networks; IDC, cloud and AI projects for enterprises</p>
+  <p class="field"><b>End product</b> — Mobile, broadband and ICT services; parent of Chief Telecom</p>
+  <p class="field pos"><b>Position</b> — Leader — Taiwan's largest integrated telecoms company (company); NT$121bn revenue, 1H26, +7.8%</p>
+</div></div></div>
+</div>
+<div class="divider"></div>
+<div class="stage" id="s12">
+  <div class="rail"><div class="stripe"></div>
+    <div class="num">STAGE 12</div>
+    <h2>End Markets</h2>
+    <p class="en2">Where the chip finally lands</p>
+    <div class="clarify">Shares are WSTS end-use shares of world chip demand for 2025, as published by the SIA; computing was the only category that gained share. Units are the latest publisher forecasts. Demand, chip content and suppliers for each market are on the <a href="downstream-en.html">Downstream End Markets</a> page.</div>
+  </div>
+  <div class="body"><div class="sub m">PC, Computers and AI <span class="lite">· 45.5% of chip demand, 2025, up from 34.9%</span></div><div class="row"><div class="step mem">
+  <span class="chip c-mem">End market, world</span>
+  <h4>AI data centre</h4>
+  <p class="field"><b>Products</b> — AI training and inference servers, GPU and ASIC rack systems, AI back-end networks</p>
+  <p class="field"><b>Lead chips</b> — GPUs, AI ASICs, HBM, server CPUs, NICs and switch ASICs, optical DSPs</p>
+  <p class="field pos"><b>Position</b> — Leader — the fastest-growing end use; &gt;2.1m AI servers shipped, 2025, 2026F +~31% (TrendForce)</p>
+</div><div class="step mem">
+  <span class="chip c-mem">End market, world</span>
+  <h4>Enterprise and cloud servers</h4>
+  <p class="field"><b>Products</b> — General-purpose x86 and Arm servers, storage servers</p>
+  <p class="field"><b>Lead chips</b> — Server CPUs, DRAM, NAND and SSD controllers, NICs, BMCs, PMICs</p>
+  <p class="field pos"><b>Position</b> — Major — ~14.5m servers of all types shipped, 2025, 2026F +~13% (TrendForce)</p>
+</div><div class="step mem">
+  <span class="chip c-mem">End market, world</span>
+  <h4>PC</h4>
+  <p class="field"><b>Products</b> — Notebooks, desktops and workstations</p>
+  <p class="field"><b>Lead chips</b> — CPUs and PC SoCs, GPUs, DRAM, SSDs, Wi-Fi chips, PMICs</p>
+  <p class="field pos"><b>Position</b> — Major — 284.7m PCs shipped, 2025, +8.1%; 2026F −11.3% to ~252.5m (IDC)</p>
+</div></div><div class="sub m">Communications <span class="lite">· 28.7% of chip demand, 2025, down from 33.0%</span></div><div class="row"><div class="step mem">
+  <span class="chip c-mem">End market, world</span>
+  <h4>Smartphone</h4>
+  <p class="field"><b>Products</b> — Smartphones, including foldables</p>
+  <p class="field"><b>Lead chips</b> — Application processors, 5G modems, RF front-end, LPDDR5X and UFS memory, image sensors, display drivers, PMICs</p>
+  <p class="field pos"><b>Position</b> — Leader — in communications; 1.26bn phones shipped, 2025, +1.9%; 2026F −16.7% to just over 1bn (IDC)</p>
+</div><div class="step mem">
+  <span class="chip c-mem">End market, world</span>
+  <h4>Communications infrastructure</h4>
+  <p class="field"><b>Products</b> — 5G radio and core networks, optical transport, broadband access, routers and data centre switches</p>
+  <p class="field"><b>Lead chips</b> — Baseband and RF chips, switch and router ASICs, optical DSPs and lasers, FPGAs</p>
+  <p class="field pos"><b>Position</b> — Major — telecom equipment revenue +4%, 2025, 2026F +2–4% (Dell'Oro); 3.1bn 5G subscriptions, 1Q26 (Ericsson)</p>
+</div></div><div class="sub m">Automotive, Consumer, Industrial and Government <span class="lite">· 10.9%, 7%, 7% and 0.9% of chip demand, 2025</span></div><div class="row"><div class="step mem">
+  <span class="chip c-mem">End market, world</span>
+  <h4>Automotive</h4>
+  <p class="field"><b>Products</b> — Light vehicles — combustion, hybrid and battery-electric; ADAS and cockpit systems</p>
+  <p class="field"><b>Lead chips</b> — MCUs, SiC and IGBT power devices, analog and PMICs, ADAS SoCs, radar and image sensors, battery management ICs</p>
+  <p class="field pos"><b>Position</b> — #3 — 10.9% of chip demand, 2025, down from 12.7%; 91.9m light vehicles sold, 2025; 2026F 89.4m, −2.7% (S&amp;P Global Mobility)</p>
+</div><div class="step mem">
+  <span class="chip c-mem">End market, world</span>
+  <h4>Consumer electronics</h4>
+  <p class="field"><b>Products</b> — TVs, game consoles, wearables, set-top boxes, audio devices</p>
+  <p class="field"><b>Lead chips</b> — TV SoCs, display drivers, DRAM and flash, console APUs, Bluetooth and Wi-Fi SoCs, MEMS sensors</p>
+  <p class="field pos"><b>Position</b> — #4 — 7% of chip demand, 2025, down from 9.9%, level with industrial; 196.2m TVs shipped, 2025, −0.8%; 2026F 194.7m, −0.8% (TrendForce)</p>
+</div><div class="step mem">
+  <span class="chip c-mem">End market, world</span>
+  <h4>Industrial</h4>
+  <p class="field"><b>Products</b> — Factory automation and robots, power and energy equipment, appliances, medical and test equipment</p>
+  <p class="field"><b>Lead chips</b> — MCUs, FPGAs, power discretes and modules, analog and sensor ICs, industrial Ethernet PHYs</p>
+  <p class="field pos"><b>Position</b> — #4 — 7% of chip demand, 2025, down from 8.4%, level with consumer electronics; &gt;600,000 industrial robots installed, 2025, +11% (IFR)</p>
+</div><div class="step mem">
+  <span class="chip c-mem">End market, world</span>
+  <h4>Government and aerospace</h4>
+  <p class="field"><b>Products</b> — Defence electronics, radar and electronic warfare, satellites and launch systems, avionics</p>
+  <p class="field"><b>Lead chips</b> — Radiation-hardened FPGAs and processors, GaN RF and MMICs, infrared sensors, secure MCUs</p>
+  <p class="field pos"><b>Position</b> — Niche — 0.9% of chip demand, 2025, the smallest end use; world military spending US$2.89tn, 2025, +2.9% (SIPRI)</p>
+</div></div><div class="link"><b>Read on</b> — demand, chip content and suppliers for each market are on the <a href="downstream-en.html">Downstream End Markets</a> page: <a href="downstream-en.html#part-b">B data centre</a>, <a href="downstream-en.html#part-c">C smartphone</a>, <a href="downstream-en.html#part-d">D PC</a>, <a href="downstream-en.html#part-e">E automotive</a>, <a href="downstream-en.html#part-f">F industrial, consumer and communications</a> and <a href="downstream-en.html#part-g">G Taiwan</a>.</div></div>
+</div>
+
+<footer class="site-foot">
+  <div class="sf-id">
+    <img src="assets/photo-sm.jpg" alt="Ethan Chen" width="44" height="44" loading="lazy">
+    <div><div class="sf-name"><a href="index.html">Ethan Chen</a></div><div class="sf-sub">Semiconductor Research Notes</div></div>
+  </div>
+  <div class="sf-contact">
+    <a href="mailto:ethanchen@qtumic.com">ethanchen@qtumic.com</a>
+    <a href="https://www.linkedin.com/in/hao-chen-194981297" target="_blank" rel="me noopener">LinkedIn</a>
+  </div>
+  <div class="sf-note">Personal research notes, not investment advice. © 2026 Ethan Chen</div>
+</footer>
+</div>
+</body>
+</html>
