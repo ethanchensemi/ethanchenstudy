@@ -109,6 +109,36 @@ tr{page-break-inside:avoid}
 @media (max-width:900px){.tocgrid{grid-template-columns:1fr 1fr}}
 @media (max-width:640px){.wrap{padding:28px 14px 60px}.masthead h1{font-size:22px}.tocgrid{grid-template-columns:1fr}}
 @media print{.backbar{display:none}.scroller{overflow:visible}}
+
+/* C2 product ladder (2026-10-14) */
+.mlad{border:1px solid var(--rule);background:var(--card)}
+.ml-rung{display:grid;grid-template-columns:92px minmax(0,1fr) minmax(0,1.35fr);border-bottom:1px solid var(--rule-soft)}
+.ml-rung:last-child{border-bottom:none}
+.ml-g{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:3px;padding:12px 6px;background:var(--gb);color:var(--gf)}
+.ml-g b{font-size:21px;font-weight:700;line-height:1;letter-spacing:.01em}
+.ml-g span{font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;opacity:.85}
+.ml-spec{padding:11px 14px;border-right:1px solid var(--rule-soft)}
+.ml-ref{margin:0 0 7px;font-size:13px;line-height:1.5;color:var(--ink)}
+.ml-chips{display:flex;flex-wrap:wrap;gap:5px 6px;margin:0}
+.ml-chips span{font-size:12px;line-height:1.4;padding:2px 8px;border:1px solid var(--rule);border-radius:12px;color:var(--ink-2);background:#FAFBFC}
+.ml-chips i{font-style:normal;color:var(--ink-3);margin-right:5px}
+.ml-vars{display:flex;flex-direction:column;justify-content:center;padding:6px 14px}
+.ml-var{display:grid;grid-template-columns:104px 132px minmax(0,1fr);gap:4px 12px;align-items:baseline;padding:6px 0;border-bottom:1px dashed var(--rule-soft)}
+.ml-var:last-child{border-bottom:none}
+.ml-vn{font-size:13px;font-weight:600;color:var(--ink)}
+.ml-vn em{display:block;font-style:normal;font-size:10.5px;font-weight:600;letter-spacing:.04em;color:#B85C10;margin-top:1px}
+.ml-p{display:flex;flex-direction:column;gap:4px}
+.ml-p b{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12.5px;font-weight:600;color:var(--ink)}
+.ml-bar{display:block;height:5px;border-radius:3px;background:var(--ccl);opacity:.75}
+.ml-use{font-size:13px;line-height:1.5;color:var(--ink-2)}
+.ml-head{display:grid;grid-template-columns:92px minmax(0,1fr) minmax(0,1.35fr);background:#EEF2F3;border-bottom:1px solid var(--rule)}
+.ml-head span{padding:7px 14px;font-size:11.5px;font-weight:600;color:var(--ink-2)}
+.ml-head span:first-child{text-align:center;padding:7px 6px}
+.ml-vn:empty{visibility:hidden}
+.ml-note{margin:8px 0 14px;font-size:11.5px;line-height:1.55;color:var(--ink-3)}
+.ml-sub{font-size:13px;font-weight:600;color:var(--ink-2);margin:4px 0 8px}
+@media (max-width:900px){.ml-head{display:none}.ml-rung{grid-template-columns:72px minmax(0,1fr)}.ml-vars{grid-column:1/-1;border-top:1px solid var(--rule-soft)}.ml-spec{border-right:none}}
+@media (max-width:640px){.ml-var{grid-template-columns:1fr;gap:2px}.ml-vn:empty{display:none}.ml-g b{font-size:18px}}
 </style>
 <style id="site-chrome">
 /* site chrome (added by build) */
@@ -399,24 +429,23 @@ tr{page-break-inside:avoid}
 </div>
 
 <div class="psec" id="c2">
-  <div class="psec-head"><span class="pno mono">C2</span><h3>Product Ladder</h3><span class="ptag" style="background:#E1F0E9;color:#2E6B4F">CCL</span></div>
+  <div class="psec-head"><span class="pno mono">C2</span><h3>Product Ladder: What Each M Grade Means</h3><span class="ptag" style="background:#E1F0E9;color:#2E6B4F">CCL</span></div>
+<p class="lede">M grades take their names from Panasonic’s MEGTRON laminates and rank CCL by signal loss (Df): each step up swaps in a lower-loss resin, glass cloth and copper foil.</p>
+  <div class="mlad">
+    <div class="ml-head"><span>Grade</span><span>Reference Laminate and Materials</span><span>Price, NT$/sheet · Where It Goes</span></div>
+    <div class="ml-rung" style="--gb:#2E6B4F;--gf:#FFFFFF"><div class="ml-g"><b>M9</b><span>High end</span></div><div class="ml-spec"><p class="ml-ref">No MEGTRON grade (Panasonic’s line ends at MEGTRON 8) · industry target Df 0.0007 or lower</p><p class="ml-chips"><span><i>Resin</i>PPE and hydrocarbon blends</span><span><i>Glass</i>Low-Dk2 or quartz</span><span><i>Copper</i>HVLP4–5</span></p></div><div class="ml-vars"><div class="ml-var"><span class="ml-vn">M9 Q-glass<em>Ramping</em></span><span class="ml-p"><b>11,000–13,000</b> </span><span class="ml-use">VR200 midplane, VR300 switch and midplane, LPU boards</span></div><div class="ml-var"><span class="ml-vn">M9 Low-Dk2</span><span class="ml-p"><b>10,000</b> </span><span class="ml-use">1.6T switches and HGX boards</span></div></div></div>
+    <div class="ml-rung" style="--gb:#3F8A63;--gf:#FFFFFF"><div class="ml-g"><b>M8</b><span>High end</span></div><div class="ml-spec"><p class="ml-ref">MEGTRON 8 · Df 0.0012–0.0016 at 14 GHz · Panasonic aims it at 800 GbE (112 Gbps PAM4)</p><p class="ml-chips"><span><i>Resin</i>PPE and hydrocarbon blends</span><span><i>Glass</i>Low-Dk or Low-Dk2</span><span><i>Copper</i>HVLP3–4</span></p></div><div class="ml-vars"><div class="ml-var"><span class="ml-vn">M8+</span><span class="ml-p"><b>7,000–8,500</b> </span><span class="ml-use">VR200 switch tray, next-generation ASIC UBB</span></div><div class="ml-var"><span class="ml-vn">M8</span><span class="ml-p"><b>6,000–6,500</b> </span><span class="ml-use">GB300 and VR200 trays, 800G switches, ASIC UBB</span></div></div></div>
+    <div class="ml-rung" style="--gb:#6FAE8A;--gf:#FFFFFF"><div class="ml-g"><b>M7</b><span>High end</span></div><div class="ml-spec"><p class="ml-ref">MEGTRON 7 · Df 0.0023 with low-Dk glass (14 GHz) to 0.0034 with E-glass (13 GHz)</p><p class="ml-chips"><span><i>Resin</i>PPE and hydrocarbon blends</span><span><i>Glass</i>E-glass or Low-Dk</span><span><i>Copper</i>HVLP1–2</span></p></div><div class="ml-vars"><div class="ml-var"> <span class="ml-p"><b>2,000–2,500</b> </span><span class="ml-use">PCIe Gen6, AI servers, OAM boards</span></div></div></div>
+    <div class="ml-rung" style="--gb:#A9D0B9;--gf:#14181C"><div class="ml-g"><b>M6</b><span>Mid</span></div><div class="ml-spec"><p class="ml-ref">MEGTRON 6 · Df 0.0037 with low-Dk glass to 0.0046 with E-glass, at 13 GHz</p><p class="ml-chips"><span><i>Resin</i>PPE blends</span><span><i>Glass</i>E-glass or Low-Dk</span><span><i>Copper</i>HVLP1</span></p></div><div class="ml-vars"><div class="ml-var"> <span class="ml-p"><b>1,400–1,600</b> </span><span class="ml-use">VR300 compute tray hybrid layers, mid-range networking</span></div></div></div>
+    <div class="ml-rung" style="--gb:#D3E7DB;--gf:#14181C"><div class="ml-g"><b>M4</b><span>Low end</span></div><div class="ml-spec"><p class="ml-ref">MEGTRON 4 · Df 0.007 at 13 GHz</p><p class="ml-chips"><span><i>Resin</i>Epoxy</span><span><i>Glass</i>E-glass</span><span><i>Copper</i>Standard (HTE, RTF)</span></p></div><div class="ml-vars"><div class="ml-var"> <span class="ml-p"><b>1,000–1,200</b> </span><span class="ml-use">General server, auto, GB300 compute tray hybrid layers</span></div></div></div>
+    <div class="ml-rung" style="--gb:#E8F2EC;--gf:#14181C"><div class="ml-g"><b>M2</b><span>Low end</span></div><div class="ml-spec"><p class="ml-ref">MEGTRON 2 · Df 0.013 at 10 GHz</p><p class="ml-chips"><span><i>Resin</i>Epoxy</span><span><i>Glass</i>E-glass</span><span><i>Copper</i>Standard (HTE, RTF)</span></p></div><div class="ml-vars"><div class="ml-var"> <span class="ml-p"><b>500–700</b> </span><span class="ml-use">Consumer and commodity boards</span></div></div></div>
+  </div>
+<p class="ml-note">Df: Panasonic’s typical values for the MEGTRON laminate behind each grade name, at 10–14 GHz; the same grade from other makers differs slightly. M8+ and M9 are supply-chain labels with no Panasonic equivalent. Price in NT$ per sheet.</p>
+<p class="ml-sub">What Changes up the Ladder</p>
   <div class="scroller"><table class="ptable">
-    <thead><tr><th class="c1">Grade</th><th class="c2">Price NT$/sheet</th><th>Where It Goes</th></tr></thead>
-    <tbody>
-      <tr class="bucket"><td colspan="3">Low End</td></tr>
-      <tr><td class="pname">M2</td><td class="n">500–700</td><td class="desc">Consumer and commodity boards</td></tr>
-      <tr><td class="pname">M4</td><td class="n">1,000–1,200</td><td class="desc">General server, auto, GB300 compute tray hybrid layers</td></tr>
-      <tr class="bucket"><td colspan="3">Mid</td></tr>
-      <tr><td class="pname">M6</td><td class="n">1,400–1,600</td><td class="desc">VR300 compute tray hybrid layers, mid-range networking</td></tr>
-      <tr class="bucket"><td colspan="3">High End</td></tr>
-      <tr><td class="pname">M7</td><td class="n">2,000–2,500</td><td class="desc">PCIe Gen6, AI servers, OAM boards</td></tr>
-      <tr><td class="pname">M8</td><td class="n">6,000–6,500</td><td class="desc">GB300 and VR200 trays, 800G switches, ASIC UBB</td></tr>
-      <tr><td class="pname">M8+</td><td class="n">7,000–8,500</td><td class="desc">VR200 switch tray, next-generation ASIC UBB</td></tr>
-      <tr><td class="pname">M9 Low-Dk2</td><td class="n">10,000</td><td class="desc">1.6T switches and HGX boards</td></tr>
-      <tr class="bucket"><td colspan="3">Ramping</td></tr>
-      <tr><td class="pname">M9 Q-glass</td><td class="n">11,000–13,000</td><td class="desc">VR200 midplane, VR300 switch and midplane, LPU boards</td></tr>
-</tbody>
-</table></div>
+    <thead><tr><th class="c1">Lever</th><th class="cw">Low Grades</th><th class="cw">High Grades</th><th>Why It Matters</th></tr></thead>
+    <tbody><tr><td class="pname">Resin</td><td class="desc">Epoxy, M2–M4</td><td class="desc">PPE blends from M6; hydrocarbon added from M7</td><td class="desc">The largest lever on Df: resins with fewer polar groups turn less of the signal into heat (C3)</td></tr><tr><td class="pname">Glass Cloth</td><td class="desc">E-glass, Dk about 6.6</td><td class="desc">Low-Dk glass (Dk about 4.4), then Low-Dk2, then quartz (Dk about 3.7)</td><td class="desc">Lower-Dk glass lets the signal travel faster and lose less</td></tr><tr><td class="pname">Copper Foil</td><td class="desc">Standard foil (HTE, RTF)</td><td class="desc">HVLP1, rising to HVLP4–5 at M9</td><td class="desc">At high frequency the current crowds into the copper surface, so smoother foil loses less</td></tr></tbody>
+  </table></div>
 </div>
 
 <div class="psec" id="c3">
@@ -429,7 +458,7 @@ tr{page-break-inside:avoid}
       <tr><td class="pname">PTFE</td><td class="desc">Beyond M9</td><td class="desc">Switch and midplane boards</td><td class="desc">Best electrical performance available</td><td class="desc">Worst mechanical support, drillability and thermal management</td></tr>
       <tr class="bucket"><td colspan="5">Current</td></tr>
       <tr><td class="pname">Hydrocarbon</td><td class="desc">M7 and above</td><td class="desc">AI compute and switch boards, share rising</td><td class="desc">No polar groups, so the lowest Df in volume production</td><td class="desc">High reactivity, narrow processing window, interface compatibility problems</td></tr>
-      <tr><td class="pname">MPPO / MPPE</td><td class="desc">M7 and above</td><td class="desc">The high-speed volume workhorse</td><td class="desc">Low Df and Dk, low moisture absorption, stable dimensions</td><td class="desc">Base PPO is too viscous to process without modification or blending</td></tr>
+      <tr><td class="pname">MPPO / MPPE</td><td class="desc">M6 and above</td><td class="desc">The high-speed volume workhorse</td><td class="desc">Low Df and Dk, low moisture absorption, stable dimensions</td><td class="desc">Base PPO is too viscous to process without modification or blending</td></tr>
       <tr><td class="pname">Epoxy</td><td class="desc">M4 and below</td><td class="desc">CCL Core and Prepreg at commodity grades. Also reaches the substrate, in glass-epoxy cores and in Build-up Films, ABF included</td><td class="desc">Wide process window, low cost, mature</td><td class="desc">Cannot meet high-frequency, high-speed requirements</td></tr>
       <tr><td class="pname">BMI</td><td class="desc">Blend component</td><td class="desc">Blended into high grades, never a base system</td><td class="desc">Thermal stability, radiation and corrosion resistance, lower cost</td><td class="desc">Brittle, poor impact resistance</td></tr>
 </tbody>
