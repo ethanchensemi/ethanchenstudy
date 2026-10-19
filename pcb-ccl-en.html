@@ -136,7 +136,7 @@ tr{page-break-inside:avoid}
 .ml-head span:first-child{text-align:center;padding:7px 6px}
 .ml-vn:empty{visibility:hidden}
 .ml-note{margin:8px 0 14px;font-size:11.5px;line-height:1.55;color:var(--ink-3)}
-.ml-sub{font-size:13px;font-weight:600;color:var(--ink-2);margin:4px 0 8px}
+.ml-sub{font-size:13px;font-weight:600;color:var(--ink-2);margin:18px 0 8px}
 @media (max-width:900px){.ml-head{display:none}.ml-rung{grid-template-columns:72px minmax(0,1fr)}.ml-vars{grid-column:1/-1;border-top:1px solid var(--rule-soft)}.ml-spec{border-right:none}}
 @media (max-width:640px){.ml-var{grid-template-columns:1fr;gap:2px}.ml-vn:empty{display:none}.ml-g b{font-size:18px}}
 </style>
@@ -408,7 +408,7 @@ tr{page-break-inside:avoid}
 
 <div class="psec" id="c1">
   <div class="psec-head"><span class="pno mono">C1</span><h3>Cost Structure</h3><span class="ptag" style="background:#E1F0E9;color:#2E6B4F">CCL</span></div>
-<p class="lede">Grade migration confers pricing power on Glass Cloth and Copper Foil but not on resin, so resin suppliers grow through design wins and spec migration rather than through price.</p>
+<p class="lede">The share of CCL cost taken by each input and the parameters that define laminate performance.</p>
   <div class="scroller"><table class="ptable">
     <thead><tr><th class="c1">Cost Line</th><th class="cs">Actual</th><th>Comment</th></tr></thead>
     <tbody>
@@ -430,7 +430,7 @@ tr{page-break-inside:avoid}
 
 <div class="psec" id="c2">
   <div class="psec-head"><span class="pno mono">C2</span><h3>Product Ladder: What Each M Grade Means</h3><span class="ptag" style="background:#E1F0E9;color:#2E6B4F">CCL</span></div>
-<p class="lede">M grades take their names from Panasonic’s MEGTRON laminates and rank CCL by signal loss (Df): each step up swaps in a lower-loss resin, glass cloth and copper foil.</p>
+<p class="lede">How the M grades rank CCL by signal loss (Df), and the resin, glass cloth and copper foil at each step. The grades take their names from Panasonic’s MEGTRON laminates.</p>
   <div class="mlad">
     <div class="ml-head"><span>Grade</span><span>Reference Laminate and Materials</span><span>Price, NT$/sheet · Where It Goes</span></div>
     <div class="ml-rung" style="--gb:#2E6B4F;--gf:#FFFFFF"><div class="ml-g"><b>M9</b><span>High end</span></div><div class="ml-spec"><p class="ml-ref">No MEGTRON grade (Panasonic’s line ends at MEGTRON 8) · industry target Df 0.0007 or lower</p><p class="ml-chips"><span><i>Resin</i>PPE and hydrocarbon blends</span><span><i>Glass</i>Low-Dk2 or quartz</span><span><i>Copper</i>HVLP4–5</span></p></div><div class="ml-vars"><div class="ml-var"><span class="ml-vn">M9 Q-glass<em>Ramping</em></span><span class="ml-p"><b>11,000–13,000</b> </span><span class="ml-use">VR200 midplane, VR300 switch and midplane, LPU boards</span></div><div class="ml-var"><span class="ml-vn">M9 Low-Dk2</span><span class="ml-p"><b>10,000</b> </span><span class="ml-use">1.6T switches and HGX boards</span></div></div></div>
@@ -440,7 +440,7 @@ tr{page-break-inside:avoid}
     <div class="ml-rung" style="--gb:#D3E7DB;--gf:#14181C"><div class="ml-g"><b>M4</b><span>Low end</span></div><div class="ml-spec"><p class="ml-ref">MEGTRON 4 · Df 0.007 at 13 GHz</p><p class="ml-chips"><span><i>Resin</i>Epoxy</span><span><i>Glass</i>E-glass</span><span><i>Copper</i>Standard (HTE, RTF)</span></p></div><div class="ml-vars"><div class="ml-var"> <span class="ml-p"><b>1,000–1,200</b> </span><span class="ml-use">General server, auto, GB300 compute tray hybrid layers</span></div></div></div>
     <div class="ml-rung" style="--gb:#E8F2EC;--gf:#14181C"><div class="ml-g"><b>M2</b><span>Low end</span></div><div class="ml-spec"><p class="ml-ref">MEGTRON 2 · Df 0.013 at 10 GHz</p><p class="ml-chips"><span><i>Resin</i>Epoxy</span><span><i>Glass</i>E-glass</span><span><i>Copper</i>Standard (HTE, RTF)</span></p></div><div class="ml-vars"><div class="ml-var"> <span class="ml-p"><b>500–700</b> </span><span class="ml-use">Consumer and commodity boards</span></div></div></div>
   </div>
-<p class="ml-note">Df: Panasonic’s typical values for the MEGTRON laminate behind each grade name, at 10–14 GHz; the same grade from other makers differs slightly. M8+ and M9 are supply-chain labels with no Panasonic equivalent. Price in NT$ per sheet.</p>
+
 <p class="ml-sub">What Changes up the Ladder</p>
   <div class="scroller"><table class="ptable">
     <thead><tr><th class="c1">Lever</th><th class="cw">Low Grades</th><th class="cw">High Grades</th><th>Why It Matters</th></tr></thead>
@@ -450,7 +450,7 @@ tr{page-break-inside:avoid}
 
 <div class="psec" id="c3">
   <div class="psec-head"><span class="pno mono">C3</span><h3>Resin Systems by Grade</h3><span class="ptag" style="background:#E1F0E9;color:#2E6B4F">CCL</span></div>
-<p class="lede">No maker uses a single resin system. Formulations blend several against target electrical, thermal and processing properties, matched to the specific glass and copper in use. Formulation capability is the core technical asset of a CCL maker.</p>
+<p class="lede">The resin systems that CCL makers blend at each grade, with their strengths and weaknesses.</p>
   <div class="scroller"><table class="ptable">
     <thead><tr><th class="c1">System</th><th class="c2">Grade</th><th class="c2">Used In</th><th class="cw">Strength</th><th class="cw">Weakness</th></tr></thead>
     <tbody>
@@ -472,7 +472,7 @@ tr{page-break-inside:avoid}
 
 <div class="psec" id="d1">
   <div class="psec-head"><span class="pno mono">D1</span><h3>Reading the Build: X+Y+X</h3><span class="ptag" style="background:#FAEEE1;color:#B85C10">PCB</span></div>
-<p class="lede">HLC has no build-up. Every layer is core, pressed once, with mechanical through-holes only. Written as a plain layer count, 44L, or as sub-stacks, 22+22. HDI has one or more build-up layers each side, added serially with laser blind vias. Written X+Y+X, and the tier name counts build-up per side, so 3+N+3 is third-order. mSAP starts from ultra-thin foil and plates the trace up from it. Reaches 18/18μm in production, 10/10μm sampling. Used on high-end HDI and SLP boards. SAP uses no foil at any point: an electroless seed, then plating into a resist mould. Reaches 8/8μm. Used on IC Substrate build-up layers, not on boards.</p>
+<p class="lede">How a board’s build is written: X+Y+X for HDI, which adds build-up layers on each side of a core, and a plain layer count for HLC, which is all core.</p>
   <div class="scroller"><table class="ptable">
     <thead><tr><th class="c1">Element</th><th class="c2">How It Is Made</th><th class="c2">Vias</th><th>Why It Matters</th></tr></thead>
     <tbody>
