@@ -185,6 +185,32 @@ a.chip{text-decoration:none} a.chip:hover{text-decoration:underline}
 .legend .fams.six{grid-template-columns:repeat(6,1fr)}
 @media (max-width:900px){.legend .fams.six{grid-template-columns:1fr 1fr}}
 .backbar .bbr{display:flex;gap:8px;flex-wrap:wrap}
+
+/* uniform step cards (21 Oct 2026) */
+.row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:12px}
+.route .row{grid-template-columns:minmax(0,1fr)}
+@media (max-width:900px){.row{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.row{grid-template-columns:minmax(0,1fr)}}
+.step{min-width:0;padding:11px 14px 13px}
+.step.f-fab,.step.f-test,.step.f-bond,.step.f-dice,.step.f-place,.step.f-cure,.step.f-mold,.step.f-finish,.step.f-optic,.step.f-mech,.step.f-ems,.step.pair,.step.opt{background:var(--card)}
+.step .head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:2px}
+.step .head .idx{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:10.5px;color:var(--ink-3)}
+.step .head .chip{font-size:10.5px;padding:1px 6px;line-height:1.5;white-space:nowrap;background:transparent;border:1px solid currentColor}
+.step h4{margin:4px 0 1px;color:var(--ink)}
+.step .en3{margin:0 0 6px}
+.step .why{margin:0 0 10px;padding:0;border:none;font-size:11.5px;color:var(--ink-3);line-height:1.5}
+.step .kv{display:grid;grid-template-columns:4.3em minmax(0,1fr);gap:0 12px;margin:0;font-size:11.5px;line-height:1.5;border-top:1px solid var(--rule-soft)}
+.step .kv dt{font-weight:600;color:var(--ink-2);padding:6px 0 5px;border-bottom:1px solid var(--rule-soft)}
+html[lang="en"] .step .kv{grid-template-columns:6.7em minmax(0,1fr)}
+.step .kv dd{margin:0;padding:6px 0 5px;color:var(--ink-2);border-bottom:1px solid var(--rule-soft);min-width:0}
+.step .kv dt:last-of-type,.step .kv dd:last-of-type{border-bottom:none;padding-bottom:0}
+.step .kv .it{display:block;padding-left:1em;text-indent:-1em}
+.step .kv .it .co{color:var(--ink-3)}
+.step .kv .it.none{color:var(--ink-3)}
+.step .kv .it.self{color:var(--t-insp);font-weight:600}
+.step .kv a{color:var(--ink-2);text-decoration:none;border-bottom:1px dotted #9AA5AD}
+.step .kv a:hover{color:var(--b);border-color:var(--b)}
+.step .kv b{font-weight:600;color:var(--ink)}
 </style>
 <style id="site-chrome">
 /* site chrome (added by build) */
@@ -288,132 +314,152 @@ a.chip{text-decoration:none} a.chip:hover{text-decoration:underline}
   
 <div class="sub p">A1 FEOL — runs once <span class="en3">A-01 to A-14</span></div>
 <div class="row">
-   <div class="step f-fab" id="st-A-01"><div class="idx">A-01</div><h4>Mask Making</h4>
-    <a class="chip f-fab" href="equipment-en.html#s-1">Wafer Processing</a>
-    <p class="vend">IMS Nanofabrication · Lasertec · NuFlare · KLA · Zeiss</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-2">Mask Blank</a> · <a href="materials-en.html#m-2">EUV Photomask</a> · <a href="materials-en.html#m-2">DUV Photomask</a> · <a href="materials-en.html#m-4">E-Beam Resist</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Actinic EUV inspection · e-beam repair</p>
-    <p class="why">One reusable mask per design layer</p></div>
-   <div class="step f-fab" id="st-A-02"><div class="idx">A-02</div><h4>Epitaxy</h4>
-    <a class="chip f-fab" href="equipment-en.html#s-3">Wafer Processing</a>
-    <p class="vend">ASM · AMAT · Aixtron · Veeco | AMEC · NAURA</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-1">300 mm Prime Silicon Wafer</a> · <a href="materials-en.html#m-5">Silicon and Germanium Source Gases</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-15">Quartz Tube · Boat · Chamber Part</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (thickness, Ge content) · defect inspection</p>
-    <p class="why">Si/SiGe superlattice for the nanosheet channels</p></div>
-   <div class="step f-cure" id="st-A-03"><div class="idx">A-03</div><h4>Oxidation and Furnace Anneal</h4>
-    <a class="chip f-cure" href="equipment-en.html#s-4">Thermal and Cure</a>
-    <p class="vend">TEL · Kokusai · ASM | NAURA · ACM</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-5">Oxidation and Anneal Gases</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-15">Quartz Tube · Boat · Chamber Part</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Film thickness (ellipsometry)</p>
-    <p class="why">Batch furnaces grow the gate oxide</p></div>
-   <div class="step f-fab" id="st-A-04"><div class="idx">A-04</div><h4>Dielectric CVD</h4>
-    <a class="chip f-fab" href="equipment-en.html#s-3">Wafer Processing</a>
-    <p class="vend">AMAT · Lam · TEL · Wonik IPS | Piotech · NAURA</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-6">Dielectric Precursors</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-5">Chamber-Clean Gases</a> · <a href="materials-en.html#m-15">Deposition Chamber Parts</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Film thickness · particle inspection</p>
-    <p class="why">Insulating films between and around the wires</p></div>
-   <div class="step f-fab" id="st-A-05"><div class="idx">A-05</div><h4>ALD</h4>
-    <a class="chip f-fab" href="equipment-en.html#s-3">Wafer Processing</a>
-    <p class="vend">ASM · AMAT · TEL · Lam · Kokusai | Leadmicro · Piotech</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-5">Oxidation and Anneal Gases</a> · <a href="materials-en.html#m-6">ALD Precursors</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-5">Chamber-Clean Gases</a> · <a href="materials-en.html#m-15">Deposition Chamber Parts</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Film thickness, Ångström level</p>
-    <p class="why">One monolayer per cycle for high-k gate dielectric</p></div>
-   <div class="step f-fab" id="st-A-06"><div class="idx">A-06</div><h4>Resist Coating</h4>
-    <a class="chip f-fab" href="equipment-en.html#s-1">Wafer Processing</a>
-    <p class="vend">TEL · SCREEN · SEMES | Kingsemi</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-4">Photoresist</a> · <a href="materials-en.html#m-4">BARC · SOC · Hard-Mask Underlayer</a> · <a href="materials-en.html#m-4">HMDS Adhesion Primer</a> · <a href="materials-en.html#m-4">Thinner and Edge-Bead Remover</a> · <a href="materials-en.html#m-15">Resist Point-of-Use Filter</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Resist thickness · defect scan</p>
-    <p class="why">Spin-coated on a track docked to the scanner</p></div>
-   <div class="step f-fab" id="st-A-07"><div class="idx">A-07</div><h4>EUV Exposure</h4>
-    <a class="chip f-fab" href="equipment-en.html#s-1">Wafer Processing</a>
-    <p class="vend">ASML</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-2">EUV Photomask</a> · <a href="materials-en.html#m-2">EUV Pellicle</a> · <a href="materials-en.html#m-4">Photoresist</a> · <a href="materials-en.html#m-5">EUV Source Tin and Hydrogen</a> · <a href="materials-en.html#m-15">EUV Collector Mirror</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;CD-SEM · overlay</p>
-    <p class="why">13.5 nm light prints the critical layers</p></div>
-   <div class="step f-fab" id="st-A-08"><div class="idx">A-08</div><h4>DUV Exposure</h4>
-    <a class="chip f-fab" href="equipment-en.html#s-1">Wafer Processing</a>
-    <p class="vend">ASML · Nikon · Canon | SMEE</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-2">DUV Photomask</a> · <a href="materials-en.html#m-2">DUV Pellicle</a> · <a href="materials-en.html#m-4">Photoresist</a> · <a href="materials-en.html#m-5">Excimer Laser Gas</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;CD-SEM · overlay</p>
-    <p class="why">193 nm immersion prints the remaining layers</p></div>
-   <div class="step f-fab" id="st-A-09"><div class="idx">A-09</div><h4>Post-Exposure Bake and Develop</h4>
-    <a class="chip f-fab" href="equipment-en.html#s-1">Wafer Processing</a>
-    <p class="vend">TEL · SCREEN · SEMES</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-4">Photoresist</a> · <a href="materials-en.html#m-4">TMAH Developer</a> · <a href="materials-en.html#m-7">Surfactant Rinse</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;After-develop inspection: CD-SEM · defect scan</p>
-    <p class="why">Bake fixes the image, developer opens the pattern</p></div>
-   <div class="step f-fab" id="st-A-10"><div class="idx">A-10</div><h4>Plasma Etch</h4>
-    <a class="chip f-fab" href="equipment-en.html#s-2">Wafer Processing</a>
-    <p class="vend">Lam · TEL · AMAT · Hitachi High-Tech | NAURA · AMEC</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-4">Photoresist</a> · <a href="materials-en.html#m-4">BARC · SOC · Hard-Mask Underlayer</a> · <a href="materials-en.html#m-5">Etch Gases</a> · <a href="materials-en.html#m-15">Etch Chamber Parts</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;After-etch inspection: CD-SEM · defect scan</p>
-    <p class="why">Transfers the pattern into silicon, metal or dielectric</p></div>
-   <div class="step f-fab" id="st-A-11"><div class="idx">A-11</div><h4>Resist Strip</h4>
-    <a class="chip f-fab" href="equipment-en.html#s-2">Wafer Processing</a>
-    <p class="vend">PSK · Lam · ULVAC | Mattson · NAURA</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-4">Photoresist</a> · <a href="materials-en.html#m-5">Strip Gases</a> · <a href="materials-en.html#m-7">Post-Etch Residue Remover</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Residue inspection</p>
-    <p class="why">Oxygen plasma removes the used resist</p></div>
-   <div class="step f-fab" id="st-A-12"><div class="idx">A-12</div><h4>Ion Implantation</h4>
-    <a class="chip f-fab" href="equipment-en.html#s-4">Wafer Processing</a>
-    <p class="vend">AMAT · Axcelis · SMIT · Nissin Ion · <span class="tw">AIBT</span> | Kingstone · CETC</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-5">Dopant Gases</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-15">Ion-Source Parts</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Sheet resistance · dose monitor</p>
-    <p class="why">Dopes source, drain, wells and threshold layers</p></div>
-   <div class="step f-cure" id="st-A-13"><div class="idx">A-13</div><h4>Rapid Thermal and Laser Anneal</h4>
-    <a class="chip f-cure" href="equipment-en.html#s-4">Thermal and Cure</a>
-    <p class="vend">AMAT · Veeco · SCREEN | Mattson · NAURA</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-5">Oxidation and Anneal Gases</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-15">Lamp Array and Quartz Window</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Sheet resistance · junction depth</p>
-    <p class="why">Activates dopants without letting them spread</p></div>
-   <div class="step f-fab" id="st-A-14"><div class="idx">A-14</div><h4>Wafer Clean</h4>
-    <a class="chip f-fab" href="equipment-en.html#s-5">Wafer Processing</a>
-    <p class="vend">SCREEN · TEL · Lam · SEMES | ACM · NAURA · Kingsemi</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-7">RCA Clean Chemistry</a> · <a href="materials-en.html#m-15">UPW Consumables</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Particle count (unpatterned inspection)</p>
-    <p class="why">Chemical and megasonic cleans without pattern collapse</p></div>
+   <div class="step f-fab" id="st-A-01"><div class="head"><span class="idx">A-01</span><a class="chip f-fab" href="equipment-en.html#s-1">Wafer Processing</a></div><h4>Mask Making</h4>
+    <p class="why">One reusable mask per design layer</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">IMS Nanofabrication · Lasertec · NuFlare · KLA · Zeiss</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-2">Mask Blank</a> <span class="co">Hoya · AGC</span></span><span class="it"><a href="materials-en.html#m-2">EUV Photomask</a> <span class="co">Tekscend Photomask · TSMC in-house</span></span><span class="it"><a href="materials-en.html#m-2">DUV Photomask</a> <span class="co">Tekscend Photomask · TSMC in-house</span></span><span class="it"><a href="materials-en.html#m-4">E-Beam Resist</a> <span class="co">Fujifilm · TOK</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">Actinic EUV inspection <span class="co">Lasertec</span></span><span class="it">E-beam repair <span class="co">Zeiss</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-A-02"><div class="head"><span class="idx">A-02</span><a class="chip f-fab" href="equipment-en.html#s-3">Wafer Processing</a></div><h4>Epitaxy</h4>
+    <p class="why">Si/SiGe superlattice for the nanosheet channels</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">ASM · AMAT · Aixtron · Veeco | AMEC · NAURA</span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-1">300 mm Prime Silicon Wafer</a> <span class="co">Shin-Etsu · SUMCO</span></span><span class="it"><a href="materials-en.html#m-5">Silicon and Germanium Source Gases</a> <span class="co">Linde · Air Liquide</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-15">Quartz Tube · Boat · Chamber Part</a> <span class="co">Heraeus Conamic · Shin-Etsu Quartz</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">Metrology (thickness, Ge content)</span><span class="it">Defect inspection <span class="co">KLA · AMAT</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-cure" id="st-A-03"><div class="head"><span class="idx">A-03</span><a class="chip f-cure" href="equipment-en.html#s-4">Thermal and Cure</a></div><h4>Oxidation and Furnace Anneal</h4>
+    <p class="why">Batch furnaces grow the gate oxide</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">TEL · Kokusai · ASM | NAURA · ACM</span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-5">Oxidation and Anneal Gases</a> <span class="co">Linde · Air Liquide</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-15">Quartz Tube · Boat · Chamber Part</a> <span class="co">Heraeus Conamic · Shin-Etsu Quartz</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">Film thickness (ellipsometry) <span class="co">KLA · Onto</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-A-04"><div class="head"><span class="idx">A-04</span><a class="chip f-fab" href="equipment-en.html#s-3">Wafer Processing</a></div><h4>Dielectric CVD</h4>
+    <p class="why">Insulating films between and around the wires</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">AMAT · Lam · TEL · Wonik IPS | Piotech · NAURA</span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-6">Dielectric Precursors</a> <span class="co">Merck · Air Liquide</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-5">Chamber-Clean Gases</a> <span class="co">SK Specialty · Kanto Denka</span></span><span class="it"><a href="materials-en.html#m-15">Deposition Chamber Parts</a> <span class="co">Ferrotec · Kyocera</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">Film thickness <span class="co">KLA · Onto</span></span><span class="it">Particle inspection <span class="co">KLA · Hitachi High-Tech</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-A-05"><div class="head"><span class="idx">A-05</span><a class="chip f-fab" href="equipment-en.html#s-3">Wafer Processing</a></div><h4>ALD</h4>
+    <p class="why">One monolayer per cycle for high-k gate dielectric</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">ASM · AMAT · TEL · Lam · Kokusai | Leadmicro · Piotech</span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-5">Oxidation and Anneal Gases</a> <span class="co">Linde · Air Liquide</span></span><span class="it"><a href="materials-en.html#m-6">ALD Precursors</a> <span class="co">Adeka · Merck</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-5">Chamber-Clean Gases</a> <span class="co">SK Specialty · Kanto Denka</span></span><span class="it"><a href="materials-en.html#m-15">Deposition Chamber Parts</a> <span class="co">Ferrotec · Kyocera</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">Film thickness, Ångström level <span class="co">KLA · Onto</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-A-06"><div class="head"><span class="idx">A-06</span><a class="chip f-fab" href="equipment-en.html#s-1">Wafer Processing</a></div><h4>Resist Coating</h4>
+    <p class="why">Spin-coated on a track docked to the scanner</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">TEL · SCREEN · SEMES | Kingsemi</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-4">Photoresist</a> <span class="co">JSR · TOK</span></span><span class="it"><a href="materials-en.html#m-4">BARC · SOC · Hard-Mask Underlayer</a> <span class="co">Brewer Science · Nissan Chemical</span></span><span class="it"><a href="materials-en.html#m-4">HMDS Adhesion Primer</a> <span class="co">Shin-Etsu · Merck</span></span><span class="it"><a href="materials-en.html#m-4">Thinner and Edge-Bead Remover</a> <span class="co">TOK · Tokuyama</span></span><span class="it"><a href="materials-en.html#m-15">Resist Point-of-Use Filter</a> <span class="co">Entegris · Pall</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">Resist thickness <span class="co">KLA · Onto</span></span><span class="it">Defect scan <span class="co">KLA · AMAT</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-A-07"><div class="head"><span class="idx">A-07</span><a class="chip f-fab" href="equipment-en.html#s-1">Wafer Processing</a></div><h4>EUV Exposure</h4>
+    <p class="why">13.5 nm light prints the critical layers</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">ASML</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-2">EUV Photomask</a> <span class="co">Tekscend Photomask · TSMC in-house</span></span><span class="it"><a href="materials-en.html#m-2">EUV Pellicle</a> <span class="co">Mitsui Chemicals · ASML</span></span><span class="it"><a href="materials-en.html#m-4">Photoresist</a> <span class="co">JSR · TOK</span></span><span class="it"><a href="materials-en.html#m-5">EUV Source Tin and Hydrogen</a> <span class="co">Linde · Air Liquide</span></span><span class="it"><a href="materials-en.html#m-15">EUV Collector Mirror</a> <span class="co">Zeiss SMT · Cymer</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">CD-SEM <span class="co">Hitachi High-Tech · AMAT</span></span><span class="it">Overlay <span class="co">KLA · ASML</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-A-08"><div class="head"><span class="idx">A-08</span><a class="chip f-fab" href="equipment-en.html#s-1">Wafer Processing</a></div><h4>DUV Exposure</h4>
+    <p class="why">193 nm immersion prints the remaining layers</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">ASML · Nikon · Canon | SMEE</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-2">DUV Photomask</a> <span class="co">Tekscend Photomask · TSMC in-house</span></span><span class="it"><a href="materials-en.html#m-2">DUV Pellicle</a> <span class="co">Mitsui Chemicals · Shin-Etsu</span></span><span class="it"><a href="materials-en.html#m-4">Photoresist</a> <span class="co">JSR · TOK</span></span><span class="it"><a href="materials-en.html#m-5">Excimer Laser Gas</a> <span class="co">Linde · Air Liquide</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">CD-SEM <span class="co">Hitachi High-Tech · AMAT</span></span><span class="it">Overlay <span class="co">KLA · ASML</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-A-09"><div class="head"><span class="idx">A-09</span><a class="chip f-fab" href="equipment-en.html#s-1">Wafer Processing</a></div><h4>Post-Exposure Bake and Develop</h4>
+    <p class="why">Bake fixes the image, developer opens the pattern</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">TEL · SCREEN · SEMES</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-4">Photoresist</a> <span class="co">JSR · TOK</span></span><span class="it"><a href="materials-en.html#m-4">TMAH Developer</a> <span class="co">Tokuyama · TOK</span></span><span class="it"><a href="materials-en.html#m-7">Surfactant Rinse</a> <span class="co">Kanto Chemical · Fujifilm</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">After-develop inspection: CD-SEM <span class="co">Hitachi High-Tech · AMAT</span></span><span class="it">Defect scan <span class="co">KLA · AMAT</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-A-10"><div class="head"><span class="idx">A-10</span><a class="chip f-fab" href="equipment-en.html#s-2">Wafer Processing</a></div><h4>Plasma Etch</h4>
+    <p class="why">Transfers the pattern into silicon, metal or dielectric</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Lam · TEL · AMAT · Hitachi High-Tech | NAURA · AMEC</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-4">Photoresist</a> <span class="co">JSR · TOK</span></span><span class="it"><a href="materials-en.html#m-4">BARC · SOC · Hard-Mask Underlayer</a> <span class="co">Brewer Science · Nissan Chemical</span></span><span class="it"><a href="materials-en.html#m-5">Etch Gases</a> <span class="co">SK Specialty · Kanto Denka</span></span><span class="it"><a href="materials-en.html#m-15">Etch Chamber Parts</a> <span class="co">Silfex · Hana Materials</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">After-etch inspection: CD-SEM <span class="co">Hitachi High-Tech · AMAT</span></span><span class="it">Defect scan <span class="co">KLA · AMAT</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-A-11"><div class="head"><span class="idx">A-11</span><a class="chip f-fab" href="equipment-en.html#s-2">Wafer Processing</a></div><h4>Resist Strip</h4>
+    <p class="why">Oxygen plasma removes the used resist</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">PSK · Lam · ULVAC | Mattson · NAURA</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-4">Photoresist</a> <span class="co">JSR · TOK</span></span><span class="it"><a href="materials-en.html#m-5">Strip Gases</a> <span class="co">Linde · Air Liquide</span></span><span class="it"><a href="materials-en.html#m-7">Post-Etch Residue Remover</a> <span class="co">Entegris · Qnity</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">Residue inspection <span class="co">KLA · AMAT</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-A-12"><div class="head"><span class="idx">A-12</span><a class="chip f-fab" href="equipment-en.html#s-4">Wafer Processing</a></div><h4>Ion Implantation</h4>
+    <p class="why">Dopes source, drain, wells and threshold layers</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">AMAT · Axcelis · SMIT · Nissin Ion · <span class="tw">AIBT</span> | Kingstone · CETC</span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-5">Dopant Gases</a> <span class="co">Entegris · Merck</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-15">Ion-Source Parts</a> <span class="co">AMAT · Axcelis</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">Sheet resistance <span class="co">KLA</span></span><span class="it">Dose monitor <span class="co">KLA</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-cure" id="st-A-13"><div class="head"><span class="idx">A-13</span><a class="chip f-cure" href="equipment-en.html#s-4">Thermal and Cure</a></div><h4>Rapid Thermal and Laser Anneal</h4>
+    <p class="why">Activates dopants without letting them spread</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">AMAT · Veeco · SCREEN | Mattson · NAURA</span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-5">Oxidation and Anneal Gases</a> <span class="co">Linde · Air Liquide</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-15">Lamp Array and Quartz Window</a> <span class="co">Ushio · Excelitas</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">Sheet resistance <span class="co">KLA</span></span><span class="it">Junction depth</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-A-14"><div class="head"><span class="idx">A-14</span><a class="chip f-fab" href="equipment-en.html#s-5">Wafer Processing</a></div><h4>Wafer Clean</h4>
+    <p class="why">Chemical and megasonic cleans without pattern collapse</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">SCREEN · TEL · Lam · SEMES | ACM · NAURA · Kingsemi</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-7">RCA Clean Chemistry</a> <span class="co">BASF · Kanto Chemical</span></span><span class="it"><a href="materials-en.html#m-15">UPW Consumables</a> <span class="co">Entegris · Pall</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">Particle count (unpatterned inspection) <span class="co">KLA · Hitachi High-Tech</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
 </div>
 <div class="sub p">A2 BEOL — once per metal layer, about 15 times <span class="en3">A-04 → A-06 to A-09 → A-10 → A-11 → A-14 → A-15 → A-16 → A-17</span></div>
 <div class="row">
-   <div class="step f-fab" id="st-A-15"><div class="idx">A-15</div><h4>Barrier and Seed PVD</h4>
-    <a class="chip f-fab" href="equipment-en.html#s-3">Wafer Processing</a>
-    <p class="vend">AMAT · ULVAC · Canon Anelva | NAURA</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-6">Sputter Targets</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-15">PVD Process Kit</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Film thickness · resistivity</p>
-    <p class="why">Base for every plated copper layer</p></div>
-   <div class="step f-fab" id="st-A-16"><div class="idx">A-16</div><h4>Copper Electroplating</h4>
-    <a class="chip f-fab" href="equipment-en.html#s-3">Wafer Processing</a>
-    <p class="vend">Lam · AMAT · TEL | ACM</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-9">Copper Plating Bath and Additives</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-9">Copper and Tin Anodes</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Void inspection · thickness</p>
-    <p class="why">Void-free bottom-up fill of trenches and vias</p></div>
-   <div class="step f-fab" id="st-A-17"><div class="idx">A-17</div><h4>CMP</h4>
-    <a class="chip f-fab" href="equipment-en.html#s-5">Wafer Processing</a>
-    <p class="vend">AMAT · Ebara | Consumables: DuPont · Fujimi · 3M <span class="tw">Kinik</span> | Hwatsing · ACM</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-8">CMP Slurry</a> · <a href="materials-en.html#m-8">Polishing Pad</a> · <a href="materials-en.html#m-8">Diamond Conditioner Disk</a> · <a href="materials-en.html#m-8">Post-CMP Cleaner and PVA Brush</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Thickness · dishing and erosion · post-CMP defect scan</p>
-    <p class="why">Flattens each layer before the next lithography</p></div>
+   <div class="step f-fab" id="st-A-15"><div class="head"><span class="idx">A-15</span><a class="chip f-fab" href="equipment-en.html#s-3">Wafer Processing</a></div><h4>Barrier and Seed PVD</h4>
+    <p class="why">Base for every plated copper layer</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">AMAT · ULVAC · Canon Anelva | NAURA</span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-6">Sputter Targets</a> <span class="co">JX Metals · Honeywell</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-15">PVD Process Kit</a> <span class="co">Ferrotec · Ultra Clean</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">Film thickness <span class="co">KLA · Onto</span></span><span class="it">Resistivity <span class="co">KLA</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-A-16"><div class="head"><span class="idx">A-16</span><a class="chip f-fab" href="equipment-en.html#s-3">Wafer Processing</a></div><h4>Copper Electroplating</h4>
+    <p class="why">Void-free bottom-up fill of trenches and vias</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Lam · AMAT · TEL | ACM</span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-9">Copper Plating Bath and Additives</a> <span class="co">MacDermid Alpha · Atotech</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-9">Copper and Tin Anodes</a> <span class="co">Mitsubishi Materials · JX Metals</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">Void inspection</span><span class="it">Thickness <span class="co">KLA · Onto</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-A-17"><div class="head"><span class="idx">A-17</span><a class="chip f-fab" href="equipment-en.html#s-5">Wafer Processing</a></div><h4>CMP</h4>
+    <p class="why">Flattens each layer before the next lithography</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">AMAT · Ebara | Hwatsing · ACM</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-8">CMP Slurry</a> <span class="co">Entegris · Fujimi</span></span><span class="it"><a href="materials-en.html#m-8">Polishing Pad</a> <span class="co">Qnity · 3M</span></span><span class="it"><a href="materials-en.html#m-8">Diamond Conditioner Disk</a> <span class="co">3M · Saesol</span></span><span class="it"><a href="materials-en.html#m-8">Post-CMP Cleaner and PVA Brush</a> <span class="co">Entegris · Aion</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">Thickness <span class="co">KLA · Onto</span></span><span class="it">Dishing and erosion <span class="co">Bruker · KLA</span></span><span class="it">Post-CMP defect scan <span class="co">KLA · AMAT</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
 </div>
 <div class="sub p">A3 Process control and wafer test <span class="en3">A-18 and A-19 sampled after litho, etch and CMP; A-20 after the last layer</span></div>
 <div class="row">
-   <div class="step f-test" id="st-A-18"><div class="idx">A-18</div><h4>Defect Inspection</h4>
-    <a class="chip f-test" href="equipment-en.html#s-6">Test and Inspection</a>
-    <p class="vend">KLA · AMAT · ASML · Hitachi High-Tech | Skyverse · Jingce</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-1">Monitor and Reclaim Wafer</a></span></p>
-    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: optical scan · e-beam review</p>
-    <p class="why">Finds defects below 20 nm</p></div>
-   <div class="step f-test" id="st-A-19"><div class="idx">A-19</div><h4>CD, Overlay and Film Metrology</h4>
-    <a class="chip f-test" href="equipment-en.html#s-6">Test and Inspection</a>
-    <p class="vend">KLA · Hitachi High-Tech · ASML · Nova · Onto | Skyverse · Jingce · DJEL</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-1">Monitor and Reclaim Wafer</a></span></p>
-    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: CD-SEM · overlay · scatterometry</p>
-    <p class="why">Feeds corrections back to the scanner</p></div>
-   <div class="step f-test" id="st-A-20"><div class="idx">A-20</div><h4>Wafer Test (KGD)</h4>
-    <a class="chip f-test" href="equipment-en.html#s-7">Test and Inspection</a>
-    <p class="vend">Advantest · Teradyne · TEL · FormFactor · <span class="tw">MPI</span> · <span class="tw">CHPT</span> | Changchuan</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-14">Probe Card</a></span></p>
-    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: electrical test</p>
-    <p class="why">The yield gate before stacking</p></div>
+   <div class="step f-test" id="st-A-18"><div class="head"><span class="idx">A-18</span><a class="chip f-test" href="equipment-en.html#s-6">Test and Inspection</a></div><h4>Defect Inspection</h4>
+    <p class="why">Finds defects below 20 nm</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">KLA · AMAT · ASML · Hitachi High-Tech | Skyverse · Jingce</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it self">This step is the check</span><span class="it">Optical scan</span><span class="it">E-beam review</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it"><a href="materials-en.html#m-1">Monitor and Reclaim Wafer</a> <span class="co">SUMCO · Shin-Etsu</span></span></dd></dl></div>
+   <div class="step f-test" id="st-A-19"><div class="head"><span class="idx">A-19</span><a class="chip f-test" href="equipment-en.html#s-6">Test and Inspection</a></div><h4>CD, Overlay and Film Metrology</h4>
+    <p class="why">Feeds corrections back to the scanner</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">KLA · Hitachi High-Tech · ASML · Nova · Onto | Skyverse · Jingce · DJEL</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it self">This step is the check</span><span class="it">CD-SEM</span><span class="it">Overlay</span><span class="it">Scatterometry</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it"><a href="materials-en.html#m-1">Monitor and Reclaim Wafer</a> <span class="co">SUMCO · Shin-Etsu</span></span></dd></dl></div>
+   <div class="step f-test" id="st-A-20"><div class="head"><span class="idx">A-20</span><a class="chip f-test" href="equipment-en.html#s-7">Test and Inspection</a></div><h4>Wafer Test (KGD)</h4>
+    <p class="why">The yield gate before stacking</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Advantest · Teradyne · TEL · FormFactor · <span class="tw">MPI</span> · <span class="tw">CHPT</span> | Changchuan</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it self">This step is the check</span><span class="it">Electrical test</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it"><a href="materials-en.html#m-14">Probe Card</a> <span class="co">FormFactor · Technoprobe</span></span></dd></dl></div>
 
   </div>
  </div>
@@ -429,86 +475,99 @@ a.chip{text-decoration:none} a.chip:hover{text-decoration:underline}
  </div>
  <div class="body">
   <div class="row">
-   <div class="step f-bond" id="st-04"><div class="idx">B-04</div><h4>Temporary Bonding</h4>
-    <a class="chip f-bond" href="equipment-en.html#s-8">Bonding and Thinning</a>
-    <p class="vend">EVG · SUSS MicroTec · TOK (Materials)</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-1">Glass or Silicon Carrier Wafer</a> · <a href="materials-en.html#m-10">Temporary Bonding Adhesive</a> · <a href="materials-en.html#m-10">Laser Release Layer</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (adhesive thickness, alignment)</p>
-    <p class="why">Carrier support for the brittle thinned wafer</p></div>
-   <div class="step f-cure" id="st-05"><div class="idx">B-05</div><h4>Post-Bond Cure</h4>
-    <a class="chip f-cure" href="equipment-en.html#s-4">Thermal and Cure</a>
-    <p class="vend"><span class="tw">C SUN</span> · Koyo Thermo</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-10">Temporary Bonding Adhesive</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (warpage)</p>
-    <p class="why">Holds the wafer still during grinding</p></div>
-   <div class="step f-bond pair" id="st-06a"><div class="idx">B-06a</div><h4>Coarse &amp; Fine Grinding</h4>
-    <a class="chip f-bond" href="equipment-en.html#s-8">Bonding and Thinning</a>
-    <p class="vend"><b>DISCO</b> · Tokyo Seimitsu · Okamoto</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-10">Diamond Grinding Wheel</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (thickness, total thickness variation)</p>
-    <p class="why">Fast removal that leaves sub-surface micro-cracks</p></div>
-   <div class="step f-fab pair" id="st-06b"><div class="idx">B-06b</div><h4>CMP Polishing</h4>
-    <a class="chip f-fab" href="equipment-en.html#s-5">Wafer Processing</a>
-    <p class="vend"><b>AMAT</b> · Ebara · ACM Research · <span class="tw">Kinik</span> (Consumables)</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-8">CMP Slurry</a> · <a href="materials-en.html#m-8">Polishing Pad</a> · <a href="materials-en.html#m-8">Diamond Conditioner Disk</a> · <a href="materials-en.html#m-8">Post-CMP Cleaner and PVA Brush</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (scratches, slurry residue) · metrology · SEM (on excursion)</p>
-    <p class="why">Removes the micro-cracks left by grinding</p></div>
+   <div class="step f-bond" id="st-04"><div class="head"><span class="idx">B-04</span><a class="chip f-bond" href="equipment-en.html#s-8">Bonding and Thinning</a></div><h4>Temporary Bonding</h4>
+    <p class="why">Carrier support for the brittle thinned wafer</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">EVG · SUSS MicroTec</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-1">Glass or Silicon Carrier Wafer</a> <span class="co">Corning · AGC</span></span><span class="it"><a href="materials-en.html#m-10">Temporary Bonding Adhesive</a> <span class="co">Brewer Science · TOK</span></span><span class="it"><a href="materials-en.html#m-10">Laser Release Layer</a> <span class="co">3M · Brewer Science</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">Metrology (adhesive thickness, alignment)</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-cure" id="st-05"><div class="head"><span class="idx">B-05</span><a class="chip f-cure" href="equipment-en.html#s-4">Thermal and Cure</a></div><h4>Post-Bond Cure</h4>
+    <p class="why">Holds the wafer still during grinding</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it"><span class="tw">C SUN</span> · Koyo Thermo</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-10">Temporary Bonding Adhesive</a> <span class="co">Brewer Science · TOK</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">Metrology (warpage)</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-bond pair" id="st-06a"><div class="head"><span class="idx">B-06a</span><a class="chip f-bond" href="equipment-en.html#s-8">Bonding and Thinning</a></div><h4>Coarse &amp; Fine Grinding</h4>
+    <p class="why">Fast removal that leaves sub-surface micro-cracks</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it"><b>DISCO</b> · Tokyo Seimitsu · Okamoto</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-10">Diamond Grinding Wheel</a> <span class="co">DISCO · Asahi Diamond</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">Metrology (thickness, total thickness variation)</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab pair" id="st-06b"><div class="head"><span class="idx">B-06b</span><a class="chip f-fab" href="equipment-en.html#s-5">Wafer Processing</a></div><h4>CMP Polishing</h4>
+    <p class="why">Removes the micro-cracks left by grinding</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it"><b>AMAT</b> · Ebara · ACM Research</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-8">CMP Slurry</a> <span class="co">Entegris · Fujimi</span></span><span class="it"><a href="materials-en.html#m-8">Polishing Pad</a> <span class="co">Qnity · 3M</span></span><span class="it"><a href="materials-en.html#m-8">Diamond Conditioner Disk</a> <span class="co">3M · Saesol</span></span><span class="it"><a href="materials-en.html#m-8">Post-CMP Cleaner and PVA Brush</a> <span class="co">Entegris · Aion</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">AOI (scratches, slurry residue) <span class="co">Camtek · Onto</span></span><span class="it">Metrology</span><span class="it">SEM (on excursion) <span class="co">Thermo Fisher · Hitachi High-Tech</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
   </div>
   <div class="row">
-   <div class="step f-mold" id="st-07"><div class="idx">B-07</div><h4>Wafer Vacuum Lamination</h4>
-    <a class="chip f-mold" href="equipment-en.html#s-11">Dispense and Encapsulation</a>
-    <p class="vend">Takatori · Nitto Denko (Materials)</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-11">Die-Attach and Backside Protection Film</a> · <a href="materials-en.html#m-11">Non-Conductive Film</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<span class="none">—</span></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (bubbles, wrinkles)</p>
-    <p class="why">No trapped bubbles to cause later defects</p></div>
-   <div class="step f-fab" id="st-08a"><div class="idx">B-08a</div><h4>Packaging Lithography</h4>
-    <a class="chip f-fab" href="equipment-en.html#s-1">Wafer Processing</a>
-    <p class="vend">Canon · Nikon · Veeco · Onto · <span class="tw">C SUN</span> | SMEE</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-4">PSPI Dielectric</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-2">Packaging Photomask</a> · <a href="materials-en.html#m-4">Thinner and Edge-Bead Remover</a> · <a href="materials-en.html#m-4">TMAH Developer</a> · <a href="materials-en.html#m-4">Thick Packaging Resist and Dry Film</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (line defects) · overlay</p>
-    <p class="why">Prints RDL and bump patterns in thick resist</p></div>
-   <div class="step f-fab" id="st-08b"><div class="idx">B-08b</div><h4>TSV Reveal Etch</h4>
-    <a class="chip f-fab" href="equipment-en.html#s-2">Wafer Processing</a>
-    <p class="vend">Lam · SPTS · AMAT · Plasma-Therm · <span class="tw">Skytech</span> | AMEC · NAURA</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-5">Etch Gases</a> · <a href="materials-en.html#m-7">Backside Etch and Clean Chemistry</a> · <a href="materials-en.html#m-15">Etch Chamber Parts</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (reveal height) · SEM</p>
-    <p class="why">Exposes the copper TSV tips for contact</p></div>
-   <div class="step f-fab" id="st-08c"><div class="idx">B-08c</div><h4>Seed-Layer PVD</h4>
-    <a class="chip f-fab" href="equipment-en.html#s-3">Wafer Processing</a>
-    <p class="vend">SPTS · Evatec · ULVAC · <span class="tw">Skytech</span> · <span class="tw">Youwei</span> | NAURA</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-6">Sputter Targets</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-15">PVD Process Kit</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Film thickness · adhesion</p>
-    <p class="why">Base for RDL and bump plating</p></div>
-   <div class="step f-fab" id="st-08d"><div class="idx">B-08d</div><h4>RDL and Bump Plating</h4>
-    <a class="chip f-fab" href="equipment-en.html#s-3">Wafer Processing</a>
-    <p class="vend">Ebara · TEL · AMAT · Lam | ACM</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-9">Copper Plating Bath and Additives</a> · <a href="materials-en.html#m-9">Nickel and Tin-Silver Plating Bath</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-4">Thick Packaging Resist and Dry Film</a> · <a href="materials-en.html#m-9">Copper and Tin Anodes</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (line defects) · metrology (linewidth, bump height)</p>
-    <p class="why">Copper lines, pillars, solder bumps and TSV fill</p></div>
-   <div class="step f-fab" id="st-08e"><div class="idx">B-08e</div><h4>Wet Etch and Strip</h4>
-    <a class="chip f-fab" href="equipment-en.html#s-5">Wafer Processing</a>
-    <p class="vend">Lam (SEZ) · Veeco · <span class="tw">GPTC</span> · <span class="tw">Scientech</span> | ACM</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-4">Thick Packaging Resist and Dry Film</a> · <a href="materials-en.html#m-7">Thick-Resist Stripper</a> · <a href="materials-en.html#m-7">Seed-Layer Etchant</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (residue) · X-ray (TSV fill) · SEM</p>
-    <p class="why">Clears resist and seed between the plated lines</p></div>
-   <div class="step f-bond" id="st-09"><div class="idx">B-09</div><h4>Debonding</h4>
-    <a class="chip f-bond" href="equipment-en.html#s-8">Bonding and Thinning</a>
-    <p class="vend">EVG · SUSS MicroTec</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-1">Glass or Silicon Carrier Wafer</a> · <a href="materials-en.html#m-7">Debond Residue Cleaner</a> · <a href="materials-en.html#m-10">Temporary Bonding Adhesive</a> · <a href="materials-en.html#m-10">Laser Release Layer</a> · <a href="materials-en.html#m-10">Dicing Tape and Frame</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (breakage, adhesive residue)</p>
-    <p class="why">Carrier release, a common source of breakage loss</p></div>
-   <div class="step f-dice" id="st-10a"><div class="idx">B-10a</div><h4>Dicing</h4>
-    <a class="chip f-dice" href="equipment-en.html#s-9">Dicing</a>
-    <p class="vend">DISCO · Tokyo Seimitsu · ASMPT · <span class="tw">Laser Tek</span> | Han's Laser</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-10">Dicing Blade</a> · <a href="materials-en.html#m-10">Dicing Tape and Frame</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (edge chipping, cracks)</p>
-    <p class="why">Low-k wafers laser-grooved first to avoid peeling</p></div>
-   <div class="step f-place" id="st-10b"><div class="idx">B-10b</div><h4>Die Picking and Sorting</h4>
-    <a class="chip f-place" href="equipment-en.html#s-10">Placement and Bonding</a>
-    <p class="vend">ASMPT · Besi · K&amp;S · <span class="tw">Jun Hwa</span> · <span class="tw">All Ring</span> | Xinyichang</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-10">Dicing Tape and Frame</a> · <a href="materials-en.html#m-14">Die Tray and Pick-Up Collet</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (die surface) · map verification</p>
-    <p class="why">Picks known good dies by the test map</p></div>
+   <div class="step f-mold" id="st-07"><div class="head"><span class="idx">B-07</span><a class="chip f-mold" href="equipment-en.html#s-11">Dispense and Encapsulation</a></div><h4>Wafer Vacuum Lamination</h4>
+    <p class="why">No trapped bubbles to cause later defects</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Takatori</span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-11">Die-Attach and Backside Protection Film</a> <span class="co">Resonac · Nitto Denko</span></span><span class="it"><a href="materials-en.html#m-11">Non-Conductive Film</a> <span class="co">Resonac · Namics</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it">AOI (bubbles, wrinkles) <span class="co">Camtek · Onto</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-08a"><div class="head"><span class="idx">B-08a</span><a class="chip f-fab" href="equipment-en.html#s-1">Wafer Processing</a></div><h4>Packaging Lithography</h4>
+    <p class="why">Prints RDL and bump patterns in thick resist</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Canon · Nikon · Veeco · Onto · <span class="tw">C SUN</span> | SMEE</span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-4">PSPI Dielectric</a> <span class="co">Asahi Kasei · HD MicroSystems</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-2">Packaging Photomask</a> <span class="co">Tekscend Photomask · Photronics</span></span><span class="it"><a href="materials-en.html#m-4">Thinner and Edge-Bead Remover</a> <span class="co">TOK · Tokuyama</span></span><span class="it"><a href="materials-en.html#m-4">TMAH Developer</a> <span class="co">Tokuyama · TOK</span></span><span class="it"><a href="materials-en.html#m-4">Thick Packaging Resist and Dry Film</a> <span class="co">TOK · JSR</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">AOI (line defects) <span class="co">Camtek · Onto</span></span><span class="it">Overlay</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-08b"><div class="head"><span class="idx">B-08b</span><a class="chip f-fab" href="equipment-en.html#s-2">Wafer Processing</a></div><h4>TSV Reveal Etch</h4>
+    <p class="why">Exposes the copper TSV tips for contact</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Lam · SPTS · AMAT · Plasma-Therm · <span class="tw">Skytech</span> | AMEC · NAURA</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-5">Etch Gases</a> <span class="co">SK Specialty · Kanto Denka</span></span><span class="it"><a href="materials-en.html#m-7">Backside Etch and Clean Chemistry</a> <span class="co">BASF · Kanto Chemical</span></span><span class="it"><a href="materials-en.html#m-15">Etch Chamber Parts</a> <span class="co">Silfex · Hana Materials</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">Metrology (reveal height)</span><span class="it">SEM <span class="co">Thermo Fisher · Hitachi High-Tech</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-08c"><div class="head"><span class="idx">B-08c</span><a class="chip f-fab" href="equipment-en.html#s-3">Wafer Processing</a></div><h4>Seed-Layer PVD</h4>
+    <p class="why">Base for RDL and bump plating</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">SPTS · Evatec · ULVAC · <span class="tw">Skytech</span> · <span class="tw">Youwei</span> | NAURA</span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-6">Sputter Targets</a> <span class="co">JX Metals · Honeywell</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-15">PVD Process Kit</a> <span class="co">Ferrotec · Ultra Clean</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">Film thickness <span class="co">KLA · Onto</span></span><span class="it">Adhesion</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-08d"><div class="head"><span class="idx">B-08d</span><a class="chip f-fab" href="equipment-en.html#s-3">Wafer Processing</a></div><h4>RDL and Bump Plating</h4>
+    <p class="why">Copper lines, pillars, solder bumps and TSV fill</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Ebara · TEL · AMAT · Lam | ACM</span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-9">Copper Plating Bath and Additives</a> <span class="co">MacDermid Alpha · Atotech</span></span><span class="it"><a href="materials-en.html#m-9">Nickel and Tin-Silver Plating Bath</a> <span class="co">MacDermid Alpha · Atotech</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-4">Thick Packaging Resist and Dry Film</a> <span class="co">TOK · JSR</span></span><span class="it"><a href="materials-en.html#m-9">Copper and Tin Anodes</a> <span class="co">Mitsubishi Materials · JX Metals</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">AOI (line defects) <span class="co">Camtek · Onto</span></span><span class="it">Metrology (linewidth, bump height) <span class="co">Camtek · Onto</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-08e"><div class="head"><span class="idx">B-08e</span><a class="chip f-fab" href="equipment-en.html#s-5">Wafer Processing</a></div><h4>Wet Etch and Strip</h4>
+    <p class="why">Clears resist and seed between the plated lines</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Lam (SEZ) · Veeco · <span class="tw">GPTC</span> · <span class="tw">Scientech</span> | ACM</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-4">Thick Packaging Resist and Dry Film</a> <span class="co">TOK · JSR</span></span><span class="it"><a href="materials-en.html#m-7">Thick-Resist Stripper</a> <span class="co">Entegris · Qnity</span></span><span class="it"><a href="materials-en.html#m-7">Seed-Layer Etchant</a> <span class="co">Entegris · Qnity</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">AOI (residue) <span class="co">Camtek · Onto</span></span><span class="it">X-ray (TSV fill) <span class="co">Nordson · Comet Yxlon</span></span><span class="it">SEM <span class="co">Thermo Fisher · Hitachi High-Tech</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-bond" id="st-09"><div class="head"><span class="idx">B-09</span><a class="chip f-bond" href="equipment-en.html#s-8">Bonding and Thinning</a></div><h4>Debonding</h4>
+    <p class="why">Carrier release, a common source of breakage loss</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">EVG · SUSS MicroTec</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-1">Glass or Silicon Carrier Wafer</a> <span class="co">Corning · AGC</span></span><span class="it"><a href="materials-en.html#m-7">Debond Residue Cleaner</a> <span class="co">Brewer Science · TOK</span></span><span class="it"><a href="materials-en.html#m-10">Temporary Bonding Adhesive</a> <span class="co">Brewer Science · TOK</span></span><span class="it"><a href="materials-en.html#m-10">Laser Release Layer</a> <span class="co">3M · Brewer Science</span></span><span class="it"><a href="materials-en.html#m-10">Dicing Tape and Frame</a> <span class="co">Nitto Denko · Lintec</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">AOI (breakage, adhesive residue) <span class="co">Camtek · Onto</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-dice" id="st-10a"><div class="head"><span class="idx">B-10a</span><a class="chip f-dice" href="equipment-en.html#s-9">Dicing</a></div><h4>Dicing</h4>
+    <p class="why">Low-k wafers laser-grooved first to avoid peeling</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">DISCO · Tokyo Seimitsu · ASMPT · <span class="tw">Laser Tek</span> | Han's Laser</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-10">Dicing Blade</a> <span class="co">DISCO · Asahi Diamond</span></span><span class="it"><a href="materials-en.html#m-10">Dicing Tape and Frame</a> <span class="co">Nitto Denko · Lintec</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">AOI (edge chipping, cracks) <span class="co">Camtek · Onto</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-place" id="st-10b"><div class="head"><span class="idx">B-10b</span><a class="chip f-place" href="equipment-en.html#s-10">Placement and Bonding</a></div><h4>Die Picking and Sorting</h4>
+    <p class="why">Picks known good dies by the test map</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">ASMPT · Besi · K&amp;S · <span class="tw">Jun Hwa</span> · <span class="tw">All Ring</span> | Xinyichang</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-10">Dicing Tape and Frame</a> <span class="co">Nitto Denko · Lintec</span></span><span class="it"><a href="materials-en.html#m-14">Die Tray and Pick-Up Collet</a> <span class="co">Entegris · Peak</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">AOI (die surface) <span class="co">Camtek · Onto</span></span><span class="it">Map verification</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
   </div>
  </div>
 </div>
@@ -527,72 +586,81 @@ a.chip{text-decoration:none} a.chip:hover{text-decoration:underline}
 
   <div class="sub g">C1 Surface Preparation</div>
   <div class="row">
-   <div class="step f-fab" id="st-11"><div class="idx">C-11</div><h4>Surface Planarization / CMP</h4>
-    <a class="chip f-fab" href="equipment-en.html#s-5">Wafer Processing</a>
-    <p class="vend"><b>AMAT</b> · Ebara · ACM Research</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-8">CMP Slurry</a> · <a href="materials-en.html#m-8">Polishing Pad</a> · <a href="materials-en.html#m-8">Diamond Conditioner Disk</a> · <a href="materials-en.html#m-8">Post-CMP Cleaner and PVA Brush</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (particle count is the critical parameter) · metrology (copper pad dishing) · SEM</p>
-    <p class="why">Dished copper pads expand to bond at anneal</p></div>
-   <div class="step f-fab" id="st-12a"><div class="idx">C-12a</div><h4>Pre-Bond Wet Clean</h4>
-    <a class="chip f-fab" href="equipment-en.html#s-5">Wafer Processing</a>
-    <p class="vend">SCREEN · TEL · Lam · <span class="tw">GPTC</span> · <span class="tw">Scientech</span> | ACM</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-7">RCA Clean Chemistry</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Particle count</p>
-    <p class="why">A single particle voids the bond</p></div>
-   <div class="step f-fab" id="st-12b"><div class="idx">C-12b</div><h4>Plasma Activation</h4>
-    <a class="chip f-fab" href="equipment-en.html#s-2">Wafer Processing</a>
-    <p class="vend">EVG · SUSS MicroTec · Nordson MARCH · Plasma-Therm · <span class="tw">Youwei</span></p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-5">Plasma Activation Gases</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (residue, particles) · contact angle</p>
-    <p class="why">Hydrophilic surface for room-temperature pre-bonding</p></div>
+   <div class="step f-fab" id="st-11"><div class="head"><span class="idx">C-11</span><a class="chip f-fab" href="equipment-en.html#s-5">Wafer Processing</a></div><h4>Surface Planarization / CMP</h4>
+    <p class="why">Dished copper pads expand to bond at anneal</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it"><b>AMAT</b> · Ebara · ACM Research</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-8">CMP Slurry</a> <span class="co">Entegris · Fujimi</span></span><span class="it"><a href="materials-en.html#m-8">Polishing Pad</a> <span class="co">Qnity · 3M</span></span><span class="it"><a href="materials-en.html#m-8">Diamond Conditioner Disk</a> <span class="co">3M · Saesol</span></span><span class="it"><a href="materials-en.html#m-8">Post-CMP Cleaner and PVA Brush</a> <span class="co">Entegris · Aion</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">AOI (particle count is the critical parameter) <span class="co">KLA · Hitachi High-Tech</span></span><span class="it">Metrology (copper pad dishing) <span class="co">Bruker · KLA</span></span><span class="it">SEM <span class="co">Thermo Fisher · Hitachi High-Tech</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-12a"><div class="head"><span class="idx">C-12a</span><a class="chip f-fab" href="equipment-en.html#s-5">Wafer Processing</a></div><h4>Pre-Bond Wet Clean</h4>
+    <p class="why">A single particle voids the bond</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">SCREEN · TEL · Lam · <span class="tw">GPTC</span> · <span class="tw">Scientech</span> | ACM</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-7">RCA Clean Chemistry</a> <span class="co">BASF · Kanto Chemical</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">Particle count <span class="co">KLA · Hitachi High-Tech</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-12b"><div class="head"><span class="idx">C-12b</span><a class="chip f-fab" href="equipment-en.html#s-2">Wafer Processing</a></div><h4>Plasma Activation</h4>
+    <p class="why">Hydrophilic surface for room-temperature pre-bonding</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">EVG · SUSS MicroTec · Nordson MARCH · Plasma-Therm · <span class="tw">Youwei</span></span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-5">Plasma Activation Gases</a> <span class="co">Linde · Air Liquide</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">AOI (residue, particles) <span class="co">KLA · Hitachi High-Tech</span></span><span class="it">Contact angle <span class="co">KRÜSS · Biolin Scientific</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
   </div>
 
   <div class="sub g">C2 Bonding</div>
   <div class="row">
-   <div class="step f-place" id="st-13"><div class="idx">C-13</div><h4>High-Precision Alignment / Bonding</h4>
-    <a class="chip f-place" href="equipment-en.html#s-10">Placement and Bonding</a>
-    <p class="vend"><b>Besi</b> · <b>ASMPT</b> · EVG · SUSS · Hanmi</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">Alignment Only</span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (overlay accuracy) · X-ray</p>
-    <p class="why">Sub-micron placement, the equipment bottleneck of the flow</p></div>
-   <div class="step f-place" id="st-14"><div class="idx">C-14</div><h4>Pre-Bond / Hybrid Bonding</h4>
-    <a class="chip f-place" href="equipment-en.html#s-10">Placement and Bonding</a>
-    <p class="vend"><b>Besi</b> · <b>ASMPT</b> · EVG</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">No Material Added</span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;X-ray · SAM · SEM (destructive, sampled)</p>
-    <p class="why">Dielectric bonds first, copper joins at anneal</p></div>
+   <div class="step f-place" id="st-13"><div class="head"><span class="idx">C-13</span><a class="chip f-place" href="equipment-en.html#s-10">Placement and Bonding</a></div><h4>High-Precision Alignment / Bonding</h4>
+    <p class="why">Sub-micron placement, the equipment bottleneck of the flow</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it"><b>Besi</b> · <b>ASMPT</b> · EVG · SUSS · Hanmi</span></dd>
+    <dt>Materials</dt><dd><span class="it none">Alignment Only</span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it">Metrology (overlay accuracy)</span><span class="it">X-ray <span class="co">Nordson · Comet Yxlon</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-place" id="st-14"><div class="head"><span class="idx">C-14</span><a class="chip f-place" href="equipment-en.html#s-10">Placement and Bonding</a></div><h4>Pre-Bond / Hybrid Bonding</h4>
+    <p class="why">Dielectric bonds first, copper joins at anneal</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it"><b>Besi</b> · <b>ASMPT</b> · EVG</span></dd>
+    <dt>Materials</dt><dd><span class="it none">No Material Added</span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it">X-ray <span class="co">Nordson · Comet Yxlon</span></span><span class="it">SAM <span class="co">PVA TePla · Nordson</span></span><span class="it">SEM (destructive, sampled) <span class="co">Thermo Fisher · Hitachi High-Tech</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
   </div>
 
   <div class="sub g">C3 Thermal</div>
   <div class="row">
-   <div class="step f-cure" id="st-15"><div class="idx">C-15</div><h4>Post-Bond Anneal</h4>
-    <a class="chip f-cure" href="equipment-en.html#s-4">Thermal and Cure</a>
-    <p class="vend">AMAT · Kokusai · TEL</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-5">Oxidation and Anneal Gases</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<span class="none">—</span></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (warpage) · X-ray (void growth) · SEM</p>
-    <p class="why">Copper grain growth makes the electrical connection</p></div>
+   <div class="step f-cure" id="st-15"><div class="head"><span class="idx">C-15</span><a class="chip f-cure" href="equipment-en.html#s-4">Thermal and Cure</a></div><h4>Post-Bond Anneal</h4>
+    <p class="why">Copper grain growth makes the electrical connection</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">AMAT · Kokusai · TEL</span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-5">Oxidation and Anneal Gases</a> <span class="co">Linde · Air Liquide</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it">Metrology (warpage)</span><span class="it">X-ray (void growth) <span class="co">Nordson · Comet Yxlon</span></span><span class="it">SEM <span class="co">Thermo Fisher · Hitachi High-Tech</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
   </div>
 
   <div class="sub g">C4 Inspection &amp; Test</div>
   <div class="row">
-   <div class="step f-test" id="st-16a"><div class="idx">C-16a</div><h4>Post-Bond Inspection</h4>
-    <a class="chip f-test" href="equipment-en.html#s-6">Test and Inspection</a>
-    <p class="vend">Onto · Camtek · KLA · <span class="tw">Taliang</span> · <span class="tw">GPM</span> | Skyverse</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">Inspection Only</span></p>
-    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: AOI (die shift, tilt)</p>
-    <p class="why">Optical check of die placement and surface</p></div>
-   <div class="step f-test" id="st-16b"><div class="idx">C-16b</div><h4>X-ray and Acoustic Inspection</h4>
-    <a class="chip f-test" href="equipment-en.html#s-6">Test and Inspection</a>
-    <p class="vend">Nordson · Comet Yxlon · Zeiss · PVA TePla · <span class="tw">TRI</span> | Unicomp</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">Inspection Only</span></p>
-    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: X-ray (voids) · SAM (delamination)</p>
-    <p class="why">Sees inside the stack where AOI cannot</p></div>
-   <div class="step f-test" id="st-16c"><div class="idx">C-16c</div><h4>Electrical Test</h4>
-    <a class="chip f-test" href="equipment-en.html#s-7">Test and Inspection</a>
-    <p class="vend">Advantest · Teradyne · TEL · FormFactor · <span class="tw">MPI</span> · <span class="tw">CHPT</span> | Changchuan</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-14">Probe Card</a></span></p>
-    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: electrical test</p>
-    <p class="why">Confirms every bonded connection conducts</p></div>
+   <div class="step f-test" id="st-16a"><div class="head"><span class="idx">C-16a</span><a class="chip f-test" href="equipment-en.html#s-6">Test and Inspection</a></div><h4>Post-Bond Inspection</h4>
+    <p class="why">Optical check of die placement and surface</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Onto · Camtek · KLA · <span class="tw">Taliang</span> · <span class="tw">GPM</span> | Skyverse</span></dd>
+    <dt>Materials</dt><dd><span class="it none">Inspection Only</span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it self">This step is the check</span><span class="it">AOI (die shift, tilt)</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-test" id="st-16b"><div class="head"><span class="idx">C-16b</span><a class="chip f-test" href="equipment-en.html#s-6">Test and Inspection</a></div><h4>X-ray and Acoustic Inspection</h4>
+    <p class="why">Sees inside the stack where AOI cannot</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Nordson · Comet Yxlon · Zeiss · PVA TePla · <span class="tw">TRI</span> | Unicomp</span></dd>
+    <dt>Materials</dt><dd><span class="it none">Inspection Only</span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it self">This step is the check</span><span class="it">X-ray (voids)</span><span class="it">SAM (delamination)</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-test" id="st-16c"><div class="head"><span class="idx">C-16c</span><a class="chip f-test" href="equipment-en.html#s-7">Test and Inspection</a></div><h4>Electrical Test</h4>
+    <p class="why">Confirms every bonded connection conducts</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Advantest · Teradyne · TEL · FormFactor · <span class="tw">MPI</span> · <span class="tw">CHPT</span> | Changchuan</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it self">This step is the check</span><span class="it">Electrical test</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it"><a href="materials-en.html#m-14">Probe Card</a> <span class="co">FormFactor · Technoprobe</span></span></dd></dl></div>
   </div>
  </div>
 
@@ -606,86 +674,98 @@ a.chip{text-decoration:none} a.chip:hover{text-decoration:underline}
 
   <div class="sub p">D1 Chip-on-Wafer (CoW)</div>
   <div class="row">
-   <div class="step f-place" id="st-17"><div class="idx">D-17</div><h4>Die Attach to Interposer</h4>
-    <a class="chip f-place" href="equipment-en.html#s-10">Placement and Bonding</a>
-    <p class="vend">ASMPT · K&amp;S · Shinkawa</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-1">Silicon Interposer Wafer</a> · <a href="materials-en.html#m-1">HBM Stack</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-9">Tacky Flux</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (placement) · metrology (tilt)</p>
-    <p class="why">Logic die and HBM placed in sequence</p></div>
-   <div class="step f-place" id="st-18"><div class="idx">D-18</div><h4>Micro-bump Bonding / TCB</h4>
-    <a class="chip f-place" href="equipment-en.html#s-10">Placement and Bonding</a>
-    <p class="vend"><b>ASMPT</b> · K&amp;S · Shinkawa · Hanmi</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-11">Non-Conductive Film</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-7">Flux Residue Cleaner</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI · X-ray (bridging, cold joints) · metrology (bond line height)</p>
-    <p class="why">Throughput here caps CoWoS capacity</p></div>
-   <div class="step f-mold" id="st-19"><div class="idx">D-19</div><h4>Underfill Fill</h4>
-    <a class="chip f-mold" href="equipment-en.html#s-11">Dispense and Encapsulation</a>
-    <p class="vend">Nordson · <span class="tw">All Ring</span> · Namics (Materials)</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-11">Capillary Underfill</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-15">Dispense Syringe and Needle</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;X-ray (voids) · SAM</p>
-    <p class="why">Spreads thermal expansion stress across the bumps</p></div>
-   <div class="step f-cure" id="st-20"><div class="idx">D-20</div><h4>Vacuum De-bubble / De-foam</h4>
-    <a class="chip f-cure" href="equipment-en.html#s-4">Thermal and Cure</a>
-    <p class="vend">Nordson · <span class="tw">C SUN</span></p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-11">Capillary Underfill</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<span class="none">—</span></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;X-ray (residual bubbles)</p>
-    <p class="why">Removes bubbles that become field failures</p></div>
+   <div class="step f-place" id="st-17"><div class="head"><span class="idx">D-17</span><a class="chip f-place" href="equipment-en.html#s-10">Placement and Bonding</a></div><h4>Die Attach to Interposer</h4>
+    <p class="why">Logic die and HBM placed in sequence</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">ASMPT · K&amp;S · Shinkawa</span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-1">Silicon Interposer Wafer</a> <span class="co">TSMC · Samsung</span></span><span class="it"><a href="materials-en.html#m-1">HBM Stack</a> <span class="co">SK hynix · Samsung</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-9">Tacky Flux</a> <span class="co">Senju Metal · MacDermid Alpha</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">AOI (placement) <span class="co">Camtek · Onto</span></span><span class="it">Metrology (tilt) <span class="co">Camtek · Onto</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-place" id="st-18"><div class="head"><span class="idx">D-18</span><a class="chip f-place" href="equipment-en.html#s-10">Placement and Bonding</a></div><h4>Micro-bump Bonding / TCB</h4>
+    <p class="why">Throughput here caps CoWoS capacity</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it"><b>ASMPT</b> · K&amp;S · Shinkawa · Hanmi</span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-11">Non-Conductive Film</a> <span class="co">Resonac · Namics</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-7">Flux Residue Cleaner</a> <span class="co">Zestron · Kyzen</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">AOI <span class="co">Camtek · Onto</span></span><span class="it">X-ray (bridging, cold joints) <span class="co">Nordson · Comet Yxlon</span></span><span class="it">Metrology (bond line height) <span class="co">Camtek · Onto</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-mold" id="st-19"><div class="head"><span class="idx">D-19</span><a class="chip f-mold" href="equipment-en.html#s-11">Dispense and Encapsulation</a></div><h4>Underfill Fill</h4>
+    <p class="why">Spreads thermal expansion stress across the bumps</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Nordson · <span class="tw">All Ring</span></span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-11">Capillary Underfill</a> <span class="co">Namics · Henkel</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-15">Dispense Syringe and Needle</a> <span class="co">Nordson EFD · Musashi Engineering</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">X-ray (voids) <span class="co">Nordson · Comet Yxlon</span></span><span class="it">SAM <span class="co">PVA TePla · Nordson</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-cure" id="st-20"><div class="head"><span class="idx">D-20</span><a class="chip f-cure" href="equipment-en.html#s-4">Thermal and Cure</a></div><h4>Vacuum De-bubble / De-foam</h4>
+    <p class="why">Removes bubbles that become field failures</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Nordson · <span class="tw">C SUN</span></span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-11">Capillary Underfill</a> <span class="co">Namics · Henkel</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it">X-ray (residual bubbles) <span class="co">Nordson · Comet Yxlon</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
   </div>
 
   <div class="sub p">D2 Molding &amp; Interposer Processing</div>
   <div class="row">
-   <div class="step f-mold" id="st-21a"><div class="idx">D-21a</div><h4>Molding</h4>
-    <a class="chip f-mold" href="equipment-en.html#s-11">Dispense and Encapsulation</a>
-    <p class="vend">TOWA · ASMPT · Besi</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-11">Epoxy Mold Compound</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-11">Mold Release Film</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (voids, incomplete fill) · SAM</p>
-    <p class="why">Encases the dies in one compression shot</p></div>
-   <div class="step f-cure" id="st-21b"><div class="idx">D-21b</div><h4>Post-Mold Cure</h4>
-    <a class="chip f-cure" href="equipment-en.html#s-4">Thermal and Cure</a>
-    <p class="vend">Koyo Thermo Systems · ESPEC · <span class="tw">C SUN</span> · <span class="tw">Chun Yi</span></p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-11">Epoxy Mold Compound</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<span class="none">—</span></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (warpage)</p>
-    <p class="why">Sets the warpage later steps inherit</p></div>
-   <div class="step f-bond pair" id="st-22a"><div class="idx">D-22a</div><h4>Interposer Grinding</h4>
-    <a class="chip f-bond" href="equipment-en.html#s-8">Bonding and Thinning</a>
-    <p class="vend"><b>DISCO</b> · Tokyo Seimitsu</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-1">Glass or Silicon Carrier Wafer</a> · <a href="materials-en.html#m-10">Temporary Bonding Adhesive</a> · <a href="materials-en.html#m-10">Diamond Grinding Wheel</a> · <a href="materials-en.html#m-10">Backgrind Tape</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (thickness, TTV, warpage)</p>
-    <p class="why">Reconstituted wafers warp more than plain ones</p></div>
-   <div class="step f-fab pair" id="st-22b"><div class="idx">D-22b</div><h4>Interposer CMP</h4>
-    <a class="chip f-fab" href="equipment-en.html#s-5">Wafer Processing</a>
-    <p class="vend">AMAT · Ebara</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-1">Glass or Silicon Carrier Wafer</a> · <a href="materials-en.html#m-8">CMP Slurry</a> · <a href="materials-en.html#m-8">Polishing Pad</a> · <a href="materials-en.html#m-8">Diamond Conditioner Disk</a> · <a href="materials-en.html#m-8">Post-CMP Cleaner and PVA Brush</a> · <a href="materials-en.html#m-10">Temporary Bonding Adhesive</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI · metrology (backside pad reveal)</p>
-    <p class="why">Finish polish that exposes the backside pads</p></div>
-   <div class="step f-dice" id="st-23"><div class="idx">D-23</div><h4>Dicing / Test Fixture Prep.</h4>
-    <a class="chip f-dice" href="equipment-en.html#s-9">Dicing</a>
-    <p class="vend">DISCO · Tokyo Seimitsu</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-10">Dicing Blade</a> · <a href="materials-en.html#m-10">Dicing Tape and Frame</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (cut edges)</p>
-    <p class="why">Individual modules, ready for the test interface</p></div>
+   <div class="step f-mold" id="st-21a"><div class="head"><span class="idx">D-21a</span><a class="chip f-mold" href="equipment-en.html#s-11">Dispense and Encapsulation</a></div><h4>Molding</h4>
+    <p class="why">Encases the dies in one compression shot</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">TOWA · ASMPT · Besi</span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-11">Epoxy Mold Compound</a> <span class="co">Sumitomo Bakelite · Resonac</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-11">Mold Release Film</a> <span class="co">AGC · Nitto Denko</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">AOI (voids, incomplete fill) <span class="co">Camtek · Onto</span></span><span class="it">SAM <span class="co">PVA TePla · Nordson</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-cure" id="st-21b"><div class="head"><span class="idx">D-21b</span><a class="chip f-cure" href="equipment-en.html#s-4">Thermal and Cure</a></div><h4>Post-Mold Cure</h4>
+    <p class="why">Sets the warpage later steps inherit</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Koyo Thermo Systems · ESPEC · <span class="tw">C SUN</span> · <span class="tw">Chun Yi</span></span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-11">Epoxy Mold Compound</a> <span class="co">Sumitomo Bakelite · Resonac</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it">Metrology (warpage)</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-bond pair" id="st-22a"><div class="head"><span class="idx">D-22a</span><a class="chip f-bond" href="equipment-en.html#s-8">Bonding and Thinning</a></div><h4>Interposer Grinding</h4>
+    <p class="why">Reconstituted wafers warp more than plain ones</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it"><b>DISCO</b> · Tokyo Seimitsu</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-1">Glass or Silicon Carrier Wafer</a> <span class="co">Corning · AGC</span></span><span class="it"><a href="materials-en.html#m-10">Temporary Bonding Adhesive</a> <span class="co">Brewer Science · TOK</span></span><span class="it"><a href="materials-en.html#m-10">Diamond Grinding Wheel</a> <span class="co">DISCO · Asahi Diamond</span></span><span class="it"><a href="materials-en.html#m-10">Backgrind Tape</a> <span class="co">Nitto Denko · Lintec</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">Metrology (thickness, TTV, warpage)</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab pair" id="st-22b"><div class="head"><span class="idx">D-22b</span><a class="chip f-fab" href="equipment-en.html#s-5">Wafer Processing</a></div><h4>Interposer CMP</h4>
+    <p class="why">Finish polish that exposes the backside pads</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">AMAT · Ebara</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-1">Glass or Silicon Carrier Wafer</a> <span class="co">Corning · AGC</span></span><span class="it"><a href="materials-en.html#m-8">CMP Slurry</a> <span class="co">Entegris · Fujimi</span></span><span class="it"><a href="materials-en.html#m-8">Polishing Pad</a> <span class="co">Qnity · 3M</span></span><span class="it"><a href="materials-en.html#m-8">Diamond Conditioner Disk</a> <span class="co">3M · Saesol</span></span><span class="it"><a href="materials-en.html#m-8">Post-CMP Cleaner and PVA Brush</a> <span class="co">Entegris · Aion</span></span><span class="it"><a href="materials-en.html#m-10">Temporary Bonding Adhesive</a> <span class="co">Brewer Science · TOK</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">AOI <span class="co">Camtek · Onto</span></span><span class="it">Metrology (backside pad reveal) <span class="co">Camtek · Onto</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-dice" id="st-23"><div class="head"><span class="idx">D-23</span><a class="chip f-dice" href="equipment-en.html#s-9">Dicing</a></div><h4>Dicing / Test Fixture Prep.</h4>
+    <p class="why">Individual modules, ready for the test interface</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">DISCO · Tokyo Seimitsu</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-10">Dicing Blade</a> <span class="co">DISCO · Asahi Diamond</span></span><span class="it"><a href="materials-en.html#m-10">Dicing Tape and Frame</a> <span class="co">Nitto Denko · Lintec</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">AOI (cut edges) <span class="co">Camtek · Onto</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
   </div>
 
   <div class="sub p">D3 Attach to Package Substrate (oS)</div>
   <div class="row">
-   <div class="step f-place" id="st-24"><div class="idx">D-24</div><h4>Attach to Package Substrate</h4>
-    <a class="chip f-place" href="equipment-en.html#s-10">Placement and Bonding</a>
-    <p class="vend">ASMPT · Shinkawa | Substrates: Ibiden · Shinko <span class="tw">Unimicron</span></p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-3">ABF Package Substrate</a> · <a href="materials-en.html#m-3">Ajinomoto Build-Up Film</a> · <a href="materials-en.html#m-3">BT Laminate · Glass Cloth · Copper Foil</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-9">Tacky Flux</a> · <a href="materials-en.html#m-10">Dicing Tape and Frame</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI · X-ray (alignment)</p>
-    <p class="why">ABF substrate supply, a bottleneck in itself</p></div>
-   <div class="step f-finish" id="st-25"><div class="idx">D-25</div><h4>C4 / Micro-bump Reflow</h4>
-    <a class="chip f-finish" href="equipment-en.html#s-12">Solder and Finish</a>
-    <p class="vend">Rehm · BTU · Heller</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-5">Reflow Nitrogen and Formic Acid</a> · <a href="materials-en.html#m-7">Flux Residue Cleaner</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;X-ray (joint voids, bridging)</p>
-    <p class="why">Melts solder into the substrate-side joints</p></div>
-   <div class="step f-cure" id="st-26"><div class="idx">D-26</div><h4>Substrate-side Underfill Cure</h4>
-    <a class="chip f-cure" href="equipment-en.html#s-4">Thermal and Cure</a>
-    <p class="vend">Nordson · <span class="tw">C SUN</span></p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-11">Capillary Underfill</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-15">Dispense Syringe and Needle</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;X-ray · SAM (delamination)</p>
-    <p class="why">Contains the substrate-to-silicon expansion mismatch</p></div>
+   <div class="step f-place" id="st-24"><div class="head"><span class="idx">D-24</span><a class="chip f-place" href="equipment-en.html#s-10">Placement and Bonding</a></div><h4>Attach to Package Substrate</h4>
+    <p class="why">ABF substrate supply, a bottleneck in itself</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">ASMPT · Shinkawa</span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-3">ABF Package Substrate</a> <span class="co">Ibiden · Shinko</span></span><span class="it"><a href="materials-en.html#m-3">Ajinomoto Build-Up Film</a> <span class="co">Ajinomoto Fine-Techno · Sekisui</span></span><span class="it"><a href="materials-en.html#m-3">BT Laminate · Glass Cloth · Copper Foil</a> <span class="co">Mitsubishi Gas Chemical · Nittobo</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-9">Tacky Flux</a> <span class="co">Senju Metal · MacDermid Alpha</span></span><span class="it"><a href="materials-en.html#m-10">Dicing Tape and Frame</a> <span class="co">Nitto Denko · Lintec</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">AOI</span><span class="it">X-ray (alignment) <span class="co">Nordson · Comet Yxlon</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-finish" id="st-25"><div class="head"><span class="idx">D-25</span><a class="chip f-finish" href="equipment-en.html#s-12">Solder and Finish</a></div><h4>Substrate-side Bump Reflow</h4>
+    <p class="why">Melts solder into the substrate-side joints</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Rehm · BTU · Heller</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-5">Reflow Nitrogen and Formic Acid</a> <span class="co">Linde · Air Liquide</span></span><span class="it"><a href="materials-en.html#m-7">Flux Residue Cleaner</a> <span class="co">Zestron · Kyzen</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">X-ray (joint voids, bridging) <span class="co">Nordson · Comet Yxlon</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-cure" id="st-26"><div class="head"><span class="idx">D-26</span><a class="chip f-cure" href="equipment-en.html#s-4">Thermal and Cure</a></div><h4>Substrate-side Underfill Cure</h4>
+    <p class="why">Contains the substrate-to-silicon expansion mismatch</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Nordson · <span class="tw">C SUN</span></span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-11">Capillary Underfill</a> <span class="co">Namics · Henkel</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-15">Dispense Syringe and Needle</a> <span class="co">Nordson EFD · Musashi Engineering</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">X-ray <span class="co">Nordson · Comet Yxlon</span></span><span class="it">SAM (delamination) <span class="co">PVA TePla · Nordson</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
   </div>
 
   <div class="sub opt" id="se">E Co-Packaged Optics <span class="lite">Optional branch</span></div>
@@ -710,88 +790,100 @@ a.chip{text-decoration:none} a.chip:hover{text-decoration:underline}
    </div>
   </div>
   <div class="row">
-   <div class="step f-place opt" id="st-C1"><div class="idx">E-01</div><h4>Optical Engine (PIC+EIC) Attach</h4>
-    <a class="chip f-place" href="equipment-en.html#s-10">Placement and Bonding</a>
-    <p class="vend">TSMC COUPE | PIC foundry: TSMC · GlobalFoundries · Tower</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-11">Non-Conductive Film</a> · <a href="materials-en.html#m-13">Optical Engine</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-9">Tacky Flux</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI · metrology (placement, tilt) · X-ray</p>
-    <p class="why">A package inside a package</p></div>
-   <div class="step f-optic opt" id="st-C2"><div class="idx">E-02</div><h4>Laser / External Light Source</h4>
-    <a class="chip f-optic" href="equipment-en.html#s-13">Optical Assembly</a>
-    <p class="vend">Coherent · Lumentum · Broadcom | <span class="tw">LandMark</span></p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-11">Gold-Tin Solder Preform</a> · <a href="materials-en.html#m-13">InP Laser Diode</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<span class="none">—</span></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Optical power · wavelength</p>
-    <p class="why">Temperature-sensitive laser beside a high-power ASIC</p></div>
+   <div class="step f-place opt" id="st-C1"><div class="head"><span class="idx">E-01</span><a class="chip f-place" href="equipment-en.html#s-10">Placement and Bonding</a></div><h4>Optical Engine (PIC+EIC) Attach</h4>
+    <p class="why">A package inside a package</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">TSMC COUPE</span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-11">Non-Conductive Film</a> <span class="co">Resonac · Namics</span></span><span class="it"><a href="materials-en.html#m-13">Optical Engine</a> <span class="co">TSMC · GlobalFoundries</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-9">Tacky Flux</a> <span class="co">Senju Metal · MacDermid Alpha</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">AOI</span><span class="it">Metrology (placement, tilt)</span><span class="it">X-ray <span class="co">Nordson · Comet Yxlon</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-optic opt" id="st-C2"><div class="head"><span class="idx">E-02</span><a class="chip f-optic" href="equipment-en.html#s-13">Optical Assembly</a></div><h4>Laser / External Light Source</h4>
+    <p class="why">Temperature-sensitive laser beside a high-power ASIC</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Coherent · Lumentum · Broadcom | <span class="tw">LandMark</span></span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-11">Gold-Tin Solder Preform</a> <span class="co">Indium Corp · Materion</span></span><span class="it"><a href="materials-en.html#m-13">InP Laser Diode</a> <span class="co">Lumentum · Coherent</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it">Optical power <span class="co">Keysight · Thorlabs</span></span><span class="it">Wavelength <span class="co">Yokogawa · Anritsu</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
   </div>
   <div class="row">
-   <div class="step f-optic opt" id="st-C3"><div class="idx">E-03</div><h4>Optical Alignment</h4>
-    <a class="chip f-optic" href="equipment-en.html#s-13">Optical Assembly</a>
-    <p class="vend"><b>ficonTEC</b> · ASMPT · K&amp;S · Shinkawa</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-13">Fibre Array Unit</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<span class="none">—</span></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Active alignment metrology (coupling efficiency measured live)</p>
-    <p class="why">Fibre to waveguide at sub-micron precision</p></div>
-   <div class="step f-optic opt" id="st-C4"><div class="idx">E-04</div><h4>Fibre Attach</h4>
-    <a class="chip f-optic" href="equipment-en.html#s-13">Optical Assembly</a>
-    <p class="vend">ficonTEC · Nordson (Dispensing) | <span class="tw">FOCI</span> · <span class="tw">Browave</span></p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-13">Fibre Array Unit</a> · <a href="materials-en.html#m-13">Index-Matched Optical Adhesive</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<span class="none">—</span></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (adhesive line) · pull test (sampled)</p>
-    <p class="why">No rework: a bad attach scraps the package</p></div>
-   <div class="step f-test opt" id="st-C5"><div class="idx">E-05</div><h4>Optical Test</h4>
-    <a class="chip f-test" href="equipment-en.html#s-13">Test and Inspection</a>
-    <p class="vend">Keysight · EXFO · <span class="tw">Chroma</span></p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-13">Fibre Array Unit</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-13">Lensed Probe Fibre</a></span></p>
-    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: insertion loss, coupling efficiency, bit error rate</p>
-    <p class="why">Optical yield multiplies on top of electrical yield</p></div>
+   <div class="step f-optic opt" id="st-C3"><div class="head"><span class="idx">E-03</span><a class="chip f-optic" href="equipment-en.html#s-13">Optical Assembly</a></div><h4>Optical Alignment</h4>
+    <p class="why">Fibre to waveguide at sub-micron precision</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it"><b>ficonTEC</b> · ASMPT · K&amp;S · Shinkawa</span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-13">Fibre Array Unit</a> <span class="co">Corning · Fujikura</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it">Active alignment metrology (coupling efficiency measured live)</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-optic opt" id="st-C4"><div class="head"><span class="idx">E-04</span><a class="chip f-optic" href="equipment-en.html#s-13">Optical Assembly</a></div><h4>Fibre Attach</h4>
+    <p class="why">No rework: a bad attach scraps the package</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">ficonTEC · Nordson (Dispensing) · <span class="tw">FOCI</span> · <span class="tw">Browave</span></span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-13">Fibre Array Unit</a> <span class="co">Corning · Fujikura</span></span><span class="it"><a href="materials-en.html#m-13">Index-Matched Optical Adhesive</a> <span class="co">Norland · Dymax</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it">AOI (adhesive line)</span><span class="it">Pull test (sampled) <span class="co">Nordson Dage · XYZTEC</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-test opt" id="st-C5"><div class="head"><span class="idx">E-05</span><a class="chip f-test" href="equipment-en.html#s-13">Test and Inspection</a></div><h4>Optical Test</h4>
+    <p class="why">Optical yield multiplies on top of electrical yield</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Keysight · EXFO · <span class="tw">Chroma</span></span></dd>
+    <dt>Materials</dt><dd><span class="it none">Test Only</span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it self">This step is the check</span><span class="it">Insertion loss, coupling efficiency, bit error rate</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it"><a href="materials-en.html#m-13">Lensed Probe Fibre</a> <span class="co">FormFactor · TEL</span></span></dd></dl></div>
   </div>
 
   <div class="sub p">D4 Final Package Integration</div>
   <div class="row">
-   <div class="step f-finish" id="st-27"><div class="idx">D-27</div><h4>TIM / Lid Attach</h4>
-    <a class="chip f-finish" href="equipment-en.html#s-12">Solder and Finish</a>
-    <p class="vend">Nordson | TIM Materials: Henkel · Indium Corp</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-12">TIM1</a> · <a href="materials-en.html#m-12">Heat-Spreader Lid and Seal Adhesive</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<span class="none">—</span></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;X-ray (voids in the TIM) · metrology (lid height, parallelism)</p>
-    <p class="why">The heat path that limits performance</p></div>
-   <div class="step f-finish" id="st-28"><div class="idx">D-28</div><h4>Ball Attach (BGA)</h4>
-    <a class="chip f-finish" href="equipment-en.html#s-12">Solder and Finish</a>
-    <p class="vend">ASMPT · Shibaura · <span class="tw">Jun Hwa</span></p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-9">Solder Ball</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<span class="none">—</span></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (missing and misplaced balls) · metrology (coplanarity)</p>
-    <p class="why">Ball array for the motherboard connection</p></div>
-   <div class="step f-finish" id="st-29"><div class="idx">D-29</div><h4>BGA Reflow</h4>
-    <a class="chip f-finish" href="equipment-en.html#s-12">Solder and Finish</a>
-    <p class="vend">Rehm · BTU · Heller</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-9">Solder Ball</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-5">Reflow Nitrogen and Formic Acid</a> · <a href="materials-en.html#m-7">Flux Residue Cleaner</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI · X-ray (voids inside balls) · metrology (warpage)</p>
-    <p class="why">Fixes the balls, holding warpage and coplanarity</p></div>
-   <div class="step f-finish" id="st-30"><div class="idx">D-30</div><h4>Laser Marking</h4>
-    <a class="chip f-finish" href="equipment-en.html#s-12">Solder and Finish</a>
-    <p class="vend">Coherent · Han's Laser</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">No Material Added</span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (OCR character verification)</p>
-    <p class="why">Part number and traceability code</p></div>
+   <div class="step f-finish" id="st-27"><div class="head"><span class="idx">D-27</span><a class="chip f-finish" href="equipment-en.html#s-12">Solder and Finish</a></div><h4>TIM / Lid Attach</h4>
+    <p class="why">The heat path that limits performance</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Nordson</span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-12">TIM1</a> <span class="co">Indium Corp · Honeywell</span></span><span class="it"><a href="materials-en.html#m-12">Heat-Spreader Lid and Seal Adhesive</a> <span class="co">Shinko · Henkel</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it">X-ray (voids in the TIM) <span class="co">Nordson · Comet Yxlon</span></span><span class="it">Metrology (lid height, parallelism)</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-finish" id="st-28"><div class="head"><span class="idx">D-28</span><a class="chip f-finish" href="equipment-en.html#s-12">Solder and Finish</a></div><h4>Ball Attach (BGA)</h4>
+    <p class="why">Ball array for the motherboard connection</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">ASMPT · Shibaura · <span class="tw">Jun Hwa</span></span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-9">Solder Ball</a> <span class="co">Senju Metal · Indium Corp</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it">AOI (missing and misplaced balls)</span><span class="it">Metrology (coplanarity)</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-finish" id="st-29"><div class="head"><span class="idx">D-29</span><a class="chip f-finish" href="equipment-en.html#s-12">Solder and Finish</a></div><h4>BGA Reflow</h4>
+    <p class="why">Fixes the balls, holding warpage and coplanarity</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Rehm · BTU · Heller</span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-9">Solder Ball</a> <span class="co">Senju Metal · Indium Corp</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-5">Reflow Nitrogen and Formic Acid</a> <span class="co">Linde · Air Liquide</span></span><span class="it"><a href="materials-en.html#m-7">Flux Residue Cleaner</a> <span class="co">Zestron · Kyzen</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">AOI</span><span class="it">X-ray (voids inside balls) <span class="co">Nordson · Comet Yxlon</span></span><span class="it">Metrology (warpage) <span class="co">Akrometrix · Insidix</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-finish" id="st-30"><div class="head"><span class="idx">D-30</span><a class="chip f-finish" href="equipment-en.html#s-12">Solder and Finish</a></div><h4>Laser Marking</h4>
+    <p class="why">Part number and traceability code</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Coherent · Han's Laser</span></dd>
+    <dt>Materials</dt><dd><span class="it none">No Material Added</span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it">AOI (OCR character verification)</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
   </div>
 
   <div class="sub p">D5 Final Test</div>
   <div class="row">
-   <div class="step f-test" id="st-31"><div class="idx">D-31</div><h4>Final Electrical Test</h4>
-    <a class="chip f-test" href="equipment-en.html#s-7">Test and Inspection</a>
-    <p class="vend"><b>Advantest</b> · Teradyne · <span class="tw">KYEC</span> (Contract mfg)· <span class="tw">WinWay</span> (Test sockets)</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-14">Test Socket and Load Board</a></span></p>
-    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: electrical test</p>
-    <p class="why">A failure here scraps the HBM and substrate</p></div>
-   <div class="step f-test" id="st-32"><div class="idx">D-32</div><h4>Burn-in / Reliability Test</h4>
-    <a class="chip f-test" href="equipment-en.html#s-7">Test and Inspection</a>
-    <p class="vend">Advantest · Chroma · Aehr</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-14">Burn-In Board and Socket</a></span></p>
-    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: burn-in</p>
-    <p class="why">Accelerated ageing screens out infant mortality</p></div>
-   <div class="step f-test" id="st-33"><div class="idx">D-33</div><h4>Final Inspection / Outgoing</h4>
-    <a class="chip f-test" href="equipment-en.html#s-6">Test and Inspection</a>
-    <p class="vend">KLA · Camtek · YXLON (X-ray)</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-14">JEDEC Tray · Moisture-Barrier Bag · Desiccant</a></span></p>
-    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: AOI · metrology · X-ray</p>
-    <p class="why">Visual and dimensional check before shipment</p></div>
+   <div class="step f-test" id="st-31"><div class="head"><span class="idx">D-31</span><a class="chip f-test" href="equipment-en.html#s-7">Test and Inspection</a></div><h4>Final Electrical Test</h4>
+    <p class="why">A failure here scraps the HBM and substrate</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it"><b>Advantest</b> · Teradyne · <span class="tw">KYEC</span> (Contract mfg)</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it self">This step is the check</span><span class="it">Electrical test</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it"><a href="materials-en.html#m-14">Test Socket and Load Board</a> <span class="co">Cohu · Johnstech</span></span></dd></dl></div>
+   <div class="step f-test" id="st-32"><div class="head"><span class="idx">D-32</span><a class="chip f-test" href="equipment-en.html#s-7">Test and Inspection</a></div><h4>Burn-in / Reliability Test</h4>
+    <p class="why">Accelerated ageing screens out infant mortality</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Advantest · Chroma · Aehr</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it self">This step is the check</span><span class="it">Burn-in</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it"><a href="materials-en.html#m-14">Burn-In Board and Socket</a> <span class="co">Aehr · Plastronics</span></span></dd></dl></div>
+   <div class="step f-test" id="st-33"><div class="head"><span class="idx">D-33</span><a class="chip f-test" href="equipment-en.html#s-6">Test and Inspection</a></div><h4>Final Inspection / Outgoing</h4>
+    <p class="why">Visual and dimensional check before shipment</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">KLA · Camtek · YXLON (X-ray)</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-14">JEDEC Tray · Moisture-Barrier Bag · Desiccant</a> <span class="co">Entegris · 3M</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it self">This step is the check</span><span class="it">AOI</span><span class="it">Metrology</span><span class="it">X-ray</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
   </div>
  </div>
 
@@ -811,222 +903,254 @@ a.chip{text-decoration:none} a.chip:hover{text-decoration:underline}
  <div class="body">
   <div class="sub b">F1 Incoming Material &amp; Preparation</div>
   <div class="row">
-   <div class="step f-test" id="st-34"><div class="idx">F-34</div><h4>Incoming Quality Control</h4>
-    <a class="chip f-test" href="equipment-en.html#s-6">Test and Inspection</a>
-    <p class="vend">Keyence · Omron · <span class="tw">Chroma</span> · <span class="tw">TRI</span></p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-3">AI Server Board</a> · <a href="materials-en.html#m-3">CCL Ingredients</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<span class="none">—</span></span></p>
-    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: dimensional metrology · visual AOI · moisture sensitivity level</p>
-    <p class="why">Lot codes and moisture levels locked at intake</p></div>
-   <div class="step f-cure" id="st-35"><div class="idx">F-35</div><h4>PCB Baking</h4>
-    <a class="chip f-cure" href="equipment-en.html#s-4">Thermal and Cure</a>
-    <p class="vend"><span class="tw">C SUN</span> · Koyo Thermo · Heller</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">Heat Only</span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Humidity indicator card · open-bag time control</p>
-    <p class="why">Prevents moisture delamination at reflow</p></div>
+   <div class="step f-test" id="st-34"><div class="head"><span class="idx">F-34</span><a class="chip f-test" href="equipment-en.html#s-6">Test and Inspection</a></div><h4>Incoming Quality Control</h4>
+    <p class="why">Lot codes and moisture levels locked at intake</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Keyence · Omron · <span class="tw">Chroma</span> · <span class="tw">TRI</span></span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-3">AI Server Board</a> <span class="co">Panasonic · Isola</span></span><span class="it"><a href="materials-en.html#m-3">CCL Ingredients</a> <span class="co">Nittobo · Mitsui Mining & Smelting</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it self">This step is the check</span><span class="it">Dimensional metrology</span><span class="it">Visual AOI</span><span class="it">Moisture sensitivity level</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-cure" id="st-35"><div class="head"><span class="idx">F-35</span><a class="chip f-cure" href="equipment-en.html#s-4">Thermal and Cure</a></div><h4>PCB Baking</h4>
+    <p class="why">Prevents moisture delamination at reflow</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it"><span class="tw">C SUN</span> · Koyo Thermo · Heller</span></dd>
+    <dt>Materials</dt><dd><span class="it none">Heat Only</span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it">Humidity indicator card</span><span class="it">Open-bag time control</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
   </div>
   <div class="sub b">F2 Surface Mount, First Side</div>
   <div class="row">
-   <div class="step f-mold" id="st-36"><div class="idx">F-36</div><h4>Solder Paste Printing</h4>
-    <a class="chip f-mold" href="equipment-en.html#s-11">Dispense and Encapsulation</a>
-    <p class="vend">ASMPT (DEK)· Panasonic · Yamaha · Ekra | Stencils: Photo Stencil · Koh Young</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-9">Solder Paste</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-14">SMT Stencil · Squeegee · Wipe Roll</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;SPI 3D solder paste metrology</p>
-    <p class="why">Source of most board-level solder defects</p></div>
-   <div class="step f-test" id="st-37"><div class="idx">F-37</div><h4>Solder Paste Inspection</h4>
-    <a class="chip f-test" href="equipment-en.html#s-6">Test and Inspection</a>
-    <p class="vend">Koh Young · CyberOptics · Parmi · <span class="tw">TRI</span></p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">Inspection Only</span></p>
-    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: 3D paste metrology, 100%</p>
-    <p class="why">Catches bad prints while rework is cheap</p></div>
-   <div class="step f-place" id="st-38"><div class="idx">F-38</div><h4>SMT Placement</h4>
-    <a class="chip f-place" href="equipment-en.html#s-10">Placement and Bonding</a>
-    <p class="vend">ASMPT · Fuji · Panasonic · Yamaha | Contract mfg: <span class="tw">Foxconn</span> · <span class="tw">Quanta</span> · <span class="tw">Wistron</span></p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-3">Passives and Connectors</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-14">Placement Nozzle · Feeder · Carrier Tape</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Post-reflow AOI · X-ray (BGA joints)</p>
-    <p class="why">Where OAM and SXM accelerator cards take shape</p></div>
-   <div class="step f-finish" id="st-39"><div class="idx">F-39</div><h4>Reflow Soldering</h4>
-    <a class="chip f-finish" href="equipment-en.html#s-12">Solder and Finish</a>
-    <p class="vend">Rehm · BTU · Heller · Kurtz Ersa</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-9">Solder Paste</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-5">Reflow Nitrogen and Formic Acid</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (F-40) · X-ray (F-41) | Process monitor: reflow profiling</p>
-    <p class="why">Profile tuned to board thickness and mass</p></div>
-   <div class="step f-test" id="st-40"><div class="idx">F-40</div><h4>Post-Reflow AOI</h4>
-    <a class="chip f-test" href="equipment-en.html#s-6">Test and Inspection</a>
-    <p class="vend">Koh Young · Omron · Saki · <span class="tw">TRI</span></p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">Inspection Only</span></p>
-    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: 100% optical inspection</p>
-    <p class="why">Visible joints only; X-ray covers the rest</p></div>
-   <div class="step f-test" id="st-41"><div class="idx">F-41</div><h4>Automated X-ray Inspection</h4>
-    <a class="chip f-test" href="equipment-en.html#s-6">Test and Inspection</a>
-    <p class="vend">Nordson · YXLON · ViTrox · <span class="tw">TRI</span> · Saki</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">Inspection Only</span></p>
-    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: penetrating inspection, 100% of BGAs</p>
-    <p class="why">Finds hidden joint defects under BGAs</p></div>
+   <div class="step f-mold" id="st-36"><div class="head"><span class="idx">F-36</span><a class="chip f-mold" href="equipment-en.html#s-11">Dispense and Encapsulation</a></div><h4>Solder Paste Printing</h4>
+    <p class="why">Source of most board-level solder defects</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">ASMPT (DEK) · Panasonic · Yamaha · Ekra</span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-9">Solder Paste</a> <span class="co">Senju Metal · MacDermid Alpha</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-14">SMT Stencil · Squeegee · Wipe Roll</a> <span class="co">Photo Stencil · ASMPT</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">SPI 3D solder paste metrology <span class="co">Koh Young · Parmi</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-test" id="st-37"><div class="head"><span class="idx">F-37</span><a class="chip f-test" href="equipment-en.html#s-6">Test and Inspection</a></div><h4>Solder Paste Inspection</h4>
+    <p class="why">Catches bad prints while rework is cheap</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Koh Young · CyberOptics · Parmi · <span class="tw">TRI</span></span></dd>
+    <dt>Materials</dt><dd><span class="it none">Inspection Only</span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it self">This step is the check</span><span class="it">3D paste metrology, 100%</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-place" id="st-38"><div class="head"><span class="idx">F-38</span><a class="chip f-place" href="equipment-en.html#s-10">Placement and Bonding</a></div><h4>SMT Placement</h4>
+    <p class="why">Where OAM and SXM accelerator cards take shape</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">ASMPT · Fuji · Panasonic · Yamaha</span><span class="it">Contract mfg: <span class="tw">Foxconn</span> · <span class="tw">Quanta</span> · <span class="tw">Wistron</span></span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-3">Passives and Connectors</a> <span class="co">Murata · Samsung Electro-Mechanics</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-14">Placement Nozzle · Feeder · Carrier Tape</a> <span class="co">3M · Advantek</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">Post-reflow AOI <span class="co">Koh Young · Omron</span></span><span class="it">X-ray (BGA joints) <span class="co">Nordson · Comet Yxlon</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-finish" id="st-39"><div class="head"><span class="idx">F-39</span><a class="chip f-finish" href="equipment-en.html#s-12">Solder and Finish</a></div><h4>Reflow Soldering</h4>
+    <p class="why">Profile tuned to board thickness and mass</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Rehm · BTU · Heller · Kurtz Ersa</span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-9">Solder Paste</a> <span class="co">Senju Metal · MacDermid Alpha</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-5">Reflow Nitrogen and Formic Acid</a> <span class="co">Linde · Air Liquide</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">AOI (F-40)</span><span class="it">X-ray (F-41)</span><span class="it">Process monitor: reflow profiling <span class="co">KIC · ECD</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-test" id="st-40"><div class="head"><span class="idx">F-40</span><a class="chip f-test" href="equipment-en.html#s-6">Test and Inspection</a></div><h4>Post-Reflow AOI</h4>
+    <p class="why">Visible joints only; X-ray covers the rest</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Koh Young · Omron · Saki · <span class="tw">TRI</span></span></dd>
+    <dt>Materials</dt><dd><span class="it none">Inspection Only</span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it self">This step is the check</span><span class="it">100% optical inspection</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-test" id="st-41"><div class="head"><span class="idx">F-41</span><a class="chip f-test" href="equipment-en.html#s-6">Test and Inspection</a></div><h4>Automated X-ray Inspection</h4>
+    <p class="why">Finds hidden joint defects under BGAs</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Nordson · YXLON · ViTrox · <span class="tw">TRI</span> · Saki</span></dd>
+    <dt>Materials</dt><dd><span class="it none">Inspection Only</span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it self">This step is the check</span><span class="it">Penetrating inspection, 100% of BGAs</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
   </div>
   <div class="sub b">F3 Second Side &amp; Through-Hole</div>
   <div class="row">
-   <div class="step f-place" id="st-42"><div class="idx">F-42</div><h4>Second-Side SMT</h4>
-    <a class="chip f-place" href="equipment-en.html#s-10">Placement and Bonding</a>
-    <p class="vend">ASMPT · Fuji · Panasonic</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-9">Solder Paste</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-14">Placement Nozzle · Feeder · Carrier Tape</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (second side) · X-ray</p>
-    <p class="why">Lighter side first, so parts stay attached</p></div>
-   <div class="step f-finish" id="st-43"><div class="idx">F-43</div><h4>Selective Soldering</h4>
-    <a class="chip f-finish" href="equipment-en.html#s-12">Solder and Finish</a>
-    <p class="vend">Kurtz Ersa · Pillarhouse · SEHO</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-9">Bar Solder and Liquid Flux</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<span class="none">—</span></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI on through-hole joints · X-ray</p>
-    <p class="why">Through-hole joints without reheating the whole board</p></div>
-   <div class="step f-finish" id="st-44"><div class="idx">F-44</div><h4>Hand Solder / Rework</h4>
-    <a class="chip f-finish" href="equipment-en.html#s-12">Solder and Finish</a>
-    <p class="vend">Hakko · Weller · Metcal · JBC</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-9">Wire Solder and Rework Flux</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-14">Soldering Tip and Rework Nozzle</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Visual · joint sampling · X-ray where needed</p>
-    <p class="why">High board value favours repair over scrap</p></div>
+   <div class="step f-place" id="st-42"><div class="head"><span class="idx">F-42</span><a class="chip f-place" href="equipment-en.html#s-10">Placement and Bonding</a></div><h4>Second-Side SMT</h4>
+    <p class="why">Lighter side first, so parts stay attached</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">ASMPT · Fuji · Panasonic</span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-9">Solder Paste</a> <span class="co">Senju Metal · MacDermid Alpha</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-14">Placement Nozzle · Feeder · Carrier Tape</a> <span class="co">3M · Advantek</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">AOI (second side) <span class="co">Koh Young · Omron</span></span><span class="it">X-ray <span class="co">Nordson · Comet Yxlon</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-finish" id="st-43"><div class="head"><span class="idx">F-43</span><a class="chip f-finish" href="equipment-en.html#s-12">Solder and Finish</a></div><h4>Selective Soldering</h4>
+    <p class="why">Through-hole joints without reheating the whole board</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Kurtz Ersa · Pillarhouse · SEHO</span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-9">Bar Solder and Liquid Flux</a> <span class="co">Senju Metal · MacDermid Alpha</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it">AOI on through-hole joints <span class="co">Koh Young · Omron</span></span><span class="it">X-ray <span class="co">Nordson · Comet Yxlon</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-finish" id="st-44"><div class="head"><span class="idx">F-44</span><a class="chip f-finish" href="equipment-en.html#s-12">Solder and Finish</a></div><h4>Hand Solder / Rework</h4>
+    <p class="why">High board value favours repair over scrap</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Hakko · Weller · Metcal · JBC</span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-9">Wire Solder and Rework Flux</a> <span class="co">Kester · MacDermid Alpha</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-14">Soldering Tip and Rework Nozzle</a> <span class="co">Hakko · JBC</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">Visual</span><span class="it">Joint sampling</span><span class="it">X-ray where needed <span class="co">Nordson · Comet Yxlon</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
   </div>
   <div class="sub b">F4 Cleaning &amp; Protective Coating</div>
   <div class="row">
-   <div class="step f-ems" id="st-45"><div class="idx">F-45</div><h4>Cleaning</h4>
-    <a class="chip f-ems" href="equipment-en.html#s-14">Board and System Assembly</a>
-    <p class="vend">Zestron · Kyzen · PBT Works · Austin American</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-7">Flux Residue Cleaner</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Ionic contamination test (ROSE)</p>
-    <p class="why">Removes flux residue that drives electrochemical migration</p></div>
-   <div class="step f-mold" id="st-46"><div class="idx">F-46</div><h4>Conformal Coating</h4>
-    <a class="chip f-mold" href="equipment-en.html#s-11">Dispense and Encapsulation</a>
-    <p class="vend">Nordson ASYMTEK · PVA · Dymax | Materials: Henkel · Dow</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-11">Conformal Coating</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<span class="none">—</span></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Visual under UV · coating thickness</p>
-    <p class="why">Insulating moisture and dust barrier, now standard</p></div>
-   <div class="step f-cure" id="st-47"><div class="idx">F-47</div><h4>Coating Cure</h4>
-    <a class="chip f-cure" href="equipment-en.html#s-4">Thermal and Cure</a>
-    <p class="vend"><span class="tw">C SUN</span> · Dymax (UV)· Heller</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-11">Conformal Coating</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<span class="none">—</span></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Cure and adhesion, sampled</p>
-    <p class="why">Full cure prevents scraping in later assembly</p></div>
+   <div class="step f-ems" id="st-45"><div class="head"><span class="idx">F-45</span><a class="chip f-ems" href="equipment-en.html#s-14">Board and System Assembly</a></div><h4>Cleaning</h4>
+    <p class="why">Removes flux residue that drives electrochemical migration</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Zestron · Kyzen · PBT Works · Austin American</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-7">Flux Residue Cleaner</a> <span class="co">Zestron · Kyzen</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">Ionic contamination test (ROSE) <span class="co">Gen3</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-mold" id="st-46"><div class="head"><span class="idx">F-46</span><a class="chip f-mold" href="equipment-en.html#s-11">Dispense and Encapsulation</a></div><h4>Conformal Coating</h4>
+    <p class="why">Insulating moisture and dust barrier, now standard</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Nordson ASYMTEK · PVA · Dymax</span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-11">Conformal Coating</a> <span class="co">HumiSeal · Henkel</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it">Visual under UV</span><span class="it">Coating thickness <span class="co">Fischer · Elcometer</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-cure" id="st-47"><div class="head"><span class="idx">F-47</span><a class="chip f-cure" href="equipment-en.html#s-4">Thermal and Cure</a></div><h4>Coating Cure</h4>
+    <p class="why">Full cure prevents scraping in later assembly</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it"><span class="tw">C SUN</span> · Dymax (UV) · Heller</span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-11">Conformal Coating</a> <span class="co">HumiSeal · Henkel</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it">Cure and adhesion, sampled</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
   </div>
   <div class="sub b">F5 Circuit &amp; Power Test</div>
   <div class="row">
-   <div class="step f-test" id="st-48"><div class="idx">F-48</div><h4>In-Circuit Test</h4>
-    <a class="chip f-test" href="equipment-en.html#s-7">Test and Inspection</a>
-    <p class="vend">Keysight · Teradyne (TestStation)· <span class="tw">Chroma</span> · <span class="tw">TRI</span></p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-14">ICT Fixture and Spring Probe</a></span></p>
-    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: 100% electrical, bed-of-nails or flying probe</p>
-    <p class="why">Catches circuit faults before first power-on</p></div>
-   <div class="step f-test" id="st-49"><div class="idx">F-49</div><h4>First Power-On / Power Sequencing</h4>
-    <a class="chip f-test" href="equipment-en.html#s-7">Test and Inspection</a>
-    <p class="vend">Keysight · <span class="tw">Chroma</span> · Ametek</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">Test Only</span></p>
-    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: voltage and timing on every power rail</p>
-    <p class="why">Rail-by-rail checks protect the accelerator card</p></div>
+   <div class="step f-test" id="st-48"><div class="head"><span class="idx">F-48</span><a class="chip f-test" href="equipment-en.html#s-7">Test and Inspection</a></div><h4>In-Circuit Test</h4>
+    <p class="why">Catches circuit faults before first power-on</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Keysight · Teradyne (TestStation) · <span class="tw">Chroma</span> · <span class="tw">TRI</span></span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it self">This step is the check</span><span class="it">100% electrical, bed-of-nails or flying probe</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it"><a href="materials-en.html#m-14">ICT Fixture and Spring Probe</a> <span class="co">Ingun · QA Technology</span></span></dd></dl></div>
+   <div class="step f-test" id="st-49"><div class="head"><span class="idx">F-49</span><a class="chip f-test" href="equipment-en.html#s-7">Test and Inspection</a></div><h4>First Power-On / Power Sequencing</h4>
+    <p class="why">Rail-by-rail checks protect the accelerator card</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Keysight · <span class="tw">Chroma</span> · Ametek</span></dd>
+    <dt>Materials</dt><dd><span class="it none">Test Only</span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it self">This step is the check</span><span class="it">Voltage and timing on every power rail</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
   </div>
   <div class="sub b">F6 Firmware &amp; Serialisation</div>
   <div class="row">
-   <div class="step f-ems" id="st-50"><div class="idx">F-50</div><h4>Firmware Flashing</h4>
-    <a class="chip f-ems" href="equipment-en.html#s-14">Board and System Assembly</a>
-    <p class="vend">Data I/O · BPM Microsystems · <span class="tw">Chroma</span></p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">Software Only</span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Read-back checksum</p>
-    <p class="why">BMC, BIOS, FPGA and power firmware</p></div>
-   <div class="step f-ems" id="st-51"><div class="idx">F-51</div><h4>Serialisation / Asset Tagging</h4>
-    <a class="chip f-ems" href="equipment-en.html#s-14">Board and System Assembly</a>
-    <p class="vend">Zebra · SATO · Domino · Videojet</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-14">Serial and Shipping Labels</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Barcode readability, ANSI grade</p>
-    <p class="why">Board-level traceability for cloud customers</p></div>
+   <div class="step f-ems" id="st-50"><div class="head"><span class="idx">F-50</span><a class="chip f-ems" href="equipment-en.html#s-14">Board and System Assembly</a></div><h4>Firmware Flashing</h4>
+    <p class="why">BMC, BIOS, FPGA and power firmware</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Data I/O · BPM Microsystems · <span class="tw">Chroma</span></span></dd>
+    <dt>Materials</dt><dd><span class="it none">Software Only</span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it">Read-back checksum</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-ems" id="st-51"><div class="head"><span class="idx">F-51</span><a class="chip f-ems" href="equipment-en.html#s-14">Board and System Assembly</a></div><h4>Serialisation / Asset Tagging</h4>
+    <p class="why">Board-level traceability for cloud customers</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Zebra · SATO · Domino · Videojet</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-14">Serial and Shipping Labels</a> <span class="co">Brady · Avery Dennison</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">Barcode readability, ANSI grade <span class="co">Cognex · Keyence</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
   </div>
   <div class="sub b">F7 Thermal &amp; Liquid Cooling Assembly</div>
   <div class="row">
-   <div class="step f-mold" id="st-52"><div class="idx">F-52</div><h4>Thermal Interface Material</h4>
-    <a class="chip f-mold" href="equipment-en.html#s-11">Dispense and Encapsulation</a>
-    <p class="vend">Nordson · <span class="tw">All Ring</span> Graco | Materials: Honeywell · Shin-Etsu · Dow · Laird</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-12">TIM2</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-15">Dispense Syringe and Needle</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Dispensed volume and coverage</p>
-    <p class="why">Uneven TIM coverage, the most common thermal failure</p></div>
-   <div class="step f-mech" id="st-53"><div class="idx">F-53</div><h4>Heatsink Assembly (Air-Cooled)</h4>
-    <a class="chip f-mech" href="equipment-en.html#s-14">Mechanical and Thermal Assembly</a>
-    <p class="vend">Automated screwdriving: Weber · Deprag | Modules: <span class="tw">AVC</span> · <span class="tw">Auras</span> · <span class="tw">Jentech</span></p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-12">Heatsink and Vapour Chamber</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<span class="none">—</span></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Torque values logged · flatness</p>
-    <p class="why">Even clamping torque avoids local hot spots</p></div>
-   <div class="step f-mech" id="st-54"><div class="idx">F-54</div><h4>Cold Plate &amp; Quick Disconnect</h4>
-    <a class="chip f-mech" href="equipment-en.html#s-14">Mechanical and Thermal Assembly</a>
-    <p class="vend">Modules: <span class="tw">AVC</span> · <span class="tw">Auras</span> · <span class="tw">Sunon</span> | Quick disconnects: CPC · Staubli · Parker</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-12">Cold Plate · Quick Disconnects · Coolant</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<span class="none">—</span></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Torque logged · connector mate check · leak test</p>
-    <p class="why">GB200-era bottleneck and new source of Taiwanese value</p></div>
-   <div class="step f-test" id="st-55"><div class="idx">F-55</div><h4>Leak Test</h4>
-    <a class="chip f-test" href="equipment-en.html#s-7">Test and Inspection</a>
-    <p class="vend">ATEQ · INFICON · Cincinnati Test Systems</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-12">Cold Plate · Quick Disconnects · Coolant</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-5">Helium Tracer Gas</a></span></p>
-    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: pressure decay or helium leak test</p>
-    <p class="why">A leak disables the whole rack</p></div>
-   <div class="step f-mech" id="st-56"><div class="idx">F-56</div><h4>Mechanical Assembly</h4>
-    <a class="chip f-mech" href="equipment-en.html#s-14">Mechanical and Thermal Assembly</a>
-    <p class="vend">Automated screwdriving: Weber · Deprag | Contract mfg: <span class="tw">Foxconn</span> · <span class="tw">Quanta</span> · <span class="tw">Wistron</span> · <span class="tw">Inventec</span></p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="materials-en.html#m-14">Stiffener · Bracket · Cable · Fastener</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<span class="none">—</span></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Appearance and dimensional sampling</p>
-    <p class="why">Turns the board into a chassis-ready module</p></div>
+   <div class="step f-mold" id="st-52"><div class="head"><span class="idx">F-52</span><a class="chip f-mold" href="equipment-en.html#s-11">Dispense and Encapsulation</a></div><h4>Thermal Interface Material</h4>
+    <p class="why">Uneven TIM coverage, the most common thermal failure</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Nordson · <span class="tw">All Ring</span> · Graco</span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-12">TIM2</a> <span class="co">Honeywell · Shin-Etsu</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-15">Dispense Syringe and Needle</a> <span class="co">Nordson EFD · Musashi Engineering</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">Dispensed volume and coverage</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-mech" id="st-53"><div class="head"><span class="idx">F-53</span><a class="chip f-mech" href="equipment-en.html#s-14">Mechanical and Thermal Assembly</a></div><h4>Heatsink Assembly (Air-Cooled)</h4>
+    <p class="why">Even clamping torque avoids local hot spots</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Automated screwdriving: Weber · Deprag</span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-12">Heatsink and Vapour Chamber</a> <span class="co">Boyd · Delta</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it">Torque values logged</span><span class="it">Flatness</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-mech" id="st-54"><div class="head"><span class="idx">F-54</span><a class="chip f-mech" href="equipment-en.html#s-14">Mechanical and Thermal Assembly</a></div><h4>Cold Plate &amp; Quick Disconnect</h4>
+    <p class="why">GB200-era bottleneck and new source of Taiwanese value</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it none">—</span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-12">Cold Plate · Quick Disconnects · Coolant</a> <span class="co">CoolIT · Boyd</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it">Torque logged</span><span class="it">Connector mate check</span><span class="it">Leak test <span class="co">INFICON · ATEQ</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-test" id="st-55"><div class="head"><span class="idx">F-55</span><a class="chip f-test" href="equipment-en.html#s-7">Test and Inspection</a></div><h4>Leak Test</h4>
+    <p class="why">A leak disables the whole rack</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">ATEQ · INFICON · Cincinnati Test Systems</span></dd>
+    <dt>Materials</dt><dd><span class="it none">Test Only</span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it self">This step is the check</span><span class="it">Pressure decay or helium leak test</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it"><a href="materials-en.html#m-5">Helium Tracer Gas</a> <span class="co">Linde · Air Liquide</span></span></dd></dl></div>
+   <div class="step f-mech" id="st-56"><div class="head"><span class="idx">F-56</span><a class="chip f-mech" href="equipment-en.html#s-14">Mechanical and Thermal Assembly</a></div><h4>Mechanical Assembly</h4>
+    <p class="why">Turns the board into a chassis-ready module</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Automated screwdriving: Weber · Deprag</span><span class="it">Contract mfg: <span class="tw">Foxconn</span> · <span class="tw">Quanta</span> · <span class="tw">Wistron</span> · <span class="tw">Inventec</span></span></dd>
+    <dt>Materials</dt><dd><span class="it"><a href="materials-en.html#m-14">Stiffener · Bracket · Cable · Fastener</a> <span class="co">Amphenol · TE Connectivity</span></span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it">Appearance and dimensional sampling <span class="co">Mitutoyo · Keyence</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
   </div>
   <div class="sub b">F8 Functional &amp; System Test</div>
   <div class="row">
-   <div class="step f-test" id="st-57"><div class="idx">F-57</div><h4>Functional Test (FT)</h4>
-    <a class="chip f-test" href="equipment-en.html#s-7">Test and Inspection</a>
-    <p class="vend"><span class="tw">Chroma</span> · Keysight · Advantest</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">Test Only</span></p>
-    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: board-level functional verification</p>
-    <p class="why">Interfaces, memory channels and power delivery</p></div>
-   <div class="step f-test" id="st-58"><div class="idx">F-58</div><h4>Burn-in Test</h4>
-    <a class="chip f-test" href="equipment-en.html#s-7">Test and Inspection</a>
-    <p class="vend">Advantest · <span class="tw">Chroma</span> · Aehr · ESPEC</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-14">Burn-In Board and Socket</a></span></p>
-    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: continuous run monitored inside the chamber</p>
-    <p class="why">Hot, full-load screening before accelerators ship</p></div>
-   <div class="step f-test" id="st-59"><div class="idx">F-59</div><h4>System Test</h4>
-    <a class="chip f-test" href="equipment-en.html#s-7">Test and Inspection</a>
-    <p class="vend">Advantest · Teradyne · <span class="tw">Chroma</span></p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">Test Only</span></p>
-    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: full-system verification</p>
-    <p class="why">Cooling, power delivery and interconnect together</p></div>
-   <div class="step f-test" id="st-60"><div class="idx">F-60</div><h4>Performance Benchmark</h4>
-    <a class="chip f-test" href="equipment-en.html#s-7">Test and Inspection</a>
-    <p class="vend">In-house test racks | NVIDIA DCGM · MLPerf <span class="tw">Chroma</span></p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">Test Only</span></p>
-    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: bandwidth, throughput and power against thresholds</p>
-    <p class="why">Real-workload check against the specification</p></div>
-   <div class="step f-test" id="st-61"><div class="idx">F-61</div><h4>Calibration</h4>
-    <a class="chip f-test" href="equipment-en.html#s-7">Test and Inspection</a>
-    <p class="vend">Keysight · Fluke · <span class="tw">Chroma</span></p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">Test Only</span></p>
-    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: calibration values written and read back</p>
-    <p class="why">Every board behaves identically on the same firmware</p></div>
+   <div class="step f-test" id="st-57"><div class="head"><span class="idx">F-57</span><a class="chip f-test" href="equipment-en.html#s-7">Test and Inspection</a></div><h4>Functional Test (FT)</h4>
+    <p class="why">Interfaces, memory channels and power delivery</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it"><span class="tw">Chroma</span> · Keysight · Advantest</span></dd>
+    <dt>Materials</dt><dd><span class="it none">Test Only</span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it self">This step is the check</span><span class="it">Board-level functional verification</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-test" id="st-58"><div class="head"><span class="idx">F-58</span><a class="chip f-test" href="equipment-en.html#s-7">Test and Inspection</a></div><h4>Burn-in Test</h4>
+    <p class="why">Hot, full-load screening before accelerators ship</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Advantest · <span class="tw">Chroma</span> · Aehr · ESPEC</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it self">This step is the check</span><span class="it">Continuous run monitored inside the chamber</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it"><a href="materials-en.html#m-14">Burn-In Board and Socket</a> <span class="co">Aehr · Plastronics</span></span></dd></dl></div>
+   <div class="step f-test" id="st-59"><div class="head"><span class="idx">F-59</span><a class="chip f-test" href="equipment-en.html#s-7">Test and Inspection</a></div><h4>System Test</h4>
+    <p class="why">Cooling, power delivery and interconnect together</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Advantest · Teradyne · <span class="tw">Chroma</span></span></dd>
+    <dt>Materials</dt><dd><span class="it none">Test Only</span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it self">This step is the check</span><span class="it">Full-system verification</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-test" id="st-60"><div class="head"><span class="idx">F-60</span><a class="chip f-test" href="equipment-en.html#s-7">Test and Inspection</a></div><h4>Performance Benchmark</h4>
+    <p class="why">Real-workload check against the specification</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">In-house test racks | NVIDIA DCGM · MLPerf <span class="tw">Chroma</span></span></dd>
+    <dt>Materials</dt><dd><span class="it none">Test Only</span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it self">This step is the check</span><span class="it">Bandwidth, throughput and power against thresholds</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-test" id="st-61"><div class="head"><span class="idx">F-61</span><a class="chip f-test" href="equipment-en.html#s-7">Test and Inspection</a></div><h4>Calibration</h4>
+    <p class="why">Every board behaves identically on the same firmware</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Keysight · Fluke · <span class="tw">Chroma</span></span></dd>
+    <dt>Materials</dt><dd><span class="it none">Test Only</span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it self">This step is the check</span><span class="it">Calibration values written and read back</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
   </div>
   <div class="sub b">F9 Final Inspection &amp; Shipping</div>
   <div class="row">
-   <div class="step f-test" id="st-62"><div class="idx">F-62</div><h4>Final Visual Inspection</h4>
-    <a class="chip f-test" href="equipment-en.html#s-6">Test and Inspection</a>
-    <p class="vend">Manual visual + Keyence · Omron vision-assisted</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">Inspection Only</span></p>
-    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: final visual</p>
-    <p class="why">Appearance, labels, completeness and foreign material</p></div>
-   <div class="step f-ems" id="st-63"><div class="idx">F-63</div><h4>ESD Packaging</h4>
-    <a class="chip f-ems" href="equipment-en.html#s-14">Board and System Assembly</a>
-    <p class="vend">3M · Desco · Botron | Materials: ESD bags · desiccant · humidity cards</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-14">JEDEC Tray · Moisture-Barrier Bag · Desiccant</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Surface resistance, sampled</p>
-    <p class="why">Moisture sensitivity level sets open-bag time</p></div>
-   <div class="step f-ems" id="st-64"><div class="idx">F-64</div><h4>Labelling</h4>
-    <a class="chip f-ems" href="equipment-en.html#s-14">Board and System Assembly</a>
-    <p class="vend">Zebra · SATO · Domino</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-14">Serial and Shipping Labels</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Barcode scan verification</p>
-    <p class="why">Labels matched to the F-51 serial record</p></div>
-   <div class="step f-ems" id="st-65"><div class="idx">F-65</div><h4>Packaging / Shipping</h4>
-    <a class="chip f-ems" href="equipment-en.html#s-14">Board and System Assembly</a>
-    <p class="vend">—</p>
-    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">—</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="materials-en.html#m-14">Carton · Foam · Pallet</a></span></p>
-    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Pre-shipment sampling and document check</p>
-    <p class="why">Boxed to the customer specification</p></div>
+   <div class="step f-test" id="st-62"><div class="head"><span class="idx">F-62</span><a class="chip f-test" href="equipment-en.html#s-6">Test and Inspection</a></div><h4>Final Visual Inspection</h4>
+    <p class="why">Appearance, labels, completeness and foreign material</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Manual visual + Keyence · Omron vision-assisted</span></dd>
+    <dt>Materials</dt><dd><span class="it none">Inspection Only</span></dd>
+    <dt>Consumables</dt><dd><span class="it none">—</span></dd>
+    <dt>Inspection</dt><dd><span class="it self">This step is the check</span><span class="it">Final visual</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-ems" id="st-63"><div class="head"><span class="idx">F-63</span><a class="chip f-ems" href="equipment-en.html#s-14">Board and System Assembly</a></div><h4>ESD Packaging</h4>
+    <p class="why">Moisture sensitivity level sets open-bag time</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">3M · Desco · Botron</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-14">JEDEC Tray · Moisture-Barrier Bag · Desiccant</a> <span class="co">Entegris · 3M</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">Surface resistance, sampled</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-ems" id="st-64"><div class="head"><span class="idx">F-64</span><a class="chip f-ems" href="equipment-en.html#s-14">Board and System Assembly</a></div><h4>Labelling</h4>
+    <p class="why">Labels matched to the F-51 serial record</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">Zebra · SATO · Domino</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-14">Serial and Shipping Labels</a> <span class="co">Brady · Avery Dennison</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">Barcode scan verification <span class="co">Cognex · Keyence</span></span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-ems" id="st-65"><div class="head"><span class="idx">F-65</span><a class="chip f-ems" href="equipment-en.html#s-14">Board and System Assembly</a></div><h4>Packaging / Shipping</h4>
+    <p class="why">Boxed to the customer specification</p>
+    <dl class="kv"><dt>Equipment</dt><dd><span class="it">—</span></dd>
+    <dt>Materials</dt><dd><span class="it none">—</span></dd>
+    <dt>Consumables</dt><dd><span class="it"><a href="materials-en.html#m-14">Carton · Foam · Pallet</a> <span class="co">Sealed Air · Sonoco</span></span></dd>
+    <dt>Inspection</dt><dd><span class="it">Pre-shipment sampling and document check</span></dd>
+    <dt>Test Consumables</dt><dd><span class="it none">—</span></dd></dl></div>
   </div>
  </div>
 </div>
