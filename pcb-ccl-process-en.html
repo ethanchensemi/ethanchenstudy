@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CCL · PCB · IC Substrate Full Process Map · Ethan Chen</title>
+<!-- site-head -->
+<meta name="author" content="Ethan Chen">
+<meta name="description" content="How resin, glass fabric and copper foil become CCL, PCBs and ABF substrates, step by step.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://ethanchensemi.github.io/ethanchenstudy/pcb-ccl-process-en.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CCL · PCB · IC Substrate Full Process Map · Ethan Chen">
+<meta property="og:description" content="How resin, glass fabric and copper foil become CCL, PCBs and ABF substrates, step by step.">
+<meta property="og:site_name" content="Ethan Chen · Semiconductor Research Notes">
+<!-- /site-head -->
+<style>
+:root{
+  --b:#4A3B7A;
+ --paper:#F6F8F9; --card:#FFFFFF;
+ --ink:#14181C; --ink-2:#4A555E; --ink-3:#7C8891;
+ --rule:#CBD3D9; --rule-soft:#E2E8EC;
+ --stage:#1F3A4D; --soic:#2E6B4F; --cowos:#4A3B7A;
+ --cowos-tint:#F0EEF7; --shared:#215C68;
+ --t-fab:#5B4B9E; --t-fab-bg:#EEEBF8;
+ --t-insp:#0E7C86; --t-insp-bg:#E4F2F3;
+ --t-pkg:#B85C10; --t-pkg-bg:#FAEEE1;
+ --t-sup:#5F6C75; --t-sup-bg:#ECEFF1;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+ font-family:-apple-system,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+ font-size:15px;line-height:1.65}
+.wrap{max-width:1240px;margin:0 auto;padding:48px 28px 80px}
+
+.masthead{border-bottom:2px solid var(--stage);padding-bottom:22px;margin-bottom:34px}
+.masthead h1{font-size:31px;line-height:1.25;font-weight:700;margin:0 0 6px;letter-spacing:-.01em}
+.masthead .en{font-size:16px;color:var(--ink-2);font-weight:400;margin:0 0 18px}
+.masthead .meta{display:flex;flex-wrap:wrap;gap:8px 26px;font-size:13px;color:var(--ink-3)}
+.masthead .meta b{color:var(--ink-2);font-weight:500}
+
+.legend{background:var(--card);border:1px solid var(--rule);padding:20px 24px;margin-bottom:38px}
+.legend h2{font-size:15px;margin:0 0 14px;font-weight:600}
+.legend h2.two{margin-top:22px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chipwrap{display:flex;align-items:baseline;gap:9px;border:1px solid var(--rule-soft);padding:9px 13px;flex:1 1 200px}
+.chipwrap small{font-size:12px;color:var(--ink-3);line-height:1.4}
+.chipwrap b{font-size:12.5px;font-weight:600;color:var(--t-insp);white-space:nowrap}
+.chip{display:inline-block;font-size:11px;font-weight:600;padding:2px 7px;white-space:nowrap;border-radius:2px}
+.c-fab{background:var(--t-fab-bg);color:var(--t-fab)}
+.c-insp{background:var(--t-insp-bg);color:var(--t-insp)}
+.c-pkg{background:var(--t-pkg-bg);color:var(--t-pkg)}
+.c-sup{background:var(--t-sup-bg);color:var(--t-sup)}
+
+.stage{display:grid;grid-template-columns:212px 1fr}
+.rail{padding:22px 20px 26px 0;border-right:2px solid var(--rule);position:relative}
+.rail .num{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;color:var(--ink-3);letter-spacing:.06em;margin-bottom:8px}
+.rail h2{font-size:19px;margin:0 0 3px;font-weight:600;line-height:1.35}
+.rail .en2{font-size:13px;color:var(--ink-2);margin:0 0 12px;line-height:1.45}
+.rail .clarify{font-size:12.5px;color:var(--ink-3);line-height:1.55;padding-top:11px;border-top:1px dashed var(--rule)}
+.rail .stripe{position:absolute;right:-2px;top:22px;bottom:26px;width:2px;background:var(--stage)}
+.rail.shared .stripe{background:var(--shared)}
+.body{padding:22px 0 26px 26px}
+
+.row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:12px}
+.row:last-child{margin-bottom:0}
+.step{background:var(--card);border:1px solid var(--rule);padding:12px 14px;flex:1 1 200px;min-width:190px}
+.step .idx{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:10.5px;color:var(--ink-3)}
+.step h4{font-size:14px;margin:2px 0 1px;font-weight:600;line-height:1.4}
+.step .en3{font-size:12px;color:var(--ink-2);margin:0 0 9px;line-height:1.4}
+.step .vend{font-size:11.5px;color:var(--ink-2);margin:6px 0 0;line-height:1.5}
+.step .why{font-size:11.5px;color:var(--ink-3);margin:8px 0 0;line-height:1.5;padding-top:8px;border-top:1px dotted var(--rule-soft)}
+.step .qc{font-size:11.5px;margin:8px 0 0;line-height:1.5;padding:7px 9px;background:var(--t-insp-bg);color:#0B5C64}
+.step .qc b{font-weight:600;color:var(--t-insp)}
+.step.fab{border-left:3px solid var(--t-fab)}
+.step.insp{border-left:3px solid var(--t-insp)}
+.step.pkg{border-left:3px solid var(--t-pkg)}
+.step.sup{border-left:3px solid var(--t-sup)}
+.step.pair{background:#FCFDFD}
+
+.sub{font-size:13px;font-weight:600;margin:20px 0 10px;padding:6px 12px;color:#fff}
+.sub:first-child{margin-top:0}
+.sub .lite{font-weight:400;opacity:.82;font-size:12px}
+.sub.g{background:var(--soic)}
+.sub.p{background:var(--cowos)}
+.sub.b{background:var(--stage)}
+.sub.opt{background:#8A5A00}
+.step.opt{border-left:3px solid #8A5A00;border-style:solid dashed dashed dashed;border-color:var(--rule);border-left-color:#8A5A00;background:#FFFDF7}
+.optnote{font-size:12px;color:#7A5100;background:#FDF6E6;border:1px dashed #C99A1E;padding:10px 12px;margin:0 0 10px;line-height:1.55}
+.optbox{border:1px dashed #C99A1E;background:#FDF6E6;margin:0 0 12px}
+.optsplit{display:grid;grid-template-columns:1fr 1fr}
+.optcell{padding:13px 15px}
+.optcell + .optcell{border-left:1px dashed #E0C486}
+.optcell h5{font-size:12px;margin:0 0 5px;font-weight:600;color:#8A5A00}
+.optcell p{font-size:12px;margin:0;color:#7A5100;line-height:1.55}
+.optstack{padding:13px 15px;border-top:1px dashed #E0C486}
+.optstack h5{font-size:12px;margin:0 0 9px;font-weight:600;color:#8A5A00}
+.optstack table{width:100%;border-collapse:collapse;font-size:12px}
+.optstack td{padding:4px 0;border:none;color:#7A5100;vertical-align:top;line-height:1.5}
+.optstack td.tier{width:22px;font-family:ui-monospace,Menlo,monospace;color:#B08A2E}
+.optstack td.tech{width:74px;font-weight:600;color:#8A5A00}
+.optstack .ts{font-size:11.5px;color:#9A7530;margin:9px 0 0;padding-top:8px;border-top:1px dashed #E0C486}
+
+.forkbar{display:grid;grid-template-columns:212px 1fr}
+.forkbar .lead{padding:26px 20px 0 0;border-right:2px solid var(--rule)}
+.forkbar .msg{padding:26px 0 4px 26px;font-size:13px;color:var(--ink-3);max-width:74ch;line-height:1.6}
+.forkbar .msg b{color:var(--ink-2);font-weight:500}
+.routes{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+@media (max-width:900px){.routes{grid-template-columns:1fr}}
+.route{border-top:3px solid var(--soic)}
+.route.pk{border-top-color:var(--cowos)}
+.routehead{padding:16px 0 14px}
+.routehead h2{font-size:20px;margin:0 0 2px;font-weight:600}
+.routehead .en2{font-size:13px;color:var(--ink-2);margin:0 0 10px}
+.routehead .clarify{font-size:12.5px;color:var(--ink-3);line-height:1.55;padding-top:11px;border-top:1px dashed var(--rule);max-width:60ch}
+.route .row{flex-direction:column}
+.route .step{flex:1 1 auto}
+.link{grid-column:1/-1;margin:26px 0 0;border:1px dashed var(--cowos);background:var(--cowos-tint);
+ padding:14px 18px;font-size:13px;color:var(--ink-2);line-height:1.6}
+.link b{color:var(--cowos);font-weight:600}
+.divider{height:1px;background:var(--rule-soft)}
+
+.sect{margin-top:48px;border:1px solid var(--rule);background:var(--card);padding:24px 26px}
+.sect h2{font-size:19px;margin:0 0 6px;font-weight:600}
+.sect .key{font-size:12.5px;color:var(--ink-3);margin:0 0 20px}
+.sect .key .tw{font-weight:600}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px solid var(--rule-soft);vertical-align:top}
+th{font-weight:600;color:var(--ink-2);font-size:12.5px;border-bottom:1px solid var(--rule)}
+td.n{font-family:ui-monospace,"SF Mono",Menlo,monospace;color:var(--ink-2);white-space:nowrap}
+tr:last-child td{border-bottom:none}
+.grouprow td{background:#F1F5F6;padding-top:11px;padding-bottom:9px;padding-left:12px;border-bottom:1px solid var(--rule)}
+.lead-v{font-weight:600}
+.tw{color:var(--t-insp)}
+
+@media (max-width:760px){
+ .wrap{padding:30px 16px 60px}
+ .stage,.forkbar{grid-template-columns:1fr}
+ .rail{border-right:none;border-bottom:2px solid var(--rule);padding:20px 0 18px}
+ .rail .stripe{right:auto;left:0;top:auto;bottom:-2px;width:60px;height:2px}
+ .body{padding:20px 0 26px}
+ .forkbar .lead{display:none}
+ .forkbar .msg{padding-left:0}
+ .scroller{overflow-x:auto}
+ table{min-width:560px}
+}
+@media print{.backbar,.toc{display:none}body{background:#fff}.wrap{max-width:none;padding:0}.step,.legend,.sect{break-inside:avoid}}
+.backbar{margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.backbar a{display:inline-block;font-size:13px;color:var(--ink-2);text-decoration:none;border:1px solid var(--rule);background:var(--card);padding:6px 13px}
+.backbar a:hover{color:var(--b);border-color:var(--b)}
+.backbar .lang{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;letter-spacing:.04em}
+.toc{background:var(--card);border:1px solid var(--rule);padding:16px 22px;margin-bottom:34px;font-size:13px}
+.toc a{color:var(--stage);text-decoration:none;font-weight:500;margin-right:18px;white-space:nowrap}
+.toc a:hover{text-decoration:underline}
+.tocrow{display:flex;flex-wrap:wrap;gap:6px 4px;row-gap:8px}
+
+/* process families, linked to the Equipment Map */
+.f-fab{background:#EEEBF8;color:#5B4B9E} .step.f-fab:not(.opt){border-left:3px solid #5B4B9E}
+.f-test{background:#E4F2F3;color:#0E7C86} .step.f-test:not(.opt){border-left:3px solid #0E7C86}
+.f-bond{background:#E8F1F8;color:#1B5E8C} .step.f-bond:not(.opt){border-left:3px solid #1B5E8C}
+.f-dice{background:#F2F5E4;color:#6B7A1E} .step.f-dice:not(.opt){border-left:3px solid #6B7A1E}
+.f-place{background:#FAEEE1;color:#B85C10} .step.f-place:not(.opt){border-left:3px solid #B85C10}
+.f-cure{background:#FBEAE7;color:#B03A2E} .step.f-cure:not(.opt){border-left:3px solid #B03A2E}
+.f-mold{background:#F8ECF3;color:#8E3B6B} .step.f-mold:not(.opt){border-left:3px solid #8E3B6B}
+.f-finish{background:#FDF3E1;color:#8A5A00} .step.f-finish:not(.opt){border-left:3px solid #8A5A00}
+.f-optic{background:#EAF4EE;color:#2E6B4F} .step.f-optic:not(.opt){border-left:3px solid #2E6B4F}
+.f-mech{background:#F4EBE2;color:#7C4A1E} .step.f-mech:not(.opt){border-left:3px solid #7C4A1E}
+.f-ems{background:#ECEFF1;color:#5F6C75} .step.f-ems:not(.opt){border-left:3px solid #5F6C75}
+a.chip{text-decoration:none} a.chip:hover{text-decoration:underline}
+.step .chip{white-space:normal;line-height:1.5;background:rgba(255,255,255,.72);border:1px solid currentColor}
+.step h4{color:inherit}
+.legend .fams{display:grid;grid-template-columns:repeat(5,1fr);gap:10px} .legend .fams .chipwrap{flex-direction:column;align-items:flex-start;gap:6px}
+.legend .chipwrap .chip{white-space:nowrap} .legend .fams small a{color:var(--ink-2);text-decoration:none;border-bottom:1px dotted var(--rule)} .legend .fams small a:hover{color:var(--b);border-color:var(--b)}
+@media (max-width:900px){.legend .fams{grid-template-columns:1fr 1fr}}
+.legend p.lnote{font-size:12px;color:var(--ink-3);margin:0 0 12px;line-height:1.5}
+
+/* materials and consumables, linked to the Materials Map */
+.step .mat{font-size:11.5px;margin:8px 0 0;line-height:1.55;padding:7px 9px;background:#F5F3EE;color:#4A555E}
+.step .mat b{font-weight:600;color:#14181C;white-space:nowrap}
+.step .mat a{color:#4A555E;text-decoration:none;border-bottom:1px dotted #9AA5AD}
+.step .mat a:hover{color:#4A3B7A;border-color:#4A3B7A}
+.step .mat .cons{display:block;margin-top:3px}
+.step .mat .none{color:#7C8891}
+.legend .fams.six{grid-template-columns:repeat(6,1fr)}
+@media (max-width:900px){.legend .fams.six{grid-template-columns:1fr 1fr}}
+.backbar .bbr{display:flex;gap:8px;flex-wrap:wrap}
+</style>
+<style id="map-css">
+.mono{font-family:ui-monospace,"SF Mono",Menlo,monospace}
+.subhead{font-size:12.5px;font-weight:600;color:var(--ink-2);margin:22px 0 8px;padding-top:14px;border-top:1px dashed var(--rule)}
+.scroller{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--rule);background:var(--card)}
+.ptable th,.ptable td{padding:8px 12px;text-align:left;vertical-align:top;line-height:1.5;border-bottom:1px solid var(--rule-soft)}
+.ptable th{background:#EEF2F3;font-weight:600;color:var(--ink-2);font-size:11.5px;border-bottom:1px solid var(--rule)}
+.ptable tr:last-child td{border-bottom:none}
+.ptable td.pname{font-weight:600;color:var(--ink)}
+.ptable td.desc{color:var(--ink-2)}
+.ptable td.n{text-align:right;font-family:ui-monospace,Menlo,monospace;font-size:12.5px;white-space:nowrap}
+.ptable td .note{font-size:11.5px;color:var(--ink-3);margin-top:3px;display:block}
+.ptable tr.bucket td{background:#F6F8F9;color:var(--ink-3);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px}
+.ptable tbody tr:not(.bucket):hover td{background:#FAFBFC}
+.ptable .c1{width:170px}
+.ptable .c2{width:120px}
+.ptable .cs{width:86px}
+.ptable .cw{width:210px}
+.fig{margin:0 0 14px;background:var(--card);border:1px solid var(--rule);padding:18px 20px 14px}
+.fig svg{width:100%;height:auto;display:block}
+.ptable.mtx{min-width:0}
+.ptable th.grp{text-align:center;border-left:1px solid var(--rule-soft)}
+.ptable th.dh{text-align:center;width:86px;line-height:1.3}
+.ptable td.dot{text-align:center;color:#2E6B4F;font-size:13px;width:86px}
+.pies{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0 0 14px}
+.pie{background:var(--card);border:1px solid var(--rule);padding:12px 14px 10px}
+.pie h4{margin:0 0 8px;font-size:12.5px;font-weight:600;color:var(--ink-2)}
+.pie svg{width:100%;height:auto;display:block}
+.fig figcaption{margin-top:13px;padding-top:11px;border-top:1px solid var(--rule-soft);
+ font-size:11.5px;color:var(--ink-3);line-height:1.6}
+.ptable td{font-size:13.5px;line-height:1.55;padding:9px 13px}
+.ptable th{padding:7px 13px}
+.ptable.mtx{min-width:0}
+.ptable th.grp{text-align:center;border-left:1px solid var(--rule-soft)}
+.ptable th.dh{text-align:center;width:86px;line-height:1.3}
+.ptable td.dot{text-align:center;color:#2E6B4F;font-size:13px;width:86px}
+/* ---- process map v12 ---- */
+.wrap{max-width:1320px}
+.pstage{margin:0 0 44px}
+.prail{border-bottom:2px solid var(--stage);padding-bottom:8px;margin-bottom:12px;position:relative;padding-left:14px}
+.pstripe{position:absolute;left:0;top:2px;bottom:10px;width:4px;background:var(--stage)}
+.pnum{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11px;color:var(--ink-3);letter-spacing:.06em;margin-bottom:3px}
+.prail h2{font-size:21px;margin:0;font-weight:700}
+.pstage .lede{font-size:13px;color:var(--ink-2);line-height:1.6;margin:0 0 16px;max-width:none}
+.pstage .lede b{color:var(--ink);font-weight:600}
+.pstage .lede a{color:var(--ink-2);text-decoration:none;border-bottom:1px dotted var(--rule)}
+.pstage.ccl .prail{border-bottom-color:#2E6B4F}.pstage.ccl .pstripe{background:#2E6B4F}
+.pstage.pcb .prail{border-bottom-color:#B85C10}.pstage.pcb .pstripe{background:#B85C10}
+.pstage.ics .prail{border-bottom-color:#8E3B6B}.pstage.ics .pstripe{background:#8E3B6B}
+.pstage.par .prail{border-bottom-color:#5A6670}.pstage.par .pstripe{background:#5A6670}
+.pstage.prod .prail{border-bottom-color:#2F4F7F}.pstage.prod .pstripe{background:#2F4F7F}
+.sub.prod{background:#2F4F7F}
+.subsub.prod{border-left-color:#2F4F7F}
+.c-prod{background:#E8EEF6;color:#2F4F7F}
+.ptable.pm.amx{min-width:1250px}
+.ptable.pm.amx th,.ptable.pm.amx td{padding-left:10px;padding-right:10px}
+.pbody{min-width:0}
+.nb{white-space:nowrap}
+.tw{color:#1F7A5C;font-weight:600}.cn{color:#B02E6E}.jp{color:#2560A6}.kr{color:#8A5A00}.us{color:#8C3A3A}.eu{color:#5B4B9E}.ot{color:#5F6B75}
+.c-ccl{background:#E1F0E9;color:#2E6B4F}.step.ccl{border-left:3px solid #2E6B4F}.sub.ccl{background:#2E6B4F}
+.c-pcb{background:#FAEEE1;color:#9A4C0C}.step.pcb{border-left:3px solid #B85C10}.sub.pcb{background:#B85C10}
+.c-par{background:#ECEFF1;color:#4A555E}.sub.par{background:#5A6670}.subsub.par{border-left-color:#5A6670}
+.c-ics{background:#F8ECF3;color:#8E3B6B}.step.ics{border-left:3px solid #8E3B6B}.sub.ics{background:#8E3B6B}
+.c-pm{background:#E8EEF3;color:#1F3A4D}.sub.pm{background:#1F3A4D}
+.c-proc{background:#ECEFF1;color:#4E5A63}.sub.proc{background:#4E5A63}
+/* process cards, as on the SoIC and CoWoS map */
+.step{flex:1 1 210px;min-width:200px;max-width:calc(20% - 10px)}
+@media (max-width:1240px){.step{max-width:calc(25% - 9px)}}
+@media (max-width:1000px){.step{max-width:calc(33.33% - 8px)}}
+@media (max-width:760px){.step{max-width:calc(50% - 6px)}}
+@media (max-width:520px){.step{max-width:none}}
+.step .chip + .chip{margin-left:4px}
+.step .vend{margin-top:7px}
+.step .why{color:var(--ink);font-size:12px;line-height:1.55;margin:9px 0 0;padding-top:0;border-top:none}
+.sub .lite{font-weight:400;opacity:.82;font-size:12px;margin-left:6px}
+.sub{scroll-margin-top:16px}
+/* materials sub-sections, X.1.n */
+.subsub{display:flex;align-items:baseline;flex-wrap:wrap;gap:0 10px;margin:16px 0 8px;padding:7px 12px;background:#F6F8F9;border-left:3px solid var(--ink-3);font-size:13.5px;font-weight:600;color:var(--ink);scroll-margin-top:16px}
+.subsub .code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11.5px;font-weight:600;color:var(--ink-3)}
+.subsub .lite{font-weight:400;font-size:12px;color:var(--ink-3)}
+.subsub.ics{border-left-color:#8E3B6B}.subsub.ccl{border-left-color:#2E6B4F}.subsub.pcb{border-left-color:#B85C10}
+.subsub + .pies,.subsub + .scroller{margin-top:0}
+.subsub + .subhead{border-top:none;padding-top:0;margin-top:4px}
+.pbody .scroller{margin-bottom:6px}
+.sub + .subhead{border-top:none;padding-top:0;margin-top:6px}
+/* market share: one white panel per section, the pies centred, left to right */
+.pies{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 28px;background:var(--card);border:1px solid var(--rule);padding:14px 18px 10px;margin:0 0 12px}
+.pies .pie{flex:0 1 calc((100% - 56px) / 3);max-width:352px;min-width:230px;background:none;border:0;padding:0}
+@media (max-width:420px){.pies .pie{flex-basis:100%}}
+/* charts and tables */
+.ptable.chart{min-width:960px;font-size:12.5px}
+.ptable.chart th,.ptable.chart td{padding:8px 10px;vertical-align:top;line-height:1.5}
+.ptable.chart th.cmat{width:180px}.ptable.chart th.cgr{width:135px}.ptable.chart th.cstp{width:168px}.ptable.chart th.cdo{width:225px}.ptable.chart th.cm{width:190px}
+.ptable.chart th.cuse{width:190px}.ptable.chart.makers.m3 th.cco{width:150px}.ptable.chart.makers.m3 th.csp{width:150px}.ptable.chart.makers.m3 th.ccu{width:200px}
+.ptable.chart.makers th.cco{width:150px}.ptable.chart.makers th.ctk{width:122px}.ptable.chart.makers th.csh{width:112px}.ptable.chart.makers th.cmk{width:400px}
+.ptable.chart.makers.hs th.cmk{width:260px}.ptable.chart.makers.hs th.ctk{width:96px}.ptable.chart.makers.hs th.csh{width:100px}
+.ptable.chart.makers .pct{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-weight:600;color:var(--ink);font-size:12.5px}
+.ptable.chart.makers .rank{font-size:11.5px;color:var(--ink-2)}
+.ptable.chart.hs{min-width:960px}
+.ptable.chart.hs th.cdot{width:46px;text-align:center}
+.ptable.chart.hs td.dot{width:auto;font-size:13px;padding-left:4px;padding-right:4px}
+.ptable.chart.hs th.cmk{width:260px}
+.ptable.chart.grade th.cg1{width:120px}.ptable.chart.grade th.cg2{width:120px}.ptable.chart.grade th.cg3{width:120px}.ptable.chart.grade th.cg4{width:140px}.ptable.chart.grade th.cg5{width:130px}.ptable.chart.grade th.cg6{width:190px}
+.pbody p.note{font-size:12px;color:var(--ink-3);margin:2px 0 8px;line-height:1.5}
+.pbody .subhead{margin-top:18px}
+.pbody .words{margin-top:12px}
+.nw{white-space:nowrap}
+.nh{white-space:nowrap}
+.defs{margin:0 0 10px}.defs p{display:flex}.defs span{flex:1}@media (max-width:620px){.defs p{display:block}.defs b{display:block}}.defs.wide b{min-width:190px}.defs.wider b{min-width:250px}.defs p{margin:3px 0;font-size:13px;line-height:1.5;color:var(--ink)}.defs b{display:inline-block;min-width:112px;font-weight:600}
+.pbody .ptable.rt td,.pbody .ptable.rt th{padding:7px 10px}
+.pbody .scroller + .scroller{margin-top:10px}
+.ptable.chart td.pname{font-weight:600;color:var(--ink)}
+.ptable.chart td.desc{color:var(--ink-2)}
+.ptable.chart td.tk{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11px;color:var(--ink-3);line-height:1.5}
+.ptable.chart .nil,.ptable.mtx .nil{color:var(--ink-3)}
+.ptable.chart td.sup a,.ptable.chart td.desc a{color:var(--ink-2);text-decoration:none;border-bottom:1px dotted var(--rule)}
+.ptable.chart td.sup a:hover{color:var(--b);border-color:var(--b)}
+.ptable.chart tr{scroll-margin-top:16px}
+.ptable.chart tr:target td{background:#FFF8E6}
+.ptable.chart tr.bucket td{background:#F6F8F9;color:var(--ink-3);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px}
+.ptable.chart tr.bucket .bl{color:var(--ink-2);font-weight:600}
+.ptable.chart tr.bucket .basis{text-transform:none;letter-spacing:0;font-size:11.5px;color:var(--ink-3)}
+.ptable.chart tr.bucket .bl + .basis::before{content:"·";margin:0 9px}
+.stepcell .sc{display:inline-block;font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:10.5px;font-weight:600;padding:1px 6px;border-radius:2px;border:1px solid;text-decoration:none;white-space:nowrap}
+.stepcell .sc:hover{text-decoration:underline}
+.stepcell.steps div{margin-bottom:4px;line-height:1.4}
+.stepcell.steps div:last-child{margin-bottom:0}
+.stepcell .sn{font-size:11.5px;color:var(--ink-2);margin-left:6px}
+.stepcell .sn.nostep{margin-left:0;color:var(--ink-3)}
+.ptable td.ctr{text-align:center}
+.ptable.nine thead th{text-align:center;vertical-align:bottom;line-height:1.25}.ptable.nine td{line-height:1.3}
+.ptable .bl{border-left:2px solid var(--rule)}
+.twin{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}.twin > .scroller{margin:0}.pbody .twin > .scroller + .scroller{margin-top:0}.twin .ptable.rt{min-width:0}@media (max-width:820px){.twin{grid-template-columns:1fr}}.ptable.nine tr.gsep td{border-top:2px solid var(--rule)}.ptable.nine th.mth{color:#8E3B6B;font-weight:600}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:10px 6px;margin:6px 0 16px}
+.flow .fs{display:inline-flex;align-items:center;white-space:nowrap}
+.flow .fa{color:var(--ink-3);font-size:12px}
+.flow .loop{position:relative;display:inline-flex;flex-wrap:wrap;align-items:center;gap:10px 6px;border:1px dashed #B8C2CA;border-radius:4px;padding:18px 8px 7px}
+.flow .loop .ll{position:absolute;top:3px;left:8px;font-size:10px;color:var(--ink-3)}
+.pbody p.note.flowline{margin:0 0 6px}
+.badge{display:inline-block;font-size:10.5px;padding:0 7px;border-radius:3px;border:1px solid;white-space:nowrap;font-weight:400;margin-top:3px}
+.badge.b-mat{color:#1F3A4D;border-color:#B9C7D2;background:#EEF3F7}
+.badge.b-con{color:#7C4A1E;border-color:#DCC5AE;background:#F8F1EA}
+.ptable.rt{min-width:820px;font-size:12.5px}
+.ptable.pm{min-width:940px}
+.ptable.mtx{min-width:0}
+.ptable.mtx th.c1{width:230px}
+.ptable.mtx th.dh,.ptable.mtx td.dot{width:auto}
+/* contents */
+.cgrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px 18px;align-items:start}
+@media (max-width:1100px){.cgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:700px){.cgrid{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.cgrid{grid-template-columns:1fr}}
+.cgrid .chip{text-decoration:none;margin-bottom:7px}
+.cgrid ul{list-style:none;margin:0;padding:0}
+.cgrid li{margin-bottom:5px;font-size:12.5px;line-height:1.4}
+.cgrid li.l3{margin-left:14px;font-size:12px}
+.cgrid li a{color:var(--ink-2);text-decoration:none;border-bottom:1px dotted var(--rule)}
+.cgrid li a:hover{color:var(--b);border-color:var(--b)}
+.cgrid .n{font-family:ui-monospace,"SF Mono",Menlo,monospace;color:var(--ink-3);font-size:11px;margin-right:6px}
+
+/* CCL types and suppliers map, Part A Overview */
+.cclmap{--head:#EEF2F3}
+.cclmap .cm-fig{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.cclmap .cm-fig svg{min-width:1000px;max-width:1200px;margin:0 auto}
+.cclmap table{border-collapse:collapse;width:100%;min-width:1260px;font-size:12.5px}
+.cclmap th,.cclmap td{padding:8px 10px;text-align:left;vertical-align:top;line-height:1.45;border-bottom:1px solid var(--rule-soft)}
+.cclmap th{background:var(--head);font-weight:600;color:var(--ink-2);font-size:11.5px;border-bottom:1px solid var(--rule)}
+.cclmap td.cm-lt{width:130px}.cclmap td.cm-co{width:120px}.cclmap td.cm-ty{width:96px}.cclmap td.cm-bd{width:120px}.cclmap td.cm-pr{width:110px}.cclmap td.cm-mk{width:140px}
+.cclmap tr.cm-band td{background:var(--head);border-top:1px solid var(--rule);padding:8px 12px}
+.cclmap .cm-bn{font-weight:600;font-size:12.5px;margin-right:18px}
+.cclmap .cm-bs{color:var(--ink-2);margin-right:18px}
+.cclmap tr.cm-subrow td{border-top:1px dashed var(--rule)}
+.cclmap tr.cm-grow td{border-top:1px solid var(--rule)}
+.cclmap tr.cm-div td{background:#2E6B4F;color:#fff;font-size:14.5px;font-weight:600;padding:8px 12px;border-top:1px solid var(--rule)}
+.cclmap p{margin:0}
+.cclmap .cm-nm{font-weight:600;font-size:12.5px}
+.cclmap .cm-sb{color:var(--ink-2);margin-top:3px}
+.cclmap .cm-mg{font-weight:600;margin-top:2px}
+.cclmap .cm-h{font-weight:600}
+.cclmap p.cm-co,.cclmap p.cm-bd{font-weight:600}
+.cclmap p.cm-ty{font-weight:600;color:#2E6B4F}
+.cclmap p.cm-pr,.cclmap p.cm-d{color:var(--ink-2)}
+.cclmap ul{margin:0 0 6px;padding-left:16px}
+.cclmap li::marker{color:var(--ink-3)}
+</style>
+<style id="site-chrome">
+/* site chrome (added by build) */
+.backbar{flex-wrap:wrap}
+.lede,.defn,.ds .lede,.routehead .clarify,.forkbar .msg,.explain .sub2,.masthead .en{max-width:none}
+.backbar .bbr{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.backbar .lang{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;letter-spacing:.04em}
+.backbar .lang-off{display:inline-block;font-size:12px;color:var(--ink-3,#7C8891);border:1px dashed var(--rule,#CBD3D9);padding:6px 13px;font-family:ui-monospace,"SF Mono",Menlo,monospace;letter-spacing:.04em;cursor:default}
+.site-foot{margin-top:56px;border-top:1px solid var(--rule,#CBD3D9);padding-top:22px;display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;font-size:12.5px;color:var(--ink-3,#7C8891);line-height:1.5}
+.site-foot .sf-id{display:flex;align-items:center;gap:12px;min-width:0}
+.site-foot .sf-id img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:0 0 auto}
+.site-foot .sf-name{font-size:14px;font-weight:600;color:var(--ink,#14181C)}
+.site-foot .sf-name a{color:inherit;text-decoration:none}
+.site-foot .sf-name a:hover{color:var(--b,#4A3B7A)}
+.site-foot .sf-sub{font-size:12px;color:var(--ink-3,#7C8891)}
+.site-foot .sf-contact{display:flex;gap:16px;flex-wrap:wrap;margin-left:auto}
+.site-foot .sf-contact a{color:var(--ink-2,#4A555E);text-decoration:none;border-bottom:1px dotted var(--rule,#CBD3D9)}
+.site-foot .sf-contact a:hover{color:var(--b,#4A3B7A);border-color:var(--b,#4A3B7A)}
+.site-foot .sf-note{flex-basis:100%;font-size:11.5px}
+@media (max-width:640px){.site-foot .sf-contact{margin-left:0}}
+@media (max-width:640px){
+  .stickynav{margin-left:-14px;margin-right:-14px;padding-left:14px;padding-right:14px;white-space:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .legend .fams,.legend .fams.six,.famgrid,.idxgrid{grid-template-columns:1fr !important}
+  .routes{grid-template-columns:minmax(0,1fr) !important}
+  .route,.routes > *{min-width:0}
+  .route .row,.route .chips,.route .chiprow,.route .cols{flex-wrap:wrap}
+  .optstack table{min-width:0 !important}
+  .famcol .chip,.legend .chip,.chipwrap b{white-space:normal}
+}
+@media print{.site-foot .sf-id img{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="backbar"><a href="map-en.html">← Industry Map</a><span class="bbr"><a href="pcb-ccl-en.html">CCL · PCB · IC Substrate</a><a href="#contents">Contents</a></span></div>
+
+<header class="masthead">
+ <h1>CCL · PCB · IC Substrate Full Process Map</h1>
+ <p class="en">Every step of IC substrate, CCL and PCB manufacturing, with the equipment and makers behind it, with Chinese makers left out</p>
+ <div class="meta"><span><b>Part A</b> IC substrate, one flow per substrate type, steps A-01 to A-35</span><span><b>Part B</b> CCL, steps B-01 to B-14</span><span><b>Part C</b> PCB, one flow per board type, steps C-01 to C-29</span><span><b>Colour</b> <span class="tw">Taiwan</span> · <span class="jp">Japan</span> · <span class="kr">Korea</span> · <span class="us">US</span> · <span class="eu">Europe</span> · <span class="ot">Other</span></span></div>
+</header>
+
+<nav class="toc">
+  <div class="tocrow">
+    <a href="#contents">Contents</a><a href="#sA">A IC Substrate</a><a href="#sB">B CCL</a><a href="#sC">C PCB</a>
+  </div>
+</nav>
+
+<section class="legend" id="contents">
+ <h2>Contents</h2>
+ <div class="cgrid">
+  <div><a class="chip c-ics" href="#sA">A IC Substrate</a><ul><li><a href="#fa1"><span class="n">A.1</span>ABF, Glass Core</a></li><li><a href="#fa2"><span class="n">A.2</span>ABF, Coreless</a></li><li><a href="#fa3"><span class="n">A.3</span>ABF, Organic Core</a></li><li><a href="#fa4"><span class="n">A.4</span>BT, Coreless</a></li><li><a href="#fa5"><span class="n">A.5</span>BT, Cored</a></li><li><a href="#a-steps">Steps</a></li><li><a href="#a-equip">Equipment and Makers</a></li></ul></div>
+  <div><a class="chip c-ccl" href="#sB">B CCL</a><ul><li><a href="#b-steps">Steps</a></li><li><a href="#b-equip">Equipment and Makers</a></li></ul></div>
+  <div><a class="chip c-pcb" href="#sC">C PCB</a><ul><li><a href="#fc1"><span class="n">C.1</span>HDI</a></li><li><a href="#fc2"><span class="n">C.2</span>Multilayer</a></li><li><a href="#fc3"><span class="n">C.3</span>FPC and Rigid-Flex</a></li><li><a href="#fc4"><span class="n">C.4</span>Single and Double-Sided</a></li><li><a href="#c-steps">Steps</a></li><li><a href="#c-equip">Equipment and Makers</a></li></ul></div>
+ </div>
+</section>
+
+<div class="pstage ics" id="sA">
+ <div class="prail"><div class="pstripe"></div><div class="pnum">PART A</div><h2>IC Substrate</h2></div>
+ <p class="lede">One flow per substrate type, then one card per step and the equipment behind it.</p>
+ <div class="pbody">
+<div class="subsub ics" id="fa1"><span class="code">A.1</span>ABF, Glass Core</div>
+  <p class="note flowline">A glass panel with through-glass vias takes the place of the laminated core, then ABF build-up as on an organic core.</p>
+  <div class="flow stepcell"><span class="fs"><a class="sc" href="#st-A-01" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-01</a><span class="sn">Through-Glass Via Forming</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-02" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-02</a><span class="sn">Glass Via Metallization</span></span><span class="fa">&rarr;</span><span class="loop"><span class="ll">Core circuits by SAP</span><span class="fs"><a class="sc" href="#st-A-22" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-22</a><span class="sn">Dry Film Lamination</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-23" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-23</a><span class="sn">Exposure</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-24" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-24</a><span class="sn">Develop</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-25" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-25</a><span class="sn">Via Fill and Pattern Plating</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-26" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-26</a><span class="sn">Resist Strip</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-27" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-27</a><span class="sn">Flash Etch</span></span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-14" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-14</a><span class="sn">Core AOI</span></span><span class="fa">&rarr;</span><span class="loop"><span class="ll">Once per layer</span><span class="fs"><a class="sc" href="#st-A-15" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-15</a><span class="sn">Copper Roughening</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-16" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-16</a><span class="sn">Build-Up Film Lamination</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-17" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-17</a><span class="sn">Film Cure</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-19" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-19</a><span class="sn">Laser Via Drilling</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-20" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-20</a><span class="sn">Via Desmear</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-21" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-21</a><span class="sn">Electroless Copper Seed</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-22" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-22</a><span class="sn">Dry Film Lamination</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-23" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-23</a><span class="sn">Exposure</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-24" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-24</a><span class="sn">Develop</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-25" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-25</a><span class="sn">Via Fill and Pattern Plating</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-26" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-26</a><span class="sn">Resist Strip</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-27" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-27</a><span class="sn">Flash Etch</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-28" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-28</a><span class="sn">Build-Up AOI</span></span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-30" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-30</a><span class="sn">Solder Resist Lamination</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-31" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-31</a><span class="sn">Solder Resist Exposure and Develop</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-32" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-32</a><span class="sn">Pad Surface Finish</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-33" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-33</a><span class="sn">Singulation</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-34" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-34</a><span class="sn">Substrate Test</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-35" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-35</a><span class="sn">Final Visual Inspection</span></span></div>
+  <div class="subsub ics" id="fa2"><span class="code">A.2</span>ABF, Coreless</div>
+  <p class="note flowline">The same ABF build-up, made on a carrier that is removed at the end, so the substrate has no core.</p>
+  <div class="flow stepcell"><span class="fs"><a class="sc" href="#st-A-03" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-03</a><span class="sn">Carrier Preparation</span></span><span class="fa">&rarr;</span><span class="loop"><span class="ll">Once per layer</span><span class="fs"><a class="sc" href="#st-A-15" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-15</a><span class="sn">Copper Roughening</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-16" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-16</a><span class="sn">Build-Up Film Lamination</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-17" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-17</a><span class="sn">Film Cure</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-19" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-19</a><span class="sn">Laser Via Drilling</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-20" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-20</a><span class="sn">Via Desmear</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-21" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-21</a><span class="sn">Electroless Copper Seed</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-22" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-22</a><span class="sn">Dry Film Lamination</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-23" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-23</a><span class="sn">Exposure</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-24" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-24</a><span class="sn">Develop</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-25" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-25</a><span class="sn">Via Fill and Pattern Plating</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-26" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-26</a><span class="sn">Resist Strip</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-27" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-27</a><span class="sn">Flash Etch</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-28" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-28</a><span class="sn">Build-Up AOI</span></span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-29" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-29</a><span class="sn">Carrier Separation</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-30" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-30</a><span class="sn">Solder Resist Lamination</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-31" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-31</a><span class="sn">Solder Resist Exposure and Develop</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-32" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-32</a><span class="sn">Pad Surface Finish</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-33" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-33</a><span class="sn">Singulation</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-34" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-34</a><span class="sn">Substrate Test</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-35" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-35</a><span class="sn">Final Visual Inspection</span></span></div>
+  <div class="subsub ics" id="fa3"><span class="code">A.3</span>ABF, Organic Core</div>
+  <p class="note flowline">ABF film is vacuum-laminated one layer at a time on both faces of a T-glass core, with traces grown by SAP.</p>
+  <div class="flow stepcell"><span class="fs"><a class="sc" href="#st-A-04" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-04</a><span class="sn">Core Laminate</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-05" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-05</a><span class="sn">Core Drilling</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-06" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-06</a><span class="sn">Core Desmear</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-07" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-07</a><span class="sn">Core Electroless Copper</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-08" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-08</a><span class="sn">Through-Hole Plating</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-09" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-09</a><span class="sn">Hole Plugging</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-10" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-10</a><span class="sn">Plug Grinding</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-11" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-11</a><span class="sn">Core Dry Film</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-12" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-12</a><span class="sn">Core Exposure</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-13" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-13</a><span class="sn">Core Develop, Etch and Strip</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-14" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-14</a><span class="sn">Core AOI</span></span><span class="fa">&rarr;</span><span class="loop"><span class="ll">Once per layer</span><span class="fs"><a class="sc" href="#st-A-15" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-15</a><span class="sn">Copper Roughening</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-16" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-16</a><span class="sn">Build-Up Film Lamination</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-17" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-17</a><span class="sn">Film Cure</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-19" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-19</a><span class="sn">Laser Via Drilling</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-20" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-20</a><span class="sn">Via Desmear</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-21" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-21</a><span class="sn">Electroless Copper Seed</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-22" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-22</a><span class="sn">Dry Film Lamination</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-23" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-23</a><span class="sn">Exposure</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-24" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-24</a><span class="sn">Develop</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-25" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-25</a><span class="sn">Via Fill and Pattern Plating</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-26" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-26</a><span class="sn">Resist Strip</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-27" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-27</a><span class="sn">Flash Etch</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-28" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-28</a><span class="sn">Build-Up AOI</span></span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-30" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-30</a><span class="sn">Solder Resist Lamination</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-31" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-31</a><span class="sn">Solder Resist Exposure and Develop</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-32" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-32</a><span class="sn">Pad Surface Finish</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-33" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-33</a><span class="sn">Singulation</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-34" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-34</a><span class="sn">Substrate Test</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-35" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-35</a><span class="sn">Final Visual Inspection</span></span></div>
+  <div class="subsub ics" id="fa4"><span class="code">A.4</span>BT, Coreless</div>
+  <p class="note flowline">The first traces are plated on a carrier and pressed into BT prepreg, then the carrier is removed, leaving them embedded flush (ETS).</p>
+  <div class="flow stepcell"><span class="fs"><a class="sc" href="#st-A-03" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-03</a><span class="sn">Carrier Preparation</span></span><span class="fa">&rarr;</span><span class="loop"><span class="ll">First traces on the carrier</span><span class="fs"><a class="sc" href="#st-A-22" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-22</a><span class="sn">Dry Film Lamination</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-23" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-23</a><span class="sn">Exposure</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-24" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-24</a><span class="sn">Develop</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-25" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-25</a><span class="sn">Via Fill and Pattern Plating</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-26" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-26</a><span class="sn">Resist Strip</span></span></span><span class="fa">&rarr;</span><span class="loop"><span class="ll">Once per layer</span><span class="fs"><a class="sc" href="#st-A-15" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-15</a><span class="sn">Copper Roughening</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-18" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-18</a><span class="sn">Prepreg and Foil Lamination</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-19" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-19</a><span class="sn">Laser Via Drilling</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-20" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-20</a><span class="sn">Via Desmear</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-21" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-21</a><span class="sn">Electroless Copper Seed</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-22" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-22</a><span class="sn">Dry Film Lamination</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-23" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-23</a><span class="sn">Exposure</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-24" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-24</a><span class="sn">Develop</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-25" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-25</a><span class="sn">Via Fill and Pattern Plating</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-26" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-26</a><span class="sn">Resist Strip</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-27" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-27</a><span class="sn">Flash Etch</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-28" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-28</a><span class="sn">Build-Up AOI</span></span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-29" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-29</a><span class="sn">Carrier Separation</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-30" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-30</a><span class="sn">Solder Resist Lamination</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-31" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-31</a><span class="sn">Solder Resist Exposure and Develop</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-32" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-32</a><span class="sn">Pad Surface Finish</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-33" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-33</a><span class="sn">Singulation</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-34" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-34</a><span class="sn">Substrate Test</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-35" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-35</a><span class="sn">Final Visual Inspection</span></span></div>
+  <div class="subsub ics" id="fa5"><span class="code">A.5</span>BT, Cored</div>
+  <p class="note flowline">BT prepreg is pressed with ultra-thin copper foil onto both faces of a BT core, with traces by mSAP or etching.</p>
+  <div class="flow stepcell"><span class="fs"><a class="sc" href="#st-A-04" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-04</a><span class="sn">Core Laminate</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-05" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-05</a><span class="sn">Core Drilling</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-06" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-06</a><span class="sn">Core Desmear</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-07" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-07</a><span class="sn">Core Electroless Copper</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-08" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-08</a><span class="sn">Through-Hole Plating</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-09" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-09</a><span class="sn">Hole Plugging</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-10" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-10</a><span class="sn">Plug Grinding</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-11" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-11</a><span class="sn">Core Dry Film</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-12" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-12</a><span class="sn">Core Exposure</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-13" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-13</a><span class="sn">Core Develop, Etch and Strip</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-14" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-14</a><span class="sn">Core AOI</span></span><span class="fa">&rarr;</span><span class="loop"><span class="ll">Once per layer</span><span class="fs"><a class="sc" href="#st-A-15" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-15</a><span class="sn">Copper Roughening</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-18" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-18</a><span class="sn">Prepreg and Foil Lamination</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-19" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-19</a><span class="sn">Laser Via Drilling</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-20" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-20</a><span class="sn">Via Desmear</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-21" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-21</a><span class="sn">Electroless Copper Seed</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-22" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-22</a><span class="sn">Dry Film Lamination</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-23" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-23</a><span class="sn">Exposure</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-24" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-24</a><span class="sn">Develop</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-25" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-25</a><span class="sn">Via Fill and Pattern Plating</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-26" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-26</a><span class="sn">Resist Strip</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-27" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-27</a><span class="sn">Flash Etch</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-28" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-28</a><span class="sn">Build-Up AOI</span></span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-30" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-30</a><span class="sn">Solder Resist Lamination</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-31" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-31</a><span class="sn">Solder Resist Exposure and Develop</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-32" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-32</a><span class="sn">Pad Surface Finish</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-33" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-33</a><span class="sn">Singulation</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-34" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-34</a><span class="sn">Substrate Test</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-35" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-35</a><span class="sn">Final Visual Inspection</span></span></div>
+  <p class="subhead" id="a-steps">Steps</p>
+  <div class="row">
+   <div class="step ics" id="st-A-01"><div class="idx">A-01</div><h4>Through-Glass Via Forming</h4>
+    <a class="chip c-ics" href="#q-tgv">TGV Laser</a>
+    <p class="vend"><span class="eu">LPKF</span> · <span class="kr">Philoptics</span></p>
+    <p class="why">A laser marks each via in the glass panel and an etch opens the holes.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-glasscore">Glass Core Panels</a></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (via diameter, taper) · AOI (cracks, chipping)</p></div>
+   <div class="step ics" id="st-A-02"><div class="idx">A-02</div><h4>Glass Via Metallization</h4>
+    <a class="chip c-ics" href="#q-splating">Plating Line</a>
+    <p class="vend"><span class="eu">Atotech</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Manz</span></p>
+    <p class="why">A seed layer goes onto the glass, since plated copper does not grip glass on its own, and the vias are filled with copper.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-splate">Core Plating Chemistry</a></span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Cross-section (via fill) · Lab test (adhesion)</p></div>
+   <div class="step ics" id="st-A-03"><div class="idx">A-03</div><h4>Carrier Preparation</h4>
+    <span class="chip c-ics">Carrier Panel</span>
+    <p class="vend">Prepared in-house by the substrate maker</p>
+    <p class="why">A rigid carrier panel is clad with a peelable ultra-thin copper foil, the base the first layer is built on.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-carrier">Ultra-Thin Carrier Foil</a></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (foil surface)</p></div>
+   <div class="step ics" id="st-A-04"><div class="idx">A-04</div><h4>Core Laminate</h4>
+    <a class="chip c-ics" href="#q-cclpress-ics">Vacuum Hot Press</a>
+    <p class="vend"><span class="jp">Kitagawa Seiki</span> · <span class="eu">Burkle</span> · <span class="eu">Lauffer</span> · <span class="eu">Cedal</span></p>
+    <p class="why">The laminate maker presses glass-cloth prepreg and copper foil into the substrate core, T-glass with BT or low-CTE epoxy where a large die must stay flat.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-core">Substrate Core Laminate</a> · <a href="pcb-ccl-en.html#m-btlam">BT Laminate</a></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (thickness, CTE, flatness)</p></div>
+   <div class="step ics" id="st-A-05"><div class="idx">A-05</div><h4>Core Drilling</h4>
+    <a class="chip c-ics" href="#q-sdrill">Drilling Machine</a> <a class="chip c-ics" href="#q-vlaser">Laser Via Drill</a>
+    <p class="vend"><span class="jp">Via Mechanics</span> · <span class="eu">Schmoll</span> · <span class="tw">Tongtai</span> · <span class="jp">Mitsubishi Electric</span> · <span class="us">ESI</span></p>
+    <p class="why">Through-holes are drilled through the core, by mechanical drill or by CO2 laser on thin cores.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;X-ray (hole position)</p></div>
+   <div class="step ics" id="st-A-06"><div class="idx">A-06</div><h4>Core Desmear</h4>
+    <a class="chip c-ics" href="#q-splating">Plating Line</a>
+    <p class="vend"><span class="eu">Atotech</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Manz</span></p>
+    <p class="why">Resin smeared by the drill is cleaned off the hole walls so the copper plates onto a clean surface.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-splate">Core Plating Chemistry</a></span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Cross-section (hole wall)</p></div>
+   <div class="step ics" id="st-A-07"><div class="idx">A-07</div><h4>Core Electroless Copper</h4>
+    <a class="chip c-ics" href="#q-splating">Plating Line</a>
+    <p class="vend"><span class="eu">Atotech</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Manz</span></p>
+    <p class="why">A thin electroless copper layer is deposited on the hole walls, since electroplating needs a conductive surface to start.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-splate">Core Plating Chemistry</a></span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Cross-section (backlight, seed coverage)</p></div>
+   <div class="step ics" id="st-A-08"><div class="idx">A-08</div><h4>Through-Hole Plating</h4>
+    <a class="chip c-ics" href="#q-splating">Plating Line</a>
+    <p class="vend"><span class="eu">Atotech</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Manz</span></p>
+    <p class="why">Electrolytic copper thickens the hole walls and the core faces, joining the two sides of the core.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-splate">Core Plating Chemistry</a></span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Cross-section (hole plating) · Metrology (copper thickness)</p></div>
+   <div class="step ics" id="st-A-09"><div class="idx">A-09</div><h4>Hole Plugging</h4>
+    <span class="chip c-ics">Plugging Machine</span>
+    <p class="vend">Done in-house by the substrate maker</p>
+    <p class="why">The plated holes are filled with resin so the layers pressed above them lie flat.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Cross-section (voids in the plug)</p></div>
+   <div class="step ics" id="st-A-10"><div class="idx">A-10</div><h4>Plug Grinding</h4>
+    <span class="chip c-ics">Brush Grinder</span>
+    <p class="vend">Done in-house by the substrate maker</p>
+    <p class="why">The cured plug resin standing above the surface is ground flat with the copper.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (plug flatness)</p></div>
+   <div class="step ics" id="st-A-11"><div class="idx">A-11</div><h4>Core Dry Film</h4>
+    <a class="chip c-ics" href="#q-wet-ics">Wet-Process Line</a>
+    <p class="vend"><span class="jp">Tokyo Kakoki</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Kuttler</span></p>
+    <p class="why">The core copper is cleaned and a dry-film resist laminated on for the core circuits.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (resist pattern), after developing</p></div>
+   <div class="step ics" id="st-A-12"><div class="idx">A-12</div><h4>Core Exposure</h4>
+    <a class="chip c-ics" href="#q-sldi">Substrate LDI</a>
+    <p class="vend"><span class="ot">Orbotech</span> · <span class="jp">ORC</span> · <span class="jp">Screen</span> · <span class="jp">Adtec</span> · <span class="jp">Ushio</span></p>
+    <p class="why">Direct imaging writes the core circuit pattern into the dry film.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (resist pattern), after developing</p></div>
+   <div class="step ics" id="st-A-13"><div class="idx">A-13</div><h4>Core Develop, Etch and Strip</h4>
+    <a class="chip c-ics" href="#q-wet-ics">Wet-Process Line</a>
+    <p class="vend"><span class="jp">Tokyo Kakoki</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Kuttler</span></p>
+    <p class="why">The unexposed film is washed off, the bare copper etched away and the film stripped, leaving the core circuits.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (core pattern)</p></div>
+   <div class="step ics" id="st-A-14"><div class="idx">A-14</div><h4>Core AOI</h4>
+    <a class="chip c-ics" href="#q-aoi-ics">AOI</a>
+    <p class="vend"><span class="ot">Orbotech</span> · <span class="tw">Utechzone</span> · <span class="tw">Machvision</span></p>
+    <p class="why">The core circuits are scanned for opens and shorts before the first layer covers them.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: AOI (opens, shorts, nicks)</p></div>
+   <div class="step ics" id="st-A-15"><div class="idx">A-15</div><h4>Copper Roughening</h4>
+    <a class="chip c-ics" href="#q-wet-ics">Wet-Process Line</a>
+    <p class="vend"><span class="jp">Tokyo Kakoki</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Kuttler</span></p>
+    <p class="why">The copper is micro-etched rough so the next film or prepreg grips it.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (roughness)</p></div>
+   <div class="step ics" id="st-A-16"><div class="idx">A-16</div><h4>Build-Up Film Lamination</h4>
+    <a class="chip c-ics" href="#q-vlam">Vacuum Laminator</a>
+    <p class="vend"><span class="jp">Meiki</span> · <span class="jp">Nikko-Materials</span></p>
+    <p class="why">A sheet of ABF is vacuum-laminated onto each face, flowing into the gaps between the circuits below.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-abf">Build-Up Film</a></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (voids, wrinkles) · Metrology (film thickness)</p></div>
+   <div class="step ics" id="st-A-17"><div class="idx">A-17</div><h4>Film Cure</h4>
+    <span class="chip c-ics">Curing Oven</span>
+    <p class="vend">Done in-house by the substrate maker</p>
+    <p class="why">The film is cured in an oven, once per layer and ten or more times a side on a large GPU substrate.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (warpage)</p></div>
+   <div class="step ics" id="st-A-18"><div class="idx">A-18</div><h4>Prepreg and Foil Lamination</h4>
+    <a class="chip c-ics" href="#q-press-ics">Lamination Press</a>
+    <p class="vend"><span class="eu">Burkle</span> · <span class="eu">Lauffer</span> · <span class="eu">Cedal</span> · <span class="jp">Kitagawa Seiki</span></p>
+    <p class="why">BT prepreg and ultra-thin copper foil are vacuum-pressed onto both faces and cured, once per layer.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-btpp">BT Prepreg</a> · <a href="pcb-ccl-en.html#m-btcarrier">Ultra-Thin Carrier Foil</a></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;X-ray (registration) · Cross-section (voids)</p></div>
+   <div class="step ics" id="st-A-19"><div class="idx">A-19</div><h4>Laser Via Drilling</h4>
+    <a class="chip c-ics" href="#q-vlaser">Laser Via Drill</a>
+    <p class="vend"><span class="jp">Mitsubishi Electric</span> · <span class="jp">Via Mechanics</span> · <span class="us">ESI</span> · <span class="eu">LPKF</span></p>
+    <p class="why">A laser drills the vias through the new ABF film or BT prepreg down to the copper below, once per layer.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (via diameter, bottom residue)</p></div>
+   <div class="step ics" id="st-A-20"><div class="idx">A-20</div><h4>Via Desmear</h4>
+    <a class="chip c-ics" href="#q-splating">Plating Line</a>
+    <p class="vend"><span class="eu">Atotech</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Manz</span></p>
+    <p class="why">Resin left at the via bottoms is cleaned out and the dielectric surface roughened so the seed copper grips it.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-sapchem">SAP Plating Chemistry</a></span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (via bottom residue)</p></div>
+   <div class="step ics" id="st-A-21"><div class="idx">A-21</div><h4>Electroless Copper Seed</h4>
+    <a class="chip c-ics" href="#q-splating">Plating Line</a>
+    <p class="vend"><span class="eu">Atotech</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Manz</span></p>
+    <p class="why">A thin electroless copper seed is deposited over the dielectric and into the vias, the base the traces are plated up from.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-sapchem">SAP Plating Chemistry</a></span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Cross-section (seed coverage)</p></div>
+   <div class="step ics" id="st-A-22"><div class="idx">A-22</div><h4>Dry Film Lamination</h4>
+    <a class="chip c-ics" href="#q-vlam">Vacuum Laminator</a>
+    <p class="vend"><span class="jp">Meiki</span> · <span class="jp">Nikko-Materials</span></p>
+    <p class="why">A fine-line dry-film resist is laminated over the copper.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-sapfilm">SAP Dry Film</a></span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (resist pattern), after developing</p></div>
+   <div class="step ics" id="st-A-23"><div class="idx">A-23</div><h4>Exposure</h4>
+    <a class="chip c-ics" href="#q-sldi">Substrate LDI</a>
+    <p class="vend"><span class="ot">Orbotech</span> · <span class="jp">ORC</span> · <span class="jp">Screen</span> · <span class="jp">Adtec</span> · <span class="jp">Ushio</span></p>
+    <p class="why">Direct imaging or a stepper writes the trace pattern into the film, aligned to the vias below.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (resist pattern) · Metrology (registration)</p></div>
+   <div class="step ics" id="st-A-24"><div class="idx">A-24</div><h4>Develop</h4>
+    <a class="chip c-ics" href="#q-wet-ics">Wet-Process Line</a>
+    <p class="vend"><span class="jp">Tokyo Kakoki</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Kuttler</span></p>
+    <p class="why">The unexposed film is washed away, opening channels where the traces will grow.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (resist pattern)</p></div>
+   <div class="step ics" id="st-A-25"><div class="idx">A-25</div><h4>Via Fill and Pattern Plating</h4>
+    <a class="chip c-ics" href="#q-splating">Plating Line</a>
+    <p class="vend"><span class="eu">Atotech</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Manz</span></p>
+    <p class="why">Copper is electroplated inside the openings, filling the vias and growing the traces to their full height.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-sapchem">SAP Plating Chemistry</a></span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (plating height) · Cross-section (via fill)</p></div>
+   <div class="step ics" id="st-A-26"><div class="idx">A-26</div><h4>Resist Strip</h4>
+    <a class="chip c-ics" href="#q-wet-ics">Wet-Process Line</a>
+    <p class="vend"><span class="jp">Tokyo Kakoki</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Kuttler</span></p>
+    <p class="why">The dry film is stripped away, leaving the plated traces standing on the thin copper below.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (resist residue)</p></div>
+   <div class="step ics" id="st-A-27"><div class="idx">A-27</div><h4>Flash Etch</h4>
+    <a class="chip c-ics" href="#q-wet-ics">Wet-Process Line</a>
+    <p class="vend"><span class="jp">Tokyo Kakoki</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Kuttler</span></p>
+    <p class="why">A quick etch removes the thin copper between the traces without eating the traces themselves.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-sapchem">SAP Plating Chemistry</a></span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (line defects) · Metrology (line width)</p></div>
+   <div class="step ics" id="st-A-28"><div class="idx">A-28</div><h4>Build-Up AOI</h4>
+    <a class="chip c-ics" href="#q-aoi-ics">AOI</a>
+    <p class="vend"><span class="ot">Orbotech</span> · <span class="tw">Utechzone</span> · <span class="tw">Machvision</span></p>
+    <p class="why">Every layer is scanned for opens, shorts and line-width errors before the next layer buries it.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: AOI (opens, shorts, line width)</p></div>
+   <div class="step ics" id="st-A-29"><div class="idx">A-29</div><h4>Carrier Separation</h4>
+    <span class="chip c-ics">Separation Line</span>
+    <p class="vend">Done in-house by the substrate maker</p>
+    <p class="why">The finished stack is peeled off the carrier and the thin foil etched away, leaving a substrate with no core.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (warpage, thickness)</p></div>
+   <div class="step ics" id="st-A-30"><div class="idx">A-30</div><h4>Solder Resist Lamination</h4>
+    <a class="chip c-ics" href="#q-vlam">Vacuum Laminator</a>
+    <p class="vend"><span class="jp">Meiki</span> · <span class="jp">Nikko-Materials</span></p>
+    <p class="why">A solder resist film is laminated, or an ink coated, over the outer layer on each face.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-sr">Substrate Solder Resist</a></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (resist thickness)</p></div>
+   <div class="step ics" id="st-A-31"><div class="idx">A-31</div><h4>Solder Resist Exposure and Develop</h4>
+    <a class="chip c-ics" href="#q-sldi">Substrate LDI</a> <a class="chip c-ics" href="#q-wet-ics">Wet-Process Line</a>
+    <p class="vend"><span class="ot">Orbotech</span> · <span class="jp">ORC</span> · <span class="jp">Screen</span> · <span class="jp">Tokyo Kakoki</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span></p>
+    <p class="why">The resist is exposed and developed to open the bump, bond and ball pads, then cured.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (opening size, registration)</p></div>
+   <div class="step ics" id="st-A-32"><div class="idx">A-32</div><h4>Pad Surface Finish</h4>
+    <a class="chip c-ics" href="#q-splating">Plating Line</a>
+    <p class="vend"><span class="eu">Atotech</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Manz</span></p>
+    <p class="why">ENEPIG, ENIG or OSP goes onto the open pads the chip and the board are joined to.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-sfinish">Surface Finish Chemistry</a></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (finish thickness)</p></div>
+   <div class="step ics" id="st-A-33"><div class="idx">A-33</div><h4>Singulation</h4>
+    <a class="chip c-ics" href="#q-router-ics">Router</a>
+    <p class="vend"><span class="jp">Via Mechanics</span> · <span class="eu">Schmoll</span> · <span class="tw">Tongtai</span> · <span class="tw">Ta Liang</span> · <span class="us">Excellon</span> · <span class="eu">LPKF</span></p>
+    <p class="why">The panel is cut into strips or single units, the form the packaging house loads.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (outline dimensions)</p></div>
+   <div class="step ics" id="st-A-34"><div class="idx">A-34</div><h4>Substrate Test</h4>
+    <a class="chip c-ics" href="#q-setest">Electrical Tester</a>
+    <p class="vend"><span class="eu">atg-LM</span> · <span class="tw">Gardien</span> · <span class="jp">MicroCraft</span> · <span class="jp">Nidec Read</span> · <span class="jp">Hioki</span> · <span class="eu">SPEA</span></p>
+    <p class="why">Every net is tested for opens and shorts with flying probes or a fixture.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: Electrical test (opens, shorts)</p></div>
+   <div class="step ics" id="st-A-35"><div class="idx">A-35</div><h4>Final Visual Inspection</h4>
+    <a class="chip c-ics" href="#q-aoi-ics">AOI</a>
+    <p class="vend"><span class="ot">Orbotech</span> · <span class="tw">Utechzone</span> · <span class="tw">Machvision</span></p>
+    <p class="why">Every unit is checked by automated visual inspection and its warpage measured, and passing units ship to the foundry or OSAT that packages the chip.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: AOI (final visual) · Metrology (warpage)</p></div>
+  </div>
+<p class="subhead" id="a-equip">Equipment and Makers</p>
+<div class="scroller"><table class="ptable chart eq"><thead><tr><th class="cstp">Step</th><th class="cm">Machine</th><th class="cdo">What It Does</th><th class="csup">Makers</th></tr></thead><tbody>
+<tr id="q-tgv"><td class="stepcell steps"><div><a class="sc" href="#st-A-01" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-01</a><span class="sn">Through-Glass Via Forming</span></div></td><td class="pname">Through-Glass-Via Equipment</td><td class="desc">Forms the vias through the glass core</td><td class="desc sup"><span class="eu">LPKF</span> · <span class="kr">Philoptics</span></td></tr>
+<tr id="q-splating"><td class="stepcell steps"><div><a class="sc" href="#st-A-02" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-02</a><span class="sn">Glass Via Metallization</span></div><div><a class="sc" href="#st-A-06" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-06</a><span class="sn">Core Desmear</span></div><div><a class="sc" href="#st-A-07" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-07</a><span class="sn">Core Electroless Copper</span></div><div><a class="sc" href="#st-A-08" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-08</a><span class="sn">Through-Hole Plating</span></div><div><a class="sc" href="#st-A-20" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-20</a><span class="sn">Via Desmear</span></div><div><a class="sc" href="#st-A-21" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-21</a><span class="sn">Electroless Copper Seed</span></div><div><a class="sc" href="#st-A-25" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-25</a><span class="sn">Via Fill and Pattern Plating</span></div><div><a class="sc" href="#st-A-32" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-32</a><span class="sn">Pad Surface Finish</span></div></td><td class="pname">Plating Lines</td><td class="desc">Plate the core holes and the SAP traces</td><td class="desc sup"><span class="eu">Atotech</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Manz</span></td></tr>
+<tr id="q-cclpress-ics"><td class="stepcell steps"><div><a class="sc" href="#st-A-04" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-04</a><span class="sn">Core Laminate</span></div></td><td class="pname">Vacuum Hot Press</td><td class="desc">Presses and cures the book into laminate</td><td class="desc sup"><span class="jp">Kitagawa Seiki</span> · <span class="eu">Burkle</span> · <span class="eu">Lauffer</span> · <span class="eu">Cedal</span></td></tr>
+<tr id="q-sdrill"><td class="stepcell steps"><div><a class="sc" href="#st-A-05" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-05</a><span class="sn">Core Drilling</span></div></td><td class="pname">Core Drilling Machines</td><td class="desc">Drill the core through-holes</td><td class="desc sup"><span class="jp">Via Mechanics</span> · <span class="eu">Schmoll</span> · <span class="tw">Tongtai</span> · <span class="tw">Ta Liang</span> · <span class="eu">Posalux</span> · <span class="us">Excellon</span> · <span class="eu">Pluritec</span> · <span class="tw">Taiwan Takisawa</span></td></tr>
+<tr id="q-vlaser"><td class="stepcell steps"><div><a class="sc" href="#st-A-05" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-05</a><span class="sn">Core Drilling</span></div><div><a class="sc" href="#st-A-19" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-19</a><span class="sn">Laser Via Drilling</span></div></td><td class="pname">Laser Via Drills</td><td class="desc">Drill the small vias through each build-up layer</td><td class="desc sup"><span class="jp">Mitsubishi Electric</span> · <span class="jp">Via Mechanics</span> · <span class="us">ESI</span> · <span class="eu">LPKF</span></td></tr>
+<tr id="q-wet-ics"><td class="stepcell steps"><div><a class="sc" href="#st-A-11" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-11</a><span class="sn">Core Dry Film</span></div><div><a class="sc" href="#st-A-13" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-13</a><span class="sn">Core Develop, Etch and Strip</span></div><div><a class="sc" href="#st-A-15" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-15</a><span class="sn">Copper Roughening</span></div><div><a class="sc" href="#st-A-24" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-24</a><span class="sn">Develop</span></div><div><a class="sc" href="#st-A-26" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-26</a><span class="sn">Resist Strip</span></div><div><a class="sc" href="#st-A-27" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-27</a><span class="sn">Flash Etch</span></div><div><a class="sc" href="#st-A-31" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-31</a><span class="sn">Solder Resist Exposure and Develop</span></div></td><td class="pname">Wet-Process Lines</td><td class="desc">Develop, etch and strip the panels and treat the copper for bonding</td><td class="desc sup"><span class="jp">Tokyo Kakoki</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Kuttler</span></td></tr>
+<tr id="q-sldi"><td class="stepcell steps"><div><a class="sc" href="#st-A-12" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-12</a><span class="sn">Core Exposure</span></div><div><a class="sc" href="#st-A-23" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-23</a><span class="sn">Exposure</span></div><div><a class="sc" href="#st-A-31" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-31</a><span class="sn">Solder Resist Exposure and Develop</span></div></td><td class="pname">Substrate Direct Imaging</td><td class="desc">Exposes the trace pattern without a photomask</td><td class="desc sup"><span class="ot">Orbotech</span> · <span class="jp">ORC</span> · <span class="jp">Screen</span> · <span class="jp">Adtec</span> · <span class="jp">Ushio</span></td></tr>
+<tr id="q-aoi-ics"><td class="stepcell steps"><div><a class="sc" href="#st-A-14" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-14</a><span class="sn">Core AOI</span></div><div><a class="sc" href="#st-A-28" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-28</a><span class="sn">Build-Up AOI</span></div><div><a class="sc" href="#st-A-35" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-35</a><span class="sn">Final Visual Inspection</span></div></td><td class="pname">AOI</td><td class="desc">Inspects every layer for defects by camera</td><td class="desc sup"><span class="ot">Orbotech</span> · <span class="tw">Utechzone</span> · <span class="tw">Machvision</span></td></tr>
+<tr id="q-vlam"><td class="stepcell steps"><div><a class="sc" href="#st-A-16" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-16</a><span class="sn">Build-Up Film Lamination</span></div><div><a class="sc" href="#st-A-22" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-22</a><span class="sn">Dry Film Lamination</span></div><div><a class="sc" href="#st-A-30" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-30</a><span class="sn">Solder Resist Lamination</span></div></td><td class="pname">Vacuum Film Laminators</td><td class="desc">Laminate build-up film onto the core</td><td class="desc sup"><span class="jp">Meiki</span> · <span class="jp">Nikko-Materials</span></td></tr>
+<tr id="q-press-ics"><td class="stepcell steps"><div><a class="sc" href="#st-A-18" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-18</a><span class="sn">Prepreg and Foil Lamination</span></div></td><td class="pname">Lamination Press</td><td class="desc">Presses cores, prepreg and foil into the multilayer</td><td class="desc sup"><span class="eu">Burkle</span> · <span class="eu">Lauffer</span> · <span class="eu">Cedal</span> · <span class="jp">Kitagawa Seiki</span></td></tr>
+<tr id="q-router-ics"><td class="stepcell steps"><div><a class="sc" href="#st-A-33" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-33</a><span class="sn">Singulation</span></div></td><td class="pname">Routing and Depaneling</td><td class="desc">Cuts the panel into single boards</td><td class="desc sup"><span class="jp">Via Mechanics</span> · <span class="eu">Schmoll</span> · <span class="tw">Tongtai</span> · <span class="tw">Ta Liang</span> · <span class="us">Excellon</span> · <span class="eu">LPKF</span> · <span class="jp">Union Tool</span> · <span class="tw">Topoint</span></td></tr>
+<tr id="q-setest"><td class="stepcell steps"><div><a class="sc" href="#st-A-34" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-34</a><span class="sn">Substrate Test</span></div></td><td class="pname">Substrate Electrical Test</td><td class="desc">Tests every circuit for opens and shorts</td><td class="desc sup"><span class="eu">atg-LM</span> · <span class="tw">Gardien</span> · <span class="jp">MicroCraft</span> · <span class="jp">Nidec Read</span> · <span class="jp">Hioki</span> · <span class="eu">SPEA</span></td></tr>
+</tbody></table></div>
+ </div>
+</div>
+
+<div class="pstage ccl" id="sB">
+ <div class="prail"><div class="pstripe"></div><div class="pnum">PART B</div><h2>CCL</h2></div>
+ <p class="lede">One card per step from glass fibre to finished laminate, and the equipment behind it.</p>
+ <div class="pbody">
+<p class="subhead" id="b-steps">Steps</p>
+<div class="row">
+   <div class="step ccl" id="st-B-01"><div class="idx">B-01</div><h4>Glass Fibre Drawing</h4>
+    <a class="chip c-ccl" href="#q-bushing">Furnace Bushing</a>
+    <p class="vend"><span class="eu">Heraeus</span> · <span class="jp">Tanaka Kikinzoku</span> · <span class="eu">Johnson Matthey</span></p>
+    <p class="why">Glass is melted in a furnace and drawn through platinum-rhodium bushings into fine filaments twisted into yarn, while quartz yarn is drawn from fused-silica rods instead.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (filament diameter) · Lab test (yarn weight, strength)</p></div>
+   <div class="step ccl" id="st-B-02"><div class="idx">B-02</div><h4>Weaving</h4>
+    <a class="chip c-ccl" href="#q-loom">Loom</a>
+    <p class="vend"><span class="jp">Toyota Industries</span> · <span class="jp">Tsudakoma</span> · <span class="eu">Picanol</span> · <span class="eu">Dornier</span></p>
+    <p class="why">The yarn is warped onto beams and woven on air-jet looms into thin electronic cloth, in styles from thick 7628 down to ultra-thin 1017.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-eyarn">E-Glass Yarn (Standard)</a> · <a href="pcb-ccl-en.html#m-ldyarn">Low-Dk Glass Yarn</a> · <a href="pcb-ccl-en.html#m-qyarn">Q-Glass Yarn (Low-Dk)</a> · <a href="pcb-ccl-en.html#m-d3tyarn">T-Glass Yarn (Low CTE)</a></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (weave defects) · Metrology (cloth weight, thickness)</p></div>
+   <div class="step ccl" id="st-B-03"><div class="idx">B-03</div><h4>Cloth Finishing</h4>
+    <span class="chip c-ccl">Finishing Line</span>
+    <p class="vend">Run in-house by the cloth maker</p>
+    <p class="why">The cloth is heat-cleaned to burn off the weaving size, then coated with silane so the resin can bond to the glass.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-silane">Silane Coupling Agent</a></span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (cloth defects) · Metrology (weight, thickness)</p></div>
+   <div class="step ccl" id="st-B-04"><div class="idx">B-04</div><h4>Foil Electrodeposition</h4>
+    <a class="chip c-ccl" href="#q-foil">Foil Line</a>
+    <p class="vend"><span class="jp">Mifune</span> · <span class="jp">New Long</span> · <span class="jp">Nishi Industry</span></p>
+    <p class="why">Copper dissolved in sulphuric acid is plated onto a rotating titanium drum and peeled off as raw foil, while rolled-annealed foil for flex is rolled from ingot instead.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (thickness) · AOI (pinholes)</p></div>
+   <div class="step ccl" id="st-B-05"><div class="idx">B-05</div><h4>Foil Surface Treatment</h4>
+    <a class="chip c-ccl" href="#q-foil">Foil Line</a>
+    <p class="vend"><span class="jp">Mifune</span> · <span class="jp">New Long</span> · <span class="jp">Nishi Industry</span></p>
+    <p class="why">The raw foil is roughened with copper nodules, kept very low on HVLP grades, then given barrier, anti-tarnish and silane coatings and slit into rolls.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (roughness, thickness) · Lab test (peel strength)</p></div>
+   <div class="step ccl" id="st-B-06"><div class="idx">B-06</div><h4>Varnish Compounding</h4>
+    <span class="chip c-ccl">Mixing Tank</span>
+    <p class="vend">Mixed in-house by the CCL maker</p>
+    <p class="why">Resin, hardener, filler, flame retardant and solvent are mixed into varnish to a recipe per grade, the CCL maker&rsquo;s core know-how.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#d-mat-shared-by-several-types">Base Resin</a> · <a href="pcb-ccl-en.html#m-hard">Hardeners and Modifiers</a> · <a href="pcb-ccl-en.html#m-silica">Spherical Silica</a> · <a href="pcb-ccl-en.html#m-fr">Flame Retardants</a></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Lab test (viscosity, gel time, solids)</p></div>
+   <div class="step ccl" id="st-B-07"><div class="idx">B-07</div><h4>Impregnation</h4>
+    <a class="chip c-ccl" href="#q-treater">Treater</a>
+    <p class="vend"><span class="tw">Asia Metal</span> · <span class="us">C.A. Litzler</span> · <span class="jp">Hirano Tecseed</span></p>
+    <p class="why">Glass cloth runs through the varnish bath and metering rollers, which set how much resin it carries.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-qcloth">Q-Glass Cloth (Low-Dk)</a> · <a href="pcb-ccl-en.html#m-ldcloth">Low-Dk Glass Cloth</a> · <a href="pcb-ccl-en.html#m-ecloth">E-Glass Cloth (Standard)</a> · <a href="pcb-ccl-en.html#m-d3tcloth">T-Glass Cloth (Low CTE)</a></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (coated weight)</p></div>
+   <div class="step ccl" id="st-B-08"><div class="idx">B-08</div><h4>B-Stage Drying</h4>
+    <a class="chip c-ccl" href="#q-oven">Drying Oven</a>
+    <p class="vend"><span class="tw">Asia Metal</span> · <span class="us">C.A. Litzler</span></p>
+    <p class="why">The tower oven drives off the solvent and half-cures the resin, turning the wet cloth into prepreg.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Lab test (resin content, gel time, resin flow, volatiles)</p></div>
+   <div class="step ccl" id="st-B-09"><div class="idx">B-09</div><h4>Prepreg Cutting</h4>
+    <a class="chip c-ccl" href="#q-layup">Lay-Up Line</a>
+    <p class="vend"><span class="eu">Burkle</span> · <span class="jp">Kitagawa Seiki</span> · <span class="eu">Cedal</span></p>
+    <p class="why">The prepreg is cut into sheets, some for the CCL press and some sold to board makers as bonding sheets.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (dry spots, foreign matter)</p></div>
+   <div class="step ccl" id="st-B-10"><div class="idx">B-10</div><h4>Lay-Up</h4>
+    <a class="chip c-ccl" href="#q-layup">Lay-Up Line</a>
+    <p class="vend"><span class="eu">Burkle</span> · <span class="jp">Kitagawa Seiki</span> · <span class="eu">Cedal</span></p>
+    <p class="why">Prepreg sheets are stacked between copper foils and steel separator plates into books, in a clean room.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-hvlp">HVLP Foil</a> · <a href="pcb-ccl-en.html#m-rtf">Standard ED and RTF Foil</a> · <a href="pcb-ccl-en.html#m-ra">Rolled-Annealed Foil</a> · <a href="pcb-ccl-en.html#m-d3carrier">Ultra-Thin Carrier Foil</a></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (foreign matter, wrinkles)</p></div>
+   <div class="step ccl" id="st-B-11"><div class="idx">B-11</div><h4>Press and Cure</h4>
+    <a class="chip c-ccl" href="#q-cclpress">Vacuum Hot Press</a>
+    <p class="vend"><span class="jp">Kitagawa Seiki</span> · <span class="eu">Burkle</span> · <span class="eu">Lauffer</span> · <span class="eu">Cedal</span></p>
+    <p class="why">The books are vacuum-pressed under heat until the resin fully cures into laminate.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (thickness)</p></div>
+   <div class="step ccl" id="st-B-12"><div class="idx">B-12</div><h4>Breakdown</h4>
+    <span class="chip c-ccl">Breakdown Line</span>
+    <p class="vend">Run in-house by the CCL maker</p>
+    <p class="why">The pressed books are taken apart and the laminates separated from the steel plates, which are cleaned and reused.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (dents, pits, scratches)</p></div>
+   <div class="step ccl" id="st-B-13"><div class="idx">B-13</div><h4>Trimming and Cutting</h4>
+    <span class="chip c-ccl">Panel Cutter</span>
+    <p class="vend">Run in-house by the CCL maker</p>
+    <p class="why">The laminate edges are trimmed and the sheets cut to the panel sizes the board makers order.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (panel size, squareness)</p></div>
+   <div class="step ccl" id="st-B-14"><div class="idx">B-14</div><h4>Final Inspection</h4>
+    <span class="chip c-ccl">Inspection and Lab</span>
+    <p class="vend">Inspected and lab-tested in-house by the CCL maker</p>
+    <p class="why">Every lot is inspected and lab-tested before the CCL and prepreg ship to the board makers.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: AOI (surface defects) · Metrology (thickness, warpage) · Lab test (Dk, Df, peel strength, Tg)</p></div>
+  </div>
+<p class="subhead" id="b-equip">Equipment and Makers</p>
+<div class="scroller"><table class="ptable chart eq"><thead><tr><th class="cstp">Step</th><th class="cm">Machine</th><th class="cdo">What It Does</th><th class="csup">Makers</th></tr></thead><tbody>
+<tr class="bucket"><td colspan="4">Glass and Foil Makers</td></tr>
+<tr id="q-bushing"><td class="stepcell steps"><div><a class="sc" href="#st-B-01" style="background:#E1F0E9;color:#2E6B4F;border-color:#2E6B4F">B-01</a><span class="sn">Glass Fibre Drawing</span></div></td><td class="pname">Glass Furnace Bushings</td><td class="desc">Draw the molten glass into fibre</td><td class="desc sup"><span class="eu">Heraeus</span> · <span class="jp">Tanaka Kikinzoku</span> · <span class="eu">Johnson Matthey</span></td></tr>
+<tr id="q-loom"><td class="stepcell steps"><div><a class="sc" href="#st-B-02" style="background:#E1F0E9;color:#2E6B4F;border-color:#2E6B4F">B-02</a><span class="sn">Weaving</span></div></td><td class="pname">Weaving Looms</td><td class="desc">Weave the yarn into cloth</td><td class="desc sup"><span class="jp">Toyota Industries</span> · <span class="jp">Tsudakoma</span> · <span class="eu">Picanol</span> · <span class="eu">Dornier</span></td></tr>
+<tr id="q-foil"><td class="stepcell steps"><div><a class="sc" href="#st-B-04" style="background:#E1F0E9;color:#2E6B4F;border-color:#2E6B4F">B-04</a><span class="sn">Foil Electrodeposition</span></div><div><a class="sc" href="#st-B-05" style="background:#E1F0E9;color:#2E6B4F;border-color:#2E6B4F">B-05</a><span class="sn">Foil Surface Treatment</span></div></td><td class="pname">Foil Surface-Treatment Lines and Drums</td><td class="desc">Grow the copper foil and treat its surface</td><td class="desc sup"><span class="jp">Mifune</span> · <span class="jp">New Long</span> · <span class="jp">Nishi Industry</span></td></tr>
+<tr class="bucket"><td colspan="4">CCL Lines</td></tr>
+<tr id="q-treater"><td class="stepcell steps"><div><a class="sc" href="#st-B-07" style="background:#E1F0E9;color:#2E6B4F;border-color:#2E6B4F">B-07</a><span class="sn">Impregnation</span></div></td><td class="pname">Treater, Impregnation Line</td><td class="desc">Soaks the cloth in varnish and meters the resin content</td><td class="desc sup"><span class="tw">Asia Metal</span> · <span class="us">C.A. Litzler</span> · <span class="jp">Hirano Tecseed</span></td></tr>
+<tr id="q-oven"><td class="stepcell steps"><div><a class="sc" href="#st-B-08" style="background:#E1F0E9;color:#2E6B4F;border-color:#2E6B4F">B-08</a><span class="sn">B-Stage Drying</span></div></td><td class="pname">Drying Oven and Exhaust</td><td class="desc">Drives off the solvent and half-cures the resin</td><td class="desc sup"><span class="tw">Asia Metal</span> · <span class="us">C.A. Litzler</span></td></tr>
+<tr id="q-layup"><td class="stepcell steps"><div><a class="sc" href="#st-B-09" style="background:#E1F0E9;color:#2E6B4F;border-color:#2E6B4F">B-09</a><span class="sn">Prepreg Cutting</span></div><div><a class="sc" href="#st-B-10" style="background:#E1F0E9;color:#2E6B4F;border-color:#2E6B4F">B-10</a><span class="sn">Lay-Up</span></div></td><td class="pname">Lay-Up Automation</td><td class="desc">Cuts the prepreg and stacks it with foil into books</td><td class="desc sup"><span class="eu">Burkle</span> · <span class="jp">Kitagawa Seiki</span> · <span class="eu">Cedal</span></td></tr>
+<tr id="q-cclpress"><td class="stepcell steps"><div><a class="sc" href="#st-B-11" style="background:#E1F0E9;color:#2E6B4F;border-color:#2E6B4F">B-11</a><span class="sn">Press and Cure</span></div></td><td class="pname">Vacuum Hot Press</td><td class="desc">Presses and cures the book into laminate</td><td class="desc sup"><span class="jp">Kitagawa Seiki</span> · <span class="eu">Burkle</span> · <span class="eu">Lauffer</span> · <span class="eu">Cedal</span></td></tr>
+</tbody></table></div>
+ </div>
+</div>
+
+<div class="pstage pcb" id="sC">
+ <div class="prail"><div class="pstripe"></div><div class="pnum">PART C</div><h2>PCB</h2></div>
+ <p class="lede">One flow per board type, then one card per step and the equipment behind it.</p>
+ <div class="pbody">
+<div class="subsub pcb" id="fc1"><span class="code">C.1</span>HDI</div>
+  <p class="note flowline">A drilled core is built up one layer at a time on each side, pressed, laser-drilled, plated and imaged once per layer.</p>
+  <div class="flow stepcell"><span class="fs"><a class="sc" href="#st-C-01" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-01</a><span class="sn">Panel Cutting</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-02" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-02</a><span class="sn">Inner-Layer Dry Film</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-03" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-03</a><span class="sn">Inner-Layer Exposure</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-04" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-04</a><span class="sn">Inner-Layer Develop, Etch and Strip</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-05" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-05</a><span class="sn">Inner-Layer AOI</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-06" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-06</a><span class="sn">Brown Oxide</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-07" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-07</a><span class="sn">Lay-Up</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-08" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-08</a><span class="sn">Lamination</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-10" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-10</a><span class="sn">X-Ray Targeting and Trim</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-11" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-11</a><span class="sn">Mechanical Drilling</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-13" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-13</a><span class="sn">Desmear and Electroless Copper</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-14" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-14</a><span class="sn">Panel Plating</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-16" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-16</a><span class="sn">Outer-Layer Imaging</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-18" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-18</a><span class="sn">Outer-Layer Etch</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-19" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-19</a><span class="sn">Outer-Layer AOI</span></span><span class="fa">&rarr;</span><span class="loop"><span class="ll">Once per layer</span><span class="fs"><a class="sc" href="#st-C-06" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-06</a><span class="sn">Brown Oxide</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-07" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-07</a><span class="sn">Lay-Up</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-08" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-08</a><span class="sn">Lamination</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-10" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-10</a><span class="sn">X-Ray Targeting and Trim</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-12" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-12</a><span class="sn">Laser Drilling</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-13" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-13</a><span class="sn">Desmear and Electroless Copper</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-14" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-14</a><span class="sn">Panel Plating</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-16" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-16</a><span class="sn">Outer-Layer Imaging</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-18" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-18</a><span class="sn">Outer-Layer Etch</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-19" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-19</a><span class="sn">Outer-Layer AOI</span></span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-21" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-21</a><span class="sn">Solder Mask</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-22" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-22</a><span class="sn">Legend Printing</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-23" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-23</a><span class="sn">Surface Finish</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-26" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-26</a><span class="sn">Routing</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-28" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-28</a><span class="sn">Electrical Test</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-29" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-29</a><span class="sn">Final Inspection</span></span></div>
+  <div class="subsub pcb" id="fc2"><span class="code">C.2</span>Multilayer</div>
+  <p class="note flowline">Inner layers are etched, pressed into one stack and joined by drilled through-holes, back-drilled on high-speed boards.</p>
+  <div class="flow stepcell"><span class="fs"><a class="sc" href="#st-C-01" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-01</a><span class="sn">Panel Cutting</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-02" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-02</a><span class="sn">Inner-Layer Dry Film</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-03" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-03</a><span class="sn">Inner-Layer Exposure</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-04" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-04</a><span class="sn">Inner-Layer Develop, Etch and Strip</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-05" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-05</a><span class="sn">Inner-Layer AOI</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-06" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-06</a><span class="sn">Brown Oxide</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-07" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-07</a><span class="sn">Lay-Up</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-08" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-08</a><span class="sn">Lamination</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-10" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-10</a><span class="sn">X-Ray Targeting and Trim</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-11" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-11</a><span class="sn">Mechanical Drilling</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-13" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-13</a><span class="sn">Desmear and Electroless Copper</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-14" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-14</a><span class="sn">Panel Plating</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-15" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-15</a><span class="sn">Back-Drilling</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-16" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-16</a><span class="sn">Outer-Layer Imaging</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-17" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-17</a><span class="sn">Pattern Plating</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-18" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-18</a><span class="sn">Outer-Layer Etch</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-19" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-19</a><span class="sn">Outer-Layer AOI</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-21" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-21</a><span class="sn">Solder Mask</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-22" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-22</a><span class="sn">Legend Printing</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-23" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-23</a><span class="sn">Surface Finish</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-26" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-26</a><span class="sn">Routing</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-28" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-28</a><span class="sn">Electrical Test</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-29" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-29</a><span class="sn">Final Inspection</span></span></div>
+  <div class="subsub pcb" id="fc3"><span class="code">C.3</span>FPC and Rigid-Flex</div>
+  <p class="note flowline">Circuits are etched on flexible CCL and covered with coverlay, and rigid-flex adds rigid layers pressed on with no-flow prepreg.</p>
+  <div class="flow stepcell"><span class="fs"><a class="sc" href="#st-C-01" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-01</a><span class="sn">Panel Cutting</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-11" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-11</a><span class="sn">Mechanical Drilling</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-12" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-12</a><span class="sn">Laser Drilling</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-13" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-13</a><span class="sn">Desmear and Electroless Copper</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-14" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-14</a><span class="sn">Panel Plating</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-16" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-16</a><span class="sn">Outer-Layer Imaging</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-18" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-18</a><span class="sn">Outer-Layer Etch</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-19" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-19</a><span class="sn">Outer-Layer AOI</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-20" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-20</a><span class="sn">Coverlay Lamination</span></span><span class="fa">&rarr;</span><span class="loop"><span class="ll">Rigid-flex only</span><span class="fs"><a class="sc" href="#st-C-07" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-07</a><span class="sn">Lay-Up</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-09" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-09</a><span class="sn">Rigid-Flex Lamination</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-10" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-10</a><span class="sn">X-Ray Targeting and Trim</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-11" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-11</a><span class="sn">Mechanical Drilling</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-13" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-13</a><span class="sn">Desmear and Electroless Copper</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-14" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-14</a><span class="sn">Panel Plating</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-16" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-16</a><span class="sn">Outer-Layer Imaging</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-18" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-18</a><span class="sn">Outer-Layer Etch</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-19" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-19</a><span class="sn">Outer-Layer AOI</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-21" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-21</a><span class="sn">Solder Mask</span></span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-23" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-23</a><span class="sn">Surface Finish</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-24" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-24</a><span class="sn">Stiffener Bonding</span></span><span class="fa">&rarr;</span><span class="loop"><span class="ll">Rigid-flex only</span><span class="fs"><a class="sc" href="#st-C-25" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-25</a><span class="sn">Depth Routing</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-26" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-26</a><span class="sn">Routing</span></span></span><span class="fa">&rarr;</span><span class="loop"><span class="ll">FPC only</span><span class="fs"><a class="sc" href="#st-C-27" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-27</a><span class="sn">Punching</span></span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-28" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-28</a><span class="sn">Electrical Test</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-29" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-29</a><span class="sn">Final Inspection</span></span></div>
+  <div class="subsub pcb" id="fc4"><span class="code">C.4</span>Single and Double-Sided</div>
+  <p class="note flowline">One laminate is etched on one or both faces, and double-sided boards are drilled and plated to join them.</p>
+  <div class="flow stepcell"><span class="fs"><a class="sc" href="#st-C-01" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-01</a><span class="sn">Panel Cutting</span></span><span class="fa">&rarr;</span><span class="loop"><span class="ll">Double-sided only</span><span class="fs"><a class="sc" href="#st-C-11" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-11</a><span class="sn">Mechanical Drilling</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-13" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-13</a><span class="sn">Desmear and Electroless Copper</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-14" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-14</a><span class="sn">Panel Plating</span></span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-16" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-16</a><span class="sn">Outer-Layer Imaging</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-18" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-18</a><span class="sn">Outer-Layer Etch</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-19" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-19</a><span class="sn">Outer-Layer AOI</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-21" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-21</a><span class="sn">Solder Mask</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-22" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-22</a><span class="sn">Legend Printing</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-23" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-23</a><span class="sn">Surface Finish</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-27" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-27</a><span class="sn">Punching</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-28" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-28</a><span class="sn">Electrical Test</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-29" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-29</a><span class="sn">Final Inspection</span></span></div>
+  <p class="subhead" id="c-steps">Steps</p>
+  <div class="row">
+   <div class="step pcb" id="st-C-01"><div class="idx">C-01</div><h4>Panel Cutting</h4>
+    <a class="chip c-pcb" href="#q-wet">Wet-Process Line</a>
+    <p class="vend"><span class="jp">Tokyo Kakoki</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Kuttler</span></p>
+    <p class="why">CCL of the grade the platform owner qualified is cut into working panels.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-hsccl">High-Speed CCL and Prepreg</a> · <a href="pcb-ccl-en.html#m-stdccl">Standard CCL and Prepreg</a></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (panel size)</p></div>
+   <div class="step pcb" id="st-C-02"><div class="idx">C-02</div><h4>Inner-Layer Dry Film</h4>
+    <a class="chip c-pcb" href="#q-wet">Wet-Process Line</a>
+    <p class="vend"><span class="jp">Tokyo Kakoki</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Kuttler</span></p>
+    <p class="why">The copper is cleaned and micro-etched, then a photosensitive dry film is laminated on.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-dryfilm">Dry-Film Photoresist</a></span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (resist pattern), after developing</p></div>
+   <div class="step pcb" id="st-C-03"><div class="idx">C-03</div><h4>Inner-Layer Exposure</h4>
+    <a class="chip c-pcb" href="#q-ldi">Direct Imaging</a>
+    <p class="vend"><span class="ot">Orbotech</span> · <span class="jp">ORC</span> · <span class="jp">Screen</span> · <span class="jp">Adtec</span> · <span class="jp">Via Mechanics</span> · <span class="eu">Limata</span></p>
+    <p class="why">Direct imaging writes the circuit pattern into the dry film with UV light, without a photomask.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (resist pattern), after developing</p></div>
+   <div class="step pcb" id="st-C-04"><div class="idx">C-04</div><h4>Inner-Layer Develop, Etch and Strip</h4>
+    <a class="chip c-pcb" href="#q-wet">Wet-Process Line</a>
+    <p class="vend"><span class="jp">Tokyo Kakoki</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Kuttler</span></p>
+    <p class="why">The unexposed film is washed off, the bare copper etched away and the remaining film stripped, leaving the inner-layer circuit.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-etch">Etch, Develop and Strip Chemistry</a></span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (opens, shorts, nicks)</p></div>
+   <div class="step pcb" id="st-C-05"><div class="idx">C-05</div><h4>Inner-Layer AOI</h4>
+    <a class="chip c-pcb" href="#q-aoi">AOI</a>
+    <p class="vend"><span class="ot">Orbotech</span> · <span class="tw">Utechzone</span> · <span class="tw">Machvision</span></p>
+    <p class="why">Every inner layer is scanned before it is buried, because a defect pressed inside a 44L stack scraps the whole board.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: AOI (opens, shorts, nicks)</p></div>
+   <div class="step pcb" id="st-C-06"><div class="idx">C-06</div><h4>Brown Oxide</h4>
+    <a class="chip c-pcb" href="#q-wet">Wet-Process Line</a>
+    <p class="vend"><span class="jp">Tokyo Kakoki</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Kuttler</span></p>
+    <p class="why">The copper is micro-roughened so the prepreg grips it, which matters more as smoother HVLP foil comes in with higher grades.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-bond">Inner-Layer Bonding Chemistry</a></span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Lab test (peel strength) · Metrology (roughness)</p></div>
+   <div class="step pcb" id="st-C-07"><div class="idx">C-07</div><h4>Lay-Up</h4>
+    <span class="chip c-pcb">Lay-Up and Riveting</span>
+    <p class="vend">Done in-house by the board maker</p>
+    <p class="why">Inner cores, prepreg and copper foil are stacked in order and pinned or riveted so the layers stay aligned.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-hsccl">High-Speed CCL and Prepreg</a> · <a href="pcb-ccl-en.html#m-stdccl">Standard CCL and Prepreg</a> · <a href="pcb-ccl-en.html#m-p1foil">Copper Foil</a> · <a href="pcb-ccl-en.html#m-pcbcarrier">Ultra-Thin Carrier Foil</a></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;X-ray (layer registration), after lamination</p></div>
+   <div class="step pcb" id="st-C-08"><div class="idx">C-08</div><h4>Lamination</h4>
+    <a class="chip c-pcb" href="#q-press">Lamination Press</a>
+    <p class="vend"><span class="eu">Burkle</span> · <span class="eu">Lauffer</span> · <span class="eu">Cedal</span> · <span class="jp">Kitagawa Seiki</span></p>
+    <p class="why">The stack is pressed under heat and vacuum so the prepreg flows and cures into one board.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;X-ray (layer registration) · Metrology (thickness) · Cross-section (voids)</p></div>
+   <div class="step pcb" id="st-C-09"><div class="idx">C-09</div><h4>Rigid-Flex Lamination</h4>
+    <a class="chip c-pcb" href="#q-press">Lamination Press</a>
+    <p class="vend"><span class="eu">Burkle</span> · <span class="eu">Lauffer</span> · <span class="eu">Cedal</span> · <span class="jp">Kitagawa Seiki</span></p>
+    <p class="why">Rigid layers are pressed onto the flex core with no-flow prepreg, which keeps resin out of the area that bends.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-stdccl">Standard CCL and Prepreg</a></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;X-ray (registration) · Cross-section (voids)</p></div>
+   <div class="step pcb" id="st-C-10"><div class="idx">C-10</div><h4>X-Ray Targeting and Trim</h4>
+    <span class="chip c-pcb">X-Ray Target Drill</span>
+    <p class="vend">Done in-house by the board maker</p>
+    <p class="why">An X-ray drill finds the buried inner-layer targets and drills the tooling holes every later step aligns to, and the edges are trimmed.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;X-ray (hole position), after drilling</p></div>
+   <div class="step pcb" id="st-C-11"><div class="idx">C-11</div><h4>Mechanical Drilling</h4>
+    <a class="chip c-pcb" href="#q-drill">Drilling Machine</a>
+    <p class="vend"><span class="jp">Via Mechanics</span> · <span class="eu">Schmoll</span> · <span class="tw">Tongtai</span> · <span class="tw">Ta Liang</span> · <span class="eu">Posalux</span> · <span class="us">Excellon</span></p>
+    <p class="why">Through-holes are drilled on multi-spindle machines, the only way to join every layer of an HLC board.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-bits">Drill Bits and Router Bits</a></span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;X-ray (hole position) · Cross-section (hole wall)</p></div>
+   <div class="step pcb" id="st-C-12"><div class="idx">C-12</div><h4>Laser Drilling</h4>
+    <a class="chip c-pcb" href="#q-laser">Laser Drill</a>
+    <p class="vend"><span class="jp">Mitsubishi Electric</span> · <span class="jp">Via Mechanics</span> · <span class="us">ESI</span> · <span class="ot">Orbotech</span> · <span class="kr">EO Technics</span> · <span class="jp">Sumitomo Heavy</span></p>
+    <p class="why">Lasers drill blind microvias under 100 &micro;m through each HDI build-up layer, stopping on the copper below.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (via diameter, residue)</p></div>
+   <div class="step pcb" id="st-C-13"><div class="idx">C-13</div><h4>Desmear and Electroless Copper</h4>
+    <a class="chip c-pcb" href="#q-plating">Plating Line</a>
+    <p class="vend"><span class="eu">Atotech</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Manz</span></p>
+    <p class="why">Resin smear is cleaned off the hole walls and a thin electroless copper seed deposited, since a gap in the seed becomes an open circuit.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-plate">Plating Chemistry</a></span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Cross-section (backlight, seed coverage)</p></div>
+   <div class="step pcb" id="st-C-14"><div class="idx">C-14</div><h4>Panel Plating</h4>
+    <a class="chip c-pcb" href="#q-plating">Plating Line</a>
+    <p class="vend"><span class="eu">Atotech</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Manz</span></p>
+    <p class="why">Electrolytic copper is plated over the whole panel, thickening the hole walls and filling the HDI microvias.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-anode">Copper Anodes and Balls</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-plate">Plating Chemistry</a></span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (copper thickness) · Cross-section (via fill)</p></div>
+   <div class="step pcb" id="st-C-15"><div class="idx">C-15</div><h4>Back-Drilling</h4>
+    <a class="chip c-pcb" href="#q-drill">Drilling Machine</a>
+    <p class="vend"><span class="jp">Via Mechanics</span> · <span class="eu">Schmoll</span> · <span class="tw">Tongtai</span> · <span class="tw">Ta Liang</span> · <span class="eu">Posalux</span> · <span class="us">Excellon</span></p>
+    <p class="why">The unused plated stub of each high-speed via is drilled out from the back, because a leftover stub distorts fast signals.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-bits">Drill Bits and Router Bits</a></span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Cross-section (stub length)</p></div>
+   <div class="step pcb" id="st-C-16"><div class="idx">C-16</div><h4>Outer-Layer Imaging</h4>
+    <a class="chip c-pcb" href="#q-wet">Wet-Process Line</a> <a class="chip c-pcb" href="#q-ldi">Direct Imaging</a>
+    <p class="vend"><span class="jp">Tokyo Kakoki</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="ot">Orbotech</span> · <span class="jp">ORC</span> · <span class="jp">Screen</span></p>
+    <p class="why">Dry film is laminated on the outer layers, exposed by direct imaging and developed into the outer-layer pattern.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-dryfilm">Dry-Film Photoresist</a></span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (resist pattern) · Metrology (registration)</p></div>
+   <div class="step pcb" id="st-C-17"><div class="idx">C-17</div><h4>Pattern Plating</h4>
+    <a class="chip c-pcb" href="#q-plating">Plating Line</a>
+    <p class="vend"><span class="eu">Atotech</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Manz</span></p>
+    <p class="why">Copper, then a tin etch resist, is plated onto the open traces, where mSAP boards grow the whole trace from ultra-thin foil and tented boards skip the step.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-anode">Copper Anodes and Balls</a><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-plate">Plating Chemistry</a></span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (plating thickness)</p></div>
+   <div class="step pcb" id="st-C-18"><div class="idx">C-18</div><h4>Outer-Layer Etch</h4>
+    <a class="chip c-pcb" href="#q-wet">Wet-Process Line</a>
+    <p class="vend"><span class="jp">Tokyo Kakoki</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Kuttler</span></p>
+    <p class="why">The film is stripped, the exposed base copper etched away and the tin stripped, while mSAP boards only flash-etch the thin foil.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-etch">Etch, Develop and Strip Chemistry</a></span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (opens, shorts) · Metrology (line width, spacing)</p></div>
+   <div class="step pcb" id="st-C-19"><div class="idx">C-19</div><h4>Outer-Layer AOI</h4>
+    <a class="chip c-pcb" href="#q-aoi">AOI</a>
+    <p class="vend"><span class="ot">Orbotech</span> · <span class="tw">Utechzone</span> · <span class="tw">Machvision</span></p>
+    <p class="why">Every outer layer is scanned for opens, shorts and line-width errors before the next layer or the solder mask covers it.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: AOI (opens, shorts, line width)</p></div>
+   <div class="step pcb" id="st-C-20"><div class="idx">C-20</div><h4>Coverlay Lamination</h4>
+    <a class="chip c-pcb" href="#q-press">Lamination Press</a>
+    <p class="vend"><span class="eu">Burkle</span> · <span class="eu">Lauffer</span> · <span class="eu">Cedal</span> · <span class="jp">Kitagawa Seiki</span></p>
+    <p class="why">A polyimide coverlay film with adhesive is pressed over the etched circuits, insulating them while the board stays flexible.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (coverlay openings) · Lab test (peel strength)</p></div>
+   <div class="step pcb" id="st-C-21"><div class="idx">C-21</div><h4>Solder Mask</h4>
+    <a class="chip c-pcb" href="#q-maskimg">Mask Imaging and Inkjet</a>
+    <p class="vend"><span class="ot">Orbotech</span> · <span class="jp">MicroCraft</span> · <span class="jp">ORC</span> · <span class="jp">Adtec</span></p>
+    <p class="why">Solder mask ink is coated, imaged, developed and cured, leaving only the pads open so solder stays off the traces.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-mask">Solder Mask Ink</a></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (registration, openings) · Metrology (mask thickness)</p></div>
+   <div class="step pcb" id="st-C-22"><div class="idx">C-22</div><h4>Legend Printing</h4>
+    <a class="chip c-pcb" href="#q-maskimg">Mask Imaging and Inkjet</a>
+    <p class="vend"><span class="ot">Orbotech</span> · <span class="jp">MicroCraft</span> · <span class="jp">ORC</span> · <span class="jp">Adtec</span></p>
+    <p class="why">Part numbers and reference markings are inkjet-printed onto the mask.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-legend">Legend Ink</a></span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (print position)</p></div>
+   <div class="step pcb" id="st-C-23"><div class="idx">C-23</div><h4>Surface Finish</h4>
+    <a class="chip c-pcb" href="#q-plating">Plating Line</a>
+    <p class="vend"><span class="eu">Atotech</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Manz</span></p>
+    <p class="why">ENIG, ENEPIG, OSP or immersion silver or tin coats the open pads, setting how well the board solders and how long it keeps.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-finish">Surface Finish Chemistry</a></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (nickel and gold thickness) · Lab test (solderability)</p></div>
+   <div class="step pcb" id="st-C-24"><div class="idx">C-24</div><h4>Stiffener Bonding</h4>
+    <span class="chip c-pcb">Stiffener Bonding</span>
+    <p class="vend">Done in-house by the board maker</p>
+    <p class="why">Polyimide, FR-4 or steel stiffeners are bonded under connectors and parts so those areas stay rigid.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (position, flatness)</p></div>
+   <div class="step pcb" id="st-C-25"><div class="idx">C-25</div><h4>Depth Routing</h4>
+    <a class="chip c-pcb" href="#q-router">Router</a>
+    <p class="vend"><span class="jp">Via Mechanics</span> · <span class="eu">Schmoll</span> · <span class="tw">Tongtai</span> · <span class="tw">Ta Liang</span> · <span class="us">Excellon</span> · <span class="eu">LPKF</span></p>
+    <p class="why">The rigid layers over the flex area are routed away to a set depth, freeing the flex section to bend.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-bits">Drill Bits and Router Bits</a></span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (depth, outline)</p></div>
+   <div class="step pcb" id="st-C-26"><div class="idx">C-26</div><h4>Routing</h4>
+    <a class="chip c-pcb" href="#q-router">Router</a>
+    <p class="vend"><span class="jp">Via Mechanics</span> · <span class="eu">Schmoll</span> · <span class="tw">Tongtai</span> · <span class="tw">Ta Liang</span> · <span class="us">Excellon</span> · <span class="eu">LPKF</span></p>
+    <p class="why">The panel is routed into single boards, which are built several to a panel and only separated at the end.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>Consumables</b>&nbsp;&nbsp;<a href="pcb-ccl-en.html#m-bits">Drill Bits and Router Bits</a></span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (outline dimensions)</p></div>
+   <div class="step pcb" id="st-C-27"><div class="idx">C-27</div><h4>Punching</h4>
+    <span class="chip c-pcb">Punching Press</span>
+    <p class="vend">Done in-house by the board maker</p>
+    <p class="why">Boards are punched out of the panel with a steel die, faster than routing for high-volume flex and single-sided boards.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (outline dimensions)</p></div>
+   <div class="step pcb" id="st-C-28"><div class="idx">C-28</div><h4>Electrical Test</h4>
+    <a class="chip c-pcb" href="#q-etest">Electrical Tester</a>
+    <p class="vend"><span class="eu">atg-LM</span> · <span class="tw">Gardien</span> · <span class="jp">MicroCraft</span> · <span class="jp">Nidec Read</span> · <span class="jp">Hioki</span> · <span class="eu">SPEA</span></p>
+    <p class="why">Every net is tested for opens and shorts with flying probes or a fixture, since a 44L board cannot be checked by eye.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: Electrical test (opens, shorts)</p></div>
+   <div class="step pcb" id="st-C-29"><div class="idx">C-29</div><h4>Final Inspection</h4>
+    <a class="chip c-pcb" href="#q-aoi">AOI</a>
+    <p class="vend"><span class="ot">Orbotech</span> · <span class="tw">Utechzone</span> · <span class="tw">Machvision</span></p>
+    <p class="why">Every finished board is inspected for appearance and flatness, then shipped bare to the assemblers who mount the chips.</p>
+    <p class="mat"><b>Materials</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: AOI (final visual) · Metrology (bow and twist)</p></div>
+  </div>
+<p class="subhead" id="c-equip">Equipment and Makers</p>
+<div class="scroller"><table class="ptable chart eq"><thead><tr><th class="cstp">Step</th><th class="cm">Machine</th><th class="cdo">What It Does</th><th class="csup">Makers</th></tr></thead><tbody>
+<tr id="q-wet"><td class="stepcell steps"><div><a class="sc" href="#st-C-01" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-01</a><span class="sn">Panel Cutting</span></div><div><a class="sc" href="#st-C-02" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-02</a><span class="sn">Inner-Layer Dry Film</span></div><div><a class="sc" href="#st-C-04" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-04</a><span class="sn">Inner-Layer Develop, Etch and Strip</span></div><div><a class="sc" href="#st-C-06" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-06</a><span class="sn">Brown Oxide</span></div><div><a class="sc" href="#st-C-16" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-16</a><span class="sn">Outer-Layer Imaging</span></div><div><a class="sc" href="#st-C-18" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-18</a><span class="sn">Outer-Layer Etch</span></div></td><td class="pname">Wet-Process Lines</td><td class="desc">Develop, etch and strip the panels and treat the copper for bonding</td><td class="desc sup"><span class="jp">Tokyo Kakoki</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Kuttler</span></td></tr>
+<tr id="q-ldi"><td class="stepcell steps"><div><a class="sc" href="#st-C-03" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-03</a><span class="sn">Inner-Layer Exposure</span></div><div><a class="sc" href="#st-C-16" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-16</a><span class="sn">Outer-Layer Imaging</span></div></td><td class="pname">Direct Imaging</td><td class="desc">Exposes the pattern into the dry film without a photomask</td><td class="desc sup"><span class="ot">Orbotech</span> · <span class="jp">ORC</span> · <span class="jp">Screen</span> · <span class="jp">Adtec</span> · <span class="jp">Via Mechanics</span> · <span class="eu">Limata</span></td></tr>
+<tr id="q-aoi"><td class="stepcell steps"><div><a class="sc" href="#st-C-05" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-05</a><span class="sn">Inner-Layer AOI</span></div><div><a class="sc" href="#st-C-19" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-19</a><span class="sn">Outer-Layer AOI</span></div><div><a class="sc" href="#st-C-29" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-29</a><span class="sn">Final Inspection</span></div></td><td class="pname">AOI</td><td class="desc">Inspects every layer for defects by camera</td><td class="desc sup"><span class="ot">Orbotech</span> · <span class="tw">Utechzone</span> · <span class="tw">Machvision</span></td></tr>
+<tr id="q-press"><td class="stepcell steps"><div><a class="sc" href="#st-C-08" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-08</a><span class="sn">Lamination</span></div><div><a class="sc" href="#st-C-09" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-09</a><span class="sn">Rigid-Flex Lamination</span></div><div><a class="sc" href="#st-C-20" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-20</a><span class="sn">Coverlay Lamination</span></div></td><td class="pname">Lamination Press</td><td class="desc">Presses cores, prepreg and foil into the multilayer</td><td class="desc sup"><span class="eu">Burkle</span> · <span class="eu">Lauffer</span> · <span class="eu">Cedal</span> · <span class="jp">Kitagawa Seiki</span></td></tr>
+<tr id="q-drill"><td class="stepcell steps"><div><a class="sc" href="#st-C-11" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-11</a><span class="sn">Mechanical Drilling</span></div><div><a class="sc" href="#st-C-15" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-15</a><span class="sn">Back-Drilling</span></div></td><td class="pname">Mechanical Drilling Machines</td><td class="desc">Drill the through-holes</td><td class="desc sup"><span class="jp">Via Mechanics</span> · <span class="eu">Schmoll</span> · <span class="tw">Tongtai</span> · <span class="tw">Ta Liang</span> · <span class="eu">Posalux</span> · <span class="us">Excellon</span> · <span class="eu">Pluritec</span> · <span class="tw">Taiwan Takisawa</span></td></tr>
+<tr id="q-laser"><td class="stepcell steps"><div><a class="sc" href="#st-C-12" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-12</a><span class="sn">Laser Drilling</span></div></td><td class="pname">Laser Drills</td><td class="desc">Drill the microvias</td><td class="desc sup"><span class="jp">Mitsubishi Electric</span> · <span class="jp">Via Mechanics</span> · <span class="us">ESI</span> · <span class="ot">Orbotech</span> · <span class="kr">EO Technics</span> · <span class="jp">Sumitomo Heavy</span> · <span class="eu">Trumpf</span> · <span class="eu">LPKF</span> · <span class="eu">Schmoll</span> · <span class="tw">Tongtai</span></td></tr>
+<tr id="q-plating"><td class="stepcell steps"><div><a class="sc" href="#st-C-13" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-13</a><span class="sn">Desmear and Electroless Copper</span></div><div><a class="sc" href="#st-C-14" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-14</a><span class="sn">Panel Plating</span></div><div><a class="sc" href="#st-C-17" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-17</a><span class="sn">Pattern Plating</span></div><div><a class="sc" href="#st-C-23" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-23</a><span class="sn">Surface Finish</span></div></td><td class="pname">Plating Lines</td><td class="desc">Plate copper into the holes and onto the surface</td><td class="desc sup"><span class="eu">Atotech</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Manz</span></td></tr>
+<tr id="q-maskimg"><td class="stepcell steps"><div><a class="sc" href="#st-C-21" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-21</a><span class="sn">Solder Mask</span></div><div><a class="sc" href="#st-C-22" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-22</a><span class="sn">Legend Printing</span></div></td><td class="pname">Solder-Mask Imaging and Inkjet</td><td class="desc">Image the solder mask and print the legend</td><td class="desc sup"><span class="ot">Orbotech</span> · <span class="jp">MicroCraft</span> · <span class="jp">ORC</span> · <span class="jp">Adtec</span></td></tr>
+<tr id="q-router"><td class="stepcell steps"><div><a class="sc" href="#st-C-25" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-25</a><span class="sn">Depth Routing</span></div><div><a class="sc" href="#st-C-26" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-26</a><span class="sn">Routing</span></div></td><td class="pname">Routing and Depaneling</td><td class="desc">Cuts the panel into single boards</td><td class="desc sup"><span class="jp">Via Mechanics</span> · <span class="eu">Schmoll</span> · <span class="tw">Tongtai</span> · <span class="tw">Ta Liang</span> · <span class="us">Excellon</span> · <span class="eu">LPKF</span> · <span class="jp">Union Tool</span> · <span class="tw">Topoint</span></td></tr>
+<tr id="q-etest"><td class="stepcell steps"><div><a class="sc" href="#st-C-28" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-28</a><span class="sn">Electrical Test</span></div></td><td class="pname">Electrical Test</td><td class="desc">Tests every circuit for opens and shorts</td><td class="desc sup"><span class="eu">atg-LM</span> · <span class="tw">Gardien</span> · <span class="jp">MicroCraft</span> · <span class="jp">Nidec Read</span> · <span class="jp">Hioki</span> · <span class="eu">SPEA</span></td></tr>
+</tbody></table></div>
+ </div>
+</div>
+
+<footer class="site-foot">
+  <div class="sf-id">
+    <img src="assets/photo-sm.jpg" alt="Ethan Chen" width="44" height="44" loading="lazy">
+    <div><div class="sf-name"><a href="index.html">Ethan Chen</a></div><div class="sf-sub">Semiconductor Research Notes</div></div>
+  </div>
+  <div class="sf-contact">
+    <a href="mailto:ethanchen@qtumic.com">ethanchen@qtumic.com</a>
+    <a href="https://www.linkedin.com/in/hao-chen-194981297" target="_blank" rel="me noopener">LinkedIn</a>
+  </div>
+  <div class="sf-note">Personal research notes, not investment advice. © 2026 Ethan Chen</div>
+</footer>
+</div>
+</body>
+</html>
