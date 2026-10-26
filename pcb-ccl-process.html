@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CCL · PCB · IC載板完整製程圖 · Ethan Chen</title>
+<!-- site-head -->
+<meta name="author" content="Ethan Chen">
+<meta name="description" content="樹脂、玻纖布與銅箔如何一步步成為CCL、PCB與ABF載板。">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://ethanchensemi.github.io/ethanchenstudy/pcb-ccl-process.html">
+<link rel="alternate" hreflang="zh-Hant" href="https://ethanchensemi.github.io/ethanchenstudy/pcb-ccl-process.html">
+<link rel="alternate" hreflang="en" href="https://ethanchensemi.github.io/ethanchenstudy/pcb-ccl-process-en.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CCL · PCB · IC載板完整製程圖 · Ethan Chen">
+<meta property="og:description" content="樹脂、玻纖布與銅箔如何一步步成為CCL、PCB與ABF載板。">
+<meta property="og:site_name" content="Ethan Chen · Semiconductor Research Notes">
+<!-- /site-head -->
+<style>
+:root{
+  --b:#4A3B7A;
+ --paper:#F6F8F9; --card:#FFFFFF;
+ --ink:#14181C; --ink-2:#4A555E; --ink-3:#7C8891;
+ --rule:#CBD3D9; --rule-soft:#E2E8EC;
+ --stage:#1F3A4D; --soic:#2E6B4F; --cowos:#4A3B7A;
+ --cowos-tint:#F0EEF7; --shared:#215C68;
+ --t-fab:#5B4B9E; --t-fab-bg:#EEEBF8;
+ --t-insp:#0E7C86; --t-insp-bg:#E4F2F3;
+ --t-pkg:#B85C10; --t-pkg-bg:#FAEEE1;
+ --t-sup:#5F6C75; --t-sup-bg:#ECEFF1;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+ font-family:-apple-system,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+ font-size:15px;line-height:1.65}
+.wrap{max-width:1240px;margin:0 auto;padding:48px 28px 80px}
+
+.masthead{border-bottom:2px solid var(--stage);padding-bottom:22px;margin-bottom:34px}
+.masthead h1{font-size:31px;line-height:1.25;font-weight:700;margin:0 0 6px;letter-spacing:-.01em}
+.masthead .en{font-size:16px;color:var(--ink-2);font-weight:400;margin:0 0 18px}
+.masthead .meta{display:flex;flex-wrap:wrap;gap:8px 26px;font-size:13px;color:var(--ink-3)}
+.masthead .meta b{color:var(--ink-2);font-weight:500}
+
+.legend{background:var(--card);border:1px solid var(--rule);padding:20px 24px;margin-bottom:38px}
+.legend h2{font-size:15px;margin:0 0 14px;font-weight:600}
+.legend h2.two{margin-top:22px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chipwrap{display:flex;align-items:baseline;gap:9px;border:1px solid var(--rule-soft);padding:9px 13px;flex:1 1 200px}
+.chipwrap small{font-size:12px;color:var(--ink-3);line-height:1.4}
+.chipwrap b{font-size:12.5px;font-weight:600;color:var(--t-insp);white-space:nowrap}
+.chip{display:inline-block;font-size:11px;font-weight:600;padding:2px 7px;white-space:nowrap;border-radius:2px}
+.c-fab{background:var(--t-fab-bg);color:var(--t-fab)}
+.c-insp{background:var(--t-insp-bg);color:var(--t-insp)}
+.c-pkg{background:var(--t-pkg-bg);color:var(--t-pkg)}
+.c-sup{background:var(--t-sup-bg);color:var(--t-sup)}
+
+.stage{display:grid;grid-template-columns:212px 1fr}
+.rail{padding:22px 20px 26px 0;border-right:2px solid var(--rule);position:relative}
+.rail .num{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;color:var(--ink-3);letter-spacing:.06em;margin-bottom:8px}
+.rail h2{font-size:19px;margin:0 0 3px;font-weight:600;line-height:1.35}
+.rail .en2{font-size:13px;color:var(--ink-2);margin:0 0 12px;line-height:1.45}
+.rail .clarify{font-size:12.5px;color:var(--ink-3);line-height:1.55;padding-top:11px;border-top:1px dashed var(--rule)}
+.rail .stripe{position:absolute;right:-2px;top:22px;bottom:26px;width:2px;background:var(--stage)}
+.rail.shared .stripe{background:var(--shared)}
+.body{padding:22px 0 26px 26px}
+
+.row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:12px}
+.row:last-child{margin-bottom:0}
+.step{background:var(--card);border:1px solid var(--rule);padding:12px 14px;flex:1 1 200px;min-width:190px}
+.step .idx{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:10.5px;color:var(--ink-3)}
+.step h4{font-size:14px;margin:2px 0 1px;font-weight:600;line-height:1.4}
+.step .en3{font-size:12px;color:var(--ink-2);margin:0 0 9px;line-height:1.4}
+.step .vend{font-size:11.5px;color:var(--ink-2);margin:6px 0 0;line-height:1.5}
+.step .why{font-size:11.5px;color:var(--ink-3);margin:8px 0 0;line-height:1.5;padding-top:8px;border-top:1px dotted var(--rule-soft)}
+.step .qc{font-size:11.5px;margin:8px 0 0;line-height:1.5;padding:7px 9px;background:var(--t-insp-bg);color:#0B5C64}
+.step .qc b{font-weight:600;color:var(--t-insp)}
+.step.fab{border-left:3px solid var(--t-fab)}
+.step.insp{border-left:3px solid var(--t-insp)}
+.step.pkg{border-left:3px solid var(--t-pkg)}
+.step.sup{border-left:3px solid var(--t-sup)}
+.step.pair{background:#FCFDFD}
+
+.sub{font-size:13px;font-weight:600;margin:20px 0 10px;padding:6px 12px;color:#fff}
+.sub:first-child{margin-top:0}
+.sub .lite{font-weight:400;opacity:.82;font-size:12px}
+.sub.g{background:var(--soic)}
+.sub.p{background:var(--cowos)}
+.sub.b{background:var(--stage)}
+.sub.opt{background:#8A5A00}
+.step.opt{border-left:3px solid #8A5A00;border-style:solid dashed dashed dashed;border-color:var(--rule);border-left-color:#8A5A00;background:#FFFDF7}
+.optnote{font-size:12px;color:#7A5100;background:#FDF6E6;border:1px dashed #C99A1E;padding:10px 12px;margin:0 0 10px;line-height:1.55}
+.optbox{border:1px dashed #C99A1E;background:#FDF6E6;margin:0 0 12px}
+.optsplit{display:grid;grid-template-columns:1fr 1fr}
+.optcell{padding:13px 15px}
+.optcell + .optcell{border-left:1px dashed #E0C486}
+.optcell h5{font-size:12px;margin:0 0 5px;font-weight:600;color:#8A5A00}
+.optcell p{font-size:12px;margin:0;color:#7A5100;line-height:1.55}
+.optstack{padding:13px 15px;border-top:1px dashed #E0C486}
+.optstack h5{font-size:12px;margin:0 0 9px;font-weight:600;color:#8A5A00}
+.optstack table{width:100%;border-collapse:collapse;font-size:12px}
+.optstack td{padding:4px 0;border:none;color:#7A5100;vertical-align:top;line-height:1.5}
+.optstack td.tier{width:22px;font-family:ui-monospace,Menlo,monospace;color:#B08A2E}
+.optstack td.tech{width:74px;font-weight:600;color:#8A5A00}
+.optstack .ts{font-size:11.5px;color:#9A7530;margin:9px 0 0;padding-top:8px;border-top:1px dashed #E0C486}
+
+.forkbar{display:grid;grid-template-columns:212px 1fr}
+.forkbar .lead{padding:26px 20px 0 0;border-right:2px solid var(--rule)}
+.forkbar .msg{padding:26px 0 4px 26px;font-size:13px;color:var(--ink-3);max-width:74ch;line-height:1.6}
+.forkbar .msg b{color:var(--ink-2);font-weight:500}
+.routes{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+@media (max-width:900px){.routes{grid-template-columns:1fr}}
+.route{border-top:3px solid var(--soic)}
+.route.pk{border-top-color:var(--cowos)}
+.routehead{padding:16px 0 14px}
+.routehead h2{font-size:20px;margin:0 0 2px;font-weight:600}
+.routehead .en2{font-size:13px;color:var(--ink-2);margin:0 0 10px}
+.routehead .clarify{font-size:12.5px;color:var(--ink-3);line-height:1.55;padding-top:11px;border-top:1px dashed var(--rule);max-width:60ch}
+.route .row{flex-direction:column}
+.route .step{flex:1 1 auto}
+.link{grid-column:1/-1;margin:26px 0 0;border:1px dashed var(--cowos);background:var(--cowos-tint);
+ padding:14px 18px;font-size:13px;color:var(--ink-2);line-height:1.6}
+.link b{color:var(--cowos);font-weight:600}
+.divider{height:1px;background:var(--rule-soft)}
+
+.sect{margin-top:48px;border:1px solid var(--rule);background:var(--card);padding:24px 26px}
+.sect h2{font-size:19px;margin:0 0 6px;font-weight:600}
+.sect .key{font-size:12.5px;color:var(--ink-3);margin:0 0 20px}
+.sect .key .tw{font-weight:600}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px solid var(--rule-soft);vertical-align:top}
+th{font-weight:600;color:var(--ink-2);font-size:12.5px;border-bottom:1px solid var(--rule)}
+td.n{font-family:ui-monospace,"SF Mono",Menlo,monospace;color:var(--ink-2);white-space:nowrap}
+tr:last-child td{border-bottom:none}
+.grouprow td{background:#F1F5F6;padding-top:11px;padding-bottom:9px;padding-left:12px;border-bottom:1px solid var(--rule)}
+.lead-v{font-weight:600}
+.tw{color:var(--t-insp)}
+
+@media (max-width:760px){
+ .wrap{padding:30px 16px 60px}
+ .stage,.forkbar{grid-template-columns:1fr}
+ .rail{border-right:none;border-bottom:2px solid var(--rule);padding:20px 0 18px}
+ .rail .stripe{right:auto;left:0;top:auto;bottom:-2px;width:60px;height:2px}
+ .body{padding:20px 0 26px}
+ .forkbar .lead{display:none}
+ .forkbar .msg{padding-left:0}
+ .scroller{overflow-x:auto}
+ table{min-width:560px}
+}
+@media print{.backbar,.toc{display:none}body{background:#fff}.wrap{max-width:none;padding:0}.step,.legend,.sect{break-inside:avoid}}
+.backbar{margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.backbar a{display:inline-block;font-size:13px;color:var(--ink-2);text-decoration:none;border:1px solid var(--rule);background:var(--card);padding:6px 13px}
+.backbar a:hover{color:var(--b);border-color:var(--b)}
+.backbar .lang{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;letter-spacing:.04em}
+.toc{background:var(--card);border:1px solid var(--rule);padding:16px 22px;margin-bottom:34px;font-size:13px}
+.toc a{color:var(--stage);text-decoration:none;font-weight:500;margin-right:18px;white-space:nowrap}
+.toc a:hover{text-decoration:underline}
+.tocrow{display:flex;flex-wrap:wrap;gap:6px 4px;row-gap:8px}
+
+/* process families, linked to the Equipment Map */
+.f-fab{background:#EEEBF8;color:#5B4B9E} .step.f-fab:not(.opt){border-left:3px solid #5B4B9E}
+.f-test{background:#E4F2F3;color:#0E7C86} .step.f-test:not(.opt){border-left:3px solid #0E7C86}
+.f-bond{background:#E8F1F8;color:#1B5E8C} .step.f-bond:not(.opt){border-left:3px solid #1B5E8C}
+.f-dice{background:#F2F5E4;color:#6B7A1E} .step.f-dice:not(.opt){border-left:3px solid #6B7A1E}
+.f-place{background:#FAEEE1;color:#B85C10} .step.f-place:not(.opt){border-left:3px solid #B85C10}
+.f-cure{background:#FBEAE7;color:#B03A2E} .step.f-cure:not(.opt){border-left:3px solid #B03A2E}
+.f-mold{background:#F8ECF3;color:#8E3B6B} .step.f-mold:not(.opt){border-left:3px solid #8E3B6B}
+.f-finish{background:#FDF3E1;color:#8A5A00} .step.f-finish:not(.opt){border-left:3px solid #8A5A00}
+.f-optic{background:#EAF4EE;color:#2E6B4F} .step.f-optic:not(.opt){border-left:3px solid #2E6B4F}
+.f-mech{background:#F4EBE2;color:#7C4A1E} .step.f-mech:not(.opt){border-left:3px solid #7C4A1E}
+.f-ems{background:#ECEFF1;color:#5F6C75} .step.f-ems:not(.opt){border-left:3px solid #5F6C75}
+a.chip{text-decoration:none} a.chip:hover{text-decoration:underline}
+.step .chip{white-space:normal;line-height:1.5;background:rgba(255,255,255,.72);border:1px solid currentColor}
+.step h4{color:inherit}
+.legend .fams{display:grid;grid-template-columns:repeat(5,1fr);gap:10px} .legend .fams .chipwrap{flex-direction:column;align-items:flex-start;gap:6px}
+.legend .chipwrap .chip{white-space:nowrap} .legend .fams small a{color:var(--ink-2);text-decoration:none;border-bottom:1px dotted var(--rule)} .legend .fams small a:hover{color:var(--b);border-color:var(--b)}
+@media (max-width:900px){.legend .fams{grid-template-columns:1fr 1fr}}
+.legend p.lnote{font-size:12px;color:var(--ink-3);margin:0 0 12px;line-height:1.5}
+
+/* materials and consumables, linked to the Materials Map */
+.step .mat{font-size:11.5px;margin:8px 0 0;line-height:1.55;padding:7px 9px;background:#F5F3EE;color:#4A555E}
+.step .mat b{font-weight:600;color:#14181C;white-space:nowrap}
+.step .mat a{color:#4A555E;text-decoration:none;border-bottom:1px dotted #9AA5AD}
+.step .mat a:hover{color:#4A3B7A;border-color:#4A3B7A}
+.step .mat .cons{display:block;margin-top:3px}
+.step .mat .none{color:#7C8891}
+.legend .fams.six{grid-template-columns:repeat(6,1fr)}
+@media (max-width:900px){.legend .fams.six{grid-template-columns:1fr 1fr}}
+.backbar .bbr{display:flex;gap:8px;flex-wrap:wrap}
+</style>
+<style id="map-css">
+.mono{font-family:ui-monospace,"SF Mono",Menlo,monospace}
+.subhead{font-size:12.5px;font-weight:600;color:var(--ink-2);margin:22px 0 8px;padding-top:14px;border-top:1px dashed var(--rule)}
+.scroller{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--rule);background:var(--card)}
+.ptable th,.ptable td{padding:8px 12px;text-align:left;vertical-align:top;line-height:1.5;border-bottom:1px solid var(--rule-soft)}
+.ptable th{background:#EEF2F3;font-weight:600;color:var(--ink-2);font-size:11.5px;border-bottom:1px solid var(--rule)}
+.ptable tr:last-child td{border-bottom:none}
+.ptable td.pname{font-weight:600;color:var(--ink)}
+.ptable td.desc{color:var(--ink-2)}
+.ptable td.n{text-align:right;font-family:ui-monospace,Menlo,monospace;font-size:12.5px;white-space:nowrap}
+.ptable td .note{font-size:11.5px;color:var(--ink-3);margin-top:3px;display:block}
+.ptable tr.bucket td{background:#F6F8F9;color:var(--ink-3);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px}
+.ptable tbody tr:not(.bucket):hover td{background:#FAFBFC}
+.ptable .c1{width:170px}
+.ptable .c2{width:120px}
+.ptable .cs{width:86px}
+.ptable .cw{width:210px}
+.fig{margin:0 0 14px;background:var(--card);border:1px solid var(--rule);padding:18px 20px 14px}
+.fig svg{width:100%;height:auto;display:block}
+.ptable.mtx{min-width:0}
+.ptable th.grp{text-align:center;border-left:1px solid var(--rule-soft)}
+.ptable th.dh{text-align:center;width:86px;line-height:1.3}
+.ptable td.dot{text-align:center;color:#2E6B4F;font-size:13px;width:86px}
+.pies{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0 0 14px}
+.pie{background:var(--card);border:1px solid var(--rule);padding:12px 14px 10px}
+.pie h4{margin:0 0 8px;font-size:12.5px;font-weight:600;color:var(--ink-2)}
+.pie svg{width:100%;height:auto;display:block}
+.fig figcaption{margin-top:13px;padding-top:11px;border-top:1px solid var(--rule-soft);
+ font-size:11.5px;color:var(--ink-3);line-height:1.6}
+.ptable td{font-size:13.5px;line-height:1.55;padding:9px 13px}
+.ptable th{padding:7px 13px}
+.ptable.mtx{min-width:0}
+.ptable th.grp{text-align:center;border-left:1px solid var(--rule-soft)}
+.ptable th.dh{text-align:center;width:86px;line-height:1.3}
+.ptable td.dot{text-align:center;color:#2E6B4F;font-size:13px;width:86px}
+/* ---- process map v12 ---- */
+.wrap{max-width:1320px}
+.pstage{margin:0 0 44px}
+.prail{border-bottom:2px solid var(--stage);padding-bottom:8px;margin-bottom:12px;position:relative;padding-left:14px}
+.pstripe{position:absolute;left:0;top:2px;bottom:10px;width:4px;background:var(--stage)}
+.pnum{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11px;color:var(--ink-3);letter-spacing:.06em;margin-bottom:3px}
+.prail h2{font-size:21px;margin:0;font-weight:700}
+.pstage .lede{font-size:13px;color:var(--ink-2);line-height:1.6;margin:0 0 16px;max-width:none}
+.pstage .lede b{color:var(--ink);font-weight:600}
+.pstage .lede a{color:var(--ink-2);text-decoration:none;border-bottom:1px dotted var(--rule)}
+.pstage.ccl .prail{border-bottom-color:#2E6B4F}.pstage.ccl .pstripe{background:#2E6B4F}
+.pstage.pcb .prail{border-bottom-color:#B85C10}.pstage.pcb .pstripe{background:#B85C10}
+.pstage.ics .prail{border-bottom-color:#8E3B6B}.pstage.ics .pstripe{background:#8E3B6B}
+.pstage.par .prail{border-bottom-color:#5A6670}.pstage.par .pstripe{background:#5A6670}
+.pstage.prod .prail{border-bottom-color:#2F4F7F}.pstage.prod .pstripe{background:#2F4F7F}
+.sub.prod{background:#2F4F7F}
+.subsub.prod{border-left-color:#2F4F7F}
+.c-prod{background:#E8EEF6;color:#2F4F7F}
+.ptable.pm.amx{min-width:1250px}
+.ptable.pm.amx th,.ptable.pm.amx td{padding-left:10px;padding-right:10px}
+.pbody{min-width:0}
+.nb{white-space:nowrap}
+.tw{color:#1F7A5C;font-weight:600}.cn{color:#B02E6E}.jp{color:#2560A6}.kr{color:#8A5A00}.us{color:#8C3A3A}.eu{color:#5B4B9E}.ot{color:#5F6B75}
+.c-ccl{background:#E1F0E9;color:#2E6B4F}.step.ccl{border-left:3px solid #2E6B4F}.sub.ccl{background:#2E6B4F}
+.c-pcb{background:#FAEEE1;color:#9A4C0C}.step.pcb{border-left:3px solid #B85C10}.sub.pcb{background:#B85C10}
+.c-par{background:#ECEFF1;color:#4A555E}.sub.par{background:#5A6670}.subsub.par{border-left-color:#5A6670}
+.c-ics{background:#F8ECF3;color:#8E3B6B}.step.ics{border-left:3px solid #8E3B6B}.sub.ics{background:#8E3B6B}
+.c-pm{background:#E8EEF3;color:#1F3A4D}.sub.pm{background:#1F3A4D}
+.c-proc{background:#ECEFF1;color:#4E5A63}.sub.proc{background:#4E5A63}
+/* process cards, as on the SoIC and CoWoS map */
+.step{flex:1 1 210px;min-width:200px;max-width:calc(20% - 10px)}
+@media (max-width:1240px){.step{max-width:calc(25% - 9px)}}
+@media (max-width:1000px){.step{max-width:calc(33.33% - 8px)}}
+@media (max-width:760px){.step{max-width:calc(50% - 6px)}}
+@media (max-width:520px){.step{max-width:none}}
+.step .chip + .chip{margin-left:4px}
+.step .vend{margin-top:7px}
+.step .why{color:var(--ink);font-size:12px;line-height:1.55;margin:9px 0 0;padding-top:0;border-top:none}
+.sub .lite{font-weight:400;opacity:.82;font-size:12px;margin-left:6px}
+.sub{scroll-margin-top:16px}
+/* materials sub-sections, X.1.n */
+.subsub{display:flex;align-items:baseline;flex-wrap:wrap;gap:0 10px;margin:16px 0 8px;padding:7px 12px;background:#F6F8F9;border-left:3px solid var(--ink-3);font-size:13.5px;font-weight:600;color:var(--ink);scroll-margin-top:16px}
+.subsub .code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11.5px;font-weight:600;color:var(--ink-3)}
+.subsub .lite{font-weight:400;font-size:12px;color:var(--ink-3)}
+.subsub.ics{border-left-color:#8E3B6B}.subsub.ccl{border-left-color:#2E6B4F}.subsub.pcb{border-left-color:#B85C10}
+.subsub + .pies,.subsub + .scroller{margin-top:0}
+.subsub + .subhead{border-top:none;padding-top:0;margin-top:4px}
+.pbody .scroller{margin-bottom:6px}
+.sub + .subhead{border-top:none;padding-top:0;margin-top:6px}
+/* market share: one white panel per section, the pies centred, left to right */
+.pies{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 28px;background:var(--card);border:1px solid var(--rule);padding:14px 18px 10px;margin:0 0 12px}
+.pies .pie{flex:0 1 calc((100% - 56px) / 3);max-width:352px;min-width:230px;background:none;border:0;padding:0}
+@media (max-width:420px){.pies .pie{flex-basis:100%}}
+/* charts and tables */
+.ptable.chart{min-width:960px;font-size:12.5px}
+.ptable.chart th,.ptable.chart td{padding:8px 10px;vertical-align:top;line-height:1.5}
+.ptable.chart th.cmat{width:180px}.ptable.chart th.cgr{width:135px}.ptable.chart th.cstp{width:168px}.ptable.chart th.cdo{width:225px}.ptable.chart th.cm{width:190px}
+.ptable.chart th.cuse{width:190px}.ptable.chart.makers.m3 th.cco{width:150px}.ptable.chart.makers.m3 th.csp{width:150px}.ptable.chart.makers.m3 th.ccu{width:200px}
+.ptable.chart.makers th.cco{width:150px}.ptable.chart.makers th.ctk{width:122px}.ptable.chart.makers th.csh{width:112px}.ptable.chart.makers th.cmk{width:400px}
+.ptable.chart.makers.hs th.cmk{width:260px}.ptable.chart.makers.hs th.ctk{width:96px}.ptable.chart.makers.hs th.csh{width:100px}
+.ptable.chart.makers .pct{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-weight:600;color:var(--ink);font-size:12.5px}
+.ptable.chart.makers .rank{font-size:11.5px;color:var(--ink-2)}
+.ptable.chart.hs{min-width:960px}
+.ptable.chart.hs th.cdot{width:46px;text-align:center}
+.ptable.chart.hs td.dot{width:auto;font-size:13px;padding-left:4px;padding-right:4px}
+.ptable.chart.hs th.cmk{width:260px}
+.ptable.chart.grade th.cg1{width:120px}.ptable.chart.grade th.cg2{width:120px}.ptable.chart.grade th.cg3{width:120px}.ptable.chart.grade th.cg4{width:140px}.ptable.chart.grade th.cg5{width:130px}.ptable.chart.grade th.cg6{width:190px}
+.pbody p.note{font-size:12px;color:var(--ink-3);margin:2px 0 8px;line-height:1.5}
+.pbody .subhead{margin-top:18px}
+.pbody .words{margin-top:12px}
+.nw{white-space:nowrap}
+.nh{white-space:nowrap}
+.defs{margin:0 0 10px}.defs p{display:flex}.defs span{flex:1}@media (max-width:620px){.defs p{display:block}.defs b{display:block}}.defs.wide b{min-width:190px}.defs.wider b{min-width:250px}.defs p{margin:3px 0;font-size:13px;line-height:1.5;color:var(--ink)}.defs b{display:inline-block;min-width:112px;font-weight:600}
+.pbody .ptable.rt td,.pbody .ptable.rt th{padding:7px 10px}
+.pbody .scroller + .scroller{margin-top:10px}
+.ptable.chart td.pname{font-weight:600;color:var(--ink)}
+.ptable.chart td.desc{color:var(--ink-2)}
+.ptable.chart td.tk{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11px;color:var(--ink-3);line-height:1.5}
+.ptable.chart .nil,.ptable.mtx .nil{color:var(--ink-3)}
+.ptable.chart td.sup a,.ptable.chart td.desc a{color:var(--ink-2);text-decoration:none;border-bottom:1px dotted var(--rule)}
+.ptable.chart td.sup a:hover{color:var(--b);border-color:var(--b)}
+.ptable.chart tr{scroll-margin-top:16px}
+.ptable.chart tr:target td{background:#FFF8E6}
+.ptable.chart tr.bucket td{background:#F6F8F9;color:var(--ink-3);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px}
+.ptable.chart tr.bucket .bl{color:var(--ink-2);font-weight:600}
+.ptable.chart tr.bucket .basis{text-transform:none;letter-spacing:0;font-size:11.5px;color:var(--ink-3)}
+.ptable.chart tr.bucket .bl + .basis::before{content:"·";margin:0 9px}
+.stepcell .sc{display:inline-block;font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:10.5px;font-weight:600;padding:1px 6px;border-radius:2px;border:1px solid;text-decoration:none;white-space:nowrap}
+.stepcell .sc:hover{text-decoration:underline}
+.stepcell.steps div{margin-bottom:4px;line-height:1.4}
+.stepcell.steps div:last-child{margin-bottom:0}
+.stepcell .sn{font-size:11.5px;color:var(--ink-2);margin-left:6px}
+.stepcell .sn.nostep{margin-left:0;color:var(--ink-3)}
+.ptable td.ctr{text-align:center}
+.ptable.nine thead th{text-align:center;vertical-align:bottom;line-height:1.25}.ptable.nine td{line-height:1.3}
+.ptable .bl{border-left:2px solid var(--rule)}
+.twin{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}.twin > .scroller{margin:0}.pbody .twin > .scroller + .scroller{margin-top:0}.twin .ptable.rt{min-width:0}@media (max-width:820px){.twin{grid-template-columns:1fr}}.ptable.nine tr.gsep td{border-top:2px solid var(--rule)}.ptable.nine th.mth{color:#8E3B6B;font-weight:600}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:10px 6px;margin:6px 0 16px}
+.flow .fs{display:inline-flex;align-items:center;white-space:nowrap}
+.flow .fa{color:var(--ink-3);font-size:12px}
+.flow .loop{position:relative;display:inline-flex;flex-wrap:wrap;align-items:center;gap:10px 6px;border:1px dashed #B8C2CA;border-radius:4px;padding:18px 8px 7px}
+.flow .loop .ll{position:absolute;top:3px;left:8px;font-size:10px;color:var(--ink-3)}
+.pbody p.note.flowline{margin:0 0 6px}
+.badge{display:inline-block;font-size:10.5px;padding:0 7px;border-radius:3px;border:1px solid;white-space:nowrap;font-weight:400;margin-top:3px}
+.badge.b-mat{color:#1F3A4D;border-color:#B9C7D2;background:#EEF3F7}
+.badge.b-con{color:#7C4A1E;border-color:#DCC5AE;background:#F8F1EA}
+.ptable.rt{min-width:820px;font-size:12.5px}
+.ptable.pm{min-width:940px}
+.ptable.mtx{min-width:0}
+.ptable.mtx th.c1{width:230px}
+.ptable.mtx th.dh,.ptable.mtx td.dot{width:auto}
+/* contents */
+.cgrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px 18px;align-items:start}
+@media (max-width:1100px){.cgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:700px){.cgrid{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.cgrid{grid-template-columns:1fr}}
+.cgrid .chip{text-decoration:none;margin-bottom:7px}
+.cgrid ul{list-style:none;margin:0;padding:0}
+.cgrid li{margin-bottom:5px;font-size:12.5px;line-height:1.4}
+.cgrid li.l3{margin-left:14px;font-size:12px}
+.cgrid li a{color:var(--ink-2);text-decoration:none;border-bottom:1px dotted var(--rule)}
+.cgrid li a:hover{color:var(--b);border-color:var(--b)}
+.cgrid .n{font-family:ui-monospace,"SF Mono",Menlo,monospace;color:var(--ink-3);font-size:11px;margin-right:6px}
+</style>
+<style id="site-chrome">
+/* site chrome (added by build) */
+.backbar{flex-wrap:wrap}
+.lede,.defn,.ds .lede,.routehead .clarify,.forkbar .msg,.explain .sub2,.masthead .en{max-width:none}
+.backbar .bbr{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.backbar .lang{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;letter-spacing:.04em}
+.backbar .lang-off{display:inline-block;font-size:12px;color:var(--ink-3,#7C8891);border:1px dashed var(--rule,#CBD3D9);padding:6px 13px;font-family:ui-monospace,"SF Mono",Menlo,monospace;letter-spacing:.04em;cursor:default}
+.site-foot{margin-top:56px;border-top:1px solid var(--rule,#CBD3D9);padding-top:22px;display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;font-size:12.5px;color:var(--ink-3,#7C8891);line-height:1.5}
+.site-foot .sf-id{display:flex;align-items:center;gap:12px;min-width:0}
+.site-foot .sf-id img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:0 0 auto}
+.site-foot .sf-name{font-size:14px;font-weight:600;color:var(--ink,#14181C)}
+.site-foot .sf-name a{color:inherit;text-decoration:none}
+.site-foot .sf-name a:hover{color:var(--b,#4A3B7A)}
+.site-foot .sf-sub{font-size:12px;color:var(--ink-3,#7C8891)}
+.site-foot .sf-contact{display:flex;gap:16px;flex-wrap:wrap;margin-left:auto}
+.site-foot .sf-contact a{color:var(--ink-2,#4A555E);text-decoration:none;border-bottom:1px dotted var(--rule,#CBD3D9)}
+.site-foot .sf-contact a:hover{color:var(--b,#4A3B7A);border-color:var(--b,#4A3B7A)}
+.site-foot .sf-note{flex-basis:100%;font-size:11.5px}
+@media (max-width:640px){.site-foot .sf-contact{margin-left:0}}
+@media (max-width:640px){
+  .stickynav{margin-left:-14px;margin-right:-14px;padding-left:14px;padding-right:14px;white-space:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .legend .fams,.legend .fams.six,.famgrid,.idxgrid{grid-template-columns:1fr !important}
+  .routes{grid-template-columns:minmax(0,1fr) !important}
+  .route,.routes > *{min-width:0}
+  .route .row,.route .chips,.route .chiprow,.route .cols{flex-wrap:wrap}
+  .optstack table{min-width:0 !important}
+  .famcol .chip,.legend .chip,.chipwrap b{white-space:normal}
+}
+@media print{.site-foot .sf-id img{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="backbar"><a href="map.html">← 產業地圖</a><span class="bbr"><a class="lang" href="pcb-ccl-process-en.html" onclick="this.href=this.href.split('#')[0]+location.hash">EN</a></span></div>
+
+<header class="masthead">
+ <h1>CCL · PCB · IC載板完整製程圖</h1>
+ <p class="en">IC載板、CCL與PCB製造的每一步，及其設備與廠商</p>
+ <div class="meta"><span><b>顏色</b> <span class="tw">台灣</span> · <span class="jp">日本</span> · <span class="kr">韓國</span> · <span class="us">美國</span> · <span class="eu">歐洲</span> · <span class="ot">其他</span></span></div>
+</header>
+
+<nav class="toc">
+  <div class="tocrow">
+    <a href="#contents">目錄</a><a href="#sA">A · IC載板</a><a href="#sB">B · CCL</a><a href="#sC">C · PCB</a>
+  </div>
+</nav>
+
+<section class="legend" id="contents">
+ <h2>目錄</h2>
+ <div class="cgrid">
+  <div><a class="chip c-ics" href="#sA">A · IC載板</a><ul><li><a href="#fa1"><span class="n">A.1</span>ABF，玻璃芯</a></li><li><a href="#fa2"><span class="n">A.2</span>ABF，無芯</a></li><li><a href="#fa3"><span class="n">A.3</span>ABF，有機芯</a></li><li><a href="#fa4"><span class="n">A.4</span>BT，無芯</a></li><li><a href="#fa5"><span class="n">A.5</span>BT，有芯</a></li><li><a href="#a-steps">步驟</a></li><li><a href="#a-equip">設備與廠商</a></li></ul></div>
+  <div><a class="chip c-ccl" href="#sB">B · CCL</a><ul><li><a href="#b-steps">步驟</a></li><li><a href="#b-equip">設備與廠商</a></li></ul></div>
+  <div><a class="chip c-pcb" href="#sC">C · PCB</a><ul><li><a href="#fc1"><span class="n">C.1</span>HDI</a></li><li><a href="#fc2"><span class="n">C.2</span>多層板</a></li><li><a href="#fc3"><span class="n">C.3</span>FPC與軟硬結合板</a></li><li><a href="#fc4"><span class="n">C.4</span>單面板與雙面板</a></li><li><a href="#c-steps">步驟</a></li><li><a href="#c-equip">設備與廠商</a></li></ul></div>
+ </div>
+</section>
+
+<div class="pstage ics" id="sA">
+ <div class="prail"><div class="pstripe"></div><div class="pnum">A部分</div><h2>IC載板</h2></div>
+ <p class="lede">每種載板類型一套流程，再逐步列出每個步驟及其設備。</p>
+ <div class="pbody">
+<div class="subsub ics" id="fa1"><span class="code">A.1</span>ABF，玻璃芯</div>
+  <p class="note flowline">以帶有玻璃通孔的玻璃板取代壓合芯板，其後的ABF增層與有機芯相同。</p>
+  <div class="flow stepcell"><span class="fs"><a class="sc" href="#st-A-01" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-01</a><span class="sn">玻璃通孔成形</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-02" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-02</a><span class="sn">玻璃通孔金屬化</span></span><span class="fa">&rarr;</span><span class="loop"><span class="ll">以SAP製作芯板線路</span><span class="fs"><a class="sc" href="#st-A-22" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-22</a><span class="sn">壓乾膜</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-23" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-23</a><span class="sn">曝光</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-24" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-24</a><span class="sn">顯影</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-25" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-25</a><span class="sn">填孔與線路電鍍</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-26" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-26</a><span class="sn">去膜</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-27" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-27</a><span class="sn">閃蝕</span></span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-14" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-14</a><span class="sn">芯板AOI</span></span><span class="fa">&rarr;</span><span class="loop"><span class="ll">每層一次</span><span class="fs"><a class="sc" href="#st-A-15" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-15</a><span class="sn">銅面粗化</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-16" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-16</a><span class="sn">增層膜壓合</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-17" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-17</a><span class="sn">增層膜固化</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-19" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-19</a><span class="sn">雷射鑽孔</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-20" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-20</a><span class="sn">盲孔除膠渣</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-21" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-21</a><span class="sn">化學銅種子層</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-22" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-22</a><span class="sn">壓乾膜</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-23" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-23</a><span class="sn">曝光</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-24" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-24</a><span class="sn">顯影</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-25" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-25</a><span class="sn">填孔與線路電鍍</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-26" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-26</a><span class="sn">去膜</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-27" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-27</a><span class="sn">閃蝕</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-28" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-28</a><span class="sn">增層AOI</span></span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-30" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-30</a><span class="sn">防焊壓膜</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-31" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-31</a><span class="sn">防焊曝光顯影</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-32" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-32</a><span class="sn">焊墊表面處理</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-33" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-33</a><span class="sn">切割</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-34" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-34</a><span class="sn">載板測試</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-35" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-35</a><span class="sn">外觀終檢</span></span></div>
+  <div class="subsub ics" id="fa2"><span class="code">A.2</span>ABF，無芯</div>
+  <p class="note flowline">相同的ABF增層改於載具上製作，載具於最後移除，故載板無芯板。</p>
+  <div class="flow stepcell"><span class="fs"><a class="sc" href="#st-A-03" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-03</a><span class="sn">載具準備</span></span><span class="fa">&rarr;</span><span class="loop"><span class="ll">每層一次</span><span class="fs"><a class="sc" href="#st-A-15" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-15</a><span class="sn">銅面粗化</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-16" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-16</a><span class="sn">增層膜壓合</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-17" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-17</a><span class="sn">增層膜固化</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-19" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-19</a><span class="sn">雷射鑽孔</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-20" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-20</a><span class="sn">盲孔除膠渣</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-21" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-21</a><span class="sn">化學銅種子層</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-22" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-22</a><span class="sn">壓乾膜</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-23" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-23</a><span class="sn">曝光</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-24" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-24</a><span class="sn">顯影</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-25" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-25</a><span class="sn">填孔與線路電鍍</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-26" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-26</a><span class="sn">去膜</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-27" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-27</a><span class="sn">閃蝕</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-28" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-28</a><span class="sn">增層AOI</span></span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-29" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-29</a><span class="sn">載具分離</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-30" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-30</a><span class="sn">防焊壓膜</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-31" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-31</a><span class="sn">防焊曝光顯影</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-32" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-32</a><span class="sn">焊墊表面處理</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-33" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-33</a><span class="sn">切割</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-34" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-34</a><span class="sn">載板測試</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-35" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-35</a><span class="sn">外觀終檢</span></span></div>
+  <div class="subsub ics" id="fa3"><span class="code">A.3</span>ABF，有機芯</div>
+  <p class="note flowline">ABF膜以真空壓膜逐層貼合於T-Glass芯板兩面，線路以SAP成長。</p>
+  <div class="flow stepcell"><span class="fs"><a class="sc" href="#st-A-04" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-04</a><span class="sn">芯板壓合</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-05" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-05</a><span class="sn">芯板鑽孔</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-06" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-06</a><span class="sn">芯板除膠渣</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-07" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-07</a><span class="sn">芯板化學銅</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-08" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-08</a><span class="sn">通孔電鍍</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-09" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-09</a><span class="sn">塞孔</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-10" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-10</a><span class="sn">塞孔研磨</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-11" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-11</a><span class="sn">芯板壓膜</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-12" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-12</a><span class="sn">芯板曝光</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-13" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-13</a><span class="sn">芯板顯影蝕刻去膜</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-14" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-14</a><span class="sn">芯板AOI</span></span><span class="fa">&rarr;</span><span class="loop"><span class="ll">每層一次</span><span class="fs"><a class="sc" href="#st-A-15" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-15</a><span class="sn">銅面粗化</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-16" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-16</a><span class="sn">增層膜壓合</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-17" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-17</a><span class="sn">增層膜固化</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-19" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-19</a><span class="sn">雷射鑽孔</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-20" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-20</a><span class="sn">盲孔除膠渣</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-21" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-21</a><span class="sn">化學銅種子層</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-22" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-22</a><span class="sn">壓乾膜</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-23" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-23</a><span class="sn">曝光</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-24" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-24</a><span class="sn">顯影</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-25" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-25</a><span class="sn">填孔與線路電鍍</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-26" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-26</a><span class="sn">去膜</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-27" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-27</a><span class="sn">閃蝕</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-28" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-28</a><span class="sn">增層AOI</span></span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-30" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-30</a><span class="sn">防焊壓膜</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-31" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-31</a><span class="sn">防焊曝光顯影</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-32" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-32</a><span class="sn">焊墊表面處理</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-33" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-33</a><span class="sn">切割</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-34" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-34</a><span class="sn">載板測試</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-35" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-35</a><span class="sn">外觀終檢</span></span></div>
+  <div class="subsub ics" id="fa4"><span class="code">A.4</span>BT，無芯</div>
+  <p class="note flowline">首層線路先電鍍於載具上並壓入BT膠片，再移除載具，使線路齊平內埋（ETS）。</p>
+  <div class="flow stepcell"><span class="fs"><a class="sc" href="#st-A-03" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-03</a><span class="sn">載具準備</span></span><span class="fa">&rarr;</span><span class="loop"><span class="ll">載具上的首層線路</span><span class="fs"><a class="sc" href="#st-A-22" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-22</a><span class="sn">壓乾膜</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-23" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-23</a><span class="sn">曝光</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-24" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-24</a><span class="sn">顯影</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-25" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-25</a><span class="sn">填孔與線路電鍍</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-26" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-26</a><span class="sn">去膜</span></span></span><span class="fa">&rarr;</span><span class="loop"><span class="ll">每層一次</span><span class="fs"><a class="sc" href="#st-A-15" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-15</a><span class="sn">銅面粗化</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-18" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-18</a><span class="sn">膠片與銅箔壓合</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-19" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-19</a><span class="sn">雷射鑽孔</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-20" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-20</a><span class="sn">盲孔除膠渣</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-21" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-21</a><span class="sn">化學銅種子層</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-22" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-22</a><span class="sn">壓乾膜</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-23" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-23</a><span class="sn">曝光</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-24" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-24</a><span class="sn">顯影</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-25" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-25</a><span class="sn">填孔與線路電鍍</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-26" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-26</a><span class="sn">去膜</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-27" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-27</a><span class="sn">閃蝕</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-28" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-28</a><span class="sn">增層AOI</span></span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-29" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-29</a><span class="sn">載具分離</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-30" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-30</a><span class="sn">防焊壓膜</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-31" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-31</a><span class="sn">防焊曝光顯影</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-32" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-32</a><span class="sn">焊墊表面處理</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-33" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-33</a><span class="sn">切割</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-34" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-34</a><span class="sn">載板測試</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-35" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-35</a><span class="sn">外觀終檢</span></span></div>
+  <div class="subsub ics" id="fa5"><span class="code">A.5</span>BT，有芯</div>
+  <p class="note flowline">BT膠片與極薄銅箔一同壓合於BT芯板兩面，線路以mSAP或蝕刻製作。</p>
+  <div class="flow stepcell"><span class="fs"><a class="sc" href="#st-A-04" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-04</a><span class="sn">芯板壓合</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-05" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-05</a><span class="sn">芯板鑽孔</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-06" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-06</a><span class="sn">芯板除膠渣</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-07" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-07</a><span class="sn">芯板化學銅</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-08" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-08</a><span class="sn">通孔電鍍</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-09" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-09</a><span class="sn">塞孔</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-10" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-10</a><span class="sn">塞孔研磨</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-11" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-11</a><span class="sn">芯板壓膜</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-12" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-12</a><span class="sn">芯板曝光</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-13" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-13</a><span class="sn">芯板顯影蝕刻去膜</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-14" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-14</a><span class="sn">芯板AOI</span></span><span class="fa">&rarr;</span><span class="loop"><span class="ll">每層一次</span><span class="fs"><a class="sc" href="#st-A-15" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-15</a><span class="sn">銅面粗化</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-18" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-18</a><span class="sn">膠片與銅箔壓合</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-19" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-19</a><span class="sn">雷射鑽孔</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-20" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-20</a><span class="sn">盲孔除膠渣</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-21" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-21</a><span class="sn">化學銅種子層</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-22" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-22</a><span class="sn">壓乾膜</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-23" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-23</a><span class="sn">曝光</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-24" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-24</a><span class="sn">顯影</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-25" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-25</a><span class="sn">填孔與線路電鍍</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-26" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-26</a><span class="sn">去膜</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-27" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-27</a><span class="sn">閃蝕</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-28" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-28</a><span class="sn">增層AOI</span></span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-30" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-30</a><span class="sn">防焊壓膜</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-31" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-31</a><span class="sn">防焊曝光顯影</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-32" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-32</a><span class="sn">焊墊表面處理</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-33" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-33</a><span class="sn">切割</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-34" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-34</a><span class="sn">載板測試</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-A-35" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-35</a><span class="sn">外觀終檢</span></span></div>
+  <p class="subhead" id="a-steps">步驟</p>
+  <div class="row">
+   <div class="step ics" id="st-A-01"><div class="idx">A-01</div><h4>玻璃通孔成形</h4><p class="en3">Through-Glass Via Forming</p>
+    <a class="chip c-ics" href="#q-tgv">TGV雷射</a>
+    <p class="vend"><span class="eu">LPKF</span> · <span class="kr">Philoptics</span></p>
+    <p class="why">雷射於玻璃板上逐一標記通孔，再以蝕刻開孔。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-glasscore">玻璃芯板</a></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;量測（孔徑、錐度） · AOI（裂紋、崩缺）</p></div>
+   <div class="step ics" id="st-A-02"><div class="idx">A-02</div><h4>玻璃通孔金屬化</h4><p class="en3">Glass Via Metallization</p>
+    <a class="chip c-ics" href="#q-splating">電鍍線</a>
+    <p class="vend"><span class="eu">Atotech</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Manz</span></p>
+    <p class="why">電鍍銅本身無法附著於玻璃，故先於玻璃上形成種子層，再以銅填滿通孔。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>耗材</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-splate">芯板電鍍藥水</a></span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;切片（填孔） · 實驗室測試（附著力）</p></div>
+   <div class="step ics" id="st-A-03"><div class="idx">A-03</div><h4>載具準備</h4><p class="en3">Carrier Preparation</p>
+    <span class="chip c-ics">載具板</span>
+    <p class="vend">由載板廠自行準備</p>
+    <p class="why">剛性載具板貼覆可剝離的極薄銅箔，作為首層的製作基底。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-carrier">極薄載體銅箔</a></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;AOI（銅箔表面）</p></div>
+   <div class="step ics" id="st-A-04"><div class="idx">A-04</div><h4>芯板壓合</h4><p class="en3">Core Laminate</p>
+    <a class="chip c-ics" href="#q-cclpress-ics">真空熱壓機</a>
+    <p class="vend"><span class="jp">北川精機</span> · <span class="eu">Burkle</span> · <span class="eu">Lauffer</span> · <span class="eu">Cedal</span></p>
+    <p class="why">基板廠將玻纖布膠片與銅箔壓合成載板芯板，大尺寸晶粒須保持平整時，則採用T-Glass搭配BT或低CTE環氧樹脂。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-core">載板芯板基材</a> · <a href="pcb-ccl.html#m-btlam">BT基板</a></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;量測（厚度、CTE、平整度）</p></div>
+   <div class="step ics" id="st-A-05"><div class="idx">A-05</div><h4>芯板鑽孔</h4><p class="en3">Core Drilling</p>
+    <a class="chip c-ics" href="#q-sdrill">鑽孔機</a> <a class="chip c-ics" href="#q-vlaser">雷射鑽孔機</a>
+    <p class="vend"><span class="jp">Via Mechanics</span> · <span class="eu">Schmoll</span> · <span class="tw">東台</span> · <span class="jp">三菱電機</span> · <span class="us">ESI</span></p>
+    <p class="why">芯板以機械鑽針鑽出通孔，薄芯板則改用CO2雷射。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;X-Ray（孔位）</p></div>
+   <div class="step ics" id="st-A-06"><div class="idx">A-06</div><h4>芯板除膠渣</h4><p class="en3">Core Desmear</p>
+    <a class="chip c-ics" href="#q-splating">電鍍線</a>
+    <p class="vend"><span class="eu">Atotech</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Manz</span></p>
+    <p class="why">鑽孔時沾附於孔壁的樹脂膠渣經清除，使銅能鍍在潔淨的表面。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>耗材</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-splate">芯板電鍍藥水</a></span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;切片（孔壁）</p></div>
+   <div class="step ics" id="st-A-07"><div class="idx">A-07</div><h4>芯板化學銅</h4><p class="en3">Core Electroless Copper</p>
+    <a class="chip c-ics" href="#q-splating">電鍍線</a>
+    <p class="vend"><span class="eu">Atotech</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Manz</span></p>
+    <p class="why">於孔壁沉積一層薄化學銅，因電鍍須有導電表面才能開始。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>耗材</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-splate">芯板電鍍藥水</a></span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;切片（背光、種子層覆蓋率）</p></div>
+   <div class="step ics" id="st-A-08"><div class="idx">A-08</div><h4>通孔電鍍</h4><p class="en3">Through-Hole Plating</p>
+    <a class="chip c-ics" href="#q-splating">電鍍線</a>
+    <p class="vend"><span class="eu">Atotech</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Manz</span></p>
+    <p class="why">電鍍銅加厚孔壁與芯板表面，使芯板兩面導通。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>耗材</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-splate">芯板電鍍藥水</a></span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;切片（孔壁電鍍） · 量測（銅厚）</p></div>
+   <div class="step ics" id="st-A-09"><div class="idx">A-09</div><h4>塞孔</h4><p class="en3">Hole Plugging</p>
+    <span class="chip c-ics">塞孔機</span>
+    <p class="vend">由載板廠自行處理</p>
+    <p class="why">已電鍍的孔以樹脂塞孔，使其上方壓合的各層保持平整。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;切片（塞孔空洞）</p></div>
+   <div class="step ics" id="st-A-10"><div class="idx">A-10</div><h4>塞孔研磨</h4><p class="en3">Plug Grinding</p>
+    <span class="chip c-ics">刷磨機</span>
+    <p class="vend">由載板廠自行處理</p>
+    <p class="why">高出表面的已固化塞孔樹脂經研磨，與銅面齊平。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;量測（塞孔平整度）</p></div>
+   <div class="step ics" id="st-A-11"><div class="idx">A-11</div><h4>芯板壓膜</h4><p class="en3">Core Dry Film</p>
+    <a class="chip c-ics" href="#q-wet-ics">濕製程線</a>
+    <p class="vend"><span class="jp">東京化工機</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Kuttler</span></p>
+    <p class="why">芯板銅面經清潔後，壓上乾膜光阻，以製作芯板線路。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;AOI（光阻圖形），顯影後</p></div>
+   <div class="step ics" id="st-A-12"><div class="idx">A-12</div><h4>芯板曝光</h4><p class="en3">Core Exposure</p>
+    <a class="chip c-ics" href="#q-sldi">載板LDI</a>
+    <p class="vend"><span class="ot">Orbotech</span> · <span class="jp">ORC</span> · <span class="jp">Screen</span> · <span class="jp">Adtec</span> · <span class="jp">牛尾電機</span></p>
+    <p class="why">直接成像將芯板線路圖形寫入乾膜。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;AOI（光阻圖形），顯影後</p></div>
+   <div class="step ics" id="st-A-13"><div class="idx">A-13</div><h4>芯板顯影蝕刻去膜</h4><p class="en3">Core Develop, Etch and Strip</p>
+    <a class="chip c-ics" href="#q-wet-ics">濕製程線</a>
+    <p class="vend"><span class="jp">東京化工機</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Kuttler</span></p>
+    <p class="why">未曝光的乾膜洗除後，裸露的銅蝕刻去除，乾膜再予剝除，留下芯板線路。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;AOI（芯板線路）</p></div>
+   <div class="step ics" id="st-A-14"><div class="idx">A-14</div><h4>芯板AOI</h4><p class="en3">Core AOI</p>
+    <a class="chip c-ics" href="#q-aoi-ics">AOI</a>
+    <p class="vend"><span class="ot">Orbotech</span> · <span class="tw">由田</span> · <span class="tw">牧德</span></p>
+    <p class="why">芯板線路在第一層覆蓋前，皆經掃描檢查斷路與短路。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>檢驗</b>&nbsp;&nbsp;本步驟即為檢驗：AOI（斷路、短路、缺口）</p></div>
+   <div class="step ics" id="st-A-15"><div class="idx">A-15</div><h4>銅面粗化</h4><p class="en3">Copper Roughening</p>
+    <a class="chip c-ics" href="#q-wet-ics">濕製程線</a>
+    <p class="vend"><span class="jp">東京化工機</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Kuttler</span></p>
+    <p class="why">銅面經微蝕粗化，以利下一層膜或膠片咬合。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;量測（粗糙度）</p></div>
+   <div class="step ics" id="st-A-16"><div class="idx">A-16</div><h4>增層膜壓合</h4><p class="en3">Build-Up Film Lamination</p>
+    <a class="chip c-ics" href="#q-vlam">真空壓膜機</a>
+    <p class="vend"><span class="jp">名機</span> · <span class="jp">Nikko-Materials</span></p>
+    <p class="why">兩面各以真空壓膜貼合一張ABF，使其流入下方線路之間的空隙。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-abf">增層膜</a></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;AOI（氣泡、皺褶） · 量測（膜厚）</p></div>
+   <div class="step ics" id="st-A-17"><div class="idx">A-17</div><h4>增層膜固化</h4><p class="en3">Film Cure</p>
+    <span class="chip c-ics">固化爐</span>
+    <p class="vend">由載板廠自行處理</p>
+    <p class="why">增層膜於烘箱中固化，每層一次，大型GPU載板單面達十次以上。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;量測（翹曲）</p></div>
+   <div class="step ics" id="st-A-18"><div class="idx">A-18</div><h4>膠片與銅箔壓合</h4><p class="en3">Prepreg and Foil Lamination</p>
+    <a class="chip c-ics" href="#q-press-ics">壓合機</a>
+    <p class="vend"><span class="eu">Burkle</span> · <span class="eu">Lauffer</span> · <span class="eu">Cedal</span> · <span class="jp">北川精機</span></p>
+    <p class="why">BT膠片與極薄銅箔以真空壓合於兩面並固化，每層一次。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-btpp">BT膠片</a> · <a href="pcb-ccl.html#m-btcarrier">極薄載體銅箔</a></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;X-Ray（對位） · 切片（空洞）</p></div>
+   <div class="step ics" id="st-A-19"><div class="idx">A-19</div><h4>雷射鑽孔</h4><p class="en3">Laser Via Drilling</p>
+    <a class="chip c-ics" href="#q-vlaser">雷射鑽孔機</a>
+    <p class="vend"><span class="jp">三菱電機</span> · <span class="jp">Via Mechanics</span> · <span class="us">ESI</span> · <span class="eu">LPKF</span></p>
+    <p class="why">雷射穿過新壓上的ABF膜或BT膠片，鑽出直達下方銅層的導通孔，每層一次。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;AOI（孔徑、孔底殘留）</p></div>
+   <div class="step ics" id="st-A-20"><div class="idx">A-20</div><h4>盲孔除膠渣</h4><p class="en3">Via Desmear</p>
+    <a class="chip c-ics" href="#q-splating">電鍍線</a>
+    <p class="vend"><span class="eu">Atotech</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Manz</span></p>
+    <p class="why">清除孔底殘留的樹脂，並粗化介電層表面，使種子銅能附著其上。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>耗材</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-sapchem">SAP電鍍藥水</a></span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;AOI（孔底殘留）</p></div>
+   <div class="step ics" id="st-A-21"><div class="idx">A-21</div><h4>化學銅種子層</h4><p class="en3">Electroless Copper Seed</p>
+    <a class="chip c-ics" href="#q-splating">電鍍線</a>
+    <p class="vend"><span class="eu">Atotech</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Manz</span></p>
+    <p class="why">於介電層表面及導通孔內沉積一層薄化學銅種子層，作為線路電鍍增厚的基底。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>耗材</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-sapchem">SAP電鍍藥水</a></span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;切片（種子層覆蓋率）</p></div>
+   <div class="step ics" id="st-A-22"><div class="idx">A-22</div><h4>壓乾膜</h4><p class="en3">Dry Film Lamination</p>
+    <a class="chip c-ics" href="#q-vlam">真空壓膜機</a>
+    <p class="vend"><span class="jp">名機</span> · <span class="jp">Nikko-Materials</span></p>
+    <p class="why">於銅面壓上細線路乾膜光阻。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>耗材</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-sapfilm">SAP乾膜</a></span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;AOI（光阻圖形），顯影後</p></div>
+   <div class="step ics" id="st-A-23"><div class="idx">A-23</div><h4>曝光</h4><p class="en3">Exposure</p>
+    <a class="chip c-ics" href="#q-sldi">載板LDI</a>
+    <p class="vend"><span class="ot">Orbotech</span> · <span class="jp">ORC</span> · <span class="jp">Screen</span> · <span class="jp">Adtec</span> · <span class="jp">牛尾電機</span></p>
+    <p class="why">直接成像或步進機將線路圖形寫入乾膜，並與下方導通孔對位。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;AOI（光阻圖形） · 量測（對位）</p></div>
+   <div class="step ics" id="st-A-24"><div class="idx">A-24</div><h4>顯影</h4><p class="en3">Develop</p>
+    <a class="chip c-ics" href="#q-wet-ics">濕製程線</a>
+    <p class="vend"><span class="jp">東京化工機</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Kuttler</span></p>
+    <p class="why">洗除未曝光的乾膜，開出供線路成長的溝槽。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;AOI（光阻圖形）</p></div>
+   <div class="step ics" id="st-A-25"><div class="idx">A-25</div><h4>填孔與線路電鍍</h4><p class="en3">Via Fill and Pattern Plating</p>
+    <a class="chip c-ics" href="#q-splating">電鍍線</a>
+    <p class="vend"><span class="eu">Atotech</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Manz</span></p>
+    <p class="why">銅於開口內電鍍，填滿導通孔，並將線路增厚至完整高度。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>耗材</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-sapchem">SAP電鍍藥水</a></span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;量測（電鍍高度） · 切片（填孔）</p></div>
+   <div class="step ics" id="st-A-26"><div class="idx">A-26</div><h4>去膜</h4><p class="en3">Resist Strip</p>
+    <a class="chip c-ics" href="#q-wet-ics">濕製程線</a>
+    <p class="vend"><span class="jp">東京化工機</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Kuttler</span></p>
+    <p class="why">剝除乾膜，留下立於下方薄銅上的電鍍線路。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;AOI（光阻殘留）</p></div>
+   <div class="step ics" id="st-A-27"><div class="idx">A-27</div><h4>閃蝕</h4><p class="en3">Flash Etch</p>
+    <a class="chip c-ics" href="#q-wet-ics">濕製程線</a>
+    <p class="vend"><span class="jp">東京化工機</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Kuttler</span></p>
+    <p class="why">以快速蝕刻去除線路之間的薄銅，而不侵蝕線路本身。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>耗材</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-sapchem">SAP電鍍藥水</a></span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;AOI（線路缺陷） · 量測（線寬）</p></div>
+   <div class="step ics" id="st-A-28"><div class="idx">A-28</div><h4>增層AOI</h4><p class="en3">Build-Up AOI</p>
+    <a class="chip c-ics" href="#q-aoi-ics">AOI</a>
+    <p class="vend"><span class="ot">Orbotech</span> · <span class="tw">由田</span> · <span class="tw">牧德</span></p>
+    <p class="why">每一層在被下一層埋入前，皆經掃描檢查斷路、短路與線寬誤差。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>檢驗</b>&nbsp;&nbsp;本步驟即為檢驗：AOI（斷路、短路、線寬）</p></div>
+   <div class="step ics" id="st-A-29"><div class="idx">A-29</div><h4>載具分離</h4><p class="en3">Carrier Separation</p>
+    <span class="chip c-ics">分離線</span>
+    <p class="vend">由載板廠自行處理</p>
+    <p class="why">完成的疊構自載具剝離，再蝕刻去除薄銅箔，留下無芯板的載板。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;量測（翹曲、厚度）</p></div>
+   <div class="step ics" id="st-A-30"><div class="idx">A-30</div><h4>防焊壓膜</h4><p class="en3">Solder Resist Lamination</p>
+    <a class="chip c-ics" href="#q-vlam">真空壓膜機</a>
+    <p class="vend"><span class="jp">名機</span> · <span class="jp">Nikko-Materials</span></p>
+    <p class="why">於兩面外層壓上防焊膜，或塗佈油墨。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-sr">載板防焊</a></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;量測（防焊厚度）</p></div>
+   <div class="step ics" id="st-A-31"><div class="idx">A-31</div><h4>防焊曝光顯影</h4><p class="en3">Solder Resist Exposure and Develop</p>
+    <a class="chip c-ics" href="#q-sldi">載板LDI</a> <a class="chip c-ics" href="#q-wet-ics">濕製程線</a>
+    <p class="vend"><span class="ot">Orbotech</span> · <span class="jp">ORC</span> · <span class="jp">Screen</span> · <span class="jp">東京化工機</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span></p>
+    <p class="why">防焊經曝光顯影，開出凸塊、打線與錫球焊墊，再予固化。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;AOI（開口尺寸、對位）</p></div>
+   <div class="step ics" id="st-A-32"><div class="idx">A-32</div><h4>焊墊表面處理</h4><p class="en3">Pad Surface Finish</p>
+    <a class="chip c-ics" href="#q-splating">電鍍線</a>
+    <p class="vend"><span class="eu">Atotech</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Manz</span></p>
+    <p class="why">ENEPIG、ENIG或OSP覆蓋於供晶片與電路板接合的外露焊墊。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-sfinish">表面處理藥水</a></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;量測（表面處理厚度）</p></div>
+   <div class="step ics" id="st-A-33"><div class="idx">A-33</div><h4>切割</h4><p class="en3">Singulation</p>
+    <a class="chip c-ics" href="#q-router-ics">成型機</a>
+    <p class="vend"><span class="jp">Via Mechanics</span> · <span class="eu">Schmoll</span> · <span class="tw">東台</span> · <span class="tw">大量</span> · <span class="us">Excellon</span> · <span class="eu">LPKF</span></p>
+    <p class="why">工作板切割成條狀或單顆，即封裝廠投料的形式。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;量測（外形尺寸）</p></div>
+   <div class="step ics" id="st-A-34"><div class="idx">A-34</div><h4>載板測試</h4><p class="en3">Substrate Test</p>
+    <a class="chip c-ics" href="#q-setest">電測機</a>
+    <p class="vend"><span class="eu">atg-LM</span> · <span class="tw">Gardien</span> · <span class="jp">MicroCraft</span> · <span class="jp">Nidec Read</span> · <span class="jp">日置</span> · <span class="eu">SPEA</span></p>
+    <p class="why">每一網路皆以飛針或治具進行斷路與短路測試。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>檢驗</b>&nbsp;&nbsp;本步驟即為檢驗：電測（斷路、短路）</p></div>
+   <div class="step ics" id="st-A-35"><div class="idx">A-35</div><h4>外觀終檢</h4><p class="en3">Final Visual Inspection</p>
+    <a class="chip c-ics" href="#q-aoi-ics">AOI</a>
+    <p class="vend"><span class="ot">Orbotech</span> · <span class="tw">由田</span> · <span class="tw">牧德</span></p>
+    <p class="why">每顆載板皆經自動外觀檢查並量測翹曲，合格品出貨至負責封裝晶片的晶圓代工廠或封測廠。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>檢驗</b>&nbsp;&nbsp;本步驟即為檢驗：AOI（最終外觀） · 量測（翹曲）</p></div>
+  </div>
+<p class="subhead" id="a-equip">設備與廠商</p>
+<div class="scroller"><table class="ptable chart eq"><thead><tr><th class="cstp">步驟</th><th class="cm">機台</th><th class="cdo">功能</th><th class="csup">廠商</th></tr></thead><tbody>
+<tr id="q-tgv"><td class="stepcell steps"><div><a class="sc" href="#st-A-01" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-01</a><span class="sn">玻璃通孔成形</span></div></td><td class="pname">玻璃通孔設備</td><td class="desc">形成貫穿玻璃芯板的導通孔</td><td class="desc sup"><span class="eu">LPKF</span> · <span class="kr">Philoptics</span></td></tr>
+<tr id="q-splating"><td class="stepcell steps"><div><a class="sc" href="#st-A-02" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-02</a><span class="sn">玻璃通孔金屬化</span></div><div><a class="sc" href="#st-A-06" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-06</a><span class="sn">芯板除膠渣</span></div><div><a class="sc" href="#st-A-07" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-07</a><span class="sn">芯板化學銅</span></div><div><a class="sc" href="#st-A-08" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-08</a><span class="sn">通孔電鍍</span></div><div><a class="sc" href="#st-A-20" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-20</a><span class="sn">盲孔除膠渣</span></div><div><a class="sc" href="#st-A-21" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-21</a><span class="sn">化學銅種子層</span></div><div><a class="sc" href="#st-A-25" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-25</a><span class="sn">填孔與線路電鍍</span></div><div><a class="sc" href="#st-A-32" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-32</a><span class="sn">焊墊表面處理</span></div></td><td class="pname">電鍍線</td><td class="desc">電鍍芯板孔與SAP線路</td><td class="desc sup"><span class="eu">Atotech</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Manz</span></td></tr>
+<tr id="q-cclpress-ics"><td class="stepcell steps"><div><a class="sc" href="#st-A-04" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-04</a><span class="sn">芯板壓合</span></div></td><td class="pname">真空熱壓機</td><td class="desc">將疊合組熱壓固化成基板</td><td class="desc sup"><span class="jp">北川精機</span> · <span class="eu">Burkle</span> · <span class="eu">Lauffer</span> · <span class="eu">Cedal</span></td></tr>
+<tr id="q-sdrill"><td class="stepcell steps"><div><a class="sc" href="#st-A-05" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-05</a><span class="sn">芯板鑽孔</span></div></td><td class="pname">芯板鑽孔機</td><td class="desc">鑽出芯板通孔</td><td class="desc sup"><span class="jp">Via Mechanics</span> · <span class="eu">Schmoll</span> · <span class="tw">東台</span> · <span class="tw">大量</span> · <span class="eu">Posalux</span> · <span class="us">Excellon</span> · <span class="eu">Pluritec</span> · <span class="tw">瀧澤科</span></td></tr>
+<tr id="q-vlaser"><td class="stepcell steps"><div><a class="sc" href="#st-A-05" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-05</a><span class="sn">芯板鑽孔</span></div><div><a class="sc" href="#st-A-19" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-19</a><span class="sn">雷射鑽孔</span></div></td><td class="pname">雷射鑽孔機</td><td class="desc">於每一增層鑽出微小導通孔</td><td class="desc sup"><span class="jp">三菱電機</span> · <span class="jp">Via Mechanics</span> · <span class="us">ESI</span> · <span class="eu">LPKF</span></td></tr>
+<tr id="q-wet-ics"><td class="stepcell steps"><div><a class="sc" href="#st-A-11" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-11</a><span class="sn">芯板壓膜</span></div><div><a class="sc" href="#st-A-13" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-13</a><span class="sn">芯板顯影蝕刻去膜</span></div><div><a class="sc" href="#st-A-15" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-15</a><span class="sn">銅面粗化</span></div><div><a class="sc" href="#st-A-24" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-24</a><span class="sn">顯影</span></div><div><a class="sc" href="#st-A-26" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-26</a><span class="sn">去膜</span></div><div><a class="sc" href="#st-A-27" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-27</a><span class="sn">閃蝕</span></div><div><a class="sc" href="#st-A-31" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-31</a><span class="sn">防焊曝光顯影</span></div></td><td class="pname">濕製程線</td><td class="desc">對工作板進行顯影、蝕刻與去膜，並處理銅面以利接合</td><td class="desc sup"><span class="jp">東京化工機</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Kuttler</span></td></tr>
+<tr id="q-sldi"><td class="stepcell steps"><div><a class="sc" href="#st-A-12" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-12</a><span class="sn">芯板曝光</span></div><div><a class="sc" href="#st-A-23" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-23</a><span class="sn">曝光</span></div><div><a class="sc" href="#st-A-31" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-31</a><span class="sn">防焊曝光顯影</span></div></td><td class="pname">載板直接成像</td><td class="desc">無需光罩即可曝光線路圖形</td><td class="desc sup"><span class="ot">Orbotech</span> · <span class="jp">ORC</span> · <span class="jp">Screen</span> · <span class="jp">Adtec</span> · <span class="jp">牛尾電機</span></td></tr>
+<tr id="q-aoi-ics"><td class="stepcell steps"><div><a class="sc" href="#st-A-14" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-14</a><span class="sn">芯板AOI</span></div><div><a class="sc" href="#st-A-28" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-28</a><span class="sn">增層AOI</span></div><div><a class="sc" href="#st-A-35" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-35</a><span class="sn">外觀終檢</span></div></td><td class="pname">AOI</td><td class="desc">以相機逐層檢查缺陷</td><td class="desc sup"><span class="ot">Orbotech</span> · <span class="tw">由田</span> · <span class="tw">牧德</span></td></tr>
+<tr id="q-vlam"><td class="stepcell steps"><div><a class="sc" href="#st-A-16" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-16</a><span class="sn">增層膜壓合</span></div><div><a class="sc" href="#st-A-22" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-22</a><span class="sn">壓乾膜</span></div><div><a class="sc" href="#st-A-30" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-30</a><span class="sn">防焊壓膜</span></div></td><td class="pname">真空壓膜機</td><td class="desc">將增層膜壓合於芯板上</td><td class="desc sup"><span class="jp">名機</span> · <span class="jp">Nikko-Materials</span></td></tr>
+<tr id="q-press-ics"><td class="stepcell steps"><div><a class="sc" href="#st-A-18" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-18</a><span class="sn">膠片與銅箔壓合</span></div></td><td class="pname">壓合機</td><td class="desc">將芯板、膠片與銅箔壓合成多層板</td><td class="desc sup"><span class="eu">Burkle</span> · <span class="eu">Lauffer</span> · <span class="eu">Cedal</span> · <span class="jp">北川精機</span></td></tr>
+<tr id="q-router-ics"><td class="stepcell steps"><div><a class="sc" href="#st-A-33" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-33</a><span class="sn">切割</span></div></td><td class="pname">成型與分板</td><td class="desc">將工作板切割成單片板</td><td class="desc sup"><span class="jp">Via Mechanics</span> · <span class="eu">Schmoll</span> · <span class="tw">東台</span> · <span class="tw">大量</span> · <span class="us">Excellon</span> · <span class="eu">LPKF</span> · <span class="jp">Union Tool</span> · <span class="tw">尖點</span></td></tr>
+<tr id="q-setest"><td class="stepcell steps"><div><a class="sc" href="#st-A-34" style="background:#F8ECF3;color:#8E3B6B;border-color:#8E3B6B">A-34</a><span class="sn">載板測試</span></div></td><td class="pname">載板電測</td><td class="desc">測試每條線路有無斷路與短路</td><td class="desc sup"><span class="eu">atg-LM</span> · <span class="tw">Gardien</span> · <span class="jp">MicroCraft</span> · <span class="jp">Nidec Read</span> · <span class="jp">日置</span> · <span class="eu">SPEA</span></td></tr>
+</tbody></table></div>
+ </div>
+</div>
+
+<div class="pstage ccl" id="sB">
+ <div class="prail"><div class="pstripe"></div><div class="pnum">B部分</div><h2>CCL</h2></div>
+ <p class="lede">從玻纖到成品基板，每個步驟一張卡片，及其設備。</p>
+ <div class="pbody">
+<p class="subhead" id="b-steps">步驟</p>
+<div class="row">
+   <div class="step ccl" id="st-B-01"><div class="idx">B-01</div><h4>玻纖拉絲</h4><p class="en3">Glass Fibre Drawing</p>
+    <a class="chip c-ccl" href="#q-bushing">熔爐漏板</a>
+    <p class="vend"><span class="eu">Heraeus</span> · <span class="jp">田中貴金屬</span> · <span class="eu">Johnson Matthey</span></p>
+    <p class="why">玻璃在熔爐中熔融，經鉑銠漏板拉成細絲再撚成紗，石英紗則改由熔融石英棒拉製。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;量測（絲徑） · 實驗室測試（紗重、強度）</p></div>
+   <div class="step ccl" id="st-B-02"><div class="idx">B-02</div><h4>織布</h4><p class="en3">Weaving</p>
+    <a class="chip c-ccl" href="#q-loom">織布機</a>
+    <p class="vend"><span class="jp">豐田自動織機</span> · <span class="jp">津田駒</span> · <span class="eu">Picanol</span> · <span class="eu">Dornier</span></p>
+    <p class="why">紗線經整經捲上經軸，再以噴氣式織布機織成薄型電子級玻纖布，布種從厚型7628至極薄型1017。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-eyarn">E-Glass玻纖紗（標準）</a> · <a href="pcb-ccl.html#m-ldyarn">Low-Dk玻纖紗</a> · <a href="pcb-ccl.html#m-qyarn">Q-Glass玻纖紗（Low-Dk）</a> · <a href="pcb-ccl.html#m-d3tyarn">T-Glass玻纖紗（低CTE）</a></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;AOI（織布缺陷） · 量測（布重、厚度）</p></div>
+   <div class="step ccl" id="st-B-03"><div class="idx">B-03</div><h4>玻纖布後處理</h4><p class="en3">Cloth Finishing</p>
+    <span class="chip c-ccl">後處理線</span>
+    <p class="vend">由玻纖布廠自行處理</p>
+    <p class="why">玻纖布經熱清洗燒除織布漿料，再塗覆矽烷，使樹脂能與玻璃黏結。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>耗材</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-silane">矽烷偶合劑</a></span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;AOI（布面缺陷） · 量測（重量、厚度）</p></div>
+   <div class="step ccl" id="st-B-04"><div class="idx">B-04</div><h4>電解生箔</h4><p class="en3">Foil Electrodeposition</p>
+    <a class="chip c-ccl" href="#q-foil">銅箔產線</a>
+    <p class="vend"><span class="jp">Mifune</span> · <span class="jp">New Long</span> · <span class="jp">Nishi Industry</span></p>
+    <p class="why">溶於硫酸的銅電鍍至旋轉的鈦滾筒上，剝離後即為生箔，軟板用壓延銅箔則改由銅錠壓延而成。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;量測（厚度） · AOI（針孔）</p></div>
+   <div class="step ccl" id="st-B-05"><div class="idx">B-05</div><h4>銅箔表面處理</h4><p class="en3">Foil Surface Treatment</p>
+    <a class="chip c-ccl" href="#q-foil">銅箔產線</a>
+    <p class="vend"><span class="jp">Mifune</span> · <span class="jp">New Long</span> · <span class="jp">Nishi Industry</span></p>
+    <p class="why">生箔以銅瘤粗化，HVLP等級的粗化程度壓至極低，再施以阻障、防鏽與矽烷塗層，並分條成捲。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;量測（粗糙度、厚度） · 實驗室測試（剝離強度）</p></div>
+   <div class="step ccl" id="st-B-06"><div class="idx">B-06</div><h4>膠液調配</h4><p class="en3">Varnish Compounding</p>
+    <span class="chip c-ccl">調膠槽</span>
+    <p class="vend">由CCL廠自行調配</p>
+    <p class="why">樹脂、硬化劑、填料、阻燃劑與溶劑依各等級配方調成膠液，此為CCL廠的核心技術。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<a href="pcb-ccl.html#d-mat-shared-by-several-types">主樹脂</a> · <a href="pcb-ccl.html#m-hard">硬化劑與改質劑</a> · <a href="pcb-ccl.html#m-silica">球形二氧化矽</a> · <a href="pcb-ccl.html#m-fr">阻燃劑</a></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;實驗室測試（黏度、膠化時間、固含量）</p></div>
+   <div class="step ccl" id="st-B-07"><div class="idx">B-07</div><h4>含浸</h4><p class="en3">Impregnation</p>
+    <a class="chip c-ccl" href="#q-treater">含浸機</a>
+    <p class="vend"><span class="tw">Asia Metal</span> · <span class="us">C.A. Litzler</span> · <span class="jp">Hirano Tecseed</span></p>
+    <p class="why">玻纖布通過膠液槽與計量滾輪，由此決定其所含樹脂量。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-qcloth">Q-Glass玻纖布（Low-Dk）</a> · <a href="pcb-ccl.html#m-ldcloth">Low-Dk玻纖布</a> · <a href="pcb-ccl.html#m-ecloth">E-Glass玻纖布（標準）</a> · <a href="pcb-ccl.html#m-d3tcloth">T-Glass玻纖布（低CTE）</a></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;量測（上膠重量）</p></div>
+   <div class="step ccl" id="st-B-08"><div class="idx">B-08</div><h4>烘乾半固化</h4><p class="en3">B-Stage Drying</p>
+    <a class="chip c-ccl" href="#q-oven">烘乾爐</a>
+    <p class="vend"><span class="tw">Asia Metal</span> · <span class="us">C.A. Litzler</span></p>
+    <p class="why">立式烘爐去除溶劑並使樹脂半固化，濕布即轉為膠片。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;實驗室測試（樹脂含量、膠化時間、樹脂流動度、揮發分）</p></div>
+   <div class="step ccl" id="st-B-09"><div class="idx">B-09</div><h4>膠片裁切</h4><p class="en3">Prepreg Cutting</p>
+    <a class="chip c-ccl" href="#q-layup">疊合線</a>
+    <p class="vend"><span class="eu">Burkle</span> · <span class="jp">北川精機</span> · <span class="eu">Cedal</span></p>
+    <p class="why">膠片裁切成張，部分供CCL壓合使用，部分作為黏合片售予PCB廠。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;AOI（乾斑、異物）</p></div>
+   <div class="step ccl" id="st-B-10"><div class="idx">B-10</div><h4>疊合</h4><p class="en3">Lay-Up</p>
+    <a class="chip c-ccl" href="#q-layup">疊合線</a>
+    <p class="vend"><span class="eu">Burkle</span> · <span class="jp">北川精機</span> · <span class="eu">Cedal</span></p>
+    <p class="why">於無塵室內將膠片疊放在銅箔與鋼製隔板之間，組成疊合組。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-hvlp">HVLP銅箔</a> · <a href="pcb-ccl.html#m-rtf">標準電解銅箔與RTF銅箔</a> · <a href="pcb-ccl.html#m-ra">壓延銅箔</a> · <a href="pcb-ccl.html#m-d3carrier">極薄載體銅箔</a></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;AOI（異物、皺褶）</p></div>
+   <div class="step ccl" id="st-B-11"><div class="idx">B-11</div><h4>熱壓固化</h4><p class="en3">Press and Cure</p>
+    <a class="chip c-ccl" href="#q-cclpress">真空熱壓機</a>
+    <p class="vend"><span class="jp">北川精機</span> · <span class="eu">Burkle</span> · <span class="eu">Lauffer</span> · <span class="eu">Cedal</span></p>
+    <p class="why">疊合組於真空下加熱壓合，直至樹脂完全固化成基板。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;量測（厚度）</p></div>
+   <div class="step ccl" id="st-B-12"><div class="idx">B-12</div><h4>拆板</h4><p class="en3">Breakdown</p>
+    <span class="chip c-ccl">拆板線</span>
+    <p class="vend">由CCL廠自行處理</p>
+    <p class="why">壓合後的疊合組經拆解，基板與鋼板分離，鋼板清潔後重複使用。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;AOI（凹陷、凹點、刮傷）</p></div>
+   <div class="step ccl" id="st-B-13"><div class="idx">B-13</div><h4>裁切</h4><p class="en3">Trimming and Cutting</p>
+    <span class="chip c-ccl">裁板機</span>
+    <p class="vend">由CCL廠自行處理</p>
+    <p class="why">基板修除板邊，並依PCB廠訂購的工作板尺寸裁切。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;量測（工作板尺寸、直角度）</p></div>
+   <div class="step ccl" id="st-B-14"><div class="idx">B-14</div><h4>成品檢驗</h4><p class="en3">Final Inspection</p>
+    <span class="chip c-ccl">檢驗與實驗室</span>
+    <p class="vend">由CCL廠自行檢驗與實驗室測試</p>
+    <p class="why">每批皆經檢驗與實驗室測試後，CCL與膠片才出貨至PCB廠。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>檢驗</b>&nbsp;&nbsp;本步驟即為檢驗：AOI（表面缺陷） · 量測（厚度、翹曲） · 實驗室測試（Dk、Df、剝離強度、Tg）</p></div>
+  </div>
+<p class="subhead" id="b-equip">設備與廠商</p>
+<div class="scroller"><table class="ptable chart eq"><thead><tr><th class="cstp">步驟</th><th class="cm">機台</th><th class="cdo">功能</th><th class="csup">廠商</th></tr></thead><tbody>
+<tr class="bucket"><td colspan="4">玻纖布與銅箔廠</td></tr>
+<tr id="q-bushing"><td class="stepcell steps"><div><a class="sc" href="#st-B-01" style="background:#E1F0E9;color:#2E6B4F;border-color:#2E6B4F">B-01</a><span class="sn">玻纖拉絲</span></div></td><td class="pname">玻璃熔爐漏板</td><td class="desc">將熔融玻璃拉製成纖維</td><td class="desc sup"><span class="eu">Heraeus</span> · <span class="jp">田中貴金屬</span> · <span class="eu">Johnson Matthey</span></td></tr>
+<tr id="q-loom"><td class="stepcell steps"><div><a class="sc" href="#st-B-02" style="background:#E1F0E9;color:#2E6B4F;border-color:#2E6B4F">B-02</a><span class="sn">織布</span></div></td><td class="pname">織布機</td><td class="desc">將紗線織成玻纖布</td><td class="desc sup"><span class="jp">豐田自動織機</span> · <span class="jp">津田駒</span> · <span class="eu">Picanol</span> · <span class="eu">Dornier</span></td></tr>
+<tr id="q-foil"><td class="stepcell steps"><div><a class="sc" href="#st-B-04" style="background:#E1F0E9;color:#2E6B4F;border-color:#2E6B4F">B-04</a><span class="sn">電解生箔</span></div><div><a class="sc" href="#st-B-05" style="background:#E1F0E9;color:#2E6B4F;border-color:#2E6B4F">B-05</a><span class="sn">銅箔表面處理</span></div></td><td class="pname">銅箔表面處理線與滾筒</td><td class="desc">生成銅箔並處理其表面</td><td class="desc sup"><span class="jp">Mifune</span> · <span class="jp">New Long</span> · <span class="jp">Nishi Industry</span></td></tr>
+<tr class="bucket"><td colspan="4">CCL產線</td></tr>
+<tr id="q-treater"><td class="stepcell steps"><div><a class="sc" href="#st-B-07" style="background:#E1F0E9;color:#2E6B4F;border-color:#2E6B4F">B-07</a><span class="sn">含浸</span></div></td><td class="pname">含浸機、含浸線</td><td class="desc">將玻纖布浸入膠液，並控制樹脂含量</td><td class="desc sup"><span class="tw">Asia Metal</span> · <span class="us">C.A. Litzler</span> · <span class="jp">Hirano Tecseed</span></td></tr>
+<tr id="q-oven"><td class="stepcell steps"><div><a class="sc" href="#st-B-08" style="background:#E1F0E9;color:#2E6B4F;border-color:#2E6B4F">B-08</a><span class="sn">烘乾半固化</span></div></td><td class="pname">烘乾爐與排氣系統</td><td class="desc">去除溶劑並使樹脂半固化</td><td class="desc sup"><span class="tw">Asia Metal</span> · <span class="us">C.A. Litzler</span></td></tr>
+<tr id="q-layup"><td class="stepcell steps"><div><a class="sc" href="#st-B-09" style="background:#E1F0E9;color:#2E6B4F;border-color:#2E6B4F">B-09</a><span class="sn">膠片裁切</span></div><div><a class="sc" href="#st-B-10" style="background:#E1F0E9;color:#2E6B4F;border-color:#2E6B4F">B-10</a><span class="sn">疊合</span></div></td><td class="pname">自動疊合設備</td><td class="desc">裁切膠片，並與銅箔疊合成疊合組</td><td class="desc sup"><span class="eu">Burkle</span> · <span class="jp">北川精機</span> · <span class="eu">Cedal</span></td></tr>
+<tr id="q-cclpress"><td class="stepcell steps"><div><a class="sc" href="#st-B-11" style="background:#E1F0E9;color:#2E6B4F;border-color:#2E6B4F">B-11</a><span class="sn">熱壓固化</span></div></td><td class="pname">真空熱壓機</td><td class="desc">將疊合組熱壓固化成基板</td><td class="desc sup"><span class="jp">北川精機</span> · <span class="eu">Burkle</span> · <span class="eu">Lauffer</span> · <span class="eu">Cedal</span></td></tr>
+</tbody></table></div>
+ </div>
+</div>
+
+<div class="pstage pcb" id="sC">
+ <div class="prail"><div class="pstripe"></div><div class="pnum">C部分</div><h2>PCB</h2></div>
+ <p class="lede">每種電路板類型一套流程，再逐步列出每個步驟及其設備。</p>
+ <div class="pbody">
+<div class="subsub pcb" id="fc1"><span class="code">C.1</span>HDI</div>
+  <p class="note flowline">已鑽孔的芯板在兩側逐層增層，每層各經壓合、雷射鑽孔、電鍍與曝光顯影一次。</p>
+  <div class="flow stepcell"><span class="fs"><a class="sc" href="#st-C-01" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-01</a><span class="sn">裁板</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-02" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-02</a><span class="sn">內層壓膜</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-03" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-03</a><span class="sn">內層曝光</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-04" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-04</a><span class="sn">內層顯影蝕刻去膜</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-05" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-05</a><span class="sn">內層AOI</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-06" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-06</a><span class="sn">棕化</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-07" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-07</a><span class="sn">疊板</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-08" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-08</a><span class="sn">壓合</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-10" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-10</a><span class="sn">X-Ray打靶與裁邊</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-11" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-11</a><span class="sn">機械鑽孔</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-13" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-13</a><span class="sn">除膠渣與化學銅</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-14" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-14</a><span class="sn">全板電鍍</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-16" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-16</a><span class="sn">外層曝光顯影</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-18" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-18</a><span class="sn">外層蝕刻</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-19" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-19</a><span class="sn">外層AOI</span></span><span class="fa">&rarr;</span><span class="loop"><span class="ll">每層一次</span><span class="fs"><a class="sc" href="#st-C-06" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-06</a><span class="sn">棕化</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-07" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-07</a><span class="sn">疊板</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-08" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-08</a><span class="sn">壓合</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-10" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-10</a><span class="sn">X-Ray打靶與裁邊</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-12" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-12</a><span class="sn">雷射鑽孔</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-13" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-13</a><span class="sn">除膠渣與化學銅</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-14" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-14</a><span class="sn">全板電鍍</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-16" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-16</a><span class="sn">外層曝光顯影</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-18" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-18</a><span class="sn">外層蝕刻</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-19" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-19</a><span class="sn">外層AOI</span></span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-21" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-21</a><span class="sn">防焊</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-22" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-22</a><span class="sn">文字印刷</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-23" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-23</a><span class="sn">表面處理</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-26" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-26</a><span class="sn">成型</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-28" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-28</a><span class="sn">電測</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-29" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-29</a><span class="sn">終檢</span></span></div>
+  <div class="subsub pcb" id="fc2"><span class="code">C.2</span>多層板</div>
+  <p class="note flowline">內層經蝕刻後壓合成單一疊構，以機鑽通孔相連，高速板的通孔再經背鑽。</p>
+  <div class="flow stepcell"><span class="fs"><a class="sc" href="#st-C-01" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-01</a><span class="sn">裁板</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-02" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-02</a><span class="sn">內層壓膜</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-03" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-03</a><span class="sn">內層曝光</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-04" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-04</a><span class="sn">內層顯影蝕刻去膜</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-05" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-05</a><span class="sn">內層AOI</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-06" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-06</a><span class="sn">棕化</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-07" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-07</a><span class="sn">疊板</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-08" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-08</a><span class="sn">壓合</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-10" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-10</a><span class="sn">X-Ray打靶與裁邊</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-11" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-11</a><span class="sn">機械鑽孔</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-13" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-13</a><span class="sn">除膠渣與化學銅</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-14" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-14</a><span class="sn">全板電鍍</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-15" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-15</a><span class="sn">背鑽</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-16" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-16</a><span class="sn">外層曝光顯影</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-17" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-17</a><span class="sn">線路電鍍</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-18" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-18</a><span class="sn">外層蝕刻</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-19" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-19</a><span class="sn">外層AOI</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-21" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-21</a><span class="sn">防焊</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-22" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-22</a><span class="sn">文字印刷</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-23" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-23</a><span class="sn">表面處理</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-26" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-26</a><span class="sn">成型</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-28" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-28</a><span class="sn">電測</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-29" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-29</a><span class="sn">終檢</span></span></div>
+  <div class="subsub pcb" id="fc3"><span class="code">C.3</span>FPC與軟硬結合板</div>
+  <p class="note flowline">線路蝕刻於軟性CCL上並覆以覆蓋膜，軟硬結合板則另以不流動膠片壓上硬板層。</p>
+  <div class="flow stepcell"><span class="fs"><a class="sc" href="#st-C-01" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-01</a><span class="sn">裁板</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-11" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-11</a><span class="sn">機械鑽孔</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-12" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-12</a><span class="sn">雷射鑽孔</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-13" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-13</a><span class="sn">除膠渣與化學銅</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-14" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-14</a><span class="sn">全板電鍍</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-16" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-16</a><span class="sn">外層曝光顯影</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-18" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-18</a><span class="sn">外層蝕刻</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-19" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-19</a><span class="sn">外層AOI</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-20" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-20</a><span class="sn">覆蓋膜壓合</span></span><span class="fa">&rarr;</span><span class="loop"><span class="ll">僅限軟硬結合板</span><span class="fs"><a class="sc" href="#st-C-07" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-07</a><span class="sn">疊板</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-09" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-09</a><span class="sn">軟硬結合板壓合</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-10" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-10</a><span class="sn">X-Ray打靶與裁邊</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-11" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-11</a><span class="sn">機械鑽孔</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-13" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-13</a><span class="sn">除膠渣與化學銅</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-14" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-14</a><span class="sn">全板電鍍</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-16" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-16</a><span class="sn">外層曝光顯影</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-18" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-18</a><span class="sn">外層蝕刻</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-19" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-19</a><span class="sn">外層AOI</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-21" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-21</a><span class="sn">防焊</span></span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-23" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-23</a><span class="sn">表面處理</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-24" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-24</a><span class="sn">補強板貼合</span></span><span class="fa">&rarr;</span><span class="loop"><span class="ll">僅限軟硬結合板</span><span class="fs"><a class="sc" href="#st-C-25" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-25</a><span class="sn">控深成型</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-26" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-26</a><span class="sn">成型</span></span></span><span class="fa">&rarr;</span><span class="loop"><span class="ll">僅限FPC</span><span class="fs"><a class="sc" href="#st-C-27" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-27</a><span class="sn">沖型</span></span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-28" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-28</a><span class="sn">電測</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-29" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-29</a><span class="sn">終檢</span></span></div>
+  <div class="subsub pcb" id="fc4"><span class="code">C.4</span>單面板與雙面板</div>
+  <p class="note flowline">單片基板於一面或兩面蝕刻，雙面板再經鑽孔與電鍍以連接兩面。</p>
+  <div class="flow stepcell"><span class="fs"><a class="sc" href="#st-C-01" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-01</a><span class="sn">裁板</span></span><span class="fa">&rarr;</span><span class="loop"><span class="ll">僅雙面板</span><span class="fs"><a class="sc" href="#st-C-11" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-11</a><span class="sn">機械鑽孔</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-13" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-13</a><span class="sn">除膠渣與化學銅</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-14" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-14</a><span class="sn">全板電鍍</span></span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-16" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-16</a><span class="sn">外層曝光顯影</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-18" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-18</a><span class="sn">外層蝕刻</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-19" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-19</a><span class="sn">外層AOI</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-21" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-21</a><span class="sn">防焊</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-22" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-22</a><span class="sn">文字印刷</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-23" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-23</a><span class="sn">表面處理</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-27" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-27</a><span class="sn">沖型</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-28" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-28</a><span class="sn">電測</span></span><span class="fa">&rarr;</span><span class="fs"><a class="sc" href="#st-C-29" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-29</a><span class="sn">終檢</span></span></div>
+  <p class="subhead" id="c-steps">步驟</p>
+  <div class="row">
+   <div class="step pcb" id="st-C-01"><div class="idx">C-01</div><h4>裁板</h4><p class="en3">Panel Cutting</p>
+    <a class="chip c-pcb" href="#q-wet">濕製程線</a>
+    <p class="vend"><span class="jp">東京化工機</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Kuttler</span></p>
+    <p class="why">將平台業者認證等級的CCL裁切成工作板。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-hsccl">高速CCL與膠片</a> · <a href="pcb-ccl.html#m-stdccl">標準CCL與膠片</a></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;量測（工作板尺寸）</p></div>
+   <div class="step pcb" id="st-C-02"><div class="idx">C-02</div><h4>內層壓膜</h4><p class="en3">Inner-Layer Dry Film</p>
+    <a class="chip c-pcb" href="#q-wet">濕製程線</a>
+    <p class="vend"><span class="jp">東京化工機</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Kuttler</span></p>
+    <p class="why">銅面經清潔與微蝕後，再壓上感光乾膜。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>耗材</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-dryfilm">乾膜光阻</a></span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;AOI（光阻圖形），顯影後</p></div>
+   <div class="step pcb" id="st-C-03"><div class="idx">C-03</div><h4>內層曝光</h4><p class="en3">Inner-Layer Exposure</p>
+    <a class="chip c-pcb" href="#q-ldi">直接成像</a>
+    <p class="vend"><span class="ot">Orbotech</span> · <span class="jp">ORC</span> · <span class="jp">Screen</span> · <span class="jp">Adtec</span> · <span class="jp">Via Mechanics</span> · <span class="eu">Limata</span></p>
+    <p class="why">直接成像以UV光將線路圖形寫入乾膜，無需底片。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;AOI（光阻圖形），顯影後</p></div>
+   <div class="step pcb" id="st-C-04"><div class="idx">C-04</div><h4>內層顯影蝕刻去膜</h4><p class="en3">Inner-Layer Develop, Etch and Strip</p>
+    <a class="chip c-pcb" href="#q-wet">濕製程線</a>
+    <p class="vend"><span class="jp">東京化工機</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Kuttler</span></p>
+    <p class="why">未曝光的乾膜洗除後，裸露的銅蝕刻去除，剩餘乾膜再予剝除，留下內層線路。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>耗材</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-etch">蝕刻、顯影與去膜藥水</a></span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;AOI（斷路、短路、缺口）</p></div>
+   <div class="step pcb" id="st-C-05"><div class="idx">C-05</div><h4>內層AOI</h4><p class="en3">Inner-Layer AOI</p>
+    <a class="chip c-pcb" href="#q-aoi">AOI</a>
+    <p class="vend"><span class="ot">Orbotech</span> · <span class="tw">由田</span> · <span class="tw">牧德</span></p>
+    <p class="why">每一內層在埋入前皆經掃描，因為缺陷一旦壓入44L疊構內，整片板即報廢。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>檢驗</b>&nbsp;&nbsp;本步驟即為檢驗：AOI（斷路、短路、缺口）</p></div>
+   <div class="step pcb" id="st-C-06"><div class="idx">C-06</div><h4>棕化</h4><p class="en3">Brown Oxide</p>
+    <a class="chip c-pcb" href="#q-wet">濕製程線</a>
+    <p class="vend"><span class="jp">東京化工機</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Kuttler</span></p>
+    <p class="why">銅面經微粗化以利膠片咬合，隨著更高等級導入更平滑的HVLP銅箔，此步驟愈顯重要。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>耗材</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-bond">棕化藥水</a></span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;實驗室測試（剝離強度） · 量測（粗糙度）</p></div>
+   <div class="step pcb" id="st-C-07"><div class="idx">C-07</div><h4>疊板</h4><p class="en3">Lay-Up</p>
+    <span class="chip c-pcb">疊板與鉚合</span>
+    <p class="vend">由PCB廠自行處理</p>
+    <p class="why">內層芯板、膠片與銅箔依序疊合，並以定位銷或鉚釘固定，使各層保持對位。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-hsccl">高速CCL與膠片</a> · <a href="pcb-ccl.html#m-stdccl">標準CCL與膠片</a> · <a href="pcb-ccl.html#m-p1foil">銅箔</a> · <a href="pcb-ccl.html#m-pcbcarrier">極薄載體銅箔</a></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;X-ray（層間對位），壓合後</p></div>
+   <div class="step pcb" id="st-C-08"><div class="idx">C-08</div><h4>壓合</h4><p class="en3">Lamination</p>
+    <a class="chip c-pcb" href="#q-press">壓合機</a>
+    <p class="vend"><span class="eu">Burkle</span> · <span class="eu">Lauffer</span> · <span class="eu">Cedal</span> · <span class="jp">北川精機</span></p>
+    <p class="why">疊構在加熱與真空下壓合，使膠片流動並固化，結合為一片板。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;X-ray（層間對位） · 量測（厚度） · 切片（空洞）</p></div>
+   <div class="step pcb" id="st-C-09"><div class="idx">C-09</div><h4>軟硬板壓合</h4><p class="en3">Rigid-Flex Lamination</p>
+    <a class="chip c-pcb" href="#q-press">壓合機</a>
+    <p class="vend"><span class="eu">Burkle</span> · <span class="eu">Lauffer</span> · <span class="eu">Cedal</span> · <span class="jp">北川精機</span></p>
+    <p class="why">硬板層以不流動膠片壓合於軟板芯板上，使樹脂不致流入彎折區域。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-stdccl">標準CCL與膠片</a></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;X-Ray（對位） · 切片（空洞）</p></div>
+   <div class="step pcb" id="st-C-10"><div class="idx">C-10</div><h4>X-Ray打靶與裁邊</h4><p class="en3">X-Ray Targeting and Trim</p>
+    <span class="chip c-pcb">X-Ray打靶機</span>
+    <p class="vend">由PCB廠自行處理</p>
+    <p class="why">X-ray打靶機找出埋入的內層靶標，鑽出後續各步驟據以對位的工具孔，並進行裁邊。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;X-ray（孔位），鑽孔後</p></div>
+   <div class="step pcb" id="st-C-11"><div class="idx">C-11</div><h4>機械鑽孔</h4><p class="en3">Mechanical Drilling</p>
+    <a class="chip c-pcb" href="#q-drill">鑽孔機</a>
+    <p class="vend"><span class="jp">Via Mechanics</span> · <span class="eu">Schmoll</span> · <span class="tw">東台</span> · <span class="tw">大量</span> · <span class="eu">Posalux</span> · <span class="us">Excellon</span></p>
+    <p class="why">通孔以多軸鑽孔機鑽製，是連通HLC板各層的唯一方式。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>耗材</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-bits">鑽針與銑刀</a></span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;X-ray（孔位） · 切片（孔壁）</p></div>
+   <div class="step pcb" id="st-C-12"><div class="idx">C-12</div><h4>雷射鑽孔</h4><p class="en3">Laser Drilling</p>
+    <a class="chip c-pcb" href="#q-laser">雷射鑽孔機</a>
+    <p class="vend"><span class="jp">三菱電機</span> · <span class="jp">Via Mechanics</span> · <span class="us">ESI</span> · <span class="ot">Orbotech</span> · <span class="kr">EO Technics</span> · <span class="jp">住友重機械</span></p>
+    <p class="why">雷射鑽穿每一HDI增層，形成小於100 &micro;m的微盲孔，並止於下方銅層。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;AOI（孔徑、殘留物）</p></div>
+   <div class="step pcb" id="st-C-13"><div class="idx">C-13</div><h4>除膠渣與化學銅</h4><p class="en3">Desmear and Electroless Copper</p>
+    <a class="chip c-pcb" href="#q-plating">電鍍線</a>
+    <p class="vend"><span class="eu">Atotech</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Manz</span></p>
+    <p class="why">孔壁上的膠渣先行清除，再沉積薄層化學銅作為種子層，因種子層若有空隙即會形成斷路。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>耗材</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-plate">電鍍藥水</a></span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;切片（背光、種子層覆蓋率）</p></div>
+   <div class="step pcb" id="st-C-14"><div class="idx">C-14</div><h4>全板電鍍</h4><p class="en3">Panel Plating</p>
+    <a class="chip c-pcb" href="#q-plating">電鍍線</a>
+    <p class="vend"><span class="eu">Atotech</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Manz</span></p>
+    <p class="why">整片工作板鍍上電鍍銅，加厚孔壁並填滿HDI微盲孔。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-anode">銅陽極與銅球</a><span class="cons"><b>耗材</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-plate">電鍍藥水</a></span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;量測（銅厚） · 切片（填孔）</p></div>
+   <div class="step pcb" id="st-C-15"><div class="idx">C-15</div><h4>背鑽</h4><p class="en3">Back-Drilling</p>
+    <a class="chip c-pcb" href="#q-drill">鑽孔機</a>
+    <p class="vend"><span class="jp">Via Mechanics</span> · <span class="eu">Schmoll</span> · <span class="tw">東台</span> · <span class="tw">大量</span> · <span class="eu">Posalux</span> · <span class="us">Excellon</span></p>
+    <p class="why">每個高速導通孔未使用的電鍍殘樁由背面鑽除，因殘樁若留存會使高速訊號失真。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>耗材</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-bits">鑽針與銑刀</a></span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;切片（殘樁長度）</p></div>
+   <div class="step pcb" id="st-C-16"><div class="idx">C-16</div><h4>外層曝光顯影</h4><p class="en3">Outer-Layer Imaging</p>
+    <a class="chip c-pcb" href="#q-wet">濕製程線</a> <a class="chip c-pcb" href="#q-ldi">直接成像</a>
+    <p class="vend"><span class="jp">東京化工機</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="ot">Orbotech</span> · <span class="jp">ORC</span> · <span class="jp">Screen</span></p>
+    <p class="why">外層壓上乾膜，經直接成像曝光並顯影，形成外層圖形。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>耗材</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-dryfilm">乾膜光阻</a></span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;AOI（光阻圖形） · 量測（對位）</p></div>
+   <div class="step pcb" id="st-C-17"><div class="idx">C-17</div><h4>線路電鍍</h4><p class="en3">Pattern Plating</p>
+    <a class="chip c-pcb" href="#q-plating">電鍍線</a>
+    <p class="vend"><span class="eu">Atotech</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Manz</span></p>
+    <p class="why">裸露的線路先鍍銅，再鍍錫作為抗蝕層，mSAP板則於此由極薄銅箔鍍出整條線路，採蓋孔法的板件則略過此步驟。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-anode">銅陽極與銅球</a><span class="cons"><b>耗材</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-plate">電鍍藥水</a></span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;量測（鍍層厚度）</p></div>
+   <div class="step pcb" id="st-C-18"><div class="idx">C-18</div><h4>外層蝕刻</h4><p class="en3">Outer-Layer Etch</p>
+    <a class="chip c-pcb" href="#q-wet">濕製程線</a>
+    <p class="vend"><span class="jp">東京化工機</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Kuttler</span></p>
+    <p class="why">乾膜剝除後，裸露的底銅蝕刻去除，再剝除錫層，mSAP板則僅閃蝕薄銅箔。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>耗材</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-etch">蝕刻、顯影與去膜藥水</a></span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;AOI（斷路、短路） · 量測（線寬、線距）</p></div>
+   <div class="step pcb" id="st-C-19"><div class="idx">C-19</div><h4>外層AOI</h4><p class="en3">Outer-Layer AOI</p>
+    <a class="chip c-pcb" href="#q-aoi">AOI</a>
+    <p class="vend"><span class="ot">Orbotech</span> · <span class="tw">由田</span> · <span class="tw">牧德</span></p>
+    <p class="why">每一外層在下一層或防焊覆蓋前，皆經掃描檢查斷路、短路與線寬誤差。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>檢驗</b>&nbsp;&nbsp;本步驟即為檢驗：AOI（斷路、短路、線寬）</p></div>
+   <div class="step pcb" id="st-C-20"><div class="idx">C-20</div><h4>覆蓋膜壓合</h4><p class="en3">Coverlay Lamination</p>
+    <a class="chip c-pcb" href="#q-press">壓合機</a>
+    <p class="vend"><span class="eu">Burkle</span> · <span class="eu">Lauffer</span> · <span class="eu">Cedal</span> · <span class="jp">北川精機</span></p>
+    <p class="why">附膠的聚醯亞胺覆蓋膜壓合於蝕刻後的線路上，使線路絕緣，同時板件仍可彎折。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;AOI（覆蓋膜開窗） · 實驗室測試（剝離強度）</p></div>
+   <div class="step pcb" id="st-C-21"><div class="idx">C-21</div><h4>防焊</h4><p class="en3">Solder Mask</p>
+    <a class="chip c-pcb" href="#q-maskimg">防焊曝光與噴墨</a>
+    <p class="vend"><span class="ot">Orbotech</span> · <span class="jp">MicroCraft</span> · <span class="jp">ORC</span> · <span class="jp">Adtec</span></p>
+    <p class="why">防焊油墨經塗布、曝光、顯影與固化，僅留焊墊外露，使焊錫不會沾上線路。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-mask">防焊油墨</a></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;AOI（對位、開窗） · 量測（防焊厚度）</p></div>
+   <div class="step pcb" id="st-C-22"><div class="idx">C-22</div><h4>文字印刷</h4><p class="en3">Legend Printing</p>
+    <a class="chip c-pcb" href="#q-maskimg">防焊曝光與噴墨</a>
+    <p class="vend"><span class="ot">Orbotech</span> · <span class="jp">MicroCraft</span> · <span class="jp">ORC</span> · <span class="jp">Adtec</span></p>
+    <p class="why">料號與參考標記以噴墨印刷於防焊層上。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>耗材</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-legend">文字油墨</a></span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;AOI（印刷位置）</p></div>
+   <div class="step pcb" id="st-C-23"><div class="idx">C-23</div><h4>表面處理</h4><p class="en3">Surface Finish</p>
+    <a class="chip c-pcb" href="#q-plating">電鍍線</a>
+    <p class="vend"><span class="eu">Atotech</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Manz</span></p>
+    <p class="why">ENIG、ENEPIG、OSP、化銀或化錫覆蓋外露焊墊，決定板件的可焊性與保存期限。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-finish">表面處理藥水</a></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;量測（鎳與金厚度） · 實驗室測試（可焊性）</p></div>
+   <div class="step pcb" id="st-C-24"><div class="idx">C-24</div><h4>補強板貼合</h4><p class="en3">Stiffener Bonding</p>
+    <span class="chip c-pcb">補強板貼合</span>
+    <p class="vend">由PCB廠自行處理</p>
+    <p class="why">聚醯亞胺、FR-4或鋼片補強板貼合於連接器與零件下方，使這些區域保持剛性。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;量測（位置、平整度）</p></div>
+   <div class="step pcb" id="st-C-25"><div class="idx">C-25</div><h4>控深成型</h4><p class="en3">Depth Routing</p>
+    <a class="chip c-pcb" href="#q-router">成型機</a>
+    <p class="vend"><span class="jp">Via Mechanics</span> · <span class="eu">Schmoll</span> · <span class="tw">東台</span> · <span class="tw">大量</span> · <span class="us">Excellon</span> · <span class="eu">LPKF</span></p>
+    <p class="why">軟板區上方的硬板層依設定深度銑除，使軟板段得以彎折。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>耗材</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-bits">鑽針與銑刀</a></span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;量測（深度、外形）</p></div>
+   <div class="step pcb" id="st-C-26"><div class="idx">C-26</div><h4>成型</h4><p class="en3">Routing</p>
+    <a class="chip c-pcb" href="#q-router">成型機</a>
+    <p class="vend"><span class="jp">Via Mechanics</span> · <span class="eu">Schmoll</span> · <span class="tw">東台</span> · <span class="tw">大量</span> · <span class="us">Excellon</span> · <span class="eu">LPKF</span></p>
+    <p class="why">工作板經成型切割成單片板，各板以數片拼於同一工作板上生產，至最後才分離。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span><span class="cons"><b>耗材</b>&nbsp;&nbsp;<a href="pcb-ccl.html#m-bits">鑽針與銑刀</a></span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;量測（外形尺寸）</p></div>
+   <div class="step pcb" id="st-C-27"><div class="idx">C-27</div><h4>沖型</h4><p class="en3">Punching</p>
+    <span class="chip c-pcb">沖床</span>
+    <p class="vend">由PCB廠自行處理</p>
+    <p class="why">板件以鋼模自工作板沖出，用於大量生產的軟板與單面板時，速度較成型快。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>下一道檢驗</b>&nbsp;&nbsp;量測（外形尺寸）</p></div>
+   <div class="step pcb" id="st-C-28"><div class="idx">C-28</div><h4>電測</h4><p class="en3">Electrical Test</p>
+    <a class="chip c-pcb" href="#q-etest">電測機</a>
+    <p class="vend"><span class="eu">atg-LM</span> · <span class="tw">Gardien</span> · <span class="jp">MicroCraft</span> · <span class="jp">Nidec Read</span> · <span class="jp">日置</span> · <span class="eu">SPEA</span></p>
+    <p class="why">每一網路皆以飛針或治具進行斷路與短路測試，因44L板無法以目視檢查。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>檢驗</b>&nbsp;&nbsp;本步驟即為檢驗：電測（斷路、短路）</p></div>
+   <div class="step pcb" id="st-C-29"><div class="idx">C-29</div><h4>終檢</h4><p class="en3">Final Inspection</p>
+    <a class="chip c-pcb" href="#q-aoi">AOI</a>
+    <p class="vend"><span class="ot">Orbotech</span> · <span class="tw">由田</span> · <span class="tw">牧德</span></p>
+    <p class="why">每片成品板皆經外觀與平整度檢驗，隨後以裸板出貨至負責安裝晶片的組裝廠。</p>
+    <p class="mat"><b>材料</b>&nbsp;&nbsp;<span class="none">&mdash;</span></p>
+    <p class="qc"><b>檢驗</b>&nbsp;&nbsp;本步驟即為檢驗：AOI（最終外觀） · 量測（板彎與板翹）</p></div>
+  </div>
+<p class="subhead" id="c-equip">設備與廠商</p>
+<div class="scroller"><table class="ptable chart eq"><thead><tr><th class="cstp">步驟</th><th class="cm">機台</th><th class="cdo">功能</th><th class="csup">廠商</th></tr></thead><tbody>
+<tr id="q-wet"><td class="stepcell steps"><div><a class="sc" href="#st-C-01" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-01</a><span class="sn">裁板</span></div><div><a class="sc" href="#st-C-02" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-02</a><span class="sn">內層壓膜</span></div><div><a class="sc" href="#st-C-04" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-04</a><span class="sn">內層顯影蝕刻去膜</span></div><div><a class="sc" href="#st-C-06" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-06</a><span class="sn">棕化</span></div><div><a class="sc" href="#st-C-16" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-16</a><span class="sn">外層曝光顯影</span></div><div><a class="sc" href="#st-C-18" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-18</a><span class="sn">外層蝕刻</span></div></td><td class="pname">濕製程線</td><td class="desc">對工作板進行顯影、蝕刻與去膜，並處理銅面以利接合</td><td class="desc sup"><span class="jp">東京化工機</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Kuttler</span></td></tr>
+<tr id="q-ldi"><td class="stepcell steps"><div><a class="sc" href="#st-C-03" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-03</a><span class="sn">內層曝光</span></div><div><a class="sc" href="#st-C-16" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-16</a><span class="sn">外層曝光顯影</span></div></td><td class="pname">直接成像</td><td class="desc">將圖形曝光於乾膜，無需底片</td><td class="desc sup"><span class="ot">Orbotech</span> · <span class="jp">ORC</span> · <span class="jp">Screen</span> · <span class="jp">Adtec</span> · <span class="jp">Via Mechanics</span> · <span class="eu">Limata</span></td></tr>
+<tr id="q-aoi"><td class="stepcell steps"><div><a class="sc" href="#st-C-05" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-05</a><span class="sn">內層AOI</span></div><div><a class="sc" href="#st-C-19" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-19</a><span class="sn">外層AOI</span></div><div><a class="sc" href="#st-C-29" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-29</a><span class="sn">終檢</span></div></td><td class="pname">AOI</td><td class="desc">以相機逐層檢查缺陷</td><td class="desc sup"><span class="ot">Orbotech</span> · <span class="tw">由田</span> · <span class="tw">牧德</span></td></tr>
+<tr id="q-press"><td class="stepcell steps"><div><a class="sc" href="#st-C-08" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-08</a><span class="sn">壓合</span></div><div><a class="sc" href="#st-C-09" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-09</a><span class="sn">軟硬結合板壓合</span></div><div><a class="sc" href="#st-C-20" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-20</a><span class="sn">覆蓋膜壓合</span></div></td><td class="pname">壓合機</td><td class="desc">將芯板、膠片與銅箔壓合成多層板</td><td class="desc sup"><span class="eu">Burkle</span> · <span class="eu">Lauffer</span> · <span class="eu">Cedal</span> · <span class="jp">北川精機</span></td></tr>
+<tr id="q-drill"><td class="stepcell steps"><div><a class="sc" href="#st-C-11" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-11</a><span class="sn">機械鑽孔</span></div><div><a class="sc" href="#st-C-15" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-15</a><span class="sn">背鑽</span></div></td><td class="pname">機械鑽孔機</td><td class="desc">鑽製通孔</td><td class="desc sup"><span class="jp">Via Mechanics</span> · <span class="eu">Schmoll</span> · <span class="tw">東台</span> · <span class="tw">大量</span> · <span class="eu">Posalux</span> · <span class="us">Excellon</span> · <span class="eu">Pluritec</span> · <span class="tw">瀧澤科</span></td></tr>
+<tr id="q-laser"><td class="stepcell steps"><div><a class="sc" href="#st-C-12" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-12</a><span class="sn">雷射鑽孔</span></div></td><td class="pname">雷射鑽孔機</td><td class="desc">鑽製微盲孔</td><td class="desc sup"><span class="jp">三菱電機</span> · <span class="jp">Via Mechanics</span> · <span class="us">ESI</span> · <span class="ot">Orbotech</span> · <span class="kr">EO Technics</span> · <span class="jp">住友重機械</span> · <span class="eu">Trumpf</span> · <span class="eu">LPKF</span> · <span class="eu">Schmoll</span> · <span class="tw">東台</span></td></tr>
+<tr id="q-plating"><td class="stepcell steps"><div><a class="sc" href="#st-C-13" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-13</a><span class="sn">除膠渣與化學銅</span></div><div><a class="sc" href="#st-C-14" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-14</a><span class="sn">全板電鍍</span></div><div><a class="sc" href="#st-C-17" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-17</a><span class="sn">線路電鍍</span></div><div><a class="sc" href="#st-C-23" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-23</a><span class="sn">表面處理</span></div></td><td class="pname">電鍍線</td><td class="desc">於孔內及表面鍍銅</td><td class="desc sup"><span class="eu">Atotech</span> · <span class="eu">Schmid</span> · <span class="us">Chemcut</span> · <span class="eu">Manz</span></td></tr>
+<tr id="q-maskimg"><td class="stepcell steps"><div><a class="sc" href="#st-C-21" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-21</a><span class="sn">防焊</span></div><div><a class="sc" href="#st-C-22" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-22</a><span class="sn">文字印刷</span></div></td><td class="pname">防焊曝光與噴墨</td><td class="desc">防焊曝光並印刷文字</td><td class="desc sup"><span class="ot">Orbotech</span> · <span class="jp">MicroCraft</span> · <span class="jp">ORC</span> · <span class="jp">Adtec</span></td></tr>
+<tr id="q-router"><td class="stepcell steps"><div><a class="sc" href="#st-C-25" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-25</a><span class="sn">控深成型</span></div><div><a class="sc" href="#st-C-26" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-26</a><span class="sn">成型</span></div></td><td class="pname">成型與分板</td><td class="desc">將工作板切割成單片板</td><td class="desc sup"><span class="jp">Via Mechanics</span> · <span class="eu">Schmoll</span> · <span class="tw">東台</span> · <span class="tw">大量</span> · <span class="us">Excellon</span> · <span class="eu">LPKF</span> · <span class="jp">Union Tool</span> · <span class="tw">尖點</span></td></tr>
+<tr id="q-etest"><td class="stepcell steps"><div><a class="sc" href="#st-C-28" style="background:#FAEEE1;color:#9A4C0C;border-color:#B85C10">C-28</a><span class="sn">電測</span></div></td><td class="pname">電測</td><td class="desc">測試每條線路有無斷路與短路</td><td class="desc sup"><span class="eu">atg-LM</span> · <span class="tw">Gardien</span> · <span class="jp">MicroCraft</span> · <span class="jp">Nidec Read</span> · <span class="jp">日置</span> · <span class="eu">SPEA</span></td></tr>
+</tbody></table></div>
+ </div>
+</div>
+
+<footer class="site-foot">
+  <div class="sf-id">
+    <img src="assets/photo-sm.jpg" alt="Ethan Chen" width="44" height="44" loading="lazy">
+    <div><div class="sf-name"><a href="index-zh.html">Ethan Chen</a></div><div class="sf-sub">半導體研究筆記 · Semiconductor Research Notes</div></div>
+  </div>
+  <div class="sf-contact">
+    <a href="mailto:ethanchen@qtumic.com">ethanchen@qtumic.com</a>
+    <a href="https://www.linkedin.com/in/hao-chen-194981297" target="_blank" rel="me noopener">LinkedIn</a>
+  </div>
+  <div class="sf-note">個人研究筆記，不構成投資建議。 © 2026 Ethan Chen</div>
+</footer>
+</div>
+</body>
+</html>

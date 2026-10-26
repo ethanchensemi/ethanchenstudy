@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>日月光：服務目錄 · Ethan Chen</title>
+<!-- site-head -->
+<meta name="author" content="Ethan Chen">
+<meta name="description" content="封裝、測試、材料與 EMS 服務，依平台排列。">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://ethanchensemi.github.io/ethanchenstudy/ase-catalogue.html">
+<link rel="alternate" hreflang="zh-Hant" href="https://ethanchensemi.github.io/ethanchenstudy/ase-catalogue.html">
+<link rel="alternate" hreflang="en" href="https://ethanchensemi.github.io/ethanchenstudy/ase-catalogue-en.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="日月光：服務目錄 · Ethan Chen">
+<meta property="og:description" content="封裝、測試、材料與 EMS 服務，依平台排列。">
+<meta property="og:site_name" content="Ethan Chen · Semiconductor Research Notes">
+<!-- /site-head -->
+<style>
+:root{--paper:#F6F8F9;--card:#FFFFFF;--ink:#14181C;--ink-2:#4A555E;--ink-3:#7C8891;--rule:#CBD3D9;--rule-soft:#E2E8EC;--stage:#1F3A4D;--b:#4A3B7A}
+*{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;font-size:15px;line-height:1.6}
+.wrap{max-width:1240px;margin:0 auto;padding:44px 24px 90px}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,monospace}
+.backbar{margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.backbar a{display:inline-block;font-size:13px;color:var(--ink-2);text-decoration:none;border:1px solid var(--rule);background:var(--card);padding:6px 13px}
+.backbar a:hover{color:var(--b);border-color:var(--b)} .backbar .lang{font-family:ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.04em}
+.masthead{border-bottom:2px solid var(--stage);padding-bottom:18px;margin-bottom:18px}
+.masthead h1{font-size:28px;line-height:1.28;font-weight:700;margin:0;letter-spacing:-.01em}
+.lede{font-size:13.5px;color:var(--ink-2);line-height:1.65;margin:0 0 22px;max-width:82ch}
+.psec .lede{margin:0 0 12px}
+.timeline{background:var(--card);border:1px solid var(--rule);padding:16px 18px 8px;margin-bottom:22px}
+.timeline h2{font-size:14px;margin:0 0 8px;font-weight:600}
+.tlscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.timeline svg{width:100%;min-width:820px;height:auto;display:block}
+.timeline svg text{paint-order:stroke;stroke:#FFFFFF;stroke-width:3px;stroke-linejoin:round}
+.legend{display:flex;gap:16px;flex-wrap:wrap;align-items:center;font-size:11.5px;color:var(--ink-3);margin:8px 0 4px}
+.legend span::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px;border:1.8px solid}
+.legend span.lg-est::before{background:#215C68;border-color:#215C68}
+.legend span.lg-ramp::before{background:#B85C10;border-color:#B85C10}
+.legend span.lg-qual::before{background:#2560A6;border-color:#2560A6}
+.legend span.lg-road::before{background:#FFFFFF;border-color:#4A3B7A;border-style:dashed}
+.legend span.lg-now::before{width:14px;height:0;border-radius:0;border:none;border-top:1.4px dashed #B02E6E;vertical-align:3px}
+.toc{background:var(--card);border:1px solid var(--rule);padding:18px 22px;margin:0 0 22px}
+.toc h2{font-size:14px;margin:0 0 12px;font-weight:600}
+.tocgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px 18px}
+.tocgroup h4{font-size:11px;color:var(--ink-3);letter-spacing:.03em;margin:0 0 8px}
+.tocgroup ul{list-style:none;margin:0;padding:0} .tocgroup li{margin-bottom:5px;font-size:12px}
+.tocgroup a{color:var(--ink-2);text-decoration:none;border-bottom:1px dotted var(--rule)} .tocgroup a:hover{color:var(--b);border-color:var(--b)}
+.tocgroup .n{font-family:ui-monospace,Menlo,monospace;color:var(--ink-3);font-size:10.5px;margin-right:5px}
+.divider{height:1px;background:var(--rule-soft);margin:34px 0}
+.prail{border-bottom:2px solid var(--stage);padding-bottom:8px;margin-bottom:20px;position:relative;padding-left:14px}
+.pstripe{position:absolute;left:0;top:2px;bottom:10px;width:4px;background:var(--stage)}
+.pnum{font-size:11px;color:var(--ink-3);letter-spacing:.06em;margin-bottom:3px} .prail h2{font-size:21px;margin:0;font-weight:700}
+.secgroup{margin:34px 0 14px;padding-bottom:6px;border-bottom:1px solid var(--rule);scroll-margin-top:16px}
+.secgroup h3{font-size:18px;margin:0;font-weight:700}
+.pstage .pbody>.secgroup:first-child{margin-top:0}
+.psec{margin-bottom:26px;scroll-margin-top:16px} .psec-head{display:flex;align-items:baseline;gap:10px;margin-bottom:8px}
+.pno{font-size:12px;color:var(--ink-3)} .psec-head h3{font-size:16px;margin:0;font-weight:600}
+.ptag{font-size:11px;padding:2px 9px;border-radius:20px;margin-left:auto}
+.ptag.own{background:#E1F5EE;color:#1F7A5C} .ptag.sub{background:#E6F1FB;color:#2560A6}
+.scroller{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--rule);background:var(--card)}
+table.ptable{border-collapse:collapse;width:100%;font-size:13px;min-width:700px}
+.ptable th,.ptable td{padding:9px 12px;text-align:left;vertical-align:top;line-height:1.5;border-bottom:1px solid var(--rule-soft)}
+.ptable th{background:#EEF2F3;font-weight:600;color:var(--ink-2);font-size:11.5px;border-bottom:1px solid var(--rule)}
+.ptable th.c1{width:240px} .ptable th.cstart{width:74px} .ptable th.ccust{width:340px} .ptable th.c5{width:120px}
+.ptable tr:last-child td{border-bottom:none}
+.ptable td.pname{font-weight:600;color:var(--ink);word-break:keep-all} .ptable td.d{color:var(--ink-3);font-size:12.5px}
+.ptable td.cust{color:var(--ink-2);font-size:12.5px}
+.ptable tr.bucket td{background:#F1F4F5;color:var(--ink-2);font-size:11.5px;font-weight:600;letter-spacing:.02em;padding:6px 12px;border-bottom:1px solid var(--rule-soft)}
+.ptable tbody tr:not(.bucket):hover td{background:#FAFBFC}
+td.prog b{display:block;color:var(--ink);font-weight:600;font-size:12.5px;margin-top:9px}
+td.prog b:first-child{margin-top:0}
+td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
+.badge{display:inline-block;font-size:11px;padding:1px 8px;border-radius:3px;border:1px solid;white-space:nowrap}
+.b-ramp{color:#B85C10;border-color:#EBC9A6;background:#FBF1E6}
+.b-qual{color:#2560A6;border-color:#BBD4F0;background:#EAF2FB}
+.b-road{color:#4A3B7A;border-color:#C9C1E3;background:#F4F1FA}
+.b-est{color:#215C68;border-color:#B7D6DC;background:#E8F3F5}
+@media (max-width:900px){.tocgrid{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.wrap{padding:28px 14px 60px} .masthead h1{font-size:22px} .tocgrid{grid-template-columns:1fr}}
+@media print{.backbar{display:none} .scroller,.tlscroll{overflow:visible}}
+</style>
+<style id="site-chrome">
+/* site chrome (added by build) */
+.backbar{flex-wrap:wrap}
+.lede,.defn,.ds .lede,.routehead .clarify,.forkbar .msg,.explain .sub2,.masthead .en{max-width:none}
+.backbar .bbr{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.backbar .lang{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;letter-spacing:.04em}
+.backbar .lang-off{display:inline-block;font-size:12px;color:var(--ink-3,#7C8891);border:1px dashed var(--rule,#CBD3D9);padding:6px 13px;font-family:ui-monospace,"SF Mono",Menlo,monospace;letter-spacing:.04em;cursor:default}
+.site-foot{margin-top:56px;border-top:1px solid var(--rule,#CBD3D9);padding-top:22px;display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;font-size:12.5px;color:var(--ink-3,#7C8891);line-height:1.5}
+.site-foot .sf-id{display:flex;align-items:center;gap:12px;min-width:0}
+.site-foot .sf-id img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:0 0 auto}
+.site-foot .sf-name{font-size:14px;font-weight:600;color:var(--ink,#14181C)}
+.site-foot .sf-name a{color:inherit;text-decoration:none}
+.site-foot .sf-name a:hover{color:var(--b,#4A3B7A)}
+.site-foot .sf-sub{font-size:12px;color:var(--ink-3,#7C8891)}
+.site-foot .sf-contact{display:flex;gap:16px;flex-wrap:wrap;margin-left:auto}
+.site-foot .sf-contact a{color:var(--ink-2,#4A555E);text-decoration:none;border-bottom:1px dotted var(--rule,#CBD3D9)}
+.site-foot .sf-contact a:hover{color:var(--b,#4A3B7A);border-color:var(--b,#4A3B7A)}
+.site-foot .sf-note{flex-basis:100%;font-size:11.5px}
+@media (max-width:640px){.site-foot .sf-contact{margin-left:0}}
+@media (max-width:640px){
+  .stickynav{margin-left:-14px;margin-right:-14px;padding-left:14px;padding-right:14px;white-space:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .legend .fams,.legend .fams.six,.famgrid,.idxgrid{grid-template-columns:1fr !important}
+  .routes{grid-template-columns:minmax(0,1fr) !important}
+  .route,.routes > *{min-width:0}
+  .route .row,.route .chips,.route .chiprow,.route .cols{flex-wrap:wrap}
+  .optstack table{min-width:0 !important}
+  .famcol .chip,.legend .chip,.chipwrap b{white-space:normal}
+}
+@media print{.site-foot .sf-id img{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="backbar"><a href="map.html">← 產業地圖</a><span class="bbr"><a class="lang" href="ase-catalogue-en.html" onclick="this.href=this.href.split('#')[0]+location.hash">EN</a></span></div>
+
+<header class="masthead">
+  <h1>日月光：服務目錄</h1>
+</header>
+
+<p class="lede">日月光的各項服務，依平台列示。</p>
+
+<section class="timeline">
+  <h2>LEAP各業務線里程碑，2023–2028年</h2>
+  <div class="tlscroll">
+  <svg viewBox="0 0 1160 300" role="img" aria-label="日月光LEAP藍圖，2023至2028年，涵蓋五條業務線：全製程、FOCoS、尖端測試、台積電oS委外與2.5D產能">
+
+    <line x1="230" y1="30" x2="230" y2="278" stroke="#E2E8EC"/><text x="230" y="20" text-anchor="middle" font-size="10.5" fill="#7C8891">2023</text>
+    <line x1="400" y1="30" x2="400" y2="278" stroke="#E2E8EC"/><text x="400" y="20" text-anchor="middle" font-size="10.5" fill="#7C8891">2024</text>
+    <line x1="570" y1="30" x2="570" y2="278" stroke="#E2E8EC"/><text x="570" y="20" text-anchor="middle" font-size="10.5" fill="#7C8891">2025</text>
+    <line x1="740" y1="30" x2="740" y2="278" stroke="#E2E8EC"/><text x="740" y="20" text-anchor="middle" font-size="10.5" fill="#7C8891">2026</text>
+    <line x1="910" y1="30" x2="910" y2="278" stroke="#E2E8EC"/><text x="910" y="20" text-anchor="middle" font-size="10.5" fill="#7C8891">2027</text>
+    <line x1="1080" y1="30" x2="1080" y2="278" stroke="#E2E8EC"/><text x="1080" y="20" text-anchor="middle" font-size="10.5" fill="#7C8891">2028</text>
+
+    <line x1="868" y1="30" x2="868" y2="278" stroke="#B02E6E" stroke-width="1.2" stroke-dasharray="4 3"/>
+
+    <text x="150" y="62" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">全製程</text>
+    <line x1="165" y1="58" x2="1130" y2="58" stroke="#CBD3D9"/>
+    <circle cx="740" cy="58" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
+    <text x="740" y="76" text-anchor="middle" font-size="10" fill="#B85C10">AMD Venice CPU</text>
+    <circle cx="910" cy="58" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
+    <text x="910" y="48" text-anchor="middle" font-size="10" fill="#4A3B7A">NVIDIA Vera CPU</text>
+
+    <text x="150" y="112" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">FOCoS</text>
+    <line x1="165" y1="108" x2="1130" y2="108" stroke="#CBD3D9"/>
+    <circle cx="570" cy="108" r="5" fill="#2560A6" stroke="#2560A6" stroke-width="1.8"/>
+    <text x="570" y="98" text-anchor="middle" font-size="10" fill="#2560A6">客戶驗證</text>
+    <circle cx="895" cy="108" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
+    <text x="895" y="126" text-anchor="middle" font-size="10" fill="#4A3B7A">量產目標</text>
+    <circle cx="990" cy="108" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
+    <text x="990" y="98" text-anchor="middle" font-size="10" fill="#4A3B7A">AI ASIC放量</text>
+
+    <text x="150" y="162" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">尖端測試</text>
+    <line x1="165" y1="158" x2="1130" y2="158" stroke="#CBD3D9"/>
+    <circle cx="400" cy="158" r="5" fill="#215C68" stroke="#215C68" stroke-width="1.8"/>
+    <text x="400" y="148" text-anchor="middle" font-size="10" fill="#215C68">晶圓針測放量</text>
+    <circle cx="570" cy="158" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
+    <text x="570" y="176" text-anchor="middle" font-size="10" fill="#B85C10">AI ASIC成品測試</text>
+    <circle cx="740" cy="158" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
+    <text x="740" y="148" text-anchor="middle" font-size="10" fill="#B85C10">Trainium 3 · 聯發科TPU</text>
+
+    <text x="150" y="212" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">台積電oS</text>
+    <line x1="165" y1="208" x2="1130" y2="208" stroke="#CBD3D9"/>
+    <circle cx="230" cy="208" r="5" fill="#215C68" stroke="#215C68" stroke-width="1.8"/>
+    <text x="230" y="198" text-anchor="middle" font-size="10" fill="#215C68">oS委外啟動</text>
+    <circle cx="740" cy="208" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
+    <text x="740" y="226" text-anchor="middle" font-size="10" fill="#B85C10">CoWoS-L放量</text>
+
+    <text x="150" y="262" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">2.5D產能</text>
+    <line x1="165" y1="258" x2="1130" y2="258" stroke="#CBD3D9"/>
+    <circle cx="740" cy="258" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
+    <text x="740" y="248" text-anchor="middle" font-size="10" fill="#B85C10">15 KPM</text>
+    <circle cx="910" cy="258" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
+    <text x="910" y="276" text-anchor="middle" font-size="10" fill="#4A3B7A">45 KPM</text>
+    <circle cx="1080" cy="258" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
+    <text x="1080" y="248" text-anchor="middle" font-size="10" fill="#4A3B7A">55 KPM</text>
+  </svg>
+  </div>
+  <div class="legend"><span class="lg-est">成熟</span><span class="lg-ramp">量產爬坡</span><span class="lg-qual">驗證中</span><span class="lg-road">規劃中</span><span class="lg-now">今日</span></div>
+</section>
+
+<section class="toc">
+  <h2>目錄</h2>
+  <div class="tocgrid">
+    <div class="tocgroup"><h4>第一部分 · LEAP</h4><ul>
+      <li><a href="#p1-1"><span class="n">1.1</span>全製程</a></li>
+      <li><a href="#p1-2"><span class="n">1.2</span>FOCoS</a></li>
+      <li><a href="#p1-3"><span class="n">1.3</span>台積電CoWoS委外</a></li>
+      <li><a href="#p1-4"><span class="n">1.4</span>共同封裝光學</a></li>
+    </ul></div>
+    <div class="tocgroup"><h4>第一部分 · 晶圓級封裝與凸塊</h4><ul>
+      <li><a href="#p1-5"><span class="n">1.5</span>凸塊</a></li>
+      <li><a href="#p1-6"><span class="n">1.6</span>扇出型晶圓級封裝</a></li>
+      <li><a href="#p1-7"><span class="n">1.7</span>扇出型面板級封裝</a></li>
+      <li><a href="#p1-8"><span class="n">1.8</span>晶圓級晶片尺寸封裝</a></li>
+    </ul></div>
+    <div class="tocgroup"><h4>第一部分 · 覆晶</h4><ul>
+      <li><a href="#p1-9"><span class="n">1.9</span>覆晶BGA</a></li>
+      <li><a href="#p1-10"><span class="n">1.10</span>覆晶CSP</a></li>
+    </ul></div>
+    <div class="tocgroup"><h4>第一部分 · 導線架與打線</h4><ul>
+      <li><a href="#p1-11"><span class="n">1.11</span>QFN與導線架</a></li>
+      <li><a href="#p1-12"><span class="n">1.12</span>打線BGA</a></li>
+      <li><a href="#p1-13"><span class="n">1.13</span>堆疊晶片與記憶體</a></li>
+    </ul></div>
+    <div class="tocgroup"><h4>第一部分 · 系統級封裝與射頻</h4><ul>
+      <li><a href="#p1-14"><span class="n">1.14</span>系統級封裝與射頻模組</a></li>
+    </ul></div>
+    <div class="tocgroup"><h4>第二部分 · 測試</h4><ul>
+      <li><a href="#p2-1"><span class="n">2.1</span>晶圓測試／晶圓針測</a></li>
+      <li><a href="#p2-2"><span class="n">2.2</span>成品測試</a></li>
+      <li><a href="#p2-3"><span class="n">2.3</span>預燒測試</a></li>
+      <li><a href="#p2-4"><span class="n">2.4</span>系統級測試</a></li>
+    </ul></div>
+    <div class="tocgroup"><h4>第三部分 · 材料與設計</h4><ul>
+      <li><a href="#p3-1"><span class="n">3.1</span>載板與導線架</a></li>
+      <li><a href="#p3-2"><span class="n">3.2</span>設計與模擬</a></li>
+    </ul></div>
+    <div class="tocgroup"><h4>第四部分 · EMS</h4><ul>
+      <li><a href="#p4-1"><span class="n">4.1</span>環旭電子</a></li>
+    </ul></div>
+  </div>
+</section>
+
+<div class="pstage" id="part1">
+  <div class="prail"><div class="pstripe"></div><div class="pnum">第一部分</div><h2>封裝</h2></div>
+  <div class="pbody">
+
+    <div class="secgroup" id="g1-leap"><h3>LEAP：尖端先進封裝</h3></div>
+
+    <div class="psec" id="p1-1">
+      <div class="psec-head"><span class="pno mono">1.1</span><h3>全製程（Full Process）</h3><span class="ptag own">自有</span></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">平台</th><th class="cstart">起始年</th><th>代表專案</th><th class="c5">狀態</th></tr></thead>
+        <tbody>
+        <tr>
+          <td class="pname">全製程：自有2.5D製程</td>
+          <td class="mono d">2026</td>
+          <td class="prog">
+            <b>AMD Venice伺服器CPU</b><span>首個量產的全製程專案</span>
+            <b>NVIDIA Vera伺服器CPU</b><span>預計2027年起成為第二個量產專案</span>
+          </td>
+          <td><span class="badge b-ramp">量產爬坡</span></td>
+        </tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p1-2">
+      <div class="psec-head"><span class="pno mono">1.2</span><h3>FOCoS</h3><span class="ptag own">自有</span></div>
+      <p class="lede">日月光自有的CoWoS替代方案，以扇出型重佈線層取代矽中介層。</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">平台</th><th class="cstart">起始年</th><th>代表專案</th><th class="c5">狀態</th></tr></thead>
+        <tbody>
+        <tr>
+          <td class="pname">FOCoS-Bridge：內嵌矽橋的2.5D封裝</td>
+          <td class="mono d">2026</td>
+          <td class="prog">
+            <b>AMD Venice與NVIDIA Vera伺服器CPU</b><span>於1.1的全製程產線生產</span>
+            <b>Broadcom Tomahawk網通晶片</b><span>晶粒大、I/O數高，適合扇出型封裝</span>
+            <b>AWS Trainium AI加速器</b><span>本平台鎖定的成本敏感型ASIC客戶</span>
+          </td>
+          <td><span class="badge b-qual">驗證中</span></td>
+        </tr>
+        <tr>
+          <td class="pname">FOCoS-CL / FOCoS-CF：晶片後置與晶片先置</td>
+          <td class="mono d">2016</td>
+          <td class="prog">
+            <b>網通與HPC晶片</b><span>佈線比載板精細，無需矽中介層</span>
+          </td>
+          <td><span class="badge b-est">成熟</span></td>
+        </tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p1-3">
+      <div class="psec-head"><span class="pno mono">1.3</span><h3>台積電CoWoS委外</h3><span class="ptag sub">委外</span></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">製程段</th><th class="cstart">起始年</th><th>代表專案</th><th class="c5">狀態</th></tr></thead>
+        <tbody>
+        <tr>
+          <td class="pname">CoW接合用凸塊</td>
+          <td class="mono d">2024</td>
+          <td class="prog">
+            <b>NVIDIA GPU晶圓凸塊</b><span>GPU與中介層晶圓的微凸塊與C4凸塊</span>
+          </td>
+          <td><span class="badge b-ramp">量產爬坡</span></td>
+        </tr>
+        <tr>
+          <td class="pname">載板上（oS）組裝</td>
+          <td class="mono d">2023</td>
+          <td class="prog">
+            <b>NVIDIA CoWoS-L GPU封裝</b><span>估計日月光承接80–90%的委外oS</span>
+            <b>美國產能配置</b><span>台積電美國廠oS預期由Amkor承接</span>
+          </td>
+          <td><span class="badge b-ramp">量產爬坡</span></td>
+        </tr>
+        <tr>
+          <td class="pname">CoWoS-S / L / R後段製程</td>
+          <td class="mono d">2023</td>
+          <td class="prog">
+            <b>CoWoS-L</b><span>局部矽互連橋接晶片搭配重佈線層</span>
+            <b>CoWoS-R</b><span>僅以重佈線層作為中介層</span>
+            <b>CoWoS-S</b><span>完整矽中介層</span>
+          </td>
+          <td><span class="badge b-est">成熟</span></td>
+        </tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p1-4">
+      <div class="psec-head"><span class="pno mono">1.4</span><h3>共同封裝光學（CPO）</h3><span class="ptag own">自有</span></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">平台</th><th class="cstart">起始年</th><th>代表專案</th><th class="c5">狀態</th></tr></thead>
+        <tbody>
+        <tr>
+          <td class="pname">光學引擎共同封裝</td>
+          <td class="mono d">2026</td>
+          <td class="prog">
+            <b>交換器ASIC CPO封裝</b><span>矽品封測NVIDIA的CPO交換器</span>
+          </td>
+          <td><span class="badge b-qual">驗證中</span></td>
+        </tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="secgroup" id="g1-wlp"><h3>晶圓級封裝與凸塊</h3></div>
+
+    <div class="psec" id="p1-5">
+      <div class="psec-head"><span class="pno mono">1.5</span><h3>凸塊</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">製程</th><th class="ccust">代表客戶</th><th class="c5">狀態</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">銅柱凸塊</td><td class="cust">聯發科 · Qualcomm · AMD · NVIDIA</td><td><span class="badge b-est">成熟</span></td></tr>
+        <tr><td class="pname">焊錫凸塊</td><td class="cust">Broadcom · Marvell · 瑞昱</td><td><span class="badge b-est">成熟</span></td></tr>
+        <tr><td class="pname">重佈線層製程</td><td class="cust">Qualcomm · 聯發科 · 聯詠</td><td><span class="badge b-est">成熟</span></td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p1-6">
+      <div class="psec-head"><span class="pno mono">1.6</span><h3>扇出型晶圓級封裝</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">應用</th><th class="ccust">代表客戶</th><th class="c5">狀態</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">電源管理IC</td><td class="cust">Qualcomm · 聯發科 · 立錡</td><td><span class="badge b-est">成熟</span></td></tr>
+        <tr><td class="pname">射頻收發器與連網晶片</td><td class="cust">Qualcomm · 聯發科 · Infineon</td><td><span class="badge b-est">成熟</span></td></tr>
+        <tr><td class="pname">車用雷達與感測器</td><td class="cust">Infineon · NXP</td><td><span class="badge b-est">成熟</span></td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p1-7">
+      <div class="psec-head"><span class="pno mono">1.7</span><h3>扇出型面板級封裝</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">應用</th><th class="ccust">代表客戶</th><th class="c5">狀態</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">顯示驅動IC</td><td class="cust">聯詠 · 奇景</td><td><span class="badge b-est">成熟</span></td></tr>
+        <tr><td class="pname">電源管理IC</td><td class="cust">立錡 · Monolithic Power Systems</td><td><span class="badge b-est">成熟</span></td></tr>
+        <tr><td class="pname">車用晶片</td><td class="cust">&ndash;</td><td><span class="badge b-est">成熟</span></td></tr>
+        <tr><td class="pname">AI與HPC封裝，310 &times; 310 mm產線</td><td class="cust">&ndash;</td><td><span class="badge b-road">規劃中</span></td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p1-8">
+      <div class="psec-head"><span class="pno mono">1.8</span><h3>晶圓級晶片尺寸封裝</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">應用</th><th class="ccust">代表客戶</th><th class="c5">狀態</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">小晶粒消費性元件</td><td class="cust">Qualcomm · Texas Instruments · Broadcom</td><td><span class="badge b-est">成熟</span></td></tr>
+        <tr><td class="pname">連網與感測器IC</td><td class="cust">瑞昱 · Nordic Semiconductor</td><td><span class="badge b-est">成熟</span></td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="secgroup" id="g1-fc"><h3>覆晶</h3></div>
+
+    <div class="psec" id="p1-9">
+      <div class="psec-head"><span class="pno mono">1.9</span><h3>覆晶BGA</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">應用</th><th class="ccust">代表客戶</th><th class="c5">狀態</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">用戶端GPU與CPU</td><td class="cust">AMD · NVIDIA · Intel</td><td><span class="badge b-est">成熟</span></td></tr>
+        <tr><td class="pname">網通與交換器晶片</td><td class="cust">Broadcom · Marvell · 瑞昱</td><td><span class="badge b-est">成熟</span></td></tr>
+        <tr><td class="pname">FPGA與可程式邏輯元件</td><td class="cust">AMD Xilinx · Altera · Lattice</td><td><span class="badge b-est">成熟</span></td></tr>
+        <tr><td class="pname">伺服器管理晶片</td><td class="cust">信驊</td><td><span class="badge b-est">成熟</span></td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p1-10">
+      <div class="psec-head"><span class="pno mono">1.10</span><h3>覆晶CSP</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">應用</th><th class="ccust">代表客戶</th><th class="c5">狀態</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">手機應用處理器</td><td class="cust">聯發科 · Qualcomm · 三星LSI</td><td><span class="badge b-est">成熟</span></td></tr>
+        <tr><td class="pname">行動通訊數據機與基頻晶片</td><td class="cust">聯發科 · Qualcomm</td><td><span class="badge b-est">成熟</span></td></tr>
+        <tr><td class="pname">智慧電視與機上盒SoC</td><td class="cust">聯發科 · 瑞昱 · 晶晨</td><td><span class="badge b-est">成熟</span></td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="secgroup" id="g1-lf"><h3>導線架與打線</h3></div>
+
+    <div class="psec" id="p1-11">
+      <div class="psec-head"><span class="pno mono">1.11</span><h3>QFN與導線架</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">應用</th><th class="ccust">代表客戶</th><th class="c5">狀態</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">射頻前端元件</td><td class="cust">Qorvo · Skyworks · Murata</td><td><span class="badge b-est">成熟</span></td></tr>
+        <tr><td class="pname">功率分離式元件與驅動IC</td><td class="cust">Infineon · onsemi · Vishay</td><td><span class="badge b-est">成熟</span></td></tr>
+        <tr><td class="pname">車用MCU與介面IC</td><td class="cust">NXP · Infineon · Renesas · STMicroelectronics · Texas Instruments</td><td><span class="badge b-est">成熟</span></td></tr>
+        <tr><td class="pname">類比與混合訊號IC</td><td class="cust">Texas Instruments · Analog Devices · Microchip</td><td><span class="badge b-est">成熟</span></td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p1-12">
+      <div class="psec-head"><span class="pno mono">1.12</span><h3>打線BGA</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">應用</th><th class="ccust">代表客戶</th><th class="c5">狀態</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">主流消費性SoC</td><td class="cust">聯發科 · 瑞昱 · 聯詠</td><td><span class="badge b-est">成熟</span></td></tr>
+        <tr><td class="pname">儲存與介面控制IC</td><td class="cust">群聯 · 慧榮 · 祥碩</td><td><span class="badge b-est">成熟</span></td></tr>
+        <tr><td class="pname">AI周邊晶片</td><td class="cust">Monolithic Power Systems · Infineon</td><td><span class="badge b-est">成熟</span></td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p1-13">
+      <div class="psec-head"><span class="pno mono">1.13</span><h3>堆疊晶片與記憶體</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">應用</th><th class="ccust">代表客戶</th><th class="c5">狀態</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">NAND與NOR Flash</td><td class="cust">華邦電 · 旺宏</td><td><span class="badge b-est">成熟</span></td></tr>
+        <tr><td class="pname">DRAM與利基型記憶體</td><td class="cust">南亞科 · 華邦電</td><td><span class="badge b-est">成熟</span></td></tr>
+        <tr><td class="pname">多晶片記憶體模組</td><td class="cust">群聯 · 慧榮</td><td><span class="badge b-est">成熟</span></td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="secgroup" id="g1-sip"><h3>系統級封裝與射頻</h3></div>
+
+    <div class="psec" id="p1-14">
+      <div class="psec-head"><span class="pno mono">1.14</span><h3>系統級封裝與射頻模組</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">模組</th><th class="ccust">代表客戶</th><th class="c5">狀態</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">毫米波天線封裝（AiP）</td><td class="cust">蘋果 · Qualcomm</td><td><span class="badge b-est">成熟</span></td></tr>
+        <tr><td class="pname">3D感測模組</td><td class="cust">蘋果</td><td><span class="badge b-est">成熟</span></td></tr>
+        <tr><td class="pname">穿戴裝置系統級封裝</td><td class="cust">蘋果</td><td><span class="badge b-est">成熟</span></td></tr>
+        <tr><td class="pname">相機模組</td><td class="cust">蘋果</td><td><span class="badge b-est">成熟</span></td></tr>
+        <tr><td class="pname">聲學模組</td><td class="cust">蘋果</td><td><span class="badge b-est">成熟</span></td></tr>
+        <tr><td class="pname">Wi-Fi與藍牙模組</td><td class="cust">聯發科 · 瑞昱 · Broadcom</td><td><span class="badge b-est">成熟</span></td></tr>
+        </tbody></table></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="pstage" id="part2">
+  <div class="prail"><div class="pstripe"></div><div class="pnum">第二部分</div><h2>測試</h2></div>
+  <div class="pbody">
+
+    <div class="psec" id="p2-1">
+      <div class="psec-head"><span class="pno mono">2.1</span><h3>晶圓測試／晶圓針測</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">服務</th><th class="cstart">起始年</th><th>涵蓋範圍</th><th class="c5">狀態</th></tr></thead>
+        <tbody>
+        <tr class="bucket"><td colspan="4">尖端 · LEAP</td></tr>
+        <tr>
+          <td class="pname">AI ASIC與GPU晶圓針測</td>
+          <td class="mono d">2024</td>
+          <td class="prog">
+            <b>NVIDIA GPU晶圓針測</b><span>與1.3的oS組裝及凸塊一併委外</span>
+            <b>AI ASIC晶圓針測</b><span>尖端測試營收中占比較大、成長較快</span>
+          </td>
+          <td><span class="badge b-ramp">量產爬坡</span></td>
+        </tr>
+        <tr class="bucket"><td colspan="4">主流</td></tr>
+        <tr>
+          <td class="pname">主流晶圓針測</td>
+          <td class="mono d">&mdash;</td>
+          <td class="prog">
+            <b>封裝前剔除不良晶粒</b><span>流程中淘汰晶片成本最低的環節</span>
+            <b>分級數據</b><span>為多晶粒產品配對同級晶粒</span>
+          </td>
+          <td><span class="badge b-est">成熟</span></td>
+        </tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p2-2">
+      <div class="psec-head"><span class="pno mono">2.2</span><h3>成品測試</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">服務</th><th class="cstart">起始年</th><th>涵蓋範圍</th><th class="c5">狀態</th></tr></thead>
+        <tbody>
+        <tr class="bucket"><td colspan="4">尖端 · LEAP</td></tr>
+        <tr>
+          <td class="pname">AI ASIC與GPU成品測試</td>
+          <td class="mono d">2025</td>
+          <td class="prog">
+            <b>AWS Trainium 3</b><span>尖端測試的主力專案之一</span>
+            <b>聯發科TPU</b><span>第二個已公開的尖端測試訂單</span>
+            <b>NVIDIA Rubin GPU</b><span>預期仍以京元電為主</span>
+          </td>
+          <td><span class="badge b-ramp">量產爬坡</span></td>
+        </tr>
+        <tr class="bucket"><td colspan="4">主流</td></tr>
+        <tr>
+          <td class="pname">主流成品測試</td>
+          <td class="mono d">&mdash;</td>
+          <td class="prog">
+            <b>封裝製程引發的失效</b><span>篩出接合、封膠與植球造成的損傷</span>
+            <b>速度與規格分級</b>
+          </td>
+          <td><span class="badge b-est">成熟</span></td>
+        </tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p2-3">
+      <div class="psec-head"><span class="pno mono">2.3</span><h3>預燒測試</h3></div>
+      <p class="lede">可靠度篩選，讓封裝後的產品在高溫、高電壓下運作以加速劣化。</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">服務</th><th class="cstart">起始年</th><th>涵蓋範圍</th><th class="c5">狀態</th></tr></thead>
+        <tbody>
+        <tr>
+          <td class="pname">預燒測試</td>
+          <td class="mono d">&mdash;</td>
+          <td class="prog">
+            <b>早期失效</b><span>體質較弱的元件於出廠前失效</span>
+            <b>車用與資料中心可靠度</b><span>失效代價愈高，涵蓋率愈高</span>
+          </td>
+          <td><span class="badge b-est">成熟</span></td>
+        </tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p2-4">
+      <div class="psec-head"><span class="pno mono">2.4</span><h3>系統級測試</h3></div>
+      <p class="lede">測試流程的最後一關，將封裝後的產品裝上模擬終端系統的電路板，以實際軟體與流量運作。</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">服務</th><th class="cstart">起始年</th><th>涵蓋範圍</th><th class="c5">狀態</th></tr></thead>
+        <tbody>
+        <tr>
+          <td class="pname">系統級測試</td>
+          <td class="mono d">&mdash;</td>
+          <td class="prog">
+            <b>唯有實際工作負載才能揭露的失效</b><span>捕捉交互作用故障</span>
+            <b>複雜SoC與加速器</b><span>隨晶粒數與封裝複雜度提高而擴大</span>
+          </td>
+          <td><span class="badge b-est">成熟</span></td>
+        </tr>
+        </tbody></table></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="pstage" id="part3">
+  <div class="prail"><div class="pstripe"></div><div class="pnum">第三部分</div><h2>材料與設計服務</h2></div>
+  <div class="pbody">
+
+    <div class="psec" id="p3-1">
+      <div class="psec-head"><span class="pno mono">3.1</span><h3>載板與導線架</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">材料</th><th>範圍</th><th class="c5">狀態</th></tr></thead>
+        <tbody>
+        <tr>
+          <td class="pname">封裝載板</td>
+          <td class="prog">
+            <b>自有載板供應</b><span>供應自家覆晶與系統級封裝產線</span>
+          </td>
+          <td><span class="badge b-est">成熟</span></td>
+        </tr>
+        <tr>
+          <td class="pname">導線架</td>
+          <td class="prog">
+            <b>自有導線架供應</b><span>供應自家QFN與打線產線</span>
+          </td>
+          <td><span class="badge b-est">成熟</span></td>
+        </tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p3-2">
+      <div class="psec-head"><span class="pno mono">3.2</span><h3>設計與模擬</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">服務</th><th>範圍</th><th class="c5">狀態</th></tr></thead>
+        <tbody>
+        <tr>
+          <td class="pname">封裝設計與協同設計</td>
+          <td class="prog">
+            <b>電性、熱與機構模擬</b><span>涵蓋先進封裝與系統級封裝</span>
+          </td>
+          <td><span class="badge b-est">成熟</span></td>
+        </tr>
+        </tbody></table></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="pstage" id="part4">
+  <div class="prail"><div class="pstripe"></div><div class="pnum">第四部分</div><h2>EMS</h2></div>
+  <div class="pbody">
+    <div class="psec" id="p4-1">
+      <div class="psec-head"><span class="pno mono">4.1</span><h3>電子代工服務</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">業務</th><th>範圍</th><th class="c5">狀態</th></tr></thead>
+        <tbody>
+        <tr>
+          <td class="pname">環旭電子（USI）</td>
+          <td class="prog">
+            <b>電路板與模組組裝</b><span>生產電子成品組件，而非封裝晶片</span>
+            <b>系統級封裝模組製造</b><span>承製相當比重的穿戴與射頻模組</span>
+          </td>
+          <td><span class="badge b-est">成熟</span></td>
+        </tr>
+        </tbody></table></div>
+    </div>
+  </div>
+</div>
+
+<footer class="site-foot">
+  <div class="sf-id">
+    <img src="assets/photo-sm.jpg" alt="Ethan Chen" width="44" height="44" loading="lazy">
+    <div><div class="sf-name"><a href="index-zh.html">Ethan Chen</a></div><div class="sf-sub">半導體研究筆記 · Semiconductor Research Notes</div></div>
+  </div>
+  <div class="sf-contact">
+    <a href="mailto:ethanchen@qtumic.com">ethanchen@qtumic.com</a>
+    <a href="https://www.linkedin.com/in/hao-chen-194981297" target="_blank" rel="me noopener">LinkedIn</a>
+  </div>
+  <div class="sf-note">個人研究筆記，不構成投資建議。 © 2026 Ethan Chen</div>
+</footer>
+</div>
+</body>
+</html>

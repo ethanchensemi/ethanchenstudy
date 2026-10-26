@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>雲端服務商 — Google、亞馬遜、微軟、Meta · Ethan Chen</title>
+<!-- site-head -->
+<meta name="author" content="Ethan Chen">
+<meta name="description" content="Google、亞馬遜、微軟與 Meta：資本支出、自研晶片與台灣供應商。">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://ethanchensemi.github.io/ethanchenstudy/csp.html">
+<link rel="alternate" hreflang="zh-Hant" href="https://ethanchensemi.github.io/ethanchenstudy/csp.html">
+<link rel="alternate" hreflang="en" href="https://ethanchensemi.github.io/ethanchenstudy/csp-en.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="雲端服務商 — Google、亞馬遜、微軟、Meta · Ethan Chen">
+<meta property="og:description" content="Google、亞馬遜、微軟與 Meta：資本支出、自研晶片與台灣供應商。">
+<meta property="og:site_name" content="Ethan Chen · Semiconductor Research Notes">
+<!-- /site-head -->
+<style>
+:root{--paper:#F6F8F9;--card:#FFFFFF;--ink:#14181C;--ink-2:#4A555E;--ink-3:#7C8891;--rule:#CBD3D9;--rule-soft:#E2E8EC;--stage:#1F3A4D;--b:#4A3B7A}
+*{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;font-size:15px;line-height:1.6}
+.wrap{max-width:1240px;margin:0 auto;padding:44px 24px 90px}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,monospace}
+.backbar{margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.backbar a{display:inline-block;font-size:13px;color:var(--ink-2);text-decoration:none;border:1px solid var(--rule);background:var(--card);padding:6px 13px}
+.backbar a:hover{color:var(--b);border-color:var(--b)} .backbar .lang{font-family:ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.04em}
+.masthead{border-bottom:2px solid var(--stage);padding-bottom:18px;margin-bottom:18px}
+.masthead h1{font-size:28px;line-height:1.28;font-weight:700;margin:0;letter-spacing:-.01em}
+.lede{font-size:13.5px;color:var(--ink-2);line-height:1.65;margin:0 0 22px;max-width:82ch}
+.psec .lede{margin:0 0 12px}
+.timeline{background:var(--card);border:1px solid var(--rule);padding:16px 18px 8px;margin-bottom:22px}
+.timeline h2{font-size:14px;margin:0 0 8px;font-weight:600}
+.tlscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.timeline svg{width:100%;min-width:820px;height:auto;display:block}
+.legend{display:flex;gap:16px;flex-wrap:wrap;align-items:center;font-size:11.5px;color:var(--ink-3);margin:8px 0 4px}
+.legend span::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px;border:1.8px solid}
+.lg-est::before{background:#215C68;border-color:#215C68}
+.lg-ramp::before{background:#B85C10;border-color:#B85C10}
+.lg-qual::before{background:#2560A6;border-color:#2560A6}
+.lg-road::before{background:#fff;border-color:#4A3B7A}
+.legend span.lg-now::before{width:14px;height:0;border-radius:0;border:none;border-top:1.4px dashed #B02E6E;vertical-align:3px}
+.legend span.lg-note{margin-left:auto}
+.legend span.lg-note::before{display:none}
+.toc{background:var(--card);border:1px solid var(--rule);padding:18px 22px;margin:0 0 8px}
+.toc h2{font-size:14px;margin:0 0 12px}
+.tocgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px 18px}
+.tocgroup h4{font-size:11px;color:var(--ink-3);letter-spacing:.03em;margin:0 0 8px}
+.tocgroup ul{list-style:none;margin:0;padding:0} .tocgroup li{margin-bottom:5px;font-size:12px}
+.tocgroup a{color:var(--ink-2);text-decoration:none;border-bottom:1px dotted var(--rule)} .tocgroup a:hover{color:var(--b);border-color:var(--b)}
+.tocgroup .n{font-family:ui-monospace,Menlo,monospace;color:var(--ink-3);font-size:10.5px;margin-right:5px}
+.divider{height:1px;background:var(--rule-soft);margin:34px 0}
+.pstage{scroll-margin-top:16px}
+.prail{border-bottom:2px solid var(--stage);padding-bottom:8px;margin-bottom:20px;position:relative;padding-left:14px}
+.pstripe{position:absolute;left:0;top:2px;bottom:10px;width:4px;background:var(--stage)}
+.pnum{font-size:11px;color:var(--ink-3);letter-spacing:.06em;margin-bottom:3px} .prail h2{font-size:21px;margin:0;font-weight:700}
+.psec{margin-bottom:26px;scroll-margin-top:16px} .psec-head{display:flex;align-items:baseline;gap:10px;margin-bottom:8px}
+.pno{font-size:12px;color:var(--ink-3)} .psec-head h3{font-size:16px;margin:0;font-weight:600}
+.ptag{font-size:11px;padding:2px 9px;border-radius:20px;margin-left:auto;background:#EEF2F3;color:var(--ink-2);white-space:nowrap}
+.scroller{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--rule);background:var(--card)}
+table.ptable{border-collapse:collapse;width:100%;font-size:13px;min-width:860px}
+.ptable th,.ptable td{padding:9px 12px;text-align:left;vertical-align:top;line-height:1.5;border-bottom:1px solid var(--rule-soft)}
+.ptable th{background:#EEF2F3;font-weight:600;color:var(--ink-2);font-size:11.5px;border-bottom:1px solid var(--rule)}
+.ptable th.c-item{width:210px} .ptable th.c-fig{width:160px} .ptable th.c-chg{width:130px} .ptable th.c-src{width:122px}
+.ptable th.c1{width:220px} .ptable th.cship{width:92px} .ptable th.c5{width:118px}
+.ptable th.c-met{width:200px} .ptable th.c-co{width:250px} .ptable th.c-share{width:112px}
+.ptable th.c-house{width:124px} .ptable th.c-date{width:96px} .ptable th.c-stock{width:150px} .ptable th.c-rate{width:128px} .ptable th.c-tp{width:112px}
+table.ptable.t-brk{min-width:980px}
+.ptable tr:last-child td{border-bottom:none}
+.ptable td.pname{font-weight:600;color:var(--ink)} .ptable td.d{color:var(--ink-3);font-size:12.5px}
+.ptable td.num{font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+.ptable td.chg{color:var(--ink-2);font-size:12.5px}
+.ptable td.desc{color:var(--ink-2);font-size:12.5px}
+.ptable td.src{color:var(--ink-3);font-size:11.5px;line-height:1.55}
+.ptable tr.bucket td{background:#F1F4F5;color:var(--ink-2);font-size:11.5px;font-weight:600;letter-spacing:.02em;padding:6px 12px;border-bottom:1px solid var(--rule-soft)}
+.ptable tbody tr:not(.bucket):hover td{background:#FAFBFC}
+td.prog b{display:block;color:var(--ink);font-weight:600;font-size:12.5px;margin-top:9px}
+td.prog b:first-child{margin-top:0}
+td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
+.badge{display:inline-block;font-size:11px;padding:1px 8px;border-radius:3px;border:1px solid;white-space:nowrap}
+.b-ramp{color:#B85C10;border-color:#EBC9A6;background:#FBF1E6}
+.b-qual{color:#2560A6;border-color:#BBD4F0;background:#EAF2FB}
+.b-road{color:#4A3B7A;border-color:#C9C1E3;background:#F4F1FA}
+.b-est{color:#215C68;border-color:#B7D6DC;background:#E8F3F5}
+@media (max-width:900px){.tocgrid{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.wrap{padding:28px 14px 60px} .masthead h1{font-size:22px} .tocgrid{grid-template-columns:1fr} .psec-head{flex-wrap:wrap} .ptag{margin-left:0} .legend span.lg-note{margin-left:0}}
+@media print{.backbar{display:none} .scroller,.tlscroll{overflow:visible}}
+.prail .studylink{position:absolute;right:0;bottom:10px;font-size:12px;color:var(--ink-2);text-decoration:none;border:1px solid var(--rule);background:var(--card);padding:4px 10px}.prail .studylink:hover{color:var(--b);border-color:var(--b)}
+@media (max-width:640px){.prail .studylink{position:static;display:inline-block;margin-top:8px}}
+</style>
+<style id="site-chrome">
+/* site chrome (added by build) */
+.backbar{flex-wrap:wrap}
+.lede,.defn,.ds .lede,.routehead .clarify,.forkbar .msg,.explain .sub2,.masthead .en{max-width:none}
+.backbar .bbr{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.backbar .lang{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;letter-spacing:.04em}
+.backbar .lang-off{display:inline-block;font-size:12px;color:var(--ink-3,#7C8891);border:1px dashed var(--rule,#CBD3D9);padding:6px 13px;font-family:ui-monospace,"SF Mono",Menlo,monospace;letter-spacing:.04em;cursor:default}
+.site-foot{margin-top:56px;border-top:1px solid var(--rule,#CBD3D9);padding-top:22px;display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;font-size:12.5px;color:var(--ink-3,#7C8891);line-height:1.5}
+.site-foot .sf-id{display:flex;align-items:center;gap:12px;min-width:0}
+.site-foot .sf-id img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:0 0 auto}
+.site-foot .sf-name{font-size:14px;font-weight:600;color:var(--ink,#14181C)}
+.site-foot .sf-name a{color:inherit;text-decoration:none}
+.site-foot .sf-name a:hover{color:var(--b,#4A3B7A)}
+.site-foot .sf-sub{font-size:12px;color:var(--ink-3,#7C8891)}
+.site-foot .sf-contact{display:flex;gap:16px;flex-wrap:wrap;margin-left:auto}
+.site-foot .sf-contact a{color:var(--ink-2,#4A555E);text-decoration:none;border-bottom:1px dotted var(--rule,#CBD3D9)}
+.site-foot .sf-contact a:hover{color:var(--b,#4A3B7A);border-color:var(--b,#4A3B7A)}
+.site-foot .sf-note{flex-basis:100%;font-size:11.5px}
+@media (max-width:640px){.site-foot .sf-contact{margin-left:0}}
+@media (max-width:640px){
+  .stickynav{margin-left:-14px;margin-right:-14px;padding-left:14px;padding-right:14px;white-space:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .legend .fams,.legend .fams.six,.famgrid,.idxgrid{grid-template-columns:1fr !important}
+  .routes{grid-template-columns:minmax(0,1fr) !important}
+  .route,.routes > *{min-width:0}
+  .route .row,.route .chips,.route .chiprow,.route .cols{flex-wrap:wrap}
+  .optstack table{min-width:0 !important}
+  .famcol .chip,.legend .chip,.chipwrap b{white-space:normal}
+}
+@media print{.site-foot .sf-id img{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="backbar"><a href="map.html">← 產業地圖</a><span class="bbr"><a class="lang" href="csp-en.html" onclick="this.href=this.href.split('#')[0]+location.hash">EN</a></span></div>
+
+<header class="masthead">
+  <h1>雲端服務商 — Google、亞馬遜、微軟、Meta</h1>
+</header>
+
+<p class="lede">美國四大超大規模雲端業者，及其AI支出如何傳導至晶片供應鏈。</p>
+
+<section class="timeline">
+  <h2>各CSP自研加速器路線圖，2025–2029</h2>
+  <div class="tlscroll">
+  <svg viewBox="0 0 1160 262" role="img" aria-label="2025至2029年自研加速器路線圖，分為四列：Google TPU、AWS Trainium、微軟Maia與Meta MTIA，並標示摩根士丹利出貨量預估">
+
+    <line x1="250" y1="30" x2="250" y2="252" stroke="#E2E8EC"/><text x="250" y="20" text-anchor="middle" font-size="10.5" fill="#7C8891">2025</text>
+    <line x1="460" y1="30" x2="460" y2="252" stroke="#E2E8EC"/><text x="460" y="20" text-anchor="middle" font-size="10.5" fill="#7C8891">2026</text>
+    <line x1="670" y1="30" x2="670" y2="252" stroke="#E2E8EC"/><text x="670" y="20" text-anchor="middle" font-size="10.5" fill="#7C8891">2027</text>
+    <line x1="880" y1="30" x2="880" y2="252" stroke="#E2E8EC"/><text x="880" y="20" text-anchor="middle" font-size="10.5" fill="#7C8891">2028</text>
+    <line x1="1090" y1="30" x2="1090" y2="252" stroke="#E2E8EC"/><text x="1090" y="20" text-anchor="middle" font-size="10.5" fill="#7C8891">2029</text>
+
+    <line x1="617" y1="30" x2="617" y2="252" stroke="#B02E6E" stroke-width="1.2" stroke-dasharray="4 3"/>
+
+    <text x="150" y="62" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">Google TPU</text>
+    <line x1="165" y1="58" x2="1130" y2="58" stroke="#CBD3D9"/>
+    <circle cx="250" cy="58" r="5" fill="#215C68" stroke="#215C68" stroke-width="1.8"/>
+    <text x="250" y="48" text-anchor="middle" font-size="10" fill="#215C68" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">v6 Trillium · 1.2m</text>
+    <circle cx="460" cy="58" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
+    <text x="460" y="76" text-anchor="middle" font-size="10" fill="#B85C10" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">v7 Ironwood · 2.3m</text>
+    <circle cx="670" cy="58" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
+    <text x="670" y="48" text-anchor="middle" font-size="10" fill="#4A3B7A" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">v8t + v8i · 7.0m</text>
+    <circle cx="880" cy="58" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
+    <text x="880" y="76" text-anchor="middle" font-size="10" fill="#4A3B7A" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">v9 Humufish · 3.0m</text>
+    <circle cx="1090" cy="58" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
+    <text x="1090" y="48" text-anchor="middle" font-size="10" fill="#4A3B7A" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">v10 Icefish · 1m</text>
+
+    <text x="150" y="120" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">AWS Trainium</text>
+    <line x1="165" y1="116" x2="1130" y2="116" stroke="#CBD3D9"/>
+    <circle cx="250" cy="116" r="5" fill="#215C68" stroke="#215C68" stroke-width="1.8"/>
+    <text x="250" y="106" text-anchor="middle" font-size="10" fill="#215C68" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">Trainium2 · 1.2m</text>
+    <circle cx="460" cy="116" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
+    <text x="460" y="134" text-anchor="middle" font-size="10" fill="#B85C10" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">Trainium3 · 1.7m</text>
+    <circle cx="670" cy="116" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
+    <text x="670" y="106" text-anchor="middle" font-size="10" fill="#4A3B7A" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">Trainium3 · 2.4m</text>
+    <circle cx="880" cy="116" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
+    <text x="880" y="134" text-anchor="middle" font-size="10" fill="#4A3B7A" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">Trainium4 · 2.5m</text>
+
+    <text x="150" y="178" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">微軟Maia</text>
+    <line x1="165" y1="174" x2="1130" y2="174" stroke="#CBD3D9"/>
+    <circle cx="460" cy="174" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
+    <text x="460" y="164" text-anchor="middle" font-size="10" fill="#B85C10" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">Maia 200 · 116k</text>
+    <circle cx="670" cy="174" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
+    <text x="670" y="192" text-anchor="middle" font-size="10" fill="#4A3B7A" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">Maia 300 · 550k</text>
+
+    <text x="150" y="236" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">Meta MTIA</text>
+    <line x1="165" y1="232" x2="1130" y2="232" stroke="#CBD3D9"/>
+    <circle cx="460" cy="232" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
+    <text x="460" y="250" text-anchor="middle" font-size="10" fill="#B85C10" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">MTIA 400 Iris · 150k</text>
+    <circle cx="670" cy="232" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
+    <text x="670" y="222" text-anchor="middle" font-size="10" fill="#4A3B7A" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">Iris · 550k</text>
+    <circle cx="880" cy="232" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
+    <text x="880" y="250" text-anchor="middle" font-size="10" fill="#4A3B7A" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">MTIA 600</text>
+  </svg>
+  </div>
+  <div class="legend"><span class="lg-est">成熟</span><span class="lg-ramp">量產爬坡</span><span class="lg-road">預期</span><span class="lg-now">今日</span><span class="lg-note">各年出貨量</span></div>
+</section>
+
+<section class="toc">
+  <h2>目錄</h2>
+  <div class="tocgrid">
+    <div class="tocgroup"><h4>第一部分 · Google</h4><ul>
+      <li><a href="#p1-1"><span class="n">1.1</span>業務與最近一季</a></li>
+      <li><a href="#p1-2"><span class="n">1.2</span>資本支出與產能</a></li>
+      <li><a href="#p1-3"><span class="n">1.3</span>自研晶片</a></li>
+      <li><a href="#p1-4"><span class="n">1.4</span>AI模型與變現</a></li>
+      <li><a href="#p1-5"><span class="n">1.5</span>台灣供應鏈</a></li>
+      <li><a href="#p1-6"><span class="n">1.6</span>券商觀點</a></li>
+    </ul></div>
+    <div class="tocgroup"><h4>第二部分 · 亞馬遜</h4><ul>
+      <li><a href="#p2-1"><span class="n">2.1</span>業務與最近一季</a></li>
+      <li><a href="#p2-2"><span class="n">2.2</span>資本支出與產能</a></li>
+      <li><a href="#p2-3"><span class="n">2.3</span>自研晶片</a></li>
+      <li><a href="#p2-4"><span class="n">2.4</span>AI模型與變現</a></li>
+      <li><a href="#p2-5"><span class="n">2.5</span>台灣供應鏈</a></li>
+      <li><a href="#p2-6"><span class="n">2.6</span>券商觀點</a></li>
+    </ul></div>
+    <div class="tocgroup"><h4>第三部分 · 微軟</h4><ul>
+      <li><a href="#p3-1"><span class="n">3.1</span>業務與最近一季</a></li>
+      <li><a href="#p3-2"><span class="n">3.2</span>資本支出與產能</a></li>
+      <li><a href="#p3-3"><span class="n">3.3</span>自研晶片</a></li>
+      <li><a href="#p3-4"><span class="n">3.4</span>AI模型與變現</a></li>
+      <li><a href="#p3-5"><span class="n">3.5</span>台灣供應鏈</a></li>
+      <li><a href="#p3-6"><span class="n">3.6</span>券商觀點</a></li>
+    </ul></div>
+    <div class="tocgroup"><h4>第四部分 · Meta</h4><ul>
+      <li><a href="#p4-1"><span class="n">4.1</span>業務與最近一季</a></li>
+      <li><a href="#p4-2"><span class="n">4.2</span>資本支出與產能</a></li>
+      <li><a href="#p4-3"><span class="n">4.3</span>晶片、網路與記憶體</a></li>
+      <li><a href="#p4-4"><span class="n">4.4</span>AI模型與變現</a></li>
+      <li><a href="#p4-5"><span class="n">4.5</span>台灣供應鏈</a></li>
+      <li><a href="#p4-6"><span class="n">4.6</span>券商觀點</a></li>
+    </ul></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<div class="pstage" id="part1">
+  <div class="prail"><div class="pstripe"></div><div class="pnum">第一部分</div><h2>Google — Alphabet (GOOGL US)</h2><a class="studylink" href="google.html">公司研究 →</a></div>
+  <div class="pbody">
+
+    <div class="psec" id="p1-1">
+      <div class="psec-head"><span class="pno mono">1.1</span><h3>業務與最近一季</h3><span class="ptag">2Q26</span></div>
+      <p class="lede">Alphabet最近一季各部門業績，其中Google Cloud為其雲端業務。</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c-item">項目</th><th class="c-fig">2Q26</th><th class="c-chg">變動</th><th>說明</th><th class="c-src">資料來源</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">Alphabet營收</td><td class="num">US$119.8bn</td><td class="chg">年增24%</td><td class="desc">連續第十二季雙位數成長；較市場共識高2.5%。</td><td class="src">群益<br>浦銀國際</td></tr>
+        <tr><td class="pname">營業利益</td><td class="num">US$40.8bn</td><td class="chg">年增30%</td><td class="desc">營業利益率34%，受惠流量獲取成本占廣告營收比率下降。</td><td class="src">浦銀國際</td></tr>
+        <tr><td class="pname">Google Services</td><td class="num">US$94.5bn</td><td class="chg">年增14.5%</td><td class="desc">搜尋US$63.3bn（+16.8%）；YouTube廣告US$11.1bn（+12.9%）。</td><td class="src">浦銀國際</td></tr>
+        <tr><td class="pname">Google Cloud</td><td class="num">US$24.8bn</td><td class="chg">年增82%</td><td class="desc">較1Q26的+63%加速，並較市場預期高10%，受惠核心GCP、AI解決方案與AI基礎設施。</td><td class="src">摩根大通<br>浦銀國際</td></tr>
+        <tr><td class="pname">Cloud營業利益率</td><td class="num">35.6%</td><td class="chg">年增14.8個百分點</td><td class="desc">隨業務規模擴大，高於2Q25的20.7%及1Q26的32.9%。</td><td class="src">摩根大通<br>浦銀國際</td></tr>
+        <tr><td class="pname">Cloud未認列合約（Backlog）</td><td class="num">US$514bn</td><td class="chg">季增US$52bn</td><td class="desc">預計其中一半將於兩年內轉為營收，隱含單季營收水準將超過US$30bn，目前為US$25bn。</td><td class="src">浦銀國際<br>摩根大通</td></tr>
+        <tr><td class="pname">3Q26展望</td><td class="num">供給受限</td><td class="chg">—</td><td class="desc">將更多使用第三方算力作為過渡，對Cloud利潤率造成小幅壓力。</td><td class="src">群益<br>摩根大通</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p1-2">
+      <div class="psec-head"><span class="pno mono">1.2</span><h3>資本支出與產能</h3></div>
+      <p class="lede">Google的資本支出與新增的資料中心產能。</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c-item">項目</th><th class="c-fig">數值</th><th class="c-chg">變動</th><th>說明</th><th class="c-src">資料來源</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">2Q26資本支出</td><td class="num">US$44.9bn</td><td class="chg">年增100%</td><td class="desc">季增26%；符合預期。</td><td class="src">摩根士丹利<br>摩根大通</td></tr>
+        <tr><td class="pname">2026年財測</td><td class="num">US$195–205bn</td><td class="chg">原為US$180–190bn</td><td class="desc">連續第二次上調：以中值計約成長120%，隱含2H26較上半年成長約50%。</td><td class="src">摩根士丹利<br>摩根大通</td></tr>
+        <tr><td class="pname">2027年展望</td><td class="num">大幅增加</td><td class="chg">—</td><td class="desc">儘管2026年基期已高，管理層仍預期將大幅增加，因算力仍供不應求。</td><td class="src">摩根士丹利<br>摩根大通</td></tr>
+        <tr><td class="pname">資料中心產能</td><td class="num">11 GW</td><td class="chg">2026F</td><td class="desc">凱基預估：2024年為4 GW、2025年為6 GW、2027F為18 GW、2028F為26 GW。</td><td class="src">凱基</td></tr>
+        <tr><td class="pname">現金流量與融資</td><td class="num">自由現金流−US$5.9bn</td><td class="chg">2Q26</td><td class="desc">Alphabet於2Q26透過普通股及強制轉換特別股募資US$49.6bn，並發行US$20.3bn優先無擔保公司債，用於AI基礎設施及一般用途。</td><td class="src">群益</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p1-3">
+      <div class="psec-head"><span class="pno mono">1.3</span><h3>自研晶片</h3></div>
+      <p class="lede">Google的TPU（張量處理器）與其他自研晶片，以及負責設計與封裝的合作夥伴。</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">晶片</th><th class="cship">出貨年度</th><th>專案</th><th class="c5">狀態</th></tr></thead>
+        <tbody>
+        <tr>
+          <td class="pname">TPU v7 Ironwood</td>
+          <td class="mono d">2025–27</td>
+          <td class="prog"><b>Broadcom · 3nm</b><span>兩顆運算晶粒搭配192GB HBM3E</span></td>
+          <td><span class="badge b-ramp">量產爬坡</span></td>
+        </tr>
+        <tr>
+          <td class="pname">TPU v8t Sunfish</td>
+          <td class="mono d">2026–28</td>
+          <td class="prog"><b>Broadcom · 3nm</b><span>兩顆運算晶粒搭配216GB HBM3E</span></td>
+          <td><span class="badge b-ramp">量產爬坡</span></td>
+        </tr>
+        <tr>
+          <td class="pname">TPU v8i Zebrafish</td>
+          <td class="mono d">2026–28</td>
+          <td class="prog"><b>聯發科 · 3nm</b><span>兩顆運算晶粒搭配288GB HBM3E</span></td>
+          <td><span class="badge b-ramp">量產爬坡</span></td>
+        </tr>
+        <tr>
+          <td class="pname">TPU v9 Humufish</td>
+          <td class="mono d">2027–29</td>
+          <td class="prog"><b>聯發科 · 2nm</b><span>四顆運算晶粒搭配576GB HBM4E</span></td>
+          <td><span class="badge b-road">規劃中</span></td>
+        </tr>
+        <tr>
+          <td class="pname">TPU v10 Icefish</td>
+          <td class="mono d">2029+</td>
+          <td class="prog"><b>聯發科 · 1.4nm · 客戶自有工具（COT）</b><span>由Google供應運算晶粒</span></td>
+          <td><span class="badge b-road">規劃中</span></td>
+        </tr>
+        <tr>
+          <td class="pname">Axion CPU</td>
+          <td class="mono d">2024+</td>
+          <td class="prog"><b>創意 · 統包</b><span>Arm伺服器CPU</span></td>
+          <td><span class="badge b-ramp">量產爬坡</span></td>
+        </tr>
+        <tr>
+          <td class="pname">供外部客戶的TPU系統</td>
+          <td class="mono d">2026–27</td>
+          <td class="prog"><b>直接銷售</b><span>多數合約營收於2027年認列</span></td>
+          <td><span class="badge b-ramp">量產爬坡</span></td>
+        </tr>
+        <tr>
+          <td class="pname">TPU周邊晶片</td>
+          <td class="mono d">2028+</td>
+          <td class="prog"><b>Marvell</b><span>推論加速器、網路卡與記憶體控制器</span></td>
+          <td><span class="badge b-road">規劃中</span></td>
+        </tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p1-4">
+      <div class="psec-head"><span class="pno mono">1.4</span><h3>AI模型與變現</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c-item">產品</th><th class="c-met">最新指標</th><th>說明</th><th class="c-src">資料來源</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">Gemini App</td><td class="num">每月用戶950m</td><td class="desc">每日用戶較去年同期增為三倍。</td><td class="src">群益<br>摩根大通</td></tr>
+        <tr><td class="pname">Gemini API</td><td class="num">每分鐘22bn個token</td><td class="desc">高於1Q26的16bn；token用量季增38%。</td><td class="src">群益<br>摩根大通</td></tr>
+        <tr><td class="pname">模型陣容</td><td class="num">Gemini 3.6 Flash</td><td class="desc">與Gemini 3.5 Flash-Lite一同推出，定位為具成本效益的模型；規模更大的Gemini 4已開始訓練。</td><td class="src">群益</td></tr>
+        <tr><td class="pname">企業</td><td class="num">Fortune 100的90%</td><td class="desc">採用Gemini Enterprise與Google Cloud資安；Gemini Enterprise Agent Platform（原Vertex AI）正將企業AI工作負載帶進GCP。</td><td class="src">群益<br>浦銀國際</td></tr>
+        <tr><td class="pname">AI雲端營收</td><td class="num">成長快於核心GCP</td><td class="desc">企業AI產品帶動未認列合約成長，惟其中多數仍為傳統GCP合約。</td><td class="src">摩根大通</td></tr>
+        <tr><td class="pname">搜尋</td><td class="num">年增16.8%</td><td class="desc">Gemini透過AI Overviews整合進搜尋。</td><td class="src">浦銀國際<br>群益</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p1-5">
+      <div class="psec-head"><span class="pno mono">1.5</span><h3>台灣供應鏈</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c-item">層級</th><th class="c-co">公司</th><th>角色</th><th class="c-src">資料來源</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">ASIC設計</td><td class="desc">聯發科（2454 TT） · 創意（3443 TT）</td><td class="desc">聯發科負責整合TPU v8i、v9與v10。創意承接Axion統包，預估2026年達US$950m、2027年達US$2.8bn，並可能承接v10的3D IC區塊。</td><td class="src">摩根士丹利</td></tr>
+        <tr><td class="pname">晶圓代工、封裝與測試</td><td class="desc">台積電（2330 TT） · 日月光（3711 TT） · 京元電（2449 TT）</td><td class="desc">3nm與2nm晶圓、CoWoS、委外封裝、晶圓針測與成品測試。</td><td class="src">摩根士丹利</td></tr>
+        <tr><td class="pname">測試介面</td><td class="desc">旺矽（6223 TT） · 穎崴（6515 TT） · 鴻勁（7769 TT）</td><td class="desc">探針卡、測試座與測試分類機；列名TPU與Axion受惠廠商。</td><td class="src">摩根士丹利</td></tr>
+        <tr><td class="pname">伺服器ODM</td><td class="desc">緯穎（6669 TT） · 鴻海（2317 TT） · 英業達（2356 TT）</td><td class="desc">伺服器及機櫃組裝；緯穎為Google上調資本支出下的台灣ODM首選。</td><td class="src">摩根大通</td></tr>
+        <tr><td class="pname">伺服器零組件</td><td class="desc">台達電（2308 TT） · 信驊（5274 TT） · 台光電（2383 TT） · 欣興（3037 TT）</td><td class="desc">電源供應器、BMC晶片、銅箔基板與載板。</td><td class="src">摩根大通</td></tr>
+        <tr><td class="pname">伺服器品牌</td><td class="desc">華碩（2357 TT） · 聯想（0992 HK）</td><td class="desc">隨Google租用第三方算力，受惠於新興雲端業者需求與價格走堅。</td><td class="src">摩根大通</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p1-6">
+      <div class="psec-head"><span class="pno mono">1.6</span><h3>券商觀點</h3><span class="ptag">3Q26</span></div>
+      <div class="scroller"><table class="ptable t-brk">
+        <thead><tr><th class="c-house">券商</th><th class="c-date">日期</th><th class="c-stock">標的</th><th class="c-rate">評等</th><th class="c-tp">目標價</th><th>投資論點</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">群益</td><td class="d">3Q26</td><td class="desc">Alphabet</td><td class="desc">買進</td><td class="num">US$400</td><td class="desc">生態系加上TPU，構成具成本效益的全端AI基礎設施；技術護城河正轉化為獲利。</td></tr>
+        <tr><td class="pname">摩根大通</td><td class="d">3Q26</td><td class="desc">Alphabet</td><td class="desc">加碼</td><td class="num">—</td><td class="desc">資本支出上調與2H26加速，支撐台灣伺服器供應鏈；TPU相關供應商營收集中於2027年。</td></tr>
+        <tr><td class="pname">摩根士丹利</td><td class="d">3Q26</td><td class="desc">大中華半導體</td><td class="desc">具吸引力</td><td class="num">—</td><td class="desc">AI資本支出提高並延續至2027年，緩解市場對基礎設施支出短期放緩的疑慮；TPU與Axion放量支撐晶片供應鏈。</td></tr>
+        <tr><td class="pname">浦銀國際</td><td class="d">3Q26</td><td class="desc">科技類股</td><td class="desc">策略性加碼</td><td class="num">—</td><td class="desc">AI變現加快且資本支出再度上調，再次確認AI為市場主軸，選股偏好雲端與應用。</td></tr>
+        <tr><td class="pname">摩根士丹利</td><td class="d">3Q26</td><td class="desc">創意 · 世芯</td><td class="desc">加碼</td><td class="num">NT$6,288<br>NT$5,888</td><td class="desc">TPU v10採客戶自有工具（COT）模式，聯發科（加碼）仍擔任整合者，同時將區塊層級工作開放予創意、世芯與Marvell。</td></tr>
+        <tr><td class="pname">富邦</td><td class="d">3Q26</td><td class="desc">Marvell</td><td class="desc">買進</td><td class="num">US$315</td><td class="desc">與Google的協議要到FY29才開始貢獻營收；為Google提供的近記憶體運算仍屬長期利多。</td></tr>
+        </tbody></table></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="pstage" id="part2">
+  <div class="prail"><div class="pstripe"></div><div class="pnum">第二部分</div><h2>亞馬遜 — AWS（AMZN US）</h2></div>
+  <div class="pbody">
+
+    <div class="psec" id="p2-1">
+      <div class="psec-head"><span class="pno mono">2.1</span><h3>業務與最近一季</h3><span class="ptag">2Q26</span></div>
+      <p class="lede">亞馬遜最近一季各部門業績，其中AWS為其雲端業務。</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c-item">項目</th><th class="c-fig">2Q26</th><th class="c-chg">變動</th><th>說明</th><th class="c-src">資料來源</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">亞馬遜營收</td><td class="num">US$200.6bn</td><td class="chg">年增20%</td><td class="desc">高於市場共識US$197.0bn，AWS、廣告與北美零售皆優於預期。</td><td class="src">兆豐</td></tr>
+        <tr><td class="pname">營業利益</td><td class="num">US$27.5bn</td><td class="chg">年增43%</td><td class="desc">利潤率13.7%，高於預期的12%，受惠AWS、廣告及服務組合優化。</td><td class="src">兆豐</td></tr>
+        <tr><td class="pname">AWS營收</td><td class="num">US$42.2bn</td><td class="chg">年增37%</td><td class="desc">較1Q26的+28%加速，季增12%；市場共識為US$40.6bn。</td><td class="src">兆豐<br>第一金證券</td></tr>
+        <tr><td class="pname">AWS營業利益率</td><td class="num">39.4%</td><td class="chg">季增1.7個百分點</td><td class="desc">高於1Q26的37.7%。</td><td class="src">兆豐</td></tr>
+        <tr><td class="pname">AWS未認列合約（Backlog）</td><td class="num">US$496bn</td><td class="chg">年增154%</td><td class="desc">季增36%。2027年多數產能已被預訂，2028年亦有部分已預訂。</td><td class="src">兆豐<br>第一金證券</td></tr>
+        <tr><td class="pname">廣告</td><td class="num">年增26%</td><td class="chg">原為+24%</td><td class="desc">贊助廣告與Prime Video體育直播；使用Ads Agent的廣告主每次曝光成本降低8%、每次轉換成本降低6%。</td><td class="src">第一金證券</td></tr>
+        <tr><td class="pname">零售</td><td class="num">US$158.4bn</td><td class="chg">年增16%</td><td class="desc">北美US$116.2bn，利潤率7.9%；國際US$42.2bn，利潤率4.1%。</td><td class="src">兆豐</td></tr>
+        <tr><td class="pname">GAAP EPS</td><td class="num">US$5.75</td><td class="chg">—</td><td class="desc">含US$53.4bn業外收益，主要來自Anthropic持股；調整後EPS為US$1.88，市場共識為US$1.84。</td><td class="src">兆豐</td></tr>
+        <tr><td class="pname">3Q26財測</td><td class="num">US$199.5bn</td><td class="chg">中值</td><td class="desc">低於市場共識US$204.0bn，因Prime Day移至2Q26，且匯率造成80bp逆風；營業利益率12.3%。</td><td class="src">兆豐</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p2-2">
+      <div class="psec-head"><span class="pno mono">2.2</span><h3>資本支出與產能</h3></div>
+      <p class="lede">亞馬遜的資本支出與新增的資料中心產能。</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c-item">項目</th><th class="c-fig">數值</th><th class="c-chg">變動</th><th>說明</th><th class="c-src">資料來源</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">2Q26資本支出</td><td class="num">US$54.2bn</td><td class="chg">年增68%</td><td class="desc">季增23%。扣除處分收入與獎勵款後，現金資本支出為US$53.1bn，預期為US$50.0bn。</td><td class="src">兆豐<br>第一金證券</td></tr>
+        <tr><td class="pname">2025年實際</td><td class="num">US$131.8bn</td><td class="chg">—</td><td class="desc">逐季增加，由2Q25的US$32.2bn增至4Q25的US$39.5bn。</td><td class="src">凱基</td></tr>
+        <tr><td class="pname">2026年財測</td><td class="num">US$220bn</td><td class="chg">原為US$200bn</td><td class="desc">上調主因為記憶體價格上漲；多數支出用於AWS資料中心、伺服器與網路設備。</td><td class="src">兆豐<br>第一金證券</td></tr>
+        <tr><td class="pname">2027年展望</td><td class="num">供給持續吃緊</td><td class="chg">—</td><td class="desc">管理層表示US$220bn無法滿足2026年全部需求。財報公布前，凱基預估2027年為US$250–300bn。</td><td class="src">兆豐<br>凱基</td></tr>
+        <tr><td class="pname">電力容量</td><td class="num">至2027年達2倍</td><td class="chg">較2025年</td><td class="desc">2025年新增3.9 GW。凱基預估2025年為13 GW、2026F為18 GW、2027F為26 GW、2028F為34 GW。</td><td class="src">凱基<br>兆豐</td></tr>
+        <tr><td class="pname">投資回收期</td><td class="num">不到3年</td><td class="chg">伺服器</td><td class="desc">伺服器與網路設備於上線前數月採購，使用年限五至六年；機房建物提前兩年興建，使用年限逾30年。多數合約期間為五年以上。</td><td class="src">兆豐<br>第一金證券</td></tr>
+        <tr><td class="pname">建置成本</td><td class="num">每GW US$20–25bn</td><td class="chg">Trainium</td><td class="desc">相較之下，NVIDIA H200至Vera Rubin建置為每GW US$30–50bn；AWS平均為US$35–40bn。</td><td class="src">凱基</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p2-3">
+      <div class="psec-head"><span class="pno mono">2.3</span><h3>自研晶片</h3></div>
+      <p class="lede">亞馬遜自研的Trainium加速器與Graviton CPU，以及協助打造的合作夥伴。</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">晶片</th><th class="cship">出貨年度</th><th>專案</th><th class="c5">狀態</th></tr></thead>
+        <tbody>
+        <tr>
+          <td class="pname">Trainium2</td>
+          <td class="mono d">2024–25</td>
+          <td class="prog"><b>Annapurna Labs</b><span>產能已售罄</span></td>
+          <td><span class="badge b-est">成熟</span></td>
+        </tr>
+        <tr>
+          <td class="pname">Trainium3</td>
+          <td class="mono d">2025–27</td>
+          <td class="prog"><b>Annapurna Labs · 世芯 · 3nm</b><span>兩顆運算晶粒搭配144GB HBM3E</span></td>
+          <td><span class="badge b-ramp">量產爬坡</span></td>
+        </tr>
+        <tr>
+          <td class="pname">Trainium4</td>
+          <td class="mono d">2027</td>
+          <td class="prog"><b>世芯（預期）</b><span>已有相當部分產能獲預訂</span></td>
+          <td><span class="badge b-road">規劃中</span></td>
+        </tr>
+        <tr>
+          <td class="pname">Graviton5</td>
+          <td class="mono d">2026</td>
+          <td class="prog"><b>自研Arm CPU</b><span>採用速度為Graviton4的兩倍</span></td>
+          <td><span class="badge b-ramp">量產爬坡</span></td>
+        </tr>
+        <tr>
+          <td class="pname">Trainium機櫃</td>
+          <td class="mono d">2026</td>
+          <td class="prog"><b>交換式Scale-Up</b><span>經NeuronSwitch托盤互連</span></td>
+          <td><span class="badge b-ramp">量產爬坡</span></td>
+        </tr>
+        <tr>
+          <td class="pname">於AWS以外銷售的晶片</td>
+          <td class="mono d">—</td>
+          <td class="prog"><b>洽談中</b><span>尚無產品形式或時程</span></td>
+          <td><span class="badge b-road">規劃中</span></td>
+        </tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p2-4">
+      <div class="psec-head"><span class="pno mono">2.4</span><h3>AI模型與變現</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c-item">產品</th><th class="c-met">最新指標</th><th>說明</th><th class="c-src">資料來源</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">AWS AI營收</td><td class="num">年化US$25bn</td><td class="desc">Bedrock近六個月新增的客戶數多於推出後頭兩年，且2Q26 Bedrock支出超過以往所有支出的總和。</td><td class="src">第一金證券</td></tr>
+        <tr><td class="pname">Anthropic</td><td class="num">5 GW · US$100bn</td><td class="desc">多世代Trainium採購協議已計入未認列合約；凱基估計Anthropic的算力有60%由AWS供應。</td><td class="src">兆豐<br>凱基</td></tr>
+        <tr><td class="pname">OpenAI</td><td class="num">2 GW的Trainium</td><td class="desc">屬其AWS合約擴大US$100bn的一部分，外加4Q25簽訂的US$38bn合約，2027年放量；GPT-5.6已於Bedrock上架。</td><td class="src">凱基<br>兆豐</td></tr>
+        <tr><td class="pname">GPU定價</td><td class="num">3Q26調漲20%，4Q26調漲15%</td><td class="desc">B300、B200、H200及H100執行個體之EC2 Capacity Blocks；3Q26的調漲貢獻1Q27 AWS營收2%。</td><td class="src">兆豐</td></tr>
+        <tr><td class="pname">代理</td><td class="num">Bedrock AgentCore</td><td class="desc">供企業部署AI代理的平台；Forward Deployed Engineering團隊協助客戶建置與部署。</td><td class="src">富邦<br>第一金證券</td></tr>
+        <tr><td class="pname">AWS成長展望</td><td class="num">+38% · +43%</td><td class="desc">為第一金證券對2026與2027年的預估；凱基預期2026年成長近35%、2027年近40%。</td><td class="src">第一金證券<br>凱基</td></tr>
+        <tr><td class="pname">零售AI</td><td class="num">Alexa for Shopping：逾350m用戶</td><td class="desc">Rufus於2025年帶動近US$12bn年化增量銷售；2Q26與Alexa+整合為代理式購物助理Alexa for Shopping。</td><td class="src">富邦</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p2-5">
+      <div class="psec-head"><span class="pno mono">2.5</span><h3>台灣供應鏈</h3></div>
+      <p class="lede">亞馬遜的台灣供應商，以及各供應商營收中來自亞馬遜的比重。</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c-co">公司</th><th class="c-share">亞馬遜占比</th><th>角色</th><th class="c-src">資料來源</th></tr></thead>
+        <tbody>
+        <tr class="bucket"><td colspan="4">晶片</td></tr>
+        <tr><td class="pname">世芯（3661 TT）</td><td class="num">60–70%</td><td class="desc">設計服務：Trainium3統包，預期承接Trainium4。</td><td class="src">凱基<br>摩根士丹利</td></tr>
+        <tr class="bucket"><td colspan="4">伺服器與機櫃</td></tr>
+        <tr><td class="pname">緯穎（6669 TT）</td><td class="num">45–55%</td><td class="desc">伺服器ODM。</td><td class="src">凱基</td></tr>
+        <tr><td class="pname">廣達（2382 TT）</td><td class="num">10–20%</td><td class="desc">伺服器ODM。</td><td class="src">凱基</td></tr>
+        <tr><td class="pname">英業達（2356 TT）</td><td class="num">5–15%</td><td class="desc">伺服器ODM。</td><td class="src">凱基</td></tr><tr><td class="pname">鴻海（2317 TT）</td><td class="num">&lt;10%</td><td class="desc">伺服器ODM：Trainium3 CPU托盤。</td><td class="src">凱基</td></tr>
+        
+        <tr><td class="pname">勤誠（8210 TT）</td><td class="num">60–65%</td><td class="desc">伺服器機殼。</td><td class="src">凱基</td></tr>
+        <tr><td class="pname">川湖（2059 TT）</td><td class="num">15–25%</td><td class="desc">滑軌。</td><td class="src">凱基</td></tr>
+        <tr><td class="pname">光寶科（2301 TT）</td><td class="num">25–30%</td><td class="desc">電源供應器。</td><td class="src">凱基</td></tr>
+        <tr class="bucket"><td colspan="4">網路與材料</td></tr>
+        <tr><td class="pname">智邦（2345 TT）</td><td class="num">50–60%</td><td class="desc">Trainium3 AI加速卡與800G交換器；2Q26營收NT$95.5bn，年增58%，預期3Q26創新高。</td><td class="src">凱基<br>富邦</td></tr>
+        
+        <tr><td class="pname">台光電（2383 TT）</td><td class="num">25–30%</td><td class="desc">銅箔基板。</td><td class="src">凱基</td></tr>
+        <tr class="bucket"><td colspan="4">零售供應商（非AWS）</td></tr>
+        <tr><td class="pname">振大環球（4441 TT）</td><td class="num">70% (2026F)</td><td class="desc">生產Amazon Essentials與亞馬遜網紅服飾系列；營收於交貨時認列，因此出貨時程會使營收在月份間移動。</td><td class="src">統一<br>元大</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p2-6">
+      <div class="psec-head"><span class="pno mono">2.6</span><h3>券商觀點</h3><span class="ptag">2Q26–3Q26</span></div>
+      <div class="scroller"><table class="ptable t-brk">
+        <thead><tr><th class="c-house">券商</th><th class="c-date">日期</th><th class="c-stock">標的</th><th class="c-rate">評等</th><th class="c-tp">目標價</th><th>投資論點</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">凱基</td><td class="d">3Q26</td><td class="desc">亞馬遜</td><td class="desc">優於大盤</td><td class="num">US$325</td><td class="desc">Anthropic與OpenAI的需求使AWS在2026–27年持續加速；資本支出對自由現金流造成沉重負擔，2027年尤甚。</td></tr>
+        <tr><td class="pname">富邦</td><td class="d">3Q26</td><td class="desc">亞馬遜</td><td class="desc">買進</td><td class="num">US$320</td><td class="desc">亞馬遜正從單點產品轉向可擴展的代理系統，並隨AI推論規模擴大而受惠。</td></tr>
+        <tr><td class="pname">第一金證券</td><td class="d">3Q26</td><td class="desc">亞馬遜</td><td class="desc">買進</td><td class="num">US$351</td><td class="desc">Bedrock的多模型策略守住定價，Graviton與Trainium提供成本優勢，零售業務的現金則支應雲端建置。</td></tr>
+        <tr><td class="pname">兆豐</td><td class="d">3Q26</td><td class="desc">亞馬遜</td><td class="desc">買進，調升評等</td><td class="num">US$361</td><td class="desc">2Q26財報消除市場對AWS成長放緩與AI稀釋利潤率的疑慮；投資回收框架與已簽約的未認列合約支撐資本報酬率提升。</td></tr>
+        <tr><td class="pname">富邦</td><td class="d">3Q26</td><td class="desc">智邦</td><td class="desc">買進</td><td class="num">NT$3,500</td><td class="desc">Trainium3 AI加速卡與一家新CSP客戶的800G交換器，抵銷機櫃組裝廠增加造成的市占稀釋。</td></tr>
+        <tr><td class="pname">富邦 · 元大 · 統一</td><td class="d">2Q26</td><td class="desc">振大環球</td><td class="desc">買進</td><td class="num">NT$243<br>NT$300<br>NT$295</td><td class="desc">生產亞馬遜網紅聯名服飾系列；2Q26物流中斷僅使營收遞延，而非消失。</td></tr>
+        </tbody></table></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="pstage" id="part3">
+  <div class="prail"><div class="pstripe"></div><div class="pnum">第三部分</div><h2>微軟 — Azure（MSFT US）</h2></div>
+  <div class="pbody">
+
+    <div class="psec" id="p3-1">
+      <div class="psec-head"><span class="pno mono">3.1</span><h3>業務與最近一季</h3><span class="ptag">FY4Q26</span></div>
+      <p class="lede">微軟最近一個會計季度的各部門業績，Azure隸屬Intelligent Cloud部門。</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c-item">項目</th><th class="c-fig">FY4Q26</th><th class="c-chg">變動</th><th>說明</th><th class="c-src">資料來源</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">營收</td><td class="num">US$90.0bn</td><td class="chg">年增18%</td><td class="desc">創歷史新高，高於市場共識US$87.7bn；新增Azure產能提前上線。</td><td class="src">台新<br>兆豐</td></tr>
+        <tr><td class="pname">營業利益</td><td class="num">US$40.6bn</td><td class="chg">營業利益率提升0.2pt</td><td class="desc">營業利益率45.1%；隨營收組合轉向Azure與AI基礎設施，毛利率為67%。</td><td class="src">台新<br>兆豐</td></tr>
+        <tr><td class="pname">Intelligent Cloud</td><td class="num">US$39.3bn</td><td class="chg">年增32%</td><td class="desc">Azure與其他雲端服務成長43%。Azure於FY26營收突破US$100bn，為首度超越此水準的年度。</td><td class="src">台新</td></tr>
+        <tr><td class="pname">Productivity And Business Processes</td><td class="num">US$37.8bn</td><td class="chg">年增14%</td><td class="desc">Microsoft 365商用雲端成長16%；部門利潤率58%，高於去年同期的57%，但低於FY3Q26的60%。</td><td class="src">台新<br>兆豐</td></tr>
+        <tr><td class="pname">More Personal Computing</td><td class="num">US$12.9bn</td><td class="chg">年減4%</td><td class="desc">Windows OEM因PC需求疲弱與高基期下滑7%；Xbox下滑10%；搜尋（扣除TAC）成長10%。</td><td class="src">台新<br>兆豐</td></tr>
+        <tr><td class="pname">商用RPO</td><td class="num">US$678bn</td><td class="chg">年增84%</td><td class="desc">另有US$329bn已簽約但尚未起租的租約，主要為資料中心，其中逾US$130bn為FY4Q26新增。</td><td class="src">台新</td></tr>
+        <tr><td class="pname">AI業務年化營收</td><td class="num">逾US$37bn</td><td class="chg">年增123%</td><td class="desc">隨FY3Q26財報（1Q26）公布。</td><td class="src">富邦證券</td></tr>
+        <tr><td class="pname">FY1Q27財測</td><td class="num">US$89.85–90.95bn</td><td class="chg">—</td><td class="desc">Azure以固定匯率計算成長45%；重申FY27營收與營業利益雙位數成長。</td><td class="src">台新<br>兆豐</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p3-2">
+      <div class="psec-head"><span class="pno mono">3.2</span><h3>資本支出與產能</h3></div>
+      <p class="lede">微軟投入短年限晶片與長年限場址的資本支出，以及新增的產能。</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c-item">項目</th><th class="c-fig">數值</th><th class="c-chg">變動</th><th>說明</th><th class="c-src">資料來源</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">FY3Q26資本支出</td><td class="num">US$31.9bn</td><td class="chg">含租賃</td><td class="desc">含US$4.7bn融資租賃；受建置與租賃交付時點影響，較上季減少。</td><td class="src">富邦證券<br>元大</td></tr>
+        <tr><td class="pname">FY4Q26資本支出</td><td class="num">US$41bn</td><td class="chg">含租賃</td><td class="desc">含US$5.6bn融資租賃，以及逾US$40bn財測中提及的零組件漲價影響；不動產、廠房及設備的現金支出為US$35.8bn。</td><td class="src">台新</td></tr>
+        <tr><td class="pname">2026曆年財測</td><td class="num">US$190bn</td><td class="chg">重編後為US$175bn</td><td class="desc">含US$25bn零組件漲價影響。3Q26的重編係因資料中心耐用年限由15年延長至25年後進行租賃重分類；實體建置規模不變。</td><td class="src">元大<br>台新<br>兆豐</td></tr>
+        <tr><td class="pname">FY1Q27財測</td><td class="num">逾US$50bn</td><td class="chg">—</td><td class="desc">含租賃重分類的影響。</td><td class="src">台新</td></tr>
+        <tr><td class="pname">產能</td><td class="num">每季新增1 GW</td><td class="chg">FY3Q26 · FY4Q26</td><td class="desc">FY26新增88座資料中心，總產能將於兩年內倍增。凱基預估2025年為8 GW，2028F將增至21 GW。</td><td class="src">元大<br>兆豐<br>凱基</td></tr>
+        <tr><td class="pname">供給限制</td><td class="num">持續至2026年</td><td class="chg">—</td><td class="desc">GPU與伺服器的供給限制至少持續至2026年，因此Azure短期成長取決於產能上線的速度。</td><td class="src">台新<br>富邦證券<br>兆豐</td></tr>
+        <tr><td class="pname">利潤率影響</td><td class="num">雲端毛利率66% → 60%</td><td class="chg">FY26F → FY28F</td><td class="desc">市場共識預估折舊占營收比重由FY25的12%升至FY28F的16%，資本支出占營收比重於FY27F達60%。</td><td class="src">凱基</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p3-3">
+      <div class="psec-head"><span class="pno mono">3.3</span><h3>自研晶片</h3></div>
+      <p class="lede">微軟自研的Maia加速器與Cobalt CPU，與外購GPU系統並行部署。</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">晶片</th><th class="cship">出貨年度</th><th>專案</th><th class="c5">狀態</th></tr></thead>
+        <tbody>
+        <tr>
+          <td class="pname">Maia 200</td>
+          <td class="mono d">2026</td>
+          <td class="prog"><b>3nm · 創意支援</b><span>第二代推論加速器</span></td>
+          <td><span class="badge b-ramp">量產爬坡</span></td>
+        </tr>
+        <tr>
+          <td class="pname">Maia 300</td>
+          <td class="mono d">2026–27</td>
+          <td class="prog"><b>2nm · 未揭露合作夥伴</b><span>搭載288GB HBM4</span></td>
+          <td><span class="badge b-road">規劃中</span></td>
+        </tr>
+        <tr>
+          <td class="pname">Cobalt 200</td>
+          <td class="mono d">2026</td>
+          <td class="prog"><b>Arm CPU · 創意支援</b><span>第二代CPU，自2Q26起開放預覽</span></td>
+          <td><span class="badge b-ramp">量產爬坡</span></td>
+        </tr>
+        <tr>
+          <td class="pname">Azure Boost與其他ASIC</td>
+          <td class="mono d">—</td>
+          <td class="prog"><b>自研</b><span>網路、資安與虛擬化晶片</span></td>
+          <td><span class="badge b-est">成熟</span></td>
+        </tr>
+        <tr>
+          <td class="pname">外售系統</td>
+          <td class="mono d">2026–27</td>
+          <td class="prog"><b>NVIDIA · AMD</b><span>Vera Rubin與Helios機櫃</span></td>
+          <td><span class="badge b-road">規劃中</span></td>
+        </tr>
+        <tr>
+          <td class="pname">創意來自微軟的營收</td>
+          <td class="mono d">2026–28</td>
+          <td class="prog"><b>創意 · 統包</b><span>2026年US$80m、2027年US$250m、2028年US$400m</span></td>
+          <td><span class="badge b-ramp">量產爬坡</span></td>
+        </tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p3-4">
+      <div class="psec-head"><span class="pno mono">3.4</span><h3>AI模型與變現</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c-item">產品</th><th class="c-met">最新指標</th><th>說明</th><th class="c-src">資料來源</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">Microsoft 365 Copilot</td><td class="num">逾30m付費席位</td><td class="desc">由FY3Q26的20m增加；淨新增席位較上季成長逾一倍，擁有逾50,000個席位的客戶數增至七倍以上。</td><td class="src">台新<br>兆豐</td></tr>
+        <tr><td class="pname">定價模式</td><td class="num">按用戶計價加用量計費</td><td class="desc">每個席位內含基本用量，超出部分另行計費；60%的Dynamics 365客服客戶已在使用點數，E7套裝方案則提升每用戶營收。</td><td class="src">台新<br>富邦證券</td></tr>
+        <tr><td class="pname">GitHub Copilot</td><td class="num">140,000個組織</td><td class="desc">於2Q26改為按用量計價，用量優於預期；用量成長壓抑Intelligent Cloud毛利率，改制後毛利率於季內逐步改善。</td><td class="src">富邦證券<br>兆豐</td></tr>
+        <tr><td class="pname">Foundry</td><td class="num">逾10,000個多模型客戶</td><td class="desc">託管OpenAI、Anthropic與MAI模型；今年將有逾300家客戶各自處理超過1tn個token。</td><td class="src">富邦證券<br>兆豐</td></tr>
+        <tr><td class="pname">MAI模型</td><td class="num">Build發表七款</td><td class="desc">自研影像、轉錄、推理、語音與程式碼模型，並針對Maia 200調校；MAI-Voice-2-Flash使Dynamics 365的GPU成本降低89%。</td><td class="src">統一<br>兆豐</td></tr>
+        <tr><td class="pname">OpenAI</td><td class="num">智財權至2032年</td><td class="desc">取得OpenAI模型與產品智財的非獨家授權，期限至2032年；OpenAI支付予微軟的營收分成持續至2030年，惟設有上限。OpenAI是Azure的大型算力客戶，但已不再獨家使用Azure。</td><td class="src">元大<br>富邦證券</td></tr>
+        <tr><td class="pname">Windows上的代理</td><td class="num">Microsoft Scout</td><td class="desc">微軟首款Autopilot代理，以開源OpenClaw打造；Build大會另推出Microsoft Execution Containers（MXC），讓OpenClaw等代理在Windows沙箱中安全執行。</td><td class="src">統一</td></tr>
+        <tr><td class="pname">競爭</td><td class="num">ChatGPT：逾9m付費企業用戶</td><td class="desc">於1Q26公布，與Microsoft 365 Copilot直接競爭；ChatGPT Work於3Q26推出，ChatGPT每週用戶逾1.2bn。</td><td class="src">凱基</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p3-5">
+      <div class="psec-head"><span class="pno mono">3.5</span><h3>台灣供應鏈</h3></div>
+      <p class="lede">微軟的台灣供應商，以及各供應商營收中來自微軟的比重。</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c-co">公司</th><th class="c-share">微軟占比</th><th>角色</th><th class="c-src">資料來源</th></tr></thead>
+        <tbody>
+        <tr class="bucket"><td colspan="4">晶片</td></tr>
+        <tr><td class="pname">創意（3443 TT）</td><td class="num">5–10%</td><td class="desc">Maia 200與Cobalt 200的設計服務。</td><td class="src">凱基<br>摩根士丹利</td></tr>
+        
+        <tr class="bucket"><td colspan="4">伺服器與機櫃</td></tr>
+        <tr><td class="pname">緯穎（6669 TT）</td><td class="num">18% (2025)</td><td class="desc">伺服器ODM。</td><td class="src">凱基</td></tr>
+        <tr><td class="pname">廣達（2382 TT）</td><td class="num">&lt;20%</td><td class="desc">伺服器ODM。</td><td class="src">凱基<br>元大</td></tr>
+        <tr><td class="pname">鴻海（2317 TT）</td><td class="num">10–15%</td><td class="desc">伺服器ODM。</td><td class="src">凱基<br>元大</td></tr>
+        <tr><td class="pname">英業達（2356 TT）</td><td class="num">&lt;10%</td><td class="desc">伺服器ODM。</td><td class="src">凱基</td></tr>
+        <tr><td class="pname">勤誠（8210 TT）</td><td class="num">—</td><td class="desc">伺服器機殼。</td><td class="src">元大</td></tr>
+        <tr><td class="pname">川湖（2059 TT）</td><td class="num">&lt;10%</td><td class="desc">滑軌。</td><td class="src">凱基</td></tr>
+        <tr><td class="pname">光寶科（2301 TT）</td><td class="num">10%</td><td class="desc">伺服器電源供應器。</td><td class="src">凱基</td></tr>
+        <tr><td class="pname">金像電（2368 TT）</td><td class="num">&lt;10%</td><td class="desc">印刷電路板。</td><td class="src">凱基</td></tr>
+        <tr class="bucket"><td colspan="4">散熱</td></tr>
+        <tr><td class="pname">奇鋐（3017 TT） · 健策（3653 TT） · 富世達（6805 TT）</td><td class="num">—</td><td class="desc">供更高密度AI機櫃使用的散熱與液冷零組件。</td><td class="src">元大</td></tr>
+        <tr class="bucket"><td colspan="4">裝置</td></tr>
+        <tr><td class="pname">和碩（4938 TT） · 群光（2385 TT）</td><td class="num">10–15%</td><td class="desc">Xbox組裝（和碩）與電源供應器（群光，透過子公司群電）。</td><td class="src">凱基</td></tr>
+        <tr><td class="pname">華碩（2357 TT） · 微星（2377 TT）</td><td class="num">—</td><td class="desc">採用NVIDIA RTX Spark的Windows PC。</td><td class="src">統一</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p3-6">
+      <div class="psec-head"><span class="pno mono">3.6</span><h3>券商觀點</h3><span class="ptag">2Q26–3Q26</span></div>
+      <div class="scroller"><table class="ptable t-brk">
+        <thead><tr><th class="c-house">券商</th><th class="c-date">日期</th><th class="c-stock">標的</th><th class="c-rate">評等</th><th class="c-tp">目標價</th><th>投資論點</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">元大</td><td class="d">2Q26</td><td class="desc">微軟</td><td class="desc">未評等</td><td class="num">—</td><td class="desc">雲端與Azure AI需求帶動FY3Q26財報優於預期；2026年US$190bn資本支出將挹注台灣ASIC伺服器、散熱與機殼供應商。</td></tr>
+        <tr><td class="pname">台新</td><td class="d">2Q26</td><td class="desc">微軟</td><td class="desc">—</td><td class="num">—</td><td class="desc">資本支出創新高，產能仍然受限；US$627bn的RPO提供能見度，內部模型訓練則占用短期Azure產能。</td></tr>
+        <tr><td class="pname">富邦證券</td><td class="d">2Q26</td><td class="desc">微軟</td><td class="desc">—</td><td class="num">—</td><td class="desc">AI業務呈指數成長，由席位計價轉為席位加用量計價，開啟新的成長曲線。</td></tr>
+        <tr><td class="pname">統一</td><td class="d">2Q26</td><td class="desc">微軟</td><td class="desc">買進</td><td class="num">US$520</td><td class="desc">Build 2026表現中性偏正面：與NVIDIA及OpenClaw的合作使Windows維持AI核心地位，惟MAI模型表現平淡。</td></tr>
+        <tr><td class="pname">兆豐</td><td class="d">2Q26</td><td class="desc">微軟</td><td class="desc">買進，首次評等</td><td class="num">US$558</td><td class="desc">Build緩解市場對依賴OpenAI的疑慮，微軟正由算力供應商轉型為企業AI平台。</td></tr>
+        <tr><td class="pname">凱基</td><td class="d">3Q26</td><td class="desc">微軟</td><td class="desc">優於大盤</td><td class="num">US$585</td><td class="desc">Azure短期可能優於已被壓低的市場預期；Productivity and Business Processes能否重新加速，才是AI變現的真正考驗。</td></tr>
+        <tr><td class="pname">台新</td><td class="d">3Q26</td><td class="desc">微軟</td><td class="desc">—</td><td class="num">—</td><td class="desc">AI支出正轉化為營收：Azure逾US$100bn、Copilot逾30m席位、RPO達US$678bn，資本支出則維持可控。</td></tr>
+        <tr><td class="pname">兆豐</td><td class="d">3Q26</td><td class="desc">微軟</td><td class="desc">買進</td><td class="num">US$607</td><td class="desc">產能與變現同步加速；FY28E本益比19x，相較五年平均26x，折價並不合理。</td></tr>
+        </tbody></table></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="pstage" id="part4">
+  <div class="prail"><div class="pstripe"></div><div class="pnum">第四部分</div><h2>Meta — Meta Platforms（META US）</h2><a class="studylink" href="meta.html">公司研究 →</a></div>
+  <div class="pbody">
+
+    <div class="psec" id="p4-1">
+      <div class="psec-head"><span class="pno mono">4.1</span><h3>業務與最近一季</h3><span class="ptag">2Q26</span></div>
+      <p class="lede">Meta最近一季各部門業績。</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c-item">項目</th><th class="c-fig">2Q26</th><th class="c-chg">變動</th><th>說明</th><th class="c-src">資料來源</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">營收</td><td class="num">US$60.8bn</td><td class="chg">年增28%</td><td class="desc">高於市場共識US$60.2bn。</td><td class="src">玉山<br>台新</td></tr>
+        <tr><td class="pname">廣告</td><td class="num">US$59.4bn</td><td class="chg">年增27%</td><td class="desc">廣告曝光量成長14%，每則廣告平均價格上漲12%。</td><td class="src">台新<br>第一金證券</td></tr>
+        <tr><td class="pname">其他營收</td><td class="num">US$1.0bn</td><td class="chg">年增73%</td><td class="desc">受惠WhatsApp付費訊息與訂閱，首度突破US$1bn。</td><td class="src">台新<br>第一金證券</td></tr>
+        <tr><td class="pname">Reality Labs</td><td class="num">US$0.43bn</td><td class="chg">年增16%</td><td class="desc">營業虧損US$4.6bn；AI眼鏡抵銷Quest銷量下滑。</td><td class="src">玉山<br>第一金證券</td></tr>
+        <tr><td class="pname">營業利益</td><td class="num">US$18.8bn</td><td class="chg">年減8%</td><td class="desc">營業利益率31%。排除US$2.4bn訴訟費用與US$1.2bn遣散費用後，營業利益成長9%。</td><td class="src">台新<br>玉山</td></tr>
+        <tr><td class="pname">EPS</td><td class="num">US$6.18</td><td class="chg">—</td><td class="desc">受一次性費用影響，低於市場共識US$7.22；股價盤後下跌7%。</td><td class="src">玉山</td></tr>
+        <tr><td class="pname">用戶</td><td class="num">每日3.6bn</td><td class="chg">年增3%</td><td class="desc">每人平均營收US$16.86，成長23.5%。</td><td class="src">第一金證券<br>玉山</td></tr>
+        <tr><td class="pname">3Q26財測</td><td class="num">US$61–64bn</td><td class="chg">年增19–25%</td><td class="desc">高標高於市場共識US$63.2bn；含1%匯率逆風。</td><td class="src">玉山</td></tr>
+        <tr><td class="pname">2026年費用</td><td class="num">US$165–169bn</td><td class="chg">原為US$162–169bn</td><td class="desc">因2Q成本與法律費用增加而上調低標；薪資成長主要來自AI人才招募。</td><td class="src">玉山<br>台新<br>第一金證券</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p4-2">
+      <div class="psec-head"><span class="pno mono">4.2</span><h3>資本支出與產能</h3></div>
+      <p class="lede">Meta的資本支出與新增的資料中心產能。</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c-item">項目</th><th class="c-fig">數值</th><th class="c-chg">變動</th><th>說明</th><th class="c-src">資料來源</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">2025年實際</td><td class="num">US$72.2bn</td><td class="chg">—</td><td class="desc">占營收36%，含融資租賃本金，即2026年財測採用的基準。</td><td class="src">凱基</td></tr>
+        <tr><td class="pname">2026年財測</td><td class="num">US$130–145bn</td><td class="chg">原為US$125–145bn</td><td class="desc">隨2Q26財報上調低標並收窄區間。</td><td class="src">玉山<br>台新</td></tr>
+        <tr><td class="pname">2027年展望</td><td class="num">逾US$200bn</td><td class="chg">凱基預估</td><td class="desc">管理層正盡可能擴大2026–27年產能，並自2028年起保留彈性；財報公布前市場共識為US$168bn。</td><td class="src">凱基<br>台新</td></tr>
+        <tr><td class="pname">資料中心產能</td><td class="num">8 GW</td><td class="chg">2026F</td><td class="desc">凱基預估2024年為2 GW、2025年為4 GW、2027F為14 GW、2028F為21 GW；據報導，一份內部備忘錄規劃2026年7 GW、2027年14 GW的算力。</td><td class="src">凱基</td></tr>
+        <tr><td class="pname">Prometheus</td><td class="num">逾600 MW</td><td class="chg">2026年上線</td><td class="desc">今年迄今已上線；Meta另營運約1.3 GW的Hopper GPU叢集。</td><td class="src">凱基</td></tr>
+        <tr><td class="pname">現金流影響</td><td class="num">FCF利潤率1%</td><td class="chg">2026F</td><td class="desc">市場共識預估由2025年的22%降至2026F的1%及2027F的−1%；淨負債比（計入現金、不計有價證券）由2024年的−8%升至2025年的11%。</td><td class="src">凱基</td></tr>
+        <tr><td class="pname">融資</td><td class="num">貝萊德合資</td><td class="chg">3Q26</td><td class="desc">穆迪表示，與貝萊德的合資兼具風險與機會。</td><td class="src">穆迪</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p4-3">
+      <div class="psec-head"><span class="pno mono">4.3</span><h3>晶片、網路與記憶體</h3></div>
+      <p class="lede">Meta自研的MTIA加速器與記憶體控制器，以及外購的GPU與光通訊元件。</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c1">晶片或連結</th><th class="cship">出貨年度</th><th>專案</th><th class="c5">狀態</th></tr></thead>
+        <tbody>
+        <tr>
+          <td class="pname">MTIA 400 Iris</td>
+          <td class="mono d">2026–27</td>
+          <td class="prog"><b>3nm · 晶心科IP</b><span>兩顆運算晶粒搭配288GB HBM3E</span></td>
+          <td><span class="badge b-ramp">量產爬坡</span></td>
+        </tr>
+        <tr>
+          <td class="pname">MTIA 600</td>
+          <td class="mono d">2028</td>
+          <td class="prog"><b>Rivos團隊 · 創意（候選）</b><span>預期2027年完成設計定案</span></td>
+          <td><span class="badge b-road">規劃中</span></td>
+        </tr>
+        <tr>
+          <td class="pname">晶心科授權</td>
+          <td class="mono d">2026</td>
+          <td class="prog"><b>晶心科</b><span>自第一代MTIA起持續授權</span></td>
+          <td><span class="badge b-ramp">量產爬坡</span></td>
+        </tr>
+        <tr>
+          <td class="pname">Vistara CXL記憶體ASIC</td>
+          <td class="mono d">—</td>
+          <td class="prog"><b>自研 · CXL Type 3</b><span>將退役DDR4再利用為第二層記憶體</span></td>
+          <td><span class="badge b-est">成熟</span></td>
+        </tr>
+        <tr>
+          <td class="pname">外售加速器</td>
+          <td class="mono d">2026–27</td>
+          <td class="prog"><b>NVIDIA · AMD</b><span>多數建置採用Blackwell</span></td>
+          <td><span class="badge b-ramp">量產爬坡</span></td>
+        </tr>
+        <tr>
+          <td class="pname">光連結</td>
+          <td class="mono d">2026</td>
+          <td class="prog"><b>800G · 1.6T</b><span>連續波雷射仍供不應求</span></td>
+          <td><span class="badge b-ramp">量產爬坡</span></td>
+        </tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p4-4">
+      <div class="psec-head"><span class="pno mono">4.4</span><h3>AI模型與變現</h3></div>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c-item">產品</th><th class="c-met">最新指標</th><th>說明</th><th class="c-src">資料來源</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">Muse Spark</td><td class="num">1.3版，3Q26</td><td class="desc">在Artificial Analysis指數上與高推理強度設定下的Claude Opus 5相當；1.1版評分高於Gemini 3.5 Flash。透過API提供，Meta正向更多開發者開放該API。</td><td class="src">凱基<br>第一金證券</td></tr>
+        <tr><td class="pname">廣告排序</td><td class="num">廣告點擊數成長8.3%</td><td class="desc">改良的用戶理解模型（結合GEM與序列學習）亦使Facebook轉換率提升15.7%；逾9m家小型企業至少使用一種生成式廣告素材工具。</td><td class="src">台新<br>玉山</td></tr>
+        <tr><td class="pname">API營收</td><td class="num">每GW逾US$50bn</td><td class="desc">凱基2027年預估值，假設70B模型於H100與H200運行、GPU利用率60%。</td><td class="src">凱基</td></tr>
+        <tr><td class="pname">算力租賃</td><td class="num">每GW US$15bn</td><td class="desc">凱基預估。Zuckerberg正研究以溢價向大型企業出售多餘算力，惟Meta預期直接出售算力的利潤率將明顯低於出售智慧。</td><td class="src">凱基<br>台新</td></tr>
+        <tr><td class="pname">訂閱</td><td class="num">每100m訂閱戶US$9.6bn</td><td class="desc">Meta One單一應用方案於2Q26推出，完整方案（月費US$2.99–499）於3Q26全球上線；Meta Verified另行銷售。凱基的數字隱含月費US$8。</td><td class="src">凱基<br>台新</td></tr>
+        <tr><td class="pname">商務訊息</td><td class="num">每週逾1m家企業</td><td class="desc">於WhatsApp與Messenger使用Meta Business Agent；在巴西Movida，AI完成85%的預約對話。</td><td class="src">玉山<br>台新</td></tr>
+        <tr><td class="pname">AI眼鏡</td><td class="num">需求強勁</td><td class="desc">新款Meta Glasses初期銷售優於Meta預期，AI眼鏡帶動Reality Labs 2Q26營收成長16%。</td><td class="src">玉山<br>台新</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p4-5">
+      <div class="psec-head"><span class="pno mono">4.5</span><h3>台灣供應鏈</h3></div>
+      <p class="lede">Meta的台灣供應商，以及各供應商營收中來自Meta的比重。</p>
+      <div class="scroller"><table class="ptable">
+        <thead><tr><th class="c-co">公司</th><th class="c-share">Meta占比</th><th>角色</th><th class="c-src">資料來源</th></tr></thead>
+        <tbody>
+        <tr class="bucket"><td colspan="4">伺服器與機櫃</td></tr>
+        <tr><td class="pname">緯穎（6669 TT）</td><td class="num">29% (2025)</td><td class="desc">伺服器ODM。</td><td class="src">凱基</td></tr>
+        <tr><td class="pname">廣達（2382 TT）</td><td class="num">20–30%</td><td class="desc">伺服器ODM。</td><td class="src">凱基</td></tr>
+        <tr><td class="pname">鴻海（2317 TT）</td><td class="num">&lt;10%</td><td class="desc">伺服器ODM。</td><td class="src">凱基</td></tr>
+        <tr><td class="pname">金像電（2368 TT）</td><td class="num">&lt;10%</td><td class="desc">印刷電路板。</td><td class="src">凱基</td></tr>
+        <tr><td class="pname">雙鴻（3324 TT）</td><td class="num">&lt;10%</td><td class="desc">液冷零組件。</td><td class="src">凱基</td></tr>
+        <tr><td class="pname">川湖（2059 TT）</td><td class="num">&lt;10%</td><td class="desc">滑軌。</td><td class="src">凱基</td></tr>
+        <tr class="bucket"><td colspan="4">網路與光通訊</td></tr>
+        <tr><td class="pname">智邦（2345 TT）</td><td class="num">—</td><td class="desc">資料中心交換器。</td><td class="src">凱基</td></tr>
+        
+        <tr class="bucket"><td colspan="4">晶片與裝置</td></tr>
+        <tr><td class="pname">晶心科（6533 TT）</td><td class="num">—</td><td class="desc">授權用於MTIA的CPU IP。</td><td class="src">中信</td></tr>
+        
+        <tr><td class="pname">聯詠（3034 TT）</td><td class="num">3–7%</td><td class="desc">AR／VR解決方案。</td><td class="src">凱基</td></tr>
+        </tbody></table></div>
+    </div>
+
+    <div class="psec" id="p4-6">
+      <div class="psec-head"><span class="pno mono">4.6</span><h3>券商觀點</h3><span class="ptag">3Q26</span></div>
+      <div class="scroller"><table class="ptable t-brk">
+        <thead><tr><th class="c-house">券商</th><th class="c-date">日期</th><th class="c-stock">標的</th><th class="c-rate">評等</th><th class="c-tp">目標價</th><th>投資論點</th></tr></thead>
+        <tbody>
+        <tr><td class="pname">群益</td><td class="d">3Q26</td><td class="desc">聯亞</td><td class="desc">短線買進</td><td class="num">NT$2,000</td><td class="desc">光通訊上升週期未變，但Meta的短期算力租賃引發市場對AI資本支出的疑慮。</td></tr>
+        
+        <tr><td class="pname">凱基</td><td class="d">3Q26</td><td class="desc">Meta</td><td class="desc">優於大盤</td><td class="num">US$845</td><td class="desc">透過API、算力租賃與訂閱的非廣告AI變現逐漸顯現，資本支出的市場共識應會上調。</td></tr>
+        <tr><td class="pname">玉山</td><td class="d">3Q26</td><td class="desc">Meta</td><td class="desc">—</td><td class="num">—</td><td class="desc">訴訟與遣散費用導致獲利不如預期；資本支出與費用財測的低標均上調。</td></tr>
+        <tr><td class="pname">台新</td><td class="d">3Q26</td><td class="desc">Meta</td><td class="desc">—</td><td class="num">—</td><td class="desc">AI推升廣告業務，但基礎設施與轉型成本壓縮利潤率與自由現金流。</td></tr>
+        <tr><td class="pname">第一金證券</td><td class="d">3Q26</td><td class="desc">Meta</td><td class="desc">買進</td><td class="num">US$654</td><td class="desc">Muse Spark重返前沿模型競賽；API與算力銷售規模是營收與估值的關鍵變數。</td></tr>
+        <tr><td class="pname">穆迪</td><td class="d">3Q26</td><td class="desc">Meta</td><td class="desc">—</td><td class="num">—</td><td class="desc">與貝萊德的合資兼具風險與機會。</td></tr>
+        <tr><td class="pname">中信</td><td class="d">3Q26</td><td class="desc">晶心科</td><td class="desc">加碼，調升評等</td><td class="num">NT$287</td><td class="desc">Meta MTIA授權顯示其在AI伺服器領域取得進展，成本控管則使晶心科2026年可望至少損益兩平。</td></tr>
+        </tbody></table></div>
+    </div>
+
+  </div>
+</div>
+
+<footer class="site-foot">
+  <div class="sf-id">
+    <img src="assets/photo-sm.jpg" alt="Ethan Chen" width="44" height="44" loading="lazy">
+    <div><div class="sf-name"><a href="index-zh.html">Ethan Chen</a></div><div class="sf-sub">半導體研究筆記 · Semiconductor Research Notes</div></div>
+  </div>
+  <div class="sf-contact">
+    <a href="mailto:ethanchen@qtumic.com">ethanchen@qtumic.com</a>
+    <a href="https://www.linkedin.com/in/hao-chen-194981297" target="_blank" rel="me noopener">LinkedIn</a>
+  </div>
+  <div class="sf-note">個人研究筆記，不構成投資建議。 © 2026 Ethan Chen</div>
+</footer>
+</div>
+</body>
+</html>

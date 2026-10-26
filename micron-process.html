@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>美光HBM與NAND完整製程圖 — 從晶圓到出貨 · Ethan Chen</title>
+<!-- site-head -->
+<meta name="author" content="Ethan Chen">
+<meta name="description" content="HBM 與 NAND 製造的每一步，及其設備與供應商。">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://ethanchensemi.github.io/ethanchenstudy/micron-process.html">
+<link rel="alternate" hreflang="zh-Hant" href="https://ethanchensemi.github.io/ethanchenstudy/micron-process.html">
+<link rel="alternate" hreflang="en" href="https://ethanchensemi.github.io/ethanchenstudy/micron-process-en.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="美光HBM與NAND完整製程圖 — 從晶圓到出貨 · Ethan Chen">
+<meta property="og:description" content="HBM 與 NAND 製造的每一步，及其設備與供應商。">
+<meta property="og:site_name" content="Ethan Chen · Semiconductor Research Notes">
+<!-- /site-head -->
+<style>
+:root{
+  --b:#4A3B7A;
+ --paper:#F6F8F9; --card:#FFFFFF;
+ --ink:#14181C; --ink-2:#4A555E; --ink-3:#7C8891;
+ --rule:#CBD3D9; --rule-soft:#E2E8EC;
+ --stage:#1F3A4D; --soic:#2E6B4F; --cowos:#4A3B7A;
+ --cowos-tint:#F0EEF7; --shared:#215C68;
+ --t-fab:#5B4B9E; --t-fab-bg:#EEEBF8;
+ --t-insp:#0E7C86; --t-insp-bg:#E4F2F3;
+ --t-pkg:#B85C10; --t-pkg-bg:#FAEEE1;
+ --t-sup:#5F6C75; --t-sup-bg:#ECEFF1;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+ font-family:-apple-system,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+ font-size:15px;line-height:1.65}
+.wrap{max-width:1240px;margin:0 auto;padding:48px 28px 80px}
+
+.masthead{border-bottom:2px solid var(--stage);padding-bottom:22px;margin-bottom:34px}
+.masthead h1{font-size:31px;line-height:1.25;font-weight:700;margin:0 0 6px;letter-spacing:-.01em}
+.masthead .en{font-size:16px;color:var(--ink-2);font-weight:400;margin:0 0 18px}
+.masthead .meta{display:flex;flex-wrap:wrap;gap:8px 26px;font-size:13px;color:var(--ink-3)}
+.masthead .meta b{color:var(--ink-2);font-weight:500}
+
+.legend{background:var(--card);border:1px solid var(--rule);padding:20px 24px;margin-bottom:38px}
+.legend h2{font-size:15px;margin:0 0 14px;font-weight:600}
+.legend h2.two{margin-top:22px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chipwrap{display:flex;align-items:baseline;gap:9px;border:1px solid var(--rule-soft);padding:9px 13px;flex:1 1 200px}
+.chipwrap small{font-size:12px;color:var(--ink-3);line-height:1.4}
+.chipwrap b{font-size:12.5px;font-weight:600;color:var(--t-insp);white-space:nowrap}
+.chip{display:inline-block;font-size:11px;font-weight:600;padding:2px 7px;white-space:nowrap;border-radius:2px}
+.c-fab{background:var(--t-fab-bg);color:var(--t-fab)}
+.c-insp{background:var(--t-insp-bg);color:var(--t-insp)}
+.c-pkg{background:var(--t-pkg-bg);color:var(--t-pkg)}
+.c-sup{background:var(--t-sup-bg);color:var(--t-sup)}
+
+.stage{display:grid;grid-template-columns:212px 1fr}
+.rail{padding:22px 20px 26px 0;border-right:2px solid var(--rule);position:relative}
+.rail .num{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;color:var(--ink-3);letter-spacing:.06em;margin-bottom:8px}
+.rail h2{font-size:19px;margin:0 0 3px;font-weight:600;line-height:1.35}
+.rail .en2{font-size:13px;color:var(--ink-2);margin:0 0 12px;line-height:1.45}
+.rail .clarify{font-size:12.5px;color:var(--ink-3);line-height:1.55;padding-top:11px;border-top:1px dashed var(--rule)}
+.rail .stripe{position:absolute;right:-2px;top:22px;bottom:26px;width:2px;background:var(--stage)}
+.rail.shared .stripe{background:var(--shared)}
+.body{padding:22px 0 26px 26px}
+
+.row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:12px}
+.row:last-child{margin-bottom:0}
+.step{background:var(--card);border:1px solid var(--rule);padding:12px 14px;flex:1 1 200px;min-width:190px}
+.step .idx{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:10.5px;color:var(--ink-3)}
+.step h4{font-size:14px;margin:2px 0 1px;font-weight:600;line-height:1.4}
+.step .en3{font-size:12px;color:var(--ink-2);margin:0 0 9px;line-height:1.4}
+.step .vend{font-size:11.5px;color:var(--ink-2);margin:6px 0 0;line-height:1.5}
+.step .why{font-size:11.5px;color:var(--ink-3);margin:8px 0 0;line-height:1.5;padding-top:8px;border-top:1px dotted var(--rule-soft)}
+.step .qc{font-size:11.5px;margin:8px 0 0;line-height:1.5;padding:7px 9px;background:var(--t-insp-bg);color:#0B5C64}
+.step .qc b{font-weight:600;color:var(--t-insp)}
+.step.fab{border-left:3px solid var(--t-fab)}
+.step.insp{border-left:3px solid var(--t-insp)}
+.step.pkg{border-left:3px solid var(--t-pkg)}
+.step.sup{border-left:3px solid var(--t-sup)}
+.step.pair{background:#FCFDFD}
+
+.sub{font-size:13px;font-weight:600;margin:20px 0 10px;padding:6px 12px;color:#fff}
+.sub:first-child{margin-top:0}
+.sub .lite{font-weight:400;opacity:.82;font-size:12px}
+.sub.g{background:var(--soic)}
+.sub.p{background:var(--cowos)}
+.sub.b{background:var(--stage)}
+.sub.opt{background:#8A5A00}
+.step.opt{border-left:3px solid #8A5A00;border-style:solid dashed dashed dashed;border-color:var(--rule);border-left-color:#8A5A00;background:#FFFDF7}
+.optnote{font-size:12px;color:#7A5100;background:#FDF6E6;border:1px dashed #C99A1E;padding:10px 12px;margin:0 0 10px;line-height:1.55}
+.optbox{border:1px dashed #C99A1E;background:#FDF6E6;margin:0 0 12px}
+.optsplit{display:grid;grid-template-columns:1fr 1fr}
+.optcell{padding:13px 15px}
+.optcell + .optcell{border-left:1px dashed #E0C486}
+.optcell h5{font-size:12px;margin:0 0 5px;font-weight:600;color:#8A5A00}
+.optcell p{font-size:12px;margin:0;color:#7A5100;line-height:1.55}
+.optstack{padding:13px 15px;border-top:1px dashed #E0C486}
+.optstack h5{font-size:12px;margin:0 0 9px;font-weight:600;color:#8A5A00}
+.optstack table{width:100%;border-collapse:collapse;font-size:12px}
+.optstack td{padding:4px 0;border:none;color:#7A5100;vertical-align:top;line-height:1.5}
+.optstack td.tier{width:22px;font-family:ui-monospace,Menlo,monospace;color:#B08A2E}
+.optstack td.tech{width:74px;font-weight:600;color:#8A5A00}
+.optstack .ts{font-size:11.5px;color:#9A7530;margin:9px 0 0;padding-top:8px;border-top:1px dashed #E0C486}
+
+.forkbar{display:grid;grid-template-columns:212px 1fr}
+.forkbar .lead{padding:26px 20px 0 0;border-right:2px solid var(--rule)}
+.forkbar .msg{padding:26px 0 4px 26px;font-size:13px;color:var(--ink-3);max-width:74ch;line-height:1.6}
+.forkbar .msg b{color:var(--ink-2);font-weight:500}
+.routes{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+@media (max-width:900px){.routes{grid-template-columns:1fr}}
+.route{border-top:3px solid var(--soic)}
+.route.pk{border-top-color:var(--cowos)}
+.routehead{padding:16px 0 14px}
+.routehead h2{font-size:20px;margin:0 0 2px;font-weight:600}
+.routehead .en2{font-size:13px;color:var(--ink-2);margin:0 0 10px}
+.routehead .clarify{font-size:12.5px;color:var(--ink-3);line-height:1.55;padding-top:11px;border-top:1px dashed var(--rule);max-width:60ch}
+.route .row{flex-direction:column}
+.route .step{flex:1 1 auto}
+.link{grid-column:1/-1;margin:26px 0 0;border:1px dashed var(--cowos);background:var(--cowos-tint);
+ padding:14px 18px;font-size:13px;color:var(--ink-2);line-height:1.6}
+.link b{color:var(--cowos);font-weight:600}
+.divider{height:1px;background:var(--rule-soft)}
+.fig.full{grid-column:1/-1}
+.figs{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.fig{border:1px solid var(--rule-soft);padding:14px 16px 16px}
+.fig h3{font-size:14px;margin:0 0 10px;font-weight:600}
+.fig svg{width:100%;height:auto;display:block}
+.figcap{font-size:11.5px;color:var(--ink-3);line-height:1.55;margin:12px 0 0;padding-top:10px;border-top:1px dotted var(--rule-soft)}
+@media (max-width:900px){.figs{grid-template-columns:1fr}}
+
+.sect{margin-top:48px;border:1px solid var(--rule);background:var(--card);padding:24px 26px}
+.sect h2{font-size:19px;margin:0 0 6px;font-weight:600}
+.sect .key{font-size:12.5px;color:var(--ink-3);margin:0 0 20px}
+.sect .key .tw{font-weight:600}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px solid var(--rule-soft);vertical-align:top}
+th{font-weight:600;color:var(--ink-2);font-size:12.5px;border-bottom:1px solid var(--rule)}
+td.n{font-family:ui-monospace,"SF Mono",Menlo,monospace;color:var(--ink-2);white-space:nowrap}
+tr:last-child td{border-bottom:none}
+.grouprow td{background:#F1F5F6;padding-top:11px;padding-bottom:9px;padding-left:12px;border-bottom:1px solid var(--rule)}
+.lead-v{font-weight:600}
+.tw{color:var(--t-insp)}
+
+@media (max-width:760px){
+ .wrap{padding:30px 16px 60px}
+ .stage,.forkbar{grid-template-columns:1fr}
+ .rail{border-right:none;border-bottom:2px solid var(--rule);padding:20px 0 18px}
+ .rail .stripe{right:auto;left:0;top:auto;bottom:-2px;width:60px;height:2px}
+ .body{padding:20px 0 26px}
+ .forkbar .lead{display:none}
+ .forkbar .msg{padding-left:0}
+ .scroller{overflow-x:auto}
+ table{min-width:560px}
+}
+@media print{.backbar,.toc{display:none}body{background:#fff}.wrap{max-width:none;padding:0}.step,.legend,.sect{break-inside:avoid}}
+.backbar{margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.backbar a{display:inline-block;font-size:13px;color:var(--ink-2);text-decoration:none;border:1px solid var(--rule);background:var(--card);padding:6px 13px}
+.backbar a:hover{color:var(--b);border-color:var(--b)}
+.backbar .lang{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;letter-spacing:.04em}
+.toc{background:var(--card);border:1px solid var(--rule);padding:16px 22px;margin-bottom:34px;font-size:13px}
+.toc a{color:var(--stage);text-decoration:none;font-weight:500;margin-right:18px;white-space:nowrap}
+.toc a:hover{text-decoration:underline}
+.tocrow{display:flex;flex-wrap:wrap;gap:6px 4px;row-gap:8px}
+</style>
+<style id="site-chrome">
+/* site chrome (added by build) */
+.backbar{flex-wrap:wrap}
+.lede,.defn,.ds .lede,.routehead .clarify,.forkbar .msg,.explain .sub2,.masthead .en{max-width:none}
+.backbar .bbr{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.backbar .lang{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;letter-spacing:.04em}
+.backbar .lang-off{display:inline-block;font-size:12px;color:var(--ink-3,#7C8891);border:1px dashed var(--rule,#CBD3D9);padding:6px 13px;font-family:ui-monospace,"SF Mono",Menlo,monospace;letter-spacing:.04em;cursor:default}
+.site-foot{margin-top:56px;border-top:1px solid var(--rule,#CBD3D9);padding-top:22px;display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;font-size:12.5px;color:var(--ink-3,#7C8891);line-height:1.5}
+.site-foot .sf-id{display:flex;align-items:center;gap:12px;min-width:0}
+.site-foot .sf-id img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:0 0 auto}
+.site-foot .sf-name{font-size:14px;font-weight:600;color:var(--ink,#14181C)}
+.site-foot .sf-name a{color:inherit;text-decoration:none}
+.site-foot .sf-name a:hover{color:var(--b,#4A3B7A)}
+.site-foot .sf-sub{font-size:12px;color:var(--ink-3,#7C8891)}
+.site-foot .sf-contact{display:flex;gap:16px;flex-wrap:wrap;margin-left:auto}
+.site-foot .sf-contact a{color:var(--ink-2,#4A555E);text-decoration:none;border-bottom:1px dotted var(--rule,#CBD3D9)}
+.site-foot .sf-contact a:hover{color:var(--b,#4A3B7A);border-color:var(--b,#4A3B7A)}
+.site-foot .sf-note{flex-basis:100%;font-size:11.5px}
+@media (max-width:640px){.site-foot .sf-contact{margin-left:0}}
+@media (max-width:640px){
+  .stickynav{margin-left:-14px;margin-right:-14px;padding-left:14px;padding-right:14px;white-space:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .legend .fams,.legend .fams.six,.famgrid,.idxgrid{grid-template-columns:1fr !important}
+  .routes{grid-template-columns:minmax(0,1fr) !important}
+  .route,.routes > *{min-width:0}
+  .route .row,.route .chips,.route .chiprow,.route .cols{flex-wrap:wrap}
+  .optstack table{min-width:0 !important}
+  .famcol .chip,.legend .chip,.chipwrap b{white-space:normal}
+}
+@media print{.site-foot .sf-id img{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="backbar"><a href="map.html">← 產業地圖</a><span class="bbr"><a class="lang" href="micron-process-en.html" onclick="this.href=this.href.split('#')[0]+location.hash">EN</a></span></div>
+<header class="masthead">
+ <h1>美光HBM &middot; NAND完整製程圖</h1>
+</header>
+
+<nav class="toc"><div class="tocrow">
+ <a href="#s1">1 晶圓進料</a><a href="#rA">A HBM路線</a><a href="#rB">B NAND路線</a><a href="#vendors">供應商總表</a>
+</div></nav>
+
+<div class="stage" id="s1">
+ <div class="rail"><div class="stripe"></div>
+  <div class="num">階段1</div>
+  <h2>晶圓進料</h2>
+  <p class="en2">Incoming Wafer</p>
+ </div>
+ <div class="body">
+  <div class="row">
+   <div class="step sup" id="st-1-01"><div class="idx">01</div><h4>素晶圓進料</h4><p class="en3">Prime Wafer Intake</p>
+    <span class="chip c-sup">支援</span>
+    <p class="vend"><span class="tw">環球晶</span> · 信越化學 · SUMCO · Siltronic · SK Siltron</p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;量測（平坦度、顆粒數）</p></div>
+   <div class="step insp" id="st-1-02"><div class="idx">02</div><h4>進料檢驗</h4><p class="en3">Incoming Wafer Inspection</p>
+    <span class="chip c-insp">檢測</span>
+    <p class="vend">KLA · Onto · Nova · <span class="tw">辛耘</span></p>
+    <p class="qc"><b>檢測</b>&nbsp;&nbsp;本步驟即為檢測站：AOI · 量測</p></div>
+   <div class="step sup" id="st-1-03"><div class="idx">03</div><h4>投片與製程配方</h4><p class="en3">Lot Start, Recipe Release</p>
+    <span class="chip c-sup">支援</span>
+    <p class="vend">美光內部</p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;量測（對位標記）</p></div>
+  </div>
+ </div>
+</div>
+<div class="divider"></div>
+
+<div class="routes">
+ <div class="route" id="rA">
+  <div class="routehead">
+   <h2>A路線 &middot; HBM</h2>
+   <p class="en2">Route A &middot; HBM</p>
+  </div>
+  <div class="sub g">A &middot; 前段 <span class="lite">DRAM晶圓廠，HBM3E與HBM4採1-beta，HBM4E起採1-gamma</span></div>
+  <div class="row">
+<div class="step fab" id="st-A-01"><div class="idx">A01</div><h4>電容結構製作</h4><p class="en3">Cell Capacitor Formation</p>
+    <span class="chip c-fab">前段</span>
+    <p class="vend">AMAT · Lam · TEL · ASM International</p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;AOI · 量測 · SEM（抽檢）</p></div>
+<div class="step fab" id="st-A-02"><div class="idx">A02</div><h4>EUV微影</h4><p class="en3">EUV Patterning</p>
+    <span class="chip c-fab">前段</span>
+    <p class="vend"><span class="lead-v">ASML</span> ｜ 1-gamma及之後。HBM4為1-beta，採浸潤式DUV</p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;量測（疊對、關鍵尺寸）</p></div>
+<div class="step fab" id="st-A-03"><div class="idx">A03</div><h4>字元線、位元線與後段金屬</h4><p class="en3">Word Line, Bit Line, BEOL Metal</p>
+    <span class="chip c-fab">前段</span>
+    <p class="vend">AMAT · Lam · TEL</p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;AOI · 量測</p></div>
+<div class="step fab" id="st-A-04"><div class="idx">A04</div><h4>TSV矽穿孔製作</h4><p class="en3">TSV Formation, Via Middle</p>
+    <span class="chip c-fab">前段</span>
+    <p class="vend">Lam · AMAT · TEL</p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;X-ray（填充孔洞） · SEM</p></div>
+  </div>
+  <div class="sub g">B &middot; 已知良品晶粒與薄化 <span class="lite">良率關卡</span></div>
+  <div class="row">
+<div class="step insp" id="st-A-05"><div class="idx">A05</div><h4>晶圓針測（KGD）</h4><p class="en3">Wafer Probe, Known Good Die</p>
+    <span class="chip c-insp">檢測</span>
+    <p class="vend">Advantest · Teradyne ｜ 探針卡：<span class="tw">旺矽</span> · <span class="tw">精測</span></p>
+    <p class="qc"><b>檢測</b>&nbsp;&nbsp;本步驟即為檢測站：全速完整電性測試</p></div>
+<div class="step insp" id="st-A-06"><div class="idx">A06</div><h4>備援修復</h4><p class="en3">Redundancy Repair</p>
+    <span class="chip c-insp">檢測</span>
+    <p class="vend">Advantest · Teradyne</p>
+    <p class="qc"><b>檢測</b>&nbsp;&nbsp;本步驟即為檢測站：熔絲燒斷後重測</p></div>
+<div class="step pkg" id="st-A-07"><div class="idx">A07</div><h4>暫時貼合於載板</h4><p class="en3">Temporary Bonding to Carrier</p>
+    <span class="chip c-pkg">封裝</span>
+    <p class="vend">EVG · SUSS MicroTec ｜ 材料：東京應化 · Brewer Science</p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;量測（膠厚、對位）</p></div>
+<div class="step pkg" id="st-A-08"><div class="idx">A08</div><h4>背面研磨與拋光</h4><p class="en3">Backgrind And Polish</p>
+    <span class="chip c-pkg">封裝</span>
+    <p class="vend"><span class="lead-v">DISCO</span> · Tokyo Seimitsu · Okamoto ｜ CMP：AMAT · <span class="tw">中砂</span></p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;量測（厚度、總厚度變異）</p></div>
+  </div>
+  <div class="sub g">C &middot; 堆疊組裝 <span class="lite">產能瓶頸</span></div>
+  <div class="row">
+<div class="step fab" id="st-A-09"><div class="idx">A09</div><h4>TSV背面外露與背面重佈線</h4><p class="en3">TSV Reveal And Backside RDL</p>
+    <span class="chip c-fab">前段</span>
+    <p class="vend">AMAT · Lam · TEL · Veeco</p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;AOI · 量測 · X-ray</p></div>
+<div class="step pkg" id="st-A-10"><div class="idx">A10</div><h4>微凸塊電鍍</h4><p class="en3">Microbump Plating</p>
+    <span class="chip c-pkg">封裝</span>
+    <p class="vend">Lam · AMAT · ASMPT</p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;AOI · 量測（凸塊高度、共面性）</p></div>
+<div class="step pkg" id="st-A-11"><div class="idx">A11</div><h4>解鍵合</h4><p class="en3">Debonding</p>
+    <span class="chip c-pkg">封裝</span>
+    <p class="vend">EVG · SUSS MicroTec</p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;AOI（破片、殘膠）</p></div>
+<div class="step pkg" id="st-A-12"><div class="idx">A12</div><h4>切割與揀晶</h4><p class="en3">Dicing And Die Sort</p>
+    <span class="chip c-pkg">封裝</span>
+    <p class="vend">DISCO · Tokyo Seimitsu · ASMPT</p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;AOI（邊緣崩裂、裂紋）</p></div>
+<div class="step fab" id="st-A-13"><div class="idx">A13</div><h4>邏輯基底晶片</h4><p class="en3">Logic Base Die</p>
+    <span class="chip c-fab">前段</span>
+    <p class="vend">美光（HBM4及之前） ｜ 台積電（HBM4E起）</p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;電性測試</p></div>
+<div class="step pkg" id="st-A-14"><div class="idx">A14</div><h4>熱壓非導電膜堆疊</h4><p class="en3">TC-NCF Stack Bonding</p>
+    <span class="chip c-pkg">封裝</span>
+    <p class="vend"><span class="lead-v">ASMPT</span> · Shinkawa · K&amp;S ｜ NCF：Resonac · Namics</p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;SAM（分層） · X-ray（接合孔洞）</p></div>
+<div class="step pkg" id="st-A-15"><div class="idx">A15</div><h4>模封</h4><p class="en3">Stack Molding</p>
+    <span class="chip c-pkg">封裝</span>
+    <p class="vend"><span class="lead-v">TOWA</span> · ASMPT · Besi</p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;量測（翹曲） · SAM</p></div>
+<div class="step pkg" id="st-A-16"><div class="idx">A16</div><h4>模封研磨至規定高度</h4><p class="en3">Mold Grinding To Stack Height</p>
+    <span class="chip c-pkg">封裝</span>
+    <p class="vend">DISCO · Tokyo Seimitsu</p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;量測（高度、共面性）</p></div>
+<div class="step pkg" id="st-A-17"><div class="idx">A17</div><h4>基板貼合與回焊</h4><p class="en3">Substrate Attach And Reflow</p>
+    <span class="chip c-pkg">封裝</span>
+    <p class="vend">ASMPT · Shibaura ｜ 基板：揖斐電 · 新光電氣 · <span class="tw">欣興</span> · <span class="tw">南電</span> · <span class="tw">景碩</span></p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;X-ray（焊料孔洞） · SAM</p></div>
+  </div>
+  <div class="sub g">D &middot; 測試與出貨</div>
+  <div class="row">
+<div class="step insp" id="st-A-18"><div class="idx">A18</div><h4>堆疊成品電性測試</h4><p class="en3">Known Good Stack Test</p>
+    <span class="chip c-insp">檢測</span>
+    <p class="vend">Advantest · Teradyne</p>
+    <p class="qc"><b>檢測</b>&nbsp;&nbsp;本步驟即為檢測站：全速電性測試</p></div>
+<div class="step insp" id="st-A-19"><div class="idx">A19</div><h4>高溫燒機</h4><p class="en3">Burn-In</p>
+    <span class="chip c-insp">檢測</span>
+    <p class="vend">Advantest ｜ 試驗箱：Espec</p>
+    <p class="qc"><b>檢測</b>&nbsp;&nbsp;本步驟即為檢測站：溫度與電壓應力測試</p></div>
+<div class="step pkg" id="st-A-20"><div class="idx">A20</div><h4>分級、雷刻與出貨</h4><p class="en3">Bin, Mark And Ship</p>
+    <span class="chip c-pkg">封裝</span>
+    <p class="vend">Coherent · 大族激光</p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;AOI（標記可讀性）</p></div>
+  </div>
+ </div>
+
+ <div class="route pk" id="rB">
+  <div class="routehead">
+   <h2>B路線 &middot; NAND</h2>
+   <p class="en2">Route B &middot; NAND</p>
+  </div>
+  <div class="sub p">A &middot; 陣列建構 <span class="lite">G8 232層、G9 276層</span></div>
+  <div class="row">
+<div class="step fab" id="st-B-01"><div class="idx">B01</div><h4>陣列下CMOS週邊電路</h4><p class="en3">CMOS Under Array</p>
+    <span class="chip c-fab">前段</span>
+    <p class="vend">AMAT · Lam · TEL</p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;AOI · 量測</p></div>
+<div class="step fab" id="st-B-02"><div class="idx">B02</div><h4>交替層堆疊沉積</h4><p class="en3">Alternating Layer Deposition</p>
+    <span class="chip c-fab">前段</span>
+    <p class="vend"><span class="lead-v">AMAT</span> · Lam · Kokusai · ASM International</p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;量測（堆疊厚度、薄膜應力）</p></div>
+<div class="step fab" id="st-B-03"><div class="idx">B03</div><h4>高深寬比通道孔蝕刻</h4><p class="en3">High Aspect Ratio Channel Hole Etch</p>
+    <span class="chip c-fab">前段</span>
+    <p class="vend"><span class="lead-v">Lam</span> · TEL · Hitachi High-Tech</p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;SEM（輪廓、扭曲） · 量測</p></div>
+<div class="step fab" id="st-B-04"><div class="idx">B04</div><h4>多層堆疊接合</h4><p class="en3">Deck Stacking</p>
+    <span class="chip c-fab">前段</span>
+    <p class="vend">Lam · AMAT · TEL</p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;量測（Deck對位） · SEM</p></div>
+<div class="step fab" id="st-B-05"><div class="idx">B05</div><h4>置換閘極與字元線填充</h4><p class="en3">Replacement Gate, Word Line Fill</p>
+    <span class="chip c-fab">前段</span>
+    <p class="vend">AMAT · Lam · TEL</p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;SEM · 量測（填充孔洞）</p></div>
+<div class="step fab" id="st-B-06"><div class="idx">B06</div><h4>階梯接點製作</h4><p class="en3">Staircase Contact Formation</p>
+    <span class="chip c-fab">前段</span>
+    <p class="vend">AMAT · Lam · TEL</p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;AOI · 量測（階梯高度）</p></div>
+<div class="step fab" id="st-B-07"><div class="idx">B07</div><h4>後段金屬與週邊電路接點</h4><p class="en3">BEOL Metal And Periphery Contact</p>
+    <span class="chip c-fab">前段</span>
+    <p class="vend">AMAT · Lam · TEL</p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;AOI · 量測</p></div>
+  </div>
+  <div class="sub p">B &middot; 測試與元件組裝</div>
+  <div class="row">
+<div class="step insp" id="st-B-08"><div class="idx">B08</div><h4>晶圓測試與壞塊標記</h4><p class="en3">Wafer Sort And Bad Block Mapping</p>
+    <span class="chip c-insp">檢測</span>
+    <p class="vend">Advantest · Teradyne ｜ 探針卡：<span class="tw">旺矽</span> · <span class="tw">精測</span></p>
+    <p class="qc"><b>檢測</b>&nbsp;&nbsp;本步驟即為檢測站：電性測試，寫入壞塊表</p></div>
+<div class="step pkg" id="st-B-09"><div class="idx">B09</div><h4>研磨與切割</h4><p class="en3">Backgrind And Dicing</p>
+    <span class="chip c-pkg">封裝</span>
+    <p class="vend"><span class="lead-v">DISCO</span> · Tokyo Seimitsu · ASMPT</p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;AOI（邊緣崩裂）</p></div>
+<div class="step pkg" id="st-B-10"><div class="idx">B10</div><h4>疊晶與打線</h4><p class="en3">Die Stacking And Wire Bond</p>
+    <span class="chip c-pkg">封裝</span>
+    <p class="vend"><span class="lead-v">ASMPT</span> · K&amp;S · Shinkawa</p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;AOI（焊線偏移） · X-ray</p></div>
+<div class="step pkg" id="st-B-11"><div class="idx">B11</div><h4>模封與植球</h4><p class="en3">Molding And Ball Attach</p>
+    <span class="chip c-pkg">封裝</span>
+    <p class="vend"><span class="lead-v">TOWA</span> · ASMPT · Shibaura · <span class="tw">均華</span></p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;X-ray（焊料孔洞） · SAM</p></div>
+<div class="step insp" id="st-B-12"><div class="idx">B12</div><h4>元件測試與燒機</h4><p class="en3">Component Test And Burn-In</p>
+    <span class="chip c-insp">檢測</span>
+    <p class="vend">Advantest · Teradyne</p>
+    <p class="qc"><b>檢測</b>&nbsp;&nbsp;本步驟即為檢測站：電性測試，耐久度抽檢</p></div>
+  </div>
+  <div class="sub p">C &middot; 硬碟製作</div>
+  <div class="row">
+<div class="step sup" id="st-B-13"><div class="idx">B13</div><h4>控制器與韌體配對</h4><p class="en3">Controller And Firmware Pairing</p>
+    <span class="chip c-sup">支援</span>
+    <p class="vend">美光內部（資料中心SSD） ｜ 慧榮 · 群聯，搭配美光韌體（用戶端SSD）</p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;功能測試</p></div>
+<div class="step pkg" id="st-B-14"><div class="idx">B14</div><h4>SSD板卡組裝</h4><p class="en3">SSD Board Assembly</p>
+    <span class="chip c-pkg">封裝</span>
+    <p class="vend">SMT產線 ｜ PCB與被動元件供應商</p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;AOI · X-ray（BGA焊點）</p></div>
+<div class="step insp" id="st-B-15"><div class="idx">B15</div><h4>整機測試</h4><p class="en3">Drive-Level Test</p>
+    <span class="chip c-insp">檢測</span>
+    <p class="vend">美光內部測試</p>
+    <p class="qc"><b>檢測</b>&nbsp;&nbsp;本步驟即為檢測站：效能、功耗與耐久度測試</p></div>
+<div class="step sup" id="st-B-16"><div class="idx">B16</div><h4>客戶認證與出貨</h4><p class="en3">Qualification And Ship</p>
+    <span class="chip c-sup">支援</span>
+    <p class="vend">客戶認證</p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;持續可靠度監控</p></div>
+  </div>
+  <div class="sub opt">選配分支 &middot; Managed NAND <span class="lite">UFS、e.MMC、MCP</span></div>
+  <div class="row">
+<div class="step pkg  opt" id="st-M-1"><div class="idx">M1</div><h4>嵌入式記憶體整合</h4><p class="en3">Managed NAND Integration</p>
+    <span class="chip c-pkg">封裝</span>
+    <p class="vend">ASMPT · K&amp;S</p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;電性測試</p></div>
+<div class="step pkg  opt" id="st-M-2"><div class="idx">M2</div><h4>MCP多晶片封裝</h4><p class="en3">Multi-Chip Package Assembly</p>
+    <span class="chip c-pkg">封裝</span>
+    <p class="vend">ASMPT · Shinkawa</p>
+    <p class="qc"><b>後續檢測</b>&nbsp;&nbsp;X-ray · SAM</p></div>
+<div class="step insp  opt" id="st-M-3"><div class="idx">M3</div><h4>行動裝置認證</h4><p class="en3">Mobile Qualification</p>
+    <span class="chip c-insp">檢測</span>
+    <p class="vend">客戶認證</p>
+    <p class="qc"><b>檢測</b>&nbsp;&nbsp;本步驟即為檢測站：平台級驗證</p></div>
+  </div>
+ </div>
+</div>
+<section class="sect" id="vendors">
+ <h2>供應商總表</h2>
+ <p class="key">粗體為領導供應商 &middot; <span class="tw">綠字為台灣供應商</span></p>
+ <div class="scroller">
+ <table>
+  <thead><tr><th style="width:200px">設備／材料</th><th style="width:130px">步驟</th><th>主要供應商</th></tr></thead>
+  <tbody>
+   <tr class="grouprow"><td colspan="3"><span class="chip c-fab">前段設備</span></td></tr>
+   <tr><td>EUV微影</td><td class="n">A02</td><td><span class="lead-v">ASML</span></td></tr>
+   <tr><td>浸潤式與DUV微影</td><td class="n">A01, A03, B01, B06</td><td><span class="lead-v">ASML</span> &middot; Nikon &middot; Canon</td></tr>
+   <tr><td>蝕刻</td><td class="n">A04, B03, B05</td><td><span class="lead-v">Lam</span> &middot; TEL &middot; AMAT &middot; Hitachi High-Tech</td></tr>
+   <tr><td>沉積</td><td class="n">A01, A09, B02, B05</td><td><span class="lead-v">AMAT</span> &middot; Lam &middot; TEL &middot; ASM International &middot; Kokusai</td></tr>
+   <tr><td>CMP</td><td class="n">A08</td><td><span class="lead-v">AMAT</span> &middot; Ebara ｜ 耗材：Entegris &middot; DuPont &middot; <span class="tw">中砂</span></td></tr>
+   <tr><td>清洗與表面前處理</td><td class="n">A03, B07</td><td><span class="lead-v">SCREEN</span> &middot; TEL &middot; Lam &middot; <span class="tw">辛耘</span></td></tr>
+
+   <tr class="grouprow"><td colspan="3"><span class="chip c-pkg">封裝設備</span></td></tr>
+   <tr><td>研磨與薄化</td><td class="n">A08, A16, B09</td><td><span class="lead-v">DISCO</span> &middot; Tokyo Seimitsu &middot; Okamoto</td></tr>
+   <tr><td>暫時貼合與解鍵合</td><td class="n">A07, A11</td><td><span class="lead-v">EVG</span> &middot; SUSS MicroTec ｜ 材料：東京應化 &middot; Brewer Science</td></tr>
+   <tr><td>切割</td><td class="n">A12, B09</td><td><span class="lead-v">DISCO</span> &middot; Tokyo Seimitsu &middot; ASMPT</td></tr>
+   <tr><td>熱壓接合</td><td class="n">A14</td><td><span class="lead-v">ASMPT</span> &middot; Shinkawa &middot; K&amp;S &middot; Hanmi</td></tr>
+   <tr><td>打線</td><td class="n">B10, M1, M2</td><td><span class="lead-v">ASMPT</span> &middot; K&amp;S &middot; Shinkawa</td></tr>
+   <tr><td>塑封</td><td class="n">A15, B11</td><td><span class="lead-v">TOWA</span> &middot; ASMPT &middot; Besi</td></tr>
+   <tr><td>植球與迴焊</td><td class="n">A17, B11</td><td>ASMPT &middot; Shibaura &middot; <span class="tw">均華</span></td></tr>
+   <tr><td>雷射標記</td><td class="n">A20</td><td>Coherent &middot; 大族激光</td></tr>
+
+   <tr class="grouprow"><td colspan="3"><span class="chip c-insp">檢測與測試</span></td></tr>
+   <tr><td>記憶體測試與燒機</td><td class="n">A05, A18, A19, B08, B12</td><td><span class="lead-v">Advantest</span> &middot; Teradyne ｜ 試驗箱：Espec</td></tr>
+   <tr><td>探針卡</td><td class="n">A05, B08</td><td><span class="tw">旺矽</span> &middot; <span class="tw">精測</span> &middot; FormFactor &middot; Micronics Japan</td></tr>
+   <tr><td>量測與缺陷檢測</td><td class="n">02, A01, A09, B02</td><td><span class="lead-v">KLA</span> &middot; Onto &middot; Nova &middot; Hitachi High-Tech</td></tr>
+
+   <tr class="grouprow"><td colspan="3"><span class="chip c-sup">材料與基板</span></td></tr>
+   <tr><td>300mm拋光晶圓</td><td class="n">01</td><td><span class="tw">環球晶</span> &middot; 信越化學 &middot; SUMCO &middot; Siltronic &middot; SK Siltron</td></tr>
+   <tr><td>非導電膜與底部填充膠</td><td class="n">A14</td><td>Resonac &middot; Namics &middot; 信越化學</td></tr>
+   <tr><td>封裝基板</td><td class="n">A17</td><td>揖斐電 &middot; 新光電氣 &middot; <span class="tw">欣興</span> &middot; <span class="tw">南電</span> &middot; <span class="tw">景碩</span></td></tr>
+   <tr><td>光阻、研磨液、特殊氣體</td><td class="n">A01至B07</td><td>JSR &middot; 東京應化 &middot; Entegris &middot; DuPont &middot; Linde &middot; Air Liquide</td></tr>
+
+   <tr class="grouprow"><td colspan="3"><span class="chip c-pkg">下游，美光以外</span></td></tr>
+   <tr><td>2.5D中介層貼裝</td><td class="n">A20之後</td><td><span class="lead-v">台積電CoWoS</span> &middot; Amkor &middot; <span class="tw">日月光</span></td></tr>
+  </tbody>
+ </table>
+ </div>
+</section>
+
+<footer class="site-foot">
+  <div class="sf-id">
+    <img src="assets/photo-sm.jpg" alt="Ethan Chen" width="44" height="44" loading="lazy">
+    <div><div class="sf-name"><a href="index-zh.html">Ethan Chen</a></div><div class="sf-sub">半導體研究筆記 · Semiconductor Research Notes</div></div>
+  </div>
+  <div class="sf-contact">
+    <a href="mailto:ethanchen@qtumic.com">ethanchen@qtumic.com</a>
+    <a href="https://www.linkedin.com/in/hao-chen-194981297" target="_blank" rel="me noopener">LinkedIn</a>
+  </div>
+  <div class="sf-note">個人研究筆記，不構成投資建議。 © 2026 Ethan Chen</div>
+</footer>
+</div>
+</body>
+</html>

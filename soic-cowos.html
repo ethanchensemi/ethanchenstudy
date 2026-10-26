@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SoIC · CoWoS · CPO 完整製程圖——從晶圓到系統出貨 · Ethan Chen</title>
+<!-- site-head -->
+<meta name="author" content="Ethan Chen">
+<meta name="description" content="SoIC、CoWoS 與 CPO 製造的每一步，及其設備、材料與供應商。">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://ethanchensemi.github.io/ethanchenstudy/soic-cowos.html">
+<link rel="alternate" hreflang="zh-Hant" href="https://ethanchensemi.github.io/ethanchenstudy/soic-cowos.html">
+<link rel="alternate" hreflang="en" href="https://ethanchensemi.github.io/ethanchenstudy/soic-cowos-en.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SoIC · CoWoS · CPO 完整製程圖——從晶圓到系統出貨 · Ethan Chen">
+<meta property="og:description" content="SoIC、CoWoS 與 CPO 製造的每一步，及其設備、材料與供應商。">
+<meta property="og:site_name" content="Ethan Chen · Semiconductor Research Notes">
+<!-- /site-head -->
+<style>
+:root{
+  --b:#4A3B7A;
+ --paper:#F6F8F9; --card:#FFFFFF;
+ --ink:#14181C; --ink-2:#4A555E; --ink-3:#7C8891;
+ --rule:#CBD3D9; --rule-soft:#E2E8EC;
+ --stage:#1F3A4D; --soic:#2E6B4F; --cowos:#4A3B7A;
+ --cowos-tint:#F0EEF7; --shared:#215C68;
+ --t-fab:#5B4B9E; --t-fab-bg:#EEEBF8;
+ --t-insp:#0E7C86; --t-insp-bg:#E4F2F3;
+ --t-pkg:#B85C10; --t-pkg-bg:#FAEEE1;
+ --t-sup:#5F6C75; --t-sup-bg:#ECEFF1;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+ font-family:-apple-system,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+ font-size:15px;line-height:1.65}
+.wrap{max-width:1240px;margin:0 auto;padding:48px 28px 80px}
+
+.masthead{border-bottom:2px solid var(--stage);padding-bottom:22px;margin-bottom:34px}
+.masthead h1{font-size:31px;line-height:1.25;font-weight:700;margin:0 0 6px;letter-spacing:-.01em}
+.masthead .en{font-size:16px;color:var(--ink-2);font-weight:400;margin:0 0 18px}
+.masthead .meta{display:flex;flex-wrap:wrap;gap:8px 26px;font-size:13px;color:var(--ink-3)}
+.masthead .meta b{color:var(--ink-2);font-weight:500}
+
+.legend{background:var(--card);border:1px solid var(--rule);padding:20px 24px;margin-bottom:38px}
+.legend h2{font-size:15px;margin:0 0 14px;font-weight:600}
+.legend h2.two{margin-top:22px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chipwrap{display:flex;align-items:baseline;gap:9px;border:1px solid var(--rule-soft);padding:9px 13px;flex:1 1 200px}
+.chipwrap small{font-size:12px;color:var(--ink-3);line-height:1.4}
+.chipwrap b{font-size:12.5px;font-weight:600;color:var(--t-insp);white-space:nowrap}
+.chip{display:inline-block;font-size:11px;font-weight:600;padding:2px 7px;white-space:nowrap;border-radius:2px}
+.c-fab{background:var(--t-fab-bg);color:var(--t-fab)}
+.c-insp{background:var(--t-insp-bg);color:var(--t-insp)}
+.c-pkg{background:var(--t-pkg-bg);color:var(--t-pkg)}
+.c-sup{background:var(--t-sup-bg);color:var(--t-sup)}
+
+.stage{display:grid;grid-template-columns:212px 1fr}
+.rail{padding:22px 20px 26px 0;border-right:2px solid var(--rule);position:relative}
+.rail .num{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;color:var(--ink-3);letter-spacing:.06em;margin-bottom:8px}
+.rail h2{font-size:19px;margin:0 0 3px;font-weight:600;line-height:1.35}
+.rail .en2{font-size:13px;color:var(--ink-2);margin:0 0 12px;line-height:1.45}
+.rail .clarify{font-size:12.5px;color:var(--ink-3);line-height:1.55;padding-top:11px;border-top:1px dashed var(--rule)}
+.rail .stripe{position:absolute;right:-2px;top:22px;bottom:26px;width:2px;background:var(--stage)}
+.rail.shared .stripe{background:var(--shared)}
+.body{padding:22px 0 26px 26px}
+
+.row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:12px}
+.row:last-child{margin-bottom:0}
+.step{background:var(--card);border:1px solid var(--rule);padding:12px 14px;flex:1 1 200px;min-width:190px}
+.step .idx{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:10.5px;color:var(--ink-3)}
+.step h4{font-size:14px;margin:2px 0 1px;font-weight:600;line-height:1.4}
+.step .en3{font-size:12px;color:var(--ink-2);margin:0 0 9px;line-height:1.4}
+.step .vend{font-size:11.5px;color:var(--ink-2);margin:6px 0 0;line-height:1.5}
+.step .why{font-size:11.5px;color:var(--ink-3);margin:8px 0 0;line-height:1.5;padding-top:8px;border-top:1px dotted var(--rule-soft)}
+.step .qc{font-size:11.5px;margin:8px 0 0;line-height:1.5;padding:7px 9px;background:var(--t-insp-bg);color:#0B5C64}
+.step .qc b{font-weight:600;color:var(--t-insp)}
+.step.fab{border-left:3px solid var(--t-fab)}
+.step.insp{border-left:3px solid var(--t-insp)}
+.step.pkg{border-left:3px solid var(--t-pkg)}
+.step.sup{border-left:3px solid var(--t-sup)}
+.step.pair{background:#FCFDFD}
+
+.sub{font-size:13px;font-weight:600;margin:20px 0 10px;padding:6px 12px;color:#fff}
+.sub:first-child{margin-top:0}
+.sub .lite{font-weight:400;opacity:.82;font-size:12px}
+.sub.g{background:var(--soic)}
+.sub.p{background:var(--cowos)}
+.sub.b{background:var(--stage)}
+.sub.opt{background:#8A5A00}
+.step.opt{border-left:3px solid #8A5A00;border-style:solid dashed dashed dashed;border-color:var(--rule);border-left-color:#8A5A00;background:#FFFDF7}
+.optnote{font-size:12px;color:#7A5100;background:#FDF6E6;border:1px dashed #C99A1E;padding:10px 12px;margin:0 0 10px;line-height:1.55}
+.optbox{border:1px dashed #C99A1E;background:#FDF6E6;margin:0 0 12px}
+.optsplit{display:grid;grid-template-columns:1fr 1fr}
+.optcell{padding:13px 15px}
+.optcell + .optcell{border-left:1px dashed #E0C486}
+.optcell h5{font-size:12px;margin:0 0 5px;font-weight:600;color:#8A5A00}
+.optcell p{font-size:12px;margin:0;color:#7A5100;line-height:1.55}
+.optstack{padding:13px 15px;border-top:1px dashed #E0C486}
+.optstack h5{font-size:12px;margin:0 0 9px;font-weight:600;color:#8A5A00}
+.optstack table{width:100%;border-collapse:collapse;font-size:12px}
+.optstack td{padding:4px 0;border:none;color:#7A5100;vertical-align:top;line-height:1.5}
+.optstack td.tier{width:22px;font-family:ui-monospace,Menlo,monospace;color:#B08A2E}
+.optstack td.tech{width:74px;font-weight:600;color:#8A5A00}
+.optstack .ts{font-size:11.5px;color:#9A7530;margin:9px 0 0;padding-top:8px;border-top:1px dashed #E0C486}
+
+.forkbar{display:grid;grid-template-columns:212px 1fr}
+.forkbar .lead{padding:26px 20px 0 0;border-right:2px solid var(--rule)}
+.forkbar .msg{padding:26px 0 4px 26px;font-size:13px;color:var(--ink-3);max-width:74ch;line-height:1.6}
+.forkbar .msg b{color:var(--ink-2);font-weight:500}
+.routes{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+@media (max-width:900px){.routes{grid-template-columns:1fr}}
+.route{border-top:3px solid var(--soic)}
+.route.pk{border-top-color:var(--cowos)}
+.routehead{padding:16px 0 14px}
+.routehead h2{font-size:20px;margin:0 0 2px;font-weight:600}
+.routehead .en2{font-size:13px;color:var(--ink-2);margin:0 0 10px}
+.routehead .clarify{font-size:12.5px;color:var(--ink-3);line-height:1.55;padding-top:11px;border-top:1px dashed var(--rule);max-width:60ch}
+.route .row{flex-direction:column}
+.route .step{flex:1 1 auto}
+.link{grid-column:1/-1;margin:26px 0 0;border:1px dashed var(--cowos);background:var(--cowos-tint);
+ padding:14px 18px;font-size:13px;color:var(--ink-2);line-height:1.6}
+.link b{color:var(--cowos);font-weight:600}
+.divider{height:1px;background:var(--rule-soft)}
+
+.sect{margin-top:48px;border:1px solid var(--rule);background:var(--card);padding:24px 26px}
+.sect h2{font-size:19px;margin:0 0 6px;font-weight:600}
+.sect .key{font-size:12.5px;color:var(--ink-3);margin:0 0 20px}
+.sect .key .tw{font-weight:600}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px solid var(--rule-soft);vertical-align:top}
+th{font-weight:600;color:var(--ink-2);font-size:12.5px;border-bottom:1px solid var(--rule)}
+td.n{font-family:ui-monospace,"SF Mono",Menlo,monospace;color:var(--ink-2);white-space:nowrap}
+tr:last-child td{border-bottom:none}
+.grouprow td{background:#F1F5F6;padding-top:11px;padding-bottom:9px;padding-left:12px;border-bottom:1px solid var(--rule)}
+.lead-v{font-weight:600}
+.tw{color:var(--t-insp)}
+
+@media (max-width:760px){
+ .wrap{padding:30px 16px 60px}
+ .stage,.forkbar{grid-template-columns:1fr}
+ .rail{border-right:none;border-bottom:2px solid var(--rule);padding:20px 0 18px}
+ .rail .stripe{right:auto;left:0;top:auto;bottom:-2px;width:60px;height:2px}
+ .body{padding:20px 0 26px}
+ .forkbar .lead{display:none}
+ .forkbar .msg{padding-left:0}
+ .scroller{overflow-x:auto}
+ table{min-width:560px}
+}
+@media print{.backbar,.toc{display:none}body{background:#fff}.wrap{max-width:none;padding:0}.step,.legend,.sect{break-inside:avoid}}
+.backbar{margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.backbar a{display:inline-block;font-size:13px;color:var(--ink-2);text-decoration:none;border:1px solid var(--rule);background:var(--card);padding:6px 13px}
+.backbar a:hover{color:var(--b);border-color:var(--b)}
+.backbar .lang{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;letter-spacing:.04em}
+.toc{background:var(--card);border:1px solid var(--rule);padding:16px 22px;margin-bottom:34px;font-size:13px}
+.toc a{color:var(--stage);text-decoration:none;font-weight:500;margin-right:18px;white-space:nowrap}
+.toc a:hover{text-decoration:underline}
+.tocrow{display:flex;flex-wrap:wrap;gap:6px 4px;row-gap:8px}
+
+/* process families, linked to the Equipment Map */
+.f-fab{background:#EEEBF8;color:#5B4B9E} .step.f-fab:not(.opt){border-left:3px solid #5B4B9E}
+.f-test{background:#E4F2F3;color:#0E7C86} .step.f-test:not(.opt){border-left:3px solid #0E7C86}
+.f-bond{background:#E8F1F8;color:#1B5E8C} .step.f-bond:not(.opt){border-left:3px solid #1B5E8C}
+.f-dice{background:#F2F5E4;color:#6B7A1E} .step.f-dice:not(.opt){border-left:3px solid #6B7A1E}
+.f-place{background:#FAEEE1;color:#B85C10} .step.f-place:not(.opt){border-left:3px solid #B85C10}
+.f-cure{background:#FBEAE7;color:#B03A2E} .step.f-cure:not(.opt){border-left:3px solid #B03A2E}
+.f-mold{background:#F8ECF3;color:#8E3B6B} .step.f-mold:not(.opt){border-left:3px solid #8E3B6B}
+.f-finish{background:#FDF3E1;color:#8A5A00} .step.f-finish:not(.opt){border-left:3px solid #8A5A00}
+.f-optic{background:#EAF4EE;color:#2E6B4F} .step.f-optic:not(.opt){border-left:3px solid #2E6B4F}
+.f-mech{background:#F4EBE2;color:#7C4A1E} .step.f-mech:not(.opt){border-left:3px solid #7C4A1E}
+.f-ems{background:#ECEFF1;color:#5F6C75} .step.f-ems:not(.opt){border-left:3px solid #5F6C75}
+a.chip{text-decoration:none} a.chip:hover{text-decoration:underline}
+.step .chip{white-space:normal;line-height:1.5;background:rgba(255,255,255,.72);border:1px solid currentColor}
+.step h4{color:inherit}
+.legend .fams{display:grid;grid-template-columns:repeat(5,1fr);gap:10px} .legend .fams .chipwrap{flex-direction:column;align-items:flex-start;gap:6px}
+.legend .chipwrap .chip{white-space:nowrap} .legend .fams small a{color:var(--ink-2);text-decoration:none;border-bottom:1px dotted var(--rule)} .legend .fams small a:hover{color:var(--b);border-color:var(--b)}
+@media (max-width:900px){.legend .fams{grid-template-columns:1fr 1fr}}
+.legend p.lnote{font-size:12px;color:var(--ink-3);margin:0 0 12px;line-height:1.5}
+
+/* materials and consumables, linked to the Materials Map */
+.step .mat{font-size:11.5px;margin:8px 0 0;line-height:1.55;padding:7px 9px;background:#F5F3EE;color:#4A555E}
+.step .mat b{font-weight:600;color:#14181C;white-space:nowrap}
+.step .mat a{color:#4A555E;text-decoration:none;border-bottom:1px dotted #9AA5AD}
+.step .mat a:hover{color:#4A3B7A;border-color:#4A3B7A}
+.step .mat .cons{display:block;margin-top:3px}
+.step .mat .none{color:#7C8891}
+.legend .fams.six{grid-template-columns:repeat(6,1fr)}
+@media (max-width:900px){.legend .fams.six{grid-template-columns:1fr 1fr}}
+.backbar .bbr{display:flex;gap:8px;flex-wrap:wrap}
+
+/* uniform step cards (21 Oct 2026) */
+.row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:12px}
+.route .row{grid-template-columns:minmax(0,1fr)}
+@media (max-width:900px){.row{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.row{grid-template-columns:minmax(0,1fr)}}
+.step{min-width:0;padding:11px 14px 13px}
+.step.f-fab,.step.f-test,.step.f-bond,.step.f-dice,.step.f-place,.step.f-cure,.step.f-mold,.step.f-finish,.step.f-optic,.step.f-mech,.step.f-ems,.step.pair,.step.opt{background:var(--card)}
+.step .head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:2px}
+.step .head .idx{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:10.5px;color:var(--ink-3)}
+.step .head .chip{font-size:10.5px;padding:1px 6px;line-height:1.5;white-space:nowrap;background:transparent;border:1px solid currentColor}
+.step h4{margin:4px 0 1px;color:var(--ink)}
+.step .en3{margin:0 0 6px}
+.step .why{margin:0 0 10px;padding:0;border:none;font-size:11.5px;color:var(--ink-3);line-height:1.5}
+.step .kv{display:grid;grid-template-columns:4.3em minmax(0,1fr);gap:0 12px;margin:0;font-size:11.5px;line-height:1.5;border-top:1px solid var(--rule-soft)}
+.step .kv dt{font-weight:600;color:var(--ink-2);padding:6px 0 5px;border-bottom:1px solid var(--rule-soft)}
+html[lang="en"] .step .kv{grid-template-columns:6.7em minmax(0,1fr)}
+.step .kv dd{margin:0;padding:6px 0 5px;color:var(--ink-2);border-bottom:1px solid var(--rule-soft);min-width:0}
+.step .kv dt:last-of-type,.step .kv dd:last-of-type{border-bottom:none;padding-bottom:0}
+.step .kv .it{display:block;padding-left:1em;text-indent:-1em}
+.step .kv .it .co{color:var(--ink-3)}
+.step .kv .it.none{color:var(--ink-3)}
+.step .kv .it.self{color:var(--t-insp);font-weight:600}
+.step .kv a{color:var(--ink-2);text-decoration:none;border-bottom:1px dotted #9AA5AD}
+.step .kv a:hover{color:var(--b);border-color:var(--b)}
+.step .kv b{font-weight:600;color:var(--ink)}
+</style>
+<style id="site-chrome">
+/* site chrome (added by build) */
+.backbar{flex-wrap:wrap}
+.lede,.defn,.ds .lede,.routehead .clarify,.forkbar .msg,.explain .sub2,.masthead .en{max-width:none}
+.backbar .bbr{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.backbar .lang{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;letter-spacing:.04em}
+.backbar .lang-off{display:inline-block;font-size:12px;color:var(--ink-3,#7C8891);border:1px dashed var(--rule,#CBD3D9);padding:6px 13px;font-family:ui-monospace,"SF Mono",Menlo,monospace;letter-spacing:.04em;cursor:default}
+.site-foot{margin-top:56px;border-top:1px solid var(--rule,#CBD3D9);padding-top:22px;display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;font-size:12.5px;color:var(--ink-3,#7C8891);line-height:1.5}
+.site-foot .sf-id{display:flex;align-items:center;gap:12px;min-width:0}
+.site-foot .sf-id img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:0 0 auto}
+.site-foot .sf-name{font-size:14px;font-weight:600;color:var(--ink,#14181C)}
+.site-foot .sf-name a{color:inherit;text-decoration:none}
+.site-foot .sf-name a:hover{color:var(--b,#4A3B7A)}
+.site-foot .sf-sub{font-size:12px;color:var(--ink-3,#7C8891)}
+.site-foot .sf-contact{display:flex;gap:16px;flex-wrap:wrap;margin-left:auto}
+.site-foot .sf-contact a{color:var(--ink-2,#4A555E);text-decoration:none;border-bottom:1px dotted var(--rule,#CBD3D9)}
+.site-foot .sf-contact a:hover{color:var(--b,#4A3B7A);border-color:var(--b,#4A3B7A)}
+.site-foot .sf-note{flex-basis:100%;font-size:11.5px}
+@media (max-width:640px){.site-foot .sf-contact{margin-left:0}}
+@media (max-width:640px){
+  .stickynav{margin-left:-14px;margin-right:-14px;padding-left:14px;padding-right:14px;white-space:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .legend .fams,.legend .fams.six,.famgrid,.idxgrid{grid-template-columns:1fr !important}
+  .routes{grid-template-columns:minmax(0,1fr) !important}
+  .route,.routes > *{min-width:0}
+  .route .row,.route .chips,.route .chiprow,.route .cols{flex-wrap:wrap}
+  .optstack table{min-width:0 !important}
+  .famcol .chip,.legend .chip,.chipwrap b{white-space:normal}
+}
+@media print{.site-foot .sf-id img{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="backbar"><a href="map.html">← 產業地圖</a><span class="bbr"><a class="lang" href="soic-cowos-en.html" onclick="this.href=this.href.split('#')[0]+location.hash">EN</a></span></div>
+
+
+
+<header class="masthead">
+ <h1>SoIC · CoWoS · CPO 完整製程圖</h1>
+ <p class="en">從晶圓製造到系統出貨的完整流程，逐步列出設備、材料與供應商<br>Wafer fabrication to system shipment, with the equipment, materials and suppliers behind every step</p>
+ <div class="meta"><span><b>顏色</b> <span class="tw">台灣</span></span></div>
+</header>
+
+<nav class="toc">
+  <div class="tocrow">
+    <a href="#legend">製程族群</a><a href="#legend-mat">材料族群</a><a href="#s1">A 晶圓製造</a><a href="#s2">B 晶片前處理</a>
+    <a href="#s3a">C SoIC</a><a href="#s3b">D CoWoS</a><a href="#se">E CPO</a>
+    <a href="#s4">F 板級組裝</a><a href="#vendors">供應商總表</a>
+  </div>
+</nav>
+
+
+<section class="legend" id="legend">
+ <h2>製程族群</h2>
+ 
+ <div class="chips fams">
+  <div class="chipwrap"><a class="chip f-fab" href="equipment.html#s-1">晶圓製程</a></div>
+  <div class="chipwrap"><a class="chip f-test" href="equipment.html#s-6">檢測與測試</a></div>
+  <div class="chipwrap"><a class="chip f-bond" href="equipment.html#s-8">接合與薄化</a></div>
+  <div class="chipwrap"><a class="chip f-dice" href="equipment.html#s-9">切割</a></div>
+  <div class="chipwrap"><a class="chip f-place" href="equipment.html#s-10">置晶與接合</a></div>
+  <div class="chipwrap"><a class="chip f-cure" href="equipment.html#s-4">熱處理與固化</a></div>
+  <div class="chipwrap"><a class="chip f-mold" href="equipment.html#s-11">點膠與封裝</a></div>
+  <div class="chipwrap"><a class="chip f-finish" href="equipment.html#s-12">焊接與後處理</a></div>
+  <div class="chipwrap"><a class="chip f-optic" href="equipment.html#s-13">光學組裝</a></div>
+  <div class="chipwrap"><a class="chip f-mech" href="equipment.html#s-14">機構與散熱組裝</a></div>
+  <div class="chipwrap"><a class="chip f-ems" href="equipment.html#s-14">板級與系統組裝</a></div>
+ </div>
+
+ <h2 class="two" id="legend-mat">材料族群</h2>
+ 
+ <div class="chips fams six">
+  <div class="chipwrap"><a class="chip" style="background:#EEEBF8;color:#5B4B9E" href="materials.html#m-1">基板</a><small><a href="materials.html#m-1">1 矽晶圓與載板</a> · <a href="materials.html#m-2">2 光罩與護膜</a> · <a href="materials.html#m-3">3 封裝基板與電路板</a></small></div>
+  <div class="chipwrap"><a class="chip" style="background:#E8F1F8;color:#1B5E8C" href="materials.html#m-4">圖形化與沉積</a><small><a href="materials.html#m-4">4 光阻與周邊材料</a> · <a href="materials.html#m-5">5 製程氣體</a> · <a href="materials.html#m-6">6 前驅物與濺鍍靶材</a></small></div>
+  <div class="chipwrap"><a class="chip" style="background:#E4F2F3;color:#0E7C86" href="materials.html#m-7">清洗、研磨與電鍍</a><small><a href="materials.html#m-7">7 濕式化學品</a> · <a href="materials.html#m-8">8 CMP 耗材</a> · <a href="materials.html#m-9">9 電鍍化學品與焊料</a></small></div>
+  <div class="chipwrap"><a class="chip" style="background:#FAEEE1;color:#B85C10" href="materials.html#m-10">封裝材料</a><small><a href="materials.html#m-10">10 接合、研磨與切割耗材</a> · <a href="materials.html#m-11">11 封裝膠材</a> · <a href="materials.html#m-12">12 散熱材料</a> · <a href="materials.html#m-13">13 光學材料</a></small></div>
+  <div class="chipwrap"><a class="chip" style="background:#F2F5E4;color:#6B7A1E" href="materials.html#m-14">測試與板級耗材</a><small><a href="materials.html#m-14">14 測試、板級與包裝耗材</a></small></div>
+  <div class="chipwrap"><a class="chip" style="background:#ECEFF1;color:#5F6C75" href="materials.html#m-15">腔體零件與廠務</a><small><a href="materials.html#m-15">15 腔體零件與廠務</a></small></div>
+ </div>
+
+ 
+ <h2 class="two">檢測方法</h2>
+ <div class="chips">
+  <div class="chipwrap"><b>AOI</b><small>表面缺陷光學檢測</small></div>
+  <div class="chipwrap"><b>量測</b><small>厚度、疊對、共面性與翹曲</small></div>
+  <div class="chipwrap"><b>X-ray</b><small>穿透檢測孔洞、偏移與裂紋</small></div>
+  <div class="chipwrap"><b>SAM</b><small>掃描式超音波顯微檢測分層</small></div>
+  <div class="chipwrap"><b>SEM</b><small>奈米級電子顯微，僅抽檢</small></div>
+ </div>
+</section>
+
+<!-- STAGE 1 -->
+<div class="stage" id="s1">
+ <div class="rail"><div class="stripe"></div>
+  <div class="num">STAGE A</div>
+  <h2>晶圓製造與晶圓級測試</h2>
+  <p class="en2">Wafer Fabrication and Wafer-Level Test</p>
+  
+ </div>
+ <div class="body">
+  
+<div class="sub p">A1 FEOL——僅執行一次 <span class="en3">A-01至A-14</span></div>
+<div class="row">
+   <div class="step f-fab" id="st-A-01"><div class="head"><span class="idx">A-01</span><a class="chip f-fab" href="equipment.html#s-1">晶圓製程</a></div><h4>光罩製作</h4><p class="en3">Mask Making</p>
+    <p class="why">每個設計層一片可重複使用的光罩</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">IMS Nanofabrication · Lasertec · NuFlare · KLA · Zeiss</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-2">光罩基板</a> <span class="co">Hoya · AGC</span></span><span class="it"><a href="materials.html#m-2">EUV 光罩</a> <span class="co">Tekscend Photomask · TSMC in-house</span></span><span class="it"><a href="materials.html#m-2">DUV 光罩</a> <span class="co">Tekscend Photomask · TSMC in-house</span></span><span class="it"><a href="materials.html#m-4">電子束光阻</a> <span class="co">Fujifilm · TOK</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">光化學 EUV 檢測 <span class="co">Lasertec</span></span><span class="it">電子束修補 <span class="co">Zeiss</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-A-02"><div class="head"><span class="idx">A-02</span><a class="chip f-fab" href="equipment.html#s-3">晶圓製程</a></div><h4>磊晶</h4><p class="en3">Epitaxy</p>
+    <p class="why">奈米片通道的Si/SiGe超晶格</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">ASM · AMAT · Aixtron · Veeco ｜ AMEC · NAURA</span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-1">300 mm 拋光矽晶圓</a> <span class="co">Shin-Etsu · SUMCO</span></span><span class="it"><a href="materials.html#m-5">矽鍺源氣體</a> <span class="co">Linde · Air Liquide</span></span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-15">石英管 · 晶舟 · 腔體零件</a> <span class="co">Heraeus Conamic · Shin-Etsu Quartz</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">量測（厚度、Ge 含量）</span><span class="it">缺陷檢測 <span class="co">KLA · AMAT</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-cure" id="st-A-03"><div class="head"><span class="idx">A-03</span><a class="chip f-cure" href="equipment.html#s-4">熱處理與固化</a></div><h4>氧化與爐管退火</h4><p class="en3">Oxidation and Furnace Anneal</p>
+    <p class="why">批次爐管成長閘極氧化層</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">TEL · Kokusai · ASM ｜ NAURA · ACM</span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-5">氧化與退火氣體</a> <span class="co">Linde · Air Liquide</span></span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-15">石英管 · 晶舟 · 腔體零件</a> <span class="co">Heraeus Conamic · Shin-Etsu Quartz</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">膜厚（橢圓偏光儀） <span class="co">KLA · Onto</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-A-04"><div class="head"><span class="idx">A-04</span><a class="chip f-fab" href="equipment.html#s-3">晶圓製程</a></div><h4>介電層 CVD</h4><p class="en3">Dielectric CVD</p>
+    <p class="why">導線之間與周圍的絕緣膜</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">AMAT · Lam · TEL · Wonik IPS ｜ Piotech · NAURA</span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-6">介電前驅物</a> <span class="co">Merck · Air Liquide</span></span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-5">腔體清潔氣體</a> <span class="co">SK Specialty · Kanto Denka</span></span><span class="it"><a href="materials.html#m-15">沉積腔零件</a> <span class="co">Ferrotec · Kyocera</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">膜厚 <span class="co">KLA · Onto</span></span><span class="it">顆粒檢測 <span class="co">KLA · Hitachi High-Tech</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-A-05"><div class="head"><span class="idx">A-05</span><a class="chip f-fab" href="equipment.html#s-3">晶圓製程</a></div><h4>原子層沉積</h4><p class="en3">ALD</p>
+    <p class="why">每循環一原子層，用於高介電閘極層</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">ASM · AMAT · TEL · Lam · Kokusai ｜ Leadmicro · Piotech</span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-5">氧化與退火氣體</a> <span class="co">Linde · Air Liquide</span></span><span class="it"><a href="materials.html#m-6">ALD 前驅物</a> <span class="co">Adeka · Merck</span></span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-5">腔體清潔氣體</a> <span class="co">SK Specialty · Kanto Denka</span></span><span class="it"><a href="materials.html#m-15">沉積腔零件</a> <span class="co">Ferrotec · Kyocera</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">膜厚，埃級 <span class="co">KLA · Onto</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-A-06"><div class="head"><span class="idx">A-06</span><a class="chip f-fab" href="equipment.html#s-1">晶圓製程</a></div><h4>光阻塗佈</h4><p class="en3">Resist Coating</p>
+    <p class="why">在與曝光機連線的塗佈機上旋塗</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">TEL · SCREEN · SEMES ｜ Kingsemi</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-4">光阻</a> <span class="co">JSR · TOK</span></span><span class="it"><a href="materials.html#m-4">BARC · SOC · 硬遮罩底層</a> <span class="co">Brewer Science · Nissan Chemical</span></span><span class="it"><a href="materials.html#m-4">HMDS 密著促進劑</a> <span class="co">Shin-Etsu · Merck</span></span><span class="it"><a href="materials.html#m-4">稀釋液與洗邊劑</a> <span class="co">TOK · Tokuyama</span></span><span class="it"><a href="materials.html#m-15">光阻終端過濾器</a> <span class="co">Entegris · Pall</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">光阻厚度 <span class="co">KLA · Onto</span></span><span class="it">缺陷掃描 <span class="co">KLA · AMAT</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-A-07"><div class="head"><span class="idx">A-07</span><a class="chip f-fab" href="equipment.html#s-1">晶圓製程</a></div><h4>EUV 曝光</h4><p class="en3">EUV Exposure</p>
+    <p class="why">13.5 nm光印出關鍵層</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">ASML</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-2">EUV 光罩</a> <span class="co">Tekscend Photomask · TSMC in-house</span></span><span class="it"><a href="materials.html#m-2">EUV 光罩護膜</a> <span class="co">Tekscend Photomask · TSMC in-house</span></span><span class="it"><a href="materials.html#m-4">光阻</a> <span class="co">JSR · TOK</span></span><span class="it"><a href="materials.html#m-5">EUV 光源錫料與氫氣</a> <span class="co">Linde · Air Liquide</span></span><span class="it"><a href="materials.html#m-15">EUV 集光鏡</a> <span class="co">Zeiss SMT · Cymer</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">CD-SEM <span class="co">Hitachi High-Tech · AMAT</span></span><span class="it">疊對 <span class="co">KLA · ASML</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-A-08"><div class="head"><span class="idx">A-08</span><a class="chip f-fab" href="equipment.html#s-1">晶圓製程</a></div><h4>DUV 曝光</h4><p class="en3">DUV Exposure</p>
+    <p class="why">193 nm浸潤式印出其餘各層</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">ASML · Nikon · Canon ｜ SMEE</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-2">DUV 光罩</a> <span class="co">Tekscend Photomask · TSMC in-house</span></span><span class="it"><a href="materials.html#m-2">DUV 光罩護膜</a> <span class="co">Tekscend Photomask · TSMC in-house</span></span><span class="it"><a href="materials.html#m-4">光阻</a> <span class="co">JSR · TOK</span></span><span class="it"><a href="materials.html#m-5">準分子雷射氣體</a> <span class="co">Linde · Air Liquide</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">CD-SEM <span class="co">Hitachi High-Tech · AMAT</span></span><span class="it">疊對 <span class="co">KLA · ASML</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-A-09"><div class="head"><span class="idx">A-09</span><a class="chip f-fab" href="equipment.html#s-1">晶圓製程</a></div><h4>曝後烘烤與顯影</h4><p class="en3">Post-Exposure Bake and Develop</p>
+    <p class="why">烘烤定影，顯影液打開圖形</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">TEL · SCREEN · SEMES</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-4">光阻</a> <span class="co">JSR · TOK</span></span><span class="it"><a href="materials.html#m-4">TMAH 顯影液</a> <span class="co">Tokuyama · TOK</span></span><span class="it"><a href="materials.html#m-7">界面活性劑沖洗液</a> <span class="co">Kanto Chemical · Fujifilm</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">顯影後檢測：CD-SEM <span class="co">Hitachi High-Tech · AMAT</span></span><span class="it">缺陷掃描 <span class="co">KLA · AMAT</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-A-10"><div class="head"><span class="idx">A-10</span><a class="chip f-fab" href="equipment.html#s-2">晶圓製程</a></div><h4>電漿蝕刻</h4><p class="en3">Plasma Etch</p>
+    <p class="why">將圖形轉印至矽、金屬或介電層</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Lam · TEL · AMAT · Hitachi High-Tech ｜ NAURA · AMEC</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-4">光阻</a> <span class="co">JSR · TOK</span></span><span class="it"><a href="materials.html#m-4">BARC · SOC · 硬遮罩底層</a> <span class="co">Brewer Science · Nissan Chemical</span></span><span class="it"><a href="materials.html#m-5">蝕刻氣體</a> <span class="co">SK Specialty · Kanto Denka</span></span><span class="it"><a href="materials.html#m-15">蝕刻腔零件</a> <span class="co">Silfex · Hana Materials</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">蝕刻後檢測：CD-SEM <span class="co">Hitachi High-Tech · AMAT</span></span><span class="it">缺陷掃描 <span class="co">KLA · AMAT</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-A-11"><div class="head"><span class="idx">A-11</span><a class="chip f-fab" href="equipment.html#s-2">晶圓製程</a></div><h4>去光阻</h4><p class="en3">Resist Strip</p>
+    <p class="why">氧電漿去除用過的光阻</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">PSK · Lam · ULVAC ｜ Mattson · NAURA</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-4">光阻</a> <span class="co">JSR · TOK</span></span><span class="it"><a href="materials.html#m-5">去光阻氣體</a> <span class="co">Linde · Air Liquide</span></span><span class="it"><a href="materials.html#m-7">蝕刻後殘留清除液</a> <span class="co">Entegris · Qnity</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">殘留檢測 <span class="co">KLA · AMAT</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-A-12"><div class="head"><span class="idx">A-12</span><a class="chip f-fab" href="equipment.html#s-4">晶圓製程</a></div><h4>離子佈植</h4><p class="en3">Ion Implantation</p>
+    <p class="why">摻雜源極、汲極、井區與臨界電壓層</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">AMAT · Axcelis · SMIT · Nissin Ion · <span class="tw">AIBT</span> ｜ Kingstone · CETC</span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-5">摻雜氣體</a> <span class="co">Entegris · Merck</span></span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-15">離子源零件</a> <span class="co">AMAT · Axcelis</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">片電阻 <span class="co">KLA</span></span><span class="it">劑量監控 <span class="co">KLA</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-cure" id="st-A-13"><div class="head"><span class="idx">A-13</span><a class="chip f-cure" href="equipment.html#s-4">熱處理與固化</a></div><h4>快速熱處理與雷射退火</h4><p class="en3">Rapid Thermal and Laser Anneal</p>
+    <p class="why">活化摻雜物而不使其擴散</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">AMAT · Veeco · SCREEN ｜ Mattson · NAURA</span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-5">氧化與退火氣體</a> <span class="co">Linde · Air Liquide</span></span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-15">燈管陣列與石英視窗</a> <span class="co">Ushio · Excelitas</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">片電阻 <span class="co">KLA</span></span><span class="it">接面深度</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-A-14"><div class="head"><span class="idx">A-14</span><a class="chip f-fab" href="equipment.html#s-5">晶圓製程</a></div><h4>晶圓清洗</h4><p class="en3">Wafer Clean</p>
+    <p class="why">化學品與兆聲波清洗，不致圖形倒塌</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">SCREEN · TEL · Lam · SEMES ｜ ACM · NAURA · Kingsemi</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-7">RCA 清洗化學品</a> <span class="co">BASF · Kanto Chemical</span></span><span class="it"><a href="materials.html#m-15">超純水耗材</a> <span class="co">Entegris · Pall</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">顆粒數（無圖形檢測） <span class="co">KLA · Hitachi High-Tech</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+</div>
+<div class="sub p">A2 BEOL——每層金屬一次，約 15 次 <span class="en3">A-04 → A-06 至 A-09 → A-10 → A-11 → A-14 → A-15 → A-16 → A-17</span></div>
+<div class="row">
+   <div class="step f-fab" id="st-A-15"><div class="head"><span class="idx">A-15</span><a class="chip f-fab" href="equipment.html#s-3">晶圓製程</a></div><h4>阻障層與種子層 PVD</h4><p class="en3">Barrier and Seed PVD</p>
+    <p class="why">每層電鍍銅的基底</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">AMAT · ULVAC · Canon Anelva ｜ NAURA</span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-6">濺鍍靶材</a> <span class="co">JX Metals · Honeywell</span></span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-15">PVD 製程套件</a> <span class="co">Ferrotec · Ultra Clean</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">膜厚 <span class="co">KLA · Onto</span></span><span class="it">電阻率 <span class="co">KLA</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-A-16"><div class="head"><span class="idx">A-16</span><a class="chip f-fab" href="equipment.html#s-3">晶圓製程</a></div><h4>銅電鍍</h4><p class="en3">Copper Electroplating</p>
+    <p class="why">由下而上無孔洞填滿溝槽與導孔</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Lam · AMAT · TEL ｜ ACM</span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-9">銅電鍍液與添加劑</a> <span class="co">MacDermid Alpha · Atotech</span></span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-9">銅／錫陽極</a> <span class="co">Mitsubishi Materials · JX Metals</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">孔洞檢測</span><span class="it">厚度 <span class="co">KLA · Onto</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-A-17"><div class="head"><span class="idx">A-17</span><a class="chip f-fab" href="equipment.html#s-5">晶圓製程</a></div><h4>化學機械研磨</h4><p class="en3">CMP</p>
+    <p class="why">下一道微影前將該層拋平</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">AMAT · Ebara ｜ Hwatsing · ACM</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-8">CMP 研磨液</a> <span class="co">Entegris · Fujimi</span></span><span class="it"><a href="materials.html#m-8">研磨墊</a> <span class="co">Qnity · 3M</span></span><span class="it"><a href="materials.html#m-8">鑽石修整碟</a> <span class="co">3M · Saesol</span></span><span class="it"><a href="materials.html#m-8">CMP 後清洗液與 PVA 刷輪</a> <span class="co">Entegris · Aion</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">厚度 <span class="co">KLA · Onto</span></span><span class="it">碟陷與侵蝕 <span class="co">Bruker · KLA</span></span><span class="it">CMP 後缺陷掃描 <span class="co">KLA · AMAT</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+</div>
+<div class="sub p">A3 製程控制與晶圓測試 <span class="en3">A-18、A-19 於微影、蝕刻與 CMP 後抽檢；A-20 於最終層之後</span></div>
+<div class="row">
+   <div class="step f-test" id="st-A-18"><div class="head"><span class="idx">A-18</span><a class="chip f-test" href="equipment.html#s-6">檢測與測試</a></div><h4>缺陷檢測</h4><p class="en3">Defect Inspection</p>
+    <p class="why">找出20 nm以下的缺陷</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">KLA · AMAT · ASML · Hitachi High-Tech ｜ Skyverse · Jingce</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it self">本步驟即為檢測站</span><span class="it">光學掃描</span><span class="it">電子束複檢</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it"><a href="materials.html#m-1">監控與再生晶圓</a> <span class="co">SUMCO · Shin-Etsu</span></span></dd></dl></div>
+   <div class="step f-test" id="st-A-19"><div class="head"><span class="idx">A-19</span><a class="chip f-test" href="equipment.html#s-6">檢測與測試</a></div><h4>線寬、疊對與膜厚量測</h4><p class="en3">CD, Overlay and Film Metrology</p>
+    <p class="why">將修正值回饋給曝光機</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">KLA · Hitachi High-Tech · ASML · Nova · Onto ｜ Skyverse · Jingce · DJEL</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it self">本步驟即為檢測站</span><span class="it">CD-SEM</span><span class="it">疊對</span><span class="it">散射量測</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it"><a href="materials.html#m-1">監控與再生晶圓</a> <span class="co">SUMCO · Shin-Etsu</span></span></dd></dl></div>
+   <div class="step f-test" id="st-A-20"><div class="head"><span class="idx">A-20</span><a class="chip f-test" href="equipment.html#s-7">檢測與測試</a></div><h4>晶圓針測（KGD）</h4><p class="en3">Wafer Test (KGD)</p>
+    <p class="why">堆疊前的良率關卡</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Advantest · Teradyne · TEL · FormFactor · <span class="tw">MPI</span> · <span class="tw">CHPT</span> ｜ Changchuan</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it self">本步驟即為檢測站</span><span class="it">電性測試</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it"><a href="materials.html#m-14">探針卡</a> <span class="co">FormFactor · Technoprobe</span></span></dd></dl></div>
+
+  </div>
+ </div>
+</div>
+<div class="divider"></div>
+
+<!-- STAGE 2 -->
+<div class="stage" id="s2">
+ <div class="rail shared"><div class="stripe"></div>
+  <div class="num">STAGE B</div>
+  <h2>上層晶片前處理</h2>
+  <p class="en2">Top-Die Preparation，SoIC 與 CoWoS 共用</p>
+  
+ </div>
+ <div class="body">
+  <div class="row">
+   <div class="step f-bond" id="st-04"><div class="head"><span class="idx">B-04</span><a class="chip f-bond" href="equipment.html#s-8">接合與薄化</a></div><h4>暫時貼合</h4><p class="en3">Temporary Bonding</p>
+    <p class="why">載板支撐薄化後易碎的晶圓</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">EVG · SUSS MicroTec</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-1">玻璃／矽載板晶圓</a> <span class="co">Corning · AGC</span></span><span class="it"><a href="materials.html#m-10">暫時接合膠</a> <span class="co">Brewer Science · TOK</span></span><span class="it"><a href="materials.html#m-10">雷射離型層</a> <span class="co">3M · Brewer Science</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">量測（膠厚、對位）</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-cure" id="st-05"><div class="head"><span class="idx">B-05</span><a class="chip f-cure" href="equipment.html#s-4">熱處理與固化</a></div><h4>貼合後固化</h4><p class="en3">Post-Bond Cure</p>
+    <p class="why">研磨時使晶圓固定不動</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it"><span class="tw">C SUN</span> · Koyo Thermo</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-10">暫時接合膠</a> <span class="co">Brewer Science · TOK</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">量測（翹曲）</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-bond pair" id="st-06a"><div class="head"><span class="idx">B-06a</span><a class="chip f-bond" href="equipment.html#s-8">接合與薄化</a></div><h4>粗磨／細磨</h4><p class="en3">Coarse &amp; Fine Grinding</p>
+    <p class="why">快速去除，但留下次表面微裂</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it"><b>DISCO</b> · Tokyo Seimitsu · Okamoto</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-10">鑽石研磨輪</a> <span class="co">DISCO · Asahi Diamond</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">量測（厚度、總厚度變異）</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab pair" id="st-06b"><div class="head"><span class="idx">B-06b</span><a class="chip f-fab" href="equipment.html#s-5">晶圓製程</a></div><h4>CMP 拋光</h4><p class="en3">CMP Polishing</p>
+    <p class="why">消除研磨留下的微裂</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it"><b>AMAT</b> · Ebara · ACM Research</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-8">CMP 研磨液</a> <span class="co">Entegris · Fujimi</span></span><span class="it"><a href="materials.html#m-8">研磨墊</a> <span class="co">Qnity · 3M</span></span><span class="it"><a href="materials.html#m-8">鑽石修整碟</a> <span class="co">3M · Saesol</span></span><span class="it"><a href="materials.html#m-8">CMP 後清洗液與 PVA 刷輪</a> <span class="co">Entegris · Aion</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">AOI（刮傷、研磨液殘留） <span class="co">Camtek · Onto</span></span><span class="it">量測</span><span class="it">SEM（異常時） <span class="co">Thermo Fisher · Hitachi High-Tech</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+  </div>
+  <div class="row">
+   <div class="step f-mold" id="st-07"><div class="head"><span class="idx">B-07</span><a class="chip f-mold" href="equipment.html#s-11">點膠與封裝</a></div><h4>晶圓真空壓膜</h4><p class="en3">Wafer Vacuum Lamination</p>
+    <p class="why">不留氣泡成為後段缺陷</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Takatori</span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-11">固晶膜與背面保護膜</a> <span class="co">Resonac · Nitto Denko</span></span><span class="it"><a href="materials.html#m-11">非導電膜</a> <span class="co">Resonac · Namics</span></span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it">AOI（氣泡、皺褶） <span class="co">Camtek · Onto</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-08a"><div class="head"><span class="idx">B-08a</span><a class="chip f-fab" href="equipment.html#s-1">晶圓製程</a></div><h4>封裝微影</h4><p class="en3">Packaging Lithography</p>
+    <p class="why">在厚膜光阻上印出RDL與凸塊圖形</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Canon · Nikon · Veeco · Onto · <span class="tw">C SUN</span> ｜ SMEE</span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-4">PSPI 感光介電材</a> <span class="co">Asahi Kasei · HD MicroSystems</span></span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-2">封裝光罩</a> <span class="co">Tekscend Photomask · Photronics</span></span><span class="it"><a href="materials.html#m-4">稀釋液與洗邊劑</a> <span class="co">TOK · Tokuyama</span></span><span class="it"><a href="materials.html#m-4">TMAH 顯影液</a> <span class="co">Tokuyama · TOK</span></span><span class="it"><a href="materials.html#m-4">封裝厚膜光阻與乾膜</a> <span class="co">TOK · JSR</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">AOI（線路缺陷） <span class="co">Camtek · Onto</span></span><span class="it">疊對</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-08b"><div class="head"><span class="idx">B-08b</span><a class="chip f-fab" href="equipment.html#s-2">晶圓製程</a></div><h4>TSV 背露蝕刻</h4><p class="en3">TSV Reveal Etch</p>
+    <p class="why">露出銅TSV尖端以供接觸</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Lam · SPTS · AMAT · Plasma-Therm · <span class="tw">Skytech</span> ｜ AMEC · NAURA</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-5">蝕刻氣體</a> <span class="co">SK Specialty · Kanto Denka</span></span><span class="it"><a href="materials.html#m-7">背面蝕刻與清洗化學品</a> <span class="co">BASF · Kanto Chemical</span></span><span class="it"><a href="materials.html#m-15">蝕刻腔零件</a> <span class="co">Silfex · Hana Materials</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">量測（露出高度）</span><span class="it">SEM <span class="co">Thermo Fisher · Hitachi High-Tech</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-08c"><div class="head"><span class="idx">B-08c</span><a class="chip f-fab" href="equipment.html#s-3">晶圓製程</a></div><h4>種子層 PVD</h4><p class="en3">Seed-Layer PVD</p>
+    <p class="why">RDL與凸塊電鍍的基底</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">SPTS · Evatec · ULVAC · <span class="tw">Skytech</span> · <span class="tw">Youwei</span> ｜ NAURA</span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-6">濺鍍靶材</a> <span class="co">JX Metals · Honeywell</span></span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-15">PVD 製程套件</a> <span class="co">Ferrotec · Ultra Clean</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">膜厚 <span class="co">KLA · Onto</span></span><span class="it">附著力</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-08d"><div class="head"><span class="idx">B-08d</span><a class="chip f-fab" href="equipment.html#s-3">晶圓製程</a></div><h4>RDL 與凸塊電鍍</h4><p class="en3">RDL and Bump Plating</p>
+    <p class="why">銅線路、銅柱、焊料凸塊與TSV填充</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Ebara · TEL · AMAT · Lam ｜ ACM</span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-9">銅電鍍液與添加劑</a> <span class="co">MacDermid Alpha · Atotech</span></span><span class="it"><a href="materials.html#m-9">鎳與錫銀電鍍液</a> <span class="co">MacDermid Alpha · Atotech</span></span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-4">封裝厚膜光阻與乾膜</a> <span class="co">TOK · JSR</span></span><span class="it"><a href="materials.html#m-9">銅／錫陽極</a> <span class="co">Mitsubishi Materials · JX Metals</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">AOI（線路缺陷） <span class="co">Camtek · Onto</span></span><span class="it">量測（線寬、凸塊高度） <span class="co">Camtek · Onto</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-08e"><div class="head"><span class="idx">B-08e</span><a class="chip f-fab" href="equipment.html#s-5">晶圓製程</a></div><h4>濕式蝕刻與去光阻</h4><p class="en3">Wet Etch and Strip</p>
+    <p class="why">清除線間的光阻與種子層</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Lam (SEZ) · Veeco · <span class="tw">GPTC</span> · <span class="tw">Scientech</span> ｜ ACM</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-4">封裝厚膜光阻與乾膜</a> <span class="co">TOK · JSR</span></span><span class="it"><a href="materials.html#m-7">厚膜光阻剝離液</a> <span class="co">Entegris · Qnity</span></span><span class="it"><a href="materials.html#m-7">種子層蝕刻液</a> <span class="co">Entegris · Qnity</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">AOI（殘留） <span class="co">Camtek · Onto</span></span><span class="it">X-ray（TSV 填充） <span class="co">Nordson · Comet Yxlon</span></span><span class="it">SEM <span class="co">Thermo Fisher · Hitachi High-Tech</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-bond" id="st-09"><div class="head"><span class="idx">B-09</span><a class="chip f-bond" href="equipment.html#s-8">接合與薄化</a></div><h4>解鍵合</h4><p class="en3">Debonding</p>
+    <p class="why">移除載板，破片損失的常見來源</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">EVG · SUSS MicroTec</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-1">玻璃／矽載板晶圓</a> <span class="co">Corning · AGC</span></span><span class="it"><a href="materials.html#m-7">解鍵合殘膠清洗液</a> <span class="co">Brewer Science · TOK</span></span><span class="it"><a href="materials.html#m-10">暫時接合膠</a> <span class="co">Brewer Science · TOK</span></span><span class="it"><a href="materials.html#m-10">雷射離型層</a> <span class="co">3M · Brewer Science</span></span><span class="it"><a href="materials.html#m-10">切割膠帶與框架</a> <span class="co">Nitto Denko · Lintec</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">AOI（破片、殘膠） <span class="co">Camtek · Onto</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-dice" id="st-10a"><div class="head"><span class="idx">B-10a</span><a class="chip f-dice" href="equipment.html#s-9">切割</a></div><h4>切割</h4><p class="en3">Dicing</p>
+    <p class="why">low-k晶圓先雷射開槽以免剝層</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">DISCO · Tokyo Seimitsu · ASMPT · <span class="tw">Laser Tek</span> ｜ Han's Laser</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-10">切割刀</a> <span class="co">DISCO · Asahi Diamond</span></span><span class="it"><a href="materials.html#m-10">切割膠帶與框架</a> <span class="co">Nitto Denko · Lintec</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">AOI（邊緣崩裂、裂紋） <span class="co">Camtek · Onto</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-place" id="st-10b"><div class="head"><span class="idx">B-10b</span><a class="chip f-place" href="equipment.html#s-10">置晶與接合</a></div><h4>揀晶與分類</h4><p class="en3">Die Picking and Sorting</p>
+    <p class="why">依測試圖揀出良好晶粒</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">ASMPT · Besi · K&amp;S · <span class="tw">Jun Hwa</span> · <span class="tw">All Ring</span> ｜ Xinyichang</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-10">切割膠帶與框架</a> <span class="co">Nitto Denko · Lintec</span></span><span class="it"><a href="materials.html#m-14">晶粒承載盤與吸嘴</a> <span class="co">Entegris · Peak</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">AOI（晶粒表面） <span class="co">Camtek · Onto</span></span><span class="it">晶圓圖核對</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+  </div>
+ </div>
+</div>
+
+
+<div style="height:20px"></div>
+
+<div class="routes">
+ <!-- SoIC -->
+ <div class="route" id="s3a">
+  <div class="routehead">
+   <h2>C SoIC</h2>
+   <p class="en2">System on Integrated Chips——垂直堆疊</p>
+   
+  </div>
+
+  <div class="sub g">C1 表面前處理 <span class="lite">Surface Preparation</span></div>
+  <div class="row">
+   <div class="step f-fab" id="st-11"><div class="head"><span class="idx">C-11</span><a class="chip f-fab" href="equipment.html#s-5">晶圓製程</a></div><h4>表面平坦化／CMP</h4><p class="en3">Surface Planarization / CMP</p>
+    <p class="why">凹陷的銅墊於退火時膨脹接合</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it"><b>AMAT</b> · Ebara · ACM Research</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-8">CMP 研磨液</a> <span class="co">Entegris · Fujimi</span></span><span class="it"><a href="materials.html#m-8">研磨墊</a> <span class="co">Qnity · 3M</span></span><span class="it"><a href="materials.html#m-8">鑽石修整碟</a> <span class="co">3M · Saesol</span></span><span class="it"><a href="materials.html#m-8">CMP 後清洗液與 PVA 刷輪</a> <span class="co">Entegris · Aion</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">AOI（顆粒數為關鍵參數） <span class="co">KLA · Hitachi High-Tech</span></span><span class="it">量測（銅墊碟陷） <span class="co">Bruker · KLA</span></span><span class="it">SEM <span class="co">Thermo Fisher · Hitachi High-Tech</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-12a"><div class="head"><span class="idx">C-12a</span><a class="chip f-fab" href="equipment.html#s-5">晶圓製程</a></div><h4>鍵合前濕式清洗</h4><p class="en3">Pre-Bond Wet Clean</p>
+    <p class="why">一顆微粒即毀掉鍵合</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">SCREEN · TEL · Lam · <span class="tw">GPTC</span> · <span class="tw">Scientech</span> ｜ ACM</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-7">RCA 清洗化學品</a> <span class="co">BASF · Kanto Chemical</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">顆粒數 <span class="co">KLA · Hitachi High-Tech</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab" id="st-12b"><div class="head"><span class="idx">C-12b</span><a class="chip f-fab" href="equipment.html#s-2">晶圓製程</a></div><h4>電漿活化</h4><p class="en3">Plasma Activation</p>
+    <p class="why">表面親水，室溫即可預鍵合</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">EVG · SUSS MicroTec · Nordson MARCH · Plasma-Therm · <span class="tw">Youwei</span></span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-5">電漿活化氣體</a> <span class="co">Linde · Air Liquide</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">AOI（殘留、顆粒） <span class="co">KLA · Hitachi High-Tech</span></span><span class="it">接觸角 <span class="co">KRÜSS · Biolin Scientific</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+  </div>
+
+  <div class="sub g">C2 鍵合 <span class="lite">Bonding</span></div>
+  <div class="row">
+   <div class="step f-place" id="st-13"><div class="head"><span class="idx">C-13</span><a class="chip f-place" href="equipment.html#s-10">置晶與接合</a></div><h4>高精度對位／貼晶</h4><p class="en3">High-Precision Alignment / Bonding</p>
+    <p class="why">次微米對位，全流程設備瓶頸</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it"><b>Besi</b> · <b>ASMPT</b> · EVG · SUSS · Hanmi</span></dd>
+    <dt>材料</dt><dd><span class="it none">僅對位</span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it">量測（疊對精度）</span><span class="it">X-ray <span class="co">Nordson · Comet Yxlon</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-place" id="st-14"><div class="head"><span class="idx">C-14</span><a class="chip f-place" href="equipment.html#s-10">置晶與接合</a></div><h4>預鍵結／混合鍵結</h4><p class="en3">Pre-Bond / Hybrid Bonding</p>
+    <p class="why">介電層先鍵合，銅墊於退火時接合</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it"><b>Besi</b> · <b>ASMPT</b> · EVG</span></dd>
+    <dt>材料</dt><dd><span class="it none">無新增材料</span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it">X-ray <span class="co">Nordson · Comet Yxlon</span></span><span class="it">SAM <span class="co">PVA TePla · Nordson</span></span><span class="it">SEM（破壞性抽檢） <span class="co">Thermo Fisher · Hitachi High-Tech</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+  </div>
+
+  <div class="sub g">C3 熱處理 <span class="lite">Thermal</span></div>
+  <div class="row">
+   <div class="step f-cure" id="st-15"><div class="head"><span class="idx">C-15</span><a class="chip f-cure" href="equipment.html#s-4">熱處理與固化</a></div><h4>鍵結後退火</h4><p class="en3">Post-Bond Anneal</p>
+    <p class="why">銅晶粒成長，形成電性連接</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">AMAT · Kokusai · TEL</span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-5">氧化與退火氣體</a> <span class="co">Linde · Air Liquide</span></span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it">量測（翹曲）</span><span class="it">X-ray（孔洞成長） <span class="co">Nordson · Comet Yxlon</span></span><span class="it">SEM <span class="co">Thermo Fisher · Hitachi High-Tech</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+  </div>
+
+  <div class="sub g">C4 檢測與測試 <span class="lite">Inspection &amp; Test</span></div>
+  <div class="row">
+   <div class="step f-test" id="st-16a"><div class="head"><span class="idx">C-16a</span><a class="chip f-test" href="equipment.html#s-6">檢測與測試</a></div><h4>鍵合後檢測</h4><p class="en3">Post-Bond Inspection</p>
+    <p class="why">以光學檢查晶粒位置與表面</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Onto · Camtek · KLA · <span class="tw">Taliang</span> · <span class="tw">GPM</span> ｜ Skyverse</span></dd>
+    <dt>材料</dt><dd><span class="it none">僅檢測</span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it self">本步驟即為檢測站</span><span class="it">AOI（晶粒偏移、傾斜）</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-test" id="st-16b"><div class="head"><span class="idx">C-16b</span><a class="chip f-test" href="equipment.html#s-6">檢測與測試</a></div><h4>X-ray 與超音波檢測</h4><p class="en3">X-ray and Acoustic Inspection</p>
+    <p class="why">穿透堆疊，補足AOI的盲區</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Nordson · Comet Yxlon · Zeiss · PVA TePla · <span class="tw">TRI</span> ｜ Unicomp</span></dd>
+    <dt>材料</dt><dd><span class="it none">僅檢測</span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it self">本步驟即為檢測站</span><span class="it">X-ray（孔洞）</span><span class="it">SAM（分層）</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-test" id="st-16c"><div class="head"><span class="idx">C-16c</span><a class="chip f-test" href="equipment.html#s-7">檢測與測試</a></div><h4>電性測試</h4><p class="en3">Electrical Test</p>
+    <p class="why">確認每個鍵合連接皆導通</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Advantest · Teradyne · TEL · FormFactor · <span class="tw">MPI</span> · <span class="tw">CHPT</span> ｜ Changchuan</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it self">本步驟即為檢測站</span><span class="it">電性測試</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it"><a href="materials.html#m-14">探針卡</a> <span class="co">FormFactor · Technoprobe</span></span></dd></dl></div>
+  </div>
+ </div>
+
+ <!-- CoWoS -->
+ <div class="route pk" id="s3b">
+  <div class="routehead">
+   <h2>D CoWoS</h2>
+   <p class="en2">Chip on Wafer on Substrate——水平整合</p>
+   
+  </div>
+
+  <div class="sub p">D1 組裝至中介層 <span class="lite">Chip-on-Wafer（CoW）</span></div>
+  <div class="row">
+   <div class="step f-place" id="st-17"><div class="head"><span class="idx">D-17</span><a class="chip f-place" href="equipment.html#s-10">置晶與接合</a></div><h4>晶片貼裝至中介層</h4><p class="en3">Die Attach to Interposer</p>
+    <p class="why">邏輯晶粒與HBM依序置放</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">ASMPT · K&amp;S · Shinkawa</span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-1">矽中介層晶圓</a> <span class="co">TSMC · Samsung</span></span><span class="it"><a href="materials.html#m-1">HBM 堆疊</a> <span class="co">SK hynix · Samsung</span></span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-9">沾黏助焊劑</a> <span class="co">Senju Metal · MacDermid Alpha</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">AOI（置放） <span class="co">Camtek · Onto</span></span><span class="it">量測（傾斜） <span class="co">Camtek · Onto</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-place" id="st-18"><div class="head"><span class="idx">D-18</span><a class="chip f-place" href="equipment.html#s-10">置晶與接合</a></div><h4>微凸塊接合／TCB</h4><p class="en3">Micro-bump Bonding / TCB</p>
+    <p class="why">此處產出決定CoWoS產能上限</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it"><b>ASMPT</b> · K&amp;S · Shinkawa · Hanmi</span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-11">非導電膜</a> <span class="co">Resonac · Namics</span></span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-7">助焊劑殘留清洗液</a> <span class="co">Zestron · Kyzen</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">AOI <span class="co">Camtek · Onto</span></span><span class="it">X-ray（橋接、冷焊） <span class="co">Nordson · Comet Yxlon</span></span><span class="it">量測（鍵合線高度） <span class="co">Camtek · Onto</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-mold" id="st-19"><div class="head"><span class="idx">D-19</span><a class="chip f-mold" href="equipment.html#s-11">點膠與封裝</a></div><h4>Underfill 填膠</h4><p class="en3">Underfill Fill</p>
+    <p class="why">分散凸塊間的熱膨脹應力</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Nordson · <span class="tw">All Ring</span></span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-11">毛細底部填充膠</a> <span class="co">Namics · Henkel</span></span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-15">點膠針筒與針頭</a> <span class="co">Nordson EFD · Musashi Engineering</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">X-ray（孔洞） <span class="co">Nordson · Comet Yxlon</span></span><span class="it">SAM <span class="co">PVA TePla · Nordson</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-cure" id="st-20"><div class="head"><span class="idx">D-20</span><a class="chip f-cure" href="equipment.html#s-4">熱處理與固化</a></div><h4>真空脫泡／去氣泡</h4><p class="en3">Vacuum De-bubble / De-foam</p>
+    <p class="why">去除日後造成現場故障的氣泡</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Nordson · <span class="tw">C SUN</span></span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-11">毛細底部填充膠</a> <span class="co">Namics · Henkel</span></span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it">X-ray（殘留氣泡） <span class="co">Nordson · Comet Yxlon</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+  </div>
+
+  <div class="sub p">D2 塑封與中介層加工 <span class="lite">Molding &amp; Interposer Processing</span></div>
+  <div class="row">
+   <div class="step f-mold" id="st-21a"><div class="head"><span class="idx">D-21a</span><a class="chip f-mold" href="equipment.html#s-11">點膠與封裝</a></div><h4>塑封</h4><p class="en3">Molding</p>
+    <p class="why">一次壓縮成型封住晶粒</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">TOWA · ASMPT · Besi</span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-11">環氧樹脂封裝膠</a> <span class="co">Sumitomo Bakelite · Resonac</span></span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-11">離型膜</a> <span class="co">AGC · Nitto Denko</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">AOI（孔洞、未填滿） <span class="co">Camtek · Onto</span></span><span class="it">SAM <span class="co">PVA TePla · Nordson</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-cure" id="st-21b"><div class="head"><span class="idx">D-21b</span><a class="chip f-cure" href="equipment.html#s-4">熱處理與固化</a></div><h4>封膠後固化</h4><p class="en3">Post-Mold Cure</p>
+    <p class="why">定型後段製程承受的翹曲</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Koyo Thermo Systems · ESPEC · <span class="tw">C SUN</span> · <span class="tw">Chun Yi</span></span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-11">環氧樹脂封裝膠</a> <span class="co">Sumitomo Bakelite · Resonac</span></span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it">量測（翹曲）</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-bond pair" id="st-22a"><div class="head"><span class="idx">D-22a</span><a class="chip f-bond" href="equipment.html#s-8">接合與薄化</a></div><h4>中介層研磨</h4><p class="en3">Interposer Grinding</p>
+    <p class="why">重組晶圓比裸晶圓更易翹曲</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it"><b>DISCO</b> · Tokyo Seimitsu</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-1">玻璃／矽載板晶圓</a> <span class="co">Corning · AGC</span></span><span class="it"><a href="materials.html#m-10">暫時接合膠</a> <span class="co">Brewer Science · TOK</span></span><span class="it"><a href="materials.html#m-10">鑽石研磨輪</a> <span class="co">DISCO · Asahi Diamond</span></span><span class="it"><a href="materials.html#m-10">研磨保護膠帶</a> <span class="co">Nitto Denko · Lintec</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">量測（厚度、TTV、翹曲）</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-fab pair" id="st-22b"><div class="head"><span class="idx">D-22b</span><a class="chip f-fab" href="equipment.html#s-5">晶圓製程</a></div><h4>中介層 CMP 拋光</h4><p class="en3">Interposer CMP</p>
+    <p class="why">精拋露出背面焊墊</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">AMAT · Ebara</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-1">玻璃／矽載板晶圓</a> <span class="co">Corning · AGC</span></span><span class="it"><a href="materials.html#m-8">CMP 研磨液</a> <span class="co">Entegris · Fujimi</span></span><span class="it"><a href="materials.html#m-8">研磨墊</a> <span class="co">Qnity · 3M</span></span><span class="it"><a href="materials.html#m-8">鑽石修整碟</a> <span class="co">3M · Saesol</span></span><span class="it"><a href="materials.html#m-8">CMP 後清洗液與 PVA 刷輪</a> <span class="co">Entegris · Aion</span></span><span class="it"><a href="materials.html#m-10">暫時接合膠</a> <span class="co">Brewer Science · TOK</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">AOI <span class="co">Camtek · Onto</span></span><span class="it">量測（背面焊墊露出） <span class="co">Camtek · Onto</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-dice" id="st-23"><div class="head"><span class="idx">D-23</span><a class="chip f-dice" href="equipment.html#s-9">切割</a></div><h4>切割／測試治具化</h4><p class="en3">Dicing / Test Fixture Prep.</p>
+    <p class="why">切成單一模組，備妥測試介面</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">DISCO · Tokyo Seimitsu</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-10">切割刀</a> <span class="co">DISCO · Asahi Diamond</span></span><span class="it"><a href="materials.html#m-10">切割膠帶與框架</a> <span class="co">Nitto Denko · Lintec</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">AOI（切割邊緣） <span class="co">Camtek · Onto</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+  </div>
+
+  <div class="sub p">D3 接合至封裝基板 <span class="lite">Attach to Package Substrate（oS）</span></div>
+  <div class="row">
+   <div class="step f-place" id="st-24"><div class="head"><span class="idx">D-24</span><a class="chip f-place" href="equipment.html#s-10">置晶與接合</a></div><h4>接合至封裝基板</h4><p class="en3">Attach to Package Substrate</p>
+    <p class="why">ABF基板供應本身即是瓶頸</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">ASMPT · Shinkawa</span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-3">ABF 封裝基板</a> <span class="co">Ibiden · Shinko</span></span><span class="it"><a href="materials.html#m-3">味之素增層膜</a> <span class="co">Ajinomoto Fine-Techno · Sekisui</span></span><span class="it"><a href="materials.html#m-3">BT 基板 · 玻纖布 · 銅箔</a> <span class="co">Mitsubishi Gas Chemical · Nittobo</span></span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-9">沾黏助焊劑</a> <span class="co">Senju Metal · MacDermid Alpha</span></span><span class="it"><a href="materials.html#m-10">切割膠帶與框架</a> <span class="co">Nitto Denko · Lintec</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">AOI</span><span class="it">X-ray（對位） <span class="co">Nordson · Comet Yxlon</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-finish" id="st-25"><div class="head"><span class="idx">D-25</span><a class="chip f-finish" href="equipment.html#s-12">焊接與後處理</a></div><h4>基板側凸塊迴焊</h4><p class="en3">Substrate-side Bump Reflow</p>
+    <p class="why">熔融焊料形成基板側連接</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Rehm · BTU · Heller</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-5">迴焊氮氣與甲酸</a> <span class="co">Linde · Air Liquide</span></span><span class="it"><a href="materials.html#m-7">助焊劑殘留清洗液</a> <span class="co">Zestron · Kyzen</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">X-ray（焊點孔洞、橋接） <span class="co">Nordson · Comet Yxlon</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-cure" id="st-26"><div class="head"><span class="idx">D-26</span><a class="chip f-cure" href="equipment.html#s-4">熱處理與固化</a></div><h4>基板側 Underfill 固化</h4><p class="en3">Substrate-side Underfill Cure</p>
+    <p class="why">抑制基板與矽的膨脹差</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Nordson · <span class="tw">C SUN</span></span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-11">毛細底部填充膠</a> <span class="co">Namics · Henkel</span></span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-15">點膠針筒與針頭</a> <span class="co">Nordson EFD · Musashi Engineering</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">X-ray <span class="co">Nordson · Comet Yxlon</span></span><span class="it">SAM（分層） <span class="co">PVA TePla · Nordson</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+  </div>
+
+  <div class="sub opt" id="se">E 共同封裝光學（CPO） <span class="lite">選配分支</span></div>
+  <div class="optbox">
+   <div class="optsplit">
+    <div class="optcell">
+     <h5>誰走這條分支</h5>
+     <p>交換器晶片：Broadcom Tomahawk、NVIDIA Quantum-X與Spectrum-X、Marvell。</p>
+    </div>
+    <div class="optcell">
+     <h5>誰不走</h5>
+     <p>GPU，其頻寬瓶頸在封裝內的HBM，而非對外I/O。</p>
+    </div>
+   </div>
+   <div class="optstack">
+    <h5>台積電 COUPE 同時堆疊三項技術</h5>
+    <table>
+     <tr><td class="tier">1</td><td class="tech">SoIC</td><td>將 65 奈米電子 IC 與光子 IC 混合鍵合，構成光引擎</td></tr>
+     <tr><td class="tier">2</td><td class="tech">CoWoS</td><td>把光引擎與客戶 ASIC 置於同一中介層</td></tr>
+     <tr><td class="tier">3</td><td class="tech">CPO</td><td>結果：光學移入封裝內，取代外部的可插拔模組</td></tr>
+    </table>
+   </div>
+  </div>
+  <div class="row">
+   <div class="step f-place opt" id="st-C1"><div class="head"><span class="idx">E-01</span><a class="chip f-place" href="equipment.html#s-10">置晶與接合</a></div><h4>光引擎貼裝</h4><p class="en3">Optical Engine (PIC+EIC) Attach</p>
+    <p class="why">封裝中的封裝</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">TSMC COUPE</span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-11">非導電膜</a> <span class="co">Resonac · Namics</span></span><span class="it"><a href="materials.html#m-13">光引擎</a> <span class="co">TSMC · GlobalFoundries</span></span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-9">沾黏助焊劑</a> <span class="co">Senju Metal · MacDermid Alpha</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">AOI</span><span class="it">量測（置放、傾斜）</span><span class="it">X-ray <span class="co">Nordson · Comet Yxlon</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-optic opt" id="st-C2"><div class="head"><span class="idx">E-02</span><a class="chip f-optic" href="equipment.html#s-13">光學組裝</a></div><h4>雷射光源整合</h4><p class="en3">Laser / External Light Source</p>
+    <p class="why">溫度敏感的雷射緊鄰高功耗ASIC</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Coherent · Lumentum · Broadcom ｜ <span class="tw">LandMark</span></span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-11">金錫焊料預型片</a> <span class="co">Indium Corp · Materion</span></span><span class="it"><a href="materials.html#m-13">InP 雷射二極體</a> <span class="co">Lumentum · Coherent</span></span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it">光功率 <span class="co">Keysight · Thorlabs</span></span><span class="it">波長 <span class="co">Yokogawa · Anritsu</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+  </div>
+  <div class="row">
+   <div class="step f-optic opt" id="st-C3"><div class="head"><span class="idx">E-03</span><a class="chip f-optic" href="equipment.html#s-13">光學組裝</a></div><h4>光學對位</h4><p class="en3">Optical Alignment</p>
+    <p class="why">次微米精度對準光纖與波導</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it"><b>ficonTEC</b> · ASMPT · K&amp;S · Shinkawa</span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-13">光纖陣列</a> <span class="co">Corning · Fujikura</span></span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it">主動對位量測（即時量測耦合效率）</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-optic opt" id="st-C4"><div class="head"><span class="idx">E-04</span><a class="chip f-optic" href="equipment.html#s-13">光學組裝</a></div><h4>光纖接合</h4><p class="en3">Fiber Attach</p>
+    <p class="why">無法重工，不良即報廢整顆封裝</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">ficonTEC · Nordson（點膠） · <span class="tw">FOCI</span> · <span class="tw">Browave</span></span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-13">光纖陣列</a> <span class="co">Corning · Fujikura</span></span><span class="it"><a href="materials.html#m-13">折射率匹配光學膠</a> <span class="co">Norland · Dymax</span></span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it">AOI（膠線）</span><span class="it">拉力測試（抽檢） <span class="co">Nordson Dage · XYZTEC</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-test opt" id="st-C5"><div class="head"><span class="idx">E-05</span><a class="chip f-test" href="equipment.html#s-13">檢測與測試</a></div><h4>光學測試</h4><p class="en3">Optical Test</p>
+    <p class="why">光學良率疊乘於電性良率之上</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Keysight · EXFO · <span class="tw">Chroma</span></span></dd>
+    <dt>材料</dt><dd><span class="it none">僅測試</span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it self">本步驟即為檢測站</span><span class="it">插入損耗、耦合效率、位元錯誤率</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it"><a href="materials.html#m-13">透鏡探測光纖</a> <span class="co">FormFactor · TEL</span></span></dd></dl></div>
+  </div>
+
+  <div class="sub p">D4 後段封裝整合 <span class="lite">Final Package Integration</span></div>
+  <div class="row">
+   <div class="step f-finish" id="st-27"><div class="head"><span class="idx">D-27</span><a class="chip f-finish" href="equipment.html#s-12">焊接與後處理</a></div><h4>TIM／散熱蓋貼合</h4><p class="en3">TIM / Lid Attach</p>
+    <p class="why">限制效能的散熱路徑</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Nordson</span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-12">TIM1</a> <span class="co">Indium Corp · Honeywell</span></span><span class="it"><a href="materials.html#m-12">散熱蓋與封蓋膠</a> <span class="co">Shinko · Henkel</span></span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it">X-ray（TIM 孔洞） <span class="co">Nordson · Comet Yxlon</span></span><span class="it">量測（蓋高、平行度）</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-finish" id="st-28"><div class="head"><span class="idx">D-28</span><a class="chip f-finish" href="equipment.html#s-12">焊接與後處理</a></div><h4>植球（BGA）</h4><p class="en3">Ball Attach (BGA)</p>
+    <p class="why">連接主機板的錫球陣列</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">ASMPT · Shibaura · <span class="tw">Jun Hwa 均華</span></span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-9">錫球</a> <span class="co">Senju Metal · Indium Corp</span></span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it">AOI（缺球、偏球）</span><span class="it">量測（共面性）</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-finish" id="st-29"><div class="head"><span class="idx">D-29</span><a class="chip f-finish" href="equipment.html#s-12">焊接與後處理</a></div><h4>BGA 迴焊</h4><p class="en3">BGA Reflow</p>
+    <p class="why">固定錫球並控制翹曲與共面性</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Rehm · BTU · Heller</span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-9">錫球</a> <span class="co">Senju Metal · Indium Corp</span></span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-5">迴焊氮氣與甲酸</a> <span class="co">Linde · Air Liquide</span></span><span class="it"><a href="materials.html#m-7">助焊劑殘留清洗液</a> <span class="co">Zestron · Kyzen</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">AOI</span><span class="it">X-ray（球內孔洞） <span class="co">Nordson · Comet Yxlon</span></span><span class="it">量測（翹曲） <span class="co">Akrometrix · Insidix</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-finish" id="st-30"><div class="head"><span class="idx">D-30</span><a class="chip f-finish" href="equipment.html#s-12">焊接與後處理</a></div><h4>雷射標記</h4><p class="en3">Laser Marking</p>
+    <p class="why">料號與追溯碼</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Coherent · Han's Laser</span></dd>
+    <dt>材料</dt><dd><span class="it none">無新增材料</span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it">AOI（OCR 字元核對）</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+  </div>
+
+  <div class="sub p">D5 最終測試 <span class="lite">Final Test</span></div>
+  <div class="row">
+   <div class="step f-test" id="st-31"><div class="head"><span class="idx">D-31</span><a class="chip f-test" href="equipment.html#s-7">檢測與測試</a></div><h4>最終電性測試</h4><p class="en3">Final Electrical Test</p>
+    <p class="why">不良品連同HBM與基板一併報廢</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it"><b>Advantest</b> · Teradyne · <span class="tw">KYEC</span>（代工）</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it self">本步驟即為檢測站</span><span class="it">電性測試</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it"><a href="materials.html#m-14">測試座與測試載板</a> <span class="co">Cohu · Johnstech</span></span></dd></dl></div>
+   <div class="step f-test" id="st-32"><div class="head"><span class="idx">D-32</span><a class="chip f-test" href="equipment.html#s-7">檢測與測試</a></div><h4>測試燒機／可靠度</h4><p class="en3">Burn-in / Reliability Test</p>
+    <p class="why">加速老化以篩出早夭故障</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Advantest · Chroma · Aehr</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it self">本步驟即為檢測站</span><span class="it">burn-in 燒機</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it"><a href="materials.html#m-14">老化測試板與測試座</a> <span class="co">Aehr · Plastronics</span></span></dd></dl></div>
+   <div class="step f-test" id="st-33"><div class="head"><span class="idx">D-33</span><a class="chip f-test" href="equipment.html#s-6">檢測與測試</a></div><h4>最終檢查／出貨</h4><p class="en3">Final Inspection / Outgoing</p>
+    <p class="why">出貨前的外觀與尺寸檢查</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">KLA · Camtek · YXLON (X-ray)</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-14">JEDEC 承載盤 · 防潮袋 · 乾燥劑</a> <span class="co">Entegris · 3M</span></span></dd>
+    <dt>檢測</dt><dd><span class="it self">本步驟即為檢測站</span><span class="it">AOI</span><span class="it">量測</span><span class="it">X-ray</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+  </div>
+ </div>
+
+ 
+</div>
+
+<div style="height:34px"></div>
+<div class="divider"></div>
+
+<!-- STAGE 4 -->
+<div class="stage" id="s4">
+ <div class="rail"><div class="stripe"></div>
+  <div class="num">STAGE F</div>
+  <h2>板級組裝與系統整合</h2>
+  <p class="en2">Board-Level Assembly &amp; System Integration</p>
+  
+ </div>
+ <div class="body">
+  <div class="sub b">F1 來料與前處理 <span class="lite">Incoming Material &amp; Preparation</span></div>
+  <div class="row">
+   <div class="step f-test" id="st-34"><div class="head"><span class="idx">F-34</span><a class="chip f-test" href="equipment.html#s-6">檢測與測試</a></div><h4>來料檢驗（IQC）</h4><p class="en3">Incoming Quality Control</p>
+    <p class="why">入庫時鎖定批號與濕敏等級</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Keyence · Omron · <span class="tw">Chroma</span> · <span class="tw">TRI</span></span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-3">AI 伺服器板</a> <span class="co">Panasonic · Isola</span></span><span class="it"><a href="materials.html#m-3">CCL 上游材料</a> <span class="co">Nittobo · Mitsui Mining & Smelting</span></span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it self">本步驟即為檢測站</span><span class="it">尺寸量測</span><span class="it">外觀 AOI</span><span class="it">濕敏等級</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-cure" id="st-35"><div class="head"><span class="idx">F-35</span><a class="chip f-cure" href="equipment.html#s-4">熱處理與固化</a></div><h4>PCB 除濕烘烤</h4><p class="en3">PCB Baking</p>
+    <p class="why">防止吸濕板材於迴焊時分層</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it"><span class="tw">C SUN</span> · Koyo Thermo · Heller</span></dd>
+    <dt>材料</dt><dd><span class="it none">僅烘烤</span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it">濕度指示卡</span><span class="it">開封時間管制</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+  </div>
+  <div class="sub b">F2 表面貼裝 SMT（正面） <span class="lite">Surface Mount, First Side</span></div>
+  <div class="row">
+   <div class="step f-mold" id="st-36"><div class="head"><span class="idx">F-36</span><a class="chip f-mold" href="equipment.html#s-11">點膠與封裝</a></div><h4>錫膏印刷</h4><p class="en3">Solder Paste Printing</p>
+    <p class="why">多數板級焊接缺陷的源頭</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">ASMPT (DEK) · Panasonic · Yamaha · Ekra</span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-9">錫膏</a> <span class="co">Senju Metal · MacDermid Alpha</span></span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-14">SMT 鋼板 · 刮刀 · 擦拭紙捲</a> <span class="co">Photo Stencil · ASMPT</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">SPI 3D 錫膏量測 <span class="co">Koh Young · Parmi</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-test" id="st-37"><div class="head"><span class="idx">F-37</span><a class="chip f-test" href="equipment.html#s-6">檢測與測試</a></div><h4>SPI 錫膏檢測</h4><p class="en3">Solder Paste Inspection</p>
+    <p class="why">趁重工成本低時攔下不良印刷</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Koh Young · CyberOptics · Parmi · <span class="tw">TRI</span></span></dd>
+    <dt>材料</dt><dd><span class="it none">僅檢測</span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it self">本步驟即為檢測站</span><span class="it">3D 錫膏量測，100%</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-place" id="st-38"><div class="head"><span class="idx">F-38</span><a class="chip f-place" href="equipment.html#s-10">置晶與接合</a></div><h4>SMT 貼片</h4><p class="en3">SMT Placement</p>
+    <p class="why">OAM與SXM加速卡在此成形</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">ASMPT · Fuji · Panasonic · Yamaha</span><span class="it">代工：<span class="tw">Foxconn</span> · <span class="tw">Quanta</span> · <span class="tw">Wistron</span></span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-3">被動元件與連接器</a> <span class="co">Murata · Samsung Electro-Mechanics</span></span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-14">貼片吸嘴 · 供料器 · 載帶</a> <span class="co">3M · Advantek</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">迴焊後 AOI <span class="co">Koh Young · Omron</span></span><span class="it">X-ray（BGA 焊點） <span class="co">Nordson · Comet Yxlon</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-finish" id="st-39"><div class="head"><span class="idx">F-39</span><a class="chip f-finish" href="equipment.html#s-12">焊接與後處理</a></div><h4>迴流焊</h4><p class="en3">Reflow Soldering</p>
+    <p class="why">溫度曲線依板厚與質量調整</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Rehm · BTU · Heller · Kurtz Ersa</span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-9">錫膏</a> <span class="co">Senju Metal · MacDermid Alpha</span></span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-5">迴焊氮氣與甲酸</a> <span class="co">Linde · Air Liquide</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">AOI（F-40）</span><span class="it">X-ray（F-41）</span><span class="it">製程監控：迴焊溫度曲線 <span class="co">KIC · ECD</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-test" id="st-40"><div class="head"><span class="idx">F-40</span><a class="chip f-test" href="equipment.html#s-6">檢測與測試</a></div><h4>迴流後 AOI</h4><p class="en3">Post-Reflow AOI</p>
+    <p class="why">只查可見焊點，其餘交給X-ray</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Koh Young · Omron · Saki · <span class="tw">TRI</span></span></dd>
+    <dt>材料</dt><dd><span class="it none">僅檢測</span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it self">本步驟即為檢測站</span><span class="it">100% 光學檢測</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-test" id="st-41"><div class="head"><span class="idx">F-41</span><a class="chip f-test" href="equipment.html#s-6">檢測與測試</a></div><h4>X-ray 檢測（AXI）</h4><p class="en3">Automated X-ray Inspection</p>
+    <p class="why">找出BGA底下被遮蔽的焊點缺陷</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Nordson · YXLON · ViTrox · <span class="tw">TRI</span> · Saki</span></dd>
+    <dt>材料</dt><dd><span class="it none">僅檢測</span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it self">本步驟即為檢測站</span><span class="it">穿透檢測，BGA 100%</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+  </div>
+  <div class="sub b">F3 背面與穿孔製程 <span class="lite">Second Side &amp; Through-Hole</span></div>
+  <div class="row">
+   <div class="step f-place" id="st-42"><div class="head"><span class="idx">F-42</span><a class="chip f-place" href="equipment.html#s-10">置晶與接合</a></div><h4>背面 SMT（雙面板）</h4><p class="en3">Second-Side SMT</p>
+    <p class="why">較輕一面先做，零件才不掉落</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">ASMPT · Fuji · Panasonic</span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-9">錫膏</a> <span class="co">Senju Metal · MacDermid Alpha</span></span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-14">貼片吸嘴 · 供料器 · 載帶</a> <span class="co">3M · Advantek</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">AOI（背面） <span class="co">Koh Young · Omron</span></span><span class="it">X-ray <span class="co">Nordson · Comet Yxlon</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-finish" id="st-43"><div class="head"><span class="idx">F-43</span><a class="chip f-finish" href="equipment.html#s-12">焊接與後處理</a></div><h4>選擇性波焊</h4><p class="en3">Selective Soldering</p>
+    <p class="why">焊接插件而不再加熱整板</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Kurtz Ersa · Pillarhouse · SEHO</span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-9">錫棒與液態助焊劑</a> <span class="co">Senju Metal · MacDermid Alpha</span></span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it">插件焊點 AOI <span class="co">Koh Young · Omron</span></span><span class="it">X-ray <span class="co">Nordson · Comet Yxlon</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-finish" id="st-44"><div class="head"><span class="idx">F-44</span><a class="chip f-finish" href="equipment.html#s-12">焊接與後處理</a></div><h4>手工焊接與精修</h4><p class="en3">Hand Solder / Rework</p>
+    <p class="why">板卡價值高，維修優於報廢</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Hakko · Weller · Metcal · JBC</span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-9">錫線與重工助焊劑</a> <span class="co">Kester · MacDermid Alpha</span></span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-14">烙鐵頭與熱風嘴</a> <span class="co">Hakko · JBC</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">目視</span><span class="it">焊點抽檢</span><span class="it">必要時 X-ray <span class="co">Nordson · Comet Yxlon</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+  </div>
+  <div class="sub b">F4 清潔與防護塗層 <span class="lite">Cleaning &amp; Protective Coating</span></div>
+  <div class="row">
+   <div class="step f-ems" id="st-45"><div class="head"><span class="idx">F-45</span><a class="chip f-ems" href="equipment.html#s-14">板級與系統組裝</a></div><h4>清洗</h4><p class="en3">Cleaning</p>
+    <p class="why">清除會引發電化學遷移的助焊劑殘留</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Zestron · Kyzen · PBT Works · Austin American</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-7">助焊劑殘留清洗液</a> <span class="co">Zestron · Kyzen</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">離子污染測試（ROSE） <span class="co">Gen3</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-mold" id="st-46"><div class="head"><span class="idx">F-46</span><a class="chip f-mold" href="equipment.html#s-11">點膠與封裝</a></div><h4>三防漆塗覆</h4><p class="en3">Conformal Coating</p>
+    <p class="why">防潮防塵絕緣層，已成標配</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Nordson ASYMTEK · PVA · Dymax</span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-11">三防漆</a> <span class="co">HumiSeal · Henkel</span></span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it">UV 下目視</span><span class="it">塗層厚度 <span class="co">Fischer · Elcometer</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-cure" id="st-47"><div class="head"><span class="idx">F-47</span><a class="chip f-cure" href="equipment.html#s-4">熱處理與固化</a></div><h4>塗層硬化</h4><p class="en3">Coating Cure</p>
+    <p class="why">充分固化以免後續組裝刮除</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it"><span class="tw">C SUN</span> · Dymax (UV) · Heller</span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-11">三防漆</a> <span class="co">HumiSeal · Henkel</span></span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it">固化與附著力，抽檢</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+  </div>
+  <div class="sub b">F5 電路與電源測試 <span class="lite">Circuit &amp; Power Test</span></div>
+  <div class="row">
+   <div class="step f-test" id="st-48"><div class="head"><span class="idx">F-48</span><a class="chip f-test" href="equipment.html#s-7">檢測與測試</a></div><h4>ICT 電路測試</h4><p class="en3">In-Circuit Test</p>
+    <p class="why">首次上電前找出電路錯誤</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Keysight · Teradyne (TestStation) · <span class="tw">Chroma</span> · <span class="tw">TRI</span></span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it self">本步驟即為檢測站</span><span class="it">100% 電性，針床或飛針</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it"><a href="materials.html#m-14">ICT 治具與彈簧探針</a> <span class="co">Ingun · QA Technology</span></span></dd></dl></div>
+   <div class="step f-test" id="st-49"><div class="head"><span class="idx">F-49</span><a class="chip f-test" href="equipment.html#s-7">檢測與測試</a></div><h4>首次開機與電源序列測試</h4><p class="en3">First Power-On / Power Sequencing</p>
+    <p class="why">逐軌驗證，避免燒毀整張加速卡</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Keysight · <span class="tw">Chroma</span> · Ametek</span></dd>
+    <dt>材料</dt><dd><span class="it none">僅測試</span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it self">本步驟即為檢測站</span><span class="it">每一電源軌的電壓與時序</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+  </div>
+  <div class="sub b">F6 韌體與序號 <span class="lite">Firmware &amp; Serialisation</span></div>
+  <div class="row">
+   <div class="step f-ems" id="st-50"><div class="head"><span class="idx">F-50</span><a class="chip f-ems" href="equipment.html#s-14">板級與系統組裝</a></div><h4>韌體燒錄</h4><p class="en3">Firmware Flashing</p>
+    <p class="why">BMC、BIOS、FPGA與電源韌體</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Data I/O · BPM Microsystems · <span class="tw">Chroma</span></span></dd>
+    <dt>材料</dt><dd><span class="it none">僅韌體燒錄</span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it">回讀檢查碼</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-ems" id="st-51"><div class="head"><span class="idx">F-51</span><a class="chip f-ems" href="equipment.html#s-14">板級與系統組裝</a></div><h4>序號與資產標籤燒錄</h4><p class="en3">Serialisation / Asset Tagging</p>
+    <p class="why">滿足雲端客戶的單板追溯要求</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Zebra · SATO · Domino · Videojet</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-14">序號與出貨標籤</a> <span class="co">Brady · Avery Dennison</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">條碼可讀性，ANSI 等級 <span class="co">Cognex · Keyence</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+  </div>
+  <div class="sub b">F7 散熱與液冷組裝 <span class="lite">Thermal &amp; Liquid Cooling Assembly</span></div>
+  <div class="row">
+   <div class="step f-mold" id="st-52"><div class="head"><span class="idx">F-52</span><a class="chip f-mold" href="equipment.html#s-11">點膠與封裝</a></div><h4>導熱介面材料塗佈（TIM）</h4><p class="en3">Thermal Interface Material</p>
+    <p class="why">TIM覆蓋不均，最常見的散熱故障</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Nordson · <span class="tw">All Ring</span> · Graco</span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-12">TIM2</a> <span class="co">Honeywell · Shin-Etsu</span></span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-15">點膠針筒與針頭</a> <span class="co">Nordson EFD · Musashi Engineering</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">點膠量與覆蓋率</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-mech" id="st-53"><div class="head"><span class="idx">F-53</span><a class="chip f-mech" href="equipment.html#s-14">機構與散熱組裝</a></div><h4>散熱片組裝（氣冷）</h4><p class="en3">Heatsink Assembly (Air-Cooled)</p>
+    <p class="why">均勻鎖附扭力以免局部熱點</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">自動鎖固：Weber · Deprag</span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-12">散熱器與均熱板</a> <span class="co">Boyd · Delta</span></span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it">扭力逐台記錄</span><span class="it">平面度</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-mech" id="st-54"><div class="head"><span class="idx">F-54</span><a class="chip f-mech" href="equipment.html#s-14">機構與散熱組裝</a></div><h4>冷板組裝與快接頭安裝</h4><p class="en3">Cold Plate &amp; Quick Disconnect</p>
+    <p class="why">GB200世代瓶頸，台廠新價值來源</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it none">—</span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-12">冷板 · 快接頭 · 冷卻液</a> <span class="co">CoolIT · Boyd</span></span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it">扭力記錄</span><span class="it">接頭核對</span><span class="it">檢漏 <span class="co">INFICON · ATEQ</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-test" id="st-55"><div class="head"><span class="idx">F-55</span><a class="chip f-test" href="equipment.html#s-7">檢測與測試</a></div><h4>氣密與洩漏測試</h4><p class="en3">Leak Test</p>
+    <p class="why">一處漏液即癱瘓整櫃</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">ATEQ · INFICON · Cincinnati Test Systems</span></dd>
+    <dt>材料</dt><dd><span class="it none">僅測試</span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it self">本步驟即為檢測站</span><span class="it">壓力衰減或氦氣檢漏</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it"><a href="materials.html#m-5">氦氣檢漏氣體</a> <span class="co">Linde · Air Liquide</span></span></dd></dl></div>
+   <div class="step f-mech" id="st-56"><div class="head"><span class="idx">F-56</span><a class="chip f-mech" href="equipment.html#s-14">機構與散熱組裝</a></div><h4>機構組裝</h4><p class="en3">Mechanical Assembly</p>
+    <p class="why">板卡成為可入機箱的模組</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">自動鎖固：Weber · Deprag</span><span class="it">代工：<span class="tw">Foxconn</span> · <span class="tw">Quanta</span> · <span class="tw">Wistron</span> · <span class="tw">Inventec</span></span></dd>
+    <dt>材料</dt><dd><span class="it"><a href="materials.html#m-14">補強架 · 支架 · 線材 · 緊固件</a> <span class="co">Amphenol · TE Connectivity</span></span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it">外觀與尺寸抽檢 <span class="co">Mitutoyo · Keyence</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+  </div>
+  <div class="sub b">F8 功能與系統測試 <span class="lite">Functional &amp; System Test</span></div>
+  <div class="row">
+   <div class="step f-test" id="st-57"><div class="head"><span class="idx">F-57</span><a class="chip f-test" href="equipment.html#s-7">檢測與測試</a></div><h4>功能測試（FT）</h4><p class="en3">Functional Test (FT)</p>
+    <p class="why">介面、記憶體通道與供電</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it"><span class="tw">Chroma</span> · Keysight · Advantest</span></dd>
+    <dt>材料</dt><dd><span class="it none">僅測試</span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it self">本步驟即為檢測站</span><span class="it">板級功能驗證</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-test" id="st-58"><div class="head"><span class="idx">F-58</span><a class="chip f-test" href="equipment.html#s-7">檢測與測試</a></div><h4>老化測試（Burn-in）</h4><p class="en3">Burn-in Test</p>
+    <p class="why">加速卡出貨前的高溫滿載篩檢</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Advantest · <span class="tw">Chroma</span> · Aehr · ESPEC</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it self">本步驟即為檢測站</span><span class="it">艙內監控連續運轉</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it"><a href="materials.html#m-14">老化測試板與測試座</a> <span class="co">Aehr · Plastronics</span></span></dd></dl></div>
+   <div class="step f-test" id="st-59"><div class="head"><span class="idx">F-59</span><a class="chip f-test" href="equipment.html#s-7">檢測與測試</a></div><h4>系統測試</h4><p class="en3">System Test</p>
+    <p class="why">散熱、供電與互連一併驗證</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Advantest · Teradyne · <span class="tw">Chroma</span></span></dd>
+    <dt>材料</dt><dd><span class="it none">僅測試</span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it self">本步驟即為檢測站</span><span class="it">全系統驗證</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-test" id="st-60"><div class="head"><span class="idx">F-60</span><a class="chip f-test" href="equipment.html#s-7">檢測與測試</a></div><h4>效能與基準測試</h4><p class="en3">Performance Benchmark</p>
+    <p class="why">以真實工作負載對照規格驗證</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">自建測試機架 ｜ NVIDIA DCGM · MLPerf · <span class="tw">Chroma</span></span></dd>
+    <dt>材料</dt><dd><span class="it none">僅測試</span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it self">本步驟即為檢測站</span><span class="it">頻寬、吞吐與功耗對標門檻</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-test" id="st-61"><div class="head"><span class="idx">F-61</span><a class="chip f-test" href="equipment.html#s-7">檢測與測試</a></div><h4>校準</h4><p class="en3">Calibration</p>
+    <p class="why">使每張板在同一韌體下行為一致</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Keysight · Fluke · <span class="tw">Chroma</span></span></dd>
+    <dt>材料</dt><dd><span class="it none">僅測試</span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it self">本步驟即為檢測站</span><span class="it">校準值寫入並回讀</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+  </div>
+  <div class="sub b">F9 最終檢驗與出貨 <span class="lite">Final Inspection &amp; Shipping</span></div>
+  <div class="row">
+   <div class="step f-test" id="st-62"><div class="head"><span class="idx">F-62</span><a class="chip f-test" href="equipment.html#s-6">檢測與測試</a></div><h4>最終目視檢查</h4><p class="en3">Final Visual Inspection</p>
+    <p class="why">外觀、標籤、完整性與異物</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Manual visual + Keyence · Omron vision-assisted</span></dd>
+    <dt>材料</dt><dd><span class="it none">僅檢測</span></dd>
+    <dt>耗材</dt><dd><span class="it none">—</span></dd>
+    <dt>檢測</dt><dd><span class="it self">本步驟即為檢測站</span><span class="it">最終目視</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-ems" id="st-63"><div class="head"><span class="idx">F-63</span><a class="chip f-ems" href="equipment.html#s-14">板級與系統組裝</a></div><h4>防靜電包裝</h4><p class="en3">ESD Packaging</p>
+    <p class="why">濕敏等級決定開封後可放置時間</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">3M · Desco · Botron</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-14">JEDEC 承載盤 · 防潮袋 · 乾燥劑</a> <span class="co">Entegris · 3M</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">表面電阻，抽檢</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-ems" id="st-64"><div class="head"><span class="idx">F-64</span><a class="chip f-ems" href="equipment.html#s-14">板級與系統組裝</a></div><h4>標籤貼附</h4><p class="en3">Labelling</p>
+    <p class="why">標籤與F-51序號紀錄相符</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">Zebra · SATO · Domino</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-14">序號與出貨標籤</a> <span class="co">Brady · Avery Dennison</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">條碼掃描核對 <span class="co">Cognex · Keyence</span></span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+   <div class="step f-ems" id="st-65"><div class="head"><span class="idx">F-65</span><a class="chip f-ems" href="equipment.html#s-14">板級與系統組裝</a></div><h4>包裝與出貨</h4><p class="en3">Packaging / Shipping</p>
+    <p class="why">依客戶規範裝箱</p>
+    <dl class="kv"><dt>設備</dt><dd><span class="it">—</span></dd>
+    <dt>材料</dt><dd><span class="it none">—</span></dd>
+    <dt>耗材</dt><dd><span class="it"><a href="materials.html#m-14">紙箱 · 緩衝材 · 棧板</a> <span class="co">Sealed Air · Sonoco</span></span></dd>
+    <dt>檢測</dt><dd><span class="it">出貨前抽驗與文件核對</span></dd>
+    <dt>檢測耗材</dt><dd><span class="it none">—</span></dd></dl></div>
+  </div>
+ </div>
+</div>
+
+<!-- VENDOR MATRIX -->
+<section class="sect" id="vendors">
+ <h2>供應商總表</h2>
+ <p class="key">粗體為領導供應商 · <span class="tw">綠字為台灣供應商</span> · 「｜」之後為中國供應商</p>
+ <div class="scroller">
+ <table>
+  <thead><tr><th style="width:190px">設備／材料</th><th style="width:110px">步驟</th><th>主要供應商</th></tr></thead>
+  <tbody>
+   <tr class="grouprow"><td colspan="3"><span class="chip c-fab">前段設備</span></td></tr>
+   <tr><td>微影</td><td class="n">A-06 至 A-09, B-08a</td><td><span class="lead-v">ASML</span> · Nikon · Canon · SMEE · Veeco</td></tr>
+   <tr><td>蝕刻</td><td class="n">A-10, A-11, B-08b</td><td><span class="lead-v">Lam</span> · TEL · AMAT · Hitachi High-Tech</td></tr>
+   <tr><td>沉積</td><td class="n">A-02 至 A-05, A-15, A-16, B-08c, B-08d</td><td><span class="lead-v">AMAT</span> · Lam · TEL · ASM · Kokusai</td></tr>
+   <tr><td>CMP</td><td class="n">A-17, B-06b, C-11, D-22b</td><td><span class="lead-v">AMAT</span> · Ebara · ACM Research ｜ 耗材：Entegris · DuPont · <span class="tw">Kinik</span></td></tr>
+   <tr><td>清洗／表面活化</td><td class="n">A-14, B-08e, C-12a, C-12b</td><td><span class="lead-v">SCREEN</span> · TEL · Lam · <span class="tw">GPTC</span> · <span class="tw">Scientech</span></td></tr>
+   <tr><td>熱處理／退火</td><td class="n">A-03, A-13, C-15</td><td><span class="lead-v">AMAT</span> · Kokusai · TEL</td></tr>
+
+   <tr class="grouprow"><td colspan="3"><span class="chip c-pkg">封裝設備</span></td></tr>
+   <tr><td>晶圓研磨／薄化</td><td class="n">B-06a, D-22a</td><td><span class="lead-v">DISCO</span> · Tokyo Seimitsu · Okamoto</td></tr>
+   <tr><td>暫時接合／解鍵合</td><td class="n">B-04, B-09</td><td><span class="lead-v">EVG</span> · SUSS MicroTec ｜ 材料：TOK · Brewer Science</td></tr>
+   <tr><td>切割</td><td class="n">B-10a, D-23</td><td><span class="lead-v">DISCO</span> · Tokyo Seimitsu · ASMPT</td></tr>
+   <tr><td>混合鍵合</td><td class="n">C-13, C-14</td><td><span class="lead-v">Besi</span> · <span class="lead-v">ASMPT</span> · EVG · SUSS · Hanmi</td></tr>
+   <tr><td>熱壓接合</td><td class="n">A-03, A-13, C-15</td><td><span class="lead-v">ASMPT</span> · K&amp;S · Shinkawa · Hanmi</td></tr>
+   <tr><td>點膠／底部填充</td><td class="n">D-19, D-26, D-27</td><td><span class="lead-v">Nordson</span> · <span class="tw">All Ring</span> ｜ 材料：Namics · Henkel</td></tr>
+   <tr><td>塑封</td><td class="n">D-21a, D-21b</td><td><span class="lead-v">TOWA</span> · ASMPT · Besi</td></tr>
+   <tr><td>植球／迴焊</td><td class="n">D-25, D-28, D-29</td><td>ASMPT · Shibaura · <span class="tw">Jun Hwa 均華</span> ｜ 爐：Rehm · BTU · Heller</td></tr>
+   <tr><td>雷射標記／加工</td><td class="n">D-30</td><td>Coherent · Han's Laser</td></tr>
+   <tr><td>封裝基板</td><td class="n">D-24</td><td>Ibiden · Shinko · AT&amp;S · <span class="tw">Unimicron</span> · <span class="tw">Nan Ya PCB</span> · <span class="tw">Kinsus</span></td></tr>
+
+   <tr class="grouprow"><td colspan="3"><span class="chip c-pkg">CPO 光學整合</span> 選配分支</td></tr>
+   <tr><td>光子 IC 代工</td><td class="n">E-01</td><td><span class="lead-v">TSMC</span> (COUPE)· GlobalFoundries · Tower · Intel</td></tr>
+   <tr><td>雷射／光源</td><td class="n">E-02</td><td><span class="lead-v">Coherent</span> · Lumentum · Broadcom · <span class="tw">LandMark</span></td></tr>
+   <tr><td>光學對位設備</td><td class="n">E-03, E-04</td><td><span class="lead-v">ficonTEC</span> · ASMPT · K&amp;S · Shinkawa</td></tr>
+   <tr><td>光纖／連接器</td><td class="n">E-04</td><td>Senko · US Conec · <span class="tw">FOCI</span> · <span class="tw">Browave</span></td></tr>
+   <tr><td>光學測試</td><td class="n">E-05</td><td>Keysight · EXFO · <span class="tw">Chroma</span></td></tr>
+   <tr><td>下單的 IC 設計客戶</td><td class="n">E-01 至 E-05</td><td>Broadcom · NVIDIA · Marvell · Cisco · Google · Meta</td></tr>
+
+   <tr class="grouprow"><td colspan="3"><span class="chip c-pkg">板級設備</span> F 段</td></tr>
+   <tr><td>錫膏印刷／鋼板</td><td class="n">F-36</td><td><span class="lead-v">ASMPT (DEK)</span> · Panasonic · Yamaha · Ekra</td></tr>
+   <tr><td>SMT 貼片</td><td class="n">F-38, F-42</td><td><span class="lead-v">ASMPT</span> · <span class="lead-v">Fuji</span> · Panasonic · Yamaha</td></tr>
+   <tr><td>迴焊爐</td><td class="n">F-39</td><td><span class="lead-v">Rehm</span> · BTU · Heller · Kurtz Ersa</td></tr>
+   <tr><td>SPI／板級 AOI</td><td class="n">F-37, F-40, F-42</td><td><span class="lead-v">Koh Young</span> · Omron · Saki · <span class="tw">TRI</span> · CyberOptics</td></tr>
+   <tr><td>板級 X-ray（AXI）</td><td class="n">C-14, C-16b, D-19, D-25, D-27, D-33</td><td><span class="lead-v">Nordson</span> · YXLON · ViTrox · <span class="tw">TRI</span></td></tr>
+   <tr><td>選擇焊／手焊</td><td class="n">F-43, F-44</td><td>Kurtz Ersa · Pillarhouse · SEHO ｜ 手焊：Hakko · JBC · Metcal</td></tr>
+   <tr><td>清洗／三防漆</td><td class="n">A-14, B-08e, C-12a, C-12b</td><td>Zestron · Kyzen · <span class="lead-v">Nordson ASYMTEK</span> · PVA ｜ 材料：Henkel · Dow</td></tr>
+   <tr><td>ICT／飛針</td><td class="n">F-48, F-49</td><td><span class="lead-v">Keysight</span> · Teradyne · <span class="tw">Chroma</span> · <span class="tw">TRI</span></td></tr>
+   <tr><td>燒錄／序號</td><td class="n">F-50, F-51, F-64</td><td>Data I/O · BPM Microsystems ｜ 標籤：Zebra · SATO · Domino</td></tr>
+   <tr><td>TIM 點膠與材料</td><td class="n">F-52</td><td><span class="lead-v">Nordson</span> · <span class="tw">All Ring</span> ｜ 材料：Honeywell · Shin-Etsu · Dow · Laird</td></tr>
+   <tr><td>散熱模組／冷板</td><td class="n">A-03, A-13, C-15</td><td><span class="tw">AVC</span> · <span class="tw">Auras</span> · <span class="tw">Jentech</span> · <span class="tw">Sunon</span> ｜ 快接頭：CPC · Staubli · Parker</td></tr>
+   <tr><td>檢漏</td><td class="n">F-55</td><td><span class="lead-v">ATEQ</span> · INFICON · Cincinnati Test Systems</td></tr>
+   <tr><td>系統組裝 ODM</td><td class="n">F-38, F-56, F-65</td><td><span class="tw">Foxconn</span> · <span class="tw">Quanta</span> · <span class="tw">Wistron</span> · <span class="tw">Inventec</span> · <span class="tw">Wiwynn</span></td></tr>
+
+   <tr class="grouprow"><td colspan="3"><span class="chip c-insp">檢測與量測</span></td></tr>
+   <tr><td>光學檢測（AOI）</td><td class="n">A-18, B-06b, B-08e, B-10a, C-12b, C-16a, D-18, D-21a, D-28, D-33</td><td><span class="lead-v">KLA</span> · Camtek · Onto Innovation · Lasertec</td></tr>
+   <tr><td>量測</td><td class="n">A-19, B-06a, B-08d, C-13, D-22a, D-27, D-28</td><td><span class="lead-v">KLA</span> · Onto · Nova · Bruker</td></tr>
+   <tr><td>X-ray／CT 檢測</td><td class="n">C-14, C-16b, D-19, D-25, D-27, D-33</td><td><span class="lead-v">YXLON</span> · Nikon · ZEISS · Nordson</td></tr>
+   <tr><td>超音波掃描顯微（SAM）</td><td class="n">C-14, C-16b, D-19, D-26</td><td>Nordson SONOSCAN · PVA TePla</td></tr>
+   <tr><td>電子顯微</td><td class="n">A-18, B-08e, C-11, C-15, C-16b</td><td>Thermo Fisher · JEOL · TESCAN · Hitachi High-Tech ｜ 服務：<span class="tw">MA-tek</span> · <span class="tw">MSSCORPS</span></td></tr>
+   <tr><td>電性測試（ATE）</td><td class="n">A-20, C-16c, D-31, F-57, F-59</td><td><span class="lead-v">Advantest</span> · Teradyne · <span class="tw">Chroma</span></td></tr>
+   <tr><td>探針卡／測試座</td><td class="n">A-20, C-16c, D-31</td><td><span class="tw">CHPT</span> · <span class="tw">MPI</span> · <span class="tw">WinWay</span> · FormFactor ｜ 代工：<span class="tw">KYEC</span></td></tr>
+   <tr><td>老化測試</td><td class="n">D-32, F-58</td><td>Advantest · <span class="tw">Chroma</span> · Aehr</td></tr>
+
+   <tr class="grouprow"><td colspan="3"><span class="chip c-sup">支援系統</span></td></tr>
+   <tr><td>真空／幫浦</td><td class="n">B-07, D-20</td><td><span class="lead-v">Edwards</span> · Ebara · Pfeiffer · INFICON</td></tr>
+   <tr><td>氣體供應／純化</td><td class="n">所有步驟</td><td>Air Liquide · Linde · <span class="tw">Taiwan Special Chemicals</span> · <span class="tw">Topco</span> (distributor)</td></tr>
+   <tr><td>固化／烘烤爐</td><td class="n">B-05, D-20, D-26</td><td><span class="tw">C SUN</span> · Koyo Thermo</td></tr>
+   <tr><td>廠務／無塵室</td><td class="n">基礎設施</td><td><span class="tw">Marketech</span> · <span class="tw">UIS</span> · <span class="tw">Acter</span> · <span class="tw">Sing Hui 聖暉</span></td></tr>
+   <tr><td>設備代工／零件</td><td class="n">上游</td><td><span class="tw">Foxsemicon</span> (AMAT)· <span class="tw">Gudeng</span> (Reticle pods)· <span class="tw">Sindek 迅得</span></td></tr>
+   <tr><td>自動化／智慧製造</td><td class="n">所有步驟</td><td>Daifuku · Murata Machinery · Siemens · FANUC · Omron</td></tr>
+  </tbody>
+ </table>
+ </div>
+</section>
+
+<footer class="site-foot">
+  <div class="sf-id">
+    <img src="assets/photo-sm.jpg" alt="Ethan Chen" width="44" height="44" loading="lazy">
+    <div><div class="sf-name"><a href="index-zh.html">Ethan Chen</a></div><div class="sf-sub">半導體研究筆記 · Semiconductor Research Notes</div></div>
+  </div>
+  <div class="sf-contact">
+    <a href="mailto:ethanchen@qtumic.com">ethanchen@qtumic.com</a>
+    <a href="https://www.linkedin.com/in/hao-chen-194981297" target="_blank" rel="me noopener">LinkedIn</a>
+  </div>
+  <div class="sf-note">個人研究筆記，不構成投資建議。 © 2026 Ethan Chen</div>
+</footer>
+</div>
+</body>
+</html>

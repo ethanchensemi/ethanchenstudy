@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>半導體供應鏈 — 下游：封裝完成的晶片到終端市場 · Ethan Chen</title>
+<!-- site-head -->
+<meta name="author" content="Ethan Chen">
+<meta name="description" content="從封裝完成的晶片到終端市場，六個階段的產品與供應商。">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://ethanchensemi.github.io/ethanchenstudy/downstream-chain.html">
+<link rel="alternate" hreflang="zh-Hant" href="https://ethanchensemi.github.io/ethanchenstudy/downstream-chain.html">
+<link rel="alternate" hreflang="en" href="https://ethanchensemi.github.io/ethanchenstudy/downstream-chain-en.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="半導體供應鏈 — 下游：封裝完成的晶片到終端市場 · Ethan Chen">
+<meta property="og:description" content="從封裝完成的晶片到終端市場，六個階段的產品與供應商。">
+<meta property="og:site_name" content="Ethan Chen · Semiconductor Research Notes">
+<!-- /site-head -->
+<style>
+:root{
+  --b:#4A3B7A;
+  --paper:#F6F8F9; --card:#FFFFFF;
+  --ink:#14181C; --ink-2:#4A555E; --ink-3:#7C8891;
+  --rule:#CBD3D9; --rule-soft:#E2E8EC;
+  --stage:#1F3A4D; --shared:#215C68;
+  --design:#8A5A00; --design-bg:#FDF3E1;
+  --foundry:#B03A2E; --foundry-bg:#FBEAE7;
+  --pkgA:#2E6B4F; --pkgA-bg:#EAF4EE;
+  --pkgB:#4A3B7A; --pkgB-bg:#F0EEF7;
+  --pkgC:#0E7C68; --pkgC-bg:#E3F3EE;
+  --back:#5F6C75; --back-bg:#ECEFF1;
+  --mem:#8E3B6B; --mem-bg:#F8ECF3;
+  --rf:#6B7A1E; --rf-bg:#F2F5E4;
+  --opt:#8A5A00; --opt-bg:#FDF6E6;
+  --sys:#1B5E8C; --sys-bg:#E8F1F8;
+  --t-fab:#5B4B9E; --t-fab-bg:#EEEBF8;
+  --t-insp:#0E7C86; --t-insp-bg:#E4F2F3;
+  --t-pkg:#B85C10; --t-pkg-bg:#FAEEE1;
+  --t-sup:#5F6C75; --t-sup-bg:#ECEFF1;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:-apple-system,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  font-size:15px;line-height:1.65}
+.wrap{max-width:1320px;margin:0 auto;padding:48px 28px 90px}
+
+.masthead{border-bottom:2px solid var(--stage);padding-bottom:22px;margin-bottom:30px}
+.masthead h1{font-size:30px;line-height:1.25;font-weight:700;margin:0 0 6px;letter-spacing:-.01em}
+.masthead .en{font-size:15px;color:var(--ink-2);font-weight:400;margin:0 0 16px}
+.masthead .meta{display:flex;flex-wrap:wrap;gap:8px 26px;font-size:13px;color:var(--ink-3)}
+.masthead .meta b{color:var(--ink-2);font-weight:500}
+
+.toc{background:var(--card);border:1px solid var(--rule);padding:16px 22px;margin-bottom:34px;font-size:13px}
+.toc a{color:var(--stage);text-decoration:none;font-weight:500;margin-right:18px;white-space:nowrap}
+.toc a:hover{text-decoration:underline}
+.tocrow{display:flex;flex-wrap:wrap;gap:6px 4px;row-gap:8px}
+
+.legend{background:var(--card);border:1px solid var(--rule);padding:18px 22px;margin-bottom:38px}
+.legend h2{font-size:14px;margin:0 0 12px;font-weight:600}
+.fieldkey{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:12.5px;color:var(--ink-3);margin-bottom:6px}
+.fieldkey b{color:var(--ink-2);font-weight:600}
+
+.stage{display:grid;grid-template-columns:216px 1fr;scroll-margin-top:20px}
+.rail{padding:22px 20px 26px 0;border-right:2px solid var(--rule);position:relative}
+.rail .num{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;color:var(--ink-3);letter-spacing:.06em;margin-bottom:8px}
+.rail h2{font-size:19px;margin:0 0 3px;font-weight:600;line-height:1.35}
+.rail .en2{font-size:13px;color:var(--ink-2);margin:0 0 12px;line-height:1.45}
+.rail .clarify{font-size:12.5px;color:var(--ink-3);line-height:1.55;padding-top:11px;border-top:1px dashed var(--rule)}
+.rail .stripe{position:absolute;right:-2px;top:22px;bottom:26px;width:2px;background:var(--stage)}
+.body{padding:22px 0 26px 26px}
+
+.row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:12px}
+.row:last-child{margin-bottom:0}
+.step{background:var(--card);border:1px solid var(--rule);padding:12px 14px;flex:1 1 208px;min-width:196px}
+.step h4{font-size:14px;margin:0 0 1px;font-weight:600;line-height:1.4}
+.step .en3{font-size:11.5px;color:var(--ink-2);margin:0 0 9px;line-height:1.4;font-style:italic}
+.step .field{font-size:11.5px;margin:6px 0 0;line-height:1.5}
+.step .field b{color:var(--ink-2);font-weight:600}
+
+.step.fab{border-left:3px solid var(--t-fab)}
+.step.design{border-left:3px solid var(--design)}
+.step.foundry{border-left:3px solid var(--foundry)}
+.step.back{border-left:3px solid var(--back)}
+.step.mem{border-left:3px solid var(--mem)}
+.step.rf{border-left:3px solid var(--rf)}
+.step.sys{border-left:3px solid var(--sys)}
+.step.pkgA{border-left:3px solid var(--pkgA)}
+.step.pkgB{border-left:3px solid var(--pkgB)}
+.step.pkgC{border-left:3px solid var(--pkgC)}
+
+.sub{font-size:13px;font-weight:600;margin:22px 0 10px;padding:6px 12px;color:#fff}
+.sub:first-child{margin-top:0}
+.sub .lite{font-weight:400;opacity:.85;font-size:12px}
+.sub.a{background:var(--pkgA)}
+.sub.fab{background:var(--t-fab)}
+.sub.b{background:var(--pkgB)}
+.sub.c{background:var(--pkgC)}
+.sub.d{background:var(--design)}
+.sub.f{background:var(--foundry)}
+.sub.k{background:var(--back)}
+.sub.m{background:var(--mem)}
+.sub.r{background:var(--rf)}
+.sub.s{background:var(--sys)}
+.sub.opt{background:var(--opt)}
+
+.stackcard{background:var(--card);border:1px solid var(--rule);padding:16px 18px;margin-bottom:14px}
+.stackcard .sctitle{font-size:15px;font-weight:700;margin:0 0 2px}
+
+.stacklayers{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+.slrow{display:flex;gap:4px}
+.slcell{flex:1;padding:6px 8px;font-size:10.5px;text-align:center;border-radius:2px;line-height:1.3}
+.sl-die{background:#E8F4EF;border:1px solid #9FC9B5;color:#1F4D38}
+.sl-mem{background:#FAE8E5;border:1px solid #D9A79E;color:#7A3226}
+.sl-interp{background:var(--pkgB-bg);border:1px solid #A797C9;color:var(--pkgB)}
+.sl-sub{background:#F1F2F3;border:1px solid #CDD2D6;color:#4A555E}
+.sl-pcb{background:#EAEAEA;border:1px solid #C4C4C4;color:#333}
+.sl-bridge{background:#DCEAFB;border:1px solid #90B8E0;color:#1B4E7A}
+.scgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 20px}
+.scfields .field{font-size:12px;margin:5px 0;line-height:1.55}
+.scfields .field b{color:var(--ink-2);font-weight:600}
+.scusers{border-top:1px solid var(--rule-soft);margin-top:10px;padding-top:10px}
+.scusers h5{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-3);margin:0 0 6px;font-weight:600}
+.scusers .u{font-size:12px;margin:3px 0;line-height:1.5}
+.scusers .u b{color:var(--ink);font-weight:600}
+.tworail{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media (max-width:900px){.tworail{grid-template-columns:1fr}}
+.threerail{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+@media (max-width:1100px){.threerail{grid-template-columns:1fr 1fr}}
+@media (max-width:700px){.threerail{grid-template-columns:1fr}}
+
+.forkbar{display:grid;grid-template-columns:216px 1fr;margin:10px 0}
+.forkbar .lead{border-right:2px solid var(--rule)}
+.forkbar .msg{padding:6px 0 4px 26px;font-size:13px;color:var(--ink-3);max-width:80ch;line-height:1.6}
+.forkbar .msg b{color:var(--ink-2);font-weight:500}
+
+.optnote{font-size:12px;color:#7A5100;background:var(--opt-bg);border:1px dashed #C99A1E;padding:10px 12px;margin:0 0 12px;line-height:1.55}
+.divider{height:1px;background:var(--rule-soft);margin:34px 0}
+
+.chip{display:inline-block;font-size:10.5px;font-weight:600;padding:2px 7px;white-space:nowrap;border-radius:2px;margin-bottom:6px}
+.c-fab{background:var(--t-fab-bg);color:var(--t-fab)}
+.c-design{background:var(--design-bg);color:var(--design)}
+.c-foundry{background:var(--foundry-bg);color:var(--foundry)}
+.c-back{background:var(--back-bg);color:var(--back)}
+.c-mem{background:var(--mem-bg);color:var(--mem)}
+.c-rf{background:var(--rf-bg);color:var(--rf)}
+.c-sys{background:var(--sys-bg);color:var(--sys)}
+.c-pkgA{background:var(--pkgA-bg);color:var(--pkgA)}
+.c-pkgB{background:var(--pkgB-bg);color:var(--pkgB)}
+.c-pkgC{background:var(--pkgC-bg);color:var(--pkgC)}
+
+.sect{margin-top:0;border:1px solid var(--rule);background:var(--card);padding:24px 26px}
+.sect h2{font-size:19px;margin:0 0 6px;font-weight:600}
+.sect .key{font-size:12.5px;color:var(--ink-3);margin:0 0 20px}
+
+@media (max-width:760px){
+  .wrap{padding:30px 16px 60px}
+  .stage,.forkbar{grid-template-columns:1fr}
+  .rail{border-right:none;border-bottom:2px solid var(--rule);padding:20px 0 18px}
+  .rail .stripe{right:auto;left:0;top:auto;bottom:-2px;width:60px;height:2px}
+  .body{padding:20px 0 26px}
+  .forkbar .lead{display:none}
+  .forkbar .msg{padding-left:0}
+  .scgrid{grid-template-columns:1fr}
+}
+@media print{.backbar,.toc{display:none}body{background:#fff}.wrap{max-width:none;padding:0}.step,.legend,.sect,.stackcard{break-inside:avoid}}
+.backbar{margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.backbar a{display:inline-block;font-size:13px;color:var(--ink-2);text-decoration:none;border:1px solid var(--rule);background:var(--card);padding:6px 13px}
+.backbar a:hover{color:var(--b);border-color:var(--b)}
+.backbar .lang{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;letter-spacing:.04em}
+
+.stage .body{min-width:0}
+.stackcard .figscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.stackcard .figscroll svg{min-width:860px}
+.nw{white-space:nowrap}
+</style>
+<style id="site-chrome">
+/* site chrome (added by build) */
+.backbar{flex-wrap:wrap}
+.lede,.defn,.ds .lede,.routehead .clarify,.forkbar .msg,.explain .sub2,.masthead .en{max-width:none}
+.backbar .bbr{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.backbar .lang{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;letter-spacing:.04em}
+.backbar .lang-off{display:inline-block;font-size:12px;color:var(--ink-3,#7C8891);border:1px dashed var(--rule,#CBD3D9);padding:6px 13px;font-family:ui-monospace,"SF Mono",Menlo,monospace;letter-spacing:.04em;cursor:default}
+.site-foot{margin-top:56px;border-top:1px solid var(--rule,#CBD3D9);padding-top:22px;display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;font-size:12.5px;color:var(--ink-3,#7C8891);line-height:1.5}
+.site-foot .sf-id{display:flex;align-items:center;gap:12px;min-width:0}
+.site-foot .sf-id img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:0 0 auto}
+.site-foot .sf-name{font-size:14px;font-weight:600;color:var(--ink,#14181C)}
+.site-foot .sf-name a{color:inherit;text-decoration:none}
+.site-foot .sf-name a:hover{color:var(--b,#4A3B7A)}
+.site-foot .sf-sub{font-size:12px;color:var(--ink-3,#7C8891)}
+.site-foot .sf-contact{display:flex;gap:16px;flex-wrap:wrap;margin-left:auto}
+.site-foot .sf-contact a{color:var(--ink-2,#4A555E);text-decoration:none;border-bottom:1px dotted var(--rule,#CBD3D9)}
+.site-foot .sf-contact a:hover{color:var(--b,#4A3B7A);border-color:var(--b,#4A3B7A)}
+.site-foot .sf-note{flex-basis:100%;font-size:11.5px}
+@media (max-width:640px){.site-foot .sf-contact{margin-left:0}}
+@media (max-width:640px){
+  .stickynav{margin-left:-14px;margin-right:-14px;padding-left:14px;padding-right:14px;white-space:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .legend .fams,.legend .fams.six,.famgrid,.idxgrid{grid-template-columns:1fr !important}
+  .routes{grid-template-columns:minmax(0,1fr) !important}
+  .route,.routes > *{min-width:0}
+  .route .row,.route .chips,.route .chiprow,.route .cols{flex-wrap:wrap}
+  .optstack table{min-width:0 !important}
+  .famcol .chip,.legend .chip,.chipwrap b{white-space:normal}
+}
+@media print{.site-foot .sf-id img{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="backbar"><a href="map.html">← 產業地圖</a><span class="bbr"><a class="lang" href="downstream-chain-en.html" onclick="this.href=this.href.split('#')[0]+location.hash">EN</a></span></div>
+
+<header class="masthead">
+  <h1>半導體供應鏈 — 下游</h1>
+</header>
+<nav class="toc">
+  <div class="tocrow">
+    <a href="#s7">7 通路</a><a href="#s8">8 模組與零組件</a><a href="#s9">9 系統組裝</a><a href="#s10">10 品牌與OEM</a><a href="#s11">11 營運商</a><a href="#s12">12 終端市場</a>
+  </div>
+</nav>
+<div class="stage" id="s7">
+  <div class="rail"><div class="stripe"></div>
+    <div class="num">階段 7</div>
+    <h2>通路</h2>
+    <p class="en2">從晶片廠到板卡廠</p>
+  </div>
+  <div class="body"><div class="stackcard">
+  <p class="sctitle">晶片如何到達終端市場</p>
+<div class="figscroll"><svg viewBox="0 0 1120 388" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="從晶片到終端市場的三條路徑，橫跨階段7至12：AI GPU直接銷售，手機晶片經通路商，車用晶片經通路商且不經營運商" style="width:100%;height:auto;display:block;font-family:Inter,Helvetica,Arial,sans-serif">
+<defs><marker id="dcArr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4A555E"/></marker></defs>
+<a href="upstream.html"><rect x="22" y="6" width="138" height="24" rx="12" fill="#F1F2F3" stroke="#4A555E" stroke-width="1"/><text x="91.0" y="22.2" font-size="11.5" font-weight="600" fill="#4A555E" text-anchor="middle">晶片 · 階段0至6</text></a>
+<a href="#s7"><rect x="178" y="6" width="138" height="24" rx="12" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1"/><text x="247.0" y="22.2" font-size="11.5" font-weight="600" fill="#5F6C75" text-anchor="middle">7 通路</text></a>
+<a href="#s8"><rect x="334" y="6" width="138" height="24" rx="12" fill="#FDF3E1" stroke="#8A5A00" stroke-width="1"/><text x="403.0" y="22.2" font-size="11.5" font-weight="600" fill="#8A5A00" text-anchor="middle">8 模組</text></a>
+<a href="#s9"><rect x="490" y="6" width="138" height="24" rx="12" fill="#E8F1F8" stroke="#1B5E8C" stroke-width="1"/><text x="559.0" y="22.2" font-size="11.5" font-weight="600" fill="#1B5E8C" text-anchor="middle">9 組裝</text></a>
+<a href="#s10"><rect x="646" y="6" width="138" height="24" rx="12" fill="#F0EEF7" stroke="#4A3B7A" stroke-width="1"/><text x="715.0" y="22.2" font-size="11.5" font-weight="600" fill="#4A3B7A" text-anchor="middle">10 品牌</text></a>
+<a href="#s11"><rect x="802" y="6" width="138" height="24" rx="12" fill="#E3F3EE" stroke="#0E7C68" stroke-width="1"/><text x="871.0" y="22.2" font-size="11.5" font-weight="600" fill="#0E7C68" text-anchor="middle">11 營運商</text></a>
+<a href="#s12"><rect x="958" y="6" width="138" height="24" rx="12" fill="#F8ECF3" stroke="#8E3B6B" stroke-width="1"/><text x="1027.0" y="22.2" font-size="11.5" font-weight="600" fill="#8E3B6B" text-anchor="middle">12 終端市場</text></a>
+<rect x="4" y="40" width="1112" height="120" rx="10" fill="#F6F8F9"/>
+<line x1="162" y1="112.0" x2="331" y2="112.0" stroke="#4A555E" stroke-width="1.4" marker-end="url(#dcArr)"/>
+<line x1="474" y1="112.0" x2="487" y2="112.0" stroke="#4A555E" stroke-width="1.4" marker-end="url(#dcArr)"/>
+<line x1="630" y1="112.0" x2="643" y2="112.0" stroke="#4A555E" stroke-width="1.4" marker-end="url(#dcArr)"/>
+<line x1="786" y1="112.0" x2="799" y2="112.0" stroke="#4A555E" stroke-width="1.4" marker-end="url(#dcArr)"/>
+<line x1="942" y1="112.0" x2="955" y2="112.0" stroke="#4A555E" stroke-width="1.4" marker-end="url(#dcArr)"/>
+<path d="M559.0,82 C559.0,50 871.0,50 871.0,80" fill="none" stroke="#4A555E" stroke-width="1.4" marker-end="url(#dcArr)"/>
+<rect x="683.0" y="47.75" width="64.0" height="20" rx="10" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.2"/>
+<text x="715.0" y="61.5" font-size="10.5" font-weight="600" fill="#4A3B7A" text-anchor="middle">不經品牌</text>
+<rect x="22" y="84" width="138" height="56" rx="6" fill="#4A555E" stroke="#4A555E" stroke-width="1.2"/>
+<text x="91.0" y="107" font-size="11.5" font-weight="600" fill="#FFFFFF" text-anchor="middle">AI GPU</text>
+<text x="91.0" y="125" font-size="10.5" fill="#E6EAED" text-anchor="middle">NVIDIA · AMD</text>
+<rect x="334" y="84" width="138" height="56" rx="6" fill="#FDF3E1" stroke="#8A5A00" stroke-width="1.2"/>
+<text x="403.0" y="107" font-size="11.5" font-weight="600" fill="#14181C" text-anchor="middle">電源與散熱</text>
+<text x="403.0" y="125" font-size="10.5" fill="#4A555E" text-anchor="middle">台達電 · 奇鋐 · 雙鴻</text>
+<rect x="490" y="84" width="138" height="56" rx="6" fill="#E8F1F8" stroke="#1B5E8C" stroke-width="1.2"/>
+<text x="559.0" y="107" font-size="11.5" font-weight="600" fill="#14181C" text-anchor="middle">機櫃ODM</text>
+<text x="559.0" y="125" font-size="10.5" fill="#4A555E" text-anchor="middle">鴻海 · 廣達</text>
+<rect x="646" y="84" width="138" height="56" rx="6" fill="#F0EEF7" stroke="#4A3B7A" stroke-width="1.2"/>
+<text x="715.0" y="107" font-size="11.5" font-weight="600" fill="#14181C" text-anchor="middle">伺服器品牌</text>
+<text x="715.0" y="125" font-size="10.5" fill="#4A555E" text-anchor="middle">戴爾 · Supermicro</text>
+<rect x="802" y="84" width="138" height="56" rx="6" fill="#E3F3EE" stroke="#0E7C68" stroke-width="1.2"/>
+<text x="871.0" y="107" font-size="11.5" font-weight="600" fill="#14181C" text-anchor="middle">雲端</text>
+<text x="871.0" y="125" font-size="10.5" fill="#4A555E" text-anchor="middle">微軟 · CoreWeave</text>
+<rect x="958" y="84" width="138" height="56" rx="6" fill="#8E3B6B" stroke="#8E3B6B" stroke-width="1.2"/>
+<text x="1027.0" y="116" font-size="11.5" font-weight="600" fill="#FFFFFF" text-anchor="middle">AI資料中心</text>
+<rect x="209.8" y="102.0" width="74.5" height="20" rx="10" fill="#FFFFFF" stroke="#5F6C75" stroke-width="1.2"/>
+<text x="247.0" y="115.8" font-size="10.5" font-weight="600" fill="#5F6C75" text-anchor="middle">不經通路商</text>
+<rect x="4" y="170" width="1112" height="120" rx="10" fill="#F6F8F9"/>
+<line x1="162" y1="210.0" x2="175" y2="210.0" stroke="#4A555E" stroke-width="1.4" marker-end="url(#dcArr)"/>
+<line x1="318" y1="210.0" x2="331" y2="210.0" stroke="#4A555E" stroke-width="1.4" marker-end="url(#dcArr)"/>
+<line x1="474" y1="210.0" x2="487" y2="210.0" stroke="#4A555E" stroke-width="1.4" marker-end="url(#dcArr)"/>
+<line x1="630" y1="210.0" x2="643" y2="210.0" stroke="#4A555E" stroke-width="1.4" marker-end="url(#dcArr)"/>
+<line x1="786" y1="210.0" x2="799" y2="210.0" stroke="#4A555E" stroke-width="1.4" marker-end="url(#dcArr)"/>
+<line x1="942" y1="210.0" x2="955" y2="210.0" stroke="#4A555E" stroke-width="1.4" marker-end="url(#dcArr)"/>
+<path d="M91.0,240 C91.0,272 403.0,272 403.0,242" fill="none" stroke="#4A555E" stroke-width="1.4" marker-end="url(#dcArr)"/>
+<rect x="194.6" y="254.25" width="104.8" height="20" rx="10" fill="#FFFFFF" stroke="#5F6C75" stroke-width="1.2"/>
+<text x="247.0" y="268.1" font-size="10.5" font-weight="600" fill="#5F6C75" text-anchor="middle">蘋果 · 不經通路商</text>
+<rect x="22" y="182" width="138" height="56" rx="6" fill="#4A555E" stroke="#4A555E" stroke-width="1.2"/>
+<text x="91.0" y="205" font-size="11.5" font-weight="600" fill="#FFFFFF" text-anchor="middle">手機晶片</text>
+<text x="91.0" y="223" font-size="10.5" fill="#E6EAED" text-anchor="middle">Qualcomm · 聯發科</text>
+<rect x="178" y="182" width="138" height="56" rx="6" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1.2"/>
+<text x="247.0" y="205" font-size="11.5" font-weight="600" fill="#14181C" text-anchor="middle">通路商</text>
+<text x="247.0" y="223" font-size="10.5" fill="#4A555E" text-anchor="middle">大聯大 · 文曄</text>
+<rect x="334" y="182" width="138" height="56" rx="6" fill="#FDF3E1" stroke="#8A5A00" stroke-width="1.2"/>
+<text x="403.0" y="205" font-size="11.5" font-weight="600" fill="#14181C" text-anchor="middle">手機零組件</text>
+<text x="403.0" y="223" font-size="10.5" fill="#4A555E" text-anchor="middle">村田製作所 · 太陽誘電</text>
+<rect x="490" y="182" width="138" height="56" rx="6" fill="#E8F1F8" stroke="#1B5E8C" stroke-width="1.2"/>
+<text x="559.0" y="205" font-size="11.5" font-weight="600" fill="#14181C" text-anchor="middle">手機EMS</text>
+<text x="559.0" y="223" font-size="10.5" fill="#4A555E" text-anchor="middle">鴻海 · 立訊</text>
+<rect x="646" y="182" width="138" height="56" rx="6" fill="#F0EEF7" stroke="#4A3B7A" stroke-width="1.2"/>
+<text x="715.0" y="205" font-size="11.5" font-weight="600" fill="#14181C" text-anchor="middle">手機品牌</text>
+<text x="715.0" y="223" font-size="10.5" fill="#4A555E" text-anchor="middle">蘋果 · 三星</text>
+<rect x="802" y="182" width="138" height="56" rx="6" fill="#E3F3EE" stroke="#0E7C68" stroke-width="1.2"/>
+<text x="871.0" y="205" font-size="11.5" font-weight="600" fill="#14181C" text-anchor="middle">電信商</text>
+<text x="871.0" y="223" font-size="10.5" fill="#4A555E" text-anchor="middle">中國移動 · Verizon</text>
+<rect x="958" y="182" width="138" height="56" rx="6" fill="#8E3B6B" stroke="#8E3B6B" stroke-width="1.2"/>
+<text x="1027.0" y="214" font-size="11.5" font-weight="600" fill="#FFFFFF" text-anchor="middle">智慧型手機</text>
+<rect x="4" y="300" width="1112" height="80" rx="10" fill="#F6F8F9"/>
+<line x1="162" y1="340.0" x2="175" y2="340.0" stroke="#4A555E" stroke-width="1.4" marker-end="url(#dcArr)"/>
+<line x1="318" y1="340.0" x2="331" y2="340.0" stroke="#4A555E" stroke-width="1.4" marker-end="url(#dcArr)"/>
+<line x1="474" y1="340.0" x2="487" y2="340.0" stroke="#4A555E" stroke-width="1.4" marker-end="url(#dcArr)"/>
+<line x1="630" y1="340.0" x2="643" y2="340.0" stroke="#4A555E" stroke-width="1.4" marker-end="url(#dcArr)"/>
+<line x1="786" y1="340.0" x2="955" y2="340.0" stroke="#4A555E" stroke-width="1.4" marker-end="url(#dcArr)"/>
+<rect x="22" y="312" width="138" height="56" rx="6" fill="#4A555E" stroke="#4A555E" stroke-width="1.2"/>
+<text x="91.0" y="335" font-size="11.5" font-weight="600" fill="#FFFFFF" text-anchor="middle">車用晶片</text>
+<text x="91.0" y="353" font-size="10.5" fill="#E6EAED" text-anchor="middle">英飛凌 · 恩智浦</text>
+<rect x="178" y="312" width="138" height="56" rx="6" fill="#ECEFF1" stroke="#5F6C75" stroke-width="1.2"/>
+<text x="247.0" y="335" font-size="11.5" font-weight="600" fill="#14181C" text-anchor="middle">通路商</text>
+<text x="247.0" y="353" font-size="10.5" fill="#4A555E" text-anchor="middle">Arrow · Avnet</text>
+<rect x="334" y="312" width="138" height="56" rx="6" fill="#FDF3E1" stroke="#8A5A00" stroke-width="1.2"/>
+<text x="403.0" y="335" font-size="11.5" font-weight="600" fill="#14181C" text-anchor="middle">車用零組件</text>
+<text x="403.0" y="353" font-size="10.5" fill="#4A555E" text-anchor="middle">村田製作所 · 國巨</text>
+<rect x="490" y="312" width="138" height="56" rx="6" fill="#E8F1F8" stroke="#1B5E8C" stroke-width="1.2"/>
+<text x="559.0" y="335" font-size="11.5" font-weight="600" fill="#14181C" text-anchor="middle">Tier 1供應商</text>
+<text x="559.0" y="353" font-size="10.5" fill="#4A555E" text-anchor="middle">Bosch · 電裝</text>
+<rect x="646" y="312" width="138" height="56" rx="6" fill="#F0EEF7" stroke="#4A3B7A" stroke-width="1.2"/>
+<text x="715.0" y="335" font-size="11.5" font-weight="600" fill="#14181C" text-anchor="middle">車廠</text>
+<text x="715.0" y="353" font-size="10.5" fill="#4A555E" text-anchor="middle">豐田 · 比亞迪</text>
+<rect x="958" y="312" width="138" height="56" rx="6" fill="#8E3B6B" stroke="#8E3B6B" stroke-width="1.2"/>
+<text x="1027.0" y="344" font-size="11.5" font-weight="600" fill="#FFFFFF" text-anchor="middle">汽車</text>
+<rect x="833.8" y="330.0" width="74.5" height="20" rx="10" fill="#FFFFFF" stroke="#0E7C68" stroke-width="1.2"/>
+<text x="871.0" y="343.8" font-size="10.5" font-weight="600" fill="#0E7C68" text-anchor="middle">不經營運商</text>
+</svg></div>
+</div><div class="sub k">全球通路商</div><div class="row"><div class="step back">
+  <span class="chip c-back">零組件通路商，美國</span>
+  <h4>Arrow Electronics</h4>
+  <p class="field"><b>銷售</b>&nbsp;— <span class="nw">晶片</span>&nbsp;· <span class="nw">被動元件</span>&nbsp;· <span class="nw">連接器</span>&nbsp;· <span class="nw">企業IT系統</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">車輛</span>&nbsp;· <span class="nw">工業設備</span>&nbsp;· <span class="nw">航太與國防</span></p>
+</div><div class="step back">
+  <span class="chip c-back">零組件通路商，美國</span>
+  <h4>Avnet</h4>
+  <p class="field"><b>銷售</b>&nbsp;— <span class="nw">晶片</span>&nbsp;· <span class="nw">連接器</span>&nbsp;· <span class="nw">被動元件</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">伺服器</span>&nbsp;· <span class="nw">網通設備</span>&nbsp;· <span class="nw">車輛</span>&nbsp;· <span class="nw">工業設備</span>&nbsp;· <span class="nw">航太與國防</span></p>
+</div><div class="step back">
+  <span class="chip c-back">零組件通路商，日本</span>
+  <h4>Macnica</h4>
+  <p class="field"><b>銷售</b>&nbsp;— <span class="nw">Altera</span>&nbsp;· <span class="nw">亞德諾</span>&nbsp;· <span class="nw">Broadcom</span>&nbsp;· <span class="nw">英飛凌</span>&nbsp;· <span class="nw">NVIDIA</span>&nbsp;· <span class="nw">瑞薩</span>&nbsp;· <span class="nw">德州儀器</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">電信設備</span>&nbsp;· <span class="nw">消費性電子</span>&nbsp;· <span class="nw">車輛</span>&nbsp;· <span class="nw">工業設備</span></p>
+</div></div><div class="sub k">亞洲通路商</div><div class="row"><div class="step back">
+  <span class="chip c-back">零組件通路商，台灣</span>
+  <h4>文曄</h4>
+  <p class="field"><b>銷售</b>&nbsp;— <span class="nw">ASIC</span>&nbsp;· <span class="nw">連網晶片</span>&nbsp;· <span class="nw">類比晶片</span>&nbsp;· <span class="nw">微控制器</span>&nbsp;· <span class="nw">記憶體</span>&nbsp;· <span class="nw">被動元件</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">伺服器</span>&nbsp;· <span class="nw">網通設備</span>&nbsp;· <span class="nw">智慧型手機</span>&nbsp;· <span class="nw">車輛</span>&nbsp;· <span class="nw">工業設備</span></p>
+</div><div class="step back">
+  <span class="chip c-back">零組件通路商，台灣</span>
+  <h4>大聯大</h4>
+  <p class="field"><b>銷售</b>&nbsp;— <span class="nw">Intel</span>&nbsp;· <span class="nw">AMD</span>&nbsp;· <span class="nw">聯發科</span>&nbsp;· <span class="nw">Qualcomm</span>&nbsp;· <span class="nw">恩智浦</span>&nbsp;· <span class="nw">英飛凌</span>&nbsp;· <span class="nw">美光</span>&nbsp;· <span class="nw">三星</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">伺服器</span>&nbsp;· <span class="nw">網通設備</span>&nbsp;· <span class="nw">PC</span>&nbsp;· <span class="nw">智慧型手機</span></p>
+</div><div class="step back">
+  <span class="chip c-back">記憶體通路商，台灣</span>
+  <h4>至上</h4>
+  <p class="field"><b>銷售</b>&nbsp;— <span class="nw">三星DRAM</span>&nbsp;· <span class="nw">三星NAND</span>&nbsp;· <span class="nw">應用處理器</span>&nbsp;· <span class="nw">驅動IC</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">智慧型手機</span></p>
+</div><div class="step back">
+  <span class="chip c-back">零組件通路商，台灣</span>
+  <h4>益登</h4>
+  <p class="field"><b>銷售</b>&nbsp;— <span class="nw">NVIDIA</span>&nbsp;· <span class="nw">AMD</span>&nbsp;· <span class="nw">Marvell</span>&nbsp;· <span class="nw">Astera Labs</span>&nbsp;· <span class="nw">Skyworks</span>&nbsp;· <span class="nw">ST</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">PC</span>&nbsp;· <span class="nw">智慧型手機</span>&nbsp;· <span class="nw">車輛</span></p>
+</div></div><div class="sub k">目錄型通路商</div><div class="row"><div class="step back">
+  <span class="chip c-back">目錄型通路商，美國</span>
+  <h4>DigiKey</h4>
+  <p class="field"><b>銷售</b>&nbsp;— <span class="nw">晶片</span>&nbsp;· <span class="nw">被動元件</span>&nbsp;· <span class="nw">連接器</span>&nbsp;· <span class="nw">機電零件</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">原型</span>&nbsp;· <span class="nw">小量板卡</span></p>
+</div><div class="step back">
+  <span class="chip c-back">目錄型通路商，美國</span>
+  <h4>Mouser Electronics</h4>
+  <p class="field"><b>銷售</b>&nbsp;— <span class="nw">晶片</span>&nbsp;· <span class="nw">被動元件</span>&nbsp;· <span class="nw">連接器</span>&nbsp;· <span class="nw">機電零件</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">原型</span>&nbsp;· <span class="nw">小量板卡</span></p>
+</div></div></div>
+</div>
+<div class="divider"></div>
+<div class="stage" id="s8">
+  <div class="rail"><div class="stripe"></div>
+    <div class="num">階段 8</div>
+    <h2>模組與零組件</h2>
+    <p class="en2">晶片周邊加上的元件</p>
+  </div>
+  <div class="body"><div class="sub d">記憶體模組與SSD</div><div class="row"><div class="step design">
+  <span class="chip c-design">記憶體模組廠，美國</span>
+  <h4>Kingston Technology</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">DDR5模組</span>&nbsp;· <span class="nw">FURY電競記憶體</span>&nbsp;· <span class="nw">用戶端SSD</span>&nbsp;· <span class="nw">資料中心SSD</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">伺服器</span>&nbsp;· <span class="nw">PC</span></p>
+</div><div class="step design">
+  <span class="chip c-design">記憶體模組廠，台灣</span>
+  <h4>威剛</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">DDR5模組</span>&nbsp;· <span class="nw">XPG電競記憶體</span>&nbsp;· <span class="nw">SSD</span>&nbsp;· <span class="nw">工業用記憶體</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">PC</span>&nbsp;· <span class="nw">工業設備</span></p>
+</div><div class="step design">
+  <span class="chip c-design">記憶體模組廠，台灣</span>
+  <h4>十銓</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">DDR5模組</span>&nbsp;· <span class="nw">T-Force電競記憶體</span>&nbsp;· <span class="nw">SSD</span>&nbsp;· <span class="nw">記憶卡</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">伺服器</span>&nbsp;· <span class="nw">PC</span>&nbsp;· <span class="nw">消費性電子</span></p>
+</div></div><div class="sub d">電源供應器與機架式電源</div><div class="row"><div class="step design">
+  <span class="chip c-design">伺服器電源廠，台灣</span>
+  <h4>台達電</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">AI伺服器電源供應器</span>&nbsp;· <span class="nw">機架式電源</span>&nbsp;· <span class="nw">HVDC機櫃電源</span>&nbsp;· <span class="nw">備援電池模組</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">伺服器</span></p>
+</div><div class="step design">
+  <span class="chip c-design">伺服器電源廠，台灣</span>
+  <h4>光寶科</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">AI伺服器電源供應器</span>&nbsp;· <span class="nw">機架式電源</span>&nbsp;· <span class="nw">備援電池模組</span>&nbsp;· <span class="nw">HVDC模組</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">伺服器</span></p>
+</div><div class="step design">
+  <span class="chip c-design">電源供應器廠，台灣</span>
+  <h4>群電</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">筆電電源轉接器</span>&nbsp;· <span class="nw">伺服器電源供應器</span>&nbsp;· <span class="nw">電信電源供應器</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">伺服器</span>&nbsp;· <span class="nw">電信設備</span>&nbsp;· <span class="nw">PC</span></p>
+</div><div class="step design">
+  <span class="chip c-design">電源供應器廠，台灣</span>
+  <h4>全漢</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">PC電源供應器</span>&nbsp;· <span class="nw">工業電源供應器</span>&nbsp;· <span class="nw">伺服器電源供應器</span>&nbsp;· <span class="nw">UPS</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">伺服器</span>&nbsp;· <span class="nw">PC</span>&nbsp;· <span class="nw">工業設備</span></p>
+</div><div class="step design">
+  <span class="chip c-design">伺服器電源廠，美國</span>
+  <h4>Advanced Energy</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">伺服器電源供應器</span>&nbsp;· <span class="nw">機架式電源</span>&nbsp;· <span class="nw">晶圓廠設備電源</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">伺服器</span>&nbsp;· <span class="nw">晶圓廠設備</span></p>
+</div><div class="step design">
+  <span class="chip c-design">電源模組廠，美國</span>
+  <h4>Vicor</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">匯流排轉換器</span>&nbsp;· <span class="nw">垂直供電模組</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span></p>
+</div></div><div class="sub d">散熱模組與冷卻設備</div><div class="row"><div class="step design">
+  <span class="chip c-design">散熱模組廠，台灣</span>
+  <h4>奇鋐</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">冷板</span>&nbsp;· <span class="nw">分歧管</span>&nbsp;· <span class="nw">均溫板</span>&nbsp;· <span class="nw">風扇</span>&nbsp;· <span class="nw">CDU</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span></p>
+</div><div class="step design">
+  <span class="chip c-design">散熱模組廠，台灣</span>
+  <h4>雙鴻</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">冷板</span>&nbsp;· <span class="nw">分歧管</span>&nbsp;· <span class="nw">均溫板</span>&nbsp;· <span class="nw">熱交換器</span>&nbsp;· <span class="nw">快接頭</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">伺服器</span></p>
+</div><div class="step design">
+  <span class="chip c-design">散熱模組廠，台灣</span>
+  <h4>訊凱</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">冷板</span>&nbsp;· <span class="nw">液冷模組</span>&nbsp;· <span class="nw">PC散熱器</span>&nbsp;· <span class="nw">PC機殼</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">PC</span></p>
+</div><div class="step design">
+  <span class="chip c-design">封裝蓋與冷板廠，台灣</span>
+  <h4>健策</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">GPU與ASIC封裝蓋</span>&nbsp;· <span class="nw">CPO交換晶片補強框</span>&nbsp;· <span class="nw">冷板</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">網通設備</span></p>
+</div><div class="step design">
+  <span class="chip c-design">液冷廠，台灣</span>
+  <h4>台達電</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">冷板</span>&nbsp;· <span class="nw">CDU</span>&nbsp;· <span class="nw">液對氣側櫃</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span></p>
+</div><div class="step design">
+  <span class="chip c-design">資料中心散熱廠，美國</span>
+  <h4>Vertiv</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">CDU</span>&nbsp;· <span class="nw">背門熱交換器</span>&nbsp;· <span class="nw">冰水機</span>&nbsp;· <span class="nw">UPS</span>&nbsp;· <span class="nw">配電設備</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">資料中心</span></p>
+</div><div class="step design">
+  <span class="chip c-design">液冷廠，加拿大</span>
+  <h4>CoolIT Systems</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">冷板</span>&nbsp;· <span class="nw">分歧管</span>&nbsp;· <span class="nw">CDU</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">超級電腦</span></p>
+</div><div class="step design">
+  <span class="chip c-design">液冷廠，美國</span>
+  <h4>Boyd Thermal</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">冷板</span>&nbsp;· <span class="nw">液冷系統</span>&nbsp;· <span class="nw">兩相冷卻系統</span>&nbsp;· <span class="nw">熱交換器</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">資料中心</span></p>
+</div></div><div class="sub d">連接器與線纜</div><div class="row"><div class="step design">
+  <span class="chip c-design">連接器廠，愛爾蘭</span>
+  <h4>TE Connectivity</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">板對板連接器</span>&nbsp;· <span class="nw">I/O連接器</span>&nbsp;· <span class="nw">車用連接器</span>&nbsp;· <span class="nw">工業連接器</span>&nbsp;· <span class="nw">感測器</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">伺服器</span>&nbsp;· <span class="nw">電信設備</span>&nbsp;· <span class="nw">車輛</span>&nbsp;· <span class="nw">工業設備</span></p>
+</div><div class="step design">
+  <span class="chip c-design">連接器廠，美國</span>
+  <h4>Amphenol</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">高速連接器</span>&nbsp;· <span class="nw">I/O連接器</span>&nbsp;· <span class="nw">射頻連接器</span>&nbsp;· <span class="nw">光纖連接器</span>&nbsp;· <span class="nw">線纜組件</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">網通設備</span>&nbsp;· <span class="nw">電信設備</span>&nbsp;· <span class="nw">車輛</span>&nbsp;· <span class="nw">航太與國防</span></p>
+</div><div class="step design">
+  <span class="chip c-design">連接器廠，美國</span>
+  <h4>Molex</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">高速連接器</span>&nbsp;· <span class="nw">I/O連接器</span>&nbsp;· <span class="nw">PCB連接器</span>&nbsp;· <span class="nw">線纜組件</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">伺服器</span>&nbsp;· <span class="nw">智慧型手機</span>&nbsp;· <span class="nw">車輛</span>&nbsp;· <span class="nw">醫療器材</span></p>
+</div><div class="step design">
+  <span class="chip c-design">連接器與線纜廠，中國</span>
+  <h4>立訊</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">高速連接器</span>&nbsp;· <span class="nw">I/O連接器</span>&nbsp;· <span class="nw">射頻連接器</span>&nbsp;· <span class="nw">線纜組件</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">智慧型手機</span>&nbsp;· <span class="nw">車輛</span></p>
+</div><div class="step design">
+  <span class="chip c-design">插座廠，台灣</span>
+  <h4>嘉澤</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">CPU插座</span>&nbsp;· <span class="nw">GPU插座</span>&nbsp;· <span class="nw">DIMM插座</span>&nbsp;· <span class="nw">高速連接器</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">伺服器</span>&nbsp;· <span class="nw">PC</span></p>
+</div><div class="step design">
+  <span class="chip c-design">連接器與線纜廠，台灣</span>
+  <h4>貿聯</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">銅纜組件</span>&nbsp;· <span class="nw">電源配線</span>&nbsp;· <span class="nw">光纖跳線</span>&nbsp;· <span class="nw">線束</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">資料中心</span>&nbsp;· <span class="nw">車輛</span>&nbsp;· <span class="nw">晶圓廠設備</span></p>
+</div></div><div class="sub d">機殼與滑軌</div><div class="row"><div class="step design">
+  <span class="chip c-design">伺服器機殼廠，台灣</span>
+  <h4>勤誠</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">伺服器機殼</span>&nbsp;· <span class="nw">儲存機殼</span>&nbsp;· <span class="nw">機架零件</span>&nbsp;· <span class="nw">機櫃零件</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">伺服器</span></p>
+</div><div class="step design">
+  <span class="chip c-design">伺服器滑軌廠，台灣</span>
+  <h4>川湖</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">HGX滑軌</span>&nbsp;· <span class="nw">GB200滑軌</span>&nbsp;· <span class="nw">GB300滑軌</span>&nbsp;· <span class="nw">Trainium滑軌</span>&nbsp;· <span class="nw">抽屜滑軌</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">伺服器</span></p>
+</div><div class="step design">
+  <span class="chip c-design">伺服器滑軌廠，台灣</span>
+  <h4>南俊</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">GB200滑軌</span>&nbsp;· <span class="nw">GB300滑軌</span>&nbsp;· <span class="nw">Vera Rubin滑軌</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">伺服器</span></p>
+</div><div class="step design">
+  <span class="chip c-design">伺服器機殼廠，台灣</span>
+  <h4>營邦</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">伺服器機殼</span>&nbsp;· <span class="nw">儲存伺服器</span>&nbsp;· <span class="nw">Helios機櫃</span>&nbsp;· <span class="nw">Helios運算托盤</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">儲存系統</span></p>
+</div></div><div class="sub d">被動元件</div><div class="row"><div class="step design">
+  <span class="chip c-design">MLCC廠，日本</span>
+  <h4>村田製作所</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">MLCC</span>&nbsp;· <span class="nw">電感</span>&nbsp;· <span class="nw">射頻濾波器</span>&nbsp;· <span class="nw">射頻模組</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">智慧型手機</span>&nbsp;· <span class="nw">車輛</span></p>
+</div><div class="step design">
+  <span class="chip c-design">MLCC廠，韓國</span>
+  <h4>Samsung Electro-Mechanics</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">MLCC</span>&nbsp;· <span class="nw">相機模組</span>&nbsp;· <span class="nw">FC-BGA載板</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">智慧型手機</span>&nbsp;· <span class="nw">車輛</span></p>
+</div><div class="step design">
+  <span class="chip c-design">被動元件廠，台灣</span>
+  <h4>國巨</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">晶片電阻</span>&nbsp;· <span class="nw">MLCC</span>&nbsp;· <span class="nw">鉭質電容</span>&nbsp;· <span class="nw">電感</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">伺服器</span>&nbsp;· <span class="nw">消費性電子</span>&nbsp;· <span class="nw">車輛</span>&nbsp;· <span class="nw">工業設備</span></p>
+</div><div class="step design">
+  <span class="chip c-design">MLCC廠，日本</span>
+  <h4>太陽誘電</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">高容值MLCC</span>&nbsp;· <span class="nw">電感</span>&nbsp;· <span class="nw">SAW濾波器</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">伺服器</span>&nbsp;· <span class="nw">智慧型手機</span>&nbsp;· <span class="nw">車輛</span></p>
+</div></div></div>
+</div>
+<div class="divider"></div>
+<div class="stage" id="s9">
+  <div class="rail"><div class="stripe"></div>
+    <div class="num">階段 9</div>
+    <h2>系統組裝</h2>
+    <p class="en2">誰來組裝板卡、整機或機櫃</p>
+  </div>
+  <div class="body"><div class="sub s">AI伺服器與機櫃ODM</div><div class="row"><div class="step sys">
+  <span class="chip c-sys">AI伺服器ODM，台灣</span>
+  <h4>鴻海</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">GB200 NVL72機櫃</span>&nbsp;· <span class="nw">GB300 NVL72機櫃</span>&nbsp;· <span class="nw">Vera Rubin NVL72機櫃</span>&nbsp;· <span class="nw">ASIC伺服器</span>&nbsp;· <span class="nw">iPhone</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">智慧型手機</span></p>
+</div><div class="step sys">
+  <span class="chip c-sys">AI伺服器ODM，台灣</span>
+  <h4>廣達</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">GB300 NVL72機櫃</span>&nbsp;· <span class="nw">Vera Rubin NVL72機櫃</span>&nbsp;· <span class="nw">ASIC伺服器</span>&nbsp;· <span class="nw">通用伺服器</span>&nbsp;· <span class="nw">筆記型電腦</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">伺服器</span>&nbsp;· <span class="nw">PC</span></p>
+</div><div class="step sys">
+  <span class="chip c-sys">AI伺服器ODM，台灣</span>
+  <h4>緯創</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">GB300運算板</span>&nbsp;· <span class="nw">GB300 NVL72機櫃</span>&nbsp;· <span class="nw">Vera Rubin NVL72機櫃</span>&nbsp;· <span class="nw">ASIC伺服器</span>&nbsp;· <span class="nw">筆記型電腦</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">PC</span></p>
+</div><div class="step sys">
+  <span class="chip c-sys">AI伺服器ODM，台灣</span>
+  <h4>緯穎</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">Trainium3機櫃</span>&nbsp;· <span class="nw">GPU伺服器</span>&nbsp;· <span class="nw">通用伺服器</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">伺服器</span></p>
+</div><div class="step sys">
+  <span class="chip c-sys">伺服器ODM，台灣</span>
+  <h4>英業達</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">B300伺服器</span>&nbsp;· <span class="nw">TPU伺服器</span>&nbsp;· <span class="nw">ASIC伺服器</span>&nbsp;· <span class="nw">筆記型電腦</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">PC</span></p>
+</div><div class="step sys">
+  <span class="chip c-sys">伺服器ODM，台灣</span>
+  <h4>神達</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">GPU伺服器</span>&nbsp;· <span class="nw">通用伺服器</span>&nbsp;· <span class="nw">車載資通訊裝置</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">伺服器</span>&nbsp;· <span class="nw">車輛</span></p>
+</div><div class="step sys">
+  <span class="chip c-sys">伺服器ODM與品牌，台灣</span>
+  <h4>技嘉</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">GPU伺服器</span>&nbsp;· <span class="nw">GPU機櫃</span>&nbsp;· <span class="nw">顯示卡</span>&nbsp;· <span class="nw">主機板</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">PC</span></p>
+</div></div><div class="sub s">全球EMS</div><div class="row"><div class="step sys">
+  <span class="chip c-sys">EMS，美國</span>
+  <h4>Jabil</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">資料中心硬體</span>&nbsp;· <span class="nw">網通設備</span>&nbsp;· <span class="nw">資本設備</span>&nbsp;· <span class="nw">醫療電子</span>&nbsp;· <span class="nw">車用電子</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">網通設備</span>&nbsp;· <span class="nw">車輛</span>&nbsp;· <span class="nw">工業設備</span>&nbsp;· <span class="nw">醫療器材</span></p>
+</div><div class="step sys">
+  <span class="chip c-sys">EMS，美國</span>
+  <h4>Flex</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">機櫃整合</span>&nbsp;· <span class="nw">電力撬裝系統</span>&nbsp;· <span class="nw">機櫃散熱</span>&nbsp;· <span class="nw">車用電子</span>&nbsp;· <span class="nw">工業電子</span>&nbsp;· <span class="nw">醫療電子</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">資料中心</span>&nbsp;· <span class="nw">車輛</span>&nbsp;· <span class="nw">工業設備</span>&nbsp;· <span class="nw">醫療器材</span></p>
+</div><div class="step sys">
+  <span class="chip c-sys">EMS，加拿大</span>
+  <h4>Celestica</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">800G交換器</span>&nbsp;· <span class="nw">1.6T交換器</span>&nbsp;· <span class="nw">AI運算系統</span>&nbsp;· <span class="nw">儲存系統</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">儲存系統</span>&nbsp;· <span class="nw">網通設備</span></p>
+</div><div class="step sys">
+  <span class="chip c-sys">EMS，美國</span>
+  <h4>Sanmina</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">AI機櫃系統</span>&nbsp;· <span class="nw">通訊硬體</span>&nbsp;· <span class="nw">雲端硬體</span>&nbsp;· <span class="nw">工業電子</span>&nbsp;· <span class="nw">醫療電子</span>&nbsp;· <span class="nw">國防電子</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">伺服器</span>&nbsp;· <span class="nw">電信設備</span>&nbsp;· <span class="nw">工業設備</span>&nbsp;· <span class="nw">醫療器材</span>&nbsp;· <span class="nw">航太與國防</span></p>
+</div></div><div class="sub s">筆電與手機組裝</div><div class="row"><div class="step sys">
+  <span class="chip c-sys">筆電ODM，台灣</span>
+  <h4>仁寶</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">筆記型電腦</span>&nbsp;· <span class="nw">通用伺服器</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">伺服器</span>&nbsp;· <span class="nw">PC</span></p>
+</div><div class="step sys">
+  <span class="chip c-sys">手機與伺服器EMS，台灣</span>
+  <h4>和碩</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">iPhone</span>&nbsp;· <span class="nw">GB200伺服器</span>&nbsp;· <span class="nw">GB300伺服器</span>&nbsp;· <span class="nw">MI355X伺服器</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">智慧型手機</span></p>
+</div><div class="step sys">
+  <span class="chip c-sys">手機EMS，中國</span>
+  <h4>立訊</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">iPhone組裝</span>&nbsp;· <span class="nw">AirPods組裝</span>&nbsp;· <span class="nw">Apple Watch組裝</span>&nbsp;· <span class="nw">資料中心線纜</span>&nbsp;· <span class="nw">車用線束</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">智慧型手機</span>&nbsp;· <span class="nw">消費性電子</span>&nbsp;· <span class="nw">車輛</span></p>
+</div><div class="step sys">
+  <span class="chip c-sys">手機EMS，中國</span>
+  <h4>比亞迪電子</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">智慧型手機組裝</span>&nbsp;· <span class="nw">消費性電子組裝</span>&nbsp;· <span class="nw">車用電子</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">智慧型手機</span>&nbsp;· <span class="nw">消費性電子</span>&nbsp;· <span class="nw">車輛</span></p>
+</div><div class="step sys">
+  <span class="chip c-sys">消費性裝置EMS，中國</span>
+  <h4>歌爾股份</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">無線耳機</span>&nbsp;· <span class="nw">MR與AR頭戴裝置</span>&nbsp;· <span class="nw">AI眼鏡</span>&nbsp;· <span class="nw">遊戲機</span>&nbsp;· <span class="nw">微型揚聲器</span>&nbsp;· <span class="nw">MEMS麥克風</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">消費性電子</span></p>
+</div></div><div class="sub s">汽車Tier 1供應商</div><div class="row"><div class="step sys">
+  <span class="chip c-sys">汽車Tier 1供應商，德國</span>
+  <h4>Bosch</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">煞車與轉向系統</span>&nbsp;· <span class="nw">動力系統</span>&nbsp;· <span class="nw">逆變器與電驅橋</span>&nbsp;· <span class="nw">雷達與攝影機感測器</span>&nbsp;· <span class="nw">車用電腦</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">車輛</span></p>
+</div><div class="step sys">
+  <span class="chip c-sys">汽車Tier 1供應商，日本</span>
+  <h4>電裝</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">動力系統</span>&nbsp;· <span class="nw">熱管理系統</span>&nbsp;· <span class="nw">逆變器</span>&nbsp;· <span class="nw">ECU</span>&nbsp;· <span class="nw">ADAS攝影機</span>&nbsp;· <span class="nw">雷達</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">車輛</span></p>
+</div><div class="step sys">
+  <span class="chip c-sys">汽車Tier 1供應商，德國</span>
+  <h4>ZF Friedrichshafen</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">變速箱</span>&nbsp;· <span class="nw">電驅系統</span>&nbsp;· <span class="nw">底盤系統</span>&nbsp;· <span class="nw">煞車</span>&nbsp;· <span class="nw">ADAS感測器</span>&nbsp;· <span class="nw">車用電腦</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">車輛</span></p>
+</div><div class="step sys">
+  <span class="chip c-sys">汽車Tier 1供應商，韓國</span>
+  <h4>Hyundai Mobis</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">底盤模組</span>&nbsp;· <span class="nw">座艙模組</span>&nbsp;· <span class="nw">前端模組</span>&nbsp;· <span class="nw">ADAS零組件</span>&nbsp;· <span class="nw">電動化零組件</span>&nbsp;· <span class="nw">車燈</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">車輛</span></p>
+</div><div class="step sys">
+  <span class="chip c-sys">汽車Tier 1供應商，加拿大</span>
+  <h4>Magna International</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">車身結構</span>&nbsp;· <span class="nw">ADAS零組件</span>&nbsp;· <span class="nw">電動化零組件</span>&nbsp;· <span class="nw">座椅</span>&nbsp;· <span class="nw">整車組裝</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">車輛</span></p>
+</div><div class="step sys">
+  <span class="chip c-sys">汽車Tier 1供應商，瑞士</span>
+  <h4>Aptiv</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">連接器</span>&nbsp;· <span class="nw">線纜管理</span>&nbsp;· <span class="nw">ADAS</span>&nbsp;· <span class="nw">車用電腦</span>&nbsp;· <span class="nw">車用軟體</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">車輛</span></p>
+</div><div class="step sys">
+  <span class="chip c-sys">汽車Tier 1供應商，德國</span>
+  <h4>Aumovio</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">雷達感測器</span>&nbsp;· <span class="nw">攝影機感測器</span>&nbsp;· <span class="nw">煞車</span>&nbsp;· <span class="nw">顯示器</span>&nbsp;· <span class="nw">車輛電子電氣架構</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">車輛</span></p>
+</div></div></div>
+</div>
+<div class="divider"></div>
+<div class="stage" id="s10">
+  <div class="rail"><div class="stripe"></div>
+    <div class="num">階段 10</div>
+    <h2>品牌與OEM</h2>
+    <p class="en2">產品上的品牌</p>
+  </div>
+  <div class="body"><div class="sub b">伺服器品牌</div><div class="row"><div class="step pkgB">
+  <span class="chip c-pkgB">伺服器品牌，美國</span>
+  <h4>戴爾</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">PowerEdge伺服器</span>&nbsp;· <span class="nw">XE AI機櫃</span>&nbsp;· <span class="nw">PowerStore儲存設備</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">伺服器</span>&nbsp;· <span class="nw">儲存系統</span></p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">伺服器品牌，美國</span>
+  <h4>Supermicro</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">GPU伺服器</span>&nbsp;· <span class="nw">機櫃系統</span>&nbsp;· <span class="nw">直接液冷</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span></p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">伺服器品牌，中國</span>
+  <h4>聯想</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">ThinkSystem伺服器</span>&nbsp;· <span class="nw">ThinkAgile系統</span>&nbsp;· <span class="nw">Neptune液冷</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">伺服器</span></p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">伺服器品牌，美國</span>
+  <h4>Hewlett Packard Enterprise</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">ProLiant伺服器</span>&nbsp;· <span class="nw">Cray伺服器</span>&nbsp;· <span class="nw">Cray EX超級電腦</span>&nbsp;· <span class="nw">Alletra儲存設備</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">超級電腦</span>&nbsp;· <span class="nw">伺服器</span>&nbsp;· <span class="nw">儲存系統</span></p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">伺服器品牌，中國</span>
+  <h4>浪潮</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">機架式伺服器</span>&nbsp;· <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">儲存系統</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">伺服器</span>&nbsp;· <span class="nw">儲存系統</span></p>
+</div></div><div class="sub b">PC品牌</div><div class="row"><div class="step pkgB">
+  <span class="chip c-pkgB">PC品牌，中國</span>
+  <h4>聯想</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">ThinkPad</span>&nbsp;· <span class="nw">Yoga</span>&nbsp;· <span class="nw">Legion</span>&nbsp;· <span class="nw">IdeaPad</span>&nbsp;· <span class="nw">Motorola手機</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">PC</span>&nbsp;· <span class="nw">智慧型手機</span></p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">PC品牌，美國</span>
+  <h4>惠普</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">EliteBook</span>&nbsp;· <span class="nw">OmniBook</span>&nbsp;· <span class="nw">ZBook</span>&nbsp;· <span class="nw">LaserJet印表機</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">PC</span>&nbsp;· <span class="nw">印表機</span></p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">PC品牌，美國</span>
+  <h4>戴爾</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">Dell</span>&nbsp;· <span class="nw">Dell Pro</span>&nbsp;· <span class="nw">Dell Pro Max</span>&nbsp;· <span class="nw">Alienware</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">PC</span></p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">PC品牌，美國</span>
+  <h4>蘋果</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">MacBook Air</span>&nbsp;· <span class="nw">MacBook Pro</span>&nbsp;· <span class="nw">iMac</span>&nbsp;· <span class="nw">Mac mini</span>&nbsp;· <span class="nw">Mac Studio</span>&nbsp;· <span class="nw">M系列晶片</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">PC</span></p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">PC品牌，台灣</span>
+  <h4>華碩</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">Zenbook</span>&nbsp;· <span class="nw">Vivobook</span>&nbsp;· <span class="nw">ROG</span>&nbsp;· <span class="nw">主機板</span>&nbsp;· <span class="nw">顯示卡</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">PC</span></p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">PC品牌，台灣</span>
+  <h4>宏碁</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">Swift</span>&nbsp;· <span class="nw">Aspire</span>&nbsp;· <span class="nw">Predator</span>&nbsp;· <span class="nw">Chromebook</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">PC</span></p>
+</div></div><div class="sub b">智慧型手機品牌</div><div class="row"><div class="step pkgB">
+  <span class="chip c-pkgB">智慧型手機品牌，美國</span>
+  <h4>蘋果</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">iPhone</span>&nbsp;· <span class="nw">A系列晶片</span>&nbsp;· <span class="nw">C1數據機</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">智慧型手機</span></p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">智慧型手機品牌，韓國</span>
+  <h4>三星</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">Galaxy S</span>&nbsp;· <span class="nw">Galaxy Z</span>&nbsp;· <span class="nw">Galaxy A</span>&nbsp;· <span class="nw">Exynos晶片</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">智慧型手機</span></p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">智慧型手機品牌，中國</span>
+  <h4>小米</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">小米手機</span>&nbsp;· <span class="nw">Redmi手機</span>&nbsp;· <span class="nw">玄戒O1晶片</span>&nbsp;· <span class="nw">IoT裝置</span>&nbsp;· <span class="nw">SU7</span>&nbsp;· <span class="nw">YU7</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">智慧型手機</span>&nbsp;· <span class="nw">消費性電子</span>&nbsp;· <span class="nw">車輛</span></p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">智慧型手機品牌，中國</span>
+  <h4>vivo</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">X系列</span>&nbsp;· <span class="nw">V系列</span>&nbsp;· <span class="nw">iQOO</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">智慧型手機</span></p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">智慧型手機品牌，中國</span>
+  <h4>OPPO</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">Find</span>&nbsp;· <span class="nw">Reno</span>&nbsp;· <span class="nw">OnePlus</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">智慧型手機</span></p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">智慧型手機品牌，中國</span>
+  <h4>傳音</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">TECNO</span>&nbsp;· <span class="nw">Infinix</span>&nbsp;· <span class="nw">itel</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">智慧型手機</span>&nbsp;· <span class="nw">功能型手機</span></p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">智慧型手機品牌，中國</span>
+  <h4>華為</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">Mate</span>&nbsp;· <span class="nw">Pura</span>&nbsp;· <span class="nw">nova</span>&nbsp;· <span class="nw">麒麟晶片</span>&nbsp;· <span class="nw">HarmonyOS</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">智慧型手機</span></p>
+</div></div><div class="sub b">網通設備品牌</div><div class="row"><div class="step pkgB">
+  <span class="chip c-pkgB">網通設備品牌，美國</span>
+  <h4>Cisco</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">Nexus交換器</span>&nbsp;· <span class="nw">Catalyst交換器</span>&nbsp;· <span class="nw">路由器</span>&nbsp;· <span class="nw">Silicon One ASIC</span>&nbsp;· <span class="nw">UCS伺服器</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">伺服器</span>&nbsp;· <span class="nw">網通設備</span></p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">網通設備品牌，美國</span>
+  <h4>NVIDIA</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">Spectrum-X乙太網路交換器</span>&nbsp;· <span class="nw">Quantum InfiniBand</span>&nbsp;· <span class="nw">ConnectX網路卡</span>&nbsp;· <span class="nw">BlueField DPU</span>&nbsp;· <span class="nw">NVLink交換器</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI伺服器</span>&nbsp;· <span class="nw">網通設備</span></p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">網通設備品牌，美國</span>
+  <h4>Arista Networks</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">7800R交換器</span>&nbsp;· <span class="nw">7060X交換器</span>&nbsp;· <span class="nw">Etherlink</span>&nbsp;· <span class="nw">EOS</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">網通設備</span></p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">網通設備品牌，中國</span>
+  <h4>華為</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">CloudEngine交換器</span>&nbsp;· <span class="nw">NetEngine路由器</span>&nbsp;· <span class="nw">5G基地台</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">網通設備</span>&nbsp;· <span class="nw">電信設備</span></p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">網通設備品牌，美國</span>
+  <h4>HPE Juniper Networking</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">QFX交換器</span>&nbsp;· <span class="nw">PTX路由器</span>&nbsp;· <span class="nw">Aruba交換器</span>&nbsp;· <span class="nw">Mist AI</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">網通設備</span></p>
+</div></div><div class="sub b">車廠</div><div class="row"><div class="step pkgB">
+  <span class="chip c-pkgB">車廠，日本</span>
+  <h4>豐田</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">豐田</span>&nbsp;· <span class="nw">Lexus</span>&nbsp;· <span class="nw">Daihatsu</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">車輛</span></p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">車廠，德國</span>
+  <h4>福斯集團</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">福斯</span>&nbsp;· <span class="nw">Audi</span>&nbsp;· <span class="nw">Porsche</span>&nbsp;· <span class="nw">Škoda</span>&nbsp;· <span class="nw">SEAT</span>&nbsp;· <span class="nw">CUPRA</span>&nbsp;· <span class="nw">TRATON卡車</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">車輛</span></p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">車廠，韓國</span>
+  <h4>現代汽車集團</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">現代</span>&nbsp;· <span class="nw">Kia</span>&nbsp;· <span class="nw">Genesis</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">車輛</span></p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">車廠，美國</span>
+  <h4>通用汽車</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">Chevrolet</span>&nbsp;· <span class="nw">GMC</span>&nbsp;· <span class="nw">Cadillac</span>&nbsp;· <span class="nw">Buick</span>&nbsp;· <span class="nw">五菱</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">車輛</span></p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">車廠，荷蘭</span>
+  <h4>Stellantis</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">Jeep</span>&nbsp;· <span class="nw">Ram</span>&nbsp;· <span class="nw">Peugeot</span>&nbsp;· <span class="nw">Fiat</span>&nbsp;· <span class="nw">Citroën</span>&nbsp;· <span class="nw">Opel</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">車輛</span></p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">車廠，中國</span>
+  <h4>比亞迪</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">王朝</span>&nbsp;· <span class="nw">海洋</span>&nbsp;· <span class="nw">騰勢</span>&nbsp;· <span class="nw">仰望</span>&nbsp;· <span class="nw">刀片電池</span>&nbsp;· <span class="nw">IGBT與SiC晶片</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">車輛</span></p>
+</div><div class="step pkgB">
+  <span class="chip c-pkgB">車廠，美國</span>
+  <h4>特斯拉</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">Model 3</span>&nbsp;· <span class="nw">Model Y</span>&nbsp;· <span class="nw">Cybertruck</span>&nbsp;· <span class="nw">FSD電腦</span>&nbsp;· <span class="nw">Megapack</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">車輛</span>&nbsp;· <span class="nw">儲能</span></p>
+</div></div></div>
+</div>
+<div class="divider"></div>
+<div class="stage" id="s11">
+  <div class="rail"><div class="stripe"></div>
+    <div class="num">階段 11</div>
+    <h2>營運商與算力買方</h2>
+    <p class="en2">誰來營運硬體</p>
+  </div>
+  <div class="body"><div class="sub c">超大規模雲端業者</div><div class="row"><div class="step pkgC">
+  <span class="chip c-pkgC">超大規模雲端，美國</span>
+  <h4>亞馬遜（AWS）</h4>
+  <p class="field"><b>營運</b>&nbsp;— <span class="nw">EC2</span>&nbsp;· <span class="nw">Bedrock</span>&nbsp;· <span class="nw">SageMaker</span>&nbsp;· <span class="nw">Trainium晶片</span>&nbsp;· <span class="nw">Graviton晶片</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI算力</span>&nbsp;· <span class="nw">AI模型</span>&nbsp;· <span class="nw">雲端服務</span></p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">超大規模雲端，美國</span>
+  <h4>微軟（Azure）</h4>
+  <p class="field"><b>營運</b>&nbsp;— <span class="nw">Azure</span>&nbsp;· <span class="nw">Microsoft Foundry</span>&nbsp;· <span class="nw">Microsoft 365 Copilot</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI算力</span>&nbsp;· <span class="nw">AI模型</span>&nbsp;· <span class="nw">AI助理</span>&nbsp;· <span class="nw">雲端服務</span></p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">超大規模雲端，美國</span>
+  <h4>Alphabet（Google Cloud）</h4>
+  <p class="field"><b>營運</b>&nbsp;— <span class="nw">Google Cloud</span>&nbsp;· <span class="nw">Gemini Enterprise</span>&nbsp;· <span class="nw">TPU</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI算力</span>&nbsp;· <span class="nw">AI模型</span>&nbsp;· <span class="nw">AI助理</span>&nbsp;· <span class="nw">雲端服務</span></p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">超大規模雲端，中國</span>
+  <h4>阿里雲</h4>
+  <p class="field"><b>營運</b>&nbsp;— <span class="nw">彈性運算</span>&nbsp;· <span class="nw">雲端儲存</span>&nbsp;· <span class="nw">AI平台</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI算力</span>&nbsp;· <span class="nw">AI模型</span>&nbsp;· <span class="nw">雲端服務</span></p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">超大規模雲端，美國</span>
+  <h4>Oracle</h4>
+  <p class="field"><b>營運</b>&nbsp;— <span class="nw">OCI超級叢集</span>&nbsp;· <span class="nw">Stargate站點</span>&nbsp;· <span class="nw">資料庫雲端</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI算力</span>&nbsp;· <span class="nw">雲端服務</span></p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">超大規模營運商，美國</span>
+  <h4>Meta</h4>
+  <p class="field"><b>營運</b>&nbsp;— <span class="nw">Facebook</span>&nbsp;· <span class="nw">Instagram</span>&nbsp;· <span class="nw">WhatsApp</span>&nbsp;· <span class="nw">Meta AI</span>&nbsp;· <span class="nw">Llama模型</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI模型</span>&nbsp;· <span class="nw">AI助理</span>&nbsp;· <span class="nw">數位廣告</span></p>
+</div></div><div class="sub c">AI雲端</div><div class="row"><div class="step pkgC">
+  <span class="chip c-pkgC">AI雲端，美國</span>
+  <h4>CoreWeave</h4>
+  <p class="field"><b>營運</b>&nbsp;— <span class="nw">GPU雲端</span>&nbsp;· <span class="nw">AI資料中心</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI算力</span></p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">AI雲端，荷蘭</span>
+  <h4>Nebius</h4>
+  <p class="field"><b>營運</b>&nbsp;— <span class="nw">GPU雲端</span>&nbsp;· <span class="nw">AI資料中心</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI算力</span></p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">AI雲端，美國</span>
+  <h4>Lambda</h4>
+  <p class="field"><b>營運</b>&nbsp;— <span class="nw">GPU雲端</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI算力</span></p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">AI雲端，美國</span>
+  <h4>Crusoe</h4>
+  <p class="field"><b>營運</b>&nbsp;— <span class="nw">GPU雲端</span>&nbsp;· <span class="nw">AI資料中心</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI算力</span>&nbsp;· <span class="nw">機房代管</span></p>
+</div></div><div class="sub c">模型開發商</div><div class="row"><div class="step pkgC">
+  <span class="chip c-pkgC">模型開發商，美國</span>
+  <h4>OpenAI</h4>
+  <p class="field"><b>營運</b>&nbsp;— <span class="nw">GPT模型</span>&nbsp;· <span class="nw">ChatGPT</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI模型</span>&nbsp;· <span class="nw">AI助理</span></p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">模型開發商，美國</span>
+  <h4>Anthropic</h4>
+  <p class="field"><b>營運</b>&nbsp;— <span class="nw">Claude模型</span>&nbsp;· <span class="nw">Claude應用程式</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI模型</span>&nbsp;· <span class="nw">AI助理</span></p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">模型開發商，美國</span>
+  <h4>xAI（SpaceX）</h4>
+  <p class="field"><b>營運</b>&nbsp;— <span class="nw">Grok模型</span>&nbsp;· <span class="nw">Colossus資料中心</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI算力</span>&nbsp;· <span class="nw">AI模型</span>&nbsp;· <span class="nw">AI助理</span></p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">模型開發商，法國</span>
+  <h4>Mistral AI</h4>
+  <p class="field"><b>營運</b>&nbsp;— <span class="nw">Mistral模型</span>&nbsp;· <span class="nw">Mistral Compute</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">AI算力</span>&nbsp;· <span class="nw">AI模型</span></p>
+</div></div><div class="sub c">機房代管業者</div><div class="row"><div class="step pkgC">
+  <span class="chip c-pkgC">機房代管，美國</span>
+  <h4>Equinix</h4>
+  <p class="field"><b>營運</b>&nbsp;— <span class="nw">IBX資料中心</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">機房代管</span>&nbsp;· <span class="nw">互連</span></p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">機房代管，美國</span>
+  <h4>Digital Realty</h4>
+  <p class="field"><b>營運</b>&nbsp;— <span class="nw">PlatformDIGITAL資料中心</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">機房代管</span>&nbsp;· <span class="nw">互連</span></p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">機房代管，日本</span>
+  <h4>NTT Global Data Centers</h4>
+  <p class="field"><b>營運</b>&nbsp;— <span class="nw">資料中心園區</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">機房代管</span></p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">機房代管，中國</span>
+  <h4>萬國數據</h4>
+  <p class="field"><b>營運</b>&nbsp;— <span class="nw">超大規模資料中心</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">機房代管</span></p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">機房代管，台灣</span>
+  <h4>是方</h4>
+  <p class="field"><b>營運</b>&nbsp;— <span class="nw">台北資料中心</span>&nbsp;· <span class="nw">TPIX網際網路交換中心</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">機房代管</span>&nbsp;· <span class="nw">互連</span></p>
+</div></div><div class="sub c">電信營運商</div><div class="row"><div class="step pkgC">
+  <span class="chip c-pkgC">電信營運商，中國</span>
+  <h4>中國移動</h4>
+  <p class="field"><b>營運</b>&nbsp;— <span class="nw">行動網路</span>&nbsp;· <span class="nw">固網</span>&nbsp;· <span class="nw">移動雲</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">雲端服務</span>&nbsp;· <span class="nw">行動服務</span>&nbsp;· <span class="nw">寬頻</span></p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">電信營運商，美國</span>
+  <h4>Verizon</h4>
+  <p class="field"><b>營運</b>&nbsp;— <span class="nw">行動網路</span>&nbsp;· <span class="nw">光纖網路</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">行動服務</span>&nbsp;· <span class="nw">寬頻</span></p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">電信營運商，美國</span>
+  <h4>AT&amp;T</h4>
+  <p class="field"><b>營運</b>&nbsp;— <span class="nw">行動網路</span>&nbsp;· <span class="nw">光纖網路</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">行動服務</span>&nbsp;· <span class="nw">寬頻</span></p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">電信營運商，德國</span>
+  <h4>Deutsche Telekom</h4>
+  <p class="field"><b>營運</b>&nbsp;— <span class="nw">行動網路</span>&nbsp;· <span class="nw">固網</span>&nbsp;· <span class="nw">T-Mobile US</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">行動服務</span>&nbsp;· <span class="nw">寬頻</span></p>
+</div><div class="step pkgC">
+  <span class="chip c-pkgC">電信營運商，台灣</span>
+  <h4>中華電</h4>
+  <p class="field"><b>營運</b>&nbsp;— <span class="nw">行動網路</span>&nbsp;· <span class="nw">固網</span>&nbsp;· <span class="nw">資料中心</span>&nbsp;· <span class="nw">雲端平台</span></p>
+  <p class="field"><b>終端產品</b>&nbsp;— <span class="nw">雲端服務</span>&nbsp;· <span class="nw">行動服務</span>&nbsp;· <span class="nw">寬頻</span></p>
+</div></div></div>
+</div>
+<div class="divider"></div>
+<div class="stage" id="s12">
+  <div class="rail"><div class="stripe"></div>
+    <div class="num">階段 12</div>
+    <h2>終端市場</h2>
+    <p class="en2">晶片最終的去處</p>
+  </div>
+  <div class="body"><div class="sub m">PC、電腦與AI <span class="lite">· 2025年占晶片需求45.5%，由34.9%上升</span></div><div class="row"><div class="step mem">
+  <span class="chip c-mem">終端市場，全球</span>
+  <h4>AI資料中心</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">AI訓練伺服器</span>&nbsp;· <span class="nw">AI推論伺服器</span>&nbsp;· <span class="nw">GPU機櫃系統</span>&nbsp;· <span class="nw">ASIC機櫃系統</span>&nbsp;· <span class="nw">AI後端網路</span></p>
+  <p class="field"><b>主要晶片</b>&nbsp;— <span class="nw">GPU</span>&nbsp;· <span class="nw">AI ASIC</span>&nbsp;· <span class="nw">HBM</span>&nbsp;· <span class="nw">伺服器CPU</span>&nbsp;· <span class="nw">網路卡</span>&nbsp;· <span class="nw">交換器ASIC</span>&nbsp;· <span class="nw">光學DSP</span></p>
+</div><div class="step mem">
+  <span class="chip c-mem">終端市場，全球</span>
+  <h4>企業與雲端伺服器</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">x86伺服器</span>&nbsp;· <span class="nw">Arm伺服器</span>&nbsp;· <span class="nw">儲存伺服器</span></p>
+  <p class="field"><b>主要晶片</b>&nbsp;— <span class="nw">伺服器CPU</span>&nbsp;· <span class="nw">DRAM</span>&nbsp;· <span class="nw">NAND</span>&nbsp;· <span class="nw">SSD控制晶片</span>&nbsp;· <span class="nw">網路卡</span>&nbsp;· <span class="nw">BMC</span>&nbsp;· <span class="nw">PMIC</span></p>
+</div><div class="step mem">
+  <span class="chip c-mem">終端市場，全球</span>
+  <h4>PC</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">筆記型電腦</span>&nbsp;· <span class="nw">桌上型電腦</span>&nbsp;· <span class="nw">工作站</span></p>
+  <p class="field"><b>主要晶片</b>&nbsp;— <span class="nw">CPU</span>&nbsp;· <span class="nw">PC SoC</span>&nbsp;· <span class="nw">GPU</span>&nbsp;· <span class="nw">DRAM</span>&nbsp;· <span class="nw">SSD</span>&nbsp;· <span class="nw">Wi-Fi晶片</span>&nbsp;· <span class="nw">PMIC</span></p>
+</div></div><div class="sub m">通訊 <span class="lite">· 2025年占晶片需求28.7%，由33.0%下降</span></div><div class="row"><div class="step mem">
+  <span class="chip c-mem">終端市場，全球</span>
+  <h4>智慧型手機</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">智慧型手機</span>&nbsp;· <span class="nw">折疊機</span></p>
+  <p class="field"><b>主要晶片</b>&nbsp;— <span class="nw">應用處理器</span>&nbsp;· <span class="nw">5G數據機</span>&nbsp;· <span class="nw">射頻前端</span>&nbsp;· <span class="nw">LPDDR5X</span>&nbsp;· <span class="nw">UFS記憶體</span>&nbsp;· <span class="nw">影像感測器</span>&nbsp;· <span class="nw">顯示驅動IC</span>&nbsp;· <span class="nw">PMIC</span></p>
+</div><div class="step mem">
+  <span class="chip c-mem">終端市場，全球</span>
+  <h4>通訊基礎設施</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">5G無線接取網路</span>&nbsp;· <span class="nw">5G核心網路</span>&nbsp;· <span class="nw">光傳輸</span>&nbsp;· <span class="nw">寬頻接取</span>&nbsp;· <span class="nw">路由器</span>&nbsp;· <span class="nw">資料中心交換器</span></p>
+  <p class="field"><b>主要晶片</b>&nbsp;— <span class="nw">基頻晶片</span>&nbsp;· <span class="nw">射頻晶片</span>&nbsp;· <span class="nw">交換器ASIC</span>&nbsp;· <span class="nw">路由器ASIC</span>&nbsp;· <span class="nw">光學DSP</span>&nbsp;· <span class="nw">雷射</span>&nbsp;· <span class="nw">FPGA</span></p>
+</div></div><div class="sub m">汽車、消費性電子、工業與政府 <span class="lite">· 2025年分別占晶片需求10.9%、7%、7%與0.9%</span></div><div class="row"><div class="step mem">
+  <span class="chip c-mem">終端市場，全球</span>
+  <h4>汽車</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">燃油車</span>&nbsp;· <span class="nw">油電混合車</span>&nbsp;· <span class="nw">純電動車</span>&nbsp;· <span class="nw">ADAS系統</span>&nbsp;· <span class="nw">座艙系統</span></p>
+  <p class="field"><b>主要晶片</b>&nbsp;— <span class="nw">MCU</span>&nbsp;· <span class="nw">SiC功率元件</span>&nbsp;· <span class="nw">IGBT功率元件</span>&nbsp;· <span class="nw">類比IC</span>&nbsp;· <span class="nw">PMIC</span>&nbsp;· <span class="nw">ADAS SoC</span>&nbsp;· <span class="nw">雷達感測器</span>&nbsp;· <span class="nw">影像感測器</span>&nbsp;· <span class="nw">電池管理IC</span></p>
+</div><div class="step mem">
+  <span class="chip c-mem">終端市場，全球</span>
+  <h4>消費性電子</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">電視</span>&nbsp;· <span class="nw">遊戲機</span>&nbsp;· <span class="nw">穿戴裝置</span>&nbsp;· <span class="nw">機上盒</span>&nbsp;· <span class="nw">音訊裝置</span></p>
+  <p class="field"><b>主要晶片</b>&nbsp;— <span class="nw">電視SoC</span>&nbsp;· <span class="nw">顯示驅動IC</span>&nbsp;· <span class="nw">DRAM</span>&nbsp;· <span class="nw">快閃記憶體</span>&nbsp;· <span class="nw">遊戲機APU</span>&nbsp;· <span class="nw">藍牙SoC</span>&nbsp;· <span class="nw">Wi-Fi SoC</span>&nbsp;· <span class="nw">MEMS感測器</span></p>
+</div><div class="step mem">
+  <span class="chip c-mem">終端市場，全球</span>
+  <h4>工業</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">工廠自動化</span>&nbsp;· <span class="nw">機器人</span>&nbsp;· <span class="nw">電力與能源設備</span>&nbsp;· <span class="nw">家電</span>&nbsp;· <span class="nw">醫療設備</span>&nbsp;· <span class="nw">測試設備</span></p>
+  <p class="field"><b>主要晶片</b>&nbsp;— <span class="nw">MCU</span>&nbsp;· <span class="nw">FPGA</span>&nbsp;· <span class="nw">功率分離式元件</span>&nbsp;· <span class="nw">功率模組</span>&nbsp;· <span class="nw">類比IC</span>&nbsp;· <span class="nw">感測IC</span>&nbsp;· <span class="nw">工業乙太網路PHY</span></p>
+</div><div class="step mem">
+  <span class="chip c-mem">終端市場，全球</span>
+  <h4>政府與航太</h4>
+  <p class="field"><b>產品</b>&nbsp;— <span class="nw">國防電子</span>&nbsp;· <span class="nw">雷達</span>&nbsp;· <span class="nw">電子戰</span>&nbsp;· <span class="nw">衛星</span>&nbsp;· <span class="nw">發射系統</span>&nbsp;· <span class="nw">航空電子</span></p>
+  <p class="field"><b>主要晶片</b>&nbsp;— <span class="nw">抗輻射FPGA</span>&nbsp;· <span class="nw">抗輻射處理器</span>&nbsp;· <span class="nw">GaN射頻晶片</span>&nbsp;· <span class="nw">MMIC</span>&nbsp;· <span class="nw">紅外線感測器</span>&nbsp;· <span class="nw">安全MCU</span></p>
+</div></div></div>
+</div>
+
+<footer class="site-foot">
+  <div class="sf-id">
+    <img src="assets/photo-sm.jpg" alt="Ethan Chen" width="44" height="44" loading="lazy">
+    <div><div class="sf-name"><a href="index-zh.html">Ethan Chen</a></div><div class="sf-sub">半導體研究筆記 · Semiconductor Research Notes</div></div>
+  </div>
+  <div class="sf-contact">
+    <a href="mailto:ethanchen@qtumic.com">ethanchen@qtumic.com</a>
+    <a href="https://www.linkedin.com/in/hao-chen-194981297" target="_blank" rel="me noopener">LinkedIn</a>
+  </div>
+  <div class="sf-note">個人研究筆記，不構成投資建議。 © 2026 Ethan Chen</div>
+</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>半導體研究筆記 · Ethan Chen</title>
+<!-- site-head -->
+<meta name="author" content="Ethan Chen">
+<meta name="description" content="以供應鏈為軸整理的半導體產業研究筆記：總覽、製程圖、產業主題、個別公司研究與分析工具，中英文對照。">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://ethanchensemi.github.io/ethanchenstudy/map.html">
+<link rel="alternate" hreflang="zh-Hant" href="https://ethanchensemi.github.io/ethanchenstudy/map.html">
+<link rel="alternate" hreflang="en" href="https://ethanchensemi.github.io/ethanchenstudy/map-en.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="半導體研究筆記 · Ethan Chen">
+<meta property="og:description" content="以供應鏈為軸整理的半導體產業研究筆記：總覽、製程圖、產業主題、個別公司研究與分析工具，中英文對照。">
+<meta property="og:site_name" content="Ethan Chen · Semiconductor Research Notes">
+<!-- /site-head -->
+<style>
+:root{--paper:#F6F8F9;--card:#FFFFFF;--ink:#14181C;--ink-2:#4A555E;--ink-3:#7C8891;--rule:#CBD3D9;--rule-soft:#E2E8EC;--stage:#1F3A4D;--b:#4A3B7A;--shared:#215C68}
+*{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;font-size:15px;line-height:1.65}
+.wrap{max-width:1080px;margin:0 auto;padding:44px 28px 80px}
+.backbar{margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.backbar a{display:inline-block;font-size:13px;color:var(--ink-2);text-decoration:none;border:1px solid var(--rule);background:var(--card);padding:6px 13px}
+.backbar a:hover{color:var(--b);border-color:var(--b)}
+.masthead{border-bottom:2px solid var(--stage);padding-bottom:20px;margin-bottom:18px}
+.masthead h1{font-size:32px;line-height:1.25;font-weight:700;margin:0 0 6px;letter-spacing:-.01em}
+.masthead .en{font-size:15.5px;color:var(--ink-2);font-weight:400;margin:0}
+.lede{font-size:13.5px;color:var(--ink-2);line-height:1.65;margin:0 0 34px}
+.sectionlbl{font-size:13px;font-weight:600;color:var(--ink-3);letter-spacing:.03em;margin:0 0 12px;text-transform:uppercase}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,monospace}
+a{color:inherit}
+@media (max-width:760px){.wrap{padding:30px 16px 60px}.masthead h1{font-size:26px}}
+@media print{.backbar{display:none}}
+
+.block{background:var(--card);border:1px solid var(--rule);margin-bottom:38px}
+.row{display:grid;grid-template-columns:52px 230px 1fr;gap:0 18px;padding:14px 20px;border-bottom:1px solid var(--rule-soft);align-items:start}
+.row:last-child{border-bottom:none}
+.row .no{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11.5px;color:var(--ink-3);padding-top:3px}
+.row .topic b{display:block;font-size:14.5px;font-weight:600;line-height:1.4}
+.row .topic i{display:block;font-style:normal;font-size:12px;color:var(--ink-3);line-height:1.4}
+.row .pages{display:flex;flex-direction:column;gap:9px;min-width:0}
+.page{display:grid;grid-template-columns:1fr auto;gap:2px 16px;align-items:baseline}
+.page .t{font-size:14.5px;font-weight:600;line-height:1.4;color:var(--ink);text-decoration:none}
+.page .t:hover{color:var(--b)}
+.topic b a{color:var(--ink);text-decoration:none}
+.topic b a:hover{color:var(--b)}
+.page .d{grid-column:1;font-size:12.5px;color:var(--ink-2);line-height:1.55}
+.langs{grid-column:2;grid-row:1/3;display:flex;gap:6px;align-self:start;padding-top:2px}
+.langs a{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11px;letter-spacing:.04em;color:var(--ink-2);text-decoration:none;border:1px solid var(--rule);background:var(--card);padding:2px 8px;border-radius:20px}
+.langs a:hover{color:var(--b);border-color:var(--b)}
+.langs a.cur{color:var(--card);background:var(--stage);border-color:var(--stage)}
+.langs .chip-off{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11px;letter-spacing:.04em;color:var(--ink-3);border:1px dashed var(--rule);padding:2px 8px;border-radius:20px;white-space:nowrap}
+.status{font-size:12.5px;color:var(--ink-3);padding-top:3px;line-height:1.55}
+.status a{color:var(--ink-2);text-decoration:none;border-bottom:1px dotted var(--rule)}
+.status a:hover{color:var(--b);border-color:var(--b)}
+.row.off .topic b{color:var(--ink-3);font-weight:500}
+.row.off{background:#FAFBFC}
+.cotag{display:inline-block;font-size:11px;color:var(--ink-3);border:1px solid var(--rule-soft);padding:1px 7px;border-radius:3px;margin-top:5px}
+@media (max-width:760px){
+  .row{grid-template-columns:40px 1fr;gap:4px 12px;padding:12px 14px}
+  .row .pages,.row .status{grid-column:2}
+  .page{grid-template-columns:1fr}
+  .langs{grid-column:1;grid-row:auto;padding-top:4px}
+}
+
+/* site chrome (added by build) */
+.backbar{flex-wrap:wrap}
+.lede,.defn,.ds .lede,.routehead .clarify,.forkbar .msg,.explain .sub2,.masthead .en{max-width:none}
+.backbar .bbr{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.backbar .lang{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;letter-spacing:.04em}
+.backbar .lang-off{display:inline-block;font-size:12px;color:var(--ink-3,#7C8891);border:1px dashed var(--rule,#CBD3D9);padding:6px 13px;font-family:ui-monospace,"SF Mono",Menlo,monospace;letter-spacing:.04em;cursor:default}
+.site-foot{margin-top:56px;border-top:1px solid var(--rule,#CBD3D9);padding-top:22px;display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;font-size:12.5px;color:var(--ink-3,#7C8891);line-height:1.5}
+.site-foot .sf-id{display:flex;align-items:center;gap:12px;min-width:0}
+.site-foot .sf-id img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:0 0 auto}
+.site-foot .sf-name{font-size:14px;font-weight:600;color:var(--ink,#14181C)}
+.site-foot .sf-name a{color:inherit;text-decoration:none}
+.site-foot .sf-name a:hover{color:var(--b,#4A3B7A)}
+.site-foot .sf-sub{font-size:12px;color:var(--ink-3,#7C8891)}
+.site-foot .sf-contact{display:flex;gap:16px;flex-wrap:wrap;margin-left:auto}
+.site-foot .sf-contact a{color:var(--ink-2,#4A555E);text-decoration:none;border-bottom:1px dotted var(--rule,#CBD3D9)}
+.site-foot .sf-contact a:hover{color:var(--b,#4A3B7A);border-color:var(--b,#4A3B7A)}
+.site-foot .sf-note{flex-basis:100%;font-size:11.5px}
+@media (max-width:640px){.site-foot .sf-contact{margin-left:0}}
+@media (max-width:640px){
+  .stickynav{margin-left:-14px;margin-right:-14px;padding-left:14px;padding-right:14px;white-space:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .legend .fams,.legend .fams.six,.famgrid,.idxgrid{grid-template-columns:1fr !important}
+  .routes{grid-template-columns:minmax(0,1fr) !important}
+  .route,.routes > *{min-width:0}
+  .route .row,.route .chips,.route .chiprow,.route .cols{flex-wrap:wrap}
+  .optstack table{min-width:0 !important}
+  .famcol .chip,.legend .chip,.chipwrap b{white-space:normal}
+}
+@media print{.site-foot .sf-id img{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="backbar"><a href="index-zh.html">← Ethan Chen</a><span class="bbr"><a class="lang" href="map-en.html" onclick="this.href=this.href.split('#')[0]+location.hash">EN</a></span></div>
+<header class="masthead"><h1>半導體研究筆記</h1><p class="en">Semiconductor Research Notes</p></header>
+<p class="lede">以供應鏈為軸，由上游到下游整理半導體產業：總覽、製程、產業主題、公司研究與工具。</p>
+<p class="sectionlbl" id="sec-a">A　總覽　Overview</p>
+<div class="block" style="--tc:0"><div class="row" style="grid-template-columns:52px 1fr"><span class="no">A1</span><div class="pages"><div class="page"><a class="t" href="upstream.html">半導體供應鏈 — 上游</a><span class="langs"><a href="upstream.html" class="cur">中文</a><a href="upstream-en.html">EN</a></span></div></div></div><div class="row" style="grid-template-columns:52px 1fr"><span class="no">A2</span><div class="pages"><div class="page"><a class="t" href="downstream-chain.html">半導體供應鏈 — 下游</a><span class="langs"><a href="downstream-chain.html" class="cur">中文</a><a href="downstream-chain-en.html">EN</a></span></div></div></div></div>
+<p class="sectionlbl" id="sec-b">B　完整製程圖　Full Process Map</p>
+<div class="block" style="--tc:0"><div class="row" style="grid-template-columns:52px 1fr"><span class="no">B1</span><div class="pages"><div class="page"><a class="t" href="soic-cowos.html">SoIC · CoWoS · CPO</a><span class="langs"><a href="soic-cowos.html" class="cur">中文</a><a href="soic-cowos-en.html">EN</a></span></div></div></div><div class="row" style="grid-template-columns:52px 1fr"><span class="no">B2</span><div class="pages"><div class="page"><a class="t" href="micron-process.html">HBM · NAND</a><span class="langs"><a href="micron-process.html" class="cur">中文</a><a href="micron-process-en.html">EN</a></span></div></div></div><div class="row" style="grid-template-columns:52px 1fr"><span class="no">B3</span><div class="pages"><div class="page"><a class="t" href="pcb-ccl-process.html">CCL · PCB · IC載板</a><span class="langs"><a href="pcb-ccl-process.html" class="cur">中文</a><a href="pcb-ccl-process-en.html">EN</a></span></div></div></div></div>
+<p class="sectionlbl" id="sec-c">C　產業地圖　Industry Map</p>
+<div class="block"><div class="row" id="t01"><span class="no">01</span><span class="topic"><b><a href="packaging.html">晶圓代工</a></b><i>Foundry</i></span><div class="pages"><div class="page"><span class="langs"><a href="packaging.html" class="cur">中文</a><a href="packaging-en.html">EN</a></span></div></div></div><div class="row off" id="t02"><span class="no">02</span><span class="topic"><b>IC設計與IP</b><i>Fabless &amp; IP</i></span><span class="status">公司研究：<a href="#c-nvidia-catalogue">輝達 NVIDIA</a></span></div><div class="row off" id="t03"><span class="no">03</span><span class="topic"><b>封測代工</b><i>OSAT</i></span><span class="status">公司研究：<a href="#c-ase-catalogue">日月光 ASE</a></span></div><div class="row" id="t04"><span class="no">04</span><span class="topic"><b><a href="memory.html">記憶體／HBM</a></b><i>Memory / HBM</i></span><div class="pages"><div class="page"><span class="langs"><a href="memory.html" class="cur">中文</a><a href="memory-en.html">EN</a></span></div></div></div><div class="row" id="t05"><span class="no">05</span><span class="topic"><b><a href="pcb-ccl.html">載板／PCB／CCL</a></b><i>Substrate / PCB / CCL</i></span><div class="pages"><div class="page"><span class="langs"><a href="pcb-ccl.html" class="cur">中文</a><a href="pcb-ccl-en.html">EN</a></span></div></div></div><div class="row" id="t06"><span class="no">06</span><span class="topic"><b><a href="cpo.html">光學／光通訊</a></b><i>Optical / CPO</i></span><div class="pages"><div class="page"><span class="langs"><a href="cpo.html" class="cur">中文</a><a href="cpo-en.html">EN</a></span></div></div></div><div class="row" id="t07"><span class="no">07</span><span class="topic"><b><a href="equipment.html">設備</a></b><i>Equipment</i></span><div class="pages"><div class="page"><span class="langs"><a href="equipment.html" class="cur">中文</a><a href="equipment-en.html">EN</a></span></div></div></div><div class="row" id="t08"><span class="no">08</span><span class="topic"><b><a href="materials.html">材料</a></b><i>Materials</i></span><div class="pages"><div class="page"><span class="langs"><a href="materials.html" class="cur">中文</a><a href="materials-en.html">EN</a></span></div></div></div><div class="row" id="t09"><span class="no">09</span><span class="topic"><b><a href="llm-industry-map.html">AI／大型語言模型</a></b><i>AI / LLM</i></span><div class="pages"><div class="page"><span class="langs"><a href="llm-industry-map.html" class="cur">中文</a><a href="llm-industry-map-en.html">EN</a></span></div></div></div><div class="row" id="t10"><span class="no">10</span><span class="topic"><b><a href="csp.html">雲端服務商</a></b><i>Cloud Operators / CSP</i></span><div class="pages"><div class="page"><span class="langs"><a href="csp.html" class="cur">中文</a><a href="csp-en.html">EN</a></span></div></div></div><div class="row" id="t11"><span class="no">11</span><span class="topic"><b><a href="downstream.html">下游終端市場</a></b><i>Downstream / End Market</i></span><div class="pages"><div class="page"><span class="langs"><a href="downstream.html" class="cur">中文</a><a href="downstream-en.html">EN</a></span></div></div></div><div class="row" id="t12"><span class="no">12</span><span class="topic"><b><a href="odm.html">系統組裝代工</a></b><i>ODM / EMS</i></span><div class="pages"><div class="page"><span class="langs"><a href="odm.html" class="cur">中文</a><a href="odm-en.html">EN</a></span></div></div></div><div class="row" id="t13"><span class="no">13</span><span class="topic"><b><a href="power.html">電源</a></b><i>Power</i></span><div class="pages"><div class="page"><span class="langs"><a href="power.html" class="cur">中文</a><a href="power-en.html">EN</a></span></div></div></div><div class="row" id="t14"><span class="no">14</span><span class="topic"><b><a href="networking.html">網路設備</a></b><i>Networking</i></span><div class="pages"><div class="page"><span class="langs"><a href="networking.html" class="cur">中文</a><a href="networking-en.html">EN</a></span></div></div></div><div class="row" id="t15"><span class="no">15</span><span class="topic"><b><a href="cooling.html">散熱</a></b><i>Thermal / Cooling</i></span><div class="pages"><div class="page"><span class="langs"><a href="cooling.html" class="cur">中文</a><a href="cooling-en.html">EN</a></span></div></div></div><div class="row" id="t16"><span class="no">16</span><span class="topic"><b><a href="racks.html">資料中心與機櫃</a></b><i>Data Centre &amp; Rack</i></span><div class="pages"><div class="page"><span class="langs"><a href="racks.html" class="cur">中文</a><a href="racks-en.html">EN</a></span></div></div></div></div>
+<p class="sectionlbl" id="sec-d">D　公司研究　Company Studies</p>
+<div class="block"><div class="row" id="c-ase-catalogue"><span class="no">D1</span><span class="topic"><b><a href="ase-catalogue.html">日月光 ASE</a></b><i>封測代工</i></span><div class="pages"><div class="page"><span class="langs"><a href="ase-catalogue.html" class="cur">中文</a><a href="ase-catalogue-en.html">EN</a></span></div></div></div><div class="row" id="c-google"><span class="no">D2</span><span class="topic"><b><a href="google.html">Google</a></b><i>雲端服務商</i></span><div class="pages"><div class="page"><span class="langs"><a href="google.html" class="cur">中文</a><a href="google-en.html">EN</a></span></div></div></div><div class="row" id="c-meta"><span class="no">D3</span><span class="topic"><b><a href="meta.html">Meta</a></b><i>雲端服務商</i></span><div class="pages"><div class="page"><span class="langs"><a href="meta.html" class="cur">中文</a><a href="meta-en.html">EN</a></span></div></div></div><div class="row" id="c-micron-catalogue"><span class="no">D4</span><span class="topic"><b><a href="micron-catalogue.html">美光 Micron</a></b><i>記憶體／HBM</i></span><div class="pages"><div class="page"><span class="langs"><a href="micron-catalogue.html" class="cur">中文</a><a href="micron-catalogue-en.html">EN</a></span></div></div></div><div class="row" id="c-nanya"><span class="no">D5</span><span class="topic"><b><a href="nanya.html">南亞 Nan Ya Plastics</a></b><i>載板／PCB／CCL</i></span><div class="pages"><div class="page"><span class="langs"><a href="nanya.html" class="cur">中文</a><a href="nanya-en.html">EN</a></span></div></div></div><div class="row" id="c-nvidia-catalogue"><span class="no">D6</span><span class="topic"><b><a href="nvidia-catalogue.html">輝達 NVIDIA</a></b><i>IC設計與IP</i></span><div class="pages"><div class="page"><span class="langs"><a href="nvidia-catalogue.html" class="cur">中文</a><a href="nvidia-catalogue-en.html">EN</a></span></div></div></div></div>
+<p class="sectionlbl" id="sec-e">E　工具　Toolkit</p>
+<div class="block" style="--tc:0"><div class="row" style="grid-template-columns:52px 1fr"><span class="no">E1</span><div class="pages"><div class="page"><a class="t" href="ratios-en.html">財務比率</a><span class="langs"><a href="ratios-en.html">EN</a></span></div></div></div></div>
+<footer class="site-foot">
+  <div class="sf-id">
+    <img src="assets/photo-sm.jpg" alt="Ethan Chen" width="44" height="44" loading="lazy">
+    <div><div class="sf-name"><a href="index-zh.html">Ethan Chen</a></div><div class="sf-sub">半導體研究筆記 · Semiconductor Research Notes</div></div>
+  </div>
+  <div class="sf-contact">
+    <a href="mailto:ethanchen@qtumic.com">ethanchen@qtumic.com</a>
+    <a href="https://www.linkedin.com/in/hao-chen-194981297" target="_blank" rel="me noopener">LinkedIn</a>
+  </div>
+  <div class="sf-note">個人研究筆記，不構成投資建議。 © 2026 Ethan Chen</div>
+</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>輝達產品目錄：晶片、系統、軟體 · Ethan Chen</title>
+<!-- site-head -->
+<meta name="author" content="Ethan Chen">
+<meta name="description" content="依層級列出所有產品，由新到舊。">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://ethanchensemi.github.io/ethanchenstudy/nvidia-catalogue.html">
+<link rel="alternate" hreflang="zh-Hant" href="https://ethanchensemi.github.io/ethanchenstudy/nvidia-catalogue.html">
+<link rel="alternate" hreflang="en" href="https://ethanchensemi.github.io/ethanchenstudy/nvidia-catalogue-en.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="輝達產品目錄：晶片、系統、軟體 · Ethan Chen">
+<meta property="og:description" content="依層級列出所有產品，由新到舊。">
+<meta property="og:site_name" content="Ethan Chen · Semiconductor Research Notes">
+<!-- /site-head -->
+<style>
+:root{--paper:#F6F8F9;--card:#FFFFFF;--ink:#14181C;--ink-2:#4A555E;--ink-3:#7C8891;--rule:#CBD3D9;--rule-soft:#E2E8EC;--stage:#1F3A4D;--b:#4A3B7A}
+*{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;font-size:15px;line-height:1.6}
+.wrap{max-width:1240px;margin:0 auto;padding:44px 24px 90px}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,monospace}
+.backbar{margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.backbar a{display:inline-block;font-size:13px;color:var(--ink-2);text-decoration:none;border:1px solid var(--rule);background:var(--card);padding:6px 13px}
+.backbar a:hover{color:var(--b);border-color:var(--b)} .backbar .lang{font-family:ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.04em}
+.masthead{border-bottom:2px solid var(--stage);padding-bottom:18px;margin-bottom:22px}
+.masthead h1{font-size:28px;line-height:1.28;font-weight:700;margin:0 0 6px;letter-spacing:-.01em}
+.masthead .en{font-size:14px;color:var(--ink-2);margin:0}
+.timeline{background:var(--card);border:1px solid var(--rule);padding:16px 18px 6px;margin-bottom:22px}
+.timeline h2{font-size:14px;margin:0 0 6px;font-weight:600}
+.timeline p{font-size:12px;color:var(--ink-3);margin:0 0 6px}
+.timeline svg{width:100%;height:auto;display:block}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:11.5px;color:var(--ink-3);margin:6px 0 4px}
+.legend span::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px;border:1.8px solid}
+.lg-old::before{background:#7C8891;border-color:#7C8891} .lg-ship::before{background:#1F7A5C;border-color:#1F7A5C} .lg-ramp::before{background:#B85C10;border-color:#B85C10} .lg-road::before{background:#fff;border-color:#4A3B7A}
+.toc{background:var(--card);border:1px solid var(--rule);padding:18px 22px;margin:0 0 8px}
+.toc h2{font-size:14px;margin:0 0 12px}
+.tocgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.tocgroup h4{font-size:11.5px;color:var(--ink-3);letter-spacing:.03em;margin:0 0 8px;text-transform:uppercase}
+.tocgroup ul{list-style:none;margin:0;padding:0} .tocgroup li{margin-bottom:5px;font-size:12.5px}
+.tocgroup a{color:var(--ink-2);text-decoration:none;border-bottom:1px dotted var(--rule)} .tocgroup a:hover{color:var(--b);border-color:var(--b)}
+.tocgroup .n{font-family:ui-monospace,Menlo,monospace;color:var(--ink-3);font-size:11px;margin-right:6px}
+.divider{height:1px;background:var(--rule-soft);margin:34px 0}
+.prail{border-bottom:2px solid var(--stage);padding-bottom:8px;margin-bottom:20px;position:relative;padding-left:14px}
+.pstripe{position:absolute;left:0;top:2px;bottom:10px;width:4px;background:var(--stage)}
+.pnum{font-size:11px;color:var(--ink-3);letter-spacing:.06em;margin-bottom:3px} .prail h2{font-size:21px;margin:0;font-weight:700}
+.psec{margin-bottom:26px} .psec-head{display:flex;align-items:baseline;gap:10px;margin-bottom:8px}
+.pno{font-size:12px;color:var(--ink-3)} .psec-head h3{font-size:16px;margin:0;font-weight:600}
+.ptag{font-size:11px;padding:2px 9px;border-radius:20px;margin-left:auto}
+.scroller{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--rule);background:var(--card)}
+table.ptable{border-collapse:collapse;width:100%;font-size:13px;min-width:820px}
+.ptable th,.ptable td{padding:8px 12px;text-align:left;vertical-align:top;line-height:1.5;border-bottom:1px solid var(--rule-soft)}
+.ptable th{background:#EEF2F3;font-weight:600;color:var(--ink-2);font-size:11.5px;border-bottom:1px solid var(--rule)}
+.ptable th.c1{width:215px} .ptable th.cwhere{width:260px} .ptable th.c2,.ptable th.c3{width:150px} .ptable th.c5{width:110px}
+.ptable tr:last-child td{border-bottom:none}
+.ptable td.pname{font-weight:600;color:var(--ink)} .ptable td.d{color:var(--ink-3);font-size:12px;white-space:nowrap}
+.ptable td.desc{color:var(--ink-2)} .ptable td .note{font-size:12px;color:var(--ink-3);margin-top:3px}
+.ptable tr.bucket td{background:#F6F8F9;color:var(--ink-3);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-bottom:1px solid var(--rule-soft)}
+.ptable tbody tr:not(.bucket):hover td{background:#FAFBFC}
+.badge{display:inline-block;font-size:11px;padding:1px 8px;border-radius:3px;border:1px solid;white-space:nowrap}
+.b-road{color:#4A3B7A;border-color:#C9C1E3;background:#F4F1FA} .b-ann{color:#2560A6;border-color:#BBD4F0;background:#EAF2FB}
+.b-warn{color:#B02E6E;border-color:#EDBBD1;background:#FBEFF4} .b-ramp{color:#B85C10;border-color:#EBC9A6;background:#FBF1E6}
+.b-ship{color:#1F7A5C;border-color:#B9E0CF;background:#E9F6F0} .b-cur{color:#215C68;border-color:#B7D6DC;background:#E8F3F5}
+.b-old{color:#7C8891;border-color:#D5DBDF;background:#F3F5F6} .b-rem{color:#7C8891;border-color:#D5DBDF;background:#F3F5F6;text-decoration:line-through}
+.notes{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
+.notebox{background:#FFF9EB;border:1px dashed #D8B25C;padding:12px 14px;font-size:12.5px;line-height:1.6;color:#5A4A1E} .notebox b{color:#8A5A00}
+.fn{font-size:11.5px;color:var(--ink-3);margin:28px 0 0;line-height:1.6;border-top:1px solid var(--rule-soft);padding-top:14px}
+@media (max-width:900px){.tocgrid{grid-template-columns:1fr 1fr} .notes{grid-template-columns:1fr}}
+@media (max-width:640px){.wrap{padding:28px 14px 60px} .masthead h1{font-size:22px} .tocgrid{grid-template-columns:1fr}}
+@media print{.backbar{display:none} .scroller{overflow:visible}}
+
+table.dctable{min-width:1180px;font-size:13px}
+.dctable .c1{width:146px} .dctable .cn{width:118px} .dctable .cd{width:186px}
+.dctable .cp{width:176px} .dctable .cm{width:154px} .dctable .c5{width:100px}
+.dctable .cc{width:230px}
+.ptable .d{font-size:13px}
+.ptable td{font-size:13px}
+
+.lede{font-size:13.5px;color:var(--ink-2);line-height:1.65;margin:0 0 6px}
+.lede.zh{color:var(--ink-3);margin-bottom:12px}
+.secgroup{margin:38px 0 4px;padding-bottom:2px;display:flex;align-items:baseline;gap:10px}
+.secgroup h3{font-size:19px;margin:0;font-weight:700}
+.secgroup .pno{font-size:13px}
+.secgroup+.psec{margin-top:16px}
+.subhead{font-size:12.5px;font-weight:600;color:var(--ink-2);letter-spacing:.01em;margin:22px 0 8px;padding-top:14px;border-top:1px dashed var(--rule)}
+.psec .subhead:first-of-type{margin-top:14px;padding-top:0;border-top:none}
+.dctable .ccat{width:168px}
+.ptable .ccat{width:168px}
+.ptable .cwhere{width:150px}
+.ptable .ctype{width:112px}
+.ptable .cscope{width:150px}
+.ptable .cwithin{width:92px}
+.ptable .ctyp{width:132px}
+.lede.below{margin:12px 0 0}
+
+.lede.zh{font-size:13px}
+</style><style id="site-chrome">
+/* site chrome (added by build) */
+.backbar{flex-wrap:wrap}
+.lede,.defn,.ds .lede,.routehead .clarify,.forkbar .msg,.explain .sub2,.masthead .en{max-width:none}
+.backbar .bbr{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.backbar .lang{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;letter-spacing:.04em}
+.backbar .lang-off{display:inline-block;font-size:12px;color:var(--ink-3,#7C8891);border:1px dashed var(--rule,#CBD3D9);padding:6px 13px;font-family:ui-monospace,"SF Mono",Menlo,monospace;letter-spacing:.04em;cursor:default}
+.site-foot{margin-top:56px;border-top:1px solid var(--rule,#CBD3D9);padding-top:22px;display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;font-size:12.5px;color:var(--ink-3,#7C8891);line-height:1.5}
+.site-foot .sf-id{display:flex;align-items:center;gap:12px;min-width:0}
+.site-foot .sf-id img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:0 0 auto}
+.site-foot .sf-name{font-size:14px;font-weight:600;color:var(--ink,#14181C)}
+.site-foot .sf-name a{color:inherit;text-decoration:none}
+.site-foot .sf-name a:hover{color:var(--b,#4A3B7A)}
+.site-foot .sf-sub{font-size:12px;color:var(--ink-3,#7C8891)}
+.site-foot .sf-contact{display:flex;gap:16px;flex-wrap:wrap;margin-left:auto}
+.site-foot .sf-contact a{color:var(--ink-2,#4A555E);text-decoration:none;border-bottom:1px dotted var(--rule,#CBD3D9)}
+.site-foot .sf-contact a:hover{color:var(--b,#4A3B7A);border-color:var(--b,#4A3B7A)}
+.site-foot .sf-note{flex-basis:100%;font-size:11.5px}
+@media (max-width:640px){.site-foot .sf-contact{margin-left:0}}
+@media (max-width:640px){
+  .stickynav{margin-left:-14px;margin-right:-14px;padding-left:14px;padding-right:14px;white-space:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .legend .fams,.legend .fams.six,.famgrid,.idxgrid{grid-template-columns:1fr !important}
+  .routes{grid-template-columns:minmax(0,1fr) !important}
+  .route,.routes > *{min-width:0}
+  .route .row,.route .chips,.route .chiprow,.route .cols{flex-wrap:wrap}
+  .optstack table{min-width:0 !important}
+  .famcol .chip,.legend .chip,.chipwrap b{white-space:normal}
+}
+@media print{.site-foot .sf-id img{display:none}}
+</style>
+</head>
+<body><div class="wrap">
+<div class="backbar"><a href="map.html">← 產業地圖</a><span class="bbr"><a class="lang" href="nvidia-catalogue-en.html" onclick="this.href=this.href.split('#')[0]+location.hash">EN</a></span></div>
+<header class="masthead"><h1>輝達產品目錄：晶片、系統、軟體</h1><p class="en">依層級列出所有產品 · 未來 → 現行 → 過去，由新到舊排列 · 狀態截至2026年10月21日</p></header>
+
+<section class="timeline">
+  <h2>2020–2028年產品節奏一覽</h2>
+  <svg viewBox="0 0 1120 254" role="img" aria-label="輝達2020至2028年產品節奏，分為GPU、CPU、機櫃與網路四條軌道"><line x1="135" y1="30" x2="135" y2="232" stroke="#E2E8EC"/><text x="135" y="24" text-anchor="middle" font-size="10.5" fill="#7C8891">2020</text><line x1="242" y1="30" x2="242" y2="232" stroke="#E2E8EC"/><text x="242" y="24" text-anchor="middle" font-size="10.5" fill="#7C8891">2021</text><line x1="348" y1="30" x2="348" y2="232" stroke="#E2E8EC"/><text x="348" y="24" text-anchor="middle" font-size="10.5" fill="#7C8891">2022</text><line x1="455" y1="30" x2="455" y2="232" stroke="#E2E8EC"/><text x="455" y="24" text-anchor="middle" font-size="10.5" fill="#7C8891">2023</text><line x1="562" y1="30" x2="562" y2="232" stroke="#E2E8EC"/><text x="562" y="24" text-anchor="middle" font-size="10.5" fill="#7C8891">2024</text><line x1="668" y1="30" x2="668" y2="232" stroke="#E2E8EC"/><text x="668" y="24" text-anchor="middle" font-size="10.5" fill="#7C8891">2025</text><line x1="775" y1="30" x2="775" y2="232" stroke="#E2E8EC"/><text x="775" y="24" text-anchor="middle" font-size="10.5" fill="#7C8891">2026</text><line x1="882" y1="30" x2="882" y2="232" stroke="#E2E8EC"/><text x="882" y="24" text-anchor="middle" font-size="10.5" fill="#7C8891">2027</text><line x1="988" y1="30" x2="988" y2="232" stroke="#E2E8EC"/><text x="988" y="24" text-anchor="middle" font-size="10.5" fill="#7C8891">2028</text><line x1="861" y1="30" x2="861" y2="232" stroke="#B02E6E" stroke-width="1.2" stroke-dasharray="4 3"/><text x="861" y="246" text-anchor="middle" font-size="10" fill="#B02E6E">今日</text><text x="125" y="58" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">GPU架構</text><line x1="135" y1="54" x2="1095" y2="54" stroke="#CBD3D9"/><circle cx="178" cy="54" r="5" fill="#7C8891" stroke="#7C8891" stroke-width="1.8"/><text x="178" y="45" text-anchor="middle" font-size="10" fill="#7C8891" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">A100</text><circle cx="423" cy="54" r="5" fill="#7C8891" stroke="#7C8891" stroke-width="1.8"/><text x="423" y="71" text-anchor="middle" font-size="10" fill="#7C8891" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">H100</text><circle cx="604" cy="54" r="5" fill="#1F7A5C" stroke="#1F7A5C" stroke-width="1.8"/><text x="604" y="45" text-anchor="middle" font-size="10" fill="#1F7A5C" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">H200</text><circle cx="658" cy="54" r="5" fill="#1F7A5C" stroke="#1F7A5C" stroke-width="1.8"/><text x="658" y="71" text-anchor="middle" font-size="10" fill="#1F7A5C" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">B200</text><circle cx="743" cy="54" r="5" fill="#1F7A5C" stroke="#1F7A5C" stroke-width="1.8"/><text x="743" y="45" text-anchor="middle" font-size="10" fill="#1F7A5C" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">B300</text><circle cx="840" cy="54" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/><text x="840" y="71" text-anchor="middle" font-size="10" fill="#B85C10" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">Rubin</text><circle cx="946" cy="54" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/><text x="946" y="45" text-anchor="middle" font-size="10" fill="#4A3B7A" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">Rubin Ultra</text><circle cx="1020" cy="54" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/><text x="1020" y="71" text-anchor="middle" font-size="10" fill="#4A3B7A" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">Feynman</text><text x="125" y="104" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">CPU</text><line x1="135" y1="100" x2="1095" y2="100" stroke="#CBD3D9"/><circle cx="498" cy="100" r="5" fill="#1F7A5C" stroke="#1F7A5C" stroke-width="1.8"/><text x="498" y="91" text-anchor="middle" font-size="10" fill="#1F7A5C" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">Grace</text><circle cx="823" cy="100" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/><text x="823" y="117" text-anchor="middle" font-size="10" fill="#B85C10" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">Vera</text><circle cx="1020" cy="100" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/><text x="1020" y="91" text-anchor="middle" font-size="10" fill="#4A3B7A" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">Rosa</text><text x="125" y="150" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">機櫃系統</text><line x1="135" y1="146" x2="1095" y2="146" stroke="#CBD3D9"/><circle cx="658" cy="146" r="5" fill="#1F7A5C" stroke="#1F7A5C" stroke-width="1.8"/><text x="658" y="137" text-anchor="middle" font-size="10" fill="#1F7A5C" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">GB200 NVL72</text><circle cx="743" cy="146" r="5" fill="#1F7A5C" stroke="#1F7A5C" stroke-width="1.8"/><text x="743" y="163" text-anchor="middle" font-size="10" fill="#1F7A5C" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">GB300 NVL72</text><circle cx="840" cy="146" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/><text x="840" y="137" text-anchor="middle" font-size="10" fill="#B85C10" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">VR NVL72</text><circle cx="946" cy="146" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/><text x="946" y="163" text-anchor="middle" font-size="10" fill="#4A3B7A" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">Kyber NVL144</text><text x="125" y="196" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">網路</text><line x1="135" y1="192" x2="1095" y2="192" stroke="#CBD3D9"/><circle cx="498" cy="192" r="5" fill="#1F7A5C" stroke="#1F7A5C" stroke-width="1.8"/><text x="498" y="183" text-anchor="middle" font-size="10" fill="#1F7A5C" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">Spectrum-X</text><circle cx="743" cy="192" r="5" fill="#1F7A5C" stroke="#1F7A5C" stroke-width="1.8"/><text x="743" y="209" text-anchor="middle" font-size="10" fill="#1F7A5C" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">X800 / CX-8</text><circle cx="819" cy="192" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/><text x="819" y="183" text-anchor="middle" font-size="10" fill="#B85C10" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">CPO交換器</text><circle cx="1020" cy="192" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/><text x="1020" y="209" text-anchor="middle" font-size="10" fill="#4A3B7A" paint-order="stroke" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round">BlueField-5</text></svg>
+  <div class="legend"><span class="lg-old">舊世代</span><span class="lg-ship">出貨中</span><span class="lg-ramp">放量中</span><span class="lg-road">路線圖 / 傳聞</span></div>
+</section>
+
+<div class="pstage" id="part-E"><div class="prail"><div class="pstripe"></div><div class="pnum">E部分</div><h2>產品 → 供應鏈地圖</h2></div>
+<div class="pbody"><div class="psec" id="se-1">
+  <div class="psec-head"><span class="pno mono">E1</span><h3>晶片</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">晶片</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">項目</th><th>供應商</th></tr></thead>
+    <tbody>
+<tr><td class="pname">Rubin GPU晶粒</td><td class="desc">台積電</td></tr>
+<tr><td class="pname">Vera CPU晶粒</td><td class="desc">台積電、安謀</td></tr>
+<tr><td class="pname">Groq 3 LPU</td><td class="desc">三星晶圓代工</td></tr>
+<tr><td class="pname">BlueField DPU、ConnectX NIC</td><td class="desc">台積電</td></tr>
+<tr><td class="pname">BMC</td><td class="desc">信驊</td></tr>
+<tr><td class="pname">Retimer、PCIe Redriver</td><td class="desc">Astera Labs、瀾起、Credo</td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="se-2">
+  <div class="psec-head"><span class="pno mono">E2</span><h3>先進封裝</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">晶片</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">項目</th><th>供應商</th></tr></thead>
+    <tbody>
+<tr><td class="pname">Rubin封裝</td><td class="desc">台積電、艾克爾、日月光、矽品</td></tr>
+<tr><td class="pname">矽中介層、TSV</td><td class="desc">台積電</td></tr>
+<tr><td class="pname">凸塊</td><td class="desc">台積電、日月光</td></tr>
+<tr><td class="pname">最終測試</td><td class="desc">京元電、矽品、愛德萬、泰瑞達</td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="se-3">
+  <div class="psec-head"><span class="pno mono">E3</span><h3>記憶體</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">晶片</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">項目</th><th class="cwhere">所在位置</th><th>供應商</th></tr></thead>
+    <tbody>
+<tr><td class="pname">HBM4</td><td class="desc">中介層上，緊鄰GPU晶粒</td><td class="desc">SK海力士、三星、美光</td></tr>
+<tr><td class="pname">GDDR7</td><td class="desc">消費級與工作站產品</td><td class="desc">三星、SK海力士、美光</td></tr>
+<tr><td class="pname">LPDDR5X</td><td class="desc">CPU旁，直接焊接或採SOCAMM2</td><td class="desc">三星、SK海力士、美光</td></tr>
+<tr><td class="pname">SSD與本機儲存</td><td class="desc">運算托盤上</td><td class="desc">三星、SK海力士、美光、鎧俠</td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="se-4">
+  <div class="psec-head"><span class="pno mono">E4</span><h3>載板與PCB</h3><span class="ptag" style="background:#FBE7E4;color:#C0433A">硬體</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">項目</th><th>供應商</th></tr></thead>
+    <tbody>
+<tr><td class="pname">ABF載板</td><td class="desc">揖斐電、欣興、景碩</td></tr>
+<tr><td class="pname">運算托盤電路板</td><td class="desc">欣興、滬電、TTM</td></tr>
+<tr><td class="pname">銅箔基板</td><td class="desc">台光電、松下、斗山</td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="se-5">
+  <div class="psec-head"><span class="pno mono">E5</span><h3>機櫃組裝與機構件</h3><span class="ptag" style="background:#FBE7E4;color:#C0433A">硬體</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">項目</th><th>供應商</th></tr></thead>
+    <tbody>
+<tr><td class="pname">NVL72機櫃組裝</td><td class="desc">鴻海、廣達、緯創、緯穎、英業達、和碩</td></tr>
+<tr><td class="pname">機殼與鈑金</td><td class="desc">鴻海、奇鋐</td></tr>
+<tr><td class="pname">連接器與背板</td><td class="desc">安費諾、立訊、泰科電子</td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="se-6">
+  <div class="psec-head"><span class="pno mono">E6</span><h3>電源</h3><span class="ptag" style="background:#FBE7E4;color:#C0433A">硬體</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">項目</th><th class="cwhere">所在位置</th><th>供應商</th></tr></thead>
+    <tbody>
+<tr><td class="pname">機櫃功率</td><td class="desc">Rubin 180–230 kW · Rubin Ultra Kyber 600 kW並採800 V直流，2027年</td><td class="desc">台達電、光寶科、Flex</td></tr>
+<tr><td class="pname">電源櫃與匯流排</td><td class="desc">機櫃頂部與底部 · 匯流排位於後方</td><td class="desc">台達電、光寶科</td></tr>
+<tr><td class="pname">VRM與功率級</td><td class="desc">運算托盤上</td><td class="desc">芯源系統、英飛凌、瑞薩</td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="se-7">
+  <div class="psec-head"><span class="pno mono">E7</span><h3>散熱</h3><span class="ptag" style="background:#FBE7E4;color:#C0433A">硬體</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">項目</th><th class="cwhere">所在位置</th><th>供應商</th></tr></thead>
+    <tbody>
+<tr><td class="pname">水冷板</td><td class="desc">直接貼合GPU與CPU</td><td class="desc">奇鋐、雙鴻、訊凱、Boyd（Eaton）</td></tr>
+<tr><td class="pname">冷卻液分配裝置</td><td class="desc">機櫃或機櫃列層級</td><td class="desc">維諦、Boyd（Eaton）、nVent、台達電</td></tr>
+<tr><td class="pname">快接頭</td><td class="desc">托盤與分歧管之間</td><td class="desc">CPC、史陶比爾、派克漢尼汾</td></tr>
+<tr><td class="pname">熱介面材料</td><td class="desc">晶粒與水冷板之間</td><td class="desc">Honeywell、信越、陶氏</td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="se-8">
+  <div class="psec-head"><span class="pno mono">E8</span><h3>網路與光通訊</h3><span class="ptag" style="background:#FBE7E4;color:#C0433A">硬體</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">項目</th><th class="cwhere">所在位置</th><th>供應商</th></tr></thead>
+    <tbody>
+<tr><td class="pname">共同封裝光學</td><td class="desc">Spectrum-X與Quantum-X Photonics交換器內部</td><td class="desc">台積電、Fabrinet、Coherent、Lumentum</td></tr>
+<tr><td class="pname">光收發模組</td><td class="desc">機櫃對機櫃、機櫃對骨幹</td><td class="desc">中際旭創、新易盛、Fabrinet、Coherent</td></tr>
+<tr><td class="pname">銅纜</td><td class="desc">機櫃內部</td><td class="desc">安費諾、立訊、鴻海</td></tr>
+</tbody></table></div>
+</div>
+</div></div>
+<div class="divider"></div>
+
+<section class="toc"><h2>目錄</h2><div class="tocgrid"><div class="tocgroup"><h4>第一層：晶片</h4><ul><li><a href="#s1-1"><span class="n">1.1</span>資料中心GPU</a></li><li><a href="#s1-2"><span class="n">1.2</span>資料中心CPU</a></li><li><a href="#s1-3"><span class="n">1.3</span>超級晶片：電路板層級整合</a></li><li><a href="#s1-4"><span class="n">1.4</span>推論協同處理器</a></li><li><a href="#s1-5"><span class="n">1.5</span>網路晶片</a></li><li><a href="#s1-6"><span class="n">1.6</span>互連技術</a></li><li><a href="#s1-7"><span class="n">1.7</span>終端與邊緣晶片</a></li></ul></div><div class="tocgroup"><h4>第二層：系統</h4><ul><li><a href="#s2-1"><span class="n">2.1</span>板卡與參考架構</a></li><li><a href="#s2-2"><span class="n">2.2</span>機櫃級整合系統</a></li><li><a href="#s2-3"><span class="n">2.3</span>AI工廠規模</a></li><li><a href="#s2-4"><span class="n">2.4</span>輝達自有品牌系統</a></li><li><a href="#s2-5"><span class="n">2.5</span>網路系統</a></li><li><a href="#s2-6"><span class="n">2.6</span>雲端與服務</a></li></ul></div><div class="tocgroup"><h4>第三層：軟體</h4><ul><li><a href="#s3-1"><span class="n">3.1</span>核心運算基礎</a></li><li><a href="#s3-2"><span class="n">3.2</span>AI開發與部署</a></li><li><a href="#s3-3"><span class="n">3.3</span>模型</a></li><li><a href="#s3-4"><span class="n">3.4</span>模擬與數位孿生</a></li><li><a href="#s3-5"><span class="n">3.5</span>基礎設施維運</a></li><li><a href="#s3-6"><span class="n">3.6</span>產業平台</a></li><li><a href="#s3-7"><span class="n">3.7</span>繪圖與消費性軟體</a></li><li><a href="#s3-8"><span class="n">3.8</span>生態系與通路</a></li></ul></div><div class="tocgroup"><h4>E部分：供應鏈</h4><ul><li><a href="#se-1"><span class="n">E1</span>晶片</a></li><li><a href="#se-2"><span class="n">E2</span>先進封裝</a></li><li><a href="#se-3"><span class="n">E3</span>記憶體</a></li><li><a href="#se-4"><span class="n">E4</span>載板與PCB</a></li><li><a href="#se-5"><span class="n">E5</span>機櫃組裝與機構件</a></li><li><a href="#se-6"><span class="n">E6</span>電源</a></li><li><a href="#se-7"><span class="n">E7</span>散熱</a></li><li><a href="#se-8"><span class="n">E8</span>網路與光通訊</a></li></ul></div></div></section>
+
+<div class="pstage" id="part-B"><div class="prail"><div class="pstripe"></div><div class="pnum">B部分</div><h2>第一層：晶片</h2></div><div class="pbody"><div class="psec" id="s1-1">
+  <div class="psec-head"><span class="pno mono">1.1</span><h3>資料中心GPU</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">晶片</span></div>
+  <div class="scroller"><table class="ptable dctable">
+    <thead><tr><th class="c1">產品</th><th class="c3">推出時間</th><th class="cn">製程</th><th class="cd">運算晶粒</th><th class="cp">封裝</th><th class="cm">記憶體</th><th class="c5">狀態</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="7">未來</td></tr>
+<tr><td class="pname">Feynman</td><td class="mono d">2028</td><td class="desc">未揭露</td><td class="desc">未揭露</td><td class="desc">先進3D堆疊</td><td class="desc">客製化HBM</td><td><span class="badge b-road">路線圖</span></td></tr>
+<tr><td class="pname">Rubin Ultra</td><td class="mono d">2027</td><td class="desc">未揭露</td><td class="desc">4 &times; Rubin Ultra GPU晶粒</td><td class="desc">CoWoS-L</td><td class="desc">1 TB HBM4E</td><td><span class="badge b-road">路線圖</span></td></tr>
+<tr class="bucket"><td colspan="7">現行</td></tr>
+<tr><td class="pname">Rubin GPU</td><td class="mono d">2026</td><td class="desc">據報導為台積電N3P</td><td class="desc">2 &times; Rubin GPU晶粒</td><td class="desc">CoWoS-L；據報導另採SoIC</td><td class="desc">288 GB HBM4</td><td><span class="badge b-ramp">放量中</span></td></tr>
+<tr><td class="pname">B300 / Blackwell Ultra</td><td class="mono d">2025</td><td class="desc">台積電4NP</td><td class="desc">2 &times; Blackwell Ultra GPU晶粒</td><td class="desc">CoWoS-L</td><td class="desc">270 GB HBM3E</td><td><span class="badge b-ship">出貨中</span></td></tr>
+<tr><td class="pname">B200</td><td class="mono d">2024</td><td class="desc">台積電4NP</td><td class="desc">2 &times; Blackwell GPU晶粒</td><td class="desc">CoWoS-L</td><td class="desc">180–186 GB HBM3E</td><td><span class="badge b-ship">出貨中</span></td></tr>
+<tr><td class="pname">H200</td><td class="mono d">2024</td><td class="desc">台積電4N</td><td class="desc">1 &times; Hopper GPU晶粒</td><td class="desc">CoWoS-S</td><td class="desc">141 GB HBM3E</td><td><span class="badge b-ship">出貨中</span></td></tr>
+<tr><td class="pname">L4 / L40S</td><td class="mono d">2023</td><td class="desc">台積電4N</td><td class="desc">1 &times; Ada GPU晶粒</td><td class="desc">覆晶BGA</td><td class="desc">24 / 48 GB GDDR6</td><td><span class="badge b-ship">出貨中</span></td></tr>
+<tr class="bucket"><td colspan="7">過去</td></tr>
+<tr><td class="pname">Rubin CPX</td><td class="mono d">&mdash;</td><td class="desc">未揭露</td><td class="desc">1 &times; CPX GPU晶粒</td><td class="desc">覆晶BGA</td><td class="desc">128 GB GDDR7</td><td><span class="badge b-rem">已移除</span></td></tr>
+<tr><td class="pname">B200A</td><td class="mono d">&mdash;</td><td class="desc">台積電4NP</td><td class="desc">1 &times; Blackwell GPU晶粒</td><td class="desc">CoWoS-S</td><td class="desc">144 GB HBM3E</td><td><span class="badge b-rem">已移除</span></td></tr>
+<tr><td class="pname">H800 / H20</td><td class="mono d">2023 / 2024</td><td class="desc">台積電4N</td><td class="desc">1 &times; Hopper GPU晶粒</td><td class="desc">CoWoS-S</td><td class="desc">80 / 96 GB HBM3</td><td><span class="badge b-old">已被取代</span></td></tr>
+<tr><td class="pname">H100</td><td class="mono d">2022</td><td class="desc">台積電4N</td><td class="desc">1 &times; Hopper GPU晶粒</td><td class="desc">CoWoS-S</td><td class="desc">80 GB HBM3</td><td><span class="badge b-old">舊世代</span></td></tr>
+<tr><td class="pname">A100</td><td class="mono d">2020</td><td class="desc">台積電N7</td><td class="desc">1 &times; Ampere GPU晶粒</td><td class="desc">CoWoS-S</td><td class="desc">40 GB HBM2 / 80 GB HBM2e</td><td><span class="badge b-old">舊世代</span></td></tr>
+</tbody></table></div>
+  </div>
+<div class="psec" id="s1-2">
+  <div class="psec-head"><span class="pno mono">1.2</span><h3>資料中心CPU</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">晶片</span></div>
+  <div class="scroller"><table class="ptable dctable">
+    <thead><tr><th class="c1">產品</th><th class="c3">推出時間</th><th class="cn">製程</th><th class="cd">運算晶粒</th><th class="cp">封裝</th><th class="cm">記憶體</th><th class="c5">狀態</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="7">未來</td></tr>
+<tr><td class="pname">Rosa</td><td class="mono d">2028</td><td class="desc">未揭露</td><td class="desc">未揭露</td><td class="desc">未揭露</td><td class="desc">未揭露</td><td><span class="badge b-road">路線圖</span></td></tr>
+<tr class="bucket"><td colspan="7">現行</td></tr>
+<tr><td class="pname">Vera</td><td class="mono d">2026</td><td class="desc">N3等級</td><td class="desc">1 &times; Vera CPU晶粒，88核心</td><td class="desc">覆晶BGA</td><td class="desc">1.5 TB LPDDR5X，SOCAMM2</td><td><span class="badge b-ramp">放量中</span></td></tr>
+<tr><td class="pname">Grace</td><td class="mono d">2023</td><td class="desc">台積電4N</td><td class="desc">1 &times; Grace CPU晶粒，72核心</td><td class="desc">覆晶BGA</td><td class="desc">480 GB LPDDR5X，焊接式</td><td><span class="badge b-ship">出貨中</span></td></tr>
+</tbody></table></div></div>
+<div class="psec" id="s1-3">
+  <div class="psec-head"><span class="pno mono">1.3</span><h3>超級晶片：電路板層級整合</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">晶片</span></div>
+  <div class="scroller"><table class="ptable dctable">
+    <thead><tr><th class="c1">產品</th><th class="c3">推出時間</th><th class="cc">組成</th><th class="cp">封裝</th><th class="c5">狀態</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="5">現行</td></tr>
+<tr><td class="pname">Vera Rubin超級晶片</td><td class="mono d">2026</td><td class="desc">1 &times; Vera CPU + 2 &times; Rubin GPU</td><td class="desc">每顆GPU採CoWoS-L；據報導另採SoIC</td><td><span class="badge b-ramp">放量中</span></td></tr>
+<tr><td class="pname">GB300</td><td class="mono d">2025</td><td class="desc">1 &times; Grace CPU + 2 &times; Blackwell Ultra GPU</td><td class="desc">每顆GPU採CoWoS-L</td><td><span class="badge b-ship">出貨中</span></td></tr>
+<tr><td class="pname">GB200</td><td class="mono d">2024</td><td class="desc">1 &times; Grace CPU + 2 &times; Blackwell GPU</td><td class="desc">每顆GPU採CoWoS-L</td><td><span class="badge b-ship">出貨中</span></td></tr>
+<tr><td class="pname">GH200</td><td class="mono d">2023</td><td class="desc">1 &times; Grace CPU + 1 &times; Hopper GPU</td><td class="desc">每顆GPU採CoWoS-S</td><td><span class="badge b-ship">出貨中</span></td></tr>
+</tbody></table></div></div>
+<div class="psec" id="s1-4">
+  <div class="psec-head"><span class="pno mono">1.4</span><h3>推論協同處理器</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">晶片</span></div>
+  <p class="lede">搭配主GPU並分擔解碼的晶片，解碼即推論中受記憶體頻寬限制的逐一token生成階段。</p>
+  <div class="scroller"><table class="ptable dctable">
+    <thead><tr><th class="c1">產品</th><th class="c3">推出時間</th><th class="cn">製程</th><th class="cd">運算晶粒</th><th class="cp">封裝</th><th class="cm">記憶體</th><th class="c5">狀態</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="7">現行</td></tr>
+<tr><td class="pname">LPX</td><td class="mono d">2026</td><td class="desc">三星SF4X</td><td class="desc">256 &times; LPU晶粒</td><td class="desc">覆晶BGA</td><td class="desc">每顆晶粒500 MB SRAM</td><td><span class="badge b-ramp">放量中</span></td></tr>
+<tr><td class="pname">Groq 3 LPU</td><td class="mono d">2026</td><td class="desc">三星SF4X</td><td class="desc">1 &times; LPU晶粒</td><td class="desc">覆晶BGA</td><td class="desc">500 MB SRAM</td><td><span class="badge b-ramp">放量中</span></td></tr>
+</tbody></table></div></div>
+<div class="psec" id="s1-5">
+  <div class="psec-head"><span class="pno mono">1.5</span><h3>網路晶片</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">晶片</span></div>
+   <p class="lede">在GPU、伺服器與機櫃之間傳輸資料的晶片；主機指連結中的伺服器端，交換網路（fabric）則指主機以外的網路。</p>
+  <div class="scroller"><table class="ptable dctable">
+    <thead><tr><th class="c1">產品</th><th class="cscope">連接範圍</th><th class="cwithin">所在層級</th><th class="ctyp">類型</th><th class="c3">推出時間</th><th>說明</th><th class="c5">狀態</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="7">晶粒層級：封裝內部</td></tr>
+<tr><td class="pname">共同封裝光學引擎</td><td class="desc">電 &harr; 光</td><td class="desc">封裝</td><td class="desc">光學引擎</td><td class="mono d">2026</td><td class="desc">CPO交換器內的矽光子引擎</td><td><span class="badge b-ramp">放量中</span></td></tr>
+<tr class="bucket"><td colspan="7">主機 &harr; 交換網路：端點晶片 / 運算托盤內部</td></tr>
+<tr><td class="pname">BlueField-5</td><td class="desc">主機 &harr; 交換網路</td><td class="desc">托盤</td><td class="desc">資料處理器</td><td class="mono d">2028</td><td class="desc">下一代DPU · Feynman世代</td><td><span class="badge b-road">路線圖</span></td></tr>
+<tr><td class="pname">BlueField-4</td><td class="desc">主機 &harr; 交換網路</td><td class="desc">托盤</td><td class="desc">資料處理器</td><td class="mono d">2026</td><td class="desc">800 Gb/s · Vera Rubin世代</td><td><span class="badge b-ramp">放量中</span></td></tr>
+<tr><td class="pname">BlueField-3 DPU</td><td class="desc">主機 &harr; 交換網路</td><td class="desc">托盤</td><td class="desc">資料處理器</td><td class="mono d">2023</td><td class="desc">400 Gb/s · 為主機CPU卸載儲存、網路與資安工作</td><td><span class="badge b-ship">出貨中</span></td></tr>
+<tr><td class="pname">ConnectX-9 SuperNIC</td><td class="desc">主機 &harr; 交換網路</td><td class="desc">托盤</td><td class="desc">網路介面卡</td><td class="mono d">2026</td><td class="desc">每埠800 Gb/s · 每顆GPU 1.6 Tb/s</td><td><span class="badge b-ramp">放量中</span></td></tr> <tr><td class="pname">ConnectX-8 SuperNIC</td><td class="desc">主機 &harr; 交換網路</td><td class="desc">托盤</td><td class="desc">網路介面卡</td><td class="mono d">2025</td><td class="desc">每埠800 Gb/s</td><td><span class="badge b-ship">出貨中</span></td></tr>
+<tr class="bucket"><td colspan="7">GPU &harr; GPU：垂直擴展 / 機櫃內部</td></tr>
+<tr><td class="pname">第六代NVLink Switch</td><td class="desc">GPU &harr; GPU</td><td class="desc">機櫃</td><td class="desc">交換器ASIC</td><td class="mono d">2026</td><td class="desc">橫跨72個封裝，每顆GPU 3 TB/s</td><td><span class="badge b-ramp">放量中</span></td></tr> <tr><td class="pname">第五代NVLink Switch</td><td class="desc">GPU &harr; GPU</td><td class="desc">機櫃</td><td class="desc">交換器ASIC</td><td class="mono d">2024</td><td class="desc">橫跨72個封裝，每顆GPU 1.8 TB/s</td><td><span class="badge b-ship">出貨中</span></td></tr>
+<tr class="bucket"><td colspan="7">機櫃 &harr; 機櫃：水平擴展 / 機櫃之間</td></tr>
+<tr><td class="pname">Quantum-X800交換器ASIC</td><td class="desc">機櫃 &harr; 機櫃</td><td class="desc">機櫃列</td><td class="desc">InfiniBand ASIC</td><td class="mono d">2025</td><td class="desc">每埠800 Gb/s · 400 Gb/s的Quantum-2仍大量出貨</td><td><span class="badge b-ship">出貨中</span></td></tr>
+<tr><td class="pname">Spectrum-6交換器ASIC</td><td class="desc">機櫃 &harr; 機櫃</td><td class="desc">機櫃列</td><td class="desc">乙太網路ASIC</td><td class="mono d">2026</td><td class="desc">102.4 Tb/s交換容量</td><td><span class="badge b-ramp">放量中</span></td></tr> <tr><td class="pname">Spectrum-4交換器ASIC</td><td class="desc">機櫃 &harr; 機櫃</td><td class="desc">機櫃列</td><td class="desc">乙太網路ASIC</td><td class="mono d">2023</td><td class="desc">51.2 Tb/s交換容量</td><td><span class="badge b-ship">出貨中</span></td></tr>
+</tbody></table></div></div>
+<div class="psec" id="s1-6">
+  <div class="psec-head"><span class="pno mono">1.6</span><h3>互連技術</h3><span class="ptag" style="background:#E6F1FB;color:#2560A6">協定</span></div>
+  <p class="lede">連結技術與互連架構，有別於負責路由的交換器。</p>
+  <div class="scroller"><table class="ptable dctable">
+    <thead><tr><th class="c1">產品</th><th class="cscope">連接範圍</th><th class="cwithin">所在層級</th><th class="ctyp">類型</th><th class="c3">推出時間</th><th>說明</th><th class="c5">狀態</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="7">未來</td></tr>
+<tr><td class="pname">NVQLink</td><td class="desc">QPU &harr; GPU</td><td class="desc">設施</td><td class="desc">量子互連</td><td class="mono d">&mdash;</td><td class="desc">將量子處理器與GPU運算緊密結合</td><td><span class="badge b-ann">已宣布</span></td></tr>
+<tr class="bucket"><td colspan="7">現行</td></tr>
+<tr><td class="pname">NVLink 6</td><td class="desc">GPU &harr; GPU</td><td class="desc">機櫃</td><td class="desc">交換式架構</td><td class="mono d">2026</td><td class="desc">每顆GPU 3 TB/s</td><td><span class="badge b-ramp">放量中</span></td></tr>
+<tr><td class="pname">NVLink Fusion</td><td class="desc">客製CPU / XPU &harr; NVLink</td><td class="desc">機櫃</td><td class="desc">IP與小晶片</td><td class="mono d">2025</td><td class="desc">向第三方晶片開放NVLink</td><td><span class="badge b-cur">現行</span></td></tr>
+<tr><td class="pname">NVLink 5</td><td class="desc">GPU &harr; GPU</td><td class="desc">機櫃</td><td class="desc">交換式架構</td><td class="mono d">2024</td><td class="desc">每顆GPU 1.8 TB/s</td><td><span class="badge b-ship">出貨中</span></td></tr>
+<tr><td class="pname">NVLink-C2C</td><td class="desc">晶片 &harr; 晶片</td><td class="desc">電路板</td><td class="desc">點對點連結</td><td class="mono d">2023</td><td class="desc">CPU與GPU之間900 GB/s</td><td><span class="badge b-ship">出貨中</span></td></tr>
+</tbody></table></div></div>
+<div class="secgroup" id="s1-7"><span class="pno mono">1.7</span><h3>終端與邊緣晶片</h3></div>
+<div class="psec" id="s1-7a">
+  <div class="psec-head"><span class="pno mono">1.7a</span><h3>終端與工作站GPU</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">晶片</span></div>
+  <div class="scroller"><table class="ptable dctable">
+    <thead><tr><th class="c1">產品</th><th class="c3">推出時間</th><th class="cn">製程</th><th class="cd">運算晶粒</th><th class="cp">封裝</th><th class="cm">記憶體</th><th class="c5">狀態</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="7">未來</td></tr>
+<tr><td class="pname">GeForce RTX 60系列</td><td class="mono d">2028</td><td class="desc">未揭露</td><td class="desc">1 &times; Rubin GPU晶粒</td><td class="desc">未揭露</td><td class="desc">未揭露</td><td><span class="badge b-road">傳聞</span></td></tr>
+<tr><td class="pname">GeForce RTX 50 Super</td><td class="mono d">&mdash;</td><td class="desc">台積電4N</td><td class="desc">1 &times; Blackwell GPU晶粒</td><td class="desc">覆晶BGA</td><td class="desc">GDDR7</td><td><span class="badge b-road">傳聞</span></td></tr>
+<tr class="bucket"><td colspan="7">現行</td></tr>
+<tr><td class="pname">RTX PRO 6000 Blackwell Server Edition</td><td class="mono d">2025</td><td class="desc">台積電4N</td><td class="desc">1 &times; GB202 Blackwell晶粒</td><td class="desc">覆晶BGA</td><td class="desc">96 GB GDDR7</td><td><span class="badge b-ship">出貨中</span></td></tr>
+<tr><td class="pname">RTX PRO 5000 / 4500 / 4000</td><td class="mono d">2025</td><td class="desc">台積電4N</td><td class="desc">1 &times; Blackwell GPU晶粒</td><td class="desc">覆晶BGA</td><td class="desc">24 / 72 GB GDDR7</td><td><span class="badge b-ship">出貨中</span></td></tr>
+<tr><td class="pname">RTX PRO 6000 Blackwell</td><td class="mono d">2025</td><td class="desc">台積電4N</td><td class="desc">1 &times; GB202 Blackwell晶粒</td><td class="desc">覆晶BGA</td><td class="desc">96 GB GDDR7</td><td><span class="badge b-ship">出貨中</span></td></tr>
+<tr><td class="pname">GeForce RTX 50系列</td><td class="mono d">2025</td><td class="desc">台積電4N</td><td class="desc">1 &times; GB20x Blackwell晶粒</td><td class="desc">覆晶BGA</td><td class="desc">8 / 32 GB GDDR7 / GDDR6</td><td><span class="badge b-ship">出貨中</span></td></tr>
+<tr class="bucket"><td colspan="7">過去</td></tr>
+<tr><td class="pname">GeForce RTX 40系列</td><td class="mono d">2022</td><td class="desc">台積電4N</td><td class="desc">1 &times; AD10x Ada晶粒</td><td class="desc">覆晶BGA</td><td class="desc">6 / 24 GB GDDR6 / GDDR6X</td><td><span class="badge b-old">舊世代</span></td></tr>
+</tbody></table></div></div>
+<div class="psec" id="s1-7b">
+  <div class="psec-head"><span class="pno mono">1.7b</span><h3>機器人與邊緣AI晶片</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">晶片</span></div>
+  <div class="scroller"><table class="ptable dctable">
+    <thead><tr><th class="c1">產品</th><th class="c3">推出時間</th><th class="cn">製程</th><th class="cd">運算晶粒</th><th class="cp">封裝</th><th class="cm">記憶體</th><th class="c5">狀態</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="7">未來</td></tr>
+<tr><td class="pname">Jetson T3000 / T2000</td><td class="mono d">2027</td><td class="desc">未揭露</td><td class="desc">1 &times; Thor SoC晶粒</td><td class="desc">覆晶BGA</td><td class="desc">16 / 32 GB LPDDR5X</td><td><span class="badge b-ann">已宣布</span></td></tr>
+<tr class="bucket"><td colspan="7">現行</td></tr>
+<tr><td class="pname">Jetson T4000</td><td class="mono d">2026</td><td class="desc">未揭露</td><td class="desc">1 &times; Thor SoC晶粒</td><td class="desc">覆晶BGA</td><td class="desc">64 GB LPDDR5X</td><td><span class="badge b-ship">出貨中</span></td></tr>
+<tr><td class="pname">Jetson AGX Thor T5000</td><td class="mono d">2025</td><td class="desc">未揭露</td><td class="desc">1 &times; Thor SoC晶粒</td><td class="desc">覆晶BGA</td><td class="desc">128 GB LPDDR5X</td><td><span class="badge b-ship">出貨中</span></td></tr>
+<tr><td class="pname">Jetson Orin</td><td class="mono d">2022</td><td class="desc">三星8N</td><td class="desc">1 &times; Ampere SoC晶粒</td><td class="desc">覆晶BGA</td><td class="desc">4 / 64 GB LPDDR5</td><td><span class="badge b-ship">出貨中</span></td></tr>
+</tbody></table></div></div>
+<div class="psec" id="s1-7c">
+  <div class="psec-head"><span class="pno mono">1.7c</span><h3>車用晶片</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">晶片</span></div>
+  <div class="scroller"><table class="ptable dctable">
+    <thead><tr><th class="c1">產品</th><th class="c3">推出時間</th><th class="cn">製程</th><th class="cd">運算晶粒</th><th class="cp">封裝</th><th class="cm">記憶體</th><th class="c5">狀態</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="7">現行</td></tr>
+<tr><td class="pname">DRIVE Thor</td><td class="mono d">2025</td><td class="desc">未揭露</td><td class="desc">1 &times; Thor SoC晶粒</td><td class="desc">覆晶BGA</td><td class="desc">LPDDR5X</td><td><span class="badge b-ship">出貨中</span></td></tr>
+</tbody></table></div></div>
+<div class="psec" id="s1-7d">
+  <div class="psec-head"><span class="pno mono">1.7d</span><h3>工業與醫療晶片</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">晶片</span></div>
+  <div class="scroller"><table class="ptable dctable">
+    <thead><tr><th class="c1">產品</th><th class="c3">推出時間</th><th class="cn">製程</th><th class="cd">運算晶粒</th><th class="cp">封裝</th><th class="cm">記憶體</th><th class="c5">狀態</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="7">現行</td></tr>
+<tr><td class="pname">IGX Thor</td><td class="mono d">2026</td><td class="desc">未揭露</td><td class="desc">1 &times; Thor SoC晶粒</td><td class="desc">覆晶BGA</td><td class="desc">128 GB LPDDR5X</td><td><span class="badge b-ship">出貨中</span></td></tr>
+</tbody></table></div></div>
+<div class="psec" id="s1-7e">
+  <div class="psec-head"><span class="pno mono">1.7e</span><h3>遊戲主機SoC</h3><span class="ptag" style="background:#E1F5EE;color:#1F7A5C">晶片</span></div>
+  <p class="lede">專為單一客戶任天堂供應的晶片：Switch 2採用客製化SoC，初代Switch採用對外銷售的Tegra X1。</p>
+  <div class="scroller"><table class="ptable dctable">
+    <thead><tr><th class="c1">產品</th><th class="c3">推出時間</th><th class="cn">製程</th><th class="cd">運算晶粒</th><th class="cp">封裝</th><th class="cm">記憶體</th><th class="c5">狀態</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="7">現行</td></tr>
+<tr><td class="pname">Switch 2遊戲主機SoC</td><td class="mono d">2025</td><td class="desc">據報導為三星8N</td><td class="desc">1 &times; Ampere SoC晶粒</td><td class="desc">覆晶BGA</td><td class="desc">12 GB LPDDR5X</td><td><span class="badge b-ship">出貨中</span></td></tr>
+<tr class="bucket"><td colspan="7">過去</td></tr>
+<tr><td class="pname">Switch遊戲主機SoC</td><td class="mono d">2017</td><td class="desc">台積電20 nm</td><td class="desc">1 &times; Maxwell SoC晶粒</td><td class="desc">覆晶BGA</td><td class="desc">4 GB LPDDR4</td><td><span class="badge b-old">舊世代</span></td></tr>
+</tbody></table></div></div>
+</div></div>
+
+<div class="pstage" id="part-C"><div class="prail"><div class="pstripe"></div><div class="pnum">C部分</div><h2>第二層：系統</h2></div><div class="pbody"><div class="secgroup" id="s2-1"><span class="pno mono">2.1</span><h3>板卡與參考架構</h3></div>
+<div class="psec" id="s2-1a">
+  <div class="psec-head"><span class="pno mono">2.1a</span><h3>板卡</h3><span class="ptag" style="background:#FBE7E4;color:#C0433A">硬體</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">產品</th><th class="ctype">類型</th><th class="c3">推出時間</th><th>說明</th><th class="c5">狀態</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="5">現行</td></tr>
+<tr><td class="pname">Bianca</td><td class="desc">運算托盤電路板</td><td class="mono d">2024</td><td class="desc">1顆Grace CPU + 2顆Blackwell GPU · GB200 / GB300 NVL72每個運算托盤配置2片 · 標準托盤</td><td><span class="badge b-ship">出貨中</span></td></tr>
+<tr><td class="pname">Ariel</td><td class="desc">運算托盤電路板</td><td class="mono d">2024</td><td class="desc">1顆Grace CPU + 1顆Blackwell GPU · CPU配比較高 · 據報導為Meta針對推薦系統工作負載的客製版本</td><td><span class="badge b-ship">出貨中</span></td></tr>
+<tr><td class="pname">HGX</td><td class="desc">基板</td><td class="mono d">持續</td><td class="desc">用於DGX B200 / B300、HGX Rubin NVL8與OEM 8 GPU伺服器</td><td><span class="badge b-cur">現行</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s2-1b">
+  <div class="psec-head"><span class="pno mono">2.1b</span><h3>標準與計畫</h3><span class="ptag" style="background:#EEEBF8;color:#5B4B9E">標準</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">產品</th><th class="ctype">類型</th><th class="c3">推出時間</th><th>說明</th><th class="c5">狀態</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="5">現行</td></tr>
+<tr><td class="pname">MGX</td><td class="desc">參考架構</td><td class="mono d">2023</td><td class="desc">供ODM打造GB300與Vera Rubin系統</td><td><span class="badge b-cur">現行</span></td></tr>
+<tr><td class="pname">NVIDIA認證系統</td><td class="desc">驗證計畫</td><td class="mono d">2021</td><td class="desc">戴爾、HPE、聯想、美超微等合作夥伴的伺服器</td><td><span class="badge b-cur">現行</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s2-2">
+  <div class="psec-head"><span class="pno mono">2.2</span><h3>機櫃級整合系統</h3><span class="ptag" style="background:#FBE7E4;color:#C0433A">硬體</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">產品</th><th class="c3">推出時間</th><th>說明</th><th class="c5">狀態</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="4">未來</td></tr><tr><td class="pname">Vera Rubin Ultra NVL144 (Kyber)</td><td class="mono d">2027</td><td class="desc">144個封裝 · 576顆GPU晶粒 · 600 kW · 800 V直流 · 液冷</td><td><span class="badge b-road">路線圖</span></td></tr><tr class="bucket"><td colspan="4">現行</td></tr><tr><td class="pname">LPX機櫃</td><td class="mono d">2026</td><td class="desc">256顆LPU晶粒 · 僅負責解碼 · 液冷</td><td><span class="badge b-ramp">放量中</span></td></tr><tr><td class="pname">Vera Rubin NVL72</td><td class="mono d">2026</td><td class="desc">72個封裝 · 144顆GPU晶粒 · 36顆Vera CPU · 180–230 kW · 液冷</td><td><span class="badge b-ramp">放量中</span></td></tr><tr><td class="pname">GB300 NVL72</td><td class="mono d">2025</td><td class="desc">72個封裝 · 144顆GPU晶粒 · 36顆Grace CPU · 130–140 kW · 液冷</td><td><span class="badge b-ship">出貨中</span></td></tr><tr><td class="pname">GB200 NVL72</td><td class="mono d">2024</td><td class="desc">72個封裝 · 144顆GPU晶粒 · 36顆Grace CPU · 120 kW · 液冷</td><td><span class="badge b-ship">出貨中</span></td></tr><tr><td class="pname">GB200 NVL4</td><td class="mono d">2025</td><td class="desc">4個封裝 · 8顆GPU晶粒 · 2顆Grace CPU · 5.4 kW · 液冷</td><td><span class="badge b-ship">出貨中</span></td></tr><tr class="bucket"><td colspan="4">過去</td></tr><tr><td class="pname">Vera Rubin NVL144 CPX</td><td class="mono d">&mdash;</td><td class="desc">144顆Rubin GPU · 144顆Rubin CPX · 36顆Vera CPU · 液冷</td><td><span class="badge b-rem">已移除</span></td></tr></tbody></table></div>
+</div><div class="secgroup" id="s2-3"><span class="pno mono">2.3</span><h3>AI工廠規模</h3></div>
+<div class="psec" id="s2-3a">
+  <div class="psec-head"><span class="pno mono">2.3a</span><h3>規劃方式</h3><span class="ptag" style="background:#EEEBF8;color:#5B4B9E">標準</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">產品</th><th class="ctype">類型</th><th class="c3">推出時間</th><th>說明</th><th class="c5">狀態</th></tr></thead>
+    <tbody>
+<tr><td class="pname">Vera Rubin DSX參考設計</td><td class="desc">參考架構</td><td class="mono d">2026</td><td class="desc">架構、模擬、設施、生命週期</td><td><span class="badge b-cur">現行</span></td></tr>
+<tr><td class="pname">Omniverse DSX</td><td class="desc">軟體</td><td class="mono d">2026</td><td class="desc">用於AI工廠設計的數位孿生</td><td><span class="badge b-cur">現行</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s2-3b">
+  <div class="psec-head"><span class="pno mono">2.3b</span><h3>部署內容</h3><span class="ptag" style="background:#FBE7E4;color:#C0433A">硬體</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">產品</th><th class="ctype">類型</th><th class="c3">推出時間</th><th>說明</th><th class="c5">狀態</th></tr></thead>
+    <tbody>
+<tr><td class="pname">Vera Rubin POD</td><td class="desc">系統</td><td class="mono d">2026</td><td class="desc">五種機櫃（Vera Rubin NVL72、Groq 3 LPX、Vera CPU、BlueField-4 STX、Spectrum-6 SPX）共40座 · 1,152顆Rubin GPU組成單一系統</td><td><span class="badge b-ramp">放量中</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="secgroup" id="s2-4"><span class="pno mono">2.4</span><h3>輝達自有品牌系統</h3></div>
+<div class="psec" id="s2-4a">
+  <div class="psec-head"><span class="pno mono">2.4a</span><h3>桌上型與工作站</h3><span class="ptag" style="background:#FBE7E4;color:#C0433A">硬體</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">產品</th><th class="ctype">類型</th><th class="c3">推出時間</th><th>說明</th><th class="c5">狀態</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="5">現行</td></tr>
+<tr><td class="pname">RTX Spark</td><td class="desc">PC超級晶片</td><td class="mono d">2026</td><td class="desc">用於OEM Windows筆電與小型桌機</td><td><span class="badge b-ship">出貨中</span></td></tr>
+<tr><td class="pname">DGX Station (GB300)</td><td class="desc">工作站</td><td class="mono d">2026</td><td class="desc">Grace Blackwell Ultra · 液冷</td><td><span class="badge b-ship">出貨中</span></td></tr>
+<tr><td class="pname">DGX Spark</td><td class="desc">個人桌上型電腦</td><td class="mono d">2025</td><td class="desc">GB10 Grace Blackwell · 氣冷</td><td><span class="badge b-ship">出貨中</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s2-4b">
+  <div class="psec-head"><span class="pno mono">2.4b</span><h3>伺服器</h3><span class="ptag" style="background:#FBE7E4;color:#C0433A">硬體</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">產品</th><th class="ctype">類型</th><th class="c3">推出時間</th><th>說明</th><th class="c5">狀態</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="5">未來</td></tr>
+<tr><td class="pname">DGX Rubin NVL8</td><td class="desc">AI伺服器</td><td class="mono d">2026</td><td class="desc">8顆Rubin GPU · 液冷</td><td><span class="badge b-ann">已宣布</span></td></tr>
+<tr class="bucket"><td colspan="5">現行</td></tr>
+<tr><td class="pname">DGX B300 (Blackwell Ultra)</td><td class="desc">AI伺服器</td><td class="mono d">2025</td><td class="desc">8顆Blackwell Ultra GPU · 氣冷</td><td><span class="badge b-ship">出貨中</span></td></tr>
+<tr><td class="pname">DGX B200</td><td class="desc">AI伺服器</td><td class="mono d">2024</td><td class="desc">8顆Blackwell GPU · 氣冷</td><td><span class="badge b-ship">出貨中</span></td></tr>
+<tr><td class="pname">IGX</td><td class="desc">邊緣平台</td><td class="mono d">2023</td><td class="desc">工業與醫療 · 小型化</td><td><span class="badge b-cur">現行</span></td></tr>
+<tr><td class="pname">OVX</td><td class="desc">模擬伺服器</td><td class="mono d">2022</td><td class="desc">專為Omniverse工作負載打造 · 機架式</td><td><span class="badge b-cur">現行</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s2-4c">
+  <div class="psec-head"><span class="pno mono">2.4c</span><h3>機櫃與叢集</h3><span class="ptag" style="background:#FBE7E4;color:#C0433A">硬體</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">產品</th><th class="ctype">類型</th><th class="c3">推出時間</th><th>說明</th><th class="c5">狀態</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="5">未來</td></tr>
+<tr><td class="pname">DGX Vera Rubin NVL72</td><td class="desc">機櫃系統</td><td class="mono d">2026</td><td class="desc">Vera Rubin · 液冷</td><td><span class="badge b-ann">已宣布</span></td></tr>
+<tr class="bucket"><td colspan="5">現行</td></tr>
+<tr><td class="pname">DGX GB300</td><td class="desc">機櫃系統</td><td class="mono d">2025</td><td class="desc">Grace Blackwell Ultra · 液冷</td><td><span class="badge b-ship">出貨中</span></td></tr>
+<tr><td class="pname">DGX GB200</td><td class="desc">機櫃系統</td><td class="mono d">2024</td><td class="desc">Grace Blackwell · 液冷</td><td><span class="badge b-ship">出貨中</span></td></tr>
+<tr><td class="pname">DGX SuperPOD</td><td class="desc">統包式AI超級電腦</td><td class="mono d">持續</td><td class="desc">多座DGX機櫃聯網組成單一叢集</td><td><span class="badge b-cur">現行</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="secgroup" id="s2-5"><span class="pno mono">2.5</span><h3>網路系統</h3></div>
+<div class="psec" id="s2-5a">
+  <div class="psec-head"><span class="pno mono">2.5a</span><h3>交換器</h3><span class="ptag" style="background:#FBE7E4;color:#C0433A">硬體</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">產品</th><th class="cscope">連接範圍</th><th class="cwithin">所在層級</th><th class="ctyp">類型</th><th class="c3">推出時間</th><th>說明</th><th class="c5">狀態</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="7">現行</td></tr>
+<tr><td class="pname">Spectrum-X Ethernet Photonics</td><td class="desc">機櫃 &harr; 機櫃</td><td class="desc">機櫃列</td><td class="desc">乙太網路交換器</td><td class="mono d">2026</td><td class="desc">採用200 Gb/s SerDes的乙太網路CPO交換器</td><td><span class="badge b-ramp">放量中</span></td></tr>
+<tr><td class="pname">Spectrum-X</td><td class="desc">機櫃 &harr; 機櫃</td><td class="desc">機櫃列</td><td class="desc">乙太網路交換器</td><td class="mono d">2023</td><td class="desc">逐封包自適應路由 · 以遙測為基礎的壅塞控制</td><td><span class="badge b-cur">現行</span></td></tr>
+<tr><td class="pname">Quantum-X Photonics</td><td class="desc">機櫃 &harr; 機櫃</td><td class="desc">機櫃列</td><td class="desc">InfiniBand交換器</td><td class="mono d">2026</td><td class="desc">共同封裝光學 · 無需可插拔光收發模組</td><td><span class="badge b-ramp">放量中</span></td></tr>
+<tr><td class="pname">Quantum-X800 InfiniBand交換器</td><td class="desc">機櫃 &harr; 機櫃</td><td class="desc">機櫃列</td><td class="desc">InfiniBand交換器</td><td class="mono d">2025</td><td class="desc">每埠800 Gb/s · XDR</td><td><span class="badge b-cur">現行</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s2-5b">
+  <div class="psec-head"><span class="pno mono">2.5b</span><h3>拓樸與佈線</h3><span class="ptag" style="background:#FBE7E4;color:#C0433A">硬體</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">產品</th><th class="cscope">連接範圍</th><th class="cwithin">所在層級</th><th class="ctyp">類型</th><th class="c3">推出時間</th><th>說明</th><th class="c5">狀態</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="7">現行</td></tr>
+<tr><td class="pname">Spectrum-X Multiplane</td><td class="desc">機櫃 &harr; 機櫃</td><td class="desc">機櫃列</td><td class="desc">拓樸</td><td class="mono d">2026</td><td class="desc">將每張SuperNIC分散至多個平行交換平面 · B300 / GB300起</td><td><span class="badge b-cur">現行</span></td></tr>
+<tr><td class="pname">Spectrum-XGS Ethernet</td><td class="desc">站點 &harr; 站點</td><td class="desc">跨站點</td><td class="desc">跨域擴展</td><td class="mono d">2025</td><td class="desc">將遠距資料中心連成單一AI工廠</td><td><span class="badge b-cur">現行</span></td></tr>
+<tr><td class="pname">LinkX</td><td class="desc">埠 &harr; 埠</td><td class="desc">機櫃與機櫃列</td><td class="desc">線纜</td><td class="mono d">持續</td><td class="desc">用於InfiniBand與乙太網路的銅纜、光纖線纜與光收發模組</td><td><span class="badge b-cur">現行</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s2-6">
+  <div class="psec-head"><span class="pno mono">2.6</span><h3>雲端與服務</h3><span class="ptag" style="background:#FBEFF4;color:#B02E6E">服務</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">產品</th><th class="ctype">類型</th><th class="c3">推出時間</th><th>說明</th><th class="c5">狀態</th></tr></thead>
+    <tbody><tr class="bucket"><td colspan="5">現行</td></tr><tr><td class="pname">DGX Cloud Lepton</td><td class="desc">算力市集</td><td class="mono d">2025</td><td class="desc">跨多家雲端供應商租用GPU算力</td><td><span class="badge b-cur">現行</span></td></tr><tr><td class="pname">DGX Cloud</td><td class="desc">算力租賃</td><td class="mono d">2023</td><td class="desc">輝達內部AI雲端 · 亦透過超大規模雲端業者的市集銷售</td><td><span class="badge b-cur">現行</span></td></tr><tr><td class="pname">AI Foundry</td><td class="desc">代管服務</td><td class="mono d">2023</td><td class="desc">在輝達基礎設施上打造客製化模型</td><td><span class="badge b-cur">現行</span></td></tr><tr><td class="pname">NGC目錄 / build.nvidia.com</td><td class="desc">軟體庫</td><td class="mono d">持續</td><td class="desc">容器、模型與微服務</td><td><span class="badge b-cur">現行</span></td></tr></tbody></table></div>
+</div></div></div><div class="divider"></div><div class="pstage" id="part-D"><div class="prail"><div class="pstripe"></div><div class="pnum">D部分</div><h2>第三層：軟體</h2></div><div class="pbody"><div class="psec" id="s3-1">
+  <div class="psec-head"><span class="pno mono">3.1</span><h3>核心運算基礎</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">軟體</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">產品</th><th class="c3">推出時間</th><th>說明</th><th class="c5">狀態</th></tr></thead>
+    <tbody>
+<tr class="bucket"><td colspan="4">撰寫GPU程式</td></tr>
+<tr><td class="pname">CUDA / CUDA Toolkit</td><td class="mono d">持續</td><td class="desc">撰寫GPU程式所用的語言與編譯器 · 750萬名開發者、6,000個應用程式</td><td><span class="badge b-cur">現行</span></td></tr>
+<tr><td class="pname">cuDNN / cuBLAS / NCCL</td><td class="mono d">持續</td><td class="desc">現成的GPU函式庫，無需自行撰寫 · 神經網路、線性代數、多GPU通訊</td><td><span class="badge b-cur">現行</span></td></tr>
+<tr class="bucket"><td colspan="4">找出效能瓶頸</td></tr>
+<tr><td class="pname">Nsight</td><td class="mono d">持續</td><td class="desc">效能分析與除錯工具 · 顯示GPU程式在哪裡浪費時間</td><td><span class="badge b-cur">現行</span></td></tr>
+</tbody></table></div>
+</div><div class="secgroup" id="s3-2"><span class="pno mono">3.2</span><h3>AI開發與部署</h3></div>
+<div class="psec" id="s3-2a">
+  <div class="psec-head"><span class="pno mono">3.2a</span><h3>訓練或客製化模型</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">軟體</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">產品</th><th class="c3">推出時間</th><th>說明</th><th class="c5">狀態</th></tr></thead>
+    <tbody>
+<tr><td class="pname">NeMo</td><td class="mono d">持續</td><td class="desc">免費的開放函式庫套件，用於訓練、微調與治理模型及AI代理 · 包含NeMo Framework</td><td><span class="badge b-cur">現行</span></td></tr>
+<tr><td class="pname">NeMo微服務</td><td class="mono d">2025</td><td class="desc">NeMo的付費附加元件 · 檢索、微調、評估、安全過濾</td><td><span class="badge b-old">已終止</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s3-2b">
+  <div class="psec-head"><span class="pno mono">3.2b</span><h3>打包並提供服務</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">軟體</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">產品</th><th class="c3">推出時間</th><th>說明</th><th class="c5">狀態</th></tr></thead>
+    <tbody>
+<tr><td class="pname">NIM微服務</td><td class="mono d">2024</td><td class="desc">預先打包為容器的模型 · 一步即可部署端點，無需自行建置</td><td><span class="badge b-cur">現行</span></td></tr>
+<tr><td class="pname">Dynamo-Triton（原Triton Inference Server）</td><td class="mono d">持續</td><td class="desc">在正式環境中執行已完成的模型，並處理傳入的請求</td><td><span class="badge b-cur">現行</span></td></tr>
+<tr><td class="pname">Dynamo</td><td class="mono d">2025</td><td class="desc">將推論拆分到多台機器，把預填與解碼分派至不同硬體 · 這正是LPX得以運作的關鍵</td><td><span class="badge b-cur">現行</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s3-2c">
+  <div class="psec-head"><span class="pno mono">3.2c</span><h3>工具與授權</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">軟體</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">產品</th><th class="c3">推出時間</th><th>說明</th><th class="c5">狀態</th></tr></thead>
+    <tbody>
+<tr><td class="pname">NemoClaw</td><td class="mono d">2026</td><td class="desc">在RTX電腦、工作站與DGX Spark或Station上本地執行的代理式AI堆疊</td><td><span class="badge b-ship">新推出（Alpha版）</span></td></tr>
+<tr><td class="pname">AI Workbench</td><td class="mono d">2024</td><td class="desc">建置並管理開發者的工作環境</td><td><span class="badge b-cur">現行</span></td></tr>
+<tr><td class="pname">Blueprints</td><td class="mono d">2024</td><td class="desc">可直接複製與改寫的範例應用程式</td><td><span class="badge b-cur">現行</span></td></tr>
+<tr><td class="pname">NVIDIA AI Enterprise</td><td class="mono d">持續</td><td class="desc">按GPU計價的訂閱方案，整合NIM、NeMo、Dynamo-Triton、CUDA-X函式庫與Blueprints的受支援版本</td><td><span class="badge b-cur">現行</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="secgroup" id="s3-3"><span class="pno mono">3.3</span><h3>模型</h3></div>
+<div class="psec" id="s3-3a">
+  <div class="psec-head"><span class="pno mono">3.3a</span><h3>語言</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">軟體</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">產品</th><th class="c3">推出時間</th><th>說明</th><th class="c5">狀態</th></tr></thead>
+    <tbody>
+<tr><td class="pname">Nemotron</td><td class="mono d">2023</td><td class="desc">輝達自家的開放大型語言模型</td><td><span class="badge b-cur">現行</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s3-3b">
+  <div class="psec-head"><span class="pno mono">3.3b</span><h3>機器人</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">軟體</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">產品</th><th class="c3">推出時間</th><th>說明</th><th class="c5">狀態</th></tr></thead>
+    <tbody>
+<tr><td class="pname">Isaac GR00T N2</td><td class="mono d">2026</td><td class="desc">下一代人形機器人模型 · 預告於2026年推出</td><td><span class="badge b-ann">已宣布</span></td></tr>
+<tr><td class="pname">Isaac GR00T N1.6 / N1.7</td><td class="mono d">2025 / 2026</td><td class="desc">人形機器人基礎模型 · N1.7為搶先體驗版，尚未正式商用</td><td><span class="badge b-cur">現行</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s3-3c">
+  <div class="psec-head"><span class="pno mono">3.3c</span><h3>世界模型與自駕</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">軟體</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">產品</th><th class="c3">推出時間</th><th>說明</th><th class="c5">狀態</th></tr></thead>
+    <tbody>
+<tr><td class="pname">Cosmos 3</td><td class="mono d">2026</td><td class="desc">可推理並生成世界與動作的開放全模態模型 · 文字、影像、影片、聲音、動作</td><td><span class="badge b-cur">現行</span></td></tr>
+<tr><td class="pname">Cosmos</td><td class="mono d">2025</td><td class="desc">預測實體世界如何運作的模型 · 生成合成資料以訓練機器人與自駕車</td><td><span class="badge b-cur">現行</span></td></tr>
+<tr><td class="pname">Alpamayo</td><td class="mono d">2025</td><td class="desc">用於自駕決策的開放模型</td><td><span class="badge b-cur">現行</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="secgroup" id="s3-4"><span class="pno mono">3.4</span><h3>模擬與數位孿生</h3></div>
+<div class="psec" id="s3-4a">
+  <div class="psec-head"><span class="pno mono">3.4a</span><h3>平台與物理</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">軟體</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">產品</th><th class="c3">推出時間</th><th>說明</th><th class="c5">狀態</th></tr></thead>
+    <tbody>
+<tr><td class="pname">Omniverse / Omniverse Enterprise</td><td class="mono d">持續</td><td class="desc">讓不同3D與模擬工具在同一個共享虛擬模型上協作 · 以OpenUSD為基礎</td><td><span class="badge b-cur">現行</span></td></tr>
+<tr><td class="pname">Newton</td><td class="mono d">2025</td><td class="desc">模擬物體運動與碰撞的開放物理引擎 · 與Google DeepMind及迪士尼合作</td><td><span class="badge b-cur">現行</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s3-4b">
+  <div class="psec-head"><span class="pno mono">3.4b</span><h3>機器人訓練</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">軟體</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">產品</th><th class="c3">推出時間</th><th>說明</th><th class="c5">狀態</th></tr></thead>
+    <tbody>
+<tr><td class="pname">Isaac Lab-Arena</td><td class="mono d">2026</td><td class="desc">評估機器人表現的開源框架</td><td><span class="badge b-ship">新推出（Alpha版）</span></td></tr>
+<tr><td class="pname">Isaac Lab</td><td class="mono d">2024</td><td class="desc">在模擬環境中以試誤方式訓練機器人</td><td><span class="badge b-cur">現行</span></td></tr>
+<tr><td class="pname">OSMO</td><td class="mono d">2024</td><td class="desc">在本機與雲端之間排程機器人訓練工作</td><td><span class="badge b-cur">現行</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s3-4c">
+  <div class="psec-head"><span class="pno mono">3.4c</span><h3>氣候</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">軟體</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">產品</th><th class="c3">推出時間</th><th>說明</th><th class="c5">狀態</th></tr></thead>
+    <tbody>
+<tr><td class="pname">Earth-2</td><td class="mono d">2024</td><td class="desc">氣候與天氣模擬</td><td><span class="badge b-cur">現行</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="secgroup" id="s3-5"><span class="pno mono">3.5</span><h3>基礎設施維運</h3></div>
+<div class="psec" id="s3-5a">
+  <div class="psec-head"><span class="pno mono">3.5a</span><h3>管理叢集</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">軟體</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">產品</th><th class="c3">推出時間</th><th>說明</th><th class="c5">狀態</th></tr></thead>
+    <tbody>
+<tr><td class="pname">Mission Control</td><td class="mono d">2025</td><td class="desc">AI工廠的單一控制台 · 叢集健康檢查、工作負載排程、電力最佳化、自動工作復原</td><td><span class="badge b-cur">現行</span></td></tr>
+<tr><td class="pname">Run:ai</td><td class="mono d">2024</td><td class="desc">決定各工作分配到哪顆GPU · 宣稱使用率最高可提升5倍</td><td><span class="badge b-cur">現行</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s3-5b">
+  <div class="psec-head"><span class="pno mono">3.5b</span><h3>監控硬體</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">軟體</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">產品</th><th class="c3">推出時間</th><th>說明</th><th class="c5">狀態</th></tr></thead>
+    <tbody>
+<tr><td class="pname">DCGM</td><td class="mono d">持續</td><td class="desc">回報GPU溫度、功耗與健康狀態</td><td><span class="badge b-cur">現行</span></td></tr>
+<tr><td class="pname">vGPU</td><td class="mono d">持續</td><td class="desc">將一顆實體GPU分割給多位使用者共用</td><td><span class="badge b-cur">現行</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s3-5c">
+  <div class="psec-head"><span class="pno mono">3.5c</span><h3>監控網路</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">軟體</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">產品</th><th class="c3">推出時間</th><th>說明</th><th class="c5">狀態</th></tr></thead>
+    <tbody>
+<tr><td class="pname">UFM</td><td class="mono d">持續</td><td class="desc">管理並監控InfiniBand網路</td><td><span class="badge b-cur">現行</span></td></tr>
+<tr><td class="pname">NetQ</td><td class="mono d">持續</td><td class="desc">檢查乙太網路（Cumulus）與NVLink交換網路的設定與運作是否正確</td><td><span class="badge b-cur">現行</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="secgroup" id="s3-6"><span class="pno mono">3.6</span><h3>產業平台</h3></div>
+<div class="psec" id="s3-6a">
+  <div class="psec-head"><span class="pno mono">3.6a</span><h3>醫療照護</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">軟體</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">產品</th><th class="c3">推出時間</th><th>說明</th><th class="c5">狀態</th></tr></thead>
+    <tbody>
+<tr><td class="pname">Clara / Parabricks / BioNeMo</td><td class="mono d">持續</td><td class="desc">醫學影像、基因體分析與藥物開發</td><td><span class="badge b-cur">現行</span></td></tr>
+<tr><td class="pname">Isaac for Healthcare</td><td class="mono d">2025</td><td class="desc">醫療機器人 · 手術、超音波影像、遠距手術</td><td><span class="badge b-cur">現行</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s3-6b">
+  <div class="psec-head"><span class="pno mono">3.6b</span><h3>汽車與電信</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">軟體</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">產品</th><th class="c3">推出時間</th><th>說明</th><th class="c5">狀態</th></tr></thead>
+    <tbody>
+<tr><td class="pname">DRIVE OS / DriveWorks</td><td class="mono d">持續</td><td class="desc">在車內運行的作業系統與中介軟體</td><td><span class="badge b-cur">現行</span></td></tr>
+<tr><td class="pname">Aerial / ARC-Pro</td><td class="mono d">持續</td><td class="desc">以GPU取代客製化晶片，運行5G與6G行動網路基地台</td><td><span class="badge b-cur">現行</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="secgroup" id="s3-7"><span class="pno mono">3.7</span><h3>繪圖與消費性軟體</h3></div>
+<div class="psec" id="s3-7a">
+  <div class="psec-head"><span class="pno mono">3.7a</span><h3>渲染</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">軟體</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">產品</th><th class="c3">推出時間</th><th>說明</th><th class="c5">狀態</th></tr></thead>
+    <tbody>
+<tr><td class="pname">DLSS 5</td><td class="mono d">2026</td><td class="desc">AI升頻與影格生成 · RTX 50與RTX Spark支援3D引導式神經渲染</td><td><span class="badge b-ship">新推出</span></td></tr>
+<tr><td class="pname">RTX Kit</td><td class="mono d">2025</td><td class="desc">供開發者在遊戲中加入神經渲染的工具組</td><td><span class="badge b-cur">現行</span></td></tr>
+<tr><td class="pname">RTX Remix</td><td class="mono d">2025</td><td class="desc">以現代光影與路徑追蹤重製舊遊戲</td><td><span class="badge b-cur">現行</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s3-7b">
+  <div class="psec-head"><span class="pno mono">3.7b</span><h3>顯示與用戶端</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">軟體</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">產品</th><th class="c3">推出時間</th><th>說明</th><th class="c5">狀態</th></tr></thead>
+    <tbody>
+<tr><td class="pname">G-SYNC Pulsar</td><td class="mono d">2026</td><td class="desc">減少動態模糊與畫面撕裂 · 顯示器自2026年開賣</td><td><span class="badge b-cur">現行</span></td></tr>
+<tr><td class="pname">NVIDIA App</td><td class="mono d">2024</td><td class="desc">整合驅動程式、設定與遊戲最佳化的單一用戶端</td><td><span class="badge b-cur">現行</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="psec" id="s3-8">
+  <div class="psec-head"><span class="pno mono">3.8</span><h3>生態系與通路</h3><span class="ptag" style="background:#FDF6E6;color:#8A5A00">軟體</span></div>
+  <div class="scroller"><table class="ptable">
+    <thead><tr><th class="c1">產品</th><th class="c3">推出時間</th><th>說明</th><th class="c5">狀態</th></tr></thead>
+    <tbody>
+<tr class="bucket"><td colspan="4">收購生態系</td></tr>
+<tr><td class="pname">收購Hugging Face</td><td class="mono d">&mdash;</td><td class="desc">3Q26簽約，金額US$12.93bn，含最高US$1.0bn員工留任獎酬 · 最具主導地位的開源模型與資料集平台</td><td><span class="badge b-ann">已宣布</span></td></tr>
+<tr class="bucket"><td colspan="4">接入生態系</td></tr>
+<tr><td class="pname">LeRobot整合</td><td class="mono d">2025</td><td class="desc">Isaac機器人模型內建於Hugging Face的機器人技術堆疊</td><td><span class="badge b-ship">新推出</span></td></tr>
+<tr class="bucket"><td colspan="4">為何難以轉移</td></tr>
+<tr><td class="pname">CUDA開發者基礎</td><td class="mono d">持續</td><td class="desc">750萬名開發者與6,000個CUDA應用程式 · 保護晶片業務的轉換成本</td><td><span class="badge b-cur">現行</span></td></tr>
+</tbody></table></div>
+</div></div></div>
+
+<footer class="site-foot">
+  <div class="sf-id">
+    <img src="assets/photo-sm.jpg" alt="Ethan Chen" width="44" height="44" loading="lazy">
+    <div><div class="sf-name"><a href="index-zh.html">Ethan Chen</a></div><div class="sf-sub">半導體研究筆記 · Semiconductor Research Notes</div></div>
+  </div>
+  <div class="sf-contact">
+    <a href="mailto:ethanchen@qtumic.com">ethanchen@qtumic.com</a>
+    <a href="https://www.linkedin.com/in/hao-chen-194981297" target="_blank" rel="me noopener">LinkedIn</a>
+  </div>
+  <div class="sf-note">個人研究筆記，不構成投資建議。 © 2026 Ethan Chen</div>
+</footer>
+</div></body></html>
