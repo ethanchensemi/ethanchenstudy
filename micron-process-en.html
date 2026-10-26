@@ -195,225 +195,14 @@ tr:last-child td{border-bottom:none}
 </head>
 <body>
 <div class="wrap">
-<div class="backbar"><a href="map-en.html">← Industry Map</a> </div>
+<div class="backbar"><a href="map-en.html">← Industry Map</a><span class="bbr"><a href="memory-en.html">HBM · DRAM · NAND</a></span></div>
 <header class="masthead">
  <h1>Micron HBM &middot; NAND Full Process Map</h1>
 </header>
 
 <nav class="toc"><div class="tocrow">
- <a href="#structure">Structure</a><a href="#s1">1 Incoming Wafer</a><a href="#rA">A HBM Route</a><a href="#rB">B NAND Route</a><a href="#vendors">Supplier Matrix</a>
+ <a href="#s1">1 Incoming Wafer</a><a href="#rA">A HBM Route</a><a href="#rB">B NAND Route</a><a href="#vendors">Supplier Matrix</a>
 </div></nav>
-
-<section class="sect" id="structure" style="margin-top:0">
- <h2>Structure</h2>
- <p class="key">What each product physically is</p>
- <div class="figs">
- <div class="fig full">
-   <h3>How Many Dies Go In A Package</h3>
-   <svg viewBox="0 0 1080 272" role="img" aria-label="Four DRAM package stacking tiers drawn to the same scale: one die, two to four wire-bonded dies, four to eight dies joined by through-silicon vias, and eight to sixteen dies on a logic base die">
-    <text x="140" y="20" text-anchor="middle" font-size="12" font-weight="600" fill="#14181C">1 die</text>
-    <rect x="85" y="186" width="110" height="12" fill="#EFE6D2" stroke="#C2AE7E"/>
-    <text x="140" y="226" text-anchor="middle" font-size="10" fill="#4A555E">Bond wires</text>
-    <text x="140" y="244" text-anchor="middle" font-size="9.5" fill="#7C8891">DDR5 RDIMM to 128GB, UDIMM,</text>
-    <text x="140" y="259" text-anchor="middle" font-size="9.5" fill="#7C8891">SODIMM, GDDR7, entry LPDDR</text>
-    <rect x="105" y="170" width="70" height="12" fill="#E8F3F5" stroke="#215C68"/>
-    <path d="M105 176 Q92 182 88 186" fill="none" stroke="#B85C10" stroke-width="1"/>
-    <path d="M175 176 Q188 182 192 186" fill="none" stroke="#B85C10" stroke-width="1"/>
-    <text x="400" y="20" text-anchor="middle" font-size="12" font-weight="600" fill="#14181C">2 to 4 dies</text>
-    <rect x="345" y="186" width="110" height="12" fill="#EFE6D2" stroke="#C2AE7E"/>
-    <text x="400" y="226" text-anchor="middle" font-size="10" fill="#4A555E">Bond wires, both sides</text>
-    <text x="400" y="244" text-anchor="middle" font-size="9.5" fill="#7C8891">LPDDR5X phone packages,</text>
-    <text x="400" y="259" text-anchor="middle" font-size="9.5" fill="#7C8891">uMCP, dual-die DDR modules</text>
-    <rect x="357" y="170" width="70" height="12" fill="#E8F3F5" stroke="#215C68"/>
-    <rect x="373" y="154" width="70" height="12" fill="#E8F3F5" stroke="#215C68"/>
-    <rect x="357" y="138" width="70" height="12" fill="#E8F3F5" stroke="#215C68"/>
-    <rect x="373" y="122" width="70" height="12" fill="#E8F3F5" stroke="#215C68"/>
-    <path d="M357 176 Q346 182 348 186" fill="none" stroke="#B85C10" stroke-width="1"/>
-    <path d="M443 160 Q456 176 452 186" fill="none" stroke="#B85C10" stroke-width="1"/>
-    <path d="M357 144 Q342 168 348 186" fill="none" stroke="#B85C10" stroke-width="1"/>
-    <path d="M443 128 Q460 162 452 186" fill="none" stroke="#B85C10" stroke-width="1"/>
-    <text x="660" y="20" text-anchor="middle" font-size="12" font-weight="600" fill="#14181C">4 to 8 dies</text>
-    <rect x="605" y="186" width="110" height="12" fill="#EFE6D2" stroke="#C2AE7E"/>
-    <text x="660" y="226" text-anchor="middle" font-size="10" fill="#4A555E">TSVs through every die</text>
-    <text x="660" y="244" text-anchor="middle" font-size="9.5" fill="#7C8891">256GB DDR5 RDIMM,</text>
-    <text x="660" y="259" text-anchor="middle" font-size="9.5" fill="#7C8891">high-capacity LPDDR modules</text>
-    <rect x="625" y="170" width="70" height="12" fill="#E8F3F5" stroke="#215C68"/>
-    <rect x="625" y="154" width="70" height="12" fill="#E8F3F5" stroke="#215C68"/>
-    <rect x="625" y="138" width="70" height="12" fill="#E8F3F5" stroke="#215C68"/>
-    <rect x="625" y="122" width="70" height="12" fill="#E8F3F5" stroke="#215C68"/>
-    <rect x="625" y="106" width="70" height="12" fill="#E8F3F5" stroke="#215C68"/>
-    <rect x="625" y="90" width="70" height="12" fill="#E8F3F5" stroke="#215C68"/>
-    <rect x="625" y="74" width="70" height="12" fill="#E8F3F5" stroke="#215C68"/>
-    <rect x="625" y="58" width="70" height="12" fill="#E8F3F5" stroke="#215C68"/>
-    <path d="M643 58V186" fill="none" stroke="#B85C10" stroke-width="1.4"/>
-    <path d="M677 58V186" fill="none" stroke="#B85C10" stroke-width="1.4"/>
-    <text x="920" y="20" text-anchor="middle" font-size="12" font-weight="600" fill="#14181C">8 to 16 dies</text>
-    <rect x="860" y="186" width="120" height="12" fill="#EFE6D2" stroke="#C2AE7E"/>
-    <text x="920" y="226" text-anchor="middle" font-size="10" fill="#4A555E">TSVs and microbumps</text>
-    <text x="920" y="244" text-anchor="middle" font-size="9.5" fill="#7C8891">HBM3E 8-high and 12-high,</text>
-    <text x="920" y="259" text-anchor="middle" font-size="9.5" fill="#7C8891">HBM4 12-high and 16-high</text>
-    <rect x="873" y="168" width="94" height="14" fill="#F4F1FA" stroke="#4A3B7A"/>
-    <rect x="883" y="154" width="74" height="9" fill="#E8F3F5" stroke="#215C68"/>
-    <rect x="883" y="144" width="74" height="9" fill="#E8F3F5" stroke="#215C68"/>
-    <rect x="883" y="134" width="74" height="9" fill="#E8F3F5" stroke="#215C68"/>
-    <rect x="883" y="124" width="74" height="9" fill="#E8F3F5" stroke="#215C68"/>
-    <rect x="883" y="114" width="74" height="9" fill="#E8F3F5" stroke="#215C68"/>
-    <rect x="883" y="104" width="74" height="9" fill="#E8F3F5" stroke="#215C68"/>
-    <rect x="883" y="94" width="74" height="9" fill="#E8F3F5" stroke="#215C68"/>
-    <rect x="883" y="84" width="74" height="9" fill="#E8F3F5" stroke="#215C68"/>
-    <rect x="883" y="74" width="74" height="9" fill="#E8F3F5" stroke="#215C68"/>
-    <rect x="883" y="64" width="74" height="9" fill="#E8F3F5" stroke="#215C68"/>
-    <rect x="883" y="54" width="74" height="9" fill="#E8F3F5" stroke="#215C68"/>
-    <rect x="883" y="44" width="74" height="9" fill="#E8F3F5" stroke="#215C68"/>
-    <path d="M901 44V168" fill="none" stroke="#B85C10" stroke-width="1.4"/>
-    <path d="M939 44V168" fill="none" stroke="#B85C10" stroke-width="1.4"/>
-    <g fill="#B85C10"><circle cx="879" cy="186" r="2.4"/><circle cx="899" cy="186" r="2.4"/><circle cx="919" cy="186" r="2.4"/><circle cx="939" cy="186" r="2.4"/><circle cx="959" cy="186" r="2.4"/></g>
-    </svg>
- </div>
-  <div class="fig">
-   <h3>DRAM Package</h3>
-   <svg viewBox="0 0 380 300" role="img" aria-label="DRAM package cross-section with four stacked dies wire bonded on both sides">
-    <rect x="40" y="72" width="185" height="114" fill="#F4F5F1" stroke="#CBD3D9"/>
-    <rect x="74" y="152" width="104" height="14" fill="#E8F3F5" stroke="#215C68"/><rect x="86" y="132" width="104" height="14" fill="#E8F3F5" stroke="#215C68"/><rect x="74" y="112" width="104" height="14" fill="#E8F3F5" stroke="#215C68"/><rect x="86" y="92" width="104" height="14" fill="#E8F3F5" stroke="#215C68"/>
-    <path d="M74,152 Q56,174 54,186" fill="none" stroke="#B85C10" stroke-width="1.2"/><path d="M190,132 Q208,154 212,186" fill="none" stroke="#B85C10" stroke-width="1.2"/><path d="M74,112 Q56,134 54,186" fill="none" stroke="#B85C10" stroke-width="1.2"/><path d="M190,92 Q208,114 212,186" fill="none" stroke="#B85C10" stroke-width="1.2"/>
-    <rect x="40" y="186" width="185" height="16" fill="#EFE6D2" stroke="#C2AE7E"/>
-    <g fill="#FCFDFD" stroke="#7C8891"><circle cx="58" cy="209" r="5.5"/><circle cx="80" cy="209" r="5.5"/><circle cx="102" cy="209" r="5.5"/><circle cx="124" cy="209" r="5.5"/><circle cx="146" cy="209" r="5.5"/><circle cx="168" cy="209" r="5.5"/><circle cx="190" cy="209" r="5.5"/><circle cx="212" cy="209" r="5.5"/></g>
-    <g fill="none" stroke="#9AA5AC" stroke-width=".9" stroke-dasharray="1.5 2.5"><path d="M225,78 H248"/><path d="M190,99 H248 V104"/><path d="M206,150 H248 V154"/><path d="M225,194 H248"/><path d="M217,212 H240 V228 H248"/></g>
-    <g fill="#9AA5AC"><circle cx="225" cy="78" r="1.8"/><circle cx="190" cy="99" r="1.8"/><circle cx="206" cy="150" r="1.8"/><circle cx="225" cy="194" r="1.8"/><circle cx="217" cy="212" r="1.8"/></g>
-    <text x="254" y="82" font-size="10" fill="#4A555E">Mould compound</text> <text x="254" y="108" font-size="10" fill="#4A555E">DRAM die, 1 to 4 wire-bonded</text> <text x="254" y="158" font-size="10" fill="#4A555E">Bond wires, both sides</text> <text x="254" y="198" font-size="10" fill="#4A555E">Package substrate</text> <text x="254" y="232" font-size="10" fill="#4A555E">Solder balls, FBGA</text>
-   </svg>
-  </div>
-  <div class="fig">
-   <h3>DDR5 Die</h3>
-   <svg viewBox="0 0 380 382" role="img" aria-label="DDR5 die floorplan with eight bank groups and a list of what the peripheral strip contains">
-    <text x="190" y="20" text-anchor="middle" font-size="12" font-weight="600" fill="#14181C">Inside one DDR5 die</text>
-    <text x="190" y="36" text-anchor="middle" font-size="10.5" fill="#7C8891">32 banks in 8 bank groups</text>
-    <rect x="24" y="52" width="332" height="226" rx="6" fill="#FCFDFD" stroke="#CBD3D9"/>
-    <g fill="#F4F1FA" stroke="#4A3B7A">
-     <rect x="36" y="68" width="74" height="60"/><rect x="118" y="68" width="74" height="60"/>
-     <rect x="200" y="68" width="74" height="60"/><rect x="282" y="68" width="62" height="60"/>
-     <rect x="36" y="202" width="74" height="60"/><rect x="118" y="202" width="74" height="60"/>
-     <rect x="200" y="202" width="74" height="60"/><rect x="282" y="202" width="62" height="60"/>
-    </g>
-    <g text-anchor="middle" font-size="11" font-weight="600" fill="#4A3B7A">
-     <text x="73" y="94">BG0</text><text x="155" y="94">BG1</text><text x="237" y="94">BG2</text><text x="313" y="94">BG3</text>
-     <text x="73" y="228">BG4</text><text x="155" y="228">BG5</text><text x="237" y="228">BG6</text><text x="313" y="228">BG7</text>
-    </g>
-    <g text-anchor="middle" font-size="9.5" fill="#7C8891">
-     <text x="73" y="110">4 banks</text><text x="155" y="110">4 banks</text><text x="237" y="110">4 banks</text><text x="313" y="110">4 banks</text>
-     <text x="73" y="244">4 banks</text><text x="155" y="244">4 banks</text><text x="237" y="244">4 banks</text><text x="313" y="244">4 banks</text>
-    </g>
-    <rect x="36" y="138" width="308" height="52" fill="#FBF1E6" stroke="#B85C10"/>
-    <text x="190" y="168" text-anchor="middle" font-size="11" font-weight="600" fill="#B85C10">Peripheral circuits</text>
-    <text x="36" y="300" font-size="10" font-weight="600" fill="#4A555E">What sits in the strip</text>
-    <g font-size="9.5" fill="#7C8891">
-      <text x="36" y="318">I/O pads, drivers, receivers</text><text x="200" y="318">Command and address decode</text>
-      <text x="36" y="333">On-die termination</text><text x="200" y="333">Clock, DLL and training</text>
-      <text x="36" y="348">Datapath, 16n prefetch</text><text x="200" y="348">Mode registers</text>
-      <text x="36" y="363">Refresh counter</text><text x="200" y="363">Voltage regulation</text>
-    </g>
-   </svg>
-  </div>
-  <div class="fig">
-   <h3>DDR5 RDIMM</h3>
-   <svg viewBox="0 0 380 336" role="img" aria-label="DDR5 RDIMM module with RCD, PMIC, SPD hub and temperature sensors">
-    <text x="190" y="20" text-anchor="middle" font-size="12" font-weight="600" fill="#14181C">The module is a small board</text>
-    <text x="190" y="36" text-anchor="middle" font-size="10.5" fill="#7C8891">DDR5 RDIMM, front side</text>
-    <text x="95" y="60" text-anchor="middle" font-size="9.5" fill="#7C8891">Sub-channel A</text>
-    <text x="285" y="60" text-anchor="middle" font-size="9.5" fill="#7C8891">Sub-channel B</text>
-
-    <rect x="16" y="66" width="348" height="104" fill="#EEF2F3" stroke="#CBD3D9"/>
-    <g fill="#E8F3F5" stroke="#215C68">
-     <rect x="26" y="84" width="32" height="32"/><rect x="62" y="84" width="32" height="32"/><rect x="98" y="84" width="32" height="32"/><rect x="134" y="84" width="32" height="32"/>
-     <rect x="214" y="84" width="32" height="32"/><rect x="250" y="84" width="32" height="32"/><rect x="286" y="84" width="32" height="32"/><rect x="322" y="84" width="32" height="32"/>
-    </g>
-    <rect x="170" y="78" width="40" height="44" fill="#FBF1E6" stroke="#B85C10"/>
-    <text x="190" y="104" text-anchor="middle" font-size="10" font-weight="600" fill="#B85C10">RCD</text>
-    <rect x="120" y="128" width="40" height="22" fill="#F4F1FA" stroke="#4A3B7A"/>
-    <text x="140" y="143" text-anchor="middle" font-size="9" fill="#4A3B7A">PMIC</text>
-    <rect x="170" y="128" width="36" height="22" fill="#F4F1FA" stroke="#4A3B7A"/>
-    <text x="188" y="143" text-anchor="middle" font-size="9" fill="#4A3B7A">SPD</text>
-    <rect x="216" y="128" width="24" height="22" fill="#E4F2F3" stroke="#0E7C86"/>
-    <text x="228" y="143" text-anchor="middle" font-size="9" fill="#0E7C86">TS</text>
-    <g fill="#C9A227" opacity=".65">
-     <rect x="26" y="158" width="5" height="12"/><rect x="35" y="158" width="5" height="12"/><rect x="44" y="158" width="5" height="12"/><rect x="53" y="158" width="5" height="12"/><rect x="62" y="158" width="5" height="12"/><rect x="71" y="158" width="5" height="12"/><rect x="80" y="158" width="5" height="12"/><rect x="89" y="158" width="5" height="12"/><rect x="98" y="158" width="5" height="12"/><rect x="107" y="158" width="5" height="12"/><rect x="116" y="158" width="5" height="12"/><rect x="125" y="158" width="5" height="12"/><rect x="134" y="158" width="5" height="12"/><rect x="143" y="158" width="5" height="12"/><rect x="152" y="158" width="5" height="12"/><rect x="161" y="158" width="5" height="12"/>
-     <rect x="206" y="158" width="5" height="12"/><rect x="215" y="158" width="5" height="12"/><rect x="224" y="158" width="5" height="12"/><rect x="233" y="158" width="5" height="12"/><rect x="242" y="158" width="5" height="12"/><rect x="251" y="158" width="5" height="12"/><rect x="260" y="158" width="5" height="12"/><rect x="269" y="158" width="5" height="12"/><rect x="278" y="158" width="5" height="12"/><rect x="287" y="158" width="5" height="12"/><rect x="296" y="158" width="5" height="12"/><rect x="305" y="158" width="5" height="12"/><rect x="314" y="158" width="5" height="12"/><rect x="323" y="158" width="5" height="12"/><rect x="332" y="158" width="5" height="12"/><rect x="341" y="158" width="5" height="12"/>
-    </g>
-
-    <rect x="26" y="200" width="14" height="14" fill="#E8F3F5" stroke="#215C68"/>
-    <text x="48" y="211" font-size="10" fill="#4A555E">DDR5 packages, 8 to 16 a side</text>
-    <rect x="26" y="226" width="14" height="14" fill="#FBF1E6" stroke="#B85C10"/>
-    <text x="48" y="237" font-size="10" fill="#4A555E">RCD, re-drives address and command</text>
-    <rect x="26" y="252" width="14" height="14" fill="#F4F1FA" stroke="#4A3B7A"/>
-    <text x="48" y="263" font-size="10" fill="#4A555E">PMIC, power regulation moved onto the module</text>
-    <rect x="26" y="278" width="14" height="14" fill="#E4F2F3" stroke="#0E7C86"/>
-    <text x="48" y="289" font-size="10" fill="#4A555E">SPD hub and temperature sensors</text>
-   </svg>
-  </div>
-  <div class="fig">
-   <h3>NAND Package</h3>
-   <svg viewBox="0 0 380 300" role="img" aria-label="NAND package cross-section with offset stacked dies">
-    <rect x="40" y="52" width="185" height="146" fill="#F4F5F1" stroke="#CBD3D9"/>
-    <rect x="64" y="186" width="98" height="11" fill="#E8F3F5" stroke="#215C68"/><rect x="71" y="170" width="98" height="11" fill="#E8F3F5" stroke="#215C68"/><rect x="78" y="154" width="98" height="11" fill="#E8F3F5" stroke="#215C68"/><rect x="85" y="138" width="98" height="11" fill="#E8F3F5" stroke="#215C68"/><rect x="92" y="122" width="98" height="11" fill="#E8F3F5" stroke="#215C68"/><rect x="99" y="106" width="98" height="11" fill="#E8F3F5" stroke="#215C68"/><rect x="106" y="90" width="98" height="11" fill="#E8F3F5" stroke="#215C68"/><rect x="113" y="74" width="98" height="11" fill="#E8F3F5" stroke="#215C68"/>
-    <path d="M64,186 Q56,206 50,196" fill="none" stroke="#B85C10" stroke-width="1.1"/><path d="M71,170 Q58,196 50,196" fill="none" stroke="#B85C10" stroke-width="1.1"/><path d="M78,154 Q60,186 50,196" fill="none" stroke="#B85C10" stroke-width="1.1"/><path d="M85,138 Q62,176 50,196" fill="none" stroke="#B85C10" stroke-width="1.1"/><path d="M92,122 Q64,166 50,196" fill="none" stroke="#B85C10" stroke-width="1.1"/><path d="M99,106 Q66,156 50,196" fill="none" stroke="#B85C10" stroke-width="1.1"/><path d="M106,90 Q68,146 50,196" fill="none" stroke="#B85C10" stroke-width="1.1"/><path d="M113,74 Q70,136 50,196" fill="none" stroke="#B85C10" stroke-width="1.1"/>
-    <rect x="40" y="198" width="185" height="16" fill="#EFE6D2" stroke="#C2AE7E"/>
-    <g fill="#FCFDFD" stroke="#7C8891"><circle cx="58" cy="221" r="5.5"/><circle cx="80" cy="221" r="5.5"/><circle cx="102" cy="221" r="5.5"/><circle cx="124" cy="221" r="5.5"/><circle cx="146" cy="221" r="5.5"/><circle cx="168" cy="221" r="5.5"/><circle cx="190" cy="221" r="5.5"/><circle cx="212" cy="221" r="5.5"/></g>
-    <g fill="none" stroke="#9AA5AC" stroke-width=".9" stroke-dasharray="1.5 2.5"><path d="M225,58 H248"/><path d="M211,76 H248 V94"/><path d="M56,150 H36 V262 H248"/><path d="M225,206 H248"/><path d="M217,224 H240 V240 H248"/></g>
-    <g fill="#9AA5AC"><circle cx="225" cy="58" r="1.8"/><circle cx="211" cy="76" r="1.8"/><circle cx="56" cy="150" r="1.8"/><circle cx="225" cy="206" r="1.8"/><circle cx="217" cy="224" r="1.8"/></g>
-    <text x="254" y="62" font-size="10" fill="#4A555E">Mould compound</text> <text x="254" y="98" font-size="10" fill="#4A555E">NAND die &times; 8 to 16</text> <text x="254" y="210" font-size="10" fill="#4A555E">Package substrate</text> <text x="254" y="244" font-size="10" fill="#4A555E">Solder balls, FBGA</text> <text x="254" y="266" font-size="10" fill="#4A555E">Bond wires, one per die</text>
-      </svg>
-  </div>
-  <div class="fig">
-   <h3>NAND Die</h3>
-   <svg viewBox="0 0 380 300" role="img" aria-label="NAND die layout with six planes, blocks and pages">
-    <text x="190" y="22" text-anchor="middle" font-size="12" font-weight="600" fill="#14181C">Inside one NAND die</text>
-    <rect x="28" y="56" width="324" height="196" rx="6" fill="#FCFDFD" stroke="#CBD3D9"/>
-    <g fill="#FCFDFD" stroke="#4A3B7A"><rect x="42" y="74" width="46" height="92" rx="3"/><rect x="94" y="74" width="46" height="92" rx="3"/><rect x="146" y="74" width="46" height="92" rx="3"/><rect x="198" y="74" width="46" height="92" rx="3"/><rect x="250" y="74" width="46" height="92" rx="3"/><rect x="302" y="74" width="46" height="92" rx="3"/></g>
-    <g text-anchor="middle" font-size="10.5" font-weight="600" fill="#4A3B7A"><text x="65" y="92">P0</text><text x="117" y="92">P1</text><text x="169" y="92">P2</text><text x="221" y="92">P3</text><text x="273" y="92">P4</text><text x="325" y="92">P5</text></g>
-    <g fill="#EEEBF8" stroke="#4A3B7A" stroke-width=".7"><rect x="50" y="102" width="30" height="13"/><rect x="50" y="121" width="30" height="13"/><rect x="50" y="140" width="30" height="13"/><rect x="102" y="102" width="30" height="13"/><rect x="102" y="121" width="30" height="13"/><rect x="102" y="140" width="30" height="13"/><rect x="154" y="102" width="30" height="13"/><rect x="154" y="121" width="30" height="13"/><rect x="154" y="140" width="30" height="13"/><rect x="206" y="102" width="30" height="13"/><rect x="206" y="121" width="30" height="13"/><rect x="206" y="140" width="30" height="13"/><rect x="258" y="102" width="30" height="13"/><rect x="258" y="121" width="30" height="13"/><rect x="258" y="140" width="30" height="13"/><rect x="310" y="102" width="30" height="13"/><rect x="310" y="121" width="30" height="13"/><rect x="310" y="140" width="30" height="13"/></g>
-    <rect x="50" y="102" width="30" height="13" fill="#FBF1E6" stroke="#B85C10"/>
-    <rect x="40" y="176" width="310" height="64" rx="3" fill="#EEF2F3" stroke="#7C8891"/>
-    <text x="195" y="192" text-anchor="middle" font-size="10" font-weight="600" fill="#4A555E">CMOS under the array</text>
-    <g><rect x="43" y="199" width="44" height="16" rx="2" fill="#F4F5F1" stroke="#7C8891" stroke-width=".7"/><rect x="95" y="199" width="44" height="16" rx="2" fill="#F4F5F1" stroke="#7C8891" stroke-width=".7"/><rect x="147" y="199" width="44" height="16" rx="2" fill="#F4F5F1" stroke="#7C8891" stroke-width=".7"/><rect x="199" y="199" width="44" height="16" rx="2" fill="#F4F5F1" stroke="#7C8891" stroke-width=".7"/><rect x="251" y="199" width="44" height="16" rx="2" fill="#F4F5F1" stroke="#7C8891" stroke-width=".7"/><rect x="303" y="199" width="44" height="16" rx="2" fill="#F4F5F1" stroke="#7C8891" stroke-width=".7"/></g>
-    <g text-anchor="middle" font-size="8.5" fill="#4A555E"><text x="65" y="210">buffer</text><text x="117" y="210">buffer</text><text x="169" y="210">buffer</text><text x="221" y="210">buffer</text><text x="273" y="210">buffer</text><text x="325" y="210">buffer</text></g>
-    <text x="195" y="231" text-anchor="middle" font-size="9" fill="#7C8891">One set per plane, plus decoders and charge pumps</text>
-    <rect x="46" y="266" width="12" height="12" fill="#FBF1E6" stroke="#B85C10"/>
-    <text x="66" y="276" font-size="10" fill="#4A555E">Block, the unit that is erased</text>
-    <rect x="212" y="266" width="12" height="12" fill="#EEEBF8" stroke="#4A3B7A"/>
-    <text x="232" y="276" font-size="10" fill="#4A555E">Page, the unit read and written</text>
-   </svg>
-  </div>
-  <div class="fig">
-   <h3>SSD Board</h3>
-   <svg viewBox="0 0 380 324" role="img" aria-label="SSD board showing NAND packages, controller, DRAM, PMIC and power-loss capacitors">
-    <text x="190" y="22" text-anchor="middle" font-size="12" font-weight="600" fill="#14181C">The module is a board</text>
-    <rect x="24" y="58" width="332" height="140" fill="#EEF2F3" stroke="#CBD3D9"/>
-    <g fill="#E8F3F5" stroke="#215C68">
-     <rect x="38" y="72" width="70" height="44"/><rect x="118" y="72" width="70" height="44"/><rect x="198" y="72" width="70" height="44"/><rect x="278" y="72" width="70" height="44"/>
-    </g>
-    <g text-anchor="middle" font-size="10" fill="#215C68"><text x="73" y="99">NAND</text><text x="153" y="99">NAND</text><text x="233" y="99">NAND</text><text x="313" y="99">NAND</text></g>
-    <rect x="118" y="130" width="90" height="50" fill="#EEEBF8" stroke="#4A3B7A"/>
-    <text x="163" y="159" text-anchor="middle" font-size="11" font-weight="600" fill="#4A3B7A">Controller</text>
-    <rect x="38" y="130" width="66" height="50" fill="#E8F3F5" stroke="#215C68"/>
-    <text x="71" y="159" text-anchor="middle" font-size="10" fill="#215C68">DRAM</text>
-    <rect x="220" y="130" width="52" height="50" fill="#F4F5F1" stroke="#7C8891"/>
-    <text x="246" y="159" text-anchor="middle" font-size="10" fill="#4A555E">PMIC</text>
-    <g fill="#FBF1E6" stroke="#B85C10"><rect x="286" y="130" width="28" height="20"/><rect x="320" y="130" width="28" height="20"/><rect x="286" y="154" width="28" height="20"/><rect x="320" y="154" width="28" height="20"/></g>
-    <text x="317" y="188" text-anchor="middle" font-size="9" fill="#B85C10">capacitors</text>
-    <rect x="38" y="222" width="12" height="12" fill="#E8F3F5" stroke="#215C68"/>
-    <text x="58" y="232" font-size="10" fill="#4A555E">NAND packages and DRAM, Micron</text>
-    <rect x="38" y="244" width="12" height="12" fill="#EEEBF8" stroke="#4A3B7A"/>
-    <text x="58" y="254" font-size="10" fill="#4A555E">Controller: Micron on data centre drives,</text>
-    <text x="58" y="267" font-size="10" fill="#4A555E">Silicon Motion or Phison on client drives</text>
-    <rect x="38" y="279" width="12" height="12" fill="#F4F5F1" stroke="#7C8891"/>
-    <text x="58" y="289" font-size="10" fill="#4A555E">PMIC and PCB</text>
-    <rect x="38" y="301" width="12" height="12" fill="#FBF1E6" stroke="#B85C10"/>
-    <text x="58" y="311" font-size="10" fill="#4A555E">Power-loss capacitors</text>
-   </svg>
-  </div>
-
- </div>
-</section>
 
 <div class="stage" id="s1">
  <div class="rail"><div class="stripe"></div>
@@ -422,15 +211,15 @@ tr:last-child td{border-bottom:none}
  </div>
  <div class="body">
   <div class="row">
-   <div class="step sup"><div class="idx">01</div><h4>Prime Wafer Intake</h4>
+   <div class="step sup" id="st-1-01"><div class="idx">01</div><h4>Prime Wafer Intake</h4>
     <span class="chip c-sup">Support</span>
     <p class="vend"><span class="tw">GlobalWafers</span> · Shin-Etsu · SUMCO · Siltronic · SK Siltron</p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (flatness, particle count)</p></div>
-   <div class="step insp"><div class="idx">02</div><h4>Incoming Wafer Inspection</h4>
+   <div class="step insp" id="st-1-02"><div class="idx">02</div><h4>Incoming Wafer Inspection</h4>
     <span class="chip c-insp">Inspection</span>
     <p class="vend">KLA · Onto · Nova · <span class="tw">Scientech</span></p>
     <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: AOI · metrology</p></div>
-   <div class="step sup"><div class="idx">03</div><h4>Lot Start, Recipe Release</h4>
+   <div class="step sup" id="st-1-03"><div class="idx">03</div><h4>Lot Start, Recipe Release</h4>
     <span class="chip c-sup">Support</span>
     <p class="vend">Micron in-house</p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (alignment marks)</p></div>
@@ -446,92 +235,92 @@ tr:last-child td{border-bottom:none}
   </div>
   <div class="sub g">A &middot; Front End <span class="lite">DRAM fab, 1-beta for HBM3E and HBM4, 1-gamma from HBM4E</span></div>
   <div class="row">
-<div class="step fab"><div class="idx">A01</div><h4>Cell Capacitor Formation</h4>
+<div class="step fab" id="st-A-01"><div class="idx">A01</div><h4>Cell Capacitor Formation</h4>
     <span class="chip c-fab">Front-end</span>
     <p class="vend">AMAT · Lam · TEL · ASM International</p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI · metrology · SEM (sampled)</p></div>
-<div class="step fab"><div class="idx">A02</div><h4>EUV Patterning</h4>
+<div class="step fab" id="st-A-02"><div class="idx">A02</div><h4>EUV Patterning</h4>
     <span class="chip c-fab">Front-end</span>
     <p class="vend"><span class="lead-v">ASML</span> | 1-gamma and later. HBM4 is 1-beta, immersion DUV</p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (overlay, critical dimension)</p></div>
-<div class="step fab"><div class="idx">A03</div><h4>Word Line, Bit Line, BEOL Metal</h4>
+<div class="step fab" id="st-A-03"><div class="idx">A03</div><h4>Word Line, Bit Line, BEOL Metal</h4>
     <span class="chip c-fab">Front-end</span>
     <p class="vend">AMAT · Lam · TEL</p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI · metrology</p></div>
-<div class="step fab"><div class="idx">A04</div><h4>TSV Formation, Via Middle</h4>
+<div class="step fab" id="st-A-04"><div class="idx">A04</div><h4>TSV Formation, Via Middle</h4>
     <span class="chip c-fab">Front-end</span>
     <p class="vend">Lam · AMAT · TEL</p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;X-ray (void fill) · SEM</p></div>
   </div>
   <div class="sub g">B &middot; Known Good Die And Thinning <span class="lite">the yield gate</span></div>
   <div class="row">
-<div class="step insp"><div class="idx">A05</div><h4>Wafer Probe, Known Good Die</h4>
+<div class="step insp" id="st-A-05"><div class="idx">A05</div><h4>Wafer Probe, Known Good Die</h4>
     <span class="chip c-insp">Inspection</span>
     <p class="vend">Advantest · Teradyne | Probe cards: <span class="tw">MPI</span> · <span class="tw">CHPT</span></p>
     <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: Full electrical test at speed</p></div>
-<div class="step insp"><div class="idx">A06</div><h4>Redundancy Repair</h4>
+<div class="step insp" id="st-A-06"><div class="idx">A06</div><h4>Redundancy Repair</h4>
     <span class="chip c-insp">Inspection</span>
     <p class="vend">Advantest · Teradyne</p>
     <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: Retest after fuse</p></div>
-<div class="step pkg"><div class="idx">A07</div><h4>Temporary Bonding to Carrier</h4>
+<div class="step pkg" id="st-A-07"><div class="idx">A07</div><h4>Temporary Bonding to Carrier</h4>
     <span class="chip c-pkg">Packaging</span>
     <p class="vend">EVG · SUSS MicroTec | Materials: TOK · Brewer Science</p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (adhesive thickness, alignment)</p></div>
-<div class="step pkg"><div class="idx">A08</div><h4>Backgrind And Polish</h4>
+<div class="step pkg" id="st-A-08"><div class="idx">A08</div><h4>Backgrind And Polish</h4>
     <span class="chip c-pkg">Packaging</span>
     <p class="vend"><span class="lead-v">DISCO</span> Tokyo Seimitsu · Okamoto | CMP: AMAT <span class="tw">Kinik</span></p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (thickness, total thickness variation)</p></div>
   </div>
   <div class="sub g">C &middot; Stack Assembly <span class="lite">the capacity bottleneck</span></div>
   <div class="row">
-<div class="step fab"><div class="idx">A09</div><h4>TSV Reveal And Backside RDL</h4>
+<div class="step fab" id="st-A-09"><div class="idx">A09</div><h4>TSV Reveal And Backside RDL</h4>
     <span class="chip c-fab">Front-end</span>
     <p class="vend">AMAT · Lam · TEL · Veeco</p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI · metrology · X-ray</p></div>
-<div class="step pkg"><div class="idx">A10</div><h4>Microbump Plating</h4>
+<div class="step pkg" id="st-A-10"><div class="idx">A10</div><h4>Microbump Plating</h4>
     <span class="chip c-pkg">Packaging</span>
     <p class="vend">Lam · AMAT · ASMPT</p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI · metrology (bump height, coplanarity)</p></div>
-<div class="step pkg"><div class="idx">A11</div><h4>Debonding</h4>
+<div class="step pkg" id="st-A-11"><div class="idx">A11</div><h4>Debonding</h4>
     <span class="chip c-pkg">Packaging</span>
     <p class="vend">EVG · SUSS MicroTec</p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (breakage, adhesive residue)</p></div>
-<div class="step pkg"><div class="idx">A12</div><h4>Dicing And Die Sort</h4>
+<div class="step pkg" id="st-A-12"><div class="idx">A12</div><h4>Dicing And Die Sort</h4>
     <span class="chip c-pkg">Packaging</span>
     <p class="vend">DISCO · Tokyo Seimitsu · ASMPT</p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (edge chipping, cracks)</p></div>
-<div class="step fab"><div class="idx">A13</div><h4>Logic Base Die</h4>
+<div class="step fab" id="st-A-13"><div class="idx">A13</div><h4>Logic Base Die</h4>
     <span class="chip c-fab">Front-end</span>
     <p class="vend">Micron through HBM4 | TSMC from HBM4E</p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Electrical test</p></div>
-<div class="step pkg"><div class="idx">A14</div><h4>TC-NCF Stack Bonding</h4>
+<div class="step pkg" id="st-A-14"><div class="idx">A14</div><h4>TC-NCF Stack Bonding</h4>
     <span class="chip c-pkg">Packaging</span>
     <p class="vend"><span class="lead-v">ASMPT</span> Shinkawa · K&amp;S | NCF: Resonac · Namics</p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;SAM (delamination) · X-ray (bond voids)</p></div>
-<div class="step pkg"><div class="idx">A15</div><h4>Stack Molding</h4>
+<div class="step pkg" id="st-A-15"><div class="idx">A15</div><h4>Stack Molding</h4>
     <span class="chip c-pkg">Packaging</span>
     <p class="vend"><span class="lead-v">TOWA</span> · ASMPT · Besi</p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (warpage) · SAM</p></div>
-<div class="step pkg"><div class="idx">A16</div><h4>Mold Grinding To Stack Height</h4>
+<div class="step pkg" id="st-A-16"><div class="idx">A16</div><h4>Mold Grinding To Stack Height</h4>
     <span class="chip c-pkg">Packaging</span>
     <p class="vend">DISCO · Tokyo Seimitsu</p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (height, coplanarity)</p></div>
-<div class="step pkg"><div class="idx">A17</div><h4>Substrate Attach And Reflow</h4>
+<div class="step pkg" id="st-A-17"><div class="idx">A17</div><h4>Substrate Attach And Reflow</h4>
     <span class="chip c-pkg">Packaging</span>
     <p class="vend">ASMPT · Shibaura | Substrate: Ibiden · Shinko <span class="tw">Unimicron</span> · <span class="tw">Nan Ya PCB</span> · <span class="tw">Kinsus</span></p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;X-ray (solder voids) · SAM</p></div>
   </div>
   <div class="sub g">D &middot; Test And Ship</div>
   <div class="row">
-<div class="step insp"><div class="idx">A18</div><h4>Known Good Stack Test</h4>
+<div class="step insp" id="st-A-18"><div class="idx">A18</div><h4>Known Good Stack Test</h4>
     <span class="chip c-insp">Inspection</span>
     <p class="vend">Advantest · Teradyne</p>
     <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: Full-speed electrical test</p></div>
-<div class="step insp"><div class="idx">A19</div><h4>Burn-In</h4>
+<div class="step insp" id="st-A-19"><div class="idx">A19</div><h4>Burn-In</h4>
     <span class="chip c-insp">Inspection</span>
     <p class="vend">Advantest | Chambers: Espec</p>
     <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: Stress test at temperature and voltage</p></div>
-<div class="step pkg"><div class="idx">A20</div><h4>Bin, Mark And Ship</h4>
+<div class="step pkg" id="st-A-20"><div class="idx">A20</div><h4>Bin, Mark And Ship</h4>
     <span class="chip c-pkg">Packaging</span>
     <p class="vend">Coherent · Han&rsquo;s Laser</p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (mark legibility)</p></div>
@@ -544,88 +333,88 @@ tr:last-child td{border-bottom:none}
   </div>
   <div class="sub p">A &middot; Array Construction <span class="lite">G8 232 layers, G9 276 layers</span></div>
   <div class="row">
-<div class="step fab"><div class="idx">B01</div><h4>CMOS Under Array</h4>
+<div class="step fab" id="st-B-01"><div class="idx">B01</div><h4>CMOS Under Array</h4>
     <span class="chip c-fab">Front-end</span>
     <p class="vend">AMAT · Lam · TEL</p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI · metrology</p></div>
-<div class="step fab"><div class="idx">B02</div><h4>Alternating Layer Deposition</h4>
+<div class="step fab" id="st-B-02"><div class="idx">B02</div><h4>Alternating Layer Deposition</h4>
     <span class="chip c-fab">Front-end</span>
     <p class="vend"><span class="lead-v">AMAT</span> · Lam · Kokusai · ASM International</p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (stack thickness, film stress)</p></div>
-<div class="step fab"><div class="idx">B03</div><h4>High Aspect Ratio Channel Hole Etch</h4>
+<div class="step fab" id="st-B-03"><div class="idx">B03</div><h4>High Aspect Ratio Channel Hole Etch</h4>
     <span class="chip c-fab">Front-end</span>
     <p class="vend"><span class="lead-v">Lam</span> · TEL · Hitachi High-Tech</p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;SEM (profile, twisting) · metrology</p></div>
-<div class="step fab"><div class="idx">B04</div><h4>Deck Stacking</h4>
+<div class="step fab" id="st-B-04"><div class="idx">B04</div><h4>Deck Stacking</h4>
     <span class="chip c-fab">Front-end</span>
     <p class="vend">Lam · AMAT · TEL</p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Metrology (deck alignment) · SEM</p></div>
-<div class="step fab"><div class="idx">B05</div><h4>Replacement Gate, Word Line Fill</h4>
+<div class="step fab" id="st-B-05"><div class="idx">B05</div><h4>Replacement Gate, Word Line Fill</h4>
     <span class="chip c-fab">Front-end</span>
     <p class="vend">AMAT · Lam · TEL</p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;SEM · metrology (fill voids)</p></div>
-<div class="step fab"><div class="idx">B06</div><h4>Staircase Contact Formation</h4>
+<div class="step fab" id="st-B-06"><div class="idx">B06</div><h4>Staircase Contact Formation</h4>
     <span class="chip c-fab">Front-end</span>
     <p class="vend">AMAT · Lam · TEL</p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI · metrology (step height)</p></div>
-<div class="step fab"><div class="idx">B07</div><h4>BEOL Metal And Periphery Contact</h4>
+<div class="step fab" id="st-B-07"><div class="idx">B07</div><h4>BEOL Metal And Periphery Contact</h4>
     <span class="chip c-fab">Front-end</span>
     <p class="vend">AMAT · Lam · TEL</p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI · metrology</p></div>
   </div>
   <div class="sub p">B &middot; Test And Component Assembly</div>
   <div class="row">
-<div class="step insp"><div class="idx">B08</div><h4>Wafer Sort And Bad Block Mapping</h4>
+<div class="step insp" id="st-B-08"><div class="idx">B08</div><h4>Wafer Sort And Bad Block Mapping</h4>
     <span class="chip c-insp">Inspection</span>
     <p class="vend">Advantest · Teradyne | Probe cards: <span class="tw">MPI</span> · <span class="tw">CHPT</span></p>
     <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: Electrical test, bad block map written</p></div>
-<div class="step pkg"><div class="idx">B09</div><h4>Backgrind And Dicing</h4>
+<div class="step pkg" id="st-B-09"><div class="idx">B09</div><h4>Backgrind And Dicing</h4>
     <span class="chip c-pkg">Packaging</span>
     <p class="vend"><span class="lead-v">DISCO</span> · Tokyo Seimitsu · ASMPT</p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (edge chipping)</p></div>
-<div class="step pkg"><div class="idx">B10</div><h4>Die Stacking And Wire Bond</h4>
+<div class="step pkg" id="st-B-10"><div class="idx">B10</div><h4>Die Stacking And Wire Bond</h4>
     <span class="chip c-pkg">Packaging</span>
     <p class="vend"><span class="lead-v">ASMPT</span> · K&amp;S · Shinkawa</p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI (wire sweep) · X-ray</p></div>
-<div class="step pkg"><div class="idx">B11</div><h4>Molding And Ball Attach</h4>
+<div class="step pkg" id="st-B-11"><div class="idx">B11</div><h4>Molding And Ball Attach</h4>
     <span class="chip c-pkg">Packaging</span>
     <p class="vend"><span class="lead-v">TOWA</span> · ASMPT · Shibaura · <span class="tw">Jun Hwa</span></p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;X-ray (solder voids) · SAM</p></div>
-<div class="step insp"><div class="idx">B12</div><h4>Component Test And Burn-In</h4>
+<div class="step insp" id="st-B-12"><div class="idx">B12</div><h4>Component Test And Burn-In</h4>
     <span class="chip c-insp">Inspection</span>
     <p class="vend">Advantest · Teradyne</p>
     <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: Electrical test, endurance sampling</p></div>
   </div>
   <div class="sub p">C &middot; Drive Build</div>
   <div class="row">
-<div class="step sup"><div class="idx">B13</div><h4>Controller And Firmware Pairing</h4>
+<div class="step sup" id="st-B-13"><div class="idx">B13</div><h4>Controller And Firmware Pairing</h4>
     <span class="chip c-sup">Support</span>
     <p class="vend">Micron in-house (data centre SSD) | Silicon Motion · Phison with Micron firmware (client SSD)</p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Functional test</p></div>
-<div class="step pkg"><div class="idx">B14</div><h4>SSD Board Assembly</h4>
+<div class="step pkg" id="st-B-14"><div class="idx">B14</div><h4>SSD Board Assembly</h4>
     <span class="chip c-pkg">Packaging</span>
     <p class="vend">SMT lines | PCB and passive component vendors</p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;AOI · X-ray (BGA joints)</p></div>
-<div class="step insp"><div class="idx">B15</div><h4>Drive-Level Test</h4>
+<div class="step insp" id="st-B-15"><div class="idx">B15</div><h4>Drive-Level Test</h4>
     <span class="chip c-insp">Inspection</span>
     <p class="vend">Micron in-house test</p>
     <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: Performance, power and endurance test</p></div>
-<div class="step sup"><div class="idx">B16</div><h4>Qualification And Ship</h4>
+<div class="step sup" id="st-B-16"><div class="idx">B16</div><h4>Qualification And Ship</h4>
     <span class="chip c-sup">Support</span>
     <p class="vend">Customer qualification</p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Ongoing reliability monitoring</p></div>
   </div>
   <div class="sub opt">Optional branch &middot; Managed NAND <span class="lite">UFS, e.MMC, MCP</span></div>
   <div class="row">
-<div class="step pkg  opt"><div class="idx">M1</div><h4>Managed NAND Integration</h4>
+<div class="step pkg  opt" id="st-M-1"><div class="idx">M1</div><h4>Managed NAND Integration</h4>
     <span class="chip c-pkg">Packaging</span>
     <p class="vend">ASMPT · K&amp;S</p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;Electrical test</p></div>
-<div class="step pkg  opt"><div class="idx">M2</div><h4>Multi-Chip Package Assembly</h4>
+<div class="step pkg  opt" id="st-M-2"><div class="idx">M2</div><h4>Multi-Chip Package Assembly</h4>
     <span class="chip c-pkg">Packaging</span>
     <p class="vend">ASMPT · Shinkawa</p>
     <p class="qc"><b>Next inspection</b>&nbsp;&nbsp;X-ray · SAM</p></div>
-<div class="step insp  opt"><div class="idx">M3</div><h4>Mobile Qualification</h4>
+<div class="step insp  opt" id="st-M-3"><div class="idx">M3</div><h4>Mobile Qualification</h4>
     <span class="chip c-insp">Inspection</span>
     <p class="vend">Customer qualification</p>
     <p class="qc"><b>Inspection</b>&nbsp;&nbsp;This step is the check: Platform-level validation</p></div>
