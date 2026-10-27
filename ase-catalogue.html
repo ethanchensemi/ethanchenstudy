@@ -31,7 +31,7 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system
 .timeline{background:var(--card);border:1px solid var(--rule);padding:16px 18px 8px;margin-bottom:22px}
 .timeline h2{font-size:14px;margin:0 0 8px;font-weight:600}
 .tlscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
-.timeline svg{width:100%;min-width:820px;height:auto;display:block}
+.timeline svg{width:100%;min-width:880px;height:auto;display:block}
 .timeline svg text{paint-order:stroke;stroke:#FFFFFF;stroke-width:3px;stroke-linejoin:round}
 .legend{display:flex;gap:16px;flex-wrap:wrap;align-items:center;font-size:11.5px;color:var(--ink-3);margin:8px 0 4px}
 .legend span::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px;border:1.8px solid}
@@ -125,7 +125,7 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
 <section class="timeline">
   <h2>LEAP各業務線里程碑，2023–2028年</h2>
   <div class="tlscroll">
-  <svg viewBox="0 0 1160 300" role="img" aria-label="日月光LEAP藍圖，2023至2028年，涵蓋五條業務線：全製程、FOCoS、尖端測試、台積電oS委外與2.5D產能">
+  <svg viewBox="0 0 1160 300" role="img" aria-label="日月光LEAP藍圖，2023至2028年，涵蓋五條業務線：全製程、FOCoS、尖端測試、台積電oS委外與LEAP營收">
 
     <line x1="230" y1="30" x2="230" y2="278" stroke="#E2E8EC"/><text x="230" y="20" text-anchor="middle" font-size="10.5" fill="#7C8891">2023</text>
     <line x1="400" y1="30" x2="400" y2="278" stroke="#E2E8EC"/><text x="400" y="20" text-anchor="middle" font-size="10.5" fill="#7C8891">2024</text>
@@ -138,17 +138,17 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
 
     <text x="150" y="62" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">全製程</text>
     <line x1="165" y1="58" x2="1130" y2="58" stroke="#CBD3D9"/>
-    <circle cx="740" cy="58" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
-    <text x="740" y="76" text-anchor="middle" font-size="10" fill="#B85C10">AMD Venice CPU</text>
+    <circle cx="783" cy="58" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
+    <text x="783" y="76" text-anchor="middle" font-size="10" fill="#B85C10">AMD Venice CPU</text>
     <circle cx="910" cy="58" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
-    <text x="910" y="48" text-anchor="middle" font-size="10" fill="#4A3B7A">NVIDIA Vera CPU</text>
+    <text x="920" y="48" text-anchor="middle" font-size="10" fill="#4A3B7A">NVIDIA Vera CPU</text>
 
     <text x="150" y="112" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">FOCoS</text>
     <line x1="165" y1="108" x2="1130" y2="108" stroke="#CBD3D9"/>
     <circle cx="570" cy="108" r="5" fill="#2560A6" stroke="#2560A6" stroke-width="1.8"/>
     <text x="570" y="98" text-anchor="middle" font-size="10" fill="#2560A6">客戶驗證</text>
-    <circle cx="895" cy="108" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
-    <text x="895" y="126" text-anchor="middle" font-size="10" fill="#4A3B7A">量產目標</text>
+    <circle cx="910" cy="108" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
+    <text x="920" y="126" text-anchor="middle" font-size="10" fill="#4A3B7A">310 mm面板產線</text>
     <circle cx="990" cy="108" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
     <text x="990" y="98" text-anchor="middle" font-size="10" fill="#4A3B7A">AI ASIC放量</text>
 
@@ -158,8 +158,8 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
     <text x="400" y="148" text-anchor="middle" font-size="10" fill="#215C68">晶圓針測放量</text>
     <circle cx="570" cy="158" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
     <text x="570" y="176" text-anchor="middle" font-size="10" fill="#B85C10">AI ASIC成品測試</text>
-    <circle cx="740" cy="158" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
-    <text x="740" y="148" text-anchor="middle" font-size="10" fill="#B85C10">Trainium 3 · 聯發科TPU</text>
+    <circle cx="825" cy="158" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
+    <text x="815" y="148" text-anchor="middle" font-size="10" fill="#B85C10">成品測試放量</text>
 
     <text x="150" y="212" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">台積電oS</text>
     <line x1="165" y1="208" x2="1130" y2="208" stroke="#CBD3D9"/>
@@ -168,14 +168,16 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
     <circle cx="740" cy="208" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
     <text x="740" y="226" text-anchor="middle" font-size="10" fill="#B85C10">CoWoS-L放量</text>
 
-    <text x="150" y="262" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">2.5D產能</text>
+    <text x="150" y="262" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">LEAP營收</text>
     <line x1="165" y1="258" x2="1130" y2="258" stroke="#CBD3D9"/>
+    <circle cx="400" cy="258" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
+    <text x="400" y="248" text-anchor="middle" font-size="10" fill="#B85C10">US$0.6bn</text>
+    <circle cx="570" cy="258" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
+    <text x="570" y="276" text-anchor="middle" font-size="10" fill="#B85C10">US$1.6bn</text>
     <circle cx="740" cy="258" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
-    <text x="740" y="248" text-anchor="middle" font-size="10" fill="#B85C10">15 KPM</text>
+    <text x="740" y="248" text-anchor="middle" font-size="10" fill="#B85C10">US$3.5bn目標</text>
     <circle cx="910" cy="258" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
-    <text x="910" y="276" text-anchor="middle" font-size="10" fill="#4A3B7A">45 KPM</text>
-    <circle cx="1080" cy="258" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
-    <text x="1080" y="248" text-anchor="middle" font-size="10" fill="#4A3B7A">55 KPM</text>
+    <text x="920" y="276" text-anchor="middle" font-size="10" fill="#4A3B7A">US$7.5bn目標</text>
   </svg>
   </div>
   <div class="legend"><span class="lg-est">成熟</span><span class="lg-ramp">量產爬坡</span><span class="lg-qual">驗證中</span><span class="lg-road">規劃中</span><span class="lg-now">今日</span></div>
@@ -249,7 +251,7 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
 
     <div class="psec" id="p1-2">
       <div class="psec-head"><span class="pno mono">1.2</span><h3>FOCoS</h3><span class="ptag own">自有</span></div>
-      <p class="lede">日月光自有的CoWoS替代方案，以扇出型重佈線層取代矽中介層。</p>
+      <p class="lede">日月光自有的CoWoS替代方案。</p>
       <div class="scroller"><table class="ptable">
         <thead><tr><th class="c1">平台</th><th class="cstart">起始年</th><th>代表專案</th><th class="c5">狀態</th></tr></thead>
         <tbody>
@@ -257,9 +259,8 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
           <td class="pname">FOCoS-Bridge：內嵌矽橋的2.5D封裝</td>
           <td class="mono d">2026</td>
           <td class="prog">
-            <b>AMD Venice與NVIDIA Vera伺服器CPU</b><span>於1.1的全製程產線生產</span>
+            <b>AWS Trainium AI加速器</b><span>成本敏感型AI ASIC</span>
             <b>Broadcom Tomahawk網通晶片</b><span>晶粒大、I/O數高，適合扇出型封裝</span>
-            <b>AWS Trainium AI加速器</b><span>本平台鎖定的成本敏感型ASIC客戶</span>
           </td>
           <td><span class="badge b-qual">驗證中</span></td>
         </tr>
@@ -280,10 +281,10 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
         <thead><tr><th class="c1">製程段</th><th class="cstart">起始年</th><th>代表專案</th><th class="c5">狀態</th></tr></thead>
         <tbody>
         <tr>
-          <td class="pname">CoW接合用凸塊</td>
+          <td class="pname">晶圓上晶片（CoW）</td>
           <td class="mono d">2024</td>
           <td class="prog">
-            <b>NVIDIA GPU晶圓凸塊</b><span>GPU與中介層晶圓的微凸塊與C4凸塊</span>
+            <b>CoWoS-S封裝</b><span>台積電首度委外CoW，由矽品承接</span>
           </td>
           <td><span class="badge b-ramp">量產爬坡</span></td>
         </tr>
@@ -291,8 +292,8 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
           <td class="pname">載板上（oS）組裝</td>
           <td class="mono d">2023</td>
           <td class="prog">
-            <b>NVIDIA CoWoS-L GPU封裝</b><span>估計日月光承接80–90%的委外oS</span>
-            <b>美國產能配置</b><span>台積電美國廠oS預期由Amkor承接</span>
+            <b>NVIDIA GPU封裝</b><span>委外oS的主要合作夥伴</span>
+            <b>台積電亞利桑那產出</b><span>2028年起由Amkor亞利桑那廠封裝</span>
           </td>
           <td><span class="badge b-ramp">量產爬坡</span></td>
         </tr>
@@ -354,10 +355,9 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
       <div class="scroller"><table class="ptable">
         <thead><tr><th class="c1">應用</th><th class="ccust">代表客戶</th><th class="c5">狀態</th></tr></thead>
         <tbody>
-        <tr><td class="pname">顯示驅動IC</td><td class="cust">聯詠 · 奇景</td><td><span class="badge b-est">成熟</span></td></tr>
         <tr><td class="pname">電源管理IC</td><td class="cust">立錡 · Monolithic Power Systems</td><td><span class="badge b-est">成熟</span></td></tr>
-        <tr><td class="pname">車用晶片</td><td class="cust">&ndash;</td><td><span class="badge b-est">成熟</span></td></tr>
-        <tr><td class="pname">AI與HPC封裝，310 &times; 310 mm產線</td><td class="cust">&ndash;</td><td><span class="badge b-road">規劃中</span></td></tr>
+        <tr><td class="pname">車用晶片</td><td class="cust">&mdash;</td><td><span class="badge b-est">成熟</span></td></tr>
+        <tr><td class="pname">AI與HPC封裝，310 &times; 310 mm產線</td><td class="cust">&mdash;</td><td><span class="badge b-road">規劃中</span></td></tr>
         </tbody></table></div>
     </div>
 
@@ -426,9 +426,9 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
       <div class="scroller"><table class="ptable">
         <thead><tr><th class="c1">應用</th><th class="ccust">代表客戶</th><th class="c5">狀態</th></tr></thead>
         <tbody>
-        <tr><td class="pname">NAND與NOR Flash</td><td class="cust">華邦電 · 旺宏</td><td><span class="badge b-est">成熟</span></td></tr>
-        <tr><td class="pname">DRAM與利基型記憶體</td><td class="cust">南亞科 · 華邦電</td><td><span class="badge b-est">成熟</span></td></tr>
-        <tr><td class="pname">多晶片記憶體模組</td><td class="cust">群聯 · 慧榮</td><td><span class="badge b-est">成熟</span></td></tr>
+        <tr><td class="pname">NAND與NOR Flash</td><td class="cust">&mdash;</td><td><span class="badge b-est">成熟</span></td></tr>
+        <tr><td class="pname">DRAM與利基型記憶體</td><td class="cust">&mdash;</td><td><span class="badge b-est">成熟</span></td></tr>
+        <tr><td class="pname">多晶片記憶體模組</td><td class="cust">&mdash;</td><td><span class="badge b-est">成熟</span></td></tr>
         </tbody></table></div>
     </div>
 
@@ -440,11 +440,8 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
         <thead><tr><th class="c1">模組</th><th class="ccust">代表客戶</th><th class="c5">狀態</th></tr></thead>
         <tbody>
         <tr><td class="pname">毫米波天線封裝（AiP）</td><td class="cust">蘋果 · Qualcomm</td><td><span class="badge b-est">成熟</span></td></tr>
-        <tr><td class="pname">3D感測模組</td><td class="cust">蘋果</td><td><span class="badge b-est">成熟</span></td></tr>
         <tr><td class="pname">穿戴裝置系統級封裝</td><td class="cust">蘋果</td><td><span class="badge b-est">成熟</span></td></tr>
-        <tr><td class="pname">相機模組</td><td class="cust">蘋果</td><td><span class="badge b-est">成熟</span></td></tr>
-        <tr><td class="pname">聲學模組</td><td class="cust">蘋果</td><td><span class="badge b-est">成熟</span></td></tr>
-        <tr><td class="pname">Wi-Fi與藍牙模組</td><td class="cust">聯發科 · 瑞昱 · Broadcom</td><td><span class="badge b-est">成熟</span></td></tr>
+        <tr><td class="pname">Wi-Fi與藍牙模組</td><td class="cust">蘋果</td><td><span class="badge b-est">成熟</span></td></tr>
         </tbody></table></div>
     </div>
 
@@ -467,8 +464,8 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
           <td class="pname">AI ASIC與GPU晶圓針測</td>
           <td class="mono d">2024</td>
           <td class="prog">
-            <b>NVIDIA GPU晶圓針測</b><span>與1.3的oS組裝及凸塊一併委外</span>
             <b>AI ASIC晶圓針測</b><span>尖端測試營收中占比較大、成長較快</span>
+            <b>NVIDIA GPU晶圓針測</b><span>與oS組裝一併委外</span>
           </td>
           <td><span class="badge b-ramp">量產爬坡</span></td>
         </tr>
@@ -477,8 +474,8 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
           <td class="pname">主流晶圓針測</td>
           <td class="mono d">&mdash;</td>
           <td class="prog">
-            <b>封裝前剔除不良晶粒</b><span>流程中淘汰晶片成本最低的環節</span>
             <b>分級數據</b><span>為多晶粒產品配對同級晶粒</span>
+            <b>封裝前剔除不良晶粒</b><span>流程中淘汰晶片成本最低的環節</span>
           </td>
           <td><span class="badge b-est">成熟</span></td>
         </tr>
@@ -495,8 +492,7 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
           <td class="pname">AI ASIC與GPU成品測試</td>
           <td class="mono d">2025</td>
           <td class="prog">
-            <b>AWS Trainium 3</b><span>尖端測試的主力專案之一</span>
-            <b>聯發科TPU</b><span>第二個已公開的尖端測試訂單</span>
+            <b>AI ASIC</b><span>產線接近滿載</span>
             <b>NVIDIA Rubin GPU</b><span>預期仍以京元電為主</span>
           </td>
           <td><span class="badge b-ramp">量產爬坡</span></td>
@@ -516,7 +512,7 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
 
     <div class="psec" id="p2-3">
       <div class="psec-head"><span class="pno mono">2.3</span><h3>預燒測試</h3></div>
-      <p class="lede">可靠度篩選，讓封裝後的產品在高溫、高電壓下運作以加速劣化。</p>
+      <p class="lede">封裝後產品的可靠度篩選。</p>
       <div class="scroller"><table class="ptable">
         <thead><tr><th class="c1">服務</th><th class="cstart">起始年</th><th>涵蓋範圍</th><th class="c5">狀態</th></tr></thead>
         <tbody>
@@ -534,7 +530,7 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
 
     <div class="psec" id="p2-4">
       <div class="psec-head"><span class="pno mono">2.4</span><h3>系統級測試</h3></div>
-      <p class="lede">測試流程的最後一關，將封裝後的產品裝上模擬終端系統的電路板，以實際軟體與流量運作。</p>
+      <p class="lede">封裝後產品在系統板上的測試。</p>
       <div class="scroller"><table class="ptable">
         <thead><tr><th class="c1">服務</th><th class="cstart">起始年</th><th>涵蓋範圍</th><th class="c5">狀態</th></tr></thead>
         <tbody>
@@ -542,8 +538,8 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
           <td class="pname">系統級測試</td>
           <td class="mono d">&mdash;</td>
           <td class="prog">
-            <b>唯有實際工作負載才能揭露的失效</b><span>捕捉交互作用故障</span>
             <b>複雜SoC與加速器</b><span>隨晶粒數與封裝複雜度提高而擴大</span>
+            <b>唯有實際工作負載才能揭露的失效</b><span>捕捉交互作用故障</span>
           </td>
           <td><span class="badge b-est">成熟</span></td>
         </tr>

@@ -29,7 +29,7 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system
 .timeline{background:var(--card);border:1px solid var(--rule);padding:16px 18px 8px;margin-bottom:22px}
 .timeline h2{font-size:14px;margin:0 0 8px;font-weight:600}
 .tlscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
-.timeline svg{width:100%;min-width:820px;height:auto;display:block}
+.timeline svg{width:100%;min-width:880px;height:auto;display:block}
 .timeline svg text{paint-order:stroke;stroke:#FFFFFF;stroke-width:3px;stroke-linejoin:round}
 .legend{display:flex;gap:16px;flex-wrap:wrap;align-items:center;font-size:11.5px;color:var(--ink-3);margin:8px 0 4px}
 .legend span::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px;border:1.8px solid}
@@ -123,7 +123,7 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
 <section class="timeline">
   <h2>LEAP Milestones by Business Line, 2023–2028</h2>
   <div class="tlscroll">
-  <svg viewBox="0 0 1160 300" role="img" aria-label="ASE LEAP roadmap 2023 to 2028 across five lanes: Full Process, FOCoS, leading-edge test, TSMC on-substrate outsourcing and 2.5D capacity">
+  <svg viewBox="0 0 1160 300" role="img" aria-label="ASE LEAP roadmap 2023 to 2028 across five lanes: Full Process, FOCoS, leading-edge test, TSMC on-substrate outsourcing and LEAP revenue">
 
     <line x1="230" y1="30" x2="230" y2="278" stroke="#E2E8EC"/><text x="230" y="20" text-anchor="middle" font-size="10.5" fill="#7C8891">2023</text>
     <line x1="400" y1="30" x2="400" y2="278" stroke="#E2E8EC"/><text x="400" y="20" text-anchor="middle" font-size="10.5" fill="#7C8891">2024</text>
@@ -136,17 +136,17 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
 
     <text x="150" y="62" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">Full Process</text>
     <line x1="165" y1="58" x2="1130" y2="58" stroke="#CBD3D9"/>
-    <circle cx="740" cy="58" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
-    <text x="740" y="76" text-anchor="middle" font-size="10" fill="#B85C10">AMD Venice CPU</text>
+    <circle cx="783" cy="58" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
+    <text x="783" y="76" text-anchor="middle" font-size="10" fill="#B85C10">AMD Venice CPU</text>
     <circle cx="910" cy="58" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
-    <text x="910" y="48" text-anchor="middle" font-size="10" fill="#4A3B7A">NVIDIA Vera CPU</text>
+    <text x="920" y="48" text-anchor="middle" font-size="10" fill="#4A3B7A">NVIDIA Vera CPU</text>
 
     <text x="150" y="112" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">FOCoS</text>
     <line x1="165" y1="108" x2="1130" y2="108" stroke="#CBD3D9"/>
     <circle cx="570" cy="108" r="5" fill="#2560A6" stroke="#2560A6" stroke-width="1.8"/>
     <text x="570" y="98" text-anchor="middle" font-size="10" fill="#2560A6">Customer Qualification</text>
-    <circle cx="895" cy="108" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
-    <text x="895" y="126" text-anchor="middle" font-size="10" fill="#4A3B7A">Mass Production Target</text>
+    <circle cx="910" cy="108" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
+    <text x="920" y="126" text-anchor="middle" font-size="10" fill="#4A3B7A">310 mm Panel Line</text>
     <circle cx="990" cy="108" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
     <text x="990" y="98" text-anchor="middle" font-size="10" fill="#4A3B7A">AI ASIC Volume</text>
 
@@ -156,8 +156,8 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
     <text x="400" y="148" text-anchor="middle" font-size="10" fill="#215C68">Wafer Sort Ramp</text>
     <circle cx="570" cy="158" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
     <text x="570" y="176" text-anchor="middle" font-size="10" fill="#B85C10">AI ASIC Final Test</text>
-    <circle cx="740" cy="158" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
-    <text x="740" y="148" text-anchor="middle" font-size="10" fill="#B85C10">Trainium 3 · MediaTek TPU</text>
+    <circle cx="825" cy="158" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
+    <text x="815" y="148" text-anchor="middle" font-size="10" fill="#B85C10">Final Test Volume</text>
 
     <text x="150" y="212" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">TSMC oS</text>
     <line x1="165" y1="208" x2="1130" y2="208" stroke="#CBD3D9"/>
@@ -166,14 +166,16 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
     <circle cx="740" cy="208" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
     <text x="740" y="226" text-anchor="middle" font-size="10" fill="#B85C10">CoWoS-L Volume</text>
 
-    <text x="150" y="262" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">2.5D Capacity</text>
+    <text x="150" y="262" text-anchor="end" font-size="11.5" font-weight="600" fill="#4A555E">LEAP Revenue</text>
     <line x1="165" y1="258" x2="1130" y2="258" stroke="#CBD3D9"/>
+    <circle cx="400" cy="258" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
+    <text x="400" y="248" text-anchor="middle" font-size="10" fill="#B85C10">US$0.6bn</text>
+    <circle cx="570" cy="258" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
+    <text x="570" y="276" text-anchor="middle" font-size="10" fill="#B85C10">US$1.6bn</text>
     <circle cx="740" cy="258" r="5" fill="#B85C10" stroke="#B85C10" stroke-width="1.8"/>
-    <text x="740" y="248" text-anchor="middle" font-size="10" fill="#B85C10">15 KPM</text>
+    <text x="740" y="248" text-anchor="middle" font-size="10" fill="#B85C10">US$3.5bn Target</text>
     <circle cx="910" cy="258" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
-    <text x="910" y="276" text-anchor="middle" font-size="10" fill="#4A3B7A">45 KPM</text>
-    <circle cx="1080" cy="258" r="5" fill="#FFFFFF" stroke="#4A3B7A" stroke-width="1.8" stroke-dasharray="2 2"/>
-    <text x="1080" y="248" text-anchor="middle" font-size="10" fill="#4A3B7A">55 KPM</text>
+    <text x="920" y="276" text-anchor="middle" font-size="10" fill="#4A3B7A">US$7.5bn Target</text>
   </svg>
   </div>
   <div class="legend"><span class="lg-est">Established</span><span class="lg-ramp">Ramping</span><span class="lg-qual">Qualification</span><span class="lg-road">Roadmap</span><span class="lg-now">Today</span></div>
@@ -231,7 +233,7 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
     <div class="psec" id="p1-1">
       <div class="psec-head"><span class="pno mono">1.1</span><h3>Full Process</h3><span class="ptag own">In-House</span></div>
       <div class="scroller"><table class="ptable">
-        <thead><tr><th class="c1">Platform</th><th class="cstart">Start</th><th>Representative Programs</th><th class="c5">Status</th></tr></thead>
+        <thead><tr><th class="c1">Platform</th><th class="cstart">Start</th><th>Representative Programmes</th><th class="c5">Status</th></tr></thead>
         <tbody>
         <tr>
           <td class="pname">Full Process: In-House 2.5D Flow</td>
@@ -247,17 +249,16 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
 
     <div class="psec" id="p1-2">
       <div class="psec-head"><span class="pno mono">1.2</span><h3>FOCoS</h3><span class="ptag own">In-House</span></div>
-      <p class="lede">ASE’s proprietary alternative to CoWoS, with fan-out redistribution layers in place of a silicon interposer.</p>
+      <p class="lede">ASE’s in-house alternative to CoWoS.</p>
       <div class="scroller"><table class="ptable">
-        <thead><tr><th class="c1">Platform</th><th class="cstart">Start</th><th>Representative Programs</th><th class="c5">Status</th></tr></thead>
+        <thead><tr><th class="c1">Platform</th><th class="cstart">Start</th><th>Representative Programmes</th><th class="c5">Status</th></tr></thead>
         <tbody>
         <tr>
           <td class="pname">FOCoS-Bridge: 2.5D with Embedded Silicon Bridge</td>
           <td class="mono d">2026</td>
           <td class="prog">
-            <b>AMD Venice and NVIDIA Vera Server CPUs</b><span>Built on the Full Process line in 1.1</span>
+            <b>AWS Trainium AI Accelerator</b><span>Cost-sensitive AI ASIC</span>
             <b>Broadcom Tomahawk Networking Chip</b><span>Large die and high I/O count suit fan-out</span>
-            <b>AWS Trainium AI Accelerator</b><span>The cost-sensitive ASIC customer the platform targets</span>
           </td>
           <td><span class="badge b-qual">Qualification</span></td>
         </tr>
@@ -275,13 +276,13 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
     <div class="psec" id="p1-3">
       <div class="psec-head"><span class="pno mono">1.3</span><h3>TSMC CoWoS Outsourcing</h3><span class="ptag sub">Subcontract</span></div>
       <div class="scroller"><table class="ptable">
-        <thead><tr><th class="c1">Step</th><th class="cstart">Start</th><th>Representative Programs</th><th class="c5">Status</th></tr></thead>
+        <thead><tr><th class="c1">Step</th><th class="cstart">Start</th><th>Representative Programmes</th><th class="c5">Status</th></tr></thead>
         <tbody>
         <tr>
-          <td class="pname">Bumping for Chip-on-Wafer</td>
+          <td class="pname">Chip-on-Wafer (CoW)</td>
           <td class="mono d">2024</td>
           <td class="prog">
-            <b>NVIDIA GPU Wafer Bumping</b><span>Micro-bump and C4 on GPU and interposer wafers</span>
+            <b>CoWoS-S Packages</b><span>TSMC’s first outsourced CoW, at SPIL</span>
           </td>
           <td><span class="badge b-ramp">Ramping</span></td>
         </tr>
@@ -289,8 +290,8 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
           <td class="pname">On-Substrate (oS) Assembly</td>
           <td class="mono d">2023</td>
           <td class="prog">
-            <b>NVIDIA CoWoS-L GPU Packages</b><span>ASE carries an estimated 80–90% of outsourced oS</span>
-            <b>US Capacity Allocation</b><span>oS for TSMC’s US fabs expected at Amkor</span>
+            <b>NVIDIA GPU Packages</b><span>Main partner for outsourced oS</span>
+            <b>TSMC Arizona Output</b><span>Packaged at Amkor Arizona from 2028</span>
           </td>
           <td><span class="badge b-ramp">Ramping</span></td>
         </tr>
@@ -310,7 +311,7 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
     <div class="psec" id="p1-4">
       <div class="psec-head"><span class="pno mono">1.4</span><h3>Co-Packaged Optics (CPO)</h3><span class="ptag own">In-House</span></div>
       <div class="scroller"><table class="ptable">
-        <thead><tr><th class="c1">Platform</th><th class="cstart">Start</th><th>Representative Programs</th><th class="c5">Status</th></tr></thead>
+        <thead><tr><th class="c1">Platform</th><th class="cstart">Start</th><th>Representative Programmes</th><th class="c5">Status</th></tr></thead>
         <tbody>
         <tr>
           <td class="pname">Optical Engine Co-Packaging</td>
@@ -352,10 +353,9 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
       <div class="scroller"><table class="ptable">
         <thead><tr><th class="c1">Application</th><th class="ccust">Typical Customers</th><th class="c5">Status</th></tr></thead>
         <tbody>
-        <tr><td class="pname">Display Driver ICs</td><td class="cust">Novatek · Himax</td><td><span class="badge b-est">Established</span></td></tr>
         <tr><td class="pname">Power Management ICs</td><td class="cust">Richtek · Monolithic Power Systems</td><td><span class="badge b-est">Established</span></td></tr>
-        <tr><td class="pname">Automotive Chips</td><td class="cust">&ndash;</td><td><span class="badge b-est">Established</span></td></tr>
-        <tr><td class="pname">AI and HPC Packages, 310 &times; 310 mm Line</td><td class="cust">&ndash;</td><td><span class="badge b-road">Roadmap</span></td></tr>
+        <tr><td class="pname">Automotive Chips</td><td class="cust">&mdash;</td><td><span class="badge b-est">Established</span></td></tr>
+        <tr><td class="pname">AI and HPC Packages, 310 &times; 310 mm Line</td><td class="cust">&mdash;</td><td><span class="badge b-road">Roadmap</span></td></tr>
         </tbody></table></div>
     </div>
 
@@ -424,9 +424,9 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
       <div class="scroller"><table class="ptable">
         <thead><tr><th class="c1">Application</th><th class="ccust">Typical Customers</th><th class="c5">Status</th></tr></thead>
         <tbody>
-        <tr><td class="pname">NAND and NOR Flash</td><td class="cust">Winbond · Macronix</td><td><span class="badge b-est">Established</span></td></tr>
-        <tr><td class="pname">DRAM and Specialty Memory</td><td class="cust">Nanya Technology · Winbond</td><td><span class="badge b-est">Established</span></td></tr>
-        <tr><td class="pname">Multi-Chip Memory Modules</td><td class="cust">Phison · Silicon Motion</td><td><span class="badge b-est">Established</span></td></tr>
+        <tr><td class="pname">NAND and NOR Flash</td><td class="cust">&mdash;</td><td><span class="badge b-est">Established</span></td></tr>
+        <tr><td class="pname">DRAM and Specialty Memory</td><td class="cust">&mdash;</td><td><span class="badge b-est">Established</span></td></tr>
+        <tr><td class="pname">Multi-Chip Memory Modules</td><td class="cust">&mdash;</td><td><span class="badge b-est">Established</span></td></tr>
         </tbody></table></div>
     </div>
 
@@ -438,11 +438,8 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
         <thead><tr><th class="c1">Module</th><th class="ccust">Typical Customers</th><th class="c5">Status</th></tr></thead>
         <tbody>
         <tr><td class="pname">mmWave AiP</td><td class="cust">Apple · Qualcomm</td><td><span class="badge b-est">Established</span></td></tr>
-        <tr><td class="pname">3D Sensing Modules</td><td class="cust">Apple</td><td><span class="badge b-est">Established</span></td></tr>
         <tr><td class="pname">Wearable SiP</td><td class="cust">Apple</td><td><span class="badge b-est">Established</span></td></tr>
-        <tr><td class="pname">Camera Modules</td><td class="cust">Apple</td><td><span class="badge b-est">Established</span></td></tr>
-        <tr><td class="pname">Acoustic Modules</td><td class="cust">Apple</td><td><span class="badge b-est">Established</span></td></tr>
-        <tr><td class="pname">Wi-Fi and Bluetooth Modules</td><td class="cust">MediaTek · Realtek · Broadcom</td><td><span class="badge b-est">Established</span></td></tr>
+        <tr><td class="pname">Wi-Fi and Bluetooth Modules</td><td class="cust">Apple</td><td><span class="badge b-est">Established</span></td></tr>
         </tbody></table></div>
     </div>
 
@@ -465,8 +462,8 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
           <td class="pname">AI ASIC and GPU Wafer Probe</td>
           <td class="mono d">2024</td>
           <td class="prog">
-            <b>NVIDIA GPU Wafer Probe</b><span>Bundled with the oS and bumping in 1.3</span>
             <b>AI ASIC Wafer Probe</b><span>Larger, faster-growing share of leading-edge test revenue</span>
+            <b>NVIDIA GPU Wafer Probe</b><span>Bundled with oS assembly</span>
           </td>
           <td><span class="badge b-ramp">Ramping</span></td>
         </tr>
@@ -475,8 +472,8 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
           <td class="pname">Mainstream Wafer Probe</td>
           <td class="mono d">&mdash;</td>
           <td class="prog">
-            <b>Bad Die Before Packaging</b><span>Cheapest point in the flow to discard silicon</span>
             <b>Binning Data</b><span>Pairs matched dies for multi-die builds</span>
+            <b>Bad Die Before Packaging</b><span>Cheapest point in the flow to discard silicon</span>
           </td>
           <td><span class="badge b-est">Established</span></td>
         </tr>
@@ -493,8 +490,7 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
           <td class="pname">AI ASIC and GPU Final Test</td>
           <td class="mono d">2025</td>
           <td class="prog">
-            <b>AWS Trainium 3</b><span>One of the anchor leading-edge test programmes</span>
-            <b>MediaTek TPU</b><span>Second named leading-edge test win</span>
+            <b>AI ASICs</b><span>Lines near full utilisation</span>
             <b>NVIDIA Rubin GPU</b><span>Expected to stay largely with KYEC</span>
           </td>
           <td><span class="badge b-ramp">Ramping</span></td>
@@ -514,7 +510,7 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
 
     <div class="psec" id="p2-3">
       <div class="psec-head"><span class="pno mono">2.3</span><h3>Burn-In</h3></div>
-      <p class="lede">A reliability screen that runs the packaged part at elevated temperature and voltage to accelerate wear.</p>
+      <p class="lede">Reliability screening of packaged parts.</p>
       <div class="scroller"><table class="ptable">
         <thead><tr><th class="c1">Service</th><th class="cstart">Start</th><th>Coverage</th><th class="c5">Status</th></tr></thead>
         <tbody>
@@ -532,7 +528,7 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
 
     <div class="psec" id="p2-4">
       <div class="psec-head"><span class="pno mono">2.4</span><h3>System-Level Test</h3></div>
-      <p class="lede">The last test in the flow, which runs the packaged part on a board that mimics its end system with real software and traffic.</p>
+      <p class="lede">Testing of packaged parts on a system board.</p>
       <div class="scroller"><table class="ptable">
         <thead><tr><th class="c1">Service</th><th class="cstart">Start</th><th>Coverage</th><th class="c5">Status</th></tr></thead>
         <tbody>
@@ -540,8 +536,8 @@ td.prog span{display:block;color:var(--ink-3);font-size:11.5px;line-height:1.5}
           <td class="pname">System-Level Test</td>
           <td class="mono d">&mdash;</td>
           <td class="prog">
-            <b>Failures Only a Real Workload Exposes</b><span>Catches interaction faults</span>
             <b>Complex SoCs and Accelerators</b><span>Grows as die count and package complexity rise</span>
+            <b>Failures Only a Real Workload Exposes</b><span>Catches interaction faults</span>
           </td>
           <td><span class="badge b-est">Established</span></td>
         </tr>
