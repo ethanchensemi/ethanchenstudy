@@ -193,6 +193,11 @@ tr:last-child td{border-bottom:none}
 #mats .us,#mats .eu,#mats .jp,#mats .kr,#mats .ot{color:inherit}
 #mats .tw{color:var(--t-insp);font-weight:600}
 #mats .nw{white-space:nowrap}
+/* the two closing sections sit on the page like the routes, a rule and a heading, with no white box around the tables */
+#mats.sect,#vendors.sect{border:none;border-top:3px solid var(--stage);background:none;padding:16px 0 0}
+#vendors .scroller{border:1px solid var(--rule);background:var(--card)}
+#vendors th,#vendors td{padding:8px 10px}
+#vendors th{background:#EEF2F3;font-size:11.5px}
 </style>
 <style id="site-chrome">
 /* site chrome (added by build) */
