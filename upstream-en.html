@@ -165,7 +165,10 @@ body{margin:0;background:var(--paper);color:var(--ink);
   .forkbar .msg{padding-left:0}
   .scgrid{grid-template-columns:1fr}
 }
-@media print{.backbar,.toc{display:none}body{background:#fff}.wrap{max-width:none;padding:0}.step,.legend,.sect,.stackcard{break-inside:avoid}}
+.stage>.body{min-width:0}
+.figscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.figscroll svg{min-width:860px}
+@media print{.backbar,.toc{display:none}.figscroll{overflow:visible}body{background:#fff}.wrap{max-width:none;padding:0}.step,.legend,.sect,.stackcard{break-inside:avoid}}
 .backbar{margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;gap:12px}
 .backbar a{display:inline-block;font-size:13px;color:var(--ink-2);text-decoration:none;border:1px solid var(--rule);background:var(--card);padding:6px 13px}
 .backbar a:hover{color:var(--b);border-color:var(--b)}
@@ -214,8 +217,8 @@ body{margin:0;background:var(--paper);color:var(--ink);
 <nav class="toc">
   <div class="tocrow">
     <a href="#s0">0 Raw Materials</a><a href="#s1">1 Chip Design</a><a href="#s2">2 Foundry</a>
-    <a href="#s3">3 Back-End</a><a href="#s4">4 Memory &amp; HBM</a>
-    <a href="#s5">5 RF &amp; Compound Semi</a><a href="#s6">6 Photonics &amp; CPO</a>
+    <a href="#s3">3 Back-End</a><a href="#s4">4 Memory, HBM and SSD</a>
+    <a href="#s5">5 RF, Power and Compound Semiconductors</a><a href="#s6">6 Photonics and CPO</a>
   </div>
 </nav>
 <div class="stage" id="s0">
@@ -229,44 +232,44 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <span class="chip c-fab">Raw wafer, Japan</span>
   <h4>Shin-Etsu</h4>
   
-  <p class="field"><b>Makes</b> — Polished 300mm silicon wafers</p>
+  <p class="field"><b>Makes</b> — Polished silicon wafers</p>
   <p class="field"><b>End product</b> — Every silicon chip</p>
-  <p class="field pos"><b>Position</b> — Leader — ~30% of 300mm silicon wafers</p>
+  <p class="field pos"><b>Position</b> — Leader — 30% of 300mm silicon wafers</p>
 </div><div class="step fab">
   <span class="chip c-fab">Raw wafer, Japan</span>
   <h4>SUMCO</h4>
   
-  <p class="field"><b>Makes</b> — Polished 300mm silicon wafers</p>
+  <p class="field"><b>Makes</b> — Polished silicon wafers</p>
   <p class="field"><b>End product</b> — Every silicon chip</p>
-  <p class="field pos"><b>Position</b> — #2 — ~25% of 300mm silicon wafers</p>
+  <p class="field pos"><b>Position</b> — #2 — 25% of 300mm silicon wafers</p>
 </div><div class="step fab">
   <span class="chip c-fab">Raw wafer, Taiwan</span>
   <h4>GlobalWafers</h4>
   
   <p class="field"><b>Makes</b> — Polished silicon wafers</p>
   <p class="field"><b>End product</b> — Every silicon chip</p>
-  <p class="field pos"><b>Position</b> — #3 — ~15% of 300mm silicon wafers</p>
+  <p class="field pos"><b>Position</b> — #3 — 15% of 300mm silicon wafers</p>
 </div><div class="step fab">
   <span class="chip c-fab">Raw wafer, Germany</span>
   <h4>Siltronic</h4>
   
   <p class="field"><b>Makes</b> — Polished silicon wafers</p>
   <p class="field"><b>End product</b> — Every silicon chip</p>
-  <p class="field pos"><b>Position</b> — Major — ~12% of 300mm silicon wafers</p>
+  <p class="field pos"><b>Position</b> — Major — 12% of 300mm silicon wafers</p>
 </div><div class="step fab">
   <span class="chip c-fab">Raw wafer, Korea</span>
   <h4>SK Siltron</h4>
   
   <p class="field"><b>Makes</b> — Polished silicon wafers</p>
   <p class="field"><b>End product</b> — Every silicon chip</p>
-  <p class="field pos"><b>Position</b> — Major — ~11% of 300mm silicon wafers</p>
+  <p class="field pos"><b>Position</b> — Major — 11% of 300mm silicon wafers</p>
 </div></div><div class="sub fab">Photoresist</div><div class="row"><div class="step fab">
   <span class="chip c-fab">Photoresist maker, Japan</span>
   <h4>JSR</h4>
   
   <p class="field"><b>Makes</b> — Photosensitive coating for lithography</p>
   <p class="field"><b>End product</b> — Every lithography-patterned wafer</p>
-  <p class="field pos"><b>Position</b> — Leader — EUV photoresist</p>
+  <p class="field pos"><b>Position</b> — Major — EUV photoresist</p>
 </div><div class="step fab">
   <span class="chip c-fab">Photoresist maker, Japan</span>
   <h4>Tokyo Ohka Kogyo (TOK)</h4>
@@ -276,14 +279,14 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <p class="field pos"><b>Position</b> — Major — photoresist</p>
 </div><div class="step fab">
   <span class="chip c-fab">Photoresist maker, Japan</span>
-  <h4>Shin-Etsu resist</h4>
+  <h4>Shin-Etsu Chemical</h4>
   
   <p class="field"><b>Makes</b> — Photoresist chemicals</p>
   <p class="field"><b>End product</b> — Every lithography-patterned wafer</p>
   <p class="field pos"><b>Position</b> — Major — photoresist</p>
 </div><div class="step fab">
   <span class="chip c-fab">Photoresist maker, US</span>
-  <h4>DuPont</h4>
+  <h4>Qnity</h4>
   
   <p class="field"><b>Makes</b> — Photoresist and electronic materials</p>
   <p class="field"><b>End product</b> — Every lithography-patterned wafer</p>
@@ -304,7 +307,7 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <p class="field pos"><b>Position</b> — Leader — photomasks</p>
 </div><div class="step fab">
   <span class="chip c-fab">Photomask maker, Japan</span>
-  <h4>Toppan</h4>
+  <h4>Tekscend Photomask</h4>
   
   <p class="field"><b>Makes</b> — Photomasks and reticles</p>
   <p class="field"><b>End product</b> — Every custom chip design</p>
@@ -324,7 +327,7 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <p class="field"><b>End product</b> — Every polished wafer</p>
   <p class="field pos"><b>Position</b> — Major — CMP slurry</p>
 </div></div><div class="sub fab">Process and Specialty Gases</div><div class="row"><div class="step fab">
-  <span class="chip c-fab">Industrial gas supplier, Germany</span>
+  <span class="chip c-fab">Industrial gas supplier, UK</span>
   <h4>Linde</h4>
   
   <p class="field"><b>Makes</b> — Bulk and specialty process gases</p>
@@ -360,14 +363,14 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <p class="field pos"><b>Position</b> — Major — electronic chemicals</p>
 </div><div class="step fab">
   <span class="chip c-fab">Sputtering target maker, US</span>
-  <h4>Honeywell targets</h4>
+  <h4>Honeywell</h4>
   
   <p class="field"><b>Makes</b> — Copper, tungsten and cobalt targets</p>
   <p class="field"><b>End product</b> — Interconnect metal in every chip</p>
   <p class="field pos"><b>Position</b> — Major — sputtering targets</p>
 </div><div class="step fab">
   <span class="chip c-fab">Sputtering target maker, Japan</span>
-  <h4>JX Nippon Mining</h4>
+  <h4>JX Advanced Metals</h4>
   
   <p class="field"><b>Makes</b> — High-purity metal targets</p>
   <p class="field"><b>End product</b> — Interconnect metal in every chip</p>
@@ -421,7 +424,7 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <span class="chip c-design">Fabless chip designer, US</span>
   <h4>AMD</h4>
   <p class="en3">GPU, CPU and accelerator silicon</p>
-  <p class="field"><b>Makes</b> — MI400/MI455X, Venice CPU</p>
+  <p class="field"><b>Makes</b> — MI455X GPU, Venice CPU</p>
   <p class="field"><b>End product</b> — AI servers, PCs, consoles</p>
   <p class="field pos"><b>Position</b> — #2 — AI GPUs</p>
 </div><div class="step design">
@@ -447,11 +450,11 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <p class="field pos"><b>Position</b> — Niche — AI inference accelerators</p>
 </div></div><div class="sub d">Hyperscaler Custom AI ASICs</div><div class="row"><div class="step design">
   <span class="chip c-design">Hyperscaler custom silicon, US</span>
-  <h4>Google TPU programme</h4>
+  <h4>Google TPU</h4>
   <p class="en3">AI training and inference accelerator</p>
   <p class="field"><b>Makes</b> — TPU chip</p>
   <p class="field"><b>End product</b> — Google Cloud AI infrastructure</p>
-  <p class="field pos"><b>Position</b> — Leader — custom AI ASIC programs</p>
+  <p class="field pos"><b>Position</b> — Leader — custom AI ASICs</p>
 </div><div class="step design">
   <span class="chip c-design">Hyperscaler custom silicon, US</span>
   <h4>Meta MTIA</h4>
@@ -478,7 +481,7 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <h4>Tesla AI5/AI6</h4>
   <p class="en3">Autonomy inference chip</p>
   <p class="field"><b>Makes</b> — AI5, AI6 chip</p>
-  <p class="field"><b>End product</b> — Vehicles, Dojo training</p>
+  <p class="field"><b>End product</b> — Vehicles, Optimus robots, Tesla training clusters</p>
   <p class="field pos"><b>Position</b> — Captive — single customer</p>
 </div></div><div class="sub d">ASIC Design Services, EDA and IP</div><div class="row"><div class="step design">
   <span class="chip c-design">ASIC design service and merchant chips, US</span>
@@ -505,7 +508,7 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <span class="chip c-design">ASIC design service, Taiwan</span>
   <h4>GUC</h4>
   <p class="en3">Back-end physical design for AI ASICs</p>
-  <p class="field"><b>Makes</b> — TPU, Maia back-end implementation</p>
+  <p class="field"><b>Makes</b> — Google Axion CPU and Microsoft Maia back-end implementation</p>
   <p class="field"><b>End product</b> — Google and Microsoft AI infrastructure</p>
   <p class="field pos"><b>Position</b> — Major — ASIC design services, TSMC-affiliated</p>
 </div><div class="step design">
@@ -535,7 +538,7 @@ body{margin:0;background:var(--paper);color:var(--ink);
   
   <p class="field"><b>Makes</b> — ASIC design services and turnkey production</p>
   <p class="field"><b>End product</b> — Custom silicon for networking, consumer and industrial customers</p>
-  <p class="field pos"><b>Position</b> — Major — ASIC design service, alongside Alchip and GUC</p>
+  <p class="field pos"><b>Position</b> — Major — ASIC design service</p>
 </div><div class="step design">
   <span class="chip c-design">ASIC design service, Japan</span>
   <h4>Socionext</h4>
@@ -556,14 +559,14 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <p class="en3">Foundry IP, Taiwan</p>
   <p class="field"><b>Makes</b> — Interface and foundation IP built for specific foundry processes</p>
   <p class="field"><b>End product</b> — SoCs taped out on TSMC and other foundry nodes</p>
-  <p class="field pos"><b>Position</b> — Major — foundry interface IP, revenue tracks node ramps</p>
+  <p class="field pos"><b>Position</b> — Major — foundry interface IP</p>
 </div><div class="step design">
   <span class="chip c-design">Embedded memory IP, Taiwan</span>
   <h4>eMemory</h4>
   <p class="en3">Embedded NVM IP, Taiwan</p>
   <p class="field"><b>Makes</b> — OTP and MTP embedded non-volatile memory IP</p>
   <p class="field"><b>End product</b> — Embedded memory inside logic, display driver and power chips</p>
-  <p class="field pos"><b>Position</b> — Leader — embedded NVM IP, licence plus per-wafer royalty</p>
+  <p class="field pos"><b>Position</b> — Leader — embedded NVM IP</p>
 </div></div><div class="sub d">Mobile and Client SoC</div><div class="row"><div class="step design">
   <span class="chip c-design">Fabless chip designer, US</span>
   <h4>Qualcomm</h4>
@@ -573,7 +576,7 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <p class="field pos"><b>Position</b> — Leader — Android SoCs</p>
 </div><div class="step design">
   <span class="chip c-design">Captive chip designer, US</span>
-  <h4>Apple silicon team</h4>
+  <h4>Apple</h4>
   <p class="en3">Mobile and PC SoC</p>
   <p class="field"><b>Makes</b> — A-series, M-series SoC</p>
   <p class="field"><b>End product</b> — iPhone, iPad, Mac</p>
@@ -584,7 +587,7 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <p class="en3">Mobile SoC</p>
   <p class="field"><b>Makes</b> — Dimensity SoC</p>
   <p class="field"><b>End product</b> — Android smartphones</p>
-  <p class="field pos"><b>Position</b> — Leader — value-tier mobile SoCs</p>
+  <p class="field pos"><b>Position</b> — Leader — smartphone SoCs by units</p>
 </div><div class="step design">
   <span class="chip c-design">Captive/merchant chip designer, Korea</span>
   <h4>Samsung LSI</h4>
@@ -626,14 +629,14 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <p class="en3">SerDes and cable chips</p>
   <p class="field"><b>Makes</b> — AEC cable chips</p>
   <p class="field"><b>End product</b> — AI server racks</p>
-  <p class="field pos"><b>Position</b> — Challenger — AI-rack interconnect</p>
+  <p class="field pos"><b>Position</b> — Leader — active electrical cables</p>
 </div><div class="step design">
   <span class="chip c-design">Interface IC, Taiwan</span>
   <h4>Parade Technologies</h4>
   
   <p class="field"><b>Makes</b> — Display interface, timing controllers and PCIe retimers</p>
   <p class="field"><b>End product</b> — Notebooks, monitors and AI server interconnect</p>
-  <p class="field pos"><b>Position</b> — Major — retimer and display interface, alongside Astera Labs and Credo</p>
+  <p class="field pos"><b>Position</b> — Major — retimers and display interface</p>
 </div></div><div class="sub d">Taiwan Fabless</div><div class="row"><div class="step design">
   <span class="chip c-design">Fabless chip designer, Taiwan</span>
   <h4>Realtek</h4>
@@ -663,13 +666,6 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <p class="field"><b>End product</b> — Every server motherboard</p>
   <p class="field pos"><b>Position</b> — Leader — server BMC chips</p>
 </div><div class="step design">
-  <span class="chip c-design">Fabless chip designer, Taiwan</span>
-  <h4>Phison</h4>
-  <p class="en3">SSD controllers</p>
-  <p class="field"><b>Makes</b> — NAND controller chips</p>
-  <p class="field"><b>End product</b> — SSDs</p>
-  <p class="field pos"><b>Position</b> — Leader — fabless SSD controllers</p>
-</div><div class="step design">
   <span class="chip c-design">Interface controller, Taiwan</span>
   <h4>ASMedia</h4>
   
@@ -682,7 +678,7 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <p class="en3">Auto MCU, radar chips</p>
   <p class="field"><b>Makes</b> — Microcontrollers, radar SoC</p>
   <p class="field"><b>End product</b> — Vehicles</p>
-  <p class="field pos"><b>Position</b> — Leader — automotive semiconductors</p>
+  <p class="field pos"><b>Position</b> — Major — automotive semiconductors</p>
 </div><div class="step design">
   <span class="chip c-design">IDM chip designer, Switzerland</span>
   <h4>STMicroelectronics</h4>
@@ -717,7 +713,7 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <p class="en3">High-performance analog, US</p>
   <p class="field"><b>Makes</b> — High-performance analog, mixed signal and power management</p>
   <p class="field"><b>End product</b> — Industrial, communications, automotive, healthcare</p>
-  <p class="field pos"><b>Position</b> — Leader — high-performance analog, alongside Texas Instruments</p>
+  <p class="field pos"><b>Position</b> — Leader — high-performance analog</p>
 </div><div class="step design">
   <span class="chip c-design">Automotive IDM, Japan</span>
   <h4>Renesas</h4>
@@ -727,25 +723,25 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <p class="field pos"><b>Position</b> — Leader — automotive microcontrollers</p>
 </div><div class="step design">
   <span class="chip c-design">Power IDM, US</span>
-  <h4>ON Semiconductor</h4>
+  <h4>onsemi</h4>
   <p class="en3">Power and sensors, US</p>
   <p class="field"><b>Makes</b> — Silicon and silicon carbide power devices, image sensors</p>
   <p class="field"><b>End product</b> — Vehicles, industrial, data centre power</p>
-  <p class="field pos"><b>Position</b> — Leader — merchant silicon carbide for traction inverters</p>
+  <p class="field pos"><b>Position</b> — Major — silicon carbide power</p>
 </div><div class="step design">
   <span class="chip c-design">MCU IDM, US</span>
   <h4>Microchip</h4>
   <p class="en3">MCU, analog and FPGA, US</p>
   <p class="field"><b>Makes</b> — Microcontrollers, analog and FPGA</p>
   <p class="field"><b>End product</b> — Industrial, automotive, consumer</p>
-  <p class="field pos"><b>Position</b> — Major — microcontrollers and analog, distribution-weighted</p>
+  <p class="field pos"><b>Position</b> — Major — microcontrollers and analog</p>
 </div></div></div>
 </div>
 <div class="divider"></div>
 <div class="stage" id="s2">
   <div class="rail"><div class="stripe"></div>
     <div class="num">STAGE 2</div>
-    <h2>Front-End Wafer Fabrication</h2>
+    <h2>Foundry</h2>
     <p class="en2">Foundries that manufacture the wafer</p>
     
   </div>
@@ -754,8 +750,8 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <h4>TSMC</h4>
   <p class="en3">Pure-play foundry, Taiwan</p>
   <p class="field"><b>Makes</b> — Fabricated wafers at every node from mature to N2; CoWoS, SoIC, InFO packaging in-house</p>
-  <p class="field"><b>End product</b> — Every leading-edge logic chip: AI GPUs, mobile SoCs, custom ASICs</p>
-  <p class="field pos"><b>Position</b> — Leader — ~73% of foundry revenue, sole source at the leading edge</p>
+  <p class="field"><b>End product</b> — Leading-edge logic chips: AI GPUs, mobile SoCs, custom ASICs</p>
+  <p class="field pos"><b>Position</b> — Leader — 72.5% of foundry revenue</p>
   <div class="scusers" style="margin-top:10px"><h5>Key customers</h5><div class="field" style="margin:3px 0"><b>NVIDIA</b> — Rubin, Blackwell GPU</div><div class="field" style="margin:3px 0"><b>Apple</b> — A-series, M-series SoC</div><div class="field" style="margin:3px 0"><b>Broadcom</b> — TPU, switch silicon</div><div class="field" style="margin:3px 0"><b>AMD</b> — EPYC, MI400</div><div class="field" style="margin:3px 0"><b>Amazon</b> — Trainium</div></div>
 </div><div class="step foundry" style="flex:1 1 100%">
   <span class="chip c-foundry">Foundry</span>
@@ -763,62 +759,62 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <p class="en3">Foundry, Korea (also IDM)</p>
   <p class="field"><b>Makes</b> — Fabricated wafers, 3nm GAA in production, 2nm ramping; I-Cube, X-Cube packaging</p>
   <p class="field"><b>End product</b> — Mobile SoCs, some AI accelerators</p>
-  <p class="field pos"><b>Position</b> — #2 — ~7% of foundry revenue</p>
-  <div class="scusers" style="margin-top:10px"><h5>Key customers</h5><div class="field" style="margin:3px 0"><b>Tesla</b> — AI6 accelerator</div><div class="field" style="margin:3px 0"><b>Samsung LSI</b> — Exynos SoC</div><div class="field" style="margin:3px 0"><b>Baidu</b> — Kunlun accelerator</div></div>
+  <p class="field pos"><b>Position</b> — #2 — 5.9% of foundry revenue</p>
+  <div class="scusers" style="margin-top:10px"><h5>Key customers</h5><div class="field" style="margin:3px 0"><b>Tesla</b> — AI6 accelerator</div><div class="field" style="margin:3px 0"><b>Samsung LSI</b> — Exynos SoC</div><div class="field" style="margin:3px 0"><b>NVIDIA</b> — Switch 2 SoC, 8nm</div></div>
 </div><div class="step foundry" style="flex:1 1 100%">
   <span class="chip c-foundry">Foundry</span>
   <h4>Intel Foundry</h4>
   <p class="en3">Foundry, US (also IDM)</p>
   <p class="field"><b>Makes</b> — Fabricated wafers, 18A in production; EMIB, Foveros packaging</p>
   <p class="field"><b>End product</b> — Intel CPUs, emerging external foundry customers</p>
-  <p class="field pos"><b>Position</b> — Challenger — rebuilding external foundry, packaging nearer-term</p>
-  <div class="scusers" style="margin-top:10px"><h5>Key customers</h5><div class="field" style="margin:3px 0"><b>Intel products</b> — Core Ultra, Xeon</div><div class="field" style="margin:3px 0"><b>Microsoft</b> — reported 18A customer</div><div class="field" style="margin:3px 0"><b>Amazon</b> — EMIB packaging customer</div></div>
+  <p class="field pos"><b>Position</b> — Challenger — external foundry</p>
+  <div class="scusers" style="margin-top:10px"><h5>Key customers</h5><div class="field" style="margin:3px 0"><b>Intel products</b> — Core Ultra, Xeon</div><div class="field" style="margin:3px 0"><b>Microsoft</b> — 18A custom chip</div><div class="field" style="margin:3px 0"><b>Amazon</b> — 18A AI fabric chip</div></div>
 </div><div class="step foundry" style="flex:1 1 100%">
   <span class="chip c-foundry">Foundry</span>
   <h4>SMIC</h4>
   <p class="en3">Foundry, China</p>
   <p class="field"><b>Makes</b> — Fabricated wafers up to 7nm via DUV multi-patterning, no EUV access</p>
   <p class="field"><b>End product</b> — China domestic mobile SoCs and AI accelerators</p>
-  <p class="field pos"><b>Position</b> — Leader — China domestic foundry, ~5% of foundry revenue</p>
+  <p class="field pos"><b>Position</b> — Leader — China domestic foundry, 5.4% of foundry revenue</p>
   <div class="scusers" style="margin-top:10px"><h5>Key customers</h5><div class="field" style="margin:3px 0"><b>Huawei HiSilicon</b> — Kirin, Ascend</div><div class="field" style="margin:3px 0"><b>Cambricon</b> — AI accelerators</div></div>
-</div><div class="step foundry" style="flex:1 1 100%">
-  <span class="chip c-foundry">Foundry</span>
-  <h4>UMC</h4>
-  <p class="en3">Foundry, Taiwan</p>
-  <p class="field"><b>Makes</b> — Fabricated wafers, 14nm to 40nm specialty processes</p>
-  <p class="field"><b>End product</b> — Display drivers, RF, networking chips</p>
-  <p class="field pos"><b>Position</b> — Major — mature nodes, ~4% of foundry revenue</p>
-  <div class="scusers" style="margin-top:10px"><h5>Key customers</h5><div class="field" style="margin:3px 0"><b>Novatek</b> — Display drivers</div><div class="field" style="margin:3px 0"><b>Realtek</b> — Networking chips</div><div class="field" style="margin:3px 0"><b>Qualcomm</b> — RF components</div></div>
 </div><div class="step foundry" style="flex:1 1 100%">
   <span class="chip c-foundry">Foundry</span>
   <h4>GlobalFoundries</h4>
   <p class="en3">Foundry, US</p>
   <p class="field"><b>Makes</b> — Fabricated wafers, 12nm to 22FDX, RF SOI and silicon photonics</p>
   <p class="field"><b>End product</b> — Automotive, RF, IoT chips</p>
-  <p class="field pos"><b>Position</b> — Major — ~3% of foundry revenue</p>
+  <p class="field pos"><b>Position</b> — Major — 3.2% of foundry revenue</p>
   <div class="scusers" style="margin-top:10px"><h5>Key customers</h5><div class="field" style="margin:3px 0"><b>AMD</b> — legacy nodes</div><div class="field" style="margin:3px 0"><b>NXP</b> — automotive chips</div><div class="field" style="margin:3px 0"><b>Qualcomm</b> — RF components</div></div>
+</div><div class="step foundry" style="flex:1 1 100%">
+  <span class="chip c-foundry">Foundry</span>
+  <h4>UMC</h4>
+  <p class="en3">Foundry, Taiwan</p>
+  <p class="field"><b>Makes</b> — Fabricated wafers, 14nm to 40nm specialty processes</p>
+  <p class="field"><b>End product</b> — Display drivers, RF, networking chips</p>
+  <p class="field pos"><b>Position</b> — Major — mature nodes, 3.9% of foundry revenue</p>
+  <div class="scusers" style="margin-top:10px"><h5>Key customers</h5><div class="field" style="margin:3px 0"><b>Novatek</b> — Display drivers</div><div class="field" style="margin:3px 0"><b>Realtek</b> — Networking chips</div><div class="field" style="margin:3px 0"><b>Qualcomm</b> — RF components</div></div>
 </div><div class="step foundry" style="flex:1 1 100%">
   <span class="chip c-foundry">Foundry</span>
   <h4>Hua Hong</h4>
   <p class="en3">Foundry, China</p>
   <p class="field"><b>Makes</b> — Fabricated wafers, 40/28nm power and analog processes</p>
   <p class="field"><b>End product</b> — Power management chips, discrete devices</p>
-  <p class="field pos"><b>Position</b> — Major — ~2.5% of foundry revenue</p>
+  <p class="field pos"><b>Position</b> — Major — 2.3% of foundry revenue</p>
   <div class="scusers" style="margin-top:10px"><h5>Key customers</h5><div class="field" style="margin:3px 0"><b>STMicroelectronics</b> — 40nm MCU</div><div class="field" style="margin:3px 0"><b>China domestic</b> — power chips</div></div>
+</div><div class="step foundry">
+  <span class="chip c-foundry">Foundry</span>
+  <h4>PSMC</h4>
+  <p class="en3">Mature-node foundry, Taiwan</p>
+  <p class="field"><b>Makes</b> — 12-inch logic and DRAM foundry wafers, plus GaN-on-Si power wafers</p>
+  <p class="field"><b>End product</b> — Consumer, memory, power and display chips</p>
+  <p class="field pos"><b>Position</b> — Major — mature-node foundry</p>
 </div><div class="step foundry">
   <span class="chip c-foundry">Foundry</span>
   <h4>Vanguard</h4>
   <p class="en3">Mature-node foundry, Taiwan</p>
   <p class="field"><b>Makes</b> — 8-inch mature-node wafers, and 12-inch through the VisionPower joint venture with NXP in Singapore</p>
   <p class="field"><b>End product</b> — Power management ICs, display driver ICs, mixed signal</p>
-  <p class="field pos"><b>Position</b> — Leader — mature-node foundry, earnings driven by mature capacity utilisation</p>
-</div><div class="step foundry">
-  <span class="chip c-foundry">Foundry</span>
-  <h4>PSMC</h4>
-  <p class="en3">Mature-node foundry, Taiwan</p>
-  <p class="field"><b>Makes</b> — 12-inch logic, memory and DRAM foundry wafers, plus GaN-on-Si power wafers</p>
-  <p class="field"><b>End product</b> — Consumer, memory, power and display chips</p>
-  <p class="field pos"><b>Position</b> — Major — mature-node foundry; the GaN foundry side appears again in Stage 5</p>
+  <p class="field pos"><b>Position</b> — Major — 8-inch specialty foundry</p>
 </div></div>
 </div>
 <div class="divider"></div>
@@ -877,49 +873,49 @@ body{margin:0;background:var(--paper);color:var(--ink);
   
   <p class="field"><b>Makes</b> — IC substrates</p>
   <p class="field"><b>End product</b> — Substrate layer inside advanced and flip-chip packages</p>
-  <p class="field pos"><b>Position</b> — Leader — ~25% of high-end ABF substrate</p>
+  <p class="field pos"><b>Position</b> — Leader — 19% of ABF substrate</p>
 </div><div class="step back">
   <span class="chip c-back">ABF substrate maker, Japan</span>
   <h4>Ibiden</h4>
   
   <p class="field"><b>Makes</b> — IC substrates</p>
   <p class="field"><b>End product</b> — Substrate layer for NVIDIA and Intel packages</p>
-  <p class="field pos"><b>Position</b> — #2 — ~20% of high-end ABF substrate</p>
-</div><div class="step back">
-  <span class="chip c-back">ABF substrate maker, Austria</span>
-  <h4>AT&amp;S</h4>
-  
-  <p class="field"><b>Makes</b> — IC substrates</p>
-  <p class="field"><b>End product</b> — Substrate layer for AMD and Intel packages</p>
-  <p class="field pos"><b>Position</b> — #3 — ~16% of high-end ABF substrate</p>
+  <p class="field pos"><b>Position</b> — #2 — 17% of ABF substrate</p>
 </div><div class="step back">
   <span class="chip c-back">ABF substrate maker, Taiwan</span>
   <h4>Nan Ya PCB</h4>
   
   <p class="field"><b>Makes</b> — IC substrates</p>
   <p class="field"><b>End product</b> — Substrate layer inside packages</p>
-  <p class="field pos"><b>Position</b> — Major — ~14% of high-end ABF substrate</p>
+  <p class="field pos"><b>Position</b> — Major — 12% of ABF substrate</p>
 </div><div class="step back">
   <span class="chip c-back">ABF substrate maker, Japan</span>
   <h4>Shinko</h4>
   
   <p class="field"><b>Makes</b> — IC substrates</p>
   <p class="field"><b>End product</b> — Substrate layer inside packages</p>
-  <p class="field pos"><b>Position</b> — Major — ~12% of high-end ABF substrate</p>
+  <p class="field pos"><b>Position</b> — Major — 12% of ABF substrate</p>
+</div><div class="step back">
+  <span class="chip c-back">ABF substrate maker, Austria</span>
+  <h4>AT&amp;S</h4>
+  
+  <p class="field"><b>Makes</b> — IC substrates</p>
+  <p class="field"><b>End product</b> — Substrate layer for AMD and Intel packages</p>
+  <p class="field pos"><b>Position</b> — Major — ABF substrate</p>
 </div></div><div class="row"><div class="step back">
   <span class="chip c-back">ABF and BT substrate maker, Taiwan</span>
   <h4>Zhen Ding</h4>
   
   <p class="field"><b>Makes</b> — IC substrates</p>
   <p class="field"><b>End product</b> — Substrate layer inside packages</p>
-  <p class="field pos"><b>Position</b> — Challenger — ABF substrate, turning profitable</p>
+  <p class="field pos"><b>Position</b> — Challenger — ABF substrate</p>
 </div><div class="step back">
   <span class="chip c-back">ABF film maker, Japan</span>
   <h4>Ajinomoto</h4>
   
   <p class="field"><b>Makes</b> — Ajinomoto build-up film</p>
   <p class="field"><b>End product</b> — Dielectric material inside ABF substrates</p>
-  <p class="field pos"><b>Position</b> — Sole source — ABF build-up film</p>
+  <p class="field pos"><b>Position</b> — Leader — build-up film</p>
 </div><div class="step back">
   <span class="chip c-back">BT resin maker, Japan</span>
   <h4>Mitsubishi Gas Chemical</h4>
@@ -933,7 +929,7 @@ body{margin:0;background:var(--paper);color:var(--ink);
   
   <p class="field"><b>Makes</b> — Flexible and rigid PCBs</p>
   <p class="field"><b>End product</b> — FPC in iPhone, AI server boards, optical PCB</p>
-  <p class="field pos"><b>Position</b> — Leader — ~7% of global PCB revenue</p>
+  <p class="field pos"><b>Position</b> — Leader — 6.9% of global PCB revenue</p>
 </div><div class="step back">
   <span class="chip c-back">PCB maker, Taiwan</span>
   <h4>Gold Circuit</h4>
@@ -961,14 +957,14 @@ body{margin:0;background:var(--paper);color:var(--ink);
   
   <p class="field"><b>Makes</b> — Copper clad laminate</p>
   <p class="field"><b>End product</b> — Raw material inside high-speed PCBs</p>
-  <p class="field pos"><b>Position</b> — Leader — high-speed CCL</p>
+  <p class="field pos"><b>Position</b> — Major — high-speed CCL</p>
 </div></div></div>
 </div>
 <div class="divider"></div>
 <div class="stage" id="s4">
   <div class="rail"><div class="stripe"></div>
     <div class="num">STAGE 4</div>
-    <h2>Memory, HBM, SSD</h2>
+    <h2>Memory, HBM and SSD</h2>
     <p class="en2">DRAM, NAND and the HBM base die</p>
     
   </div>
@@ -978,21 +974,21 @@ body{margin:0;background:var(--paper);color:var(--ink);
   
   <p class="field"><b>Makes</b> — HBM, DDR5, LPDDR</p>
   <p class="field"><b>End product</b> — Data centre memory, PC memory, mobile memory</p>
-  <p class="field pos"><b>Position</b> — #3 — ~15% of HBM</p>
+  <p class="field pos"><b>Position</b> — #2 — 33% of HBM</p>
 </div><div class="step mem">
   <span class="chip c-mem">DRAM and HBM maker, Korea</span>
   <h4>SK hynix</h4>
   
   <p class="field"><b>Makes</b> — HBM, DDR5</p>
   <p class="field"><b>End product</b> — Data centre memory</p>
-  <p class="field pos"><b>Position</b> — Leader — ~55% of HBM</p>
+  <p class="field pos"><b>Position</b> — Leader — 50% of HBM</p>
 </div><div class="step mem">
   <span class="chip c-mem">DRAM and HBM maker, US</span>
   <h4>Micron</h4>
   
   <p class="field"><b>Makes</b> — HBM, DDR5, LPDDR</p>
   <p class="field"><b>End product</b> — Data centre memory, PC memory</p>
-  <p class="field pos"><b>Position</b> — #2 — ~20% of HBM</p>
+  <p class="field pos"><b>Position</b> — #3 — 18% of HBM</p>
 </div><div class="step mem">
   <span class="chip c-mem">DRAM maker, Taiwan</span>
   <h4>Nanya</h4>
@@ -1013,7 +1009,7 @@ body{margin:0;background:var(--paper);color:var(--ink);
   
   <p class="field"><b>Makes</b> — Specialty DRAM, NOR flash and code storage memory</p>
   <p class="field"><b>End product</b> — Automotive, industrial, consumer and networking equipment</p>
-  <p class="field pos"><b>Position</b> — Leader — specialty DRAM and NOR, priced on its own cycle</p>
+  <p class="field pos"><b>Position</b> — Leader — specialty DRAM and NOR</p>
 </div></div><div class="sub m">NAND</div><div class="row"><div class="step mem">
   <span class="chip c-mem">NAND flash maker, Korea</span>
   <h4>Samsung</h4>
@@ -1032,7 +1028,7 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <span class="chip c-mem">NAND flash maker, Japan</span>
   <h4>Kioxia</h4>
   
-  <p class="field"><b>Makes</b> — BiCS NAND, with Sandisk</p>
+  <p class="field"><b>Makes</b> — BiCS NAND, with SanDisk</p>
   <p class="field"><b>End product</b> — SSDs</p>
   <p class="field pos"><b>Position</b> — Major — NAND</p>
 </div><div class="step mem">
@@ -1048,34 +1044,34 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <p class="en3">NAND and SSD, US</p>
   <p class="field"><b>Makes</b> — BiCS NAND and client SSDs, through the joint venture with Kioxia</p>
   <p class="field"><b>End product</b> — Client SSD, retail storage, memory cards</p>
-  <p class="field pos"><b>Position</b> — Major — NAND, separately listed since the Western Digital split</p>
+  <p class="field pos"><b>Position</b> — Major — NAND</p>
 </div><div class="step mem">
   <span class="chip c-mem">NAND maker, China</span>
   <h4>YMTC</h4>
   <p class="en3">3D NAND, China</p>
   <p class="field"><b>Makes</b> — 3D NAND flash and Xtacking architecture</p>
   <p class="field"><b>End product</b> — Consumer SSD and China domestic storage</p>
-  <p class="field pos"><b>Position</b> — Leader — China NAND, the main supply-side variable in NAND pricing</p>
+  <p class="field pos"><b>Position</b> — Leader — China NAND</p>
 </div></div><div class="sub m">HBM — Base Die and Stacking</div><div class="row"><div class="step mem">
   <span class="chip c-mem">HBM base die, Korea</span>
   <h4>SK hynix</h4>
   
   <p class="field"><b>Makes</b> — Base logic die for HBM stacks</p>
-  <p class="field"><b>End product</b> — Fabricated on TSMC advanced nodes for HBM4E</p>
-  <p class="field pos"><b>Position</b> — Leader — HBM, base die moving to TSMC</p>
-</div><div class="step mem">
-  <span class="chip c-mem">HBM base die, US</span>
-  <h4>Micron</h4>
-  
-  <p class="field"><b>Makes</b> — Base logic die for HBM stacks</p>
-  <p class="field"><b>End product</b> — In-house today, reportedly moving to TSMC for HBM4E</p>
-  <p class="field pos"><b>Position</b> — #2 — HBM</p>
+  <p class="field"><b>End product</b> — Made by TSMC from HBM4</p>
+  <p class="field pos"><b>Position</b> — Leader — HBM</p>
 </div><div class="step mem">
   <span class="chip c-mem">HBM base die, Korea</span>
   <h4>Samsung</h4>
   
   <p class="field"><b>Makes</b> — Base logic die for HBM stacks</p>
   <p class="field"><b>End product</b> — In-house 4nm process</p>
+  <p class="field pos"><b>Position</b> — #2 — HBM</p>
+</div><div class="step mem">
+  <span class="chip c-mem">HBM base die, US</span>
+  <h4>Micron</h4>
+  
+  <p class="field"><b>Makes</b> — Base logic die for HBM stacks</p>
+  <p class="field"><b>End product</b> — In-house; TSMC from HBM4E</p>
   <p class="field pos"><b>Position</b> — #3 — HBM</p>
 </div><div class="step mem">
   <span class="chip c-mem">HBM stacking tool, Korea</span>
@@ -1089,22 +1085,22 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <h4>Besi</h4>
   
   <p class="field"><b>Makes</b> — Hybrid bonding tools</p>
-  <p class="field"><b>End product</b> — HBM4 stack assembly, moving from microbump through-silicon via (TSV)</p>
+  <p class="field"><b>End product</b> — Logic die stacking (SoIC); HBM from 16-high HBM4E</p>
   <p class="field pos"><b>Position</b> — Leader — hybrid bonding tools</p>
 </div></div><div class="stackcard">
-  <p class="sctitle">HBM internal stack</p>
+  <p class="sctitle">HBM Internal Stack</p>
   
-  <div class="stacklayers"><div class="slrow"><div class="slcell sl-mem" style="flex:1">DRAM die</div></div><div class="slrow"><div class="slcell sl-mem" style="flex:1">DRAM die</div></div><div class="slrow"><div class="slcell sl-mem" style="flex:1">DRAM die</div></div><div class="slrow"><div class="slcell sl-mem" style="flex:1">DRAM die</div></div><div class="slrow"><div class="slcell sl-bridge" style="flex:1">Through-silicon via (TSV) or hybrid bond between each die</div></div><div class="slrow"><div class="slcell sl-die" style="flex:1">Base logic die — I/O and control</div></div></div>
+  <div class="stacklayers"><div class="slrow"><div class="slcell sl-mem" style="flex:1">DRAM die</div></div><div class="slrow"><div class="slcell sl-mem" style="flex:1">DRAM die</div></div><div class="slrow"><div class="slcell sl-mem" style="flex:1">DRAM die</div></div><div class="slrow"><div class="slcell sl-mem" style="flex:1">DRAM die</div></div><div class="slrow"><div class="slcell sl-bridge" style="flex:1">Microbump or hybrid bond between each die</div></div><div class="slrow"><div class="slcell sl-die" style="flex:1">Base logic die — I/O and control</div></div></div>
   
   <div class="scgrid">
     <div class="scfields">
-      <p class="field"><b>Makes</b> — A pre-stacked memory module, 8 to 16 DRAM dies high</p>
-      <p class="field"><b>End product</b> — The HBM component inside every CoWoS, I-Cube and EMIB package</p>
-      <p class="field pos"><b>Position</b> — Growing — HBM4 shifting from through-silicon via (TSV) to hybrid bonding through 2026</p>
+      <p class="field"><b>Makes</b> — A stack of 8 to 16 DRAM dies on a base logic die</p>
+      <p class="field"><b>End product</b> — The memory beside the processor in CoWoS, I-Cube and EMIB packages</p>
+      <p class="field pos"><b>Position</b> — Growing — hybrid bonding expected from 16-high HBM4E</p>
     </div>
     <div class="scusers">
       <h5>Used by</h5><div class="u"><b>Every AI accelerator</b> — NVIDIA, AMD, Google TPU, all hyperscaler ASICs</div>
-      <h5 style="margin-top:8px">Done by</h5><div class="u"><b>SK hynix, Micron, Samsung</b> — stack assembly</div><div class="u"><b>TSMC</b> — base die fabrication for HBM4E</div>
+      <h5 style="margin-top:8px">Done by</h5><div class="u"><b>SK hynix, Micron, Samsung</b> — stack assembly</div><div class="u"><b>TSMC</b> — base die for SK hynix from HBM4, Micron from HBM4E</div>
     </div>
   </div>
 </div><div class="sub m">Memory Controllers and Interface</div><div class="row"><div class="step mem">
@@ -1134,7 +1130,7 @@ body{margin:0;background:var(--paper);color:var(--ink);
   
   <p class="field"><b>Makes</b> — DDR5 register clock drivers, MRDIMM buffers and memory interface silicon</p>
   <p class="field"><b>End product</b> — Server memory modules for cloud and AI platforms</p>
-  <p class="field pos"><b>Position</b> — Leader — server memory interface, content rises with each DDR generation</p>
+  <p class="field pos"><b>Position</b> — Leader — server memory interface</p>
 </div><div class="step mem">
   <span class="chip c-mem">Memory interface and IP, US</span>
   <h4>Rambus</h4>
@@ -1148,7 +1144,7 @@ body{margin:0;background:var(--paper);color:var(--ink);
   
   <p class="field"><b>Makes</b> — NOR flash, specialty DRAM and microcontrollers</p>
   <p class="field"><b>End product</b> — Consumer, industrial and automotive electronics</p>
-  <p class="field pos"><b>Position</b> — Leader — China NOR flash, read alongside Winbond</p>
+  <p class="field pos"><b>Position</b> — Leader — China NOR flash</p>
 </div></div></div>
 </div>
 <div class="divider"></div>
@@ -1160,9 +1156,9 @@ body{margin:0;background:var(--paper);color:var(--ink);
     
   </div>
   <div class="body"><div class="stackcard">
-  <p class="sctitle">How an RF chip is made — wafer to QFN package</p>
+  <p class="sctitle">How an RF Chip Is Made — Wafer to QFN Package</p>
   
-  <svg viewBox="0 100 1120 245" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:Inter,Helvetica,Arial,sans-serif">
+  <div class="figscroll"><svg viewBox="0 100 1120 245" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:Inter,Helvetica,Arial,sans-serif">
     <defs>
       <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6B7A1E"/></marker>
       <marker id="heat" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#B03A2E"/></marker>
@@ -1242,7 +1238,7 @@ body{margin:0;background:var(--paper);color:var(--ink);
       <circle cx="705" cy="271" r="10" fill="#6B7A1E"/><text x="705" y="275">7</text>
       <circle cx="1084" cy="312" r="10" fill="#6B7A1E"/><text x="1084" y="316">8</text>
     </g>
-  </svg>
+  </svg></div>
 
   <div class="threerail" style="grid-template-columns:1fr 1fr;margin-top:14px">
     <div>
@@ -1260,42 +1256,42 @@ body{margin:0;background:var(--paper);color:var(--ink);
   </div>
 </div><div class="sub r">RF Chip Applications — End Use</div><div class="row"><div class="step rf">
   <span class="chip c-rf">RF application, global</span>
-  <h4>WiFi and Bluetooth</h4>
+  <h4>Wi-Fi and Bluetooth</h4>
   
   <p class="field"><b>Makes</b> — Connectivity RF front-end chips</p>
   <p class="field"><b>End product</b> — Phones, laptops, routers, IoT devices</p>
   <p class="field pos"><b>Position</b> — Largest — RF unit volume</p>
 </div><div class="step rf">
   <span class="chip c-rf">RF application, global</span>
-  <h4>Cellular smartphone</h4>
+  <h4>Cellular Smartphone</h4>
   
   <p class="field"><b>Makes</b> — Cellular RF front-end chips</p>
   <p class="field"><b>End product</b> — Smartphones</p>
   <p class="field pos"><b>Position</b> — #2 — RF unit volume</p>
 </div><div class="step rf">
   <span class="chip c-rf">RF application, global</span>
-  <h4>Radar automotive</h4>
+  <h4>Automotive Radar</h4>
   
   <p class="field"><b>Makes</b> — GaN and SiGe radar chips</p>
   <p class="field"><b>End product</b> — Advanced driver assistance systems</p>
   <p class="field pos"><b>Position</b> — Growing — with ADAS adoption</p>
 </div><div class="step rf">
   <span class="chip c-rf">RF application, global</span>
-  <h4>Base station infrastructure</h4>
+  <h4>Base Station Infrastructure</h4>
   
   <p class="field"><b>Makes</b> — GaN power amplifiers</p>
   <p class="field"><b>End product</b> — Cellular base stations, telecom infrastructure</p>
   <p class="field pos"><b>Position</b> — Mature — high value, IDM-dominated</p>
 </div><div class="step rf">
   <span class="chip c-rf">RF application, global</span>
-  <h4>Defence and radar</h4>
+  <h4>Defence and Radar</h4>
   
   <p class="field"><b>Makes</b> — GaN and GaAs RF components</p>
   <p class="field"><b>End product</b> — Military radar, electronic warfare systems</p>
   <p class="field pos"><b>Position</b> — Mature — high margin, specification-driven</p>
 </div></div><div class="row"><div class="step rf">
   <span class="chip c-rf">RF application, global</span>
-  <h4>Satellite communications</h4>
+  <h4>Satellite Communications</h4>
   
   <p class="field"><b>Makes</b> — GaAs and GaN RF components</p>
   <p class="field"><b>End product</b> — Satellite ground stations, LEO satellites</p>
@@ -1341,7 +1337,7 @@ body{margin:0;background:var(--paper);color:var(--ink);
   
   <p class="field"><b>Makes</b> — GaN power devices</p>
   <p class="field"><b>End product</b> — Fast chargers, data centre power</p>
-  <p class="field pos"><b>Position</b> — Challenger — GaN power, moving fab to PSMC</p>
+  <p class="field pos"><b>Position</b> — Challenger — GaN power</p>
 </div><div class="step rf">
   <span class="chip c-rf">GaN power IDM, China</span>
   <h4>Innoscience</h4>
@@ -1350,12 +1346,12 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <p class="field"><b>End product</b> — Consumer and industrial power</p>
   <p class="field pos"><b>Position</b> — Leader — China GaN power</p>
 </div><div class="step rf">
-  <span class="chip c-rf">GaN and SiC power maker, Germany</span>
+  <span class="chip c-rf">GaN power maker, Germany</span>
   <h4>Infineon</h4>
   
-  <p class="field"><b>Makes</b> — Power devices</p>
-  <p class="field"><b>End product</b> — Vehicles, industrial, data centre power</p>
-  <p class="field pos"><b>Position</b> — Leader — power semiconductors</p>
+  <p class="field"><b>Makes</b> — GaN power devices</p>
+  <p class="field"><b>End product</b> — Data centre power, chargers, vehicles</p>
+  <p class="field pos"><b>Position</b> — Major — GaN power</p>
 </div></div><div class="sub r">Compound-Semi Foundry</div><div class="row"><div class="step rf">
   <span class="chip c-rf">GaAs foundry, Taiwan</span>
   <h4>WIN Semiconductors</h4>
@@ -1390,7 +1386,7 @@ body{margin:0;background:var(--paper);color:var(--ink);
   
   <p class="field"><b>Makes</b> — Fabricated GaAs and InP wafers</p>
   <p class="field"><b>End product</b> — RF front-end chips, lasers and photonic devices</p>
-  <p class="field pos"><b>Position</b> — Major — GaAs and InP foundry, the InP route into Stage 6</p>
+  <p class="field pos"><b>Position</b> — Major — GaAs and InP foundry</p>
 </div></div><div class="sub r">GaAs Epi and Substrates — For RF Front-End</div><div class="row"><div class="step rf">
   <span class="chip c-rf">GaAs epi maker, UK</span>
   <h4>IQE</h4>
@@ -1413,19 +1409,19 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <p class="field"><b>End product</b> — RF front-end chips</p>
   <p class="field pos"><b>Position</b> — Major — GaAs epi</p>
 </div><div class="step rf">
+  <span class="chip c-rf">GaAs substrate maker, Germany</span>
+  <h4>Freiberger</h4>
+  
+  <p class="field"><b>Makes</b> — GaAs substrates</p>
+  <p class="field"><b>End product</b> — RF chips</p>
+  <p class="field pos"><b>Position</b> — Leader — GaAs substrates</p>
+</div><div class="step rf">
   <span class="chip c-rf">GaAs and Ge substrate maker, US</span>
   <h4>AXT</h4>
   
   <p class="field"><b>Makes</b> — GaAs and germanium substrates</p>
   <p class="field"><b>End product</b> — RF chips, solar cells</p>
-  <p class="field pos"><b>Position</b> — Leader — compound-semi substrates</p>
-</div><div class="step rf">
-  <span class="chip c-rf">GaAs substrate maker, China</span>
-  <h4>Xiamen Powerway</h4>
-  
-  <p class="field"><b>Makes</b> — GaAs substrates</p>
-  <p class="field"><b>End product</b> — RF chips</p>
-  <p class="field pos"><b>Position</b> — Major — China domestic market</p>
+  <p class="field pos"><b>Position</b> — Major — GaAs substrates</p>
 </div></div><div class="sub r">InP Epi and Substrates — For Lasers and Photonics</div><div class="row"><div class="step rf">
   <span class="chip c-rf">InP epi maker, UK</span>
   <h4>IQE</h4>
@@ -1434,10 +1430,10 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <p class="field"><b>End product</b> — Laser diodes for optical modules</p>
   <p class="field pos"><b>Position</b> — Leader — InP epi</p>
 </div><div class="step rf">
-  <span class="chip c-rf">InP epi and substrate maker, Japan (Sumitomo)</span>
-  <h4>SCIOCS</h4>
+  <span class="chip c-rf">InP substrate maker, Japan</span>
+  <h4>Sumitomo Electric</h4>
   
-  <p class="field"><b>Makes</b> — InP epitaxial wafers and substrates</p>
+  <p class="field"><b>Makes</b> — InP substrates</p>
   <p class="field"><b>End product</b> — Laser diodes for optical modules</p>
   <p class="field pos"><b>Position</b> — Leader — InP substrates</p>
 </div><div class="step rf">
@@ -1449,7 +1445,7 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <p class="field pos"><b>Position</b> — Major — InP epi</p>
 </div><div class="step rf">
   <span class="chip c-rf">Laser epi maker, Taiwan</span>
-  <h4>Landmark Optoelectronics</h4>
+  <h4>LandMark Optoelectronics</h4>
   
   <p class="field"><b>Makes</b> — Laser epitaxial wafers</p>
   <p class="field"><b>End product</b> — Laser diodes for optical modules</p>
@@ -1460,8 +1456,8 @@ body{margin:0;background:var(--paper);color:var(--ink);
   
   <p class="field"><b>Makes</b> — InP substrates</p>
   <p class="field"><b>End product</b> — Laser diodes</p>
-  <p class="field pos"><b>Position</b> — Leader — compound-semi substrates</p>
-</div></div><div class="sub r">OSATs Doing QFN and RF Assembly</div><div class="row"><div class="step rf">
+  <p class="field pos"><b>Position</b> — Major — InP substrates</p>
+</div></div><div class="sub r">QFN and RF Assembly</div><div class="row"><div class="step rf">
   <span class="chip c-rf">OSAT, Taiwan</span>
   <h4>ASE</h4>
   
@@ -1483,40 +1479,26 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <p class="field"><b>End product</b> — Packaged RF chips</p>
   <p class="field pos"><b>Position</b> — Major — China RF assembly</p>
 </div></div><div class="sub r">RF SiP Module Makers</div><div class="row"><div class="step rf">
-  <span class="chip c-rf">RF SiP module maker, Japan</span>
-  <h4>Murata</h4>
-  
-  <p class="field"><b>Makes</b> — Complete front-end modules</p>
-  <p class="field"><b>End product</b> — Smartphone RF front-end</p>
-  <p class="field pos"><b>Position</b> — Leader — RF modules</p>
-</div><div class="step rf">
   <span class="chip c-rf">RF SiP module maker, Taiwan (ASE group)</span>
   <h4>USI</h4>
   
   <p class="field"><b>Makes</b> — Complete SiP modules</p>
   <p class="field"><b>End product</b> — Smartphone and wearable RF</p>
   <p class="field pos"><b>Position</b> — Major — SiP modules</p>
-</div><div class="step rf">
-  <span class="chip c-rf">RF SiP module maker, US</span>
-  <h4>Qorvo</h4>
-  
-  <p class="field"><b>Makes</b> — Complete front-end modules</p>
-  <p class="field"><b>End product</b> — Smartphone RF front-end</p>
-  <p class="field pos"><b>Position</b> — Major — RF modules, in-house</p>
 </div></div></div>
 </div>
 <div class="divider"></div>
 <div class="stage" id="s6">
   <div class="rail"><div class="stripe"></div>
     <div class="num">STAGE 6</div>
-    <h2>Photonics and Co-Packaged Optics</h2>
+    <h2>Photonics and CPO</h2>
     <p class="en2">Light generation, conversion and CPO</p>
     
   </div>
   <div class="body"><div class="stackcard">
-  <p class="sctitle">How a CPO switch is made — InP wafer to CPO package</p>
+  <p class="sctitle">How a CPO Switch Is Made — InP Wafer to CPO Package</p>
   
-  <svg viewBox="0 100 1120 245" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:Inter,Helvetica,Arial,sans-serif">
+  <div class="figscroll"><svg viewBox="0 100 1120 245" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:Inter,Helvetica,Arial,sans-serif">
     <defs>
       <marker id="arwc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0E7C68"/></marker>
       <marker id="heatc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#B03A2E"/></marker>
@@ -1533,7 +1515,7 @@ body{margin:0;background:var(--paper);color:var(--ink);
       <rect x="226" y="186" width="52" height="18"/><rect x="306" y="186" width="52" height="18"/>
       <rect x="386" y="186" width="52" height="18"/>
     </g>
-    <text x="150" y="172" font-size="12" fill="#7A5100">Laser diode structures patterned into the epi</text>
+    <text x="150" y="172" font-size="12" fill="#7A5100">Laser diodes patterned into the epi</text>
     <g stroke="#B03A2E" stroke-width="1.6" stroke-dasharray="5,4">
       <line x1="132" y1="150" x2="132" y2="296"/><line x1="372" y1="150" x2="372" y2="296"/>
     </g>
@@ -1600,12 +1582,12 @@ body{margin:0;background:var(--paper);color:var(--ink);
 
     <!-- badges right -->
     <g font-size="12" font-weight="700" fill="#fff" text-anchor="middle">
-      <circle cx="770" cy="197" r="10" fill="#0E7C68"/><text x="770" y="201">5</text>
+      <circle cx="770" cy="187" r="10" fill="#0E7C68"/><text x="770" y="191">5</text>
       <circle cx="802" cy="191" r="10" fill="#0E7C68"/><text x="802" y="195">6</text>
       <circle cx="1036" cy="205" r="10" fill="#0E7C68"/><text x="1036" y="209">7</text>
       <circle cx="1084" cy="312" r="10" fill="#0E7C68"/><text x="1084" y="316">8</text>
     </g>
-  </svg>
+  </svg></div>
 
   <div class="threerail" style="grid-template-columns:1fr 1fr;margin-top:14px">
     <div>
@@ -1739,7 +1721,7 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <p class="en3">Vertically integrated, US</p>
   <p class="field"><b>Makes</b> — Lasers grown in-house, plus finished optical modules</p>
   <p class="field"><b>End product</b> — Data centre optical links and cable television networks</p>
-  <p class="field pos"><b>Position</b> — Major — one of few Western suppliers making laser and module together</p>
+  <p class="field pos"><b>Position</b> — Major — lasers and optical modules</p>
 </div></div><div class="sub c">Fibre and Connectors</div><div class="row"><div class="step pkgC">
   <span class="chip c-pkgC">Fibre and connector maker, US</span>
   <h4>Corning</h4>
@@ -1784,12 +1766,12 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <p class="field pos"><b>Position</b> — Major — Taiwan passive optical components</p>
 </div><div class="step pkgC">
   <span class="chip c-pkgC">Optical connectors, Taiwan</span>
-  <h4>Ezconn</h4>
+  <h4>EZconn</h4>
   <p class="en3">Connectors and components, Taiwan</p>
   <p class="field"><b>Makes</b> — Optical connectors, transceiver components and cable assemblies</p>
   <p class="field"><b>End product</b> — Data centre and access network equipment</p>
   <p class="field pos"><b>Position</b> — Major — Taiwan optical connectors and assemblies</p>
-</div></div><div class="sub c">Fibre Array Units — FAU Makers</div><div class="row"><div class="step pkgC">
+</div></div><div class="sub c">Fibre Array Units</div><div class="row"><div class="step pkgC">
   <span class="chip c-pkgC">FAU maker, Japan</span>
   <h4>Orbray</h4>
   
@@ -1830,15 +1812,8 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <p class="en3">FAU and connectivity, Taiwan</p>
   <p class="field"><b>Makes</b> — Fibre array units and optical connectivity for packaged devices</p>
   <p class="field"><b>End product</b> — Fibre attach for CPO packages and optical engines</p>
-  <p class="field pos"><b>Position</b> — Major — Taiwan FAU supplier with direct CPO fibre attach exposure</p>
+  <p class="field pos"><b>Position</b> — Major — fibre array units</p>
 </div></div><div class="sub c">Substrate, Assembly and Test</div><div class="row"><div class="step pkgC">
-  <span class="chip c-pkgC">Photonics packaging, Taiwan</span>
-  <h4>TSMC</h4>
-  
-  <p class="field"><b>Makes</b> — COUPE stacking</p>
-  <p class="field"><b>End product</b> — CPO switch packages</p>
-  <p class="field pos"><b>Position</b> — Sole source — COUPE stacking</p>
-</div><div class="step pkgC">
   <span class="chip c-pkgC">Photonics packaging, Taiwan</span>
   <h4>ASE</h4>
   
@@ -1873,7 +1848,7 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <p class="field"><b>Makes</b> — Optical test equipment</p>
   <p class="field"><b>End product</b> — CPO and transceiver test</p>
   <p class="field pos"><b>Position</b> — Major — optical test equipment</p>
-</div></div><div class="sub c">Pluggable Transceivers — The Incumbent Path CPO Competes with</div><div class="row"><div class="step pkgC">
+</div></div><div class="sub c">Pluggable Transceivers</div><div class="row"><div class="step pkgC">
   <span class="chip c-pkgC">Optical module maker, China</span>
   <h4>Innolight</h4>
   
@@ -1909,13 +1884,6 @@ body{margin:0;background:var(--paper);color:var(--ink);
   <p class="field"><b>End product</b> — Data centre switches</p>
   <p class="field pos"><b>Position</b> — Major — China optical modules</p>
 </div></div><div class="row"><div class="step pkgC">
-  <span class="chip c-pkgC">Optical DSP maker, US</span>
-  <h4>Marvell</h4>
-  
-  <p class="field"><b>Makes</b> — DSP inside pluggable modules</p>
-  <p class="field"><b>End product</b> — Pluggable optical modules</p>
-  <p class="field pos"><b>Position</b> — Leader — optical module DSPs</p>
-</div><div class="step pkgC">
   <span class="chip c-pkgC">Optical PCB maker, Taiwan</span>
   <h4>Zhen Ding</h4>
   
@@ -1942,7 +1910,7 @@ body{margin:0;background:var(--paper);color:var(--ink);
   
   <p class="field"><b>Makes</b> — Data centre switches</p>
   <p class="field"><b>End product</b> — Enterprise and cloud networking</p>
-  <p class="field pos"><b>Position</b> — Leader — enterprise switches</p>
+  <p class="field pos"><b>Position</b> — Leader — data centre switches</p>
 </div><div class="step pkgC">
   <span class="chip c-pkgC">Switch system maker, US</span>
   <h4>Cisco</h4>
